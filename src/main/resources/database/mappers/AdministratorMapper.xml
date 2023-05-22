@@ -19,11 +19,25 @@
 						COLLEGE C 
 					USING(COLLEGENUM)
   	</select>
-  	<resultMap type="MemberVO" id="MemberList">
-  		<id column="USERNAME" property="usename"/>
-  		<result column="CATEGORY" property="category"/>
-  		<result column="ENABLED" property="enabled"/>
-  		
-  		
+  	<resultMap type="CollegeVO" id="MemberList">
+  		<id column="COLLEGENUM" property="collegeNum"/>
+  		<result column="COLLEGENAME" property="collegeName"/>
+  		<collection property="departmentVOs" javaType="List" ofType="DepartmentVO">
+  			<id column="DEPTNUM" property="deptNum"/>
+  			<result column="DEPTNAME" property="deptName"/>
+  			<collection property="studentVOs" javaType="List" ofType="StudentVO">
+  				<id column="USERNAME" property="username"/>
+  				<result column="GRADE" property="grade"/>
+  				<result column="NAME" property="name"/>
+  				<result column="PHONE" property="phone"/>
+  				<result column="STATUS" property="status"/>
+  				<collection property="memberFilesVOs" javaType="List" ofType="MemberFilesVO">
+  					<id column="FILENUM" property="fileNum"/>
+  					<result column="FILENAME" property="fileName"/>
+  					<result column="ORINAME" property="oriName"/>
+  				</collection>
+  			</collection>
+  		</collection>
   	</resultMap>
+ 
   </mapper>

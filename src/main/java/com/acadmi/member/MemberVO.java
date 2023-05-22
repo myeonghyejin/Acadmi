@@ -1,5 +1,7 @@
 package com.acadmi.member;
 
+import java.util.List;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,5 +14,6 @@ public class MemberVO {
 	private String email;
 	private Integer category;
 	private Integer enabled;
+	private List<MemberFilesVO> memberFilesVOs;
 	
 }

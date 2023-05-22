@@ -1,4 +1,4 @@
-package com.acadmi.student;
+package com.acadmi.administrator;
 
 import java.sql.Date;
 
@@ -9,10 +9,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class StudentVO extends MemberVO{
+public class AdminIstratorVO extends MemberVO {
 
 	private Integer deptNum;
-	private Integer grade;
 	private String name;
 	private Integer phone;
 	private Date birth;
