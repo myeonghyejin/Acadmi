@@ -8,6 +8,6 @@ import lombok.Setter;
 public class RoleVO {
 
 	private int roleNum;
-	private String rolrName;
+	private String roleName;
 	
 }
