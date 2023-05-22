@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Schema 추가 -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.acadmi.member.MemberDAO">
+  
+  		<select id="getLogin" parameterType="MemberVO" resultMap="loginResult">
+  			SELECT M.USERNAME, M.EMAIL, M.CATEGORY
+  			FROM MEMBER M
+  				INNER JOIN
+  				MEMBER_ROLE MR
+  				ON M.USERNAME = MR.USERNAME
+  				INNER JOIN
+  				ROLE R
+  				ON MR.ROLENUM = R.ROLENUM
+  			WHERE M.USERNAME = #{USERNAME} AND M.PASSWORD=#{PASSWORD}
+  		</select>
+  		
+  		<resultMap type="MemberVO" id="loginResult">
+  			<id property="userName" column="USERNAME"/>
+  			<result property="category" column="CATEGORY"/>
+  			<collection property="roleVOs" javaType="List" ofType="RoleVO">
+  				<id property="roleNum" column="ROLENUM"/>
+  				<result property="roleName" column="ROLENAME"/>
+  			</collection>
+  		</resultMap>
+  
+  </mapper>
