@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 //**-context.xml
 public class WebConfig implements WebMvcConfigurer {
 	
-	@Value("${app.load.base}")
+	@Value("${app.upload.base}")
 	private String basePath;
 	
 	@Value("${app.url.path}")
