@@ -5,5 +5,9 @@
   
   <configuration>
   	<typeAliases>
+  		<typeAlias type="com.acadmi.notification.NotificationVO" alias="NotificationVO"/>
+  		<typeAlias type="com.acadmi.member.MemberVO" alias="MemberVO"/>
+  		<typeAlias type="com.acadmi.member.RoleVO" alias="RoleVO"/>
+  		
   	</typeAliases>
   </configuration>
