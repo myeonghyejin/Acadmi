@@ -27,6 +27,10 @@ public class MemberVO implements UserDetails {
 	 public String getUsername() {
 		 return username;
 	 }
+	 
+	 public String setUsername() {
+		 return username;
+	 }
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

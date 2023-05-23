@@ -32,10 +32,6 @@
                         <div class="row gx-5 justify-content-center">
                             <div class="col-lg-8 col-xl-6">
                                 
-                                <c:if test="${not empty param.errorMessage}">
-                                	<h1>${param.errorMessage}</h1>
-                                </c:if>
-                                
                                 <form id="contactForm" action="./login" method="post" data-sb-form-api-token="API_TOKEN">
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                                     <!-- Name input-->
@@ -51,6 +47,7 @@
                                         <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
                                         <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
                                     </div>
+                                    
                                     <div class="form-floating mb-3">
                                         <input id="remember" name="remember" type="checkbox"/>
                                         <label for="remember">ID기억하기</label>
@@ -60,8 +57,12 @@
                                     	<a href="./findPw">비밀번호 찾기</a>
                                     </div>
                                     
+	                                <c:if test="${not empty param.errorMessage}">
+	                                	<h3>${param.errorMessage}</h3>
+	                                </c:if>
+                                    
                                     <div class="d-grid">
-                                    	<button class="btn btn-primary btn-lg" id="submitButton" type="submit">Submit</button>
+                                    	<button class="btn btn-primary btn-lg" id="submitButton" type="submit">로그인</button>
                                     </div>
                                 </form>
                             </div>
