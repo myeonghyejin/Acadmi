@@ -14,6 +14,7 @@ public class MemberVO {
 	private String email;
 	private Integer category;
 	private Integer enabled;
+	private List<MemberFilesVO> memberFilesVOs;
 	
 	private List<RoleVO> roleVOs;
 }
