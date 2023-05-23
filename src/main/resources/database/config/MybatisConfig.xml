@@ -14,7 +14,9 @@
   		<typeAlias type="com.acadmi.department.DepartmentVO" alias="DepartmentVO"/>
   		<typeAlias type="com.acadmi.college.CollegeVO" alias="CollegeVO"/>
   		<typeAlias type="com.acadmi.administrator.AdminIstratorVO" alias="AdminIstratorVO"/>
-  		
+  		<typeAlias type="com.acadmi.board.BoardFileVO" alias="BoardFileVO"/>
+  		<typeAlias type="com.acadmi.board.BoardVO" alias="BoardVO"/>
+  		<typeAlias type="com.acadmi.board.notice.NoticeVO" alias="NoticeVO"/>
   		
   	</typeAliases>
   </configuration>
