@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<c:import url="../temp/style.jsp"></c:import>
+
 
 	<table class="table table-hover">
      	 		<thead>
