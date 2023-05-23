@@ -18,5 +18,7 @@ public interface AdminIstratorDAO {
 	public int setStudentInsert(StudentVO studentVO) throws Exception;
 	public int setDepartmentInsert(DepartmentVO departmentVO) throws Exception;
 	public int setCollegeInsert(CollegeVO collegeVO) throws Exception;
+	
+	public List<AdminIstratorVO> getProfessorList() throws Exception;
 
 }

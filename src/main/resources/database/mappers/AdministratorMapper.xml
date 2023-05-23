@@ -39,5 +39,42 @@
   			</collection>
   		</collection>
   	</resultMap>
-  
+  	
+  	<select id="getProfessorList" resultMap="ProfessorList">
+  		SELECT * FROM MEMBER M
+		LEFT OUTER JOIN
+			MEMBERFILES MF 
+		USING(USERNAME)
+			INNER JOIN
+				PROFESSOR P 
+		USING(USERNAME)
+				INNER JOIN 
+					DEPARTMENT D 
+				USING(DEPTNUM)
+					INNER JOIN
+						COLLEGE C
+					USING(COLLEGENUM)
+  	</select>
+  	<resultMap type="CollegeVO" id="ProfessorList">
+  		<id column="COLLEGENUM" property="collegeNum"/>
+  		<result column="COLLEGENAME" property="collegeName"/>
+  		<result column="BUILDING" property="building"/>
+  		<collection property="departmentVOs" javaType="List" ofType="DepartmentVO">
+  			<id column="DEPTNUM" property="deptNum"/>
+  			<result column="DEPTNAME" property="deptName"/>
+  			<collection property="professorVOs" javaType="List" ofType="ProfessorVO">
+  				<result column="NAME" property="name"/>
+  				<result column="EMAIL" property="email"/>
+  				<result column="PHONE" property="phone"/>
+  				<result column="PROFESSORROOM" property="professorRoom"/>
+  				<result column="STATUS" property="status"/>
+  				<collection property="memberFilesVOs" javaType="List" ofType="MemberFilesVO">
+  					<id column="FILENUM" property="fileNum"/>
+  					<result column="FILENAME" property="fileName"/>
+  					<result column="ORINAME" property="oriName"/>
+  				</collection>
+  			</collection>
+  		</collection>
+  	</resultMap>
+  	
   </mapper>

@@ -12,7 +12,7 @@
 <body>
 
 
-	<table class="table table-hover">
+	<table class="table table-hover" border="1">
      	 		<thead>
      	 		`	<tr>
      	 				<th>쪽지</th>
