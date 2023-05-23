@@ -1,5 +1,24 @@
 package com.acadmi.lecture;
 
 public class LectureVO {
+	private Integer lectureNum;
+	private Integer userName;
+	private String lectureName;
+	private Integer semester;
+	private String category;
+	private String lectureBuilding;
+	private Integer lectureRoom;
+	private Integer deptNum;
+	private Integer grade;
+	private Integer suvScription;
+	private Integer personal;
+	private Integer year;
+	private String weekday;
+	private Integer startTime;
+	private Integer endTime;
+	private Float completionGrade;
+	private Integer status;
+	private String note;
+	private Integer temporary;
 
 }
