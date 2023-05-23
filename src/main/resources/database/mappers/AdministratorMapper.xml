@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.acadmi.administrator.AdminIstratorDAO">
+  	<select id="getStudentList" resultMap="MemberList">
+  		SELECT * FROM MEMBER M
+		LEFT OUTER JOIN
+			MEMBERFILES MF
+		USING(USERNAME)
+			INNER JOIN
+				STUDENT S 
+			USING(USERNAME)
+				INNER JOIN
+					DEPARTMENT D 
+				USING(DEPTNUM)
+					INNER JOIN 
+						COLLEGE C 
+					USING(COLLEGENUM)
+  	</select>
+  	<resultMap type="CollegeVO" id="MemberList">
+  		<id column="COLLEGENUM" property="collegeNum"/>
+  		<result column="COLLEGENAME" property="collegeName"/>
+  		<collection property="departmentVOs" javaType="List" ofType="DepartmentVO">
+  			<id column="DEPTNUM" property="deptNum"/>
+  			<result column="DEPTNAME" property="deptName"/>
+  			<collection property="studentVOs" javaType="List" ofType="StudentVO">
+  				<id column="USERNAME" property="username"/>
+  				<result column="GRADE" property="grade"/>
+  				<result column="NAME" property="name"/>
+  				<result column="PHONE" property="phone"/>
+  				<result column="STATUS" property="status"/>
+  				<collection property="memberFilesVOs" javaType="List" ofType="MemberFilesVO">
+  					<id column="FILENUM" property="fileNum"/>
+  					<result column="FILENAME" property="fileName"/>
+  					<result column="ORINAME" property="oriName"/>
+  				</collection>
+  			</collection>
+  		</collection>
+  	</resultMap>
+  </mapper>

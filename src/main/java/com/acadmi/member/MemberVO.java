@@ -1,5 +1,7 @@
 package com.acadmi.member;
 
+import java.util.List;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,10 +9,12 @@ import lombok.Setter;
 @Getter
 public class MemberVO {
 
-	private Integer userName;
+	private Integer username;
 	private String password;
 	private String email;
 	private Integer category;
 	private Integer enabled;
+	private List<MemberFilesVO> memberFilesVOs;
 	
+	private List<RoleVO> roleVOs;
 }
