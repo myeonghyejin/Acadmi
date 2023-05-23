@@ -14,5 +14,7 @@ public class NotificationService {
 	public List<NotificationVO> getList() throws Exception {
 		return notificationDAO.getList();
 	}
+	
+	
 
 }
