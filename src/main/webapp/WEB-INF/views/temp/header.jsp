@@ -125,7 +125,7 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
 	<!-- Brand Logo -->
-	<a href="#" class="brand-link">
+	<a href="/" class="brand-link">
 		<img src="/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
 		<span class="brand-text font-weight-light">Acadmi!</span>
     </a>
@@ -159,13 +159,13 @@
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
 							<a href="#" class="nav-link">
-								<i class="far fa-circle nav-icon"></i>
+								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>강의 목록</p>
 							</a>
 						</li>
 						<li class="nav-item">
 							<a href="#" class="nav-link">
-								<i class="far fa-circle nav-icon"></i>
+								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>성적 조회</p>
 							</a>
 						</li>
@@ -184,31 +184,31 @@
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
 							<a href="#" class="nav-link">
-								<i class="far fa-circle nav-icon"></i>
+								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>수강 신청</p>
 							</a>
 						</li>
 						<li class="nav-item">
 							<a href="#" class="nav-link">
-								<i class="far fa-circle nav-icon"></i>
+								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>수강 신청 내역</p>
 							</a>
 						</li>
 						<li class="nav-item">
 							<a href="#" class="nav-link">
-								<i class="far fa-circle nav-icon"></i>
+								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>장바구니</p>
 							</a>
 						</li>
 						<li class="nav-item">
 							<a href="#" class="nav-link">
-								<i class="far fa-circle nav-icon"></i>
+								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>내 장바구니</p>
 							</a>
 						</li>
 						<li class="nav-item">
 							<a href="#" class="nav-link">
-								<i class="far fa-circle nav-icon"></i>
+								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>시간표 조회</p>
 							</a>
 						</li>
@@ -227,13 +227,13 @@
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
 							<a href="#" class="nav-link">
-								<i class="far fa-circle nav-icon"></i>
+								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>공지사항</p>
 							</a>
 						</li>
 						<li class="nav-item">
 							<a href="#" class="nav-link">
-								<i class="far fa-circle nav-icon"></i>
+								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>질의응답</p>
 							</a>
 						</li>
@@ -246,3 +246,9 @@
     </div>
     <!-- /.sidebar -->
 </aside>
+
+<style>
+.fa-circle {
+	margin: 0 8px;
+}
+</style>
