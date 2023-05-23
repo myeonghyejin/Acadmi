@@ -18,6 +18,13 @@
 	</properties>
 	<dependencies>
 		
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-messaging -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-messaging</artifactId>
+		    <version>6.0.6</version>
+		</dependency>
+		
 		<!--검증 -->
 		<dependency>
     		<groupId>org.springframework.boot</groupId>
