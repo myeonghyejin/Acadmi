@@ -5,15 +5,21 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.acadmi.college.CollegeVO;
+import com.acadmi.department.DepartmentVO;
+import com.acadmi.member.MemberVO;
+import com.acadmi.student.StudentVO;
+
 @Service
 public class AdminIstratorService {
 	
 	@Autowired
 	private AdminIstratorDAO adminIstratorDAO;
 	
-	public List<AdminIstratorVO> getMemberList() throws Exception {
+	public List<AdminIstratorVO> getStudentList() throws Exception {
 		
-		return adminIstratorDAO.getMemberList();
+		return adminIstratorDAO.getStudentList();
 	}
+	
 
 }

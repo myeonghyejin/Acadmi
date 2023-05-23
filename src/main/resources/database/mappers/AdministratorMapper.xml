@@ -4,7 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.acadmi.administrator.AdminIstratorDAO">
-  	<select id="getMemberList" resultMap="MemberList">
+  	<select id="getStudentList" resultMap="MemberList">
   		SELECT * FROM MEMBER M
 		LEFT OUTER JOIN
 			MEMBERFILES MF
@@ -39,5 +39,4 @@
   			</collection>
   		</collection>
   	</resultMap>
- 
   </mapper>
