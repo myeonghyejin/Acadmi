@@ -53,7 +53,8 @@
      	 				<td><c:out value="${college}"></c:out></td>
      	 				<td><c:out value="${department}"></c:out></td>
      	 				<td><c:out value="${studentGrade}"></c:out></td>
-     	 				<td><c:out value="${studentStatus}"></c:out></td>
+	     	 			<td><c:out value="${studentStatus}"></c:out></td>
+     	 				
      	 			</tr>
      	 			</c:forEach>
      	 			
