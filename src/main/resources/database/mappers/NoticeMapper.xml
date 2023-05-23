@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Schema 추가 -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.acadmi.board.notice.NoticeDAO">
+  	
+  	<sql id="search">
+  		<where>
+  			<if test="kind == 'title'">
+  				TITLE LIKE CONCAT('%', #{search}, '%')
+  			</if>
+  			<if test="kind == 'contents'">
+  				CONTENTS LIKE CONCAT('%', #{search}, '%')
+  			</if>
+  			<if test="kind == 'writer'">
+  				WRITER LIKE CONCAT('%', #{search}, '%')
+  			</if>
+  		</where>
+  	</sql>
+  
+  	<select id="getTotalCount" resultMap="Long" parameterType="Pagination">
+  		SELECT COUNT(NUM) FROM NOTICE
+  		<include refid="search"></include>
+  	</select>
+  
+  	<select id="getList" resultType="NoticeVO" parameterType="Pagination">
+  		SELECT * FROM NOTICE
+  		<include refid="search"></include>
+  		ORDER BY NUM DESC
+  		LIMIT #{startRow}, #{perPage}
+  	</select>
+  
+  </mapper>
