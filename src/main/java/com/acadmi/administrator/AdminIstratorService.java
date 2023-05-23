@@ -22,17 +22,30 @@ public class AdminIstratorService {
 	private AdminIstratorDAO adminIstratorDAO;
 	
 	public List<AdminIstratorVO> getStudentList(Pagination pagination) throws Exception {
+		Long totalCount = adminIstratorDAO.getTotalCount(pagination);
 		
-		return adminIstratorDAO.getStudentList();
+		pagination.makeNum(totalCount);
+		pagination.makeStartRow();
+		
+		return adminIstratorDAO.getStudentList(pagination);
 	}
 	
-	public List<AdminIstratorVO> getProfessorList() throws Exception {
-		return adminIstratorDAO.getProfessorList();
+	public List<AdminIstratorVO> getProfessorList(Pagination pagination) throws Exception {
+		Long totalCount = adminIstratorDAO.getTotalCount(pagination);
+		
+		pagination.makeNum(totalCount);
+		pagination.makeStartRow();
+		
+		return adminIstratorDAO.getProfessorList(pagination);
 	}
 	
-	public List<AdminIstratorVO> getAdminIstratorList() throws Exception {
+	public List<AdminIstratorVO> getAdminIstratorList(Pagination pagination) throws Exception {
+		Long totalCount = adminIstratorDAO.getTotalCount(pagination);
 		
-		return adminIstratorDAO.getAdminIstratorList();
+		pagination.makeNum(totalCount);
+		pagination.makeStartRow();
+		
+		return adminIstratorDAO.getAdminIstratorList(pagination);
 	}
 
 }

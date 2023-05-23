@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.acadmi.member.MemberVO;
 import com.acadmi.student.StudentVO;
+import com.acadmi.util.Pagination;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,10 +24,10 @@ public class AdminIstratorController {
 	private AdminIstratorService adminIstratorService;
 
 	@GetMapping("studentList")
-	public ModelAndView getMemberList() throws Exception {
+	public ModelAndView getMemberList(Pagination pagination) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		List<AdminIstratorVO> ar =  adminIstratorService.getStudentList();
+		List<AdminIstratorVO> ar =  adminIstratorService.getStudentList(pagination);
 		mv.addObject("list", ar);
 		mv.setViewName("administrator/studentList");
 		
@@ -34,10 +35,10 @@ public class AdminIstratorController {
 	}
 	
 	@GetMapping("professorList")
-	public ModelAndView getProfessorList() throws Exception {
+	public ModelAndView getProfessorList(Pagination pagination) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		List<AdminIstratorVO> ar = adminIstratorService.getProfessorList();
+		List<AdminIstratorVO> ar = adminIstratorService.getProfessorList(pagination);
 		mv.addObject("list", ar);
 		mv.setViewName("administrator/professorList");
 		
@@ -45,10 +46,10 @@ public class AdminIstratorController {
 	}
 	
 	@GetMapping("adminIstratorList")
-	public ModelAndView getAdminIstratorList() throws Exception {
+	public ModelAndView getAdminIstratorList(Pagination pagination) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		List<AdminIstratorVO> ar = adminIstratorService.getAdminIstratorList();
+		List<AdminIstratorVO> ar = adminIstratorService.getAdminIstratorList(pagination);
 		mv.addObject("list", ar);
 		mv.setViewName("administrator/adminIstratorList");
 		

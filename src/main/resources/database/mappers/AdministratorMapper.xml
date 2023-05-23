@@ -4,6 +4,11 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.acadmi.administrator.AdminIstratorDAO">
+  
+  	<select id="getTotalCount" resultType="java.lang.Long">
+  		SELECT COUNT(USERNAME) FROM MEMBER
+  	</select>
+  
   	<select id="getStudentList" parameterType="Pagination" resultMap="StudentList">
   		SELECT * FROM MEMBER M
 		LEFT OUTER JOIN
@@ -18,7 +23,8 @@
 					INNER JOIN 
 						COLLEGE C 
 					USING(COLLEGENUM)
-		LIMIT #{startRow},#{perPage}						
+		WHERE CATEGORY=2			
+		LIMIT #{startRow},#{perPage}					
   	</select>
   	<resultMap type="CollegeVO" id="StudentList">
   		<id column="COLLEGENUM" property="collegeNum"/>
@@ -55,6 +61,8 @@
 					INNER JOIN
 						COLLEGE C
 					USING(COLLEGENUM)
+		WHERE CATEGORY=1			
+		LIMIT #{startRow},#{perPage}			
   	</select>
   	<resultMap type="CollegeVO" id="ProfessorList">
   		<id column="COLLEGENUM" property="collegeNum"/>
@@ -89,6 +97,8 @@
 				INNER JOIN 
 					DEPARTMENT D 
 				USING(DEPTNUM)
+	WHERE CATEGORY=0			
+	LIMIT #{startRow},#{perPage}			
   </select>
   
   <resultMap type="DepartmentVO" id="AdminIstratorList">

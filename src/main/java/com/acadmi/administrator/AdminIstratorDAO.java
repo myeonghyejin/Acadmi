@@ -16,8 +16,9 @@ import com.acadmi.util.Pagination;
 public interface AdminIstratorDAO {
 	
 	public List<AdminIstratorVO> getStudentList(Pagination pagination) throws Exception;
-	public List<AdminIstratorVO> getProfessorList() throws Exception;
-	public List<AdminIstratorVO> getAdminIstratorList() throws Exception;
+	public List<AdminIstratorVO> getProfessorList(Pagination pagination) throws Exception;
+	public List<AdminIstratorVO> getAdminIstratorList(Pagination pagination) throws Exception;
+	public Long getTotalCount(Pagination pagination) throws Exception;
 	
 	public int setMemberInsert(MemberVO memberVO) throws Exception;
 	public int setStudentInsert(StudentVO studentVO)throws Exception;

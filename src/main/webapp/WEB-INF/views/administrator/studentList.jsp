@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<h1>학생 목록 조회</h1>
 
 	<table class="table table-hover" border="1">
      	 		<thead>
@@ -45,29 +45,29 @@
 											<td><img src="/${memberFilesVO.fileName}"></td>
 										</tr>
      	 							</c:forEach>
-     	 							<td></td>
-     	 							<td></td>
-     	 							<td><c:out value="${studentUsername}"></c:out></td>
-			     	 				<td><c:out value="${studentName}"></c:out></td>
-			     	 				<td><c:out value="${studentPhone}"></c:out></td>
-			     	 				<td><c:out value="${college}"></c:out></td>
-			     	 				<td><c:out value="${department}"></c:out></td>
-			     	 				<td><c:out value="${studentGrade}"></c:out></td>
-			     	 				<c:if test="${studentStatus eq 1}">
-			     	 					<td>재학</td>
-			     	 				</c:if>
-			     	 				<c:if test="${studentStatus eq 2 }">
-			     	 					<td>휴학</td>
-			     	 				</c:if>
-			     	 				<c:if test="${studentStatus eq 3 }">
-			     	 					<td>퇴학</td>
-			     	 				</c:if>
-			     	 				<c:if test="${studentStatus eq 4 }">
-			     	 					<td>졸업</td>
-			     	 				</c:if>
-			     	 				<c:if test="${studentStatus eq 5 }">
-			     	 					<td>졸업유예</td>
-			     	 				</c:if>
+	     	 							<td></td>
+	     	 							<td></td>
+	     	 							<td><c:out value="${studentUsername}"></c:out></td>
+				     	 				<td><c:out value="${studentName}"></c:out></td>
+				     	 				<td><c:out value="${studentPhone}"></c:out></td>
+				     	 				<td><c:out value="${college}"></c:out></td>
+				     	 				<td><c:out value="${department}"></c:out></td>
+				     	 				<td><c:out value="${studentGrade}"></c:out></td>
+				     	 				<c:if test="${studentStatus eq 1}">
+				     	 					<td>재학</td>
+				     	 				</c:if>
+				     	 				<c:if test="${studentStatus eq 2 }">
+				     	 					<td>휴학</td>
+				     	 				</c:if>
+				     	 				<c:if test="${studentStatus eq 3 }">
+				     	 					<td>퇴학</td>
+				     	 				</c:if>
+				     	 				<c:if test="${studentStatus eq 4 }">
+				     	 					<td>졸업</td>
+				     	 				</c:if>
+				     	 				<c:if test="${studentStatus eq 5 }">
+				     	 					<td>졸업유예</td>
+				     	 				</c:if>
      	 						</tr>	
      	 						</c:forEach>
      	 					</c:forEach>
@@ -75,6 +75,10 @@
      	 			</c:forEach>
      	 			
      	 		</tbody>
-     	 	</table>
+     	 </table>
+     	 
+     	 <c:forEach begin="${pagination.startNum}" end="${pagination.lastNum}" var="i">
+     	 	<a href="./studentList?page=${i}">${i}</a>
+     	 </c:forEach>
 </body>
 </html>

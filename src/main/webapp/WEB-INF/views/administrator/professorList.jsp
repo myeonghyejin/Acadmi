@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<h1>교수 목록 조회</h1>
 
 	<table class="table table-hover" border="1">
 		<thead>
@@ -65,6 +66,10 @@
 				</tr>		
    	 			</c:forEach>
    	 		</tbody>
-   	 </table>		
+   	 </table>
+   	 
+   	 <c:forEach begin="${pagination.startNum}" end="${pagination.lastNum}" var="i">
+   	 	<a href="./professorList?page=${i}">${i}</a>
+   	 </c:forEach>		
 </body>
 </html>

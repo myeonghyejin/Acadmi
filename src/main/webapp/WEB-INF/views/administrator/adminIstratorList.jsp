@@ -8,7 +8,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<h1>행정 목록 조회</h1>
+	
 	<table class="table table-hover" border="1">
 		<thead>
    	 		`	<tr>
@@ -40,12 +41,24 @@
 	   	 			<td><c:out value="${adminIstratorPhone}"></c:out></td>
 	   	 			<td><c:out value="${adminIstratorEmail}"></c:out></td>
 	   	 			<td><c:out value="${department}"></c:out></td>
-	   	 			<td><c:out value="${adminIstratorStatus}"></c:out></td>		
+	   	 			<c:if test="${adminIstratorStatus eq 1}">
+	   	 				<td>재직</td>
+	   	 			</c:if>
+	   	 			<c:if test="${adminIstratorStatus eq 2}">
+	   	 				<td>휴직</td>
+	   	 			</c:if>
+	   	 			<c:if test="${adminIstratorStatus eq 3}">
+	   	 				<td>퇴직</td>
+	   	 			</c:if>
    	 				</tr>
    	 			</c:forEach>
    	 		</tr>	
    	 		</c:forEach>
    	 	</tbody>
 	</table>
+	
+	<c:forEach begin="${pagination.startNum}" end="${pagination.lastNum}" var="i">
+   	 	<a href="./adminIstratorList?page=${i}">${i}</a>
+   	 </c:forEach>		
 </body>
 </html>
