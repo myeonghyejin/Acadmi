@@ -17,11 +17,20 @@ public class NotificationDAOTest {
 	
 	@Test
 	void getList() throws Exception {
-		NotificationVO notificationVO = new NotificationVO();
-		notificationVO.setNotificationKind(1);
-		List<NotificationVO> ar = notificationDAO.getList(notificationVO);
+		
+		List<NotificationVO> ar = notificationDAO.getList();
 		assertNotEquals(0, ar.size());
 		
+	}
+	
+	@Test
+	void setNotification() throws Exception {
+		NotificationVO notificationVO = new NotificationVO();
+		notificationVO.setUsername(123L);
+		notificationVO.setNotificationMsg("dsdsds");
+		notificationVO.setNotificationKind(1);
+		int result = notificationDAO.setNotification(notificationVO);
+		assertNotEquals(0, result);
 	}
 	
 }

@@ -11,8 +11,8 @@ public class NotificationService {
 	@Autowired
 	private NotificationDAO notificationDAO;
 	
-	public List<NotificationVO> getList(NotificationVO notificationVO) throws Exception {
-		return notificationDAO.getList(notificationVO);
+	public List<NotificationVO> getList() throws Exception {
+		return notificationDAO.getList();
 	}
 
 }

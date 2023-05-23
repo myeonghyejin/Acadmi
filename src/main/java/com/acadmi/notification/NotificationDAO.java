@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface NotificationDAO {
 	
-	public List<NotificationVO> getList(NotificationVO notificationVO) throws Exception;
+	public List<NotificationVO> getList() throws Exception;
+	
+	public int setNotification(NotificationVO notificationVO) throws Exception;
 
 }

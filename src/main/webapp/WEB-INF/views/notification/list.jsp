@@ -18,20 +18,21 @@
 		 	</tr>
 		 </thead>
 		 <tbody>
-		 	<tr>
-		 		<c:forEach items="${list}" var="notificationVO">
+		 	<c:forEach items="${list}" var="notificationVO">
+		 		<tr>
 		 			<td>${notificationVO.notificationNum}</td>
 		 			<td>
 		 				<c:if test="${notificationVO.notificationKind eq 1}">
-		 					[공지]${notificationVO.notificationMsg}
+		 					[공지]
 		 				</c:if>
 		 				<c:if test="${notificationVO.notificationKind eq 2}">
-		 					[답글]${notificationVO.notificationMsg}
+		 					[답글]
 		 				</c:if>
+		 				${notificationVO.notificationMsg}
 					</td>
 					<td>${notificationVO.notificationDate}</td>
-		 		</c:forEach>
-		 	</tr>
+		 		</tr>
+		 	</c:forEach>
 		 </tbody>
 	</table>
 	

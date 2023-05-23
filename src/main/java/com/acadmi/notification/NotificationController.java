@@ -19,11 +19,10 @@ public class NotificationController {
 	private NotificationService notificationService;
 	
 	@GetMapping("list")
-	public ModelAndView getList(NotificationVO notificationVO) throws Exception {
+	public ModelAndView getList() throws Exception {
 		ModelAndView mv = new ModelAndView();
-		notificationVO.setNotificationKind(1);
-		log.debug("==========check==============");
-		List<NotificationVO> ar = notificationService.getList(notificationVO);
+		List<NotificationVO> ar = notificationService.getList();
+		log.info("========== size : {}",ar.size());
 		
 		mv.addObject("list", ar);
 		mv.setViewName("notification/list");
