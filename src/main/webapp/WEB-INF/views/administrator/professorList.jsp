@@ -36,22 +36,32 @@
 							<c:set var="professorEmail" value="${professorVO.email}"></c:set>
 							<c:set var="professorRoom" value="${professorVO.professorRoom}"></c:set>
 							<c:set var="professorStatus" value="${professorVO.status}"></c:set>
-							<c:forEach items="${professorVO.memberFilesVOs}" var="memberFilesVO">
-								<c:set var="memberFiles" value="${memberFilesVO.fileName}"></c:set>
-							</c:forEach>
+							<tr>
+								<c:forEach items="${professorVO.memberFilesVOs}" var="memberFilesVO">
+									<td><img src="/file/member/${memberFiles.fileName}"></td>
+								</c:forEach>
+							<td></td>
+							<td></td>
+							<td><c:out value="${professorName}"></c:out></td>
+							<td><c:out value="${collegeName}"></c:out></td>	
+							<td><c:out value="${department}"></c:out></td>
+							<td><c:out value="${professorPhone}"></c:out></td>
+							<td><c:out value="${professorEmail}"></c:out></td>
+							<td>
+							<c:out value="${collegeBuilding} "></c:out><c:out value="${professorRoom}호"></c:out>
+							</td>
+							<c:if test="${professorStatus eq 1}">
+								<td>재직</td>
+							</c:if>
+							<c:if test="${professorStatus eq 2}">
+								<td>휴직</td>
+							</c:if>
+							<c:if test="${professorStatus  eq 3}">
+								<td>퇴임</td>
+							</c:if>
+							</tr>
 						</c:forEach>
 					</c:forEach>
-					<td></td>
-					<td><img src="/file/member/${memberFiles.fileName}"></td>
-					<td><c:out value="${professorName}"></c:out></td>
-					<td><c:out value="${collegeName}"></c:out></td>	
-					<td><c:out value="${department}"></c:out></td>
-					<td><c:out value="${professorPhone}"></c:out></td>
-					<td><c:out value="${professorEmail}"></c:out></td>
-					<td>
-					<c:out value="${collegeBuilding} "></c:out><c:out value="${professorRoom}"></c:out>
-					</td>
-					<td><c:out value="${professorStatus}"></c:out></td>
 				</tr>		
    	 			</c:forEach>
    	 		</tbody>

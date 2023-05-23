@@ -4,7 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.acadmi.administrator.AdminIstratorDAO">
-  	<select id="getStudentList" resultMap="StudentList">
+  	<select id="getStudentList" parameterType="Pagination" resultMap="StudentList">
   		SELECT * FROM MEMBER M
 		LEFT OUTER JOIN
 			MEMBERFILES MF
@@ -18,6 +18,7 @@
 					INNER JOIN 
 						COLLEGE C 
 					USING(COLLEGENUM)
+		LIMIT #{startRow},#{perPage}						
   	</select>
   	<resultMap type="CollegeVO" id="StudentList">
   		<id column="COLLEGENUM" property="collegeNum"/>
@@ -76,5 +77,57 @@
   			</collection>
   		</collection>
   	</resultMap>
+  
+  <select id="getAdminIstratorList" resultMap="AdminIstratorList">
+  	SELECT * FROM MEMBER M
+		LEFT OUTER JOIN
+			MEMBERFILES MF 
+		USING(USERNAME)
+			INNER JOIN
+				ADMINISTRATOR A
+			USING(USERNAME)
+				INNER JOIN 
+					DEPARTMENT D 
+				USING(DEPTNUM)
+  </select>
+  
+  <resultMap type="DepartmentVO" id="AdminIstratorList">
+  	<id column="DEPTNUM" property="deptNum"/>
+  	<result column="DEPTNAME" property="deptName"/>
+		<collection property="adminIstratorVOs" javaType="List" ofType="AdminIstratorVO">
+			<result column="NAME" property="name"/>
+			<result column="EMAIL" property="email"/>
+			<result column="PHONE" property="phone"/>
+			<result column="STATUS" property="status"/>
+			<collection property="memberFilesVOs" javaType="List" ofType="MemberFilesVO">
+				<id column="FILENUM" property="fileNum"/>
+				<result column="FILENAME" property="fileName"/>
+				<result column="ORINAME" property="oriName"/>
+			</collection>
+		</collection>
+  </resultMap>
+  
+    <insert id="setMemberInsert" parameterType="MemberVO">
+  		INSERT INTO MEMBER
+  		VALUES(#{username}, #{password},#{email},#{category},#{enabled})
+  	</insert>
   	
+  	<insert id="setStudentInsert" parameterType="StudentVO">
+  		INSERT INTO STUDENT
+  		VALUES(#{username},#{deptNum},#{grade},#{name},#{phone},now(),#{address},#{status})
+  	</insert>
+  	
+  	<insert id="setProfessorInsert" parameterType="ProfessorVO">
+  		INSERT INTO PROFESSOR
+  		VALUES(#{username},#{deptNum},#{name},#{professorRoom},#{phone},now(),#{address},#{status})
+  	</insert>
+  	
+  	<insert id="setAdminIstratorInsert" parameterType="AdminIstratorVO">
+  		INSERT INTO ADMINISTRATOR
+  		VALUES(#{username},1,#{name},01044444444,now(),'서울',1)
+  	</insert>
+  	
+  	<select id="getMember" resultType="MemberVO">
+  		SELECT USERNAME FROM MEMBER
+  	</select>
   </mapper>

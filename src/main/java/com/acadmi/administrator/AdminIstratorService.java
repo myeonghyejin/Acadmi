@@ -8,22 +8,31 @@ import org.springframework.stereotype.Service;
 import com.acadmi.college.CollegeVO;
 import com.acadmi.department.DepartmentVO;
 import com.acadmi.member.MemberVO;
+import com.acadmi.professor.ProfessorVO;
 import com.acadmi.student.StudentVO;
+import com.acadmi.util.Pagination;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
 public class AdminIstratorService {
 	
 	@Autowired
 	private AdminIstratorDAO adminIstratorDAO;
 	
-	public List<AdminIstratorVO> getStudentList() throws Exception {
+	public List<AdminIstratorVO> getStudentList(Pagination pagination) throws Exception {
 		
 		return adminIstratorDAO.getStudentList();
 	}
 	
 	public List<AdminIstratorVO> getProfessorList() throws Exception {
-		
 		return adminIstratorDAO.getProfessorList();
+	}
+	
+	public List<AdminIstratorVO> getAdminIstratorList() throws Exception {
+		
+		return adminIstratorDAO.getAdminIstratorList();
 	}
 
 }

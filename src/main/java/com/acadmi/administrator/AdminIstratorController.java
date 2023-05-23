@@ -44,6 +44,19 @@ public class AdminIstratorController {
 		return mv;
 	}
 	
+	@GetMapping("adminIstratorList")
+	public ModelAndView getAdminIstratorList() throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		List<AdminIstratorVO> ar = adminIstratorService.getAdminIstratorList();
+		mv.addObject("list", ar);
+		mv.setViewName("administrator/adminIstratorList");
+		
+		return mv;
+		
+		
+	}
+	
 	
 
 }
