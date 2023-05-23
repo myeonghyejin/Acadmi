@@ -13,4 +13,12 @@ public class MemberService {
 		return memberDAO.getLogin(memberVO);
 	}
 	
+	public MemberVO getMyPage(MemberVO memberVO)throws Exception{
+		return memberDAO.getLogin(memberVO);
+	}
+	
+	public int setLogout(MemberVO memberVO) throws Exception{
+		return memberDAO.setLogout(memberVO);
+	}
+	
 }

@@ -34,9 +34,33 @@ public class MemberController {
 			session.setAttribute("member", memberVO);
 			mv.setViewName("redirect:../");
 		}
+	
+		return mv;
+	}
+	
+	@GetMapping("logout")
+	public ModelAndView getLogout(HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView();
 		
+		session.invalidate();
+		
+		mv.setViewName("redirect:../");
 		
 		return mv;
 	}
+	
+	@GetMapping(value = "mypage")
+	   public ModelAndView getMemberPage(HttpSession session) throws Exception {
+	      ModelAndView mv = new ModelAndView();
+	      
+	      MemberVO memberVO = (MemberVO)session.getAttribute("member");
+	      
+	      memberVO = memberService.getMyPage(memberVO);
+	      
+	      mv.addObject("memberVO", memberVO);
+	      mv.setViewName("member/mypage");
+	      
+	      return mv;
+	   }
 	
 }
