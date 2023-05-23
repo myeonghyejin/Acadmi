@@ -5,5 +5,29 @@
   
   <configuration>
   	<typeAliases>
+  		<typeAlias type="com.acadmi.util.Pagination" alias="Pagination"/>
+  		<typeAlias type="com.acadmi.util.FileVO" alias="FileVO"/>
+  	
+  		<typeAlias type="com.acadmi.notification.NotificationVO" alias="NotificationVO"/>
+  		
+  		<typeAlias type="com.acadmi.member.MemberVO" alias="MemberVO"/>
+  		<typeAlias type="com.acadmi.member.MemberFilesVO" alias="MemberFilesVO"/>
+  		<typeAlias type="com.acadmi.member.RoleVO" alias="RoleVO"/>
+  		
+  		<typeAlias type="com.acadmi.lecture.LectureVO" alias="LectureVO"/>
+  		<typeAlias type="com.acadmi.student.StudentVO" alias="StudentVO"/>
+  		<typeAlias type="com.acadmi.department.DepartmentVO" alias="DepartmentVO"/>
+  		<typeAlias type="com.acadmi.college.CollegeVO" alias="CollegeVO"/>
+  		<typeAlias type="com.acadmi.administrator.AdminIstratorVO" alias="AdminIstratorVO"/>
+  		<typeAlias type="com.acadmi.professor.ProfessorVO" alias="ProfessorVO"/>
+  		
+  		<typeAlias type="com.acadmi.board.BoardFileVO" alias="BoardFileVO"/>
+  		<typeAlias type="com.acadmi.board.BoardVO" alias="BoardVO"/>
+  		<typeAlias type="com.acadmi.board.notice.NoticeVO" alias="NoticeVO"/>
+  		
+  		
+  		
+  		
+  		
   	</typeAliases>
   </configuration>
