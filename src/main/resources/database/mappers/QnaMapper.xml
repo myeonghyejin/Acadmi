@@ -51,7 +51,7 @@
   		<result column="step" property="step"/>
   		<result column="depth" property="depth"/>
   		
-  		<collection property="fileVOs" javaType="List" ofType="FileVO">
+  		<collection property="qnaFileVOs" javaType="List" ofType="QnaFileVO">
   			<id column="fileNum" property="fileNum"/>
   			<result column="fileName" property="fileName"/>
   			<result column="oriName" property="oriName"/>
@@ -63,12 +63,12 @@
   		VALUES (#{num}, #{title}, #{writer}, #{contents}, now(), 0, 0, 0)
   	</insert>
   	
-  	<insert id="setBoardFileAdd" parameterType="FileVO">
+  	<insert id="setBoardFileAdd" parameterType="QnaFileVO">
   		INSERT INTO QNAFILES (NUM, FILENAME, ORINAME)
   		VALUES(#{num}, #{fileName}, #{oriName})
   	</insert>
   	
-  	<select id="getFileDetail" parameterType="FileVO" resultType="FileVO">
+  	<select id="getFileDetail" parameterType="QnaFileVO" resultType="QnaFileVO">
   		SELECT * FROM QNAFILES WHERE FILENUM = #{fileNum}
   	</select>
   	

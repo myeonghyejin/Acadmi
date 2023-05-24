@@ -20,19 +20,19 @@
   		</where>
   	</sql>
   
-  	<select id="getTotalCount" resultMap="Long" parameterType="Pagination">
+  	<select id="getTotalCount" resultType="Long" parameterType="Pagination">
   		SELECT COUNT(NUM) FROM NOTICE
   		<include refid="search"></include>
   	</select>
   
-  	<select id="getList" resultType="NoticeVO" parameterType="Pagination">
+  	<select id="getList" resultType="BoardVO" parameterType="Pagination">
   		SELECT * FROM NOTICE
   		<include refid="search"></include>
   		ORDER BY NUM DESC
   		LIMIT #{startRow}, #{perPage}
   	</select>
   	
-  	<select id="getDetail" parameterType="NoticeVO" resultMap="getDetailResult">
+  	<!-- <select id="getDetail" parameterType="NoticeVO" resultMap="getDetailResult">
   		SELECT *
 		FROM NOTICE 
 			 LEFT JOIN
@@ -50,7 +50,7 @@
   		<result column="modifyDate" property="modifyDate"/>
   		<result column="hit" property="hit"/>
   		
-  		<collection property="fileVOs" javaType="List" ofType="FileVO">
+  		<collection property="noticeFileVOs" javaType="List" ofType="NoticeFileVO">
   			<id column="fileNum" property="fileNum"/>
   			<result column="fileName" property="fileName"/>
   			<result column="oriName" property="oriName"/>
@@ -71,13 +71,13 @@
   		DELETE FROM NOTICE WHERE NUM = #{num}
   	</delete>
   	
-  	<insert id="setBoardFileAdd" parameterType="FileVO">
+  	<insert id="setBoardFileAdd" parameterType="NoticeFileVO">
   		INSERT INTO NOTICEFILES (NUM, FILENAME, ORINAME)
   		VALUES(#{num}, #{fileName}, #{oriName})
   	</insert>
   	
-  	<select id="getFileDetail" parameterType="FileVO" resultType="FileVO">
+  	<select id="getFileDetail" parameterType="NoticeFileVO" resultType="NoticeFileVO">
   		SELECT * FROM NOTICEFILES WHERE FILENUM = #{fileNum}
-  	</select>
+  	</select> -->
   
   </mapper>
