@@ -19,7 +19,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import com.acadmi.member.MemberService;
 import com.acadmi.security.UserLoginFailHandler;
-import com.acadmi.security.UserSuccessHandler;
+
 
 
 @Configuration
@@ -49,18 +49,15 @@ public class SecurityConfig {
                .authorizeRequests()
                   // URL과 권한 매칭
                   .antMatchers("/member/login").permitAll()
-                  .antMatchers("/test").authenticated()
-                  .antMatchers("/").permitAll()
-//                  .antMatchers("/qna/add").hasAnyRole("ADMIN", "MANAGER", "MEMBER")
-                  //.anyRequest().authenticated()
-                  .anyRequest().permitAll()
+//                  .antMatchers("/test").authenticated()
+                  	.antMatchers("/").permitAll()
+//                  .antMatchers("/").hasAnyRole("ADMIN", "ADMINISTRATOR", "PROFESSOR", "STUDENT")
+//                  .anyRequest().permitAll()
                   .and()
                .formLogin()
                   .loginPage("/member/login")
                   .defaultSuccessUrl("/")
-                  	//.successHandler(new UserSuccessHandler())
-                  	.failureUrl("/member/login")
-                  	//.failureHandler(new UserLoginFailHandler())
+                  .failureHandler(new UserLoginFailHandler())
                   .permitAll()
                   .and()
                .logout()
