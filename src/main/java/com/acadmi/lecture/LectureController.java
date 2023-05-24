@@ -41,15 +41,15 @@ public class LectureController {
 	@GetMapping("add")
 	public ModelAndView setLectureAdd(@ModelAttribute LectureVO lectureVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		log.error("ddd");
+		log.error("getMapping");
 		mv.setViewName("lecture/add");
 		return mv;
 	}
 	@PostMapping("add")
-	public ModelAndView setLectureAdd(@Valid LectureVO lectureVO, ModelAndView mv) throws Exception{
-		log.error(lectureVO.getLectureName());
+	public ModelAndView setLectureAdd(LectureVO lectureVO, ModelAndView mv) throws Exception{
+		log.error("postMapping-before");
 		int result = lectureService.setLectureAdd(lectureVO);
-		log.error(lectureVO.getLectureName());
+		log.error("postMapping-after");
 		mv.setViewName("redirect:./list");
 		return mv;
 	}
