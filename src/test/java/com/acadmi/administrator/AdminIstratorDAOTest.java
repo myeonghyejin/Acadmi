@@ -26,7 +26,7 @@ public class AdminIstratorDAOTest {
 	
 	//@Test
 	void setMemberInsert() throws Exception {
-		for(int i=80; i<120; i++) {	
+		for(int i=120; i<230; i++) {	
 			MemberVO memberVO = new MemberVO();
 			
 			memberVO.setUsername(i);
@@ -42,7 +42,7 @@ public class AdminIstratorDAOTest {
 	
 	@Test
 	void setStudentInsert() throws Exception {
-		for(int i=71; i<120; i++) {
+		for(int i=181; i<230; i++) {
 			StudentVO studentVO = new StudentVO();
 			
 			studentVO.setUsername(adminAdminIstratorDAO.getMember().get(i-1).getUsername());
@@ -58,7 +58,7 @@ public class AdminIstratorDAOTest {
 	
 	//@Test
 	void setProfessorInsert() throws Exception {
-		for(int i=30; i<70; i++) {
+		for(int i=151; i<181; i++) {
 			ProfessorVO professorVO = new ProfessorVO();
 			
 			professorVO.setUsername(adminAdminIstratorDAO.getMember().get(i-1).getUsername());
@@ -76,7 +76,7 @@ public class AdminIstratorDAOTest {
 	//@Test
 	void setAdminIstratorInsert() throws Exception {
 		
-		for(int i=11; i<30; i++) {
+		for(int i=120; i<151; i++) {
 			AdminIstratorVO adminIstratorVO = new AdminIstratorVO();
 			
 			adminIstratorVO.setUsername(adminAdminIstratorDAO.getMember().get(i-1).getUsername());

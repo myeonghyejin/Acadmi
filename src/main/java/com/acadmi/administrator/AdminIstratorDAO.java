@@ -18,7 +18,9 @@ public interface AdminIstratorDAO {
 	public List<StudentVO> getStudentList(Pagination pagination) throws Exception;
 	public List<ProfessorVO> getProfessorList(Pagination pagination) throws Exception;
 	public List<AdminIstratorVO> getAdminIstratorList(Pagination pagination) throws Exception;
-	public Long getTotalCount(Pagination pagination) throws Exception;
+	public Long getTotalCountStudent(Pagination pagination) throws Exception;
+	public Long getTotalCountProfessor(Pagination pagination) throws Exception;
+	public Long getTotalCountAdminIstrator(Pagination pagination) throws Exception;
 	
 	public int setMemberInsert(MemberVO memberVO) throws Exception;
 	public int setStudentInsert(StudentVO studentVO)throws Exception;

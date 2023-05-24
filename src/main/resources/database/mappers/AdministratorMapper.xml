@@ -5,8 +5,16 @@
   
   <mapper namespace="com.acadmi.administrator.AdminIstratorDAO">
   
-  	<select id="getTotalCount" resultType="Long">
-  		SELECT COUNT(USERNAME) FROM MEMBER
+  	<select id="getTotalCountStudent" resultType="Long">
+  		SELECT COUNT(USERNAME) FROM STUDENT
+  	</select>
+  	
+  	<select id="getTotalCountProfessor" resultType="Long">
+  		SELECT COUNT(USERNAME) FROM PROFESSOR
+  	</select>
+  	
+  	<select id="getTotalCountAdminIstrator" resultType="Long">
+  		SELECT COUNT(USERNAME) FROM ADMINISTRATOR
   	</select>
   
   	<select id="getStudentList" parameterType="Pagination" resultMap="StudentList">

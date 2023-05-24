@@ -22,7 +22,7 @@ public class AdminIstratorService {
 	private AdminIstratorDAO adminIstratorDAO;
 	
 	public List<StudentVO> getStudentList(Pagination pagination) throws Exception {
-		Long totalCount = adminIstratorDAO.getTotalCount(pagination);
+		Long totalCount = adminIstratorDAO.getTotalCountStudent(pagination);
 		
 		pagination.makeNum(totalCount);
 		pagination.makeStartRow();
@@ -31,7 +31,7 @@ public class AdminIstratorService {
 	}
 	
 	public List<ProfessorVO> getProfessorList(Pagination pagination) throws Exception {
-		Long totalCount = adminIstratorDAO.getTotalCount(pagination);
+		Long totalCount = adminIstratorDAO.getTotalCountProfessor(pagination);
 		
 		pagination.makeNum(totalCount);
 		pagination.makeStartRow();
@@ -40,7 +40,7 @@ public class AdminIstratorService {
 	}
 	
 	public List<AdminIstratorVO> getAdminIstratorList(Pagination pagination) throws Exception {
-		Long totalCount = adminIstratorDAO.getTotalCount(pagination);
+		Long totalCount = adminIstratorDAO.getTotalCountAdminIstrator(pagination);
 		
 		pagination.makeNum(totalCount);
 		pagination.makeStartRow();
