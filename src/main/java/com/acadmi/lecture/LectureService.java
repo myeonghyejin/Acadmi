@@ -14,12 +14,10 @@ public class LectureService {
 	@Autowired
 	private LectureDAO lectureDAO;
 	
-	public List<LectureVO> getLectureList() throws Exception{
-		return lectureDAO.getLectureList();
+	public List<LectureVO> getLectureList(LectureVO lectureVO) throws Exception{
+		return lectureDAO.getLectureList(lectureVO);
 	}
-	public List<LectureVO> getTemporaryList() throws Exception{
-		return lectureDAO.getTemporaryList();
-	}
+	
 	public int setLectureUpdate(LectureVO lectureVO) throws Exception{
 		return lectureDAO.setLectureUpdate(lectureVO);
 	}

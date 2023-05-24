@@ -6,8 +6,8 @@ import lombok.Setter;
 @Setter
 @Getter
 public class LectureVO {
-	private Integer lectureNum;
-	private Integer userName;
+	private Long lectureNum;
+	private String userName;
 	private String lectureName;
 	private Integer semester;
 	private String category;

@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import lombok.extern.slf4j.Slf4j;
-
+@CrossOrigin(origins="localhost")
 @Slf4j
 @Controller
 @RequestMapping("/lecture/")
@@ -23,21 +24,14 @@ public class LectureController {
 	private LectureService lectureService;
 	
 	@GetMapping("list")
-	public ModelAndView getLectureList() throws Exception{
+	public ModelAndView getLectureList(LectureVO lectureVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		List<LectureVO> ar = lectureService.getLectureList();
+		List<LectureVO> ar = lectureService.getLectureList(lectureVO);
 		mv.addObject("list",ar);
 		mv.setViewName("lecture/list");
 		return mv;
 	}
-	@GetMapping("temporary")
-	public ModelAndView getTemporaryList() throws Exception{
-		ModelAndView mv = new ModelAndView();
-		List<LectureVO> ar = lectureService.getTemporaryList();
-		mv.addObject("temporary",ar);
-		mv.setViewName("lecture/temporary");
-		return mv;
-	}
+	
 	
 	@GetMapping("add")
 	public ModelAndView setLectureAdd(@ModelAttribute LectureVO lectureVO) throws Exception{

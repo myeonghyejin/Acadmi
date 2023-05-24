@@ -5,12 +5,17 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.acadmi.lecture.LectureDAO">
-  	<select id="getLectureList" resultType="LectureVO">
-  		SELECT * FROM LECTURE WHERE TEMPORARY=0
+  <sql id="lectureCondition">
+  	<trim prefix="WHERE" prefixOverrides="AND">
+  		<if test="temporary">
+  			TEMPORARY = #{temporary}
+  		</if>
+  	</trim>
+  </sql>
+  	<select id="getLectureList" parameterType="LectureVO" resultType="LectureVO">
+  		SELECT * FROM LECTURE <include refid="lectureCondition"></include>
   	</select>
-  	<select id="getTemporaryList" resultType="LectureVO">
-  		SELECT * FROM LECTURE WHERE TEMPORARY=1
-  	</select>
+  
   	<insert id="setLectureAdd" parameterType="LectureVO" useGeneratedKeys="true" keyProperty="lectureNum">
   		INSERT INTO LECTURE (USERNAME,LECTURENAME,SEMESTER,LECTUREBUILDING,LECTUREROOM,DEPTNUM,YEAR,TEMPORARY)
   		VALUES (20190821,#{lectureName},1,'정보관',101,1,2022,0)
