@@ -1,6 +1,5 @@
 package com.acadmi.administrator;
 
-import java.lang.reflect.Member;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -13,7 +12,6 @@ import com.acadmi.college.CollegeVO;
 import com.acadmi.department.DepartmentVO;
 import com.acadmi.member.MemberFilesVO;
 import com.acadmi.member.MemberVO;
-import com.acadmi.professor.ProfessorVO;
 import com.acadmi.student.StudentVO;
 import com.fasterxml.jackson.databind.type.CollectionLikeType;
 
@@ -24,68 +22,49 @@ public class AdminIstratorDAOTest {
 	@Autowired
 	private AdminIstratorDAO adminAdminIstratorDAO;
 	
-	//@Test
-	void setMemberInsert() throws Exception {
-		for(int i=120; i<230; i++) {	
-			MemberVO memberVO = new MemberVO();
-			
-			memberVO.setUsername(i);
-			memberVO.setPassword("1234");
-			memberVO.setEmail("dfd@naver.com");
-			memberVO.setCategory(0);
-			memberVO.setEnabled(1);
-			
-			int result = adminAdminIstratorDAO.setMemberInsert(memberVO);
-		}
-	}
-	
-	
 	@Test
-	void setStudentInsert() throws Exception {
-		for(int i=181; i<230; i++) {
-			StudentVO studentVO = new StudentVO();
-			
-			studentVO.setUsername(adminAdminIstratorDAO.getMember().get(i-1).getUsername());
-			studentVO.setDeptNum(1);
-			studentVO.setGrade(2);
-			studentVO.setName("miri"+i);
-			studentVO.setPhone(0102222222);
-			studentVO.setAddress("서울");
-			studentVO.setStatus(1);
-			int result = adminAdminIstratorDAO.setStudentInsert(studentVO);
-		}
-	}
-	
-	//@Test
-	void setProfessorInsert() throws Exception {
-		for(int i=151; i<181; i++) {
-			ProfessorVO professorVO = new ProfessorVO();
-			
-			professorVO.setUsername(adminAdminIstratorDAO.getMember().get(i-1).getUsername());
-			professorVO.setDeptNum(1);
-			professorVO.setName("professor"+i);
-			professorVO.setProfessorRoom(i);
-			professorVO.setPhone(01033333333);
-			professorVO.setAddress("서울");
-			professorVO.setStatus(1);
-			
-			int result = adminAdminIstratorDAO.setProfessorInsert(professorVO);
-		}
-	}
-	
-	//@Test
-	void setAdminIstratorInsert() throws Exception {
+	@Transactional(rollbackFor = Exception.class)
+	void setMemberInsertTest() throws Exception {
 		
-		for(int i=120; i<151; i++) {
-			AdminIstratorVO adminIstratorVO = new AdminIstratorVO();
+		for(int i=0; i<50; i++) {
+			MemberVO memberVO = new MemberVO();
+			memberVO.setUsername("user");
+			adminAdminIstratorDAO.setMemberInsert(memberVO);
 			
-			adminIstratorVO.setUsername(adminAdminIstratorDAO.getMember().get(i-1).getUsername());
-			adminIstratorVO.setName("administrator" + i);
-			
-			int result = adminAdminIstratorDAO.setAdminIstratorInsert(adminIstratorVO);
 		}
 	}
 	
-	
-
+//	@Test
+//	void setCollegeInsertTest() throws Exception {
+//		
+//		for(int i=0; i<50; i++) {
+//			CollegeVO collegeVO = new CollegeVO();
+//			collegeVO.setCollegeNum(i);
+//			collegeVO.setCollegeName("정보대" + i);
+//			adminAdminIstratorDAO.setCollegeInsert(collegeVO);
+//		}
+//	}
+//	
+//	@Test
+//	void setDepartmentInsertTest() throws Exception {
+//		
+//		for(int i=0; i<50; i++) {
+//			DepartmentVO departmentVO = new DepartmentVO();
+//			departmentVO.setDeptNum(i);
+//			departmentVO.setCollegeNum(i);
+//			departmentVO.setDeptName("컴퓨터공학과" + i);
+//			adminAdminIstratorDAO.setDepartmentInsert(departmentVO);
+//		}
+//	}
+//	
+//	@Test
+//	void setStudentInsertTest() throws Exception {
+//		
+//		for(int i=0; i<50; i++) {
+//			StudentVO studentVO = new StudentVO();
+//			studentVO.setUsername(i);
+//			studentVO.setDeptNum(i);
+//			adminAdminIstratorDAO.setStudentInsert(studentVO);
+//		}
+//	}
 }
