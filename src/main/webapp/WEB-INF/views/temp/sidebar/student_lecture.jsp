@@ -3,7 +3,7 @@
     
 <link rel="stylesheet" href="/css/sidebar.css">
 
-<div class="dropdown">
+<div class="sidebar-dropdown">
 
 	<!-- Menu -->
 	<h4>수강</h4>
@@ -11,30 +11,30 @@
 	<!-- 더 많은 개수의 submenu가 필요할 경우
 	필요한 수 만큼 복사하고 div 태그의 아이디 'submenu_숫자' 형식으로 수정하여 사용하면 됨 -->
 	<!-- Submenu_1 -->
-	<button onclick="myFunction_1()" class="menu">
+	<button onclick="myFunction_1()" class="sidebar-menu">
 		<i class="fas fa-angle-down fa-2xs"></i>&nbsp
 		수강 신청
 	</button>
-	<div id="submenu_1" class="dropdown-content">
+	<div id="submenu_1" class="sidebar-dropdown-content">
 		<a href="#">수강 신청 & 장바구니</a>
 	</div>
 	
 	<!-- Submenu_2 -->
-	<button onclick="myFunction_2()" class="menu">
+	<button onclick="myFunction_2()" class="sidebar-menu">
 		<i class="fas fa-angle-down fa-2xs"></i>&nbsp
 		내역 조회
 	</button>
-	<div id="submenu_2" class="dropdown-content">
+	<div id="submenu_2" class="sidebar-dropdown-content">
 		<a href="#">내 수강 신청</a>
 		<a href="#">내 장바구니</a>
 	</div>
 	
 	<!-- Submenu_3 -->
-	<button onclick="myFunction_3()" class="menu">
+	<button onclick="myFunction_3()" class="sidebar-menu">
 		<i class="fas fa-angle-down fa-2xs"></i>&nbsp
 		시간표
 	</button>
-	<div id="submenu_3" class="dropdown-content">
+	<div id="submenu_3" class="sidebar-dropdown-content">
 		<a href="#">시간표 조회</a>
 	</div>
 	
