@@ -6,7 +6,24 @@
   
   <mapper namespace="com.acadmi.lecture.LectureDAO">
   	<select id="getLectureList" resultType="LectureVO">
-  		SELECT * FROM LECTURE
+  		SELECT * FROM LECTURE WHERE TEMPORARY=0
   	</select>
+  	<select id="getTemporaryList" resultType="LectureVO">
+  		SELECT * FROM LECTURE WHERE TEMPORARY=1
+  	</select>
+  	<insert id="setLectureAdd" parameterType="LectureVO" useGeneratedKeys="true" keyProperty="lectureNum">
+  		INSERT INTO LECTURE (USERNAME,LECTURENAME,SEMESTER,LECTUREBUILDING,LECTUREROOM,DEPTNUM,YEAR,TEMPORARY)
+  		VALUES (20190821,#{lectureName},1,'정보관',101,1,2022,0)
+  	</insert>
+  	<insert id="setTemporaryAdd" parameterType="LectureVO" useGeneratedKeys="true" keyProperty="lectureNum">
+  		INSERT INTO LECTURE (USERNAME,LECTURENAME,SEMESTER,LECTUREBUILDING,LECTUREROOM,DEPTNUM,YEAR,TEMPORARY)
+  		VALUES (20190821,#{lectureName},1,'정보관',101,1,2022,1)
+  	</insert>
+  	<update id="setLectureUpdate" parameterType="LectureVO">
+ 		UPDATE LECTURE SET SEMESTER=#{semester}, DEPTNUM=#{deptNum},LECTURENAME=#{lectureName},CATEGORY=#{category},
+ 		YEAR=#{year}, WEEKDAY=#{weekday},STARTTIME=#{startTime},ENDTIME=#{endTime},LECTUREBUILDING=#{lectureBuilding},
+ 		LECTUREROOM=#{lectureRoom},GRADE= #{grade},PERSONAL=#{personal},COMPLETIONGRADE=#{completionGrade},NOTE=#{note} 
+ 		WHERE LECTURENUM=#{lectureNum}
+ 	</update>
   
   </mapper>

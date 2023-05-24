@@ -1,5 +1,10 @@
 package com.acadmi.lecture;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 public class LectureVO {
 	private Integer lectureNum;
 	private Integer userName;
