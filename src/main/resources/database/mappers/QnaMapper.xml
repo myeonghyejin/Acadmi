@@ -4,14 +4,14 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="com.acadmi.board.notice.NoticeDAO">
+  <mapper namespace="com.acadmi.board.qna.QnaDAO">
   	
   	<sql id="search">
   		<where>
   			<if test="kind == 'title'">
   				TITLE LIKE CONCAT('%', #{search}, '%')
   			</if>
-  			<if test="kind == 'contents'">
+  			<if test="kind == 'content'">
   				CONTENTS LIKE CONCAT('%', #{search}, '%')
   			</if>
   			<if test="kind == 'writer'">
@@ -19,36 +19,37 @@
   			</if>
   		</where>
   	</sql>
-  
-  	<select id="getTotalCount" resultMap="Long" parameterType="Pagination">
-  		SELECT COUNT(NUM) FROM NOTICE
-  		<include refid="search"></include>
+  	
+  	<select id="getTotalCount" resultType="Long" parameterType="Pagination">
+  		SELECT COUNT(NUM) FROM QNA
+		<include refid="search"></include>
   	</select>
   
-  	<select id="getList" resultType="NoticeVO" parameterType="Pagination">
-  		SELECT * FROM NOTICE
+  	<select id="getList" parameterType="Pagination" resultType="QnaVO">
+  		SELECT * FROM QNA 
   		<include refid="search"></include>
   		ORDER BY NUM DESC
   		LIMIT #{startRow}, #{perPage}
   	</select>
   	
-  	<select id="getDetail" parameterType="NoticeVO" resultMap="getDetailResult">
+  	<select id="getDetail" parameterType="QnaVO" resultMap="getDetailResult">
   		SELECT *
-		FROM NOTICE 
+		FROM QNA 
 			 LEFT JOIN
-			 NOTICEFILES 
+			 QNAFILES 
 			 USING(NUM)
 		WHERE NUM = #{num}
   	</select>
-  
- 	<resultMap type="NoticeVO" id="getDetailResult">
+  	
+  	<resultMap type="QnaVO" id="getDetailResult">
   		<id column="num" property="num"/>
   		<result column="title" property="title"/>
   		<result column="writer" property="writer"/>
   		<result column="contents" property="contents"/>
   		<result column="regDate" property="regDate"/>
-  		<result column="modifyDate" property="modifyDate"/>
-  		<result column="hit" property="hit"/>
+  		<result column="ref" property="ref"/>
+  		<result column="step" property="step"/>
+  		<result column="depth" property="depth"/>
   		
   		<collection property="boardFileVOs" javaType="List" ofType="BoardFileVO">
   			<id column="fileNum" property="fileNum"/>
@@ -57,27 +58,18 @@
   		</collection>
   	</resultMap>
   	
-  	<insert id="setInsert" parameterType="NoticeVO" useGeneratedKeys="true" keyProperty="num">
-  		INSERT INTO NOTICE (NUM, TITLE, CONTENTS, WRITER, HIT, REGDATE, MODIFYDATE)
-  		VALUES (#{num}, #{title}, #{contents}, #{writer}, 0, now(), now())
+  	<insert id="setInsert" parameterType="QnaVO" useGeneratedKeys="true" keyProperty="num">
+  		INSERT INTO QNA (NUM, TITLE, WRITER, CONTENTS, REGDATE, REF, STEP, DEPTH)
+  		VALUES (#{num}, #{title}, #{writer}, #{contents}, now(), 0, 0, 0)
   	</insert>
   	
-  	<update id="setUpdate" parameterType="NoticeVO">
-  		UPDATE NOTICE SET TITLE = #{title}, CONTENTS = #{contents}
-  		WHERE NUM = #{num}
-  	</update>
-  	
-  	<delete id="setDelete" parameterType="NoticeVO">
-  		DELETE FROM NOTICE WHERE NUM = #{num}
-  	</delete>
-  	
   	<insert id="setBoardFileAdd" parameterType="BoardFileVO">
-  		INSERT INTO NOTICEFILES (NUM, FILENAME, ORINAME)
+  		INSERT INTO QNAFILES (NUM, FILENAME, ORINAME)
   		VALUES(#{num}, #{fileName}, #{oriName})
   	</insert>
   	
   	<select id="getFileDetail" parameterType="BoardFileVO" resultType="BoardFileVO">
-  		SELECT * FROM NOTICEFILES WHERE FILENUM = #{fileNum}
+  		SELECT * FROM QNAFILES WHERE FILENUM = #{fileNum}
   	</select>
-  
+  	
   </mapper>
