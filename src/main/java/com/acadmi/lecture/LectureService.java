@@ -27,6 +27,10 @@ public class LectureService {
 		log.error("ddd");
 		return lectureDAO.setLectureAdd(lectureVO);
 	}
+	public int setTemporaryAdd(LectureVO lectureVO) throws Exception{
+		log.error("ddd");
+		return lectureDAO.setTemporaryAdd(lectureVO);
+	}
 	
 
 }

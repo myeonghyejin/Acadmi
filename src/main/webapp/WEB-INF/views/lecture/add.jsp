@@ -17,8 +17,8 @@
 						<input type="text" name="lectureName" class="form-control" id="lectureName" placeholder="강의 이름 입력"><br>
 	                	
 						
-	                    <button><a href="#" style="color: black;">임시등록</a></button>
-	                    <button type="submit">등록</a></button>
+	                    <button type="submit" name="buttonType" value="1">임시등록</button>
+	                    <button type="submit" name="buttonType" value="0">등록</button>
 	                    <button><a href="./list" style="color: black;">뒤로가기</a></button>
 	                 </form>
                 </div>

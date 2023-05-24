@@ -12,8 +12,12 @@
   		SELECT * FROM LECTURE WHERE TEMPORARY=1
   	</select>
   	<insert id="setLectureAdd" parameterType="LectureVO" useGeneratedKeys="true" keyProperty="lectureNum">
-  		INSERT INTO LECTURE (USERNAME,LECTURENAME,SEMESTER,LECTUREBUILDING,LECTUREROOM,DEPTNUM,YEAR)
-  		VALUES (20190821,#{lectureName},1,'정보관',101,1,2022)
+  		INSERT INTO LECTURE (USERNAME,LECTURENAME,SEMESTER,LECTUREBUILDING,LECTUREROOM,DEPTNUM,YEAR,TEMPORARY)
+  		VALUES (20190821,#{lectureName},1,'정보관',101,1,2022,0)
+  	</insert>
+  	<insert id="setTemporaryAdd" parameterType="LectureVO" useGeneratedKeys="true" keyProperty="lectureNum">
+  		INSERT INTO LECTURE (USERNAME,LECTURENAME,SEMESTER,LECTUREBUILDING,LECTUREROOM,DEPTNUM,YEAR,TEMPORARY)
+  		VALUES (20190821,#{lectureName},1,'정보관',101,1,2022,1)
   	</insert>
   	<update id="setLectureUpdate" parameterType="LectureVO">
  		UPDATE LECTURE SET SEMESTER=#{semester}, DEPTNUM=#{deptNum},LECTURENAME=#{lectureName},CATEGORY=#{category},

@@ -10,5 +10,6 @@ public interface LectureDAO {
 	public List<LectureVO> getLectureList() throws Exception;
 	public List<LectureVO> getTemporaryList() throws Exception;
 	public int setLectureAdd(LectureVO lectureVO) throws Exception;
+	public int setTemporaryAdd(LectureVO lectureVO) throws Exception;
 	public int setLectureUpdate(LectureVO lectureVO) throws Exception;
 }
