@@ -21,5 +21,9 @@ public class AdminIstratorService {
 		return adminIstratorDAO.getStudentList();
 	}
 	
+	public List<AdminIstratorVO> getProfessorList() throws Exception {
+		
+		return adminIstratorDAO.getProfessorList();
+	}
 
 }
