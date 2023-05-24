@@ -12,7 +12,7 @@
 <body>
 
 
-	<table class="table table-hover">
+	<table class="table table-hover" border="1">
      	 		<thead>
      	 		`	<tr>
      	 				<th>쪽지</th>
@@ -53,7 +53,8 @@
      	 				<td><c:out value="${college}"></c:out></td>
      	 				<td><c:out value="${department}"></c:out></td>
      	 				<td><c:out value="${studentGrade}"></c:out></td>
-     	 				<td><c:out value="${studentStatus}"></c:out></td>
+	     	 			<td><c:out value="${studentStatus}"></c:out></td>
+     	 				
      	 			</tr>
      	 			</c:forEach>
      	 			
