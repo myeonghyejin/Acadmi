@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.acadmi.member.MemberVO;
+import com.acadmi.professor.ProfessorVO;
 import com.acadmi.student.StudentVO;
 import com.acadmi.util.Pagination;
 
@@ -27,7 +28,7 @@ public class AdminIstratorController {
 	public ModelAndView getMemberList(Pagination pagination) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		List<AdminIstratorVO> ar =  adminIstratorService.getStudentList(pagination);
+		List<StudentVO> ar =  adminIstratorService.getStudentList(pagination);
 		mv.addObject("list", ar);
 		mv.setViewName("administrator/studentList");
 		
@@ -38,7 +39,7 @@ public class AdminIstratorController {
 	public ModelAndView getProfessorList(Pagination pagination) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		List<AdminIstratorVO> ar = adminIstratorService.getProfessorList(pagination);
+		List<ProfessorVO> ar = adminIstratorService.getProfessorList(pagination);
 		mv.addObject("list", ar);
 		mv.setViewName("administrator/professorList");
 		

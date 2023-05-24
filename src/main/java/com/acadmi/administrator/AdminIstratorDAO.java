@@ -15,8 +15,8 @@ import com.acadmi.util.Pagination;
 @Mapper
 public interface AdminIstratorDAO {
 	
-	public List<AdminIstratorVO> getStudentList(Pagination pagination) throws Exception;
-	public List<AdminIstratorVO> getProfessorList(Pagination pagination) throws Exception;
+	public List<StudentVO> getStudentList(Pagination pagination) throws Exception;
+	public List<ProfessorVO> getProfessorList(Pagination pagination) throws Exception;
 	public List<AdminIstratorVO> getAdminIstratorList(Pagination pagination) throws Exception;
 	public Long getTotalCount(Pagination pagination) throws Exception;
 	

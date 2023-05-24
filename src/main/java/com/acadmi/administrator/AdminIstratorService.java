@@ -21,7 +21,7 @@ public class AdminIstratorService {
 	@Autowired
 	private AdminIstratorDAO adminIstratorDAO;
 	
-	public List<AdminIstratorVO> getStudentList(Pagination pagination) throws Exception {
+	public List<StudentVO> getStudentList(Pagination pagination) throws Exception {
 		Long totalCount = adminIstratorDAO.getTotalCount(pagination);
 		
 		pagination.makeNum(totalCount);
@@ -30,7 +30,7 @@ public class AdminIstratorService {
 		return adminIstratorDAO.getStudentList(pagination);
 	}
 	
-	public List<AdminIstratorVO> getProfessorList(Pagination pagination) throws Exception {
+	public List<ProfessorVO> getProfessorList(Pagination pagination) throws Exception {
 		Long totalCount = adminIstratorDAO.getTotalCount(pagination);
 		
 		pagination.makeNum(totalCount);

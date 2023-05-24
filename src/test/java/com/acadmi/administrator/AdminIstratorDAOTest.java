@@ -26,13 +26,13 @@ public class AdminIstratorDAOTest {
 	
 	//@Test
 	void setMemberInsert() throws Exception {
-		for(int i=0; i<50; i++) {	
+		for(int i=80; i<120; i++) {	
 			MemberVO memberVO = new MemberVO();
 			
 			memberVO.setUsername(i);
 			memberVO.setPassword("1234");
 			memberVO.setEmail("dfd@naver.com");
-			memberVO.setCategory(2);
+			memberVO.setCategory(0);
 			memberVO.setEnabled(1);
 			
 			int result = adminAdminIstratorDAO.setMemberInsert(memberVO);
@@ -40,9 +40,9 @@ public class AdminIstratorDAOTest {
 	}
 	
 	
-	//@Test
+	@Test
 	void setStudentInsert() throws Exception {
-		for(int i=1; i<50; i++) {
+		for(int i=71; i<120; i++) {
 			StudentVO studentVO = new StudentVO();
 			
 			studentVO.setUsername(adminAdminIstratorDAO.getMember().get(i-1).getUsername());
@@ -58,7 +58,7 @@ public class AdminIstratorDAOTest {
 	
 	//@Test
 	void setProfessorInsert() throws Exception {
-		for(int i=1; i<50; i++) {
+		for(int i=30; i<70; i++) {
 			ProfessorVO professorVO = new ProfessorVO();
 			
 			professorVO.setUsername(adminAdminIstratorDAO.getMember().get(i-1).getUsername());
@@ -73,10 +73,10 @@ public class AdminIstratorDAOTest {
 		}
 	}
 	
-	@Test
+	//@Test
 	void setAdminIstratorInsert() throws Exception {
 		
-		for(int i=1; i<50; i++) {
+		for(int i=11; i<30; i++) {
 			AdminIstratorVO adminIstratorVO = new AdminIstratorVO();
 			
 			adminIstratorVO.setUsername(adminAdminIstratorDAO.getMember().get(i-1).getUsername());

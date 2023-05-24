@@ -77,8 +77,15 @@
      	 		</tbody>
      	 </table>
      	 
-     	 <c:forEach begin="${pagination.startNum}" end="${pagination.lastNum}" var="i">
+     	 <c:if test="${pagination.pre}">
+			<a href="./studentList?page=${pagination.startNum-1}">이전</a>
+		</c:if>
+     	 
+     	<c:forEach begin="${pagination.startNum}" end="${pagination.lastNum}" var="i">
      	 	<a href="./studentList?page=${i}">${i}</a>
-     	 </c:forEach>
+     	</c:forEach>
+     	 <c:if test="${pagination.next}">
+			<a href="./studentList?page=${pagination.lastNum+1}">다음</a>
+		</c:if> 
 </body>
 </html>

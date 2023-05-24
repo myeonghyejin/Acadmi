@@ -67,9 +67,15 @@
    	 			</c:forEach>
    	 		</tbody>
    	 </table>
+   	 <c:if test="${pagination.pre}">
+		<a href="./professorList?page=${pagination.startNum-1}">이전</a>
+	</c:if>
    	 
    	 <c:forEach begin="${pagination.startNum}" end="${pagination.lastNum}" var="i">
    	 	<a href="./professorList?page=${i}">${i}</a>
    	 </c:forEach>		
+   	  <c:if test="${pagination.next}">
+		<a href="./professorList?page=${pagination.lastNum+1}">다음</a>
+	</c:if>
 </body>
 </html>
