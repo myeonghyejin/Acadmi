@@ -1,6 +1,9 @@
 package com.acadmi.board;
 
 import java.sql.Date;
+import java.util.List;
+
+import com.acadmi.util.FileVO;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -14,5 +17,5 @@ public class BoardVO {
 	private String writer;
 	private String contents;
 	private Date regDate;
-	
+	private List<FileVO> fileVOs;
 }
