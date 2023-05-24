@@ -47,14 +47,17 @@ public class LectureController {
 		return mv;
 	}
 	@PostMapping("add")
-	public ModelAndView setLectureAdd(LectureVO lectureVO, ModelAndView mv, @RequestParam("buttonType")Integer buttonType) throws Exception{
+	public ModelAndView setLectureAdd(LectureVO lectureVO, ModelAndView mv, @RequestParam("buttonType")String buttonType) throws Exception{
 		log.error("postMapping-before");
-		if(buttonType.equals(0)) {
+		int result = lectureService.setLectureAdd(lectureVO);
+		if(buttonType.equals("0")) {
 			lectureVO.setTemporary(0);
-		} else if(buttonType.equals(1)) {
+		} else if(buttonType.equals("1")) {
+			lectureVO.setTemporary(1);
+		}else {
 			lectureVO.setTemporary(1);
 		}
-		int result = lectureService.setLectureAdd(lectureVO);
+		
 		log.error("postMapping-after");
 		mv.setViewName("redirect:./list");
 		return mv;
