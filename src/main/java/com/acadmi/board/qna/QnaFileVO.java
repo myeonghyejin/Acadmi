@@ -1,7 +1,7 @@
 package com.acadmi.board.qna;
 
-import com.acadmi.board.BoardFileVO;
+import com.acadmi.util.FileVO;
 
-public class QnaFileVO extends BoardFileVO {
+public class QnaFileVO extends FileVO {
 
 }

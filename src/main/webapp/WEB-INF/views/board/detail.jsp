@@ -32,9 +32,9 @@
                                 <figure class="mb-4"><img class="img-fluid rounded" src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="..." /></figure>
                                 <section class="mb-5">
                                     ${boardVO.content}
-                                    <c:forEach items="${boardVO.boardFileVOs}" var="boardFileVO">
-                                    	<img alt="" src="/file/${board}/${boardFileVO.fileName}">
-                                    	<a href="./fileDown?fileNum=${boardFileVO.fileNum}">${boardFileVO.oriName}</a>
+                                    <c:forEach items="${boardVO.fileVOs}" var="fileVO">
+                                    	<img alt="" src="/file/${board}/${fileVO.fileName}">
+                                    	<a href="./fileDown?fileNum=${fileVO.fileNum}">${fileVO.oriName}</a>
                                     </c:forEach>
                                 </section>
                             </article>

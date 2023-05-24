@@ -45,21 +45,21 @@
 			
 				<nav aria-label="Page navigation example">
 					<ul class="pagination justify-content-center">				  
-						<c:if test="${pager.pre}">
+						<c:if test="${pagination.pre}">
 							<li class="page-item">
-								<a class="page-link" href="./list?page=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}" aria-label="Previous">
+								<a class="page-link" href="./list?page=${pagination.startNum-1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous">
 									<span aria-hidden="true">&laquo;</span>
 								</a>
 							</li>
 			    		</c:if>
 								    
-			     		<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-			            	<li class="page-item"><a class="page-link" href="./list?page=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
+			     		<c:forEach begin="${pagination.startNum}" end="${pagination.lastNum}" var="i">
+			            	<li class="page-item"><a class="page-link" href="./list?page=${i}&kind=${pagination.kind}&search=${pagination.search}">${i}</a></li>
 			            </c:forEach>
 			            
-			            <c:if test="${pager.next}">
+			            <c:if test="${pagination.next}">
 							<li class="page-item">
-								<a class="page-link" href="./list?page=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}" aria-label="Next">
+								<a class="page-link" href="./list?page=${pagination.lastNum+1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next">
 								  <span aria-hidden="true">&raquo;</span>
 				 				</a>
 			 				</li>
