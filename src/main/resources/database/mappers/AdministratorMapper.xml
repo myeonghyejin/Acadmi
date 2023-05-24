@@ -3,29 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="com.acadmi.administrator.AdminIstratorDAO">
+  <mapper namespace="com.acadmi.administrator.AdministratorDAO">
   
-  <sql id="studentSearch">
-  	<where>
-  		<if test="kind == username">
-  			USERNAME LIKE CONCAT('%', #{search}, '%')
-  		</if>
-  		<if test="kind == name">
-  			NAME LIKE CONCAT('%', #{search}, '%')
-  		</if>
-  		<if test="kind == grade">
-  			GRADE LIKE CONCAT('%', #{search}, '%')
-  		</if>
-  		<if test="kind == status">
-  			S.STATUS LIKE CONCAT('%',#{search},'%')
-  		</if>
-  		<if test="kind == "></if>
-  		
-  		<if test="kind == deptName">
-  			DEPTNAME LIKE CONCAT('%', #{search} ,'%')
-  		</if>
-  	</where>
-  </sql>
   
   	<select id="getTotalCountStudent" resultType="Long">
   		SELECT COUNT(USERNAME) FROM STUDENT
@@ -53,7 +32,7 @@
 					INNER JOIN 
 						COLLEGE C 
 					USING(COLLEGENUM)
-		WHERE CATEGORY=2			
+		WHERE CATEGORY=2
 		LIMIT #{startRow},#{perPage}					
   	</select>
   	<resultMap type="CollegeVO" id="StudentList">

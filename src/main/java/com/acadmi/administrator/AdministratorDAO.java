@@ -13,11 +13,11 @@ import com.acadmi.util.Pagination;
 
 
 @Mapper
-public interface AdminIstratorDAO {
+public interface AdministratorDAO {
 	
 	public List<StudentVO> getStudentList(Pagination pagination) throws Exception;
 	public List<ProfessorVO> getProfessorList(Pagination pagination) throws Exception;
-	public List<AdminIstratorVO> getAdminIstratorList(Pagination pagination) throws Exception;
+	public List<AdministratorVO> getAdminIstratorList(Pagination pagination) throws Exception;
 	public Long getTotalCountStudent(Pagination pagination) throws Exception;
 	public Long getTotalCountProfessor(Pagination pagination) throws Exception;
 	public Long getTotalCountAdminIstrator(Pagination pagination) throws Exception;
@@ -25,7 +25,7 @@ public interface AdminIstratorDAO {
 	public int setMemberInsert(MemberVO memberVO) throws Exception;
 	public int setStudentInsert(StudentVO studentVO)throws Exception;
 	public int setProfessorInsert(ProfessorVO professorVO)throws Exception;
-	public int setAdminIstratorInsert(AdminIstratorVO adminIstratorVO) throws Exception;
+	public int setAdminIstratorInsert(AdministratorVO adminIstratorVO) throws Exception;
 	
 	public List<MemberVO> getMember() throws Exception;
 

@@ -19,16 +19,16 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/administrator/*")
 @Slf4j
-public class AdminIstratorController {
+public class AdministratorController {
 	
 	@Autowired
-	private AdminIstratorService adminIstratorService;
+	private AdministratorService administratorService;
 
 	@GetMapping("studentList")
 	public ModelAndView getMemberList(Pagination pagination) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		List<StudentVO> ar =  adminIstratorService.getStudentList(pagination);
+		List<StudentVO> ar =  administratorService.getStudentList(pagination);
 		mv.addObject("list", ar);
 		mv.setViewName("administrator/studentList");
 		
@@ -39,7 +39,7 @@ public class AdminIstratorController {
 	public ModelAndView getProfessorList(Pagination pagination) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		List<ProfessorVO> ar = adminIstratorService.getProfessorList(pagination);
+		List<ProfessorVO> ar = administratorService.getProfessorList(pagination);
 		mv.addObject("list", ar);
 		mv.setViewName("administrator/professorList");
 		
@@ -47,12 +47,12 @@ public class AdminIstratorController {
 	}
 	
 	@GetMapping("adminIstratorList")
-	public ModelAndView getAdminIstratorList(Pagination pagination) throws Exception {
+	public ModelAndView getAdministratorList(Pagination pagination) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		List<AdminIstratorVO> ar = adminIstratorService.getAdminIstratorList(pagination);
+		List<AdministratorVO> ar = administratorService.getAdminIstratorList(pagination);
 		mv.addObject("list", ar);
-		mv.setViewName("administrator/adminIstratorList");
+		mv.setViewName("administrator/administratorList");
 		
 		return mv;
 		

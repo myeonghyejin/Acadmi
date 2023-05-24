@@ -16,36 +16,36 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-public class AdminIstratorService {
+public class AdministratorService {
 	
 	@Autowired
-	private AdminIstratorDAO adminIstratorDAO;
+	private AdministratorDAO administratorDAO;
 	
 	public List<StudentVO> getStudentList(Pagination pagination) throws Exception {
-		Long totalCount = adminIstratorDAO.getTotalCountStudent(pagination);
+		Long totalCount = administratorDAO.getTotalCountStudent(pagination);
 		
 		pagination.makeNum(totalCount);
 		pagination.makeStartRow();
 		
-		return adminIstratorDAO.getStudentList(pagination);
+		return administratorDAO.getStudentList(pagination);
 	}
 	
 	public List<ProfessorVO> getProfessorList(Pagination pagination) throws Exception {
-		Long totalCount = adminIstratorDAO.getTotalCountProfessor(pagination);
+		Long totalCount = administratorDAO.getTotalCountProfessor(pagination);
 		
 		pagination.makeNum(totalCount);
 		pagination.makeStartRow();
 		
-		return adminIstratorDAO.getProfessorList(pagination);
+		return administratorDAO.getProfessorList(pagination);
 	}
 	
-	public List<AdminIstratorVO> getAdminIstratorList(Pagination pagination) throws Exception {
-		Long totalCount = adminIstratorDAO.getTotalCountAdminIstrator(pagination);
+	public List<AdministratorVO> getAdminIstratorList(Pagination pagination) throws Exception {
+		Long totalCount = administratorDAO.getTotalCountAdminIstrator(pagination);
 		
 		pagination.makeNum(totalCount);
 		pagination.makeStartRow();
 		
-		return adminIstratorDAO.getAdminIstratorList(pagination);
+		return administratorDAO.getAdminIstratorList(pagination);
 	}
 
 }

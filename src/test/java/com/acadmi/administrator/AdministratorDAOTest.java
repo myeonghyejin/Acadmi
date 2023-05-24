@@ -17,10 +17,10 @@ import com.fasterxml.jackson.databind.type.CollectionLikeType;
 
 @SpringBootTest
 @Rollback(true)
-public class AdminIstratorDAOTest {
+public class AdministratorDAOTest {
 
 	@Autowired
-	private AdminIstratorDAO adminAdminIstratorDAO;
+	private AdministratorDAO adminAdminIstratorDAO;
 	
 	//@Test
 	void setMemberInsertTest() throws Exception {

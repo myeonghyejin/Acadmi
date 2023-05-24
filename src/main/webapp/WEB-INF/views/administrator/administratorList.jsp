@@ -26,22 +26,22 @@
    	 		<c:forEach items="${list}" var="departmentVO">
    	 		<tr>
    	 			<c:set var="department" value="${departmentVO.deptName}"></c:set>
-   	 			<c:forEach items="${departmentVO.adminIstratorVOs}" var="adminIstratorVO">
-   	 				<c:set var="adminIstratorName" value="${adminIstratorVO.name}"></c:set>
-   	 				<c:set var="adminIstratorPhone" value="${adminIstratorVO.phone}"></c:set>
-   	 				<c:set var="adminIstratorEmail" value="${adminIstratorVO.email}"></c:set>
-   	 				<c:set var="adminIstratorStatus" value="${adminIstratorVO.status}"></c:set>
+   	 			<c:forEach items="${departmentVO.administratorVOs}" var="administratorVO">
+   	 				<c:set var="administratorName" value="${administratorVO.name}"></c:set>
+   	 				<c:set var="administratorPhone" value="${administratorVO.phone}"></c:set>
+   	 				<c:set var="administratorEmail" value="${administratorVO.email}"></c:set>
+   	 				<c:set var="administratorStatus" value="${administratorVO.status}"></c:set>
    	 				<tr>
-	   	 				<c:forEach items="${adminIstratorVO.memberFilesVOs}" var="memberFilesVO">
+	   	 				<c:forEach items="${administratorVO.memberFilesVOs}" var="memberFilesVO">
 	   	 					<c:set var="memberFiles" value="${memberFilesVO.fileName}"></c:set>
 	   	 				</c:forEach>
 	   	 			<td></td>
 	   	 			<td></td>
-	   	 			<td><c:out value="${adminIstratorName}"></c:out></td>
-	   	 			<td><c:out value="${adminIstratorPhone}"></c:out></td>
-	   	 			<td><c:out value="${adminIstratorEmail}"></c:out></td>
+	   	 			<td><c:out value="${administratorName}"></c:out></td>
+	   	 			<td><c:out value="${administratorPhone}"></c:out></td>
+	   	 			<td><c:out value="${administratorEmail}"></c:out></td>
 	   	 			<td><c:out value="${department}"></c:out></td>
-	   	 			<c:if test="${adminIstratorStatus eq 1}">
+	   	 			<c:if test="${administratorStatus eq 1}">
 	   	 				<td>재직</td>
 	   	 			</c:if>
 	   	 			<c:if test="${adminIstratorStatus eq 2}">
