@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 public class MemberVO {
 
-	private Integer username;
+	private Long username;
 	private String password;
 	private String email;
 	private Integer category;

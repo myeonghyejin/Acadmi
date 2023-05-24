@@ -16,5 +16,15 @@
   		INSERT INTO NOTIFICATION
   		VALUES (0, #{username}, #{notificationMsg}, now(), 0, #{notificationKind})
   	</insert>
+  	
+  	<!-- 중요 공지 알림을 위한 memberVO의 list -->
+  	<select id="getMemberList" resultType="MemberVO">
+  		SELECT * FROM MEMBER
+  	</select>
+  	
+  	<!-- 직원 알림을 위한 직원의 memberVO의 list -->
+  	<select id="getAdministratorList" parameterType="MemberVO" resultType="MemberVO">
+  		SELECT * FROM MEMBER WHERE CATEGORY = #{category}
+  	</select>
     
   </mapper>
