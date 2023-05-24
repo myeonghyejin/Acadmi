@@ -23,7 +23,7 @@
 			<div class="row">
 				<!-- 2레벨 Sidebar 적용 -->
 				<div class="content-wrapper">
-					<c:import url="./temp/sidebar/std_lecture.jsp"></c:import>
+					<c:import url="./temp/sidebar/student_lecture.jsp"></c:import>
 				</div>
 				<!-- 2레벨 Sidebar 끝 -->
 				
