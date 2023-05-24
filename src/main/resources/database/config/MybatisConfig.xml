@@ -23,9 +23,9 @@
   		<typeAlias type="com.acadmi.administrator.AdminIstratorVO" alias="AdminIstratorVO"/>
   		<typeAlias type="com.acadmi.professor.ProfessorVO" alias="ProfessorVO"/>
   		
-  		<typeAlias type="com.acadmi.board.BoardFileVO" alias="BoardFileVO"/>
   		<typeAlias type="com.acadmi.board.BoardVO" alias="BoardVO"/>
   		<typeAlias type="com.acadmi.board.notice.NoticeVO" alias="NoticeVO"/>
+  		<typeAlias type="com.acadmi.board.notice.NoticeFileVO" alias="NoticeFileVO"/>
   		<typeAlias type="com.acadmi.board.qna.QnaVO" alias="QnaVO"/>
   		<typeAlias type="com.acadmi.board.qna.QnaFileVO" alias="QnaFileVO"/>
   		
