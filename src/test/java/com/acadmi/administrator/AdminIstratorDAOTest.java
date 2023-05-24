@@ -28,7 +28,7 @@ public class AdminIstratorDAOTest {
 		
 		for(int i=0; i<50; i++) {
 			MemberVO memberVO = new MemberVO();
-//			memberVO.setUsername(i);
+			memberVO.setUsername("user");
 			adminAdminIstratorDAO.setMemberInsert(memberVO);
 			
 		}
