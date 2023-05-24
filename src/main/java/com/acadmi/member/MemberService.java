@@ -2,6 +2,7 @@ package com.acadmi.member;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class MemberService {
+public class MemberService implements UserDetailsService{
 	
 	@Autowired
 	private MemberDAO memberDAO;

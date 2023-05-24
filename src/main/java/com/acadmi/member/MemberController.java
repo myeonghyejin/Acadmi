@@ -34,20 +34,20 @@ public class MemberController {
 		return mv;
 	}
 	
-	@PostMapping("login")
-	public ModelAndView getLogin(MemberVO memberVO, HttpSession session) throws Exception{
-		ModelAndView mv = new ModelAndView();
-		
-		memberVO = memberService.getLogin(memberVO);
-		
-		mv.setViewName("redirect:./login");
-		if(memberVO != null) {
-			session.setAttribute("member", memberVO);
-			mv.setViewName("redirect:../");
-		}
-	
-		return mv;
-	}
+//	@PostMapping("login")
+//	public ModelAndView getLogin(MemberVO memberVO, HttpSession session) throws Exception{
+//		ModelAndView mv = new ModelAndView();
+//		
+//		memberVO = memberService.getLogin(memberVO);
+//		
+//		mv.setViewName("redirect:./login");
+//		if(memberVO != null) {
+//			session.setAttribute("member", memberVO);
+//			mv.setViewName("redirect:../");
+//		}
+//	
+//		return mv;
+//	}
 	
 	@GetMapping("logout")
 	public ModelAndView getLogout(HttpSession session) throws Exception{
@@ -59,48 +59,5 @@ public class MemberController {
 		
 		return mv;
 	}
-	
-	@GetMapping(value = "mypage")
-	   public ModelAndView getMemberPage(HttpSession session) throws Exception {
-	      ModelAndView mv = new ModelAndView();
-	      
-	      MemberVO memberVO = (MemberVO)session.getAttribute("member");
-	      
-	      memberVO = memberService.getMyPage(memberVO);
-	      
-	      mv.addObject("memberVO", memberVO);
-	      mv.setViewName("member/mypage");
-	      
-	      return mv;
-	   }
-	
-	@GetMapping(value = "info")
-	   public void info(HttpSession session) {
-	      String pw = "qwer1234";
-	      MemberVO memberVO = (MemberVO) memberService.loadUserByUsername("wkdgustj02");
-	      
-	      log.error("============== {} ============", memberVO.getPassword());
-	      log.error("============== {} ============", passwordEncoder.encode(pw));
-	      log.error("============== {} ============", memberVO.getPassword().equals(passwordEncoder.encode(pw)));
-	      
-	      // encode 된 패스워드는 passwordEncoder의 matches로 DB에 암호화된 패스워드와 비교
-	      boolean check = passwordEncoder.matches(pw, memberVO.getPassword());
-	      log.error("============== {} ============", check);
-	      
-	      log.error("================== Login Info =================");
-//	      Enumeration<String> names = session.getAttributeNames();
-//	      while(names.hasMoreElements()) {
-//	         log.error("======== {} =======", names.nextElement());
-//	      }
-	      Object obj = session.getAttribute("SPRING_SECURITY_CONTEXT");
-	      SecurityContextImpl contextImpl = (SecurityContextImpl) obj;
-	      Authentication authentication = contextImpl.getAuthentication();
-	      
-	      log.error("======== {} =======", obj);
-	      log.error("======== NAME : {} =======", authentication.getName());
-	      log.error("======== DETAIL : {} =======", authentication.getDetails());
-	      log.error("======== PRINCIPAL : {} =======", authentication.getPrincipal());
-	   }
 
-	
 }

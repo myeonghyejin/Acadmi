@@ -2,7 +2,6 @@ package com.acadmi.config;
 
 import javax.servlet.ServletException;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -50,6 +49,8 @@ public class SecurityConfig {
                .authorizeRequests()
                   // URL과 권한 매칭
                   .antMatchers("/member/login").permitAll()
+                  .antMatchers("/test").authenticated()
+                  .antMatchers("/").permitAll()
 //                  .antMatchers("/qna/add").hasAnyRole("ADMIN", "MANAGER", "MEMBER")
                   //.anyRequest().authenticated()
                   .anyRequest().permitAll()
@@ -57,16 +58,15 @@ public class SecurityConfig {
                .formLogin()
                   .loginPage("/member/login")
                   .defaultSuccessUrl("/")
-                  	.successHandler(new UserSuccessHandler())
+                  	//.successHandler(new UserSuccessHandler())
                   	.failureUrl("/member/login")
-                  	.failureHandler(new UserLoginFailHandler())
+                  	//.failureHandler(new UserLoginFailHandler())
                   .permitAll()
                   .and()
                .logout()
                   .logoutUrl("/member/logout")
                   .logoutSuccessUrl("/member/login")
 //                .addLogoutHandler(userLogoutHandler)
-                
                   .invalidateHttpSession(true)
                   .deleteCookies("JSESSIONID")
                   .permitAll()
