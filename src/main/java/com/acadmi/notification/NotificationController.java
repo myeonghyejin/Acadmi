@@ -20,10 +20,9 @@ public class NotificationController {
 	
 	//notification list
 	@GetMapping("list")
-	public ModelAndView getList() throws Exception {
+	public ModelAndView getList(NotificationVO notificationVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		NotificationVO notificationVO = new NotificationVO();
-		notificationVO.setNotificationKind(1);
+		//알림전체보기를 눌렀을때 기본적으로 notificationkind가 1로 들어가게 jsp에서 설정
 		List<NotificationVO> ar = notificationService.getKindList(notificationVO);
 		log.info("========== size : {}",ar.size());
 		
