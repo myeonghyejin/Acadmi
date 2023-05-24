@@ -33,13 +33,13 @@ public class NotificationService {
 	public int setIptNotice(NoticeVO noticeVO) throws Exception {
 		NotificationVO notificationVO = new NotificationVO();
 		//123456789L은 admin 아이디
-		notificationVO.setSender(123456789L);
+		notificationVO.setSender("123456789");
 		notificationVO.setNotificationMsg(noticeVO.getTitle());
 		notificationVO.setNotificationKind(1);
 		int result = notificationDAO.setNotification(notificationVO);
 		List<MemberVO> ar = notificationDAO.getMemberList();
 		for(MemberVO memberVO:ar) {
-			this.sendNotification(memberVO.getUsername().toString(), "[공지]"+notificationVO.getNotificationMsg());
+			this.sendNotification(memberVO.getUsername(), "[공지]"+notificationVO.getNotificationMsg());
 		}
 		
 		return result;
@@ -62,7 +62,7 @@ public class NotificationService {
 		for(MemberVO memberVO2:ar) {
 			notificationVO.setRecipient(memberVO2.getUsername());
 			result = notificationDAO.setNotification(notificationVO);
-			this.sendNotification(memberVO2.getUsername().toString(), "[질의응답]"+notificationVO.getNotificationMsg());
+			this.sendNotification(memberVO2.getUsername(), "[질의응답]"+notificationVO.getNotificationMsg());
 		}
 		return result;
 	}
@@ -81,10 +81,7 @@ public class NotificationService {
 		for(MemberVO memberVO2:ar) {
 			notificationVO.setRecipient(memberVO2.getUsername());
 			result = notificationDAO.setNotification(notificationVO);
-			String username = memberVO2.getUsername().toString();
-			String destication = "/queue/notification";
-			String message = "[강의실배정]"+notificationVO.getNotificationMsg();
-			messagingTemplate.convertAndSendToUser(username, message, message);
+			this.sendNotification(memberVO2.getUsername(), "[강의실배정]"+notificationVO.getNotificationMsg());
 		}
 		
 		return result;

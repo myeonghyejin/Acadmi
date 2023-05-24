@@ -10,8 +10,8 @@ import lombok.Setter;
 public class NotificationVO {
 	
 	private Long notificationNum;
-	private Long recipient;
-	private Long sender;
+	private String recipient;
+	private String sender;
 	private String notificationMsg;
 	private Date notificationDate;
 	private Integer notificationStatus;
