@@ -27,6 +27,7 @@ public class QnaService implements BoardService {
 	
 	@Override
 	public List<BoardVO> getList(Pagination pagination) throws Exception {
+		
 		pagination.makeStartRow();
 		
 		pagination.makeNum(qnaDAO.getTotalCount(pagination));
