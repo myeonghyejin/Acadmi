@@ -20,12 +20,19 @@ public class NotificationService {
 	@Autowired
 	private SimpMessagingTemplate messagingTemplate;
 	
+	//알림을 보내는 메서드
 	public void sendNotification(String username, String message) {
 		messagingTemplate.convertAndSendToUser(username, "/queue/notification", message);
 	}
 	
+	//notification list
 	public List<NotificationVO> getList() throws Exception {
 		return notificationDAO.getList();
+	}
+	
+	//kind에 따른 알림 list
+	public List<NotificationVO> getKindList(NotificationVO notificationVO) throws Exception {
+		return notificationDAO.getKindList(notificationVO);
 	}
 	
 	//member 모두가 받을 수 있음

@@ -16,5 +16,6 @@ public class NotificationVO {
 	private Date notificationDate;
 	private Integer notificationStatus;
 	private Integer notificationKind;
+	
 
 }

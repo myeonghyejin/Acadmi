@@ -17,13 +17,15 @@
 		<!-- Header 적용 -->
 		<c:import url="./temp/header.jsp"></c:import>
 		<!-- Header 끝 -->
-
-		<!-- Main Contents -->
+		<div class="content-wrapper">
+			<h1>contents</h1>
+		</div>
+		<%-- <!-- Main Contents -->
 		<div class="container-fluid">
 			<div class="row">
 				<!-- 2레벨 Sidebar 적용 -->
 				<div class="content-wrapper">
-					<c:import url="./temp/sidebar/std_lecture.jsp"></c:import>
+					<c:import url="./temp/sidebar/student_lecture.jsp"></c:import>
 				</div>
 				<!-- 2레벨 Sidebar 끝 -->
 				
@@ -32,7 +34,7 @@
 					<h1>Contents</h1>
 				</div>
 			</div>
-		</div>
+		</div> --%>
 
 		<!-- Footer 적용 -->
 		<c:import url="./temp/footer.jsp"></c:import>

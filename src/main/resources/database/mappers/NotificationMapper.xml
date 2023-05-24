@@ -11,6 +11,11 @@
   		SELECT * FROM NOTIFICATION
   	</select>
   	
+  	<!-- kind에 따른 알림 list -->
+  	<select id="getKindList" parameterType="NotificationVO" resultType="NotificationVO">
+  		SELECT * FROM NOTIFICATION WHERE NOTIFICATIONKIND = #{notificationKind}
+  	</select>
+  	
   	<!-- notification add -->
   	<insert id="setNotification" parameterType="NotificationVO">
   		INSERT INTO NOTIFICATION

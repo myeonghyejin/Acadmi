@@ -12,6 +12,9 @@ public interface NotificationDAO {
 	//알림 list 출력
 	public List<NotificationVO> getList() throws Exception;
 	
+	//kind에 따른 알림 list
+	public List<NotificationVO> getKindList(NotificationVO notificationVO) throws Exception;
+	
 	//알림 저장
 	public int setNotification(NotificationVO notificationVO) throws Exception;
 	
