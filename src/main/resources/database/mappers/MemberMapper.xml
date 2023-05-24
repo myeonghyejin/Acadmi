@@ -7,7 +7,7 @@
   <mapper namespace="com.acadmi.member.MemberDAO">
   
   		<select id="getLogin" parameterType="MemberVO" resultMap="loginResult">
-  			SELECT M.USERNAME, M.EMAIL, M.CATEGORY
+  			SELECT M.USERNAME, M.PASSWORD, M.EMAIL, M.CATEGORY
   			FROM MEMBER M
   				INNER JOIN
   				MEMBER_ROLE MR
@@ -15,11 +15,12 @@
   				INNER JOIN
   				ROLE R
   				ON MR.ROLENUM = R.ROLENUM
-  			WHERE M.USERNAME = #{USERNAME} AND M.PASSWORD=#{PASSWORD}
+  			WHERE M.USERNAME = #{username}
   		</select>
   		
   		<resultMap type="MemberVO" id="loginResult">
-  			<id property="userName" column="USERNAME"/>
+  			<id property="username" column="USERNAME"/>
+  			<result property="password" column="PASSWORD"/>
   			<result property="category" column="CATEGORY"/>
   			<collection property="roleVOs" javaType="List" ofType="RoleVO">
   				<id property="roleNum" column="ROLENUM"/>
