@@ -50,7 +50,7 @@
   		<result column="modifyDate" property="modifyDate"/>
   		<result column="hit" property="hit"/>
   		
-  		<collection property="boardFileVOs" javaType="List" ofType="BoardFileVO">
+  		<collection property="fileVOs" javaType="List" ofType="FileVO">
   			<id column="fileNum" property="fileNum"/>
   			<result column="fileName" property="fileName"/>
   			<result column="oriName" property="oriName"/>
@@ -71,12 +71,12 @@
   		DELETE FROM NOTICE WHERE NUM = #{num}
   	</delete>
   	
-  	<insert id="setBoardFileAdd" parameterType="BoardFileVO">
+  	<insert id="setBoardFileAdd" parameterType="FileVO">
   		INSERT INTO NOTICEFILES (NUM, FILENAME, ORINAME)
   		VALUES(#{num}, #{fileName}, #{oriName})
   	</insert>
   	
-  	<select id="getFileDetail" parameterType="BoardFileVO" resultType="BoardFileVO">
+  	<select id="getFileDetail" parameterType="FileVO" resultType="FileVO">
   		SELECT * FROM NOTICEFILES WHERE FILENUM = #{fileNum}
   	</select>
   

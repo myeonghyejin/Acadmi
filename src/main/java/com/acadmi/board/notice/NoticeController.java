@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.acadmi.board.BoardFileVO;
 import com.acadmi.board.BoardVO;
+import com.acadmi.util.FileVO;
 import com.acadmi.util.Pagination;
 
 @Controller
@@ -74,12 +74,12 @@ public class NoticeController {
 	}
 	
 	@GetMapping(value = "fileDown")
-	public ModelAndView getFileDown(BoardFileVO boardFileVO) throws Exception {
+	public ModelAndView getFileDown(FileVO fileVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		boardFileVO = noticeService.getFileDetail(boardFileVO);
+		fileVO = noticeService.getFileDetail(fileVO);
 		
-		mv.addObject("boardFileVO", boardFileVO);
+		mv.addObject("boardFileVO", fileVO);
 		mv.setViewName("fileManager");
 		
 		return mv;

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.acadmi.util.FileVO;
 import com.acadmi.util.Pagination;
 
 public interface BoardService {
@@ -18,5 +19,5 @@ public interface BoardService {
 			
 	public int setDelete(BoardVO boardVO) throws Exception;
 		
-	public BoardFileVO getFileDetail(BoardFileVO boardFileVO) throws Exception;
+	public FileVO getFileDetail(FileVO fileVO) throws Exception;
 }

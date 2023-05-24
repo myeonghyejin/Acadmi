@@ -1,7 +1,7 @@
 package com.acadmi.board.notice;
 
-import com.acadmi.board.BoardFileVO;
+import com.acadmi.util.FileVO;
 
-public class NoticeFileVO extends BoardFileVO {
+public class NoticeFileVO extends FileVO {
 
 }

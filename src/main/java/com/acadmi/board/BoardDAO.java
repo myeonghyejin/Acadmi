@@ -2,6 +2,7 @@ package com.acadmi.board;
 
 import java.util.List;
 
+import com.acadmi.util.FileVO;
 import com.acadmi.util.Pagination;
 
 public interface BoardDAO {
@@ -18,8 +19,8 @@ public interface BoardDAO {
 		
 	public int setDelete(BoardVO boardVO) throws Exception;
 		
-	public int setBoardFileAdd(BoardFileVO boardFileVO) throws Exception;
+	public int setBoardFileAdd(FileVO fileVO) throws Exception;
 
-	public BoardFileVO getFileDetail(BoardFileVO boardFileVO) throws Exception;
+	public FileVO getFileDetail(FileVO fileVO) throws Exception;
 
 }
