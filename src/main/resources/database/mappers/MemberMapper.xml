@@ -22,6 +22,7 @@
   			<id property="username" column="USERNAME"/>
   			<result property="password" column="PASSWORD"/>
   			<result property="category" column="CATEGORY"/>
+  			<result property="enabled" column="ENABLED"/>
   			<collection property="roleVOs" javaType="List" ofType="RoleVO">
   				<id property="roleNum" column="ROLENUM"/>
   				<result property="roleName" column="ROLENAME"/>
@@ -31,7 +32,7 @@
   	
   		<insert id="setJoin" parameterType="MemberVO">
 	  		INSERT INTO MEMBER
-	  		VALUES(#{username}, #{password}, #{email}, #{category}, 1)
+	  		VALUES(#{username}, #{password}, #{email}, #{category}, 0)
   		</insert>
   		
   		<insert id="setRoleAdd" parameterType="Map">
@@ -47,5 +48,5 @@
   		<update id="setPwUpdate" parameterType="MemberVO">
   			UPDATE MEMBER SET PASSWORD = #{password} WHERE USERNAME = #{username}
   		</update>
-  
+  		
   </mapper>

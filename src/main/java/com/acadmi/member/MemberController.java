@@ -38,14 +38,16 @@ public class MemberController {
 	public ModelAndView getLogin(HttpSession session) throws Exception{
 		 ModelAndView mv = new ModelAndView();
 	     
+		 MemberVO memberVO = new MemberVO();
 		 
 	     Object object = session.getAttribute("SPRING_SECURITY_CONTEXT");
 	      
 	     if(object == null) {
 	        mv.setViewName("member/login");
-	     } else {
+	     } 
+	     else {
 	        mv.setViewName("redirect:/");
-	     }
+	     } 
 
 	     return mv;
 	}
@@ -158,4 +160,5 @@ public class MemberController {
 			mv.setViewName("member/login");
 			return mv;
 		}
+	 
 }

@@ -65,9 +65,9 @@
 	                                <c:if test="${not empty param.errorMessage}">
 	                                	<h3>${param.errorMessage}</h3>
 	                                </c:if>
-                                    <div class="d-grid">
-                                    	<button class="btn btn-primary float-right" id="submitButton" type="submit">로그인</button>
-                                    </div>
+	                                <div class="d-grid">
+	                                	<button class="btn btn-primary float-right" id="submitButton" type="submit">로그인</button>
+	                                </div>
                                 </form>
                             </div>
                         </div>
