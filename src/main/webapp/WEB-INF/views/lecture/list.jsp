@@ -17,7 +17,7 @@
                     <select id="temporary" name="temporary" onchange="this.form.submit()">
 						<option value="">전체</option>
 						<option value="1">등록</option>
-						<option value="0" >미등록</option>
+						<option value="0">미등록</option>
 					</select>
                     <button><a href="./add" style="color: black;">강의 등록</a></button>
                     	<table class="table table-hover">
