@@ -15,5 +15,4 @@ public class QnaVO extends BoardVO {
 	private Long ref;
 	private Long step;
 	private Long depth;
-	private List<QnaFileVO> qnaFileVOs;
 }

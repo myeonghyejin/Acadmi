@@ -37,31 +37,27 @@ public class NoticeController {
 		return mv;
 	}
 	
-	@GetMapping(value = "add")
-	public ModelAndView setInsert(@ModelAttribute BoardVO boardVO) throws Exception {
+	@GetMapping("add")
+	public ModelAndView setInsert(NoticeVO noticeVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
+		
 		mv.setViewName("board/add");
 		
 		return mv;
 	}
 	
-	@PostMapping(value = "add")
-	public ModelAndView setInsert(@Valid BoardVO boardVO, BindingResult bindingResult, MultipartFile [] boardFiles) throws Exception {
+	@PostMapping("add")
+	public ModelAndView setInsert(NoticeVO noticeVO, MultipartFile [] addfiles) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		if(bindingResult.hasErrors()) {
-			mv.setViewName("board/add");
-			return mv;
-		}
-		
-		int result = noticeService.setInsert(boardVO, boardFiles);
+		int result = noticeService.setInsert(noticeVO, addfiles);
 		
 		mv.setViewName("redirect:./list");
 		
 		return mv;
 	}
 	
-	@GetMapping(value = "detail")
+	@GetMapping("detail")
 	public ModelAndView getDetail(NoticeVO noticeVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
@@ -73,7 +69,7 @@ public class NoticeController {
 		return mv;
 	}
 	
-	@GetMapping(value = "fileDown")
+	@GetMapping("fileDown")
 	public ModelAndView getFileDown(FileVO fileVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
@@ -85,7 +81,28 @@ public class NoticeController {
 		return mv;
 	}
 	
-	@GetMapping(value = "delete")
+	@GetMapping("update")
+	public ModelAndView setUpdate(NoticeVO noticeVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		noticeVO = (NoticeVO)noticeService.getDetail(noticeVO);
+		
+		mv.addObject("dto", noticeVO);
+		mv.setViewName("board/update");
+		
+		return mv;
+	}
+	
+	@PostMapping("update")
+	public ModelAndView setUpdate(ModelAndView mv, NoticeVO noticeVO) throws Exception {
+		
+		int result = noticeService.setUpdate(noticeVO);
+		
+		mv.setViewName("redirect:./list");
+		
+		return mv;
+	}
+	
+	@GetMapping("delete")
 	public ModelAndView setDelete(BoardVO boardVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
@@ -95,4 +112,7 @@ public class NoticeController {
 		
 		return mv;
 	}
+	
+	
+
 }

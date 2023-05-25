@@ -25,7 +25,7 @@
   		<include refid="search"></include>
   	</select>
   
-  	<select id="getList" resultType="BoardVO" parameterType="Pagination">
+  	<select id="getList" resultType="NoticeVO" parameterType="Pagination">
   		SELECT * FROM NOTICE
   		<include refid="search"></include>
   		ORDER BY NUM DESC
@@ -49,8 +49,9 @@
   		<result column="regDate" property="regDate"/>
   		<result column="modifyDate" property="modifyDate"/>
   		<result column="hit" property="hit"/>
+  		<result column="important" property="important"/>
   		
-  		<collection property="noticeFileVOs" javaType="List" ofType="NoticeFileVO">
+  		<collection property="fileVOs" javaType="List" ofType="FileVO">
   			<id column="fileNum" property="fileNum"/>
   			<result column="fileName" property="fileName"/>
   			<result column="oriName" property="oriName"/>
@@ -58,12 +59,12 @@
   	</resultMap>
   	
   	<insert id="setInsert" parameterType="NoticeVO" useGeneratedKeys="true" keyProperty="num">
-  		INSERT INTO NOTICE (NUM, TITLE, CONTENTS, WRITER, HIT, REGDATE, MODIFYDATE)
-  		VALUES (#{num}, #{title}, #{contents}, #{writer}, 0, now(), now())
+  		INSERT INTO NOTICE (NUM, TITLE, WRITER, CONTENTS, HIT, REGDATE, MODIFYDATE, IMPORTANT)
+  		VALUES (#{num}, #{title}, #{writer}, #{contents}, 0, now(), now(), #{important})
   	</insert>
   	
   	<update id="setUpdate" parameterType="NoticeVO">
-  		UPDATE NOTICE SET TITLE = #{title}, CONTENTS = #{contents}
+  		UPDATE NOTICE SET TITLE = #{title}, CONTENTS = #{contents}, IMPORTANT = #{important}
   		WHERE NUM = #{num}
   	</update>
   	
@@ -71,13 +72,13 @@
   		DELETE FROM NOTICE WHERE NUM = #{num}
   	</delete>
   	
-  	<insert id="setBoardFileAdd" parameterType="NoticeFileVO">
+  	<insert id="setBoardFileAdd" parameterType="FileVO">
   		INSERT INTO NOTICEFILES (NUM, FILENAME, ORINAME)
   		VALUES(#{num}, #{fileName}, #{oriName})
   	</insert>
   	
-  	<select id="getFileDetail" parameterType="NoticeFileVO" resultType="NoticeFileVO">
+  	<select id="getFileDetail" parameterType="FileVO" resultType="FileVO">
   		SELECT * FROM NOTICEFILES WHERE FILENUM = #{fileNum}
   	</select>
-  
+  	
   </mapper>

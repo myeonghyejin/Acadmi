@@ -74,4 +74,5 @@ public class QnaService implements BoardService {
 	public FileVO getFileDetail(FileVO fileVO) throws Exception {
 		return qnaDAO.getFileDetail(fileVO);
 	}
+
 }
