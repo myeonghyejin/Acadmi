@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.acadmi.student.lecture.StudentLectureDAO">
+	<!-- SQL -->
+	<sql id="search">
+		<where>
+			<if test="kind == 'name'">
+				LECTURENAME LIKE CONCAT('%', #{search}, '%')
+			</if>
+			<if test="kind == 'category'">
+				CATEGORY = #{category}
+			</if>
+			<if test="kind == 'grade'">
+				GRADE = #{grade}
+			</if>
+			<if test="kind == 'dept'">
+				DEPTNUM = #{deptNum}
+			</if>
+		</where>
+	</sql>
+	
+	<!-- SELECT -->
+	<select id="getAllLectureList" parameterType="Pagination" resultType="LectureVO">
+		SELECT *
+		FROM LECTURE
+		<include refid="search"></include>
+		ORDER BY LECTURENUM DESC
+		LIMIT #{startRow}, #{perPage}
+	</select>
+	
+	<select id="getMyLectureList" parameterType="Pagination" resultType="StudentLectureVO">
+		SELECT *
+		FROM STUDENT_LECTURE
+		<include refid="search"></include>
+		ORDER BY LECTURENUM DESC
+		LIMIT #{startRow}, #{perPage}
+	</select>
+	
+	<select id="getMyFavoriteList" parameterType="Pagination" resultType="FavoriteLectureVO">
+		SELECT *
+		FROM FAVORITE_LECTURE
+		<include refid="search"></include>
+		ORDER BY FAVORITENUM DESC
+		LIMIT #{startRow}, #{perPage}
+	</select>
+	
+	<select id="getTotalCount" parameterType="Pagination" resultType="Long">
+		SELECT COUNT(LECTURENUM)
+		FROM STUDENT_LECTURE
+		<include refid="search"></include>
+	</select>
+	
+</mapper>

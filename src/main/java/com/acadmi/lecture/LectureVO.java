@@ -22,7 +22,7 @@ public class LectureVO {
 	private String weekday;
 	private Integer startTime;
 	private Integer lastTime;
-	private Double completionGrade;
+	private Float completionGrade;
 	private String note;
 	private Integer temporary;
 
