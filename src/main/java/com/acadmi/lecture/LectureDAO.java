@@ -8,8 +8,9 @@ import org.apache.ibatis.annotations.Mapper;
 public interface LectureDAO {
 
 	public List<LectureVO> getLectureList(LectureVO lectureVO) throws Exception;
-	
+	public LectureVO getLectureDetail(LectureVO lectureVO) throws Exception;
 	public int setLectureAdd(LectureVO lectureVO) throws Exception;
 	public int setTemporaryAdd(LectureVO lectureVO) throws Exception;
 	public int setLectureUpdate(LectureVO lectureVO) throws Exception;
+	public int setTemporaryUpdate(LectureVO lectureVO) throws Exception;
 }

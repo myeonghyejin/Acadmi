@@ -17,10 +17,10 @@ public class LectureService {
 	public List<LectureVO> getLectureList(LectureVO lectureVO) throws Exception{
 		return lectureDAO.getLectureList(lectureVO);
 	}
-	
-	public int setLectureUpdate(LectureVO lectureVO) throws Exception{
-		return lectureDAO.setLectureUpdate(lectureVO);
+	public LectureVO getLectureDetail(LectureVO lectureVO) throws Exception{
+		return lectureDAO.getLectureDetail(lectureVO);
 	}
+	
 	public int setLectureAdd(LectureVO lectureVO) throws Exception{
 		log.error("ddd");
 		return lectureDAO.setLectureAdd(lectureVO);
@@ -30,5 +30,10 @@ public class LectureService {
 		return lectureDAO.setTemporaryAdd(lectureVO);
 	}
 	
-
+	public int setLectureUpdate(LectureVO lectureVO) throws Exception{
+		return lectureDAO.setLectureUpdate(lectureVO);
+	}
+	public int setTemporaryUpdate(LectureVO lectureVO) throws Exception{
+		return lectureDAO.setTemporaryUpdate(lectureVO);
+	}
 }

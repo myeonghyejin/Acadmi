@@ -42,9 +42,9 @@ public class LectureController {
 	}
 	@PostMapping("add")
 	public ModelAndView setLectureAdd(LectureVO lectureVO, ModelAndView mv, @RequestParam("buttonType")String buttonType) throws Exception{
-		if(buttonType.equals("0")) {
+		if(buttonType.equals("1")) {
 			int result = lectureService.setLectureAdd(lectureVO);
-		} else if(buttonType.equals("1")){
+		} else if(buttonType.equals("0")){
 			int result = lectureService.setTemporaryAdd(lectureVO);
 		}
 		log.error(lectureVO.getLectureNum().toString());
@@ -55,14 +55,19 @@ public class LectureController {
 	@GetMapping("update")
 	public ModelAndView setLectureUpdate(LectureVO lectureVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
+		lectureVO = lectureService.getLectureDetail(lectureVO);
 		mv.addObject("update",lectureVO);
 		mv.setViewName("lecture/update");
 		return mv;
 	}
 	@PostMapping("update")
-	public ModelAndView setLectureUpdate(LectureVO lectureVO, ModelAndView mv) throws Exception{
-		int result = lectureService.setLectureUpdate(lectureVO);
-		mv.setViewName("lecture/list");
+	public ModelAndView setLectureUpdate(LectureVO lectureVO, ModelAndView mv, @RequestParam("buttonType")String buttonType) throws Exception{
+		if(buttonType.equals("1")) {
+			int result = lectureService.setLectureUpdate(lectureVO);
+		} else if(buttonType.equals("0")){
+			int result = lectureService.setTemporaryUpdate(lectureVO);
+		}
+		mv.setViewName("redirect:./list");
 		return mv;
 	}
 
