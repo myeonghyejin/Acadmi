@@ -5,19 +5,19 @@
 <html>
 <head>
  <head>
- <%--    <meta charset="utf-8">
+     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Acadmi!</title>
 	<!-- CSS/favicon 적용 -->
 	<c:import url="../temp/style.jsp"></c:import>
-	<!-- CSS/favicon 끝 --> --%>
+	<!-- CSS/favicon 끝 -->
 </head>
  		<body class="hold-transition sidebar-mini layout-fixed">
 		<div class="wrapper">
        
-      		<%-- <!-- Header 적용 -->
+      		<!-- Header 적용 -->
 				<c:import url="../temp/header.jsp"></c:import>
-			<!-- Header 끝 --> --%>
+			<!-- Header 끝 --> 
         
             <!-- Main Contents -->
 		<div class="container-fluid">
@@ -84,11 +84,11 @@
 				</div>
 			</div>
 		</div>
-       <%--  
+       
 		<!-- Footer 적용 -->
 			<c:import url="../temp/footer.jsp"></c:import>
 		<!-- Footer 끝 -->
- --%>
+
 	</div>
 <!-- ./wrapper -->
 </body>
