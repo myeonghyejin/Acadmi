@@ -29,6 +29,8 @@
   		<typeAlias type="com.acadmi.board.qna.QnaVO" alias="QnaVO"/>
   		<typeAlias type="com.acadmi.board.qna.QnaFileVO" alias="QnaFileVO"/>
   		
+  		<typeAlias type="com.acadmi.lectureroom.LectureRoomVO" alias="LectureRoomVO"/>
+  		
   		
   		
   		

@@ -10,6 +10,19 @@
 <body>
 	<h1>행정 목록 조회</h1>
 	
+	<div class="card-body">
+		<div>직원번호</div>
+		<input type="text" name="username" id="username">
+		<div>성명</div>
+		<input type="text" name="name" id="name" placeholder="이름을 입력하세요">
+		<div>상태</div>
+		<select id="status" name="status">
+			<option value="1">재직</option>
+			<option value="2">휴직</option>
+			<option value="3">퇴직</option>
+		</select>
+	</div>
+	
 	<table class="table table-hover" border="1">
 		<thead>
    	 		`	<tr>
@@ -44,10 +57,10 @@
 	   	 			<c:if test="${administratorStatus eq 1}">
 	   	 				<td>재직</td>
 	   	 			</c:if>
-	   	 			<c:if test="${adminIstratorStatus eq 2}">
+	   	 			<c:if test="${administratorStatus eq 2}">
 	   	 				<td>휴직</td>
 	   	 			</c:if>
-	   	 			<c:if test="${adminIstratorStatus eq 3}">
+	   	 			<c:if test="${administratorStatus eq 3}">
 	   	 				<td>퇴직</td>
 	   	 			</c:if>
    	 				</tr>
@@ -58,13 +71,13 @@
 	</table>
 	
 	<c:if test="${pagination.pre}">
-		<a href="./adminIstratorList?page=${pagination.startNum-1}">이전</a>
+		<a href="./administratorList?page=${pagination.startNum-1}">이전</a>
 	</c:if>
 	<c:forEach begin="${pagination.startNum}" end="${pagination.lastNum}" var="i">
-   	 	<a href="./adminIstratorList?page=${i}">${i}</a>
+   	 	<a href="./administratorList?page=${i}">${i}</a>
    	 </c:forEach>		
    	<c:if test="${pagination.next}">
-		<a href="./adminIstratorList?page=${pagination.lastNum+1}">다음</a>
+		<a href="./administratorList?page=${pagination.lastNum+1}">다음</a>
 	</c:if> 
 </body>
 </html>

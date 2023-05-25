@@ -23,15 +23,15 @@ public class AdministratorDAOTest {
 	private AdministratorDAO adminAdminIstratorDAO;
 	
 	//@Test
-	void setMemberInsertTest() throws Exception {
-		
-		for(int i=0; i<50; i++) {
-			MemberVO memberVO = new MemberVO();
-			memberVO.setUsername("user");
-			adminAdminIstratorDAO.setMemberInsert(memberVO);
-			
-		}
-	}
+//	void setMemberInsertTest() throws Exception {
+//		
+//		for(int i=0; i<50; i++) {
+//			MemberVO memberVO = new MemberVO();
+//			memberVO.setUsername("user");
+//			adminAdminIstratorDAO.setMemberInsert(memberVO);
+//			
+//		}
+//	}
 	
 	
 }

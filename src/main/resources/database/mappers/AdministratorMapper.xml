@@ -5,7 +5,19 @@
   
   <mapper namespace="com.acadmi.administrator.AdministratorDAO">
   
-  
+    <!--회원 관리  -->
+    
+  	<!--계정 생성  -->
+  	<insert id="setMemberAdd" parameterType="StudentVO">
+  		INSERT INTO MEMBER
+  		VALUES(#{username},#{password},#{email},#{category},1)
+  	</insert>
+  	<insert id="setStudentAdd" parameterType="StudentVO">
+  		INSERT INTO STUDENT
+  		VALUES(#{username},#{deptNum},#{grade},1,#{name},#{phone},#{birth},#{address},0)
+  	</insert>
+  	
+	 <!-- 회원 조회 -->
   	<select id="getTotalCountStudent" resultType="Long">
   		SELECT COUNT(USERNAME) FROM STUDENT
   	</select>
@@ -113,7 +125,7 @@
   <resultMap type="DepartmentVO" id="AdminIstratorList">
   	<id column="DEPTNUM" property="deptNum"/>
   	<result column="DEPTNAME" property="deptName"/>
-		<collection property="adminIstratorVOs" javaType="List" ofType="AdminIstratorVO">
+		<collection property="administratorVOs" javaType="List" ofType="AdministratorVO">
 			<result column="NAME" property="name"/>
 			<result column="EMAIL" property="email"/>
 			<result column="PHONE" property="phone"/>
@@ -126,27 +138,32 @@
 		</collection>
   </resultMap>
   
-    <insert id="setMemberInsert" parameterType="MemberVO">
-  		INSERT INTO MEMBER
-  		VALUES(#{username}, #{password},#{email},#{category},#{enabled})
-  	</insert>
-  	
-  	<insert id="setStudentInsert" parameterType="StudentVO">
-  		INSERT INTO STUDENT
-  		VALUES(#{username},#{deptNum},#{grade},#{name},#{phone},now(),#{address},#{status})
-  	</insert>
-  	
-  	<insert id="setProfessorInsert" parameterType="ProfessorVO">
-  		INSERT INTO PROFESSOR
-  		VALUES(#{username},#{deptNum},#{name},#{professorRoom},#{phone},now(),#{address},#{status})
-  	</insert>
-  	
-  	<insert id="setAdminIstratorInsert" parameterType="AdminIstratorVO">
-  		INSERT INTO ADMINISTRATOR
-  		VALUES(#{username},1,#{name},01044444444,now(),'서울',1)
-  	</insert>
-  	
-  	<select id="getMember" resultType="MemberVO">
-  		SELECT USERNAME FROM MEMBER
+  	<!-- 강의실 관리 -->
+    
+    <!-- 강의실 조회 -->
+	<select id="getLectureRoomList" parameterType="Pagination" resultType="LectureRoomVO">
+		SELECT * FROM LECTURE_ROOM
+		LIMIT #{startRow},#{perPage}
+	</select>
+  
+  	<select id="getTotalCountLectureRoom" resultType="Long">
+  		SELECT COUNT(LECTUREROOM) FROM LECTURE_ROOM
   	</select>
+ 	<!-- 강의실 등록 -->
+ 	<insert id="setLectureRoomAdd" parameterType="LectureRoomVO">
+ 		INSERT INTO LECTURE_ROOM
+ 		VALUES(#{lectureBuilding},#{lectureRoom},#{personel},1)
+ 	</insert>
+ 	<!--강의실 수정 -->
+ 	<update id="setLectureRoomUpdate" parameterType="LectureRoomVO">
+ 		UPDATE LECTURE_ROOM
+ 		SET PERSONEL=#{personel},STATUS=#{status}
+ 		WHERE LECTUREBUILDING = #{lectureBuilding} AND LECTUREROOM = #{lectureRoom}
+ 	</update>
+ 	
+ 
+ 	
+  
+  
+  	
   </mapper>
