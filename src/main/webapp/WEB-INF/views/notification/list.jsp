@@ -91,5 +91,6 @@
 
 	</div>
 <!-- ./wrapper -->
+	<script src="../js/notification/notificationList.js"></script>
 </body>
 </html>

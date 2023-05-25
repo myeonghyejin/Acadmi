@@ -39,8 +39,6 @@ public class NotificationService {
 	//중요 공지사항이 등록외었을때 알림발생
 	public int setIptNotice(NoticeVO noticeVO) throws Exception {
 		NotificationVO notificationVO = new NotificationVO();
-		//123456789L은 admin 아이디
-		notificationVO.setSender("123456789");
 		notificationVO.setNotificationMsg(noticeVO.getTitle());
 		notificationVO.setNotificationKind(1);
 		int result = notificationDAO.setNotification(notificationVO);
@@ -58,18 +56,21 @@ public class NotificationService {
 		int result = 0;
 		NotificationVO notificationVO = new NotificationVO();
 		notificationVO.setNotificationMsg(qnaVO.getTitle());
-		//member가 완성되면 세션에서 id빼와서 sender에다가 넣기
+		//sender는 질의응답의 작성자
+		notificationVO.setSender(qnaVO.getWriter());
 		// kind가 2번은 질의응답 등록
 		notificationVO.setNotificationKind(2);
 		//for문 돌려서 디비에서 권한정보 빼와서 직원인 멤버만 recipient에 넣어준다
 		MemberVO memberVO = new MemberVO();
 		//category가 1이 직원
 		memberVO.setCategory(1);
-		List<MemberVO> ar =  notificationDAO.getAdministratorList(memberVO);
-		for(MemberVO memberVO2:ar) {
-			notificationVO.setRecipient(memberVO2.getUsername());
+		List<MemberVO> administrators = notificationDAO.getAdministratorList(memberVO);
+		for(MemberVO administrator:administrators) {
+			//잘의응답 작성자(sender)의 학과와 뽑아온 멤버의 학과가 같을때 recipient에 넣어주고 저장 후 알림 보내기
+			
+			notificationVO.setRecipient(administrator.getUsername());
 			result = notificationDAO.setNotification(notificationVO);
-			this.sendNotification(memberVO2.getUsername(), "[질의응답]"+notificationVO.getNotificationMsg());
+			this.sendNotification(administrator.getUsername(), "[질의응답]"+notificationVO.getNotificationMsg());
 		}
 		return result;
 	}
