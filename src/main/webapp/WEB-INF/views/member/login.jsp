@@ -39,6 +39,7 @@
                         <div class="text-center mb-5">
                             <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-envelope"></i></div>
                             <h1 class="fw-bolder">로그인</h1>
+                            <p>저희 Acadmi에 오신걸 환영합니다</p>
                         </div>
                         <div class="row gx-5 justify-content-center">
                             <div class="col-lg-8 col-xl-6">
@@ -57,7 +58,7 @@
                                     </div>
                                     
                                     <div>
-                                    	<a href="./findPw">비밀번호 찾기</a>
+                                    	<a href="./findPw">비밀번호 찾기</a><br>
                                     	<a href="./join">회원가입</a>
                                     </div>
                                     
@@ -65,7 +66,7 @@
 	                                	<h3>${param.errorMessage}</h3>
 	                                </c:if>
                                     <div class="d-grid">
-                                    	<button class="btn btn-primary btn-lg" id="submitButton" type="submit">로그인</button>
+                                    	<button class="btn btn-primary float-right" id="submitButton" type="submit">로그인</button>
                                     </div>
                                 </form>
                             </div>
