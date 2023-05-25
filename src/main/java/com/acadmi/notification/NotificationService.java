@@ -2,16 +2,24 @@ package com.acadmi.notification;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
+import com.acadmi.administrator.AdministratorVO;
 import com.acadmi.board.notice.NoticeVO;
 import com.acadmi.member.MemberVO;
+import com.acadmi.professor.ProfessorVO;
 import com.acadmi.qna.QnaVO;
+import com.acadmi.student.StudentVO;
+
+import lombok.extern.slf4j.Slf4j;
 
 
 @Service
+@Slf4j
 public class NotificationService {
 	
 	@Autowired
@@ -25,13 +33,8 @@ public class NotificationService {
 		messagingTemplate.convertAndSendToUser(username, "/queue/notification", message);
 	}
 	
-	//notification list
-	public List<NotificationVO> getList() throws Exception {
-		return notificationDAO.getList();
-	}
-	
 	//kind에 따른 알림 list
-	public List<NotificationVO> getKindList(NotificationVO notificationVO) throws Exception {
+	public List<NotificationVO> getKindList(NotificationVO notificationVO, HttpSession session) throws Exception {
 		return notificationDAO.getKindList(notificationVO);
 	}
 	
@@ -60,17 +63,28 @@ public class NotificationService {
 		notificationVO.setSender(qnaVO.getWriter());
 		// kind가 2번은 질의응답 등록
 		notificationVO.setNotificationKind(2);
-		//for문 돌려서 디비에서 권한정보 빼와서 직원인 멤버만 recipient에 넣어준다
-		MemberVO memberVO = new MemberVO();
-		//category가 1이 직원
-		memberVO.setCategory(1);
-		List<MemberVO> administrators = notificationDAO.getAdministratorList(memberVO);
-		for(MemberVO administrator:administrators) {
+		//for문 돌려서 디비에서 CATEGORY가 직원인 멤버만 recipient에 넣어준다
+		List<AdministratorVO> administrators = notificationDAO.getAdministratorList();
+		for(AdministratorVO administrator:administrators) {
+			MemberVO memberVO = new MemberVO();
+			memberVO.setUsername(notificationVO.getSender());
+			StudentVO student = notificationDAO.getStudentDetail(memberVO);
+			ProfessorVO professor = notificationDAO.getProfessorDetail(memberVO);
 			//잘의응답 작성자(sender)의 학과와 뽑아온 멤버의 학과가 같을때 recipient에 넣어주고 저장 후 알림 보내기
+			if(student != null) {
+				if(student.getDeptNum()==administrator.getDeptNum()) {
+					notificationVO.setRecipient(administrator.getUsername());
+					result = notificationDAO.setNotification(notificationVO);
+					this.sendNotification(administrator.getUsername(), "[질의응답]"+notificationVO.getNotificationMsg());
+				}
+			} else {
+				if(professor.getDeptNum()==administrator.getDeptNum()) {
+					notificationVO.setRecipient(administrator.getUsername());
+					result = notificationDAO.setNotification(notificationVO);
+					this.sendNotification(administrator.getUsername(), "[질의응답]"+notificationVO.getNotificationMsg());
+				}
+			}
 			
-			notificationVO.setRecipient(administrator.getUsername());
-			result = notificationDAO.setNotification(notificationVO);
-			this.sendNotification(administrator.getUsername(), "[질의응답]"+notificationVO.getNotificationMsg());
 		}
 		return result;
 	}
@@ -82,10 +96,7 @@ public class NotificationService {
 		notificationVO.setNotificationMsg(lectureName);
 		notificationVO.setNotificationKind(6);
 		//for문 돌려서 디비에서 권한정보 빼와서 직원인 멤버만 recipient에 넣어준다
-		MemberVO memberVO = new MemberVO();
-		//category가 1이 직원
-		memberVO.setCategory(1);
-		List<MemberVO> ar =  notificationDAO.getAdministratorList(memberVO);
+		List<AdministratorVO> ar =  notificationDAO.getAdministratorList();
 		for(MemberVO memberVO2:ar) {
 			notificationVO.setRecipient(memberVO2.getUsername());
 			result = notificationDAO.setNotification(notificationVO);

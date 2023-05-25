@@ -6,11 +6,6 @@
   
   <mapper namespace="com.acadmi.notification.NotificationDAO">
   	
-  	<!-- notification list -->
-  	<select id="getList" resultType="NotificationVO">
-  		SELECT * FROM NOTIFICATION
-  	</select>
-  	
   	<!-- kind에 따른 알림 list -->
   	<select id="getKindList" parameterType="NotificationVO" resultType="NotificationVO">
   		SELECT * FROM NOTIFICATION WHERE NOTIFICATIONKIND = #{notificationKind}
@@ -28,11 +23,31 @@
   	</select>
   	
   	<!-- 직원 알림을 위한 직원의 memberVO의 list -->
-  	<select id="getAdministratorList" parameterType="MemberVO" resultType="MemberVO">
-  		SELECT * FROM MEMBER WHERE CATEGORY = #{category}
+  	<select id="getAdministratorList" resultType="AdministratorVO">
+  		SELECT * FROM MEMBER M
+			  		  INNER JOIN
+					  ADMINISTRATOR A
+					  USING (USERNAME)
+		WHERE CATEGORY = 0
   	</select>
   	
-  	<!-- 학과비교를 위한 memberDetail -->
-  	<select id="getMemberDetail"></select>
+  	<!-- 교수의 정보를 가져오는 detail -->
+  	<select id="getProfessorDetail" parameterType="MemberVO" resultType="ProfessorVO">
+  		SELECT * FROM MEMBER M
+  					  INNER JOIN
+  					  PROFESSOR P
+  					  USING (USERNAME)
+  		WHERE CATEGORY = 1 AND USERNAME = #{username}
+  	</select>
+  	<!-- 학생의 정보를 가져오는 detail -->
+  	<select id="getStudentDetail" parameterType="MemberVO" resultType="StudentVO">
+  		SELECT * FROM MEMBER M
+  					  INNER JOIN
+  					  STUDENT S
+  					  USING (USERNAME)
+  		WHERE CATEGORY = 2 AND USERNAME = #{username}
+  	</select>
+  	
+  	
     
   </mapper>

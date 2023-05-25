@@ -16,12 +16,12 @@ public class AdminIstratorService {
 	@Autowired
 	private AdminIstratorDAO adminIstratorDAO;
 	
-	public List<AdminIstratorVO> getStudentList() throws Exception {
+	public List<AdministratorVO> getStudentList() throws Exception {
 		
 		return adminIstratorDAO.getStudentList();
 	}
 	
-	public List<AdminIstratorVO> getProfessorList() throws Exception {
+	public List<AdministratorVO> getProfessorList() throws Exception {
 		
 		return adminIstratorDAO.getProfessorList();
 	}

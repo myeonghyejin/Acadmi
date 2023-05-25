@@ -26,7 +26,7 @@ public class AdminIstratorController {
 	public ModelAndView getMemberList() throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		List<AdminIstratorVO> ar =  adminIstratorService.getStudentList();
+		List<AdministratorVO> ar =  adminIstratorService.getStudentList();
 		mv.addObject("list", ar);
 		mv.setViewName("administrator/studentList");
 		
@@ -37,7 +37,7 @@ public class AdminIstratorController {
 	public ModelAndView getProfessorList() throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		List<AdminIstratorVO> ar = adminIstratorService.getProfessorList();
+		List<AdministratorVO> ar = adminIstratorService.getProfessorList();
 		mv.addObject("list", ar);
 		mv.setViewName("administrator/professorList");
 		

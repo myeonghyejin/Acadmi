@@ -9,7 +9,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class AdminIstratorVO extends MemberVO {
+public class AdministratorVO extends MemberVO {
 
 	private Integer deptNum;
 	private String name;

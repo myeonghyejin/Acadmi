@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.acadmi.administrator.AdministratorVO;
 import com.acadmi.member.MemberVO;
 
 @SpringBootTest
@@ -46,7 +47,7 @@ public class NotificationDAOTest {
 	void getAdministratorList() throws Exception {
 		MemberVO memberVO = new MemberVO();
 		memberVO.setCategory(1);
-		List<MemberVO> ar = notificationDAO.getAdministratorList(memberVO);
+		List<AdministratorVO> ar = notificationDAO.getAdministratorList(memberVO);
 		assertEquals(3, ar.size());
 		
 	}
