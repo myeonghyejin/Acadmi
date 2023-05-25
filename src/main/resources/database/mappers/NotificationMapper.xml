@@ -31,5 +31,8 @@
   	<select id="getAdministratorList" parameterType="MemberVO" resultType="MemberVO">
   		SELECT * FROM MEMBER WHERE CATEGORY = #{category}
   	</select>
+  	
+  	<!-- 학과비교를 위한 memberDetail -->
+  	<select id="getMemberDetail"></select>
     
   </mapper>
