@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,7 +23,7 @@
 			<div class="row">
 				<!-- 2레벨 Sidebar 적용 -->
 				<div class="content-wrapper">
-					<c:import url="./temp/sidebar/std_lecture.jsp"></c:import>
+					<c:import url="./temp/sidebar/student_lecture.jsp"></c:import>
 				</div>
 				<!-- 2레벨 Sidebar 끝 -->
 				

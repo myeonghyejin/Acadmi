@@ -22,6 +22,7 @@ import com.acadmi.security.UserLoginFailHandler;
 import com.acadmi.security.UserSuccessHandler;
 
 
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -48,19 +49,18 @@ public class SecurityConfig {
                
                .authorizeRequests()
                   // URL과 권한 매칭
-                  .antMatchers("/member/login").permitAll()
-                  .antMatchers("/test").authenticated()
-                  .antMatchers("/").permitAll()
-//                  .antMatchers("/qna/add").hasAnyRole("ADMIN", "MANAGER", "MEMBER")
-                  //.anyRequest().authenticated()
+//                  .antMatchers("/member/login").permitAll()
+//                  .antMatchers("/member/join").permitAll()
+//                  .antMatchers("/test").authenticated()
+//                  	.antMatchers("/").permitAll()
+                  .antMatchers("/").hasAnyRole("ADMIN", "ADMINISTRATOR", "PROFESSOR", "STUDENT")
                   .anyRequest().permitAll()
                   .and()
                .formLogin()
                   .loginPage("/member/login")
                   .defaultSuccessUrl("/")
-                  	//.successHandler(new UserSuccessHandler())
-                  	.failureUrl("/member/login")
-                  	//.failureHandler(new UserLoginFailHandler())
+//                  .successHandler(new UserSuccessHandler())
+                  .failureHandler(new UserLoginFailHandler())
                   .permitAll()
                   .and()
                .logout()

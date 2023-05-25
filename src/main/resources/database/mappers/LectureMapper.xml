@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.acadmi.lecture.LectureDAO">
+	<!-- SQL -->
+	<sql id="search">
+		<where>
+			<if test="kind == 'name'">
+				LECTURENAME LIKE CONCAT('%', #{search}, '%')
+			</if>
+			<if test="kind == 'category'">
+				CATEGORY = #{category}
+			</if>
+			<if test="kind == 'grade'">
+				GRADE = #{grade}
+			</if>
+			<if test="kind == 'dept'">
+				DEPTNUM = #{deptNum}
+			</if>
+		</where>
+	</sql>
+	
+	<!-- SELECT -->
+	<select id="getList" parameterType="Pagination" resultType="LectureVO">
+		SELECT *
+		FROM NOTICE
+		<include refid="search"></include>
+		ORDER BY NUM DESC
+		LIMIT #{startRow}, #{perPage}
+	</select>
+	
+</mapper>
