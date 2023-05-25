@@ -7,7 +7,7 @@
   <mapper namespace="com.acadmi.member.MemberDAO">
   
   		<select id="getLogin" parameterType="MemberVO" resultMap="loginResult">
-  			SELECT M.USERNAME, M.PASSWORD, M.EMAIL, M.CATEGORY
+  			SELECT *
   			FROM MEMBER M
   				INNER JOIN
   				MEMBER_ROLE MR
@@ -27,5 +27,16 @@
   				<result property="roleName" column="ROLENAME"/>
   			</collection>
   		</resultMap>
+  	
+  	
+  		<insert id="setJoin" parameterType="MemberVO">
+	  		INSERT INTO MEMBER
+	  		VALUES(#{username}, #{password}, #{email}, #{category}, 1)
+  		</insert>
+  		
+  		<insert id="setRoleAdd" parameterType="Map">
+	  		INSERT INTO MEMBER_ROLE
+	  		VALUES(#{username}, 1)
+  		</insert>
   
   </mapper>
