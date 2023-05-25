@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,8 +38,7 @@
                     <div class="bg-light rounded-3 py-5 px-4 px-md-5 mb-5">
                         <div class="text-center mb-5">
                             <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-envelope"></i></div>
-                            <h1 class="fw-bolder">Member Login Page</h1>
-                            <p class="lead fw-normal text-muted mb-0">We'd love to hear from you</p>
+                            <h1 class="fw-bolder">로그인</h1>
                         </div>
                         <div class="row gx-5 justify-content-center">
                             <div class="col-lg-8 col-xl-6">
@@ -46,31 +47,23 @@
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                                     <!-- Name input-->
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="username" value="${cookie.remember.value}" name="username"  placeholder="Enter your userName..." data-sb-validations="required" />
-                                        <label for="username">User Name</label>
-                                        <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
+                                        <label for="username">아이디</label>
+                                        <input class="form-control" id="username" value="${cookie.remember.value}" name="username"  placeholder="아이디를 입력하세요"/>
                                     </div>
                                     <!-- pw address input-->
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="password" name="password" type="password"  data-sb-validations="required,email" />
-                                        <label for="password">PassWord</label>
-                                        <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
-                                        <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
-                                    </div>
-                                    
-                                    <div class="form-floating mb-3">
-                                        <input id="remember" name="remember" type="checkbox"/>
-                                        <label for="remember">ID기억하기</label>
+                                        <label for="password">비밀번호</label>
+                                        <input class="form-control" id="password" name="password" type="password" placeholder="비밀번호를 입력하세요"/>
                                     </div>
                                     
                                     <div>
                                     	<a href="./findPw">비밀번호 찾기</a>
+                                    	<a href="./join">회원가입</a>
                                     </div>
                                     
 	                                <c:if test="${not empty param.errorMessage}">
 	                                	<h3>${param.errorMessage}</h3>
 	                                </c:if>
-                                    
                                     <div class="d-grid">
                                     	<button class="btn btn-primary btn-lg" id="submitButton" type="submit">로그인</button>
                                     </div>
