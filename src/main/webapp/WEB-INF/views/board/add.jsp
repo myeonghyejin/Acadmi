@@ -33,7 +33,7 @@
 	                    <form:errors path="writer"></form:errors>
 	                </div>                      
 	                <div class="form-floating mb-3">
-		                <textarea class="form-control" id="content" name="content" placeholder="Enter your message here..." style="height: 10rem" data-sb-validations="required"></textarea>
+		                <textarea class="form-control" id="contents" name="contents" placeholder="Enter your message here..." style="height: 10rem" data-sb-validations="required"></textarea>
 		                <label for="content">Content</label>
 	                </div>                   
 	                <div class="form-floating mb-3">

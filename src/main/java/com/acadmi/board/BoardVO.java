@@ -17,5 +17,5 @@ public class BoardVO {
 	private String writer;
 	private String contents;
 	private Date regDate;
-	private List<FileVO> fileVOs;
+	
 }
