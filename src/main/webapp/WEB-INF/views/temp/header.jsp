@@ -114,7 +114,7 @@
 		
 		<!-- 로그아웃 -->
 		<li class="nav-item">
-			<a class="nav-link" href="#" role="button">
+			<a class="nav-link" href="/member/logout" role="button">
 				<i class="fas fa-right-to-bracket"></i>
 			</a>
 		</li>
