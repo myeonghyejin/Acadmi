@@ -30,53 +30,45 @@
 					<c:import url="./temp/sidebar/std_lecture.jsp"></c:import>
 				</div>
 				<!-- 2레벨 Sidebar 끝 --> --%>
-				
-				 <section class="py-5">
-                	<div class="container px-5">
+				<div class="col">
+					 <section class="py-5">
+                 <div class="container px-5">
                     <!-- Contact form-->
-                    <div class="bg-light rounded-3 py-5 px-4 px-md-5 mb-5">
+                  <div class="bg-light rounded-3 py-5 px-4 px-md-5 mb-5">
                         <div class="text-center mb-5">
                             <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-envelope"></i></div>
-                            <h1 class="fw-bolder">Member Login Page</h1>
-                            <p class="lead fw-normal text-muted mb-0">We'd love to hear from you</p>
+                            <h1 class="fw-bolder">회원가입</h1>
                         </div>
                         <div class="row gx-5 justify-content-center">
                             <div class="col-lg-8 col-xl-6">
-                                <!-- * * * * * * * * * * * * * * *-->
-                                <!-- * * SB Forms Contact Form * *-->
-                                <!-- * * * * * * * * * * * * * * *-->
-                                <!-- This form is pre-integrated with SB Forms.-->
-                                <!-- To make this form functional, sign up at-->
-                                <!-- https://startbootstrap.com/solution/contact-forms-->
-                                <!-- to get an API token!-->
                                  <form:form id="contactForm" modelAttribute="memberVO" action="./join" method="post" data-sb-form-api-token="API_TOKEN">
                                     <!-- Name input-->
                                     <div class="form-floating mb-3">
+                                        <form:label path="username">아이디</form:label>
                                         <form:input path="username" id="username" cssClass="form-control"/>
-                                        <form:label path="username">UserName</form:label>
                                         <form:errors path="username"></form:errors>
                                     </div>
                                     <!-- pw address input-->
                                     <div class="form-floating mb-3">
+                                        <form:label path="password">비밀번호</form:label>
                                         <form:password path="password" id="password" cssClass="form-control"/>
-                                        <form:label path="password">Password</form:label>
                                         <form:errors path="password"></form:errors>
                                     </div>
                                     <div class="form-floating mb-3">
+                                        <form:label path="email">이메일</form:label>
                                         <form:input path="email" id="email" cssClass="form-control"/>
-                                        <form:label path="email">Email</form:label>
                                         <form:errors path="email"></form:errors>
                                     </div>
                                     <div class="form-floating mb-3">
+                                        <label for="Category">직업(학생 , 교수, 행정)</label>
                                         <input class="form-control" id="Category" name="Category"  placeholder="Enter your Birth..." data-sb-validations="required" />
-                                        <label for="Category">Category</label>
                                         <form:errors path="Category"></form:errors>
                                         
                                         <%-- <form:input path="birth" id="birth" cssClass="form-control"/>
                                         <label for="birth">Birth</label>
                                         <form:errors path="birth"></form:errors> --%>
                                     </div>
-                                    <div class="d-grid"><button class="btn btn-primary btn-lg" id="submitButton" type="submit">Submit</button></div>
+                                    <div class="d-grid"><button class="btn btn-primary float-right" id="submitButton" type="submit">가입</button></div>
                                 </form:form>
                             </div>
                         </div>

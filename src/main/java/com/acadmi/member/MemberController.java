@@ -139,4 +139,23 @@ public class MemberController {
 	      
 	      return mv;
 	   }
+	   
+	   @GetMapping("findPw")
+		public ModelAndView getFindPw(MemberVO memberVO) throws Exception {
+			ModelAndView mv = new ModelAndView();
+			mv.setViewName("member/findPw");
+			return mv;
+		}
+	   
+	   @PostMapping("findPw")
+		public ModelAndView getFindPw(@Valid MemberVO memberVO, BindingResult bindingResult) throws Exception{
+			ModelAndView mv = new ModelAndView();
+			boolean check = memberService.getFindPw(memberVO, bindingResult);
+			if(check) {
+				mv.setViewName("member/findPw");
+				return mv;
+			}
+			mv.setViewName("member/login");
+			return mv;
+		}
 }
