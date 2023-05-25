@@ -50,8 +50,8 @@ public class SecurityConfig {
                   // URL과 권한 매칭
                   .antMatchers("/member/login").permitAll()
 //                  .antMatchers("/test").authenticated()
-                  	.antMatchers("/").permitAll()
-//                  .antMatchers("/").hasAnyRole("ADMIN", "ADMINISTRATOR", "PROFESSOR", "STUDENT")
+//                  	.antMatchers("/").permitAll()
+                  .antMatchers("/").hasAnyRole("ADMIN", "ADMINISTRATOR", "PROFESSOR", "STUDENT")
 //                  .anyRequest().permitAll()
                   .and()
                .formLogin()
