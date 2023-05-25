@@ -1,9 +1,11 @@
 package com.acadmi.member;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.Getter;
@@ -25,8 +27,14 @@ public class MemberVO implements UserDetails {
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		List<GrantedAuthority> autoAuthorities = new ArrayList<>();
+		
+		for(RoleVO roleVO : roleVOs) {
+			autoAuthorities.add(new SimpleGrantedAuthority(roleVO.getRoleName()));
+		}
+		
+		return autoAuthorities;
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package com.acadmi.member;
 
+import java.util.Enumeration;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.acadmi.member.MemberVO;
@@ -17,7 +20,7 @@ import com.acadmi.member.MemberVO;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@Controller
+@RestController
 @RequestMapping("/member/*")
 public class MemberController {
 
@@ -49,6 +52,37 @@ public class MemberController {
 //		return mv;
 //	}
 	
+	@GetMapping("info")
+	public void info(HttpSession session) {
+		String pw="user1";
+		
+		MemberVO memberVO=(MemberVO)memberService.loadUserByUsername("user1");
+		
+		log.error("{} ::::: ", memberVO.getPassword());
+		log.error("{} ::::: ", passwordEncoder.encode(pw));
+		log.error("{} :::::", memberVO.getPassword().equals(passwordEncoder.encode(pw)));
+		
+		boolean check = passwordEncoder.matches(pw, memberVO.getPassword());
+		log.error("{} :::: ", check);
+		
+		
+		log.error("======== Login Info ===========");
+		//SPRING_SECURITY_CONTEXT
+//		Enumeration<String> names = session.getAttributeNames();
+//		while(names.hasMoreElements()) {
+//			log.error("==== {} === ", names.nextElement());
+//		}
+//		Object obj =session.getAttribute("SPRING_SECURITY_CONTEXT");
+//		log.error("========== {} =========", obj);
+//		SecurityContextImpl contextImpl = (SecurityContextImpl)obj;
+//		Authentication authentication= contextImpl.getAuthentication();
+//		
+//		log.error("====== {} ======", obj);
+//		log.error("====== USERNAME :  {} ======", authentication.getName());
+//		log.error("====== Detail :  {} ======", authentication.getDetails());
+//		log.error("====== MemberVO :  {} ======", authentication.getPrincipal());
+	}
+	
 	@GetMapping("logout")
 	public ModelAndView getLogout(HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
@@ -59,5 +93,18 @@ public class MemberController {
 		
 		return mv;
 	}
-
+	
+	@GetMapping(value = "mypage")
+	   public ModelAndView getMemberPage(HttpSession session) throws Exception {
+	      ModelAndView mv = new ModelAndView();
+	      
+	      MemberVO memberVO = (MemberVO)session.getAttribute("member");
+	      
+	      memberVO = memberService.getMyPage(memberVO);
+	      
+	      mv.addObject("memberVO", memberVO);
+	      mv.setViewName("member/mypage");
+	      
+	      return mv;
+	   }
 }
