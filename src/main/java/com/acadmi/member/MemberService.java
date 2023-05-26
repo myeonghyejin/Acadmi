@@ -1,16 +1,20 @@
 package com.acadmi.member;
 
+import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BindingResult;
 
+import com.acadmi.util.MailManager;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,14 +27,20 @@ public class MemberService implements UserDetailsService{
 	private MemberDAO memberDAO;
 	
 	@Autowired
+	private MailManager mailManager;
+	
+	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
 	public MemberVO getLogin(MemberVO memberVO) throws Exception{
 		return memberDAO.getLogin(memberVO);
 	}
 	
-	public MemberVO getMyPage(MemberVO memberVO)throws Exception{
-		return memberDAO.getLogin(memberVO);
+	public MemberVO getMyPage(MemberVO memberVO) throws Exception {
+		
+		memberVO = memberDAO.getLogin(memberVO);
+		
+		return memberVO;
 	}
 	
 	public int setLogout(MemberVO memberVO) throws Exception{
@@ -64,6 +74,37 @@ public class MemberService implements UserDetailsService{
 		map.put("num", 1);
 		result = memberDAO.setRoleAdd(map);
 		return result;
+	}
+	
+	public boolean getFindPw(MemberVO memberVO, BindingResult bindingResult) throws Exception {
+		boolean result = false;
+		
+		result = bindingResult.hasErrors();
+		log.error("=========== result1 : {} ===========", result);
+
+		if(memberDAO.getFindPw(memberVO) != null) {
+			String charaters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+			SecureRandom random = new SecureRandom();
+			StringBuffer sb = new StringBuffer(6);
+			for(int i = 0;i<6;i++) {
+				sb.append(charaters.charAt(random.nextInt(charaters.length())));
+			}
+			String password = sb.toString();
+			mailManager.send(memberVO.getEmail(), "임시 비밀번호 입니다", "임시비밀번호는 " + password + "입니다.");
+			memberVO.setPassword(passwordEncoder.encode(password));
+			memberDAO.setPwUpdate(memberVO);
+			log.error("=========== result2 : {} ===========", result);
+
+		} else {
+			bindingResult.rejectValue("email", "member.username.email");
+			result = true;
+			log.error("=========== result3 : {} ===========", result);
+
+			
+		}
+		
+		return result;
+		
 	}
 	
 }
