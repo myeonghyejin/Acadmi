@@ -226,7 +226,7 @@
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
-							<a href="#" class="nav-link">
+							<a href="/notice/list" class="nav-link">
 								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>공지사항</p>
 							</a>
