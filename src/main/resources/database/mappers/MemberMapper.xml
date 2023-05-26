@@ -6,6 +6,8 @@
   
   <mapper namespace="com.acadmi.member.MemberDAO">
   
+  		<!-- ==================================Member================================ -->
+  
   		<select id="getLogin" parameterType="MemberVO" resultMap="loginResult">
   			SELECT *
   			FROM MEMBER M
@@ -48,5 +50,39 @@
   		<update id="setPwUpdate" parameterType="MemberVO">
   			UPDATE MEMBER SET PASSWORD = #{password} WHERE USERNAME = #{username}
   		</update>
+  		
+  		<!-- ===================================================================== -->
+  		
+  		<select id="getStudentList" parameterType="MemberVO" resultType="MemberVO">
+	  		SELECT * FROM MEMBER M
+			LEFT OUTER JOIN
+				MEMBERFILES MF
+			USING(USERNAME)
+				INNER JOIN
+					STUDENT S 
+				USING(USERNAME)
+					INNER JOIN
+						DEPARTMENT D 
+					USING(DEPTNUM)
+						INNER JOIN 
+							COLLEGE C 
+						USING(COLLEGENUM)
+  		</select>
+  		
+  		<select id="getProfessor" parameterType="MemberVO" resultType="MemberVO">
+	  		SELECT * FROM MEMBER M
+			LEFT OUTER JOIN
+				MEMBERFILES MF 
+			USING(USERNAME)
+				INNER JOIN
+					PROFESSOR P 
+			USING(USERNAME)
+					INNER JOIN 
+						DEPARTMENT D 
+					USING(DEPTNUM)
+						INNER JOIN
+							COLLEGE C
+						USING(COLLEGENUM)
+  		</select>
   		
   </mapper>

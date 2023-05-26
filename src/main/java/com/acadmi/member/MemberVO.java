@@ -9,6 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.acadmi.administrator.AdminIstratorVO;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -21,9 +22,8 @@ public class MemberVO implements UserDetails {
 	private String password;
 	private String email;
 	private Integer category;
-	private Integer enabled;
+	private boolean enabled;
 	private List<MemberFilesVO> memberFilesVOs;
-	
 	private List<RoleVO> roleVOs;
 	
 	
@@ -61,7 +61,7 @@ public class MemberVO implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
-		return true;
+		return this.enabled;
 	}
 	
 }

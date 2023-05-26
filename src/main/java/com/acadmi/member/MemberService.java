@@ -1,7 +1,9 @@
 package com.acadmi.member;
 
 import java.security.SecureRandom;
+
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 
+import com.acadmi.administrator.AdminIstratorDAO;
+import com.acadmi.administrator.AdminIstratorVO;
 import com.acadmi.util.MailManager;
 
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +26,8 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class MemberService implements UserDetailsService{
+	
+//	Member
 	
 	@Autowired
 	private MemberDAO memberDAO;
@@ -68,7 +74,6 @@ public class MemberService implements UserDetailsService{
 		memberVO.setPassword(passwordEncoder.encode(memberVO.getPassword()));
 		
 		int result = memberDAO.setJoin(memberVO);
-		
 		Map<String, Object> map = new HashMap<>();
 		map.put("username", memberVO.getUsername());
 		map.put("num", 1);
@@ -105,6 +110,38 @@ public class MemberService implements UserDetailsService{
 		
 		return result;
 		
+	}
+	
+//	======================================================================================================================
+	
+	public AdminIstratorVO getStudent(MemberVO memberVO) throws Exception {
+		
+		return memberDAO.getStudent();
+	}
+	
+	public AdminIstratorVO getProfessor(MemberVO memberVO) throws Exception {
+		
+		return memberDAO.getProfessor();
+	}
+	
+	public AdminIstratorVO getAdminIstrator(MemberVO memberVO) throws Exception {
+		
+		return memberDAO.getAdminIstrator();
+	}
+	
+	public AdminIstratorVO setStudent(MemberVO memberVO) throws Exception {
+		
+		return memberDAO.setStudent();
+	}
+	
+	public AdminIstratorVO setProfessor(MemberVO memberVO) throws Exception {
+		
+		return memberDAO.setProfessor();
+	}
+	
+	public AdminIstratorVO setAdminIstrator(MemberVO memberVO) throws Exception {
+		
+		return memberDAO.setAdminIstrator();
 	}
 	
 }

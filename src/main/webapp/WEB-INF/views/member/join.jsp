@@ -84,7 +84,7 @@
 		<!-- Footer 적용 -->
 			<c:import url="../temp/footer.jsp"></c:import>
 		<!-- Footer 끝 -->
-
+	</div>
 <!-- ./wrapper -->
 </body>
 </html>

@@ -28,6 +28,8 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/member/*")
 public class MemberController {
 
+//	Member
+	
 	@Autowired
 	private MemberService memberService;
 	
@@ -101,7 +103,7 @@ public class MemberController {
 	}
 	
 	@GetMapping("mypage")
-	   public ModelAndView getMemberPage(HttpSession session) throws Exception {
+	   public ModelAndView getMyPage(HttpSession session) throws Exception {
 	      ModelAndView mv = new ModelAndView();
 	      
 	      MemberVO memberVO = (MemberVO)session.getAttribute("member");
@@ -160,5 +162,9 @@ public class MemberController {
 			mv.setViewName("member/login");
 			return mv;
 		}
-	 
+	   
+//	   ================================================================================================================
+	   
+	   
+	   
 }
