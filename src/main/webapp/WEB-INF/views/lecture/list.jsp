@@ -26,7 +26,7 @@
 		                <form action="./list" method="get">
 		                    <div class="row gx-5 my-3">
 		                    <select class="form-select" id="temporary" name="temporary" onchange="this.form.submit()">
-		                    	<option name="temporary" id="temporary">전체</option>
+		                    	<option name="temporary" id="temporary" value=" ">전체</option>
 								<option for="temporary" value=" " >전체</option>
 								<option for="temporary"  value="1">등록</option>
 								<option for="temporary"  value="0">미등록</option>
@@ -61,7 +61,7 @@
 		 											<c:if test="${LectureVO.temporary eq 0}">
 			 											<td>
 			 												<button class="btn btn-primary"><a href="./update?lectureNum=${LectureVO.lectureNum}" style="color: white;">수정</a></button>
-			 												<button class="btn btn-danger">삭제</button>
+			 												<button class="btn btn-danger"><a href="./delete?lectureNum=${LectureVO.lectureNum}" style="color: white;">삭제</a></button>
 			 											</td>
 			 										</c:if>
 			 										<c:if test="${LectureVO.temporary eq 1}">

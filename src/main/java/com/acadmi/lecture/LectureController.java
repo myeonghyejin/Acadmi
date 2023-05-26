@@ -70,5 +70,13 @@ public class LectureController {
 		mv.setViewName("redirect:./list");
 		return mv;
 	}
+	
+	@GetMapping("delete")
+	public ModelAndView setLectureDelete(LectureVO lectureVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		int result = lectureService.setLectureDelete(lectureVO);
+		mv.setViewName("redirect:./list");
+		return mv;
+	}
 
 }

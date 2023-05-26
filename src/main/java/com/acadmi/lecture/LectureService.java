@@ -36,4 +36,7 @@ public class LectureService {
 	public int setTemporaryUpdate(LectureVO lectureVO) throws Exception{
 		return lectureDAO.setTemporaryUpdate(lectureVO);
 	}
+	public int setLectureDelete(LectureVO lectureVO) throws Exception{
+		return lectureDAO.setLectureDelete(lectureVO);
+	}
 }

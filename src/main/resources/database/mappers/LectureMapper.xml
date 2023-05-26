@@ -24,29 +24,31 @@
   	</select>
   
   	<insert id="setLectureAdd" parameterType="LectureVO" useGeneratedKeys="true" keyProperty="lectureNum">
-  		INSERT INTO LECTURE (USERNAME,LECTURENAME,SEMESTER,CATEGORY,LECTUREBUILDING,LECTUREROOM,DEPTNUM,GRADE,
+  		INSERT INTO LECTURE (USERNAME,LECTURENAME,SEMESTER,CATEGORY,DEPTNUM,GRADE,
   		YEAR,WEEKDAY, STARTTIME, ENDTIME, PERSONAL, COMPLETIONGRADE,NOTE,TEMPORARY)
-  		VALUES (20190821,#{lectureName},#{semester},#{category},'정보관',101,#{deptNum},#{grade},#{year},#{weekday},
+  		VALUES (20190821,#{lectureName},#{semester},#{category},#{deptNum},#{grade},#{year},#{weekday},
   		#{startTime},#{endTime},#{personal},#{completionGrade},#{note},1)
   	</insert>
   	<insert id="setTemporaryAdd" parameterType="LectureVO" useGeneratedKeys="true" keyProperty="lectureNum">
-  		INSERT INTO LECTURE (USERNAME,LECTURENAME,SEMESTER,CATEGORY,LECTUREBUILDING,LECTUREROOM,DEPTNUM,GRADE,
+  		INSERT INTO LECTURE (USERNAME,LECTURENAME,SEMESTER,CATEGORY,DEPTNUM,GRADE,
   		YEAR,WEEKDAY, STARTTIME, ENDTIME, PERSONAL, COMPLETIONGRADE,NOTE,TEMPORARY)
-  		VALUES (20190821,#{lectureName},#{semester},#{category},'정보관',101,#{deptNum},#{grade},#{year},#{weekday},
+  		VALUES (20190821,#{lectureName},#{semester},#{category},#{deptNum},#{grade},#{year},#{weekday},
   		#{startTime},#{endTime},#{personal},#{completionGrade},#{note},0)
   	</insert>
   	
   	<update id="setLectureUpdate" parameterType="LectureVO">
  		UPDATE LECTURE SET SEMESTER=#{semester}, DEPTNUM=#{deptNum},LECTURENAME=#{lectureName},CATEGORY=#{category},
- 		GRADE= #{grade},YEAR=#{year}, WEEKDAY=#{weekday},STARTTIME=#{startTime},ENDTIME=#{endTime},LECTUREBUILDING='정보관',
- 		LECTUREROOM='101',PERSONAL=#{personal},COMPLETIONGRADE=#{completionGrade},NOTE=#{note} 
- 		WHERE LECTURENUM=#{lectureNum}
+ 		GRADE= #{grade},YEAR=#{year}, WEEKDAY=#{weekday},STARTTIME=#{startTime},ENDTIME=#{endTime},PERSONAL=#{personal},
+ 		COMPLETIONGRADE=#{completionGrade},NOTE=#{note},TEMPORARY=1 WHERE LECTURENUM=#{lectureNum}
  	</update>
  	<update id="setTemporaryUpdate" parameterType="LectureVO">
  		UPDATE LECTURE SET SEMESTER=#{semester}, DEPTNUM=#{deptNum},LECTURENAME=#{lectureName},CATEGORY=#{category},
- 		GRADE= #{grade},YEAR=#{year}, WEEKDAY=#{weekday},STARTTIME=#{startTime},ENDTIME=#{endTime},LECTUREBUILDING='정보관',
- 		LECTUREROOM='101',PERSONAL=#{personal},COMPLETIONGRADE=#{completionGrade},NOTE=#{note} 
- 		WHERE LECTURENUM=#{lectureNum}
+ 		GRADE= #{grade},YEAR=#{year}, WEEKDAY=#{weekday},STARTTIME=#{startTime},ENDTIME=#{endTime},PERSONAL=#{personal},
+ 		COMPLETIONGRADE=#{completionGrade},NOTE=#{note}, TEMPORARY=0 WHERE LECTURENUM=#{lectureNum}
  	</update>
+ 	
+ 	<delete id="setLectureDelete" parameterType="LectureVO">
+ 		DELETE FROM LECTURE WHERE LECTURENUM=#{lectureNum}
+ 	</delete>
   
   </mapper>
