@@ -88,9 +88,13 @@
 						</table>
 						
 						<div class="col-12 float-right">
-							<button type="button" class="float-right btn btn-primary" onclick="location.href='./add'">
-								<span>작성</span>
-							</button>
+							<c:if test="${not empty memberVO}">
+								<c:if test="${memberVO.category eq '1'}">
+									<button type="button" class="float-right btn btn-primary" onclick="location.href='./add'">
+										<span>작성</span>
+									</button>
+								</c:if>
+							</c:if>
 						</div>
 						
 				<div class="row d-flex justify-content-between">

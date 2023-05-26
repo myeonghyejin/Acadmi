@@ -39,15 +39,12 @@
 				
 				<div class="col-md-4">
 					<label for="writer" class="form-label strongFont2">작성자</label> 
-					<input type="text" name="writer" class="form-control" id="writer">
-						<%-- <label for="writer" class="form-label strongFont2">작성자</label> <input
-						type="text" name="writer" class="form-control" id="writer" readonly value="${member.id}"> --%>
+					<input type="text" name="writer" class="form-control" id="writer" readonly value="${member.userName}">
 				</div>
 
 				<div class="col-md-12 mt-3">
-					<label for="title" class="form-label strongFont2">제목</label> <input type="text"
-						class="form-control" name="title" id="title"
-						placeholder="제목을 입력하세요">
+					<label for="title" class="form-label strongFont2">제목</label> 
+					<input type="text" class="form-control" name="title" id="title" placeholder="제목을 입력하세요">
 				</div>
 				
 				<div class="col-md-12 mt-3">
@@ -77,7 +74,7 @@
 						<button type="submit" class="submitButton btn btn-primary" data-wow-delay="0.1s">
 							<span>등록</span>
 						</button>
-		
+						
 						<button type="button" class="btn btn-primary" data-wow-delay="0.1s" onclick="location.href='./list'">
 							<span>취소</span>
 						</button>
