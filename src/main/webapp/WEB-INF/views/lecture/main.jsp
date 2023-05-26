@@ -16,10 +16,10 @@
 		<!-- Header 적용 -->
 		<c:import url="../temp/header.jsp"></c:import>
 		<!-- Header 끝 -->
-		
 		<div class="content-wrapper">
 		
 			<main class="flex-shrink-0">
+			<c:import url="../temp/sidebar/professor_lecture.jsp"></c:import>
 					<section class="bg-light py-5">
 		                <div class="container px-5 my-5">
 		                <h1 class="fw-bolder">내 강의 목록</h1>
@@ -28,8 +28,8 @@
 		                    <select class="form-select" id="temporary" name="temporary" onchange="this.form.submit()">
 		                    	<option name="temporary" id="temporary" value=" ">전체</option>
 								<option for="temporary" value=" " >전체</option>
-								<option for="temporary" value="1">등록</option>
-								<option for="temporary" value="0">미등록</option>
+								<option for="temporary"  value="1">등록</option>
+								<option for="temporary"  value="0">미등록</option>
 							</select>
 		                    <button><a href="./add" style="color: black;">강의 등록</a></button>
 		                    	<table class="table table-hover">
@@ -52,7 +52,7 @@
 			                    					<td>${LectureVO.year}</td>
 		 											<td>${LectureVO.semester}학기</td>
 		 											<td>${LectureVO.grade}</td>
-		 											<td><a href="./main?lectureNum=${LectureVO.lectureNum}" style="color: black;">${LectureVO.lectureName}</a></td>
+		 											<td><a href="./detail?lectureNum=${LectureVO.lectureNum}" style="color: black;">${LectureVO.lectureName}</a></td>
 		 											<td>${LectureVO.category}</td>
 		 											<td>
 		 												<c:if test="${LectureVO.temporary eq 1}">등록</c:if> 

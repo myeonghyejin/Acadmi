@@ -37,9 +37,15 @@
 						<!-- 학과 수정 필요 -->
 	               		<p class="col-6">학과</p>
 	               		<select class="form-select" id="collegeNum" name="collegeNum" onchange="updateDepartments()">
-		                    	<option name="collegeNum" id="collegeNum">건물 선택</option>
-								<option for="collegeNum" value="1" >정보대</option>
+		                    	<option name="collegeNum" id="collegeNum">단과대 선택</option>
+		                    	<c:if test="${update.deptNum >='1' && update.deptNum<='2'}">
+								<option for="collegeNum" value="1" selected="selected">정보대</option>
 								<option for="collegeNum" value="2">인문대</option>
+								</c:if>
+								<c:if test="${update.deptNum >='3' && update.deptNum<='4'}">
+								<option for="collegeNum" value="1">정보대</option>
+								<option for="collegeNum" value="2" selected="selected">인문대</option>
+								</c:if>
 						</select>
 						<select class="form-select" id="deptNum" name="deptNum">
 		                    	<option name="deptNum" id="deptNum">학과 선택</option>
@@ -50,10 +56,10 @@
 						</select>
 						<script>
 							function updateDepartments(){
-								var collegeSelect = document.getElementById("collegeNum");
-						        var departmentSelect = document.getElementById("deptNum");
+								const collegeSelect = document.getElementById("collegeNum");
+								const departmentSelect = document.getElementById("deptNum");
 						        
-						        var selectedCollege = collegeSelect.value;
+								const selectedCollege = collegeSelect.value;
 						        departmentSelect.innerHTML = ""; 
 						        departmentSelect.disabled = true;
 						        
@@ -71,7 +77,7 @@
 						        }
 							}
 							function addOption(selectElement, value, text) {
-						        var option = document.createElement("option");
+								const option = document.createElement("option");
 						        option.value = value;
 						        option.text = text;
 						        selectElement.appendChild(option);

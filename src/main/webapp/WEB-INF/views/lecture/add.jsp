@@ -47,10 +47,10 @@
 						</select>
 						<script>
 							function updateDepartments(){
-								var collegeSelect = document.getElementById("collegeNum");
-						        var departmentSelect = document.getElementById("deptNum");
+								const collegeSelect = document.getElementById("collegeNum");
+								const departmentSelect = document.getElementById("deptNum");
 						        
-						        var selectedCollege = collegeSelect.value;
+								const selectedCollege = collegeSelect.value;
 						        departmentSelect.innerHTML = ""; 
 						        departmentSelect.disabled = false;
 						        
@@ -68,7 +68,7 @@
 						        }
 							}
 							function addOption(selectElement, value, text) {
-						        var option = document.createElement("option");
+								const option = document.createElement("option");
 						        option.value = value;
 						        option.text = text;
 						        selectElement.appendChild(option);
@@ -119,11 +119,34 @@
 						</select>
 						<p class="col-6">종료시간</p>
 						<select class="form-select" id="endTime" name="endTime">
-		                    	<option name="endTime" id="startTime" value="">종료시간 선택</option>
+		                    	<option name="endTime" id="endTime" value="">종료시간 선택</option>
 		                    	<c:forEach begin="1" end="9" step="1" var="i">
 		                    		<option for="endTime" value="${i}" >${i}</option>
 		                    	</c:forEach>
 						</select>
+						
+						<script>
+							// 첫 번째 select 박스의 변경 이벤트를 처리하는 함수
+							function handleFirstSelectChange() {
+							  // 첫 번째 select 박스에서 선택한 숫자 가져오기
+							  const selectedNumber = parseInt(document.getElementById('startTime').value);
+							  
+							  // 두 번째 select 박스 초기화
+							  const secondSelect = document.getElementById('endTime');
+							  secondSelect.innerHTML = ''; // 기존 옵션 제거
+							  
+							  // 선택한 숫자보다 작은 숫자를 필터링하여 두 번째 select 박스에 옵션 추가
+							  for (var i > selectedNumber; i <=9; i++) {
+								  addOption(secondSelect, i, i);
+							  }
+							}
+							
+							// 첫 번째 select 박스의 변경 이벤트에 이벤트 리스너 등록
+							document.getElementById('startTime').addEventListener('change', handleFirstSelectChange);
+							
+							// 초기화 시 첫 번째 select 박스에 대한 초기 설정
+							handleFirstSelectChange();
+							</script>
 						<p class="col-6">학점</p>
 						<select class="form-select" id="completionGrade" name="completionGrade">
 		                    	<option name="completionGrade" id="completionGrade" value="">학점 선택</option>
@@ -158,5 +181,6 @@
 
 	</div>
 <!-- ./wrapper -->
+<script src="../js/lecture/lectureForm.js"></script>
 </body>
 </html>
