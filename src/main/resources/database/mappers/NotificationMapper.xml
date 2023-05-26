@@ -8,16 +8,15 @@
   	
   	<!-- kind에 따른 알림 list -->
   	<select id="getKindList" parameterType="NotificationVO" resultType="NotificationVO">
-  		SELECT * FROM NOTIFICATION WHERE NOTIFICATIONKIND = #{notificationKind}
-  		<if test="notificationKind != 1">
-  			AND RECIPIENT = #{recipient}
-  		</if>
+  		SELECT * FROM NOTIFICATION
+  		WHERE NOTIFICATIONKIND = #{notificationKind} AND RECIPIENT = #{recipient}
+  		
   	</select>
   	
   	<!-- notification add -->
   	<insert id="setNotification" parameterType="NotificationVO">
   		INSERT INTO NOTIFICATION
-  		VALUES (0, #{username}, #{notificationMsg}, now(), 0, #{notificationKind})
+  		VALUES (0, #{recipient}, #{sender} #{notificationMsg}, now(), 0, #{notificationKind})
   	</insert>
   	
   	<!-- 중요 공지 알림을 위한 memberVO의 list -->
@@ -51,6 +50,10 @@
   		WHERE CATEGORY = 2 AND USERNAME = #{username}
   	</select>
   	
-  	
+  	<!-- qna의 원문을 가져오는 쿼리 -->
+  	<select id="getOriginalQna" parameterType="QnaVO" resultType="QnaVO">
+  		SELECT * FROM QNA
+  		WHERE NUM #{num}
+  	</select>
     
   </mapper>

@@ -8,6 +8,7 @@ import com.acadmi.administrator.AdminIstratorController;
 import com.acadmi.administrator.AdministratorVO;
 import com.acadmi.member.MemberVO;
 import com.acadmi.professor.ProfessorVO;
+import com.acadmi.board.qna.QnaVO;
 import com.acadmi.student.StudentVO;
 
 @Mapper
@@ -30,5 +31,8 @@ public interface NotificationDAO {
 	
 	//학생 정보를 가져오는 detail
 	public StudentVO getStudentDetail(MemberVO memberVO) throws Exception;
+	
+	//qna의 원글을 가져오는 것
+	public QnaVO getOriginalQna(QnaVO qnaVO) throws Exception;
 
 }
