@@ -8,7 +8,8 @@ import lombok.Setter;
 public class Pagination {
 	
 	private Long page;
-	private Long perPage;		
+	private Long perPage;
+	private Long totalPage;
 	private Long startRow;		
 	private Long startNum;
 	private Long lastNum;		
@@ -18,7 +19,7 @@ public class Pagination {
 	private boolean next;
 		
 	public void makeNum(Long totalCount) {
-		Long totalPage = totalCount / this.getPerPage();
+		totalPage = totalCount / this.getPerPage();
 		if(totalCount % this.getPerPage() != 0) {
 			totalPage++;
 		}
