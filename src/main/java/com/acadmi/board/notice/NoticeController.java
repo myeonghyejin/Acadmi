@@ -42,6 +42,18 @@ public class NoticeController {
 		return mv;
 	}
 	
+	@GetMapping("importantList")
+	public ModelAndView getImportantList(NoticeVO noticeVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		List<BoardVO> ar = noticeService.getImportantList(noticeVO);
+		
+		mv.addObject("importantList", ar);
+		mv.setViewName("board/importantList");
+		
+		return mv;
+	}
+	
 	@GetMapping("add")
 	public ModelAndView setInsert(NoticeVO noticeVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
@@ -67,6 +79,8 @@ public class NoticeController {
 		ModelAndView mv = new ModelAndView();
 		
 		noticeVO = (NoticeVO)noticeService.getDetail(noticeVO);
+		
+		int result = noticeService.setNoticeHit(noticeVO);
 		
 		mv.addObject("boardVO", noticeVO);
 		mv.setViewName("board/detail");

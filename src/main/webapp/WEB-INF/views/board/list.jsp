@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -69,8 +70,14 @@
 									<th>조회수</th>
 								</tr>
 							</thead>
-
-							<tbody>
+								
+							<tbody>		
+							
+								<tr class="importantList" style="background-color: #f2f2f2;">
+									
+								</tr>
+								
+								
 								<c:forEach items="${list}" var="dto">
 									<tr class="check-item" data-num-important="${dto.important}">
 									
@@ -87,20 +94,16 @@
 							</tbody>
 						</table>
 						
-						<div class="col-12 float-right">
-							<c:if test="${not empty memberVO}">
-								<c:if test="${memberVO.category eq '1'}">
-									<button type="button" class="float-right btn btn-primary" onclick="location.href='./add'">
-										<span>작성</span>
-									</button>
-								</c:if>
-							</c:if>
+						<div class="col-12 float-right">	
+							<sec:authorize access="hasRole('ROLE_ADMIN')">
+						    	<a class="float-right btn btn-primary" href="./add">작성</a>
+						    </sec:authorize>
 						</div>
 						
 				<div class="row d-flex justify-content-between">
 					<nav aria-label="Page navigation example">
 						<ul class="pagination d-flex justify-content-center wow fadeIn" data-wow-delay="0.1s"">
-					 		<li class=" page-item ${pagination.pre ? 'disabled' : '' }">
+					 		<li class="page-item ${pagination.pre ? 'disabled' : '' }">
 								<a class="page-link" href="./list?page=1&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="1">
 									<span aria-hidden="true">&laquo;</span>
 								</a>

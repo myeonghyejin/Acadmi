@@ -39,7 +39,7 @@
 				
 				<div class="col-md-4">
 					<label for="writer" class="form-label strongFont2">작성자</label> 
-					<input type="text" name="writer" class="form-control" id="writer" readonly value="${member.userName}">
+					<input type="text" name="writer" class="form-control" id="writer">
 				</div>
 
 				<div class="col-md-12 mt-3">

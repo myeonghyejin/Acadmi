@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -60,11 +61,10 @@
 
 							<div class="my-5">	
 								<div>
-									<%-- <c:if test="${member.id eq boardVO.writer}"> --%>
-										<a href="./update?num=${boardVO.num}" id="update" class="btn btn-primary float-right">수정</a>
-												
+									<sec:authorize access="hasRole('ROLE_ADMIN')">
+						    			<a href="./update?num=${boardVO.num}" id="update" class="btn btn-primary float-right">수정</a>	
 										<a href="./delete?num=${boardVO.num}" id="delete" class="btn btn-primary float-right">삭제</a>
-									<%-- </c:if> --%>
+						    		</sec:authorize>
 								</div>
 							</div>
 						</div>

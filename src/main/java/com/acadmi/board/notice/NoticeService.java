@@ -36,6 +36,10 @@ public class NoticeService implements BoardService {
 		
 		return noticeDAO.getList(pagination);
 	}
+	
+	public List<BoardVO> getImportantList(NoticeVO noticeVO) throws Exception {
+		return noticeDAO.getImportantList(noticeVO);
+	}
 
 	@Override
 	public BoardVO getDetail(BoardVO boardVO) throws Exception {
@@ -99,4 +103,7 @@ public class NoticeService implements BoardService {
 		return noticeDAO.setBoardFileDelete(fileVO);
 	}
 	
+	public int setNoticeHit(NoticeVO noticeVO) throws Exception {
+		return noticeDAO.setNoticeHit(noticeVO);
+	}
 }

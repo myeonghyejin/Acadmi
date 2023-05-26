@@ -32,6 +32,11 @@
   		LIMIT #{startRow}, #{perPage}
   	</select>
   	
+  	<select id="getImportantList" resultType="NoticeVO" parameterType="NoticeVO">
+  		SELECT * FROM NOTICE
+  		WHERE IMPORTANT = #{important}
+  	</select>
+  	
   	<select id="getDetail" parameterType="NoticeVO" resultMap="getDetailResult">
   		SELECT *
 		FROM NOTICE 
@@ -84,5 +89,10 @@
   	<delete id="setBoardFileDelete" parameterType="FileVO">
   		DELETE FROM NOTICEFILES WHERE FILENUM = #{fileNum}
   	</delete>
+  	
+  	<update id="setNoticeHit" parameterType="NoticeVO">
+		UPDATE NOTICE SET HIT = #{hit} + 1 
+		WHERE NUM = #{num}
+   	</update>
   	
   </mapper>
