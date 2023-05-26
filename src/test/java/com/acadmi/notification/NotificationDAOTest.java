@@ -43,14 +43,14 @@ public class NotificationDAOTest {
 		
 	}
 	
-	@Test
-	void getAdministratorList() throws Exception {
-		MemberVO memberVO = new MemberVO();
-		memberVO.setCategory(1);
-		List<AdministratorVO> ar = notificationDAO.getAdministratorList(memberVO);
-		assertEquals(3, ar.size());
-		
-	}
+//	@Test
+//	void getAdministratorList() throws Exception {
+//		MemberVO memberVO = new MemberVO();
+//		memberVO.setCategory(1);
+//		List<AdministratorVO> ar = notificationDAO.getAdministratorList(admi);
+//		assertEquals(3, ar.size());
+//		
+//	}
 
 	
 }

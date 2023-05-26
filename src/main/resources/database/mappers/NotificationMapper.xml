@@ -9,6 +9,9 @@
   	<!-- kind에 따른 알림 list -->
   	<select id="getKindList" parameterType="NotificationVO" resultType="NotificationVO">
   		SELECT * FROM NOTIFICATION WHERE NOTIFICATIONKIND = #{notificationKind}
+  		<if test="notificationKind != 1">
+  			AND RECIPIENT = #{recipient}
+  		</if>
   	</select>
   	
   	<!-- notification add -->

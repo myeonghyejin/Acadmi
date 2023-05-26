@@ -6,6 +6,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.stereotype.Service;
 
 import com.acadmi.administrator.AdministratorVO;
@@ -35,6 +37,10 @@ public class NotificationService {
 	
 	//kind에 따른 알림 list
 	public List<NotificationVO> getKindList(NotificationVO notificationVO, HttpSession session) throws Exception {
+		Object ojt = session.getAttribute("SPRING_SECURITY_CONTEXT");
+		SecurityContextImpl contextImpl = (SecurityContextImpl)ojt;
+		Authentication authentication = (Authentication) contextImpl;
+		notificationVO.setRecipient(authentication.getName());
 		return notificationDAO.getKindList(notificationVO);
 	}
 	
