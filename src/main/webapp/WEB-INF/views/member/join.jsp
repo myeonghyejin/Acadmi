@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,49 +30,50 @@
 					<c:import url="./temp/sidebar/std_lecture.jsp"></c:import>
 				</div>
 				<!-- 2레벨 Sidebar 끝 --> --%>
-				
-				<!-- Contents -->
 				<div class="col">
 					 <section class="py-5">
                  <div class="container px-5">
                     <!-- Contact form-->
-                    <div class="bg-light rounded-3 py-5 px-4 px-md-5 mb-5">
+                  <div class="bg-light rounded-3 py-5 px-4 px-md-5 mb-5">
                         <div class="text-center mb-5">
                             <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-envelope"></i></div>
-                            <h1 class="fw-bolder">로그인</h1>
-                            <p>저희 Acadmi에 오신걸 환영합니다</p>
+                            <h1 class="fw-bolder">회원가입</h1>
                         </div>
                         <div class="row gx-5 justify-content-center">
                             <div class="col-lg-8 col-xl-6">
-                                
-                                <form id="contactForm" action="./login" method="post" data-sb-form-api-token="API_TOKEN">
-                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                                 <form:form id="contactForm" modelAttribute="memberVO" action="./join" method="post" data-sb-form-api-token="API_TOKEN">
                                     <!-- Name input-->
                                     <div class="form-floating mb-3">
-                                        <label for="username">아이디</label>
-                                        <input class="form-control" id="username" value="${cookie.remember.value}" name="username"  placeholder="아이디를 입력하세요"/>
+                                        <form:label path="username">아이디</form:label>
+                                        <form:input path="username" id="username" cssClass="form-control"/>
+                                        <form:errors path="username"></form:errors>
                                     </div>
                                     <!-- pw address input-->
                                     <div class="form-floating mb-3">
-                                        <label for="password">비밀번호</label>
-                                        <input class="form-control" id="password" name="password" type="password" placeholder="비밀번호를 입력하세요"/>
+                                        <form:label path="password">비밀번호</form:label>
+                                        <form:password path="password" id="password" cssClass="form-control"/>
+                                        <form:errors path="password"></form:errors>
                                     </div>
-                                    
-                                    <div>
-                                    	<a href="./findPw">비밀번호 찾기</a><br>
-                                    	<a href="./join">회원가입</a>
+                                    <div class="form-floating mb-3">
+                                        <form:label path="email">이메일</form:label>
+                                        <form:input path="email" id="email" cssClass="form-control"/>
+                                        <form:errors path="email"></form:errors>
                                     </div>
-                                    
-	                                <c:if test="${not empty param.errorMessage}">
-	                                	<h3>${param.errorMessage}</h3>
-	                                </c:if>
-                                    <div class="d-grid">
-                                    	<button class="btn btn-primary float-right" id="submitButton" type="submit">로그인</button>
+                                    <div class="form-floating mb-3">
+                                        <label for="Category">직업(학생 , 교수, 행정)</label>
+                                        <input class="form-control" id="Category" name="Category"  placeholder="Enter your Birth..." data-sb-validations="required" />
+                                        <form:errors path="Category"></form:errors>
+                                        
+                                        <%-- <form:input path="birth" id="birth" cssClass="form-control"/>
+                                        <label for="birth">Birth</label>
+                                        <form:errors path="birth"></form:errors> --%>
                                     </div>
-                                </form>
+                                    <div class="d-grid"><button class="btn btn-primary float-right" id="submitButton" type="submit">가입</button></div>
+                                </form:form>
                             </div>
                         </div>
                     </div>
+                    
                 </div>
             </section>
             
@@ -83,7 +85,6 @@
 			<c:import url="../temp/footer.jsp"></c:import>
 		<!-- Footer 끝 -->
 
-	</div>
 <!-- ./wrapper -->
 </body>
 </html>
