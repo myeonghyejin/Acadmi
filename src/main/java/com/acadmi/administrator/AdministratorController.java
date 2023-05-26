@@ -137,7 +137,7 @@ public class AdministratorController {
 	public ModelAndView getAdministratorList(Pagination pagination) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		List<AdministratorVO> ar = administratorService.getAdminIstratorList(pagination);
+		List<AdministratorVO> ar = administratorService.getAdministratorList(pagination);
 		mv.addObject("list", ar);
 		mv.setViewName("administrator/administratorList");
 		

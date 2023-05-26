@@ -47,7 +47,7 @@
   		SELECT COUNT(USERNAME) FROM PROFESSOR
   	</select>
   	
-  	<select id="getTotalCountAdminIstrator" resultType="Long">
+  	<select id="getTotalCountAdministrator" resultType="Long">
   		SELECT COUNT(USERNAME) FROM ADMINISTRATOR
   	</select>
   
@@ -128,7 +128,7 @@
   		</collection>
   	</resultMap>
   
-  <select id="getAdminIstratorList" resultMap="AdminIstratorList">
+  <select id="getAdministratorList" resultMap="AdminIstratorList">
   	SELECT * FROM MEMBER M
 		LEFT OUTER JOIN
 			MEMBERFILES MF 

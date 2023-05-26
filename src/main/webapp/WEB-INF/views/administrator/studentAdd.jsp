@@ -5,8 +5,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<c:import url="../temp/style.jsp"></c:import>
+<link
+	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
+	rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <title>Insert title here</title>
 </head>
+<c:import url="../temp/header.jsp"></c:import>
 <body>
 	<h1>학생 계정 생성</h1>
 	<form action="./studentAdd" method="post">

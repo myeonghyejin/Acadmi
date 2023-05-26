@@ -74,13 +74,13 @@ public class AdministratorService {
 		return administratorDAO.getProfessorList(pagination);
 	}
 	
-	public List<AdministratorVO> getAdminIstratorList(Pagination pagination) throws Exception {
-		Long totalCount = administratorDAO.getTotalCountAdminIstrator(pagination);
+	public List<AdministratorVO> getAdministratorList(Pagination pagination) throws Exception {
+		Long totalCount = administratorDAO.getTotalCountAdministrator(pagination);
 		
 		pagination.makeNum(totalCount);
 		pagination.makeStartRow();
 		
-		return administratorDAO.getAdminIstratorList(pagination);
+		return administratorDAO.getAdministratorList(pagination);
 	}
 	
 	//강의실 관리

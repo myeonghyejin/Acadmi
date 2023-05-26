@@ -5,10 +5,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<c:import url="../temp/style.jsp"></c:import>
+<link
+	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
+	rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
+
+<c:import url="../temp/header.jsp"></c:import>
 	<h1>직원 목록 조회</h1>
+	
+	
 	
 	<div class="card-body">
 		<div>직원번호</div>

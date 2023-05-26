@@ -32,10 +32,10 @@ public interface AdministratorDAO {
 	//회원 조회
 	public List<StudentVO> getStudentList(Pagination pagination) throws Exception;
 	public List<ProfessorVO> getProfessorList(Pagination pagination) throws Exception;
-	public List<AdministratorVO> getAdminIstratorList(Pagination pagination) throws Exception;
+	public List<AdministratorVO> getAdministratorList(Pagination pagination) throws Exception;
 	public Long getTotalCountStudent(Pagination pagination) throws Exception;
 	public Long getTotalCountProfessor(Pagination pagination) throws Exception;
-	public Long getTotalCountAdminIstrator(Pagination pagination) throws Exception;
+	public Long getTotalCountAdministrator(Pagination pagination) throws Exception;
 	
 	
 	
