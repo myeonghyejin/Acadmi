@@ -63,8 +63,25 @@ public class NoticeService implements BoardService {
 	}
 
 	@Override
-	public int setUpdate(BoardVO boardVO) throws Exception {
-		return noticeDAO.setUpdate(boardVO);
+	public int setUpdate(BoardVO boardVO, MultipartFile [] multipartFiles) throws Exception {
+		
+		int result = noticeDAO.setUpdate(boardVO);
+		
+		if(multipartFiles != null) {
+			for(MultipartFile multipartFile : multipartFiles) {
+				if(!multipartFile.isEmpty()) {
+					String fileName = fileManager.saveFile(path, multipartFile);
+					FileVO fileVO = new FileVO();
+					fileVO.setNum(boardVO.getNum());
+					fileVO.setFileName(fileName);
+					fileVO.setOriName(multipartFile.getOriginalFilename());
+					
+					result = noticeDAO.setBoardFileAdd(fileVO);
+				}
+			}
+		}
+		return result;		
+		
 	}
 
 	@Override
@@ -75,6 +92,11 @@ public class NoticeService implements BoardService {
 	@Override
 	public FileVO getFileDetail(FileVO fileVO) throws Exception {
 		return noticeDAO.getFileDetail(fileVO);
+	}
+
+	@Override
+	public int setBoardFileDelete(FileVO fileVO) throws Exception {
+		return noticeDAO.setBoardFileDelete(fileVO);
 	}
 	
 }

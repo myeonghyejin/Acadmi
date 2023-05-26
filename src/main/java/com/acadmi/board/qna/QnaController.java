@@ -22,6 +22,11 @@ public class QnaController {
 	@Autowired
 	private QnaService qnaService;
 	
+	@ModelAttribute("board")
+	public String getBoardName() {
+		return "Qna";
+	}
+	
 	@GetMapping(value = "list")
 	public ModelAndView getList(Pagination pagination) throws Exception {
 		ModelAndView mv = new ModelAndView();

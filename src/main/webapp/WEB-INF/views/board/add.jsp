@@ -74,11 +74,11 @@
 				
 				<div class="col-md-12 mt-2">
 					<div class="d-flex justify-content-between">
-						<button type="submit" class="submitButton" data-wow-delay="0.1s">
-							<span>글등록</span>
+						<button type="submit" class="submitButton btn btn-primary" data-wow-delay="0.1s">
+							<span>등록</span>
 						</button>
 		
-						<button type="button" class="image-buttonclose" data-wow-delay="0.1s" onclick="location.href='./list'">
+						<button type="button" class="btn btn-primary" data-wow-delay="0.1s" onclick="location.href='./list'">
 							<span>취소</span>
 						</button>
 					</div>

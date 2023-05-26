@@ -31,7 +31,7 @@
 			<div class="container-fluid my-5">
 		<div class="row mb-4">
 			<h3
-				class="col-md-7 mx-auto text-center border-bottom border-dark pb-4">공지사항 등록</h3>
+				class="col-md-7 mx-auto text-center border-bottom border-dark pb-4">공지사항 수정</h3>
 		</div>
 
 		<div class="row col-md-7 mx-auto">
@@ -52,7 +52,7 @@
 				
 				<div class="col-md-12 mt-3">
 					<label for="important" class="form-label strongFont2">중요표시</label>
-					<c:if test="${dto.important == 0}">
+					<c:if test="${dto.important == 0 || empty dto.important}">
 						<input type="checkbox" class="form-control" name="important" id="important">
 					</c:if>
 					<c:if test="${dto.important == 1}">
@@ -66,42 +66,41 @@
 				</div>
 				
 				 <div id="fileList">
-					<button class="col-md-12 mt-5 btn btn-primary" id="fileAdd" type="button">파일추가</button>
+				 	<button class="col-md-12 mt-5 btn btn-primary" id="fileAdd" type="button">파일추가</button>
+					<c:forEach items="${dto.fileVOs}" var="fileVO">
+					 	
+						<div class="input-group mb-3">
+							<div class="input-group-text">
+								<input class="form-check-input mt-0 deleteCheck" type="checkbox" name="fileNum" value="${fileVO.fileNum}" aria-label="Checkbox for following text input">
+							</div>
+							<input type="text" disabled value="${fileVO.oriName}" class="form-control" aria-label="Text input with checkbox">
+						</div>
+					</c:forEach>	
 				</div>
-				
-				<div id="fileList" class="my-5">
-					<div class="input-group mb-3">
-						<c:forEach items="${dto.fileVOs}" var="fileVO">
-							<input type="file" class="form-control" id="files" name="files" value="${fileVO.oriName}">
-							<button type="button" class="btn btn-outline-danger deleteCheck">X</button>
-						</c:forEach>
-					</div>
-				</div>
-				
+
 				<div class="col-md-12 mt-2">
 					<div class="d-flex justify-content-between">
-						<button type="submit" class="submitButton" data-wow-delay="0.1s">
+						<button type="submit" class="submitButton btn btn-primary" data-wow-delay="0.1s">
 							<span>수정</span>
 						</button>
 		
-						<button type="button" class="image-buttonclose" data-wow-delay="0.1s" onclick="location.href='./list'">
-							<span>취소</span>
-						</button>
+						<a href="./detail?num=${dto.num}" class="btn btn-primary">취소</a>
 					</div>
 				</div>
 			</form>
 		</div>
 	</div>
 
+	<c:import url="../temp/footer.jsp"></c:import>
+	<script src="/js/filemanager.js"></script>
+	<script src="/js/notice.js"></script>
 	<script>
+		setCount(${dto.fileVOs.size()});
+	
 		$("#contents").summernote({
 			height : 500,
 			width : 1187.48
 		});
 	</script>
-		
-	<c:import url="../temp/footer.jsp"></c:import>
-	<script src="/js/filemanager.js"></script>
-	<script src="/js/notice.js"></script>
 </body>
 </html>

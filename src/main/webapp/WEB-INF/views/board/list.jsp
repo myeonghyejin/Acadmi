@@ -14,7 +14,14 @@
 				<div class="row">
 					<div class="col-12">
 						<header class="entry-header wow fadeInDown" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInDown;">
-							<h1>공지사항</h1>
+							<h1>
+								<c:if test="${board eq 'notice'}">
+									공지사항
+								</c:if>
+								<c:if test="${board eq 'qna'}">
+									질의응답게시판
+								</c:if>
+							</h1>
 						</header>
 					</div>
 				</div>
@@ -46,7 +53,7 @@
 										<input type="text" class="form-control mb-4 wow fadeInUp" data-wow-delay="0.1s"
 											style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;"
 											value="${pagination.search}" name="search" id="search" placeholder="검색어를 입력하세요">
-										<button type="submit" class="align-items-start">검색</button>
+										<button type="submit" class="align-items-start btn btn-primary">검색</button>
 									</div>
 								</div>
 							</form>
@@ -81,9 +88,8 @@
 						</table>
 						
 						<div class="col-12 float-right">
-							<button type="button" class="image-button  float-right color-5 wow fadeIn "
-								data-wow-delay="0.1s" onclick="location.href='./add'">
-								<span>글쓰기</span>
+							<button type="button" class="float-right btn btn-primary" onclick="location.href='./add'">
+								<span>작성</span>
 							</button>
 						</div>
 						

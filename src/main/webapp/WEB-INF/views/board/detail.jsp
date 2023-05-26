@@ -48,33 +48,22 @@
 								style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
 								<p>${boardVO.contents}</p>
 							</div>
+							
+							<c:forEach items="${boardVO.fileVOs}" var="fileVO">
+                                <img alt="" src="/file/${board}/${fileVO.fileName}">
+                                <a href="./fileDown?fileNum=${fileVO.fileNum}">${fileVO.oriName}</a>
+                           	</c:forEach>
 
 							<div class="mt-6 mb-6 ">
-								<button type="button" class="image-buttonclosewhite color-5 wow fadeInUp"
-									data-wow-delay="0.1s"
-									style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;"
-									onclick="location.href='./list'">
-									<span>목록</span>
-								</button>
+								<a href="./list" class="btn btn-primary">목록</a>
 							</div>
 
 							<div class="my-5">	
 								<div>
 									<%-- <c:if test="${member.id eq boardVO.writer}"> --%>
-										<form action="./update" id="frm">
-											<input type="hidden" name="num" value="${boardVO.num}">
-											<div class="d-flex">
-												<button type="submit" class="image-button color-5 wow fadeIn mr-3"
-													id="update" data-wow-delay="0.1s">
-													<span>글수정</span>
-												</button>
-
-												<button type="button" id="delete"
-													class="image-buttonclose wow fadeIn mr-4" data-wow-delay="0.1s">
-													<span>글삭제</span>
-												</button>
-											</div>
-										</form>
+										<a href="./update?num=${boardVO.num}" id="update" class="btn btn-primary float-right">수정</a>
+												
+										<a href="./delete?num=${boardVO.num}" id="delete" class="btn btn-primary float-right">삭제</a>
 									<%-- </c:if> --%>
 								</div>
 							</div>

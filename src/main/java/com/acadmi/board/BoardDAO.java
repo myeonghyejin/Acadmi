@@ -23,4 +23,5 @@ public interface BoardDAO {
 
 	public FileVO getFileDetail(FileVO fileVO) throws Exception;
 
+	public int setBoardFileDelete(FileVO fileVO) throws Exception;
 }

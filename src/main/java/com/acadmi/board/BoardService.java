@@ -15,10 +15,11 @@ public interface BoardService {
 			
 	public int setInsert(BoardVO boardVO, MultipartFile [] multipartFiles) throws Exception;
 
-	public int setUpdate(BoardVO boardVO) throws Exception;
+	public int setUpdate(BoardVO boardVO, MultipartFile [] multipartFiles) throws Exception;
 			
 	public int setDelete(BoardVO boardVO) throws Exception;
 		
 	public FileVO getFileDetail(FileVO fileVO) throws Exception;
 	
+	public int setBoardFileDelete(FileVO fileVO) throws Exception;
 }

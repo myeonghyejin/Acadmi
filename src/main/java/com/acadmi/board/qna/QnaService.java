@@ -61,7 +61,7 @@ public class QnaService implements BoardService {
 	}
 	
 	@Override
-	public int setUpdate(BoardVO boardVO) throws Exception {
+	public int setUpdate(BoardVO boardVO, MultipartFile [] multipartFiles) throws Exception {
 		return 0;
 	}
 
@@ -75,4 +75,8 @@ public class QnaService implements BoardService {
 		return qnaDAO.getFileDetail(fileVO);
 	}
 
+	@Override
+	public int setBoardFileDelete(FileVO fileVO) throws Exception {
+		return 0;
+	}
 }

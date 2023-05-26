@@ -25,6 +25,11 @@ public class NoticeController {
 	@Autowired
 	private NoticeService noticeService;
 	
+	@ModelAttribute("board")
+	public String getBoardName() {
+		return "notice";
+	}
+	
 	@GetMapping("list")
 	public ModelAndView getList(Pagination pagination) throws Exception {
 		ModelAndView mv = new ModelAndView();
@@ -75,7 +80,7 @@ public class NoticeController {
 		
 		fileVO = noticeService.getFileDetail(fileVO);
 		
-		mv.addObject("boardFileVO", fileVO);
+		mv.addObject("fileVO", fileVO);
 		mv.setViewName("fileManager");
 		
 		return mv;
@@ -93,9 +98,9 @@ public class NoticeController {
 	}
 	
 	@PostMapping("update")
-	public ModelAndView setUpdate(ModelAndView mv, NoticeVO noticeVO) throws Exception {
+	public ModelAndView setUpdate(ModelAndView mv, NoticeVO noticeVO, MultipartFile [] addfiles) throws Exception {
 		
-		int result = noticeService.setUpdate(noticeVO);
+		int result = noticeService.setUpdate(noticeVO, addfiles);
 		
 		mv.setViewName("redirect:./list");
 		
@@ -113,6 +118,16 @@ public class NoticeController {
 		return mv;
 	}
 	
-	
+	@PostMapping("boardFileDelete")
+	public ModelAndView setBoardFileDelete(FileVO fileVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		int result = noticeService.setBoardFileDelete(fileVO);
+		
+		mv.addObject("result", result);
+		mv.setViewName("common/result");
+		
+		return mv;
+	}
 
 }
