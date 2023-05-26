@@ -30,10 +30,12 @@ public class AdministratorController {
 	private AdministratorService administratorService;
 
 	//회원 관리
+	//아이디
+
 	
 	//계정 관리
 	@GetMapping("studentAdd")
-	public ModelAndView setMemberAdd(StudentVO studentVO) throws Exception {
+	public ModelAndView setStudentAdd() throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
 		
@@ -43,17 +45,17 @@ public class AdministratorController {
 		
 	}
 	@PostMapping("studentAdd")
-	public ModelAndView setMemberAdd(@Valid StudentVO studentVO, BindingResult bindingResult) throws Exception{
+	public ModelAndView setStudentAdd(@Valid StudentVO studentVO, BindingResult bindingResult, MemberVO memberVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
 		
-			int result = administratorService.setStudentAdd(studentVO);
+			int result = administratorService.setStudentAdd(studentVO,memberVO);
 		
 			if(bindingResult.hasErrors()) {
-			log.warn("검중에 실패");
-			mv.setViewName("administrator/studentAdd");
-			return mv;
-		}
+				log.warn("검중에 실패");
+				mv.setViewName("administrator/studentAdd");
+				return mv;
+			}
 			
 			String message="등록 실패";
 			
@@ -67,6 +69,44 @@ public class AdministratorController {
 			
 			mv.addObject("url", "./studentList");
 			return mv;
+		
+	}
+	@GetMapping("administratorAdd")
+	public ModelAndView setAdministratorAdd() throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		
+		mv.setViewName("administrator/administratorAdd");
+		
+		return mv;
+		
+	}
+	
+	@PostMapping("administratorAdd")
+	public ModelAndView setAdministratorAdd(@Valid AdministratorVO administratorVO, BindingResult bindingResult, MemberVO memberVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		int result = administratorService.setAdministratorAdd(administratorVO, memberVO);
+		
+		if(bindingResult.hasErrors()) {
+			log.warn("검중에 실패");
+			mv.setViewName("administrator/administratorAdd");
+			return mv;
+		}
+		
+		String message="등록 실패";
+		
+		if(result > 0) {
+			message = "등록 되었습니다";
+			
+		}
+		
+		mv.addObject("result", message);
+		mv.setViewName("administrator/result");
+		
+		mv.addObject("url", "./administratorList");
+		return mv;
+		
 		
 	}
 	

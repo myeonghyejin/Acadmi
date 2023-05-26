@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.acadmi.college.CollegeVO;
 import com.acadmi.department.DepartmentVO;
 import com.acadmi.lectureroom.LectureRoomVO;
+import com.acadmi.member.MemberSeqVO;
 import com.acadmi.member.MemberVO;
 import com.acadmi.professor.ProfessorVO;
 import com.acadmi.student.StudentVO;
@@ -24,18 +25,36 @@ public class AdministratorService {
 	
 	//회원 관리
 	
+	//아이디
+	//username이 string이기 때문에 string으로 변환시켜주기
+
+	
 	//계정 생성
-	public int setStudentAdd(StudentVO studentVO) throws Exception {
+	public int setStudentAdd(StudentVO studentVO, MemberVO memberVO) throws Exception {
+	
 		
-		int result = administratorDAO.setMemberAdd(studentVO);
+		int result = administratorDAO.setMemberAdd(memberVO);
 		
-		studentVO.setUsername(studentVO.getUsername());
+		studentVO.setUsername(memberVO.getUsername());
 		
 		result = administratorDAO.setStudentAdd(studentVO);
 		
 		return result;
 		
 	}
+	
+	public int setAdministratorAdd(AdministratorVO administratorVO, MemberVO memberVO) throws Exception {
+		
+		int result = administratorDAO.setMemberAdd(memberVO);
+		
+		administratorVO.setUsername(memberVO.getUsername());
+		
+		result = administratorDAO.setAdministratorAdd(administratorVO);
+		
+		return result;
+		
+	}
+	
 	//회원 조회
 	public List<StudentVO> getStudentList(Pagination pagination) throws Exception {
 		Long totalCount = administratorDAO.getTotalCountStudent(pagination);

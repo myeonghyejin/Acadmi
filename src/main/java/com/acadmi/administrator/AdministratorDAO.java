@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.acadmi.college.CollegeVO;
 import com.acadmi.department.DepartmentVO;
 import com.acadmi.lectureroom.LectureRoomVO;
+import com.acadmi.member.MemberSeqVO;
 import com.acadmi.member.MemberVO;
 import com.acadmi.professor.ProfessorVO;
 import com.acadmi.student.StudentVO;
@@ -18,9 +19,15 @@ public interface AdministratorDAO {
 	
 	//회원관리
 	
+	//아이디 
+//	public int setMemberSeqAdd(MemberSeqVO memberSeqVO) throws Exception;
+//	public MemberSeqVO getMemberSeq(MemberSeqVO memberSeqVO) throws Exception;
+//	public int setMemberSeqUpdate(MemberSeqVO memberSeqVO) throws Exception;
+	
 	//계정 생성
-	public int setMemberAdd(StudentVO studentVO) throws Exception;
+	public int setMemberAdd(MemberVO memberVO) throws Exception;
 	public int setStudentAdd(StudentVO studentVO) throws Exception;
+	public int setAdministratorAdd(AdministratorVO administratorVO) throws Exception;
 	
 	//회원 조회
 	public List<StudentVO> getStudentList(Pagination pagination) throws Exception;

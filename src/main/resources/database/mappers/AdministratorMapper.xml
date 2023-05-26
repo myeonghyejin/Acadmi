@@ -7,14 +7,35 @@
   
     <!--회원 관리  -->
     
+    <!--아이디  -->
+   <!--  <insert id="setMemberSeqAdd" parameterType="MemberSeqVO">
+    	INSERT INTO MEMBERSEQ
+    	VALUES(#{year},1)
+    </insert>
+    
+    <select id="getMemberSeq" parameterType="MemberSeqVO" resultType="MemberSeqVO">
+    	SELECT * FROM MEMBERSEQ
+    	WHERE YEAR=#{year}
+    </select>
+    
+    <update id="setMemberSeqUpdate" parameterType="MemberSeqVO">
+    	UPDATE UPDATE MEMBERSEQ 
+		SET MEMBERSEQ = #{memberSeq}
+		WHERE YEAR = #{year};
+    </update> -->
+    
   	<!--계정 생성  -->
-  	<insert id="setMemberAdd" parameterType="StudentVO">
+  	<insert id="setMemberAdd" parameterType="MemberVO" useGeneratedKeys="true" keyProperty="username">
   		INSERT INTO MEMBER
   		VALUES(#{username},#{password},#{email},#{category},1)
   	</insert>
-  	<insert id="setStudentAdd" parameterType="StudentVO">
+  	<insert id="setStudentAdd" parameterType="StudentVO" >
   		INSERT INTO STUDENT
-  		VALUES(#{username},#{deptNum},#{grade},1,#{name},#{phone},#{birth},#{address},0)
+  		VALUES(#{username},#{deptNum},1,#{name},#{phone},#{birth},#{address},0)
+  	</insert>
+  	<insert id="setAdministratorAdd" parameterType="AdministratorVO">
+  		INSERT INTO ADMINISTRATOR
+  		VALUES(#{username},#{deptNum},#{name},#{phone},#{birth},#{address},0)
   	</insert>
   	
 	 <!-- 회원 조회 -->

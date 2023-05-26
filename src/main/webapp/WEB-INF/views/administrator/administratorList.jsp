@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>행정 목록 조회</h1>
+	<h1>직원 목록 조회</h1>
 	
 	<div class="card-body">
 		<div>직원번호</div>
