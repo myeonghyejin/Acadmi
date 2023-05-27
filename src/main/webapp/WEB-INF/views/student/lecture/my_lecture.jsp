@@ -107,7 +107,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										<%-- <c:forEach items="${list}" var="lectureVO">
+										<c:forEach items="${list}" var="lectureVO">
 											<tr>
 												<td>
 													${lectureVO.lectureNum}
@@ -118,17 +118,28 @@
 													</a>
 													<br/>
 													<small>
-														${lectureVO.username}
+														${lectureVO.professorVO.username}
 													</small>
 												</td>
 												<td>
 													${lectureVO.grade}
 												</td>
 												<td>
-													${lectureVO.category}
+													<c:if test="${lectureVO.category eq '전공 필수'}">
+														전공 필수
+													</c:if>
+													<c:if test="${lectureVO.category eq '전공 선택'}">
+														전공 선택
+													</c:if>
+													<c:if test="${lectureVO.category eq '필수 교양'}">
+														필수 교양
+													</c:if>
+													<c:if test="${lectureVO.category eq '선택 교양'}">
+														선택 교양
+													</c:if>
 												</td>
 												<td>
-													${lectureVO.deptnum}
+													${lectureVO.departmentVO.deptName}
 												</td>
 												<td>
 													${lectureVO.completionGrade}
@@ -137,31 +148,84 @@
 													${lectureVO.weekday}
 												</td>
 												<td>
-													${lectureVO.startTime}
+													<c:if test="${lectureVO.startTime eq 1}">
+														AM 09:00
+													</c:if>
+													<c:if test="${lectureVO.startTime eq 2}">
+														AM 10:00
+													</c:if>
+													<c:if test="${lectureVO.startTime eq 3}">
+														AM 11:00
+													</c:if>
+													<c:if test="${lectureVO.startTime eq 4}">
+														PM 12:00
+													</c:if>
+													<c:if test="${lectureVO.startTime eq 5}">
+														PM 13:00
+													</c:if>
+													<c:if test="${lectureVO.startTime eq 6}">
+														PM 14:00
+													</c:if>
+													<c:if test="${lectureVO.startTime eq 7}">
+														PM 15:00
+													</c:if>
+													<c:if test="${lectureVO.startTime eq 8}">
+														PM 16:00
+													</c:if>
+													<c:if test="${lectureVO.startTime eq 9}">
+														PM 17:00
+													</c:if>
+													<c:if test="${lectureVO.startTime eq 10}">
+														PM 18:00
+													</c:if>
 												</td>
 												<td>
-													${lectureVO.lastTime}
+													<c:if test="${lectureVO.endTime eq 1}">
+														AM 09:00
+													</c:if>
+													<c:if test="${lectureVO.endTime eq 2}">
+														AM 10:00
+													</c:if>
+													<c:if test="${lectureVO.endTime eq 3}">
+														AM 11:00
+													</c:if>
+													<c:if test="${lectureVO.endTime eq 4}">
+														PM 12:00
+													</c:if>
+													<c:if test="${lectureVO.endTime eq 5}">
+														PM 13:00
+													</c:if>
+													<c:if test="${lectureVO.endTime eq 6}">
+														PM 14:00
+													</c:if>
+													<c:if test="${lectureVO.endTime eq 7}">
+														PM 15:00
+													</c:if>
+													<c:if test="${lectureVO.endTime eq 8}">
+														PM 16:00
+													</c:if>
+													<c:if test="${lectureVO.endTime eq 9}">
+														PM 17:00
+													</c:if>
+													<c:if test="${lectureVO.endTime eq 10}">
+														PM 18:00
+													</c:if>
 												</td>
 												<td>
-													${lectureVO.lectureBuilding} ${lectureVO.lectureRoom}
+													${lectureVO.lectureRoomVO.lectureBuilding} ${lectureVO.lectureRoomVO.lectureRoom}
 												</td>
 												<td>
 													${lectureVO.personal}
 												</td>
 												<td class="project-actions text-right">
-													<a class="btn btn-info btn-sm" href="#">
-														<i class="fas fa-circle-check">
+													<a class="btn btn-danger btn-sm" href="#">
+														<i class="fas fa-xmark">
 														</i>
-														신청
-													</a>
-													<a class="btn btn-primary btn-sm" href="#">
-														<i class="fas fa-basket-shopping">
-														</i>
-														담기
+														취소
 													</a>
 												</td>
 											</tr>
-										</c:forEach> --%>
+										</c:forEach>
 											
 											<tr>
 												<td>

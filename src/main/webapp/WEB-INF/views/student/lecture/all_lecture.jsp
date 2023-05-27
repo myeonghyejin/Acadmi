@@ -29,7 +29,7 @@
 				
 				<!-- Contents -->
 				<div class="col">
-
+					
 					<!-- Content Header (Page header) -->
 					<section class="content-header">
 						<div class="container-fluid">
@@ -49,6 +49,62 @@
 
 					<!-- Content -->
 					<section class="content">
+
+            <form action="./all_lecture">
+                <div class="row justify-content-center mx-auto mb-3">
+                    <div class="col-md-6">
+                        <div class="row">
+	                            <div class="col-4">
+	                                <div class="form-group">
+	                                    <label>구분</label>
+	                                    <select class="select2" multiple="multiple" style="width: 100%;" name="category">
+	                                        <option value="">전체</option>
+	                                        <option value="전공 필수">전공 필수</option>
+	                                        <option value="전공 선택">전공 선택</option>
+	                                        <option value="필수 교양">필수 교양</option>
+	                                        <option value="선택 교양">선택 교양</option>
+	                                    </select>
+	                                </div>
+	                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label>학년</label>
+                                    <select class="select2" style="width: 100%;" name="grade">
+                                        <option value="" selected>전체</option>
+                                        <option value="1">1학년</option>
+                                        <option value="2">2학년</option>
+                                        <option value="3">3학년</option>
+                                        <option value="4">4학년</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label>학과</label>
+                                    <select class="select2" style="width: 100%;" name="department">
+                                        <option value="" selected>전체</option>
+                                        <option value="">Date</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                       <div class="form-group">
+                            <div class="input-group input-group-lg">
+                                <input type="hidden" name="kind" value="name">
+                                <input type="search" class="form-control form-control-lg" placeholder="강의 이름을 입력하세요." name="search">
+                                <div class="input-group-append">
+                                	<button type="submit" class="btn btn-lg btn-default">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-lg btn-default">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                    </div>
+                </div>
+            </form>
 
 						<!-- Default box -->
 						<div class="card">
@@ -112,23 +168,33 @@
 												<td>
 													${lectureVO.lectureNum}
 												</td>
-												<td>
-													<a>
+												<td><a>
 														${lectureVO.lectureName}
 													</a>
 													<br/>
 													<small>
-														${lectureVO.username}
+														${lectureVO.professorVO.username}
 													</small>
 												</td>
 												<td>
 													${lectureVO.grade}
 												</td>
 												<td>
-													${lectureVO.category}
+													<c:if test="${lectureVO.category eq '전공 필수'}">
+														전공 필수
+													</c:if>
+													<c:if test="${lectureVO.category eq '전공 선택'}">
+														전공 선택
+													</c:if>
+													<c:if test="${lectureVO.category eq '필수 교양'}">
+														필수 교양
+													</c:if>
+													<c:if test="${lectureVO.category eq '선택 교양'}">
+														선택 교양
+													</c:if>
 												</td>
 												<td>
-													${lectureVO.deptnum}
+													${lectureVO.departmentVO.deptName}
 												</td>
 												<td>
 													${lectureVO.completionGrade}
@@ -137,13 +203,71 @@
 													${lectureVO.weekday}
 												</td>
 												<td>
-													${lectureVO.startTime}
+													<c:if test="${lectureVO.startTime eq 1}">
+														AM 09:00
+													</c:if>
+													<c:if test="${lectureVO.startTime eq 2}">
+														AM 10:00
+													</c:if>
+													<c:if test="${lectureVO.startTime eq 3}">
+														AM 11:00
+													</c:if>
+													<c:if test="${lectureVO.startTime eq 4}">
+														PM 12:00
+													</c:if>
+													<c:if test="${lectureVO.startTime eq 5}">
+														PM 13:00
+													</c:if>
+													<c:if test="${lectureVO.startTime eq 6}">
+														PM 14:00
+													</c:if>
+													<c:if test="${lectureVO.startTime eq 7}">
+														PM 15:00
+													</c:if>
+													<c:if test="${lectureVO.startTime eq 8}">
+														PM 16:00
+													</c:if>
+													<c:if test="${lectureVO.startTime eq 9}">
+														PM 17:00
+													</c:if>
+													<c:if test="${lectureVO.startTime eq 10}">
+														PM 18:00
+													</c:if>
 												</td>
 												<td>
-													${lectureVO.lastTime}
+													<c:if test="${lectureVO.endTime eq 1}">
+														AM 09:00
+													</c:if>
+													<c:if test="${lectureVO.endTime eq 2}">
+														AM 10:00
+													</c:if>
+													<c:if test="${lectureVO.endTime eq 3}">
+														AM 11:00
+													</c:if>
+													<c:if test="${lectureVO.endTime eq 4}">
+														PM 12:00
+													</c:if>
+													<c:if test="${lectureVO.endTime eq 5}">
+														PM 13:00
+													</c:if>
+													<c:if test="${lectureVO.endTime eq 6}">
+														PM 14:00
+													</c:if>
+													<c:if test="${lectureVO.endTime eq 7}">
+														PM 15:00
+													</c:if>
+													<c:if test="${lectureVO.endTime eq 8}">
+														PM 16:00
+													</c:if>
+													<c:if test="${lectureVO.endTime eq 9}">
+														PM 17:00
+													</c:if>
+													<c:if test="${lectureVO.endTime eq 10}">
+														PM 18:00
+													</c:if>
 												</td>
 												<td>
-													${lectureVO.lectureBuilding} ${lectureVO.lectureRoom}
+													${lectureVO.lectureRoomVO.lectureBuilding} ${lectureVO.lectureRoomVO.lectureRoom}
 												</td>
 												<td>
 													${lectureVO.personal}
@@ -226,5 +350,10 @@
 
 	</div>
 <!-- ./wrapper -->
+<script>
+    $(function () {
+      $('.select2').select2()
+    });
+</script>
 </body>
 </html>

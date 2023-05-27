@@ -19,6 +19,7 @@
   		<typeAlias type="com.acadmi.lecture.LectureVO" alias="LectureVO"/>
   		<typeAlias type="com.acadmi.student.lecture.StudentLectureVO" alias="StudentLectureVO"/>
   		<typeAlias type="com.acadmi.student.lecture.FavoriteLectureVO" alias="FavoriteLectureVO"/>
+  		<typeAlias type="com.acadmi.lecture.room.LectureRoomVO" alias="LectureRoomVO"/>
   		<typeAlias type="com.acadmi.student.StudentVO" alias="StudentVO"/>
   		<typeAlias type="com.acadmi.department.DepartmentVO" alias="DepartmentVO"/>
   		<typeAlias type="com.acadmi.college.CollegeVO" alias="CollegeVO"/>
@@ -31,7 +32,7 @@
   		<typeAlias type="com.acadmi.board.qna.QnaVO" alias="QnaVO"/>
   		<typeAlias type="com.acadmi.board.qna.QnaFileVO" alias="QnaFileVO"/>
   		
-  		
+  		<typeAlias type="com.acadmi.period.PeriodVO" alias="PeriodVO"/>
   		
   		
   		
