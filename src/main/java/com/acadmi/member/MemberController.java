@@ -1,7 +1,7 @@
 package com.acadmi.member;
 
 import java.util.Enumeration;
-
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import com.acadmi.administrator.AdminIstratorService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -102,21 +102,6 @@ public class MemberController {
 		log.error("====== MemberVO :  {} ======", authentication.getPrincipal());
 	}
 	
-	@GetMapping("mypage")
-	   public ModelAndView getMyPage(HttpSession session) throws Exception {
-	      ModelAndView mv = new ModelAndView();
-	      
-	      MemberVO memberVO = (MemberVO)session.getAttribute("member");
-	      
-	      memberVO = memberService.getMyPage(memberVO);
-	      
-	      mv.addObject("memberVO", memberVO);
-	      mv.setViewName("member/mypage");
-	      
-	      return mv;
-	   }
-	
-
 	   @GetMapping("join")
 	   public ModelAndView setMemberAdd(@ModelAttribute MemberVO memberVO) throws Exception {
 	      ModelAndView mv = new ModelAndView();
@@ -163,8 +148,49 @@ public class MemberController {
 			return mv;
 		}
 	   
+	   
+	   @GetMapping("studentPage")
+	   public ModelAndView getStudent(HttpSession session) throws Exception {
+	      ModelAndView mv = new ModelAndView();
+	      
+	      MemberVO memberVO = (MemberVO) session.getAttribute("student");
+	      
+	      memberVO = memberService.getStudent(memberVO);
+	      
+	      mv.addObject("memberVO", memberVO);
+	      mv.setViewName("member/studentPage");
+	      
+	      return mv;
+	   }
+	   
+	   @GetMapping("professorPage")
+	   public ModelAndView getProfessor(HttpSession session) throws Exception {
+	      ModelAndView mv = new ModelAndView();
+	      
+	      MemberVO memberVO = (MemberVO) session.getAttribute("professor");
+	      
+	      memberVO = memberService.getProfessor(memberVO);
+	      
+	      mv.addObject("memberVO", memberVO);
+	      mv.setViewName("member/professorPage");
+	      
+	      return mv;
+	   }
+	   
+	   @GetMapping("administratorPage")
+	   public ModelAndView getAdministrator(HttpSession session) throws Exception {
+	      ModelAndView mv = new ModelAndView();
+	      
+	      MemberVO memberVO = (MemberVO) session.getAttribute("administrator");
+	      
+	      memberVO = memberService.getAdministrator(memberVO);
+	      
+	      mv.addObject("memberVO", memberVO);
+	      mv.setViewName("member/administratorPage");
+	      
+	      return mv;
+	   }
+	   
 //	   ================================================================================================================
-	   
-	   
-	   
+	  
 }

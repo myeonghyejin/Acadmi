@@ -53,36 +53,41 @@
   		
   		<!-- ===================================================================== -->
   		
-  		<select id="getStudentList" parameterType="MemberVO" resultType="MemberVO">
-	  		SELECT * FROM MEMBER M
-			LEFT OUTER JOIN
-				MEMBERFILES MF
-			USING(USERNAME)
-				INNER JOIN
-					STUDENT S 
-				USING(USERNAME)
-					INNER JOIN
-						DEPARTMENT D 
-					USING(DEPTNUM)
-						INNER JOIN 
-							COLLEGE C 
-						USING(COLLEGENUM)
+  		<select id="getStudent" parameterType="MemberVO" resultType="MemberVO">
+	  		SELECT *
+		 	FROM MEMBER M
+		  		INNER JOIN
+		  		STUDENT S
+		  		ON M.USERNAME = S.USERNAME
+		  		INNER JOIN 
+		  		MEMBERFILES MF 
+		  		ON S.USERNAME = MF.USERNAME 
+		 	WHERE M.USERNAME = #{username}
+			
   		</select>
   		
   		<select id="getProfessor" parameterType="MemberVO" resultType="MemberVO">
-	  		SELECT * FROM MEMBER M
-			LEFT OUTER JOIN
-				MEMBERFILES MF 
-			USING(USERNAME)
-				INNER JOIN
-					PROFESSOR P 
-			USING(USERNAME)
-					INNER JOIN 
-						DEPARTMENT D 
-					USING(DEPTNUM)
-						INNER JOIN
-							COLLEGE C
-						USING(COLLEGENUM)
+	  		SELECT *
+		 	FROM MEMBER M
+		  		INNER JOIN
+		  		PROFESSOR P
+		  		ON M.USERNAME = P.USERNAME
+		  		INNER JOIN 
+		  		MEMBERFILES MF 
+		  		ON P.USERNAME = MF.USERNAME 
+		 	WHERE M.USERNAME = #{username}
+  		</select>
+  		
+  		<select id="getAdministrator" parameterType="MemberVO" resultType="MemberVO">
+	  		SELECT *
+		 	FROM MEMBER M
+		  		INNER JOIN
+		  		ADMINISTRATOR A
+		  		ON M.USERNAME = A.USERNAME
+		  		INNER JOIN 
+		  		MEMBERFILES MF 
+		  		ON A.USERNAME = MF.USERNAME 
+		 	WHERE M.USERNAME = #{username}
   		</select>
   		
   </mapper>

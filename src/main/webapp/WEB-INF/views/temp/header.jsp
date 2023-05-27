@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!-- Preloader -->
 <div class="preloader flex-column justify-content-center align-items-center">
@@ -138,7 +139,9 @@
 				<img src="/images/iu.jpg" class="img-circle elevation-2" alt="User Image">
 			</div>
 			<div class="info">
-				<a href="/member/mypage" class="d-block">Alexander Pierce</a>
+				<sec:authorize access="hasRole('STUDENT')">
+					<a href="/member/studentPage" class="d-block">Alexander Pierce</a>
+				</sec:authorize>
 			</div>
 		</div>
 
