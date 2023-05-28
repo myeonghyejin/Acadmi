@@ -53,7 +53,7 @@
   		
   		<!-- ===================================================================== -->
   		
-  		<select id="getStudent" parameterType="MemberVO" resultMap="studentResult">
+  		<select id="getStudent" parameterType="MemberVO" resultType="MemberVO">
 	  		SELECT M.USERNAME, S.DEPTNUM, S.GRADE, S.NAME, S.PHONE, S.BIRTH, S.ADDRESS, MF.FILENAME
 		 	FROM MEMBER M
 		  		INNER JOIN
@@ -65,23 +65,23 @@
 		 	WHERE M.USERNAME = #{username}
   		</select>
   		
-  		<resultMap type="MemberVO" id="studentResult">
+<!--   		<resultMap type="MemberVO" id="studentResult">
   			<id property="username" column="USERNAME"/>
   			<result property="password" column="PASSWORD"/>
   			<result property="category" column="CATEGORY"/>
   			<result property="enabled" column="ENABLED"/>
   			<collection property="adminIstratorVOs" javaType="List" ofType="AdministratorVO">
-  			<id property="deptNum" column="DEPTNUM"/>
-  			<result property="grade" column="GRADE"/>
-  			<result property="name" column="NAME"/>
-  			<result property="phone" column="PHONE"/>
-  			<result property="birth" column="BIRTH"/>
-  			<result property="address" column="ADDRESS"/>
+	  			<id property="deptNum" column="DEPTNUM"/>
+	  			<result property="grade" column="GRADE"/>
+	  			<result property="name" column="NAME"/>
+	  			<result property="phone" column="PHONE"/>
+	  			<result property="birth" column="BIRTH"/>
+	  			<result property="address" column="ADDRESS"/>
   			</collection>
   			<collection property="memberFilesVOs" javaType="List" ofType="MemberFilesVO">
   				<id property="fileName" column="FILENAME"/>
   			</collection>
-  		</resultMap>
+  		</resultMap> -->
   		
   		<select id="getProfessor" parameterType="MemberVO" resultType="MemberVO">
 	  		SELECT *

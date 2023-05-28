@@ -16,8 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 
-import com.acadmi.administrator.AdminIstratorDAO;
-import com.acadmi.administrator.AdminIstratorVO;
+import com.acadmi.administrator.AdministratorDAO;
+import com.acadmi.administrator.AdministratorVO;
 import com.acadmi.util.MailManager;
 
 import lombok.extern.slf4j.Slf4j;
@@ -105,17 +105,17 @@ public class MemberService implements UserDetailsService{
 		
 	}
 	
-	public List<AdminIstratorVO> getStudent(MemberVO memberVO) throws Exception {
+	public AdministratorVO getStudent(MemberVO memberVO) throws Exception {
 		
 		return memberDAO.getStudent(memberVO);
 	}
 	
-	public List<AdminIstratorVO> getProfessor(MemberVO memberVO) throws Exception {
+	public AdministratorVO getProfessor(MemberVO memberVO) throws Exception {
 		
 		return memberDAO.getProfessor(memberVO);
 	}
 
-	public List<AdminIstratorVO> getAdministrator(MemberVO memberVO) throws Exception {
+	public AdministratorVO getAdministrator(MemberVO memberVO) throws Exception {
 	
 		return memberDAO.getAdministrator(memberVO);
 	}

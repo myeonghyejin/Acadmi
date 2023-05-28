@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.acadmi.administrator.AdminIstratorService;
+import com.acadmi.administrator.AdministratorService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -32,9 +32,6 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
-	
-	@Autowired
-	private PasswordEncoder passwordEncoder;
 	
 	@GetMapping("login")
 	public ModelAndView getLogin(HttpSession session) throws Exception{
@@ -154,11 +151,15 @@ public class MemberController {
 	      ModelAndView mv = new ModelAndView();
 		     
 	      MemberVO memberVO = new MemberVO();
-			 
+	      
 		  Object object = session.getAttribute("SPRING_SECURITY_CONTEXT");
 		  
-		  mv.addObject("memberVO", object); 
-		  mv.setViewName("member/studentPage");
+		  	 if(object != null) {
+			  mv.setViewName("member/studentPage");
+		     } 
+		     else {
+		        mv.setViewName("redirect:/");
+		     } 
 		  
 		  return mv;
 	   }
