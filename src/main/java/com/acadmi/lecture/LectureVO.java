@@ -1,5 +1,7 @@
 package com.acadmi.lecture;
 
+import com.acadmi.professor.ProfessorVO;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,5 +27,6 @@ public class LectureVO {
 	private Integer status;
 	private String note;
 	private Integer temporary;
+
 
 }

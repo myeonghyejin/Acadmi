@@ -11,14 +11,13 @@
 	<!-- CSS/favicon 끝 -->
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
-	<div class="wrapper">
+	<div class="wrapper"> 
 
 		<!-- Header 적용 -->
 		<c:import url="../temp/header.jsp"></c:import>
 		<!-- Header 끝 -->
 		
 		<div class="content-wrapper">
-		
 			<main class="flex-shrink-0">
 					<section class="bg-light py-5">
 		                <div class="container px-5 my-5">

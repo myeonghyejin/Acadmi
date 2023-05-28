@@ -78,5 +78,25 @@ public class LectureController {
 		mv.setViewName("redirect:./list");
 		return mv;
 	}
+	
+	
+	
+	
+	@GetMapping("main")
+	public ModelAndView getLectureMain(LectureVO lectureVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		lectureVO = lectureService.getLectureDetail(lectureVO);
+		mv.addObject("main",lectureVO);
+		mv.setViewName("lecture/main");
+		return mv;
+	}
+	@GetMapping("main/info")
+	public ModelAndView getLectureInfo(LectureVO lectureVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		lectureVO = lectureService.getLectureDetail(lectureVO);
+		mv.addObject("main",lectureVO);
+		mv.setViewName("lecture/info");
+		return mv;
+	}
 
 }
