@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.acadmi.student.lecture.StudentLectureDAO">
+	<!-- SQL -->
+	<sql id="search">
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+			<if test="name != null and !name.equals('')">
+				AND LECTURENAME LIKE CONCAT('%', #{search}, '%')
+			</if>
+			<if test="category != null and !category.equals('')">
+				AND CATEGORY = #{category}
+			</if>
+			<if test="grade != null and !grade.equals('')">
+				AND GRADE = #{grade}
+			</if>
+ 			<if test="department != null and !department.equals('')">
+				AND DEPTNUM = #{deptNum}
+			</if>
+		</trim>
+	</sql>	
+
+	<!-- SELECT -->
+	<select id="getAllLectureList" parameterType="Pagination" resultMap="LectureList">
+		SELECT L.*, D.DEPTNAME
+		FROM LECTURE L
+			LEFT OUTER JOIN
+			PROFESSOR PR
+			ON PR.USERNAME = L.USERNAME
+				INNER JOIN
+				PERIOD PE
+				ON PE.SEMESTER = L.SEMESTER AND PE.YEAR = L.YEAR
+					INNER JOIN
+					LECTURE_ROOM LR
+					ON LR.LECTUREBUILDING = L.LECTUREBUILDING AND LR.LECTUREROOM = L.LECTUREROOM		
+						INNER JOIN
+						DEPARTMENT D
+						ON D.DEPTNUM = L.DEPTNUM
+		<include refid="search"></include>
+		ORDER BY LECTURENUM DESC
+		LIMIT #{startRow}, #{perPage}
+	</select>
+	
+	<select id="getMyLectureList" parameterType="StudentLectureVO" resultMap="LectureList">
+		SELECT L.*, D.DEPTNAME
+		FROM STUDENT_LECTURE SL
+			RIGHT OUTER JOIN
+			LECTURE L
+			USING (LECTURENUM)
+				INNER JOIN
+				DEPARTMENT D
+				ON D.DEPTNUM = L.DEPTNUM
+					INNER JOIN
+					STUDENT S
+					ON S.USERNAME = SL.USERNAME
+		WHERE S.USERNAME = #{username}
+		ORDER BY LECTURENUM DESC
+	</select>
+	
+	<select id="getMyFavoriteList" parameterType="FavoriteLectureVO" resultMap="LectureList">
+		SELECT L.*, D.DEPTNAME
+		FROM FAVORITE_LECTURE FL
+			RIGHT OUTER JOIN
+			LECTURE L
+			ON L.LECTURENUM = FL.LECTURENUM
+				INNER JOIN
+				DEPARTMENT D
+				ON D.DEPTNUM = L.DEPTNUM
+					INNER JOIN
+					STUDENT S
+					ON S.USERNAME = FL.USERNAME
+		WHERE S.USERNAME = #{username}
+		ORDER BY FAVORITENUM DESC
+	</select>
+	
+		<resultMap type="LectureVO" id="LectureList">
+		<id column="LECTURENUM" property="lectureNum"/>
+		<result column="LECTURENAME" property="lectureName"/>
+		<result column="CATEGORY" property="category"/>
+		<result column="GRADE" property="grade"/>
+		<result column="SUBSCRIPTION" property="subscription"/>
+		<result column="PERSONAL" property="personal"/>
+		<result column="WEEKDAY" property="weekday"/>
+		<result column="STARTTIME" property="startTime"/>
+		<result column="ENDTIME" property="endTime"/>
+		<result column="COMPLETIONGRADE" property="completionGrade"/>
+		<result column="STATUS" property="status"/>
+		<result column="NOTE" property="note"/>
+		<result column="TEMPORARY" property="temporary"/>
+		<association property="professorVO" javaType="ProfessorVO">
+			<id column="USERNAME" property="username"/>
+			<result column="NAME" property="name"/>
+			<result column="PROFESSORROOM" property="professorRoom"/>
+			<result column="PHONE" property="phone"/>
+			<result column="BIRTH" property="birth"/>
+			<result column="ADDRESS" property="address"/>
+			<result column="STATUS" property="status"/>
+		</association>
+		<association property="periodVO" javaType="PeriodVO">
+			<id column="YEAR" property="year"/>
+			<id column="SEMESTER" property="semester"/>
+			<result column="APPLICATIONSTART" property="applicationStart"/>
+			<result column="APPLICATIONEND" property="applicationEnd"/>
+			<result column="FAVORITESTART" property="favoriteStart"/>
+			<result column="FAVORITEEND" property="favoriteEnd"/>
+			<result column="DEADLINE" property="deadline"/>
+		</association>
+		<association property="lectureRoomVO" javaType="LectureRoomVO">
+			<id column="LECTUREBUILDING" property="lectureBuilding"/>
+			<id column="LECTUREROOM" property="lectureRoom"/>
+			<result column="PERSONAL" property="personal"/>
+			<result column="STATUS" property="status"/>
+		</association>
+		<association property="departmentVO" javaType="DepartmentVO">
+			<id column="DEPTNUM" property="deptNum"/>
+			<result column="COLLEGENUM" property="collegeNum"/>
+			<result column="DEPTNAME" property="deptName"/>
+			<result column="STATUS" property="status"/>
+		</association>
+	</resultMap>
+	
+	<select id="getAllLectureCount" parameterType="Pagination" resultType="Long">
+		SELECT COUNT(LECTURENUM)
+		FROM LECTURE
+		<include refid="search"></include>
+	</select>
+	
+	<select id="getMyLectureCount" parameterType="Pagination" resultType="Long">
+		SELECT COUNT(LECTURENUM)
+		FROM STUDENT_LECTURE
+		<include refid="search"></include>
+	</select>
+	
+	<select id="getMyFavoriteCount" parameterType="Pagination" resultType="Long">
+		SELECT COUNT(FAVORITENUM)
+		FROM FAVORITE_LECTURE
+		<include refid="search"></include>
+	</select>
+	
+</mapper>

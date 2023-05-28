@@ -1,5 +1,12 @@
 package com.acadmi.lecture;
 
+import java.util.List;
+
+import com.acadmi.department.DepartmentVO;
+import com.acadmi.lecture.room.LectureRoomVO;
+import com.acadmi.period.PeriodVO;
+import com.acadmi.professor.ProfessorVO;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,9 +28,15 @@ public class LectureVO {
 	private Integer year;
 	private String weekday;
 	private Integer startTime;
-	private Integer lastTime;
-	private Double completionGrade;
+	private Integer endTime;
+	private Float completionGrade;
+	private Integer status;
 	private String note;
 	private Integer temporary;
+	
+	private ProfessorVO professorVO;
+	private PeriodVO periodVO;
+	private LectureRoomVO lectureRoomVO;
+	private DepartmentVO departmentVO;
 
 }
