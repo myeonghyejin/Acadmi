@@ -37,7 +37,7 @@
                                 <!-- Post header-->
                                 <header class="mb-4">
                                     <!-- Post title-->
-                                    <h4 class="fw-bolder mb-1">${memberVO.name}</h4>
+                                    <h4 class="fw-bolder mb-1">${securityContext.authentication.name}</h4>
                                     <!-- Post meta content-->
                                     <h4 class="text-muted fst-italic mb-2"><%-- ${boardVO.regDate} --%></h4>
                                 </header>

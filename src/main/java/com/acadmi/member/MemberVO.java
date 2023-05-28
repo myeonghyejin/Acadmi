@@ -25,6 +25,7 @@ public class MemberVO implements UserDetails {
 	private boolean enabled;
 	private List<MemberFilesVO> memberFilesVOs;
 	private List<RoleVO> roleVOs;
+	private List<AdminIstratorVO> adminIstratorVOs;
 	
 	
 	@Override
