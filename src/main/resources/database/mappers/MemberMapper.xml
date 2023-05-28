@@ -53,36 +53,58 @@
   		
   		<!-- ===================================================================== -->
   		
-  		<select id="getStudentList" parameterType="MemberVO" resultType="MemberVO">
-	  		SELECT * FROM MEMBER M
-			LEFT OUTER JOIN
-				MEMBERFILES MF
-			USING(USERNAME)
-				INNER JOIN
-					STUDENT S 
-				USING(USERNAME)
-					INNER JOIN
-						DEPARTMENT D 
-					USING(DEPTNUM)
-						INNER JOIN 
-							COLLEGE C 
-						USING(COLLEGENUM)
+  		<select id="getStudent" parameterType="MemberVO" resultMap="studentResult">
+	  		SELECT M.USERNAME, S.DEPTNUM, S.GRADE, S.NAME, S.PHONE, S.BIRTH, S.ADDRESS, MF.FILENAME
+		 	FROM MEMBER M
+		  		INNER JOIN
+		  		STUDENT S
+		  		ON M.USERNAME = S.USERNAME
+		  		INNER JOIN 
+		  		MEMBERFILES MF 
+		  		ON S.USERNAME = MF.USERNAME 
+		 	WHERE M.USERNAME = #{username}
   		</select>
   		
+  		<resultMap type="MemberVO" id="studentResult">
+  			<id property="username" column="USERNAME"/>
+  			<result property="password" column="PASSWORD"/>
+  			<result property="category" column="CATEGORY"/>
+  			<result property="enabled" column="ENABLED"/>
+  			<collection property="adminIstratorVOs" javaType="List" ofType="AdministratorVO">
+  			<id property="deptNum" column="DEPTNUM"/>
+  			<result property="grade" column="GRADE"/>
+  			<result property="name" column="NAME"/>
+  			<result property="phone" column="PHONE"/>
+  			<result property="birth" column="BIRTH"/>
+  			<result property="address" column="ADDRESS"/>
+  			</collection>
+  			<collection property="memberFilesVOs" javaType="List" ofType="MemberFilesVO">
+  				<id property="fileName" column="FILENAME"/>
+  			</collection>
+  		</resultMap>
+  		
   		<select id="getProfessor" parameterType="MemberVO" resultType="MemberVO">
-	  		SELECT * FROM MEMBER M
-			LEFT OUTER JOIN
-				MEMBERFILES MF 
-			USING(USERNAME)
-				INNER JOIN
-					PROFESSOR P 
-			USING(USERNAME)
-					INNER JOIN 
-						DEPARTMENT D 
-					USING(DEPTNUM)
-						INNER JOIN
-							COLLEGE C
-						USING(COLLEGENUM)
+	  		SELECT *
+		 	FROM MEMBER M
+		  		INNER JOIN
+		  		PROFESSOR P
+		  		ON M.USERNAME = P.USERNAME
+		  		INNER JOIN 
+		  		MEMBERFILES MF 
+		  		ON P.USERNAME = MF.USERNAME 
+		 	WHERE M.USERNAME = #{username}
+  		</select>
+  		
+  		<select id="getAdministrator" parameterType="MemberVO" resultType="MemberVO">
+	  		SELECT *
+		 	FROM MEMBER M
+		  		INNER JOIN
+		  		ADMINISTRATOR A
+		  		ON M.USERNAME = A.USERNAME
+		  		INNER JOIN 
+		  		MEMBERFILES MF 
+		  		ON A.USERNAME = MF.USERNAME 
+		 	WHERE M.USERNAME = #{username}
   		</select>
   		
   </mapper>

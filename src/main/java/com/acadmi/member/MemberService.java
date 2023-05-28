@@ -42,13 +42,6 @@ public class MemberService implements UserDetailsService{
 		return memberDAO.getLogin(memberVO);
 	}
 	
-	public MemberVO getMyPage(MemberVO memberVO) throws Exception {
-		
-		memberVO = memberDAO.getLogin(memberVO);
-		
-		return memberVO;
-	}
-	
 	public int setLogout(MemberVO memberVO) throws Exception{
 		return memberDAO.setLogout(memberVO);
 	}
@@ -112,36 +105,21 @@ public class MemberService implements UserDetailsService{
 		
 	}
 	
+	public List<AdminIstratorVO> getStudent(MemberVO memberVO) throws Exception {
+		
+		return memberDAO.getStudent(memberVO);
+	}
+	
+	public List<AdminIstratorVO> getProfessor(MemberVO memberVO) throws Exception {
+		
+		return memberDAO.getProfessor(memberVO);
+	}
+
+	public List<AdminIstratorVO> getAdministrator(MemberVO memberVO) throws Exception {
+	
+		return memberDAO.getAdministrator(memberVO);
+	}
+	
 //	======================================================================================================================
-	
-	public AdminIstratorVO getStudent(MemberVO memberVO) throws Exception {
-		
-		return memberDAO.getStudent();
-	}
-	
-	public AdminIstratorVO getProfessor(MemberVO memberVO) throws Exception {
-		
-		return memberDAO.getProfessor();
-	}
-	
-	public AdminIstratorVO getAdminIstrator(MemberVO memberVO) throws Exception {
-		
-		return memberDAO.getAdminIstrator();
-	}
-	
-	public AdminIstratorVO setStudent(MemberVO memberVO) throws Exception {
-		
-		return memberDAO.setStudent();
-	}
-	
-	public AdminIstratorVO setProfessor(MemberVO memberVO) throws Exception {
-		
-		return memberDAO.setProfessor();
-	}
-	
-	public AdminIstratorVO setAdminIstrator(MemberVO memberVO) throws Exception {
-		
-		return memberDAO.setAdminIstrator();
-	}
 	
 }
