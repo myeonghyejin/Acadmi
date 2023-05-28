@@ -152,41 +152,41 @@ public class MemberController {
 	   @GetMapping("studentPage")
 	   public ModelAndView getStudent(HttpSession session) throws Exception {
 	      ModelAndView mv = new ModelAndView();
-	      
-	      MemberVO memberVO = (MemberVO) session.getAttribute("student");
-	      
-	      memberVO = memberService.getStudent(memberVO);
-	      
-	      mv.addObject("memberVO", memberVO);
-	      mv.setViewName("member/studentPage");
-	      
-	      return mv;
+		     
+	      MemberVO memberVO = new MemberVO();
+			 
+		  Object object = session.getAttribute("SPRING_SECURITY_CONTEXT");
+		  
+		  mv.addObject("memberVO", object); 
+		  mv.setViewName("member/studentPage");
+		  
+		  return mv;
 	   }
 	   
 	   @GetMapping("professorPage")
 	   public ModelAndView getProfessor(HttpSession session) throws Exception {
-	      ModelAndView mv = new ModelAndView();
-	      
-	      MemberVO memberVO = (MemberVO) session.getAttribute("professor");
-	      
-	      memberVO = memberService.getProfessor(memberVO);
-	      
-	      mv.addObject("memberVO", memberVO);
-	      mv.setViewName("member/professorPage");
+		   ModelAndView mv = new ModelAndView();
+		     
+		      MemberVO memberVO = new MemberVO();
+				 
+			  Object object = session.getAttribute("SPRING_SECURITY_CONTEXT");
+			  
+			  mv.addObject("memberVO", object); 
+			  mv.setViewName("member/professorPage");
 	      
 	      return mv;
 	   }
 	   
 	   @GetMapping("administratorPage")
 	   public ModelAndView getAdministrator(HttpSession session) throws Exception {
-	      ModelAndView mv = new ModelAndView();
-	      
-	      MemberVO memberVO = (MemberVO) session.getAttribute("administrator");
-	      
-	      memberVO = memberService.getAdministrator(memberVO);
-	      
-	      mv.addObject("memberVO", memberVO);
-	      mv.setViewName("member/administratorPage");
+		   ModelAndView mv = new ModelAndView();
+		     
+		      MemberVO memberVO = new MemberVO();
+				 
+			  Object object = session.getAttribute("SPRING_SECURITY_CONTEXT");
+			  
+			  mv.addObject("memberVO", object); 
+			  mv.setViewName("member/administratorPage");
 	      
 	      return mv;
 	   }

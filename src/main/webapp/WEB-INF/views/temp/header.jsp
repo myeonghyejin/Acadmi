@@ -136,11 +136,25 @@
 		<!-- Sidebar user panel (optional) -->
 		<div class="user-panel mt-3 pb-3 mb-3 d-flex">
 			<div class="image">
-				<img src="/images/iu.jpg" class="img-circle elevation-2" alt="User Image">
+				<sec:authorize access="hasRole('STUDENT')">
+					<img src="/images/iu.jpg" class="img-circle elevation-2" alt="User Image">
+				</sec:authorize>
+				<sec:authorize access="hasRole('PROFESSOR')">
+					<img src="/images/iu.jpg" class="img-circle elevation-2" alt="User Image">
+				</sec:authorize>
+				<sec:authorize access="hasRole('ADMINISTRATOR')">
+					<img src="/images/iu.jpg" class="img-circle elevation-2" alt="User Image">
+				</sec:authorize>
 			</div>
 			<div class="info">
 				<sec:authorize access="hasRole('STUDENT')">
-					<a href="/member/studentPage" class="d-block">Alexander Pierce</a>
+					<a href="/member/studentPage" class="d-block">STUDENT</a>
+				</sec:authorize>
+				<sec:authorize access="hasRole('PROFESSOR')">
+					<a href="/member/professorPage" class="d-block">PROFESSOR</a>
+				</sec:authorize>
+				<sec:authorize access="hasRole('ADMINISTRATOR')">
+					<a href="/member/administratorPage" class="d-block">ADMINISTRATOR</a>
 				</sec:authorize>
 			</div>
 		</div>

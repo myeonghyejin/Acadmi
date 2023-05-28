@@ -60,9 +60,9 @@
                                         <form:errors path="email"></form:errors>
                                     </div>
                                     <div class="form-floating mb-3">
-                                        <label for="Category">직업(학생 , 교수, 행정)</label>
-                                        <input class="form-control" id="Category" name="Category"  placeholder="Enter your Birth..." data-sb-validations="required" />
-                                        <form:errors path="Category"></form:errors>
+                                        <label for="category">직업(학생 , 교수, 행정)</label>
+                                        <input class="form-control" id="category" name="category"  placeholder="Enter your Birth..." data-sb-validations="required" />
+                                        <form:errors path="category"></form:errors>
                                         
                                         <%-- <form:input path="birth" id="birth" cssClass="form-control"/>
                                         <label for="birth">Birth</label>

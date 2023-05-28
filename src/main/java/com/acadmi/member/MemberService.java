@@ -105,17 +105,17 @@ public class MemberService implements UserDetailsService{
 		
 	}
 	
-	public MemberVO getStudent(MemberVO memberVO) throws Exception {
+	public List<AdminIstratorVO> getStudent(MemberVO memberVO) throws Exception {
 		
 		return memberDAO.getStudent(memberVO);
 	}
 	
-	public MemberVO getProfessor(MemberVO memberVO) throws Exception {
+	public List<AdminIstratorVO> getProfessor(MemberVO memberVO) throws Exception {
 		
 		return memberDAO.getProfessor(memberVO);
 	}
 
-	public MemberVO getAdministrator(MemberVO memberVO) throws Exception {
+	public List<AdminIstratorVO> getAdministrator(MemberVO memberVO) throws Exception {
 	
 		return memberDAO.getAdministrator(memberVO);
 	}

@@ -22,9 +22,9 @@ public interface MemberDAO {
 	public MemberVO getFindPw(MemberVO memberVO) throws Exception;
 	public int setPwUpdate(MemberVO memberVO) throws Exception;
 	
-	public MemberVO getStudent(MemberVO memberVO) throws Exception;
-	public MemberVO getProfessor(MemberVO memberVO) throws Exception;
-	public MemberVO getAdministrator(MemberVO memberVO) throws Exception;
+	public List<AdminIstratorVO> getStudent(MemberVO memberVO) throws Exception;
+	public List<AdminIstratorVO> getProfessor(MemberVO memberVO) throws Exception;
+	public List<AdminIstratorVO> getAdministrator(MemberVO memberVO) throws Exception;
 	
 	public int setStudent(MemberVO memberVO) throws Exception;
 	public int setProfessor(MemberVO memberVO) throws Exception;

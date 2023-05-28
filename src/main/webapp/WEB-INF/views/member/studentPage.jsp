@@ -37,16 +37,16 @@
                                 <!-- Post header-->
                                 <header class="mb-4">
                                     <!-- Post title-->
-                                    <div class="fw-bolder mb-1"><%-- ${memberVO.userName} --%>이름</div>
+                                    <h4 class="fw-bolder mb-1">${memberVO.name}</h4>
                                     <!-- Post meta content-->
-                                    <div class="text-muted fst-italic mb-2"><%-- ${boardVO.regDate} --%>가입날짜</div>
+                                    <h4 class="text-muted fst-italic mb-2"><%-- ${boardVO.regDate} --%></h4>
                                 </header>
                             </article>
                         </div>
                     </div>
-                             <div class="d-grid">
-	                         	<button class="btn btn-primary float-right" id="submitButton" type="submit">수정</button>
-	                         </div>
+                      	<div class="d-grid">
+	                    	<button class="btn btn-primary float-right" id="submitButton" type="submit">수정</button>
+	                    </div>
                 </div>
             </section>
 
