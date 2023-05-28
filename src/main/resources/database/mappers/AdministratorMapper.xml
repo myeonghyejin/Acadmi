@@ -36,6 +36,8 @@
 	</select>
 	
 	
+	
+	
   	<!--계정 생성  -->
   	<insert id="setMemberAdd" parameterType="MemberVO" useGeneratedKeys="true" keyProperty="username">
   		INSERT INTO MEMBER
@@ -48,6 +50,14 @@
   	<insert id="setAdministratorAdd" parameterType="AdministratorVO">
   		INSERT INTO ADMINISTRATOR
   		VALUES(#{username},#{deptNum},#{name},#{phone},#{birth},#{address},0)
+  	</insert>
+  	<insert id="setProfessorAdd" parameterType="ProfessorVO">
+  		INSERT INTO PROFESSOR
+  		VALUES(#{username},#{deptNum},#{name},#{professorRoom},#{phone},#{birth},#{address},0)
+  	</insert>
+  	<insert id="setRoleAdd" parameterType="Map">
+  			INSERT INTO MEMBER_ROLE
+	  		VALUES(#{username}, #{roleNum})
   	</insert>
   	
 	 <!-- 회원 조회 -->

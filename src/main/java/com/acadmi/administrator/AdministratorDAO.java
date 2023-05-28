@@ -1,6 +1,7 @@
 package com.acadmi.administrator;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -31,6 +32,8 @@ public interface AdministratorDAO {
 	public int setMemberAdd(MemberVO memberVO) throws Exception;
 	public int setStudentAdd(StudentVO studentVO) throws Exception;
 	public int setAdministratorAdd(AdministratorVO administratorVO) throws Exception;
+	public int setProfessorAdd(ProfessorVO professorVO) throws Exception;
+	public int setRoleAdd(Map<String, Object> map) throws Exception;
 	
 	//회원 조회
 	public List<StudentVO> getStudentList(Pagination pagination) throws Exception;
