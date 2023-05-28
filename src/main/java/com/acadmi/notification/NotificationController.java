@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.acadmi.qna.QnaVO;
+import com.acadmi.board.qna.QnaVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,13 +35,10 @@ public class NotificationController {
 		return mv;
 	}
 	
-	@GetMapping("test")
-	public ModelAndView getTest() throws Exception {
-		ModelAndView mv = new ModelAndView();
-		QnaVO qnaVO = new QnaVO();
-		notificationService.setQna(qnaVO);
-		return mv;
-	}
+//	@GetMapping("test")
+//	public void getTest() throws Exception {
+//		notificationService.setMemberSeqUpdate();
+//	}
 	
 	
 

@@ -12,12 +12,15 @@ import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.stereotype.Service;
 
 import com.acadmi.administrator.AdministratorVO;
+import com.acadmi.board.lectureNotice.LectureNoticeVO;
+import com.acadmi.board.lectureQna.LectureQnaVO;
 import com.acadmi.board.notice.NoticeVO;
 import com.acadmi.lecture.LectureVO;
 import com.acadmi.member.MemberVO;
 import com.acadmi.professor.ProfessorVO;
 import com.acadmi.board.qna.QnaVO;
 import com.acadmi.student.StudentVO;
+import com.acadmi.student.Student_lectureVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -129,11 +132,68 @@ public class NotificationService {
 		int result = 0;
 		NotificationVO notificationVO = new NotificationVO();
 		notificationVO.setNotificationMsg(qnaVO.getTitle());
+		notificationVO.setNotificationKind(3);
 		//qna의 원글을 따와서 작성자를 recipient에 넣어준다 답글의 ref가 원글의 글번호
 		qnaVO.setNum(qnaVO.getRef());
 		qnaVO = notificationDAO.getOriginalQna(qnaVO);
 		notificationVO.setRecipient(qnaVO.getWriter());
+		result = notificationDAO.setNotification(notificationVO);
 		this.sendNotification(qnaVO.getWriter(), "답글 등록");
+		return result;
+	}
+	
+	//강의 질의응답
+	public int setLectureQna(LectureQnaVO lectureQnaVO) throws Exception {
+		int result = 0;
+		NotificationVO notificationVO = new NotificationVO();
+		LectureVO lectureVO = new LectureVO();
+		lectureVO.setLectureNum(lectureQnaVO.getLectureNum());
+		lectureVO = notificationDAO.getLecture(lectureVO);
+		notificationVO.setNotificationMsg("["+lectureVO.getLectureName()+"]"+lectureQnaVO.getTitle());
+		notificationVO.setNotificationKind(5);
+		//sender는 질의응답 작성자
+		notificationVO.setSender(lectureQnaVO.getWriter());
+		//recipient는 강의의 교수(username)
+		notificationVO.setRecipient(lectureVO.getUsername());
+		this.sendNotification(lectureVO.getUsername(), "강의 질의응답 등록");
+		return result;
+	}
+	
+	//학생(student)의 알림 : 강의 공지사항, 질의응답 답글, 강의 질의응답 답글
+	//강의 공지사항
+	public int setLectureNotice(LectureNoticeVO lectureNoticeVO) throws Exception {
+		int result = 0;
+		NotificationVO notificationVO = new NotificationVO();
+		LectureVO lectureVO = new LectureVO();
+		lectureVO.setLectureNum(lectureNoticeVO.getLectureNum());
+		lectureVO = notificationDAO.getLecture(lectureVO);
+		notificationVO.setNotificationMsg("["+lectureVO.getLectureName()+"]"+lectureNoticeVO.getTitle());
+		notificationVO.setNotificationKind(4);
+		//수강강의에 강의 번호를 가지고있는 학생(username)들을 recipient에 넣는다
+		List<Student_lectureVO> ar = notificationDAO.getStudentLectureList(lectureVO);
+		for(Student_lectureVO student_lectureVO:ar) {
+			notificationVO.setRecipient(student_lectureVO.getUsername());
+			result = notificationDAO.setNotification(notificationVO);
+			this.sendNotification(student_lectureVO.getUsername(), "강의 공지사항 등록");
+		}
+		return result;
+	}
+	
+	//강의 질의응답 답글
+	public int setLectureQnaReply(LectureQnaVO lectureQnaVO) throws Exception {
+		int result = 0;
+		NotificationVO notificationVO = new NotificationVO();
+		LectureVO lectureVO = new LectureVO();
+		lectureVO.setLectureNum(lectureQnaVO.getLectureNum());
+		lectureVO = notificationDAO.getLecture(lectureVO);
+		notificationVO.setNotificationMsg("["+lectureVO.getLectureName()+"]"+lectureQnaVO.getTitle());
+		notificationVO.setNotificationKind(5);
+		//lectureQna의 원글을 따와서 작성자를 recipient에 넣는다 답글의 ref가 원글의 글번호
+		lectureQnaVO.setNum(lectureQnaVO.getRef());
+		lectureQnaVO = notificationDAO.getOriginalLectureQna(lectureQnaVO);
+		notificationVO.setRecipient(lectureQnaVO.getWriter());
+		result = notificationDAO.setNotification(notificationVO);
+		this.sendNotification(notificationVO.getRecipient(), "강의 질의응답 답글 등록");
 		return result;
 	}
 

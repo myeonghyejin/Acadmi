@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,23 +34,33 @@
 									<li class="nav-item">
 										<a class="nav-link" href="./list?notificationKind=1">공지사항</a>
 									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="./list?notificationKind=2">질의응답</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="./list?notificationKind=3">질의응답 답글</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="./list?notificationKind=4">강의공지사항</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="./list?notificationKind=5">강의질의응답</a>
-									</li><li class="nav-item">
-										<a class="nav-link" href="./list?notificationKind=6">강의질의응답 답글</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="./list?notificationKind=7">강의등록</a>
-									</li>
+									<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
+										<li class="nav-item">
+											<a class="nav-link" href="./list?notificationKind=2">질의응답</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" href="./list?notificationKind=7">강의등록</a>
+										</li>
+									</sec:authorize>
+									<sec:authorize access="hasRole('ROLE_PROFESSOR')">
+										<li class="nav-item">
+											<a class="nav-link" href="./list?notificationKind=3">질의응답 답글</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" href="./list?notificationKind=5">강의질의응답</a>
+										</li><li class="nav-item">
+									</sec:authorize>
+									<sec:authorize access="hasRole('ROLE_STUDENT')">
+										<li class="nav-item">
+											<a class="nav-link" href="./list?notificationKind=3">질의응답 답글</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" href="./list?notificationKind=4">강의공지사항</a>
+										</li>
+										<li>
+											<a class="nav-link" href="./list?notificationKind=6">강의질의응답 답글</a>
+										</li>
+									</sec:authorize>
 								</ul>
 							</div>
 							<div class="row">

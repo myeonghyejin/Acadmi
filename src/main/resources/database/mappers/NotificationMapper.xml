@@ -52,8 +52,22 @@
   	
   	<!-- qna의 원문을 가져오는 쿼리 -->
   	<select id="getOriginalQna" parameterType="QnaVO" resultType="QnaVO">
-  		SELECT * FROM QNA
-  		WHERE NUM #{num}
+  		SELECT * FROM QNA WHERE NUM #{num}
+  	</select>
+  	
+  	<!-- 강의 정보를 가져오는 쿼리 -->
+  	<select id="getLecture" parameterType="LectureVO" resultType="LectureVO">
+  		SELECT * FROM LECTURE WHERE LECTURENUM = #{lectureNum}
+  	</select>
+  	
+  	<!-- 수강 강의 정보를 가져오는 List -->
+  	<select id="getStudentLectureList" parameterType="LectureVO" resultType="Student_lectureVO">
+  		SELECT * FROM STUDENT_LECTURE WHERE LECTURENUM = #{lectureNum}
+  	</select>
+  	
+  	<!-- lectureQna의 원문을 가져오는 쿼리 -->
+  	<select id="getOriginalLectureQna" parameterType="LectureQnaVO" resultType="LectureQnaVO">
+  		SELECT * FROM LECTUREQNA WHERE NUM = #{num}
   	</select>
     
   </mapper>
