@@ -2,7 +2,7 @@ package com.acadmi.department;
 
 import java.util.List;
 
-import com.acadmi.administrator.AdminIstratorVO;
+import com.acadmi.administrator.AdministratorVO;
 import com.acadmi.professor.ProfessorVO;
 import com.acadmi.student.StudentVO;
 
@@ -19,5 +19,5 @@ public class DepartmentVO {
 	private Integer status;
 	private List<StudentVO> studentVOs;
 	private List<ProfessorVO> professorVOs;
-	private List<AdminIstratorVO> adminIstratorVOs;
+	private List<AdministratorVO> administratorVOs;
 }
