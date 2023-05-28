@@ -1,9 +1,17 @@
 package com.acadmi.administrator;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.acadmi.college.CollegeVO;
 import com.acadmi.department.DepartmentVO;
@@ -18,10 +26,14 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-public class AdministratorService {
+@Transactional(rollbackFor = Exception.class)
+public class AdministratorService implements UserDetailsService{
 	
 	@Autowired
 	private AdministratorDAO administratorDAO;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	//회원 관리
 	
@@ -38,6 +50,7 @@ public class AdministratorService {
 	
 	//계정 생성
 	public int setStudentAdd(StudentVO studentVO, MemberVO memberVO, MemberSeqVO memberSeqVO) throws Exception {
+		memberVO.setPassword(passwordEncoder.encode(memberVO.getPassword()));
 		
 		int result;
 		String year;
@@ -57,15 +70,29 @@ public class AdministratorService {
 				  username = year + memberSeq;
 			  }
 			  
-			  
-			  memberVO.setUsername(username);
-			 
+			memberVO.setUsername(username);
 			
 			result = administratorDAO.setMemberAdd(memberVO);
 			
 			studentVO.setUsername(memberVO.getUsername());
-			
+		
 			result = administratorDAO.setStudentAdd(studentVO);
+			
+			Map<String, Object> map = new HashMap<>();
+			map.put("username", memberVO.getUsername());
+			
+			if(memberVO.getCategory() == 0) {
+				map.put("roleNum", 1);
+			}else if(memberVO.getCategory() == 1) {
+				map.put("roleNum", 2);
+			}else if(memberVO.getCategory() == 2) {
+				map.put("roleNum", 3);
+			}else {
+				map.put("roleNum", 0);
+			}
+			
+			
+			result = administratorDAO.setRoleAdd(map);
 			
 			return result;
 			 
@@ -97,6 +124,22 @@ public class AdministratorService {
 			studentVO.setUsername(memberVO.getUsername());
 			
 			result = administratorDAO.setStudentAdd(studentVO);
+			
+			Map<String, Object> map = new HashMap<>();
+			map.put("username", memberVO.getUsername());
+			
+			if(memberVO.getCategory() == 0) {
+				map.put("roleNum", 1);
+			}else if(memberVO.getCategory() == 1) {
+				map.put("roleNum", 2);
+			}else if(memberVO.getCategory() == 2) {
+				map.put("roleNum",3);
+			}else {
+				map.put("roleNum", 0);
+			}
+			
+			
+			result = administratorDAO.setRoleAdd(map);
 			
 			return result;
 		 }
@@ -105,6 +148,7 @@ public class AdministratorService {
 	}
 	
 	public int setAdministratorAdd(AdministratorVO administratorVO, MemberVO memberVO, MemberSeqVO memberSeqVO) throws Exception {
+		memberVO.setPassword(passwordEncoder.encode(memberVO.getPassword()));
 		
 		int result;
 		String year;
@@ -134,8 +178,24 @@ public class AdministratorService {
 			
 			result = administratorDAO.setAdministratorAdd(administratorVO);
 			
+			Map<String, Object> map = new HashMap<>();
+			map.put("username", memberVO.getUsername());
+			
+			if(memberVO.getCategory() == 0) {
+				map.put("roleNum", 1);
+			}else if(memberVO.getCategory() == 1) {
+				map.put("roleNum", 2);
+			}else if(memberVO.getCategory() == 2) {
+				map.put("roleNum",3);
+			}else {
+				map.put("roleNum", 0);
+			}
+			
+			
+			result = administratorDAO.setRoleAdd(map);
+			
 			return result;
-			 
+			
 			 
 		 }else {
 			  year = administratorDAO.getYearSeq(memberSeqVO).toString(); 
@@ -156,7 +216,7 @@ public class AdministratorService {
 			  }
 			  
 			  
-			  memberVO.setUsername(username);
+			 memberVO.setUsername(username);
 			 
 			
 			result = administratorDAO.setMemberAdd(memberVO);
@@ -165,10 +225,125 @@ public class AdministratorService {
 			
 			result = administratorDAO.setAdministratorAdd(administratorVO);
 			
+			Map<String, Object> map = new HashMap<>();
+			map.put("username", memberVO.getUsername());
+			
+			if(memberVO.getCategory() == 0) {
+				map.put("roleNum", 1);
+			}else if(memberVO.getCategory() == 1) {
+				map.put("roleNum", 2);
+			}else if(memberVO.getCategory() == 2) {
+				map.put("roleNum",3);
+			}else {
+				map.put("roleNum", 0);
+			}
+			
+			
+			result = administratorDAO.setRoleAdd(map);
+			
 			return result;
 		 }
 		
 	}
+	
+	public int setProfessorAdd(ProfessorVO professorVO, MemberVO memberVO, MemberSeqVO memberSeqVO) throws Exception {
+	memberVO.setPassword(passwordEncoder.encode(memberVO.getPassword()));
+		
+		int result;
+		String year;
+		 if(administratorDAO.getYearSeq(memberSeqVO) == null) {
+			 result =  administratorDAO.setInsertSeq(memberSeqVO);
+			 year=  administratorDAO.getYearSeq(memberSeqVO).toString();
+			 Long memberSeq = administratorDAO.getMemberSeq(memberSeqVO);
+			 String username;
+			 
+			 if(memberSeq < 10) {
+				  username = year + "000" + memberSeq;
+			  }else if(memberSeq < 100) {
+				  username = year + "00" + memberSeq;
+			  }else if(memberSeq < 1000) {
+				  username = year + "0" + memberSeq;
+			  }else {
+				  username = year + memberSeq;
+			  }
+			  
+			  
+			  memberVO.setUsername(username);
+			 
+			
+			result = administratorDAO.setMemberAdd(memberVO);
+			
+			professorVO.setUsername(memberVO.getUsername());
+			
+			result = administratorDAO.setProfessorAdd(professorVO);
+			
+			Map<String, Object> map = new HashMap<>();
+			map.put("username", memberVO.getUsername());
+			
+			if(memberVO.getCategory() == 0) {
+				map.put("roleNum", 1);
+			}else if(memberVO.getCategory() == 1) {
+				map.put("roleNum", 2);
+			}else if(memberVO.getCategory() == 2) {
+				map.put("roleNum",3);
+			}else {
+				map.put("roleNum", 0);
+			}
+			
+			
+			result = administratorDAO.setRoleAdd(map);
+			
+			return result;
+			
+			 
+		 }else {
+			  year = administratorDAO.getYearSeq(memberSeqVO).toString(); 
+			  result = administratorDAO.setUpdateSeq(memberSeqVO);
+			  Long memberSeq = administratorDAO.getMemberSeq(memberSeqVO);
+			  String username;
+			  
+			  
+			  
+			  if(memberSeq < 10) {
+				  username = year + "000" + memberSeq;
+			  }else if(memberSeq < 100) {
+				  username = year + "00" + memberSeq;
+			  }else if(memberSeq < 1000) {
+				  username = year + "0" + memberSeq;
+			  }else {
+				  username = year + memberSeq;
+			  }
+			  
+			  
+			 memberVO.setUsername(username);
+			 
+			
+			result = administratorDAO.setMemberAdd(memberVO);
+			
+			professorVO.setUsername(memberVO.getUsername());
+			
+			result = administratorDAO.setProfessorAdd(professorVO);
+			
+			Map<String, Object> map = new HashMap<>();
+			map.put("username", memberVO.getUsername());
+			
+			if(memberVO.getCategory() == 0) {
+				map.put("roleNum", 1);
+			}else if(memberVO.getCategory() == 1) {
+				map.put("roleNum", 2);
+			}else if(memberVO.getCategory() == 2) {
+				map.put("roleNum",3);
+			}else {
+				map.put("roleNum", 0);
+			}
+			
+			
+			result = administratorDAO.setRoleAdd(map);
+			
+			return result;
+		 }
+	}
+	
 	
 	//회원 조회
 	public List<StudentVO> getStudentList(Pagination pagination) throws Exception {
@@ -218,6 +393,18 @@ public class AdministratorService {
 	public int setLectureRoomUpdate(LectureRoomVO lectureRoomVO) throws Exception {
 		
 		return administratorDAO.setLectureRoomUpdate(lectureRoomVO);
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		// TODO Auto-generated method stub
+				log.error("============Spring Security Login============");
+				log.error("====================={}=====================", username);
+				
+				MemberVO memberVO = new MemberVO();
+				memberVO.setUsername(username);
+				
+				return memberVO;
 	}
 	
 	

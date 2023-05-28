@@ -56,14 +56,14 @@ public class AdministratorController {
 	public ModelAndView setStudentAdd(@Valid StudentVO studentVO, BindingResult bindingResult, MemberVO memberVO, MemberSeqVO memberSeqVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
-			
-			int result = administratorService.setStudentAdd(studentVO,memberVO, memberSeqVO);
 		
 			if(bindingResult.hasErrors()) {
 				log.warn("검중에 실패");
 				mv.setViewName("administrator/studentAdd");
 				return mv;
 			}
+			
+			int result = administratorService.setStudentAdd(studentVO,memberVO, memberSeqVO);
 			
 			String message="등록 실패";
 			
@@ -113,6 +113,45 @@ public class AdministratorController {
 		mv.setViewName("administrator/result");
 		
 		mv.addObject("url", "./administratorList");
+		return mv;
+		
+		
+	}
+	
+	@GetMapping("professorAdd")
+	public ModelAndView setProfessorAdd() throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		
+		mv.setViewName("administrator/professorAdd");
+		
+		return mv;
+		
+	}
+	
+	@PostMapping("professorAdd")
+	public ModelAndView setProfessorAdd(@Valid ProfessorVO professorVO, BindingResult bindingResult, MemberVO memberVO, MemberSeqVO memberSeqVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		int result = administratorService.setProfessorAdd(professorVO, memberVO, memberSeqVO);
+		
+		if(bindingResult.hasErrors()) {
+			log.warn("검중에 실패");
+			mv.setViewName("administrator/professorAdd");
+			return mv;
+		}
+		
+		String message="등록 실패";
+		
+		if(result > 0) {
+			message = "등록 되었습니다";
+			
+		}
+		
+		mv.addObject("result", message);
+		mv.setViewName("administrator/result");
+		
+		mv.addObject("url", "./professorList");
 		return mv;
 		
 		
