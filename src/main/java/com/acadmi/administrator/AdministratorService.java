@@ -1,4 +1,4 @@
-package com.acadmi.administrator.copy;
+package com.acadmi.administrator;
 
 import java.util.List;
 
