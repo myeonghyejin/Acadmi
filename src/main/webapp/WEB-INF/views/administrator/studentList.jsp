@@ -7,10 +7,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<c:import url="../temp/style.jsp"></c:import>
+<link
+	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
+	rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
 
+<c:import url="../temp/header.jsp"></c:import>
+	<h1>학생 목록 조회</h1>
 
 	<table class="table table-hover" border="1">
      	 		<thead>
@@ -29,8 +36,8 @@
      	 		<tbody>
      	 		
      	 			<c:forEach items="${list}" var="collegeVO">
-     	 			<tr>
-     	 			<c:set var="college" value="${collegeVO.collegeName}"></c:set>
+     	 				<tr>
+     	 				<c:set var="college" value="${collegeVO.collegeName}"></c:set>
      	 					<c:forEach items="${collegeVO.departmentVOs}" var="departmentVO">
      	 						<c:set var="department" value="${departmentVO.deptName}"></c:set>
      	 						<c:forEach items="${departmentVO.studentVOs}" var="studentVO">
@@ -39,26 +46,53 @@
      	 							<c:set var="studentPhone" value="${studentVO.phone}"></c:set>
      	 							<c:set var="studentGrade" value="${studentVO.grade}"></c:set>
      	 							<c:set var="studentStatus" value="${studentVO.status}"></c:set>
+     	 						<tr>
      	 							<c:forEach items="${studentVO.memberFilesVOs}" var="memberFilesVO">
-										<c:set var="memberFiles" value="${memberFilesVO.fileName}"></c:set>
-										
+     	 								<tr>
+											<td><img src="/${memberFilesVO.fileName}"></td>
+										</tr>
      	 							</c:forEach>
+	     	 							<td></td>
+	     	 							<td></td>
+	     	 							<td><c:out value="${studentUsername}"></c:out></td>
+				     	 				<td><c:out value="${studentName}"></c:out></td>
+				     	 				<td><c:out value="${studentPhone}"></c:out></td>
+				     	 				<td><c:out value="${college}"></c:out></td>
+				     	 				<td><c:out value="${department}"></c:out></td>
+				     	 				<td><c:out value="${studentGrade}"></c:out></td>
+				     	 				<c:if test="${studentStatus eq 1}">
+				     	 					<td>재학</td>
+				     	 				</c:if>
+				     	 				<c:if test="${studentStatus eq 2 }">
+				     	 					<td>휴학</td>
+				     	 				</c:if>
+				     	 				<c:if test="${studentStatus eq 3 }">
+				     	 					<td>퇴학</td>
+				     	 				</c:if>
+				     	 				<c:if test="${studentStatus eq 4 }">
+				     	 					<td>졸업</td>
+				     	 				</c:if>
+				     	 				<c:if test="${studentStatus eq 5 }">
+				     	 					<td>졸업유예</td>
+				     	 				</c:if>
+     	 						</tr>	
      	 						</c:forEach>
      	 					</c:forEach>
-     	 				<td></td>	
-     	 				<td><img src="/file/member/${memberFiles.fileName}"></td>	
-     	 				<td><c:out value="${studentUsername}"></c:out></td>
-     	 				<td><c:out value="${studentName}"></c:out></td>
-     	 				<td><c:out value="${studentPhone}"></c:out></td>
-     	 				<td><c:out value="${college}"></c:out></td>
-     	 				<td><c:out value="${department}"></c:out></td>
-     	 				<td><c:out value="${studentGrade}"></c:out></td>
-	     	 			<td><c:out value="${studentStatus}"></c:out></td>
-     	 				
-     	 			</tr>
+     	 				</tr>
      	 			</c:forEach>
      	 			
      	 		</tbody>
-     	 	</table>
+     	 </table>
+     	 
+     	 <c:if test="${pagination.pre}">
+			<a href="./studentList?page=${pagination.startNum-1}">이전</a>
+		</c:if>
+     	 
+     	<c:forEach begin="${pagination.startNum}" end="${pagination.lastNum}" var="i">
+     	 	<a href="./studentList?page=${i}">${i}</a>
+     	</c:forEach>
+     	 <c:if test="${pagination.next}">
+			<a href="./studentList?page=${pagination.lastNum+1}">다음</a>
+		</c:if> 
 </body>
 </html>

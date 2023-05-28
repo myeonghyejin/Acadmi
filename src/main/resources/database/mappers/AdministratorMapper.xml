@@ -3,8 +3,77 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="com.acadmi.administrator.AdminIstratorDAO">
-  	<select id="getStudentList" resultMap="StudentList">
+  <mapper namespace="com.acadmi.administrator.AdministratorDAO">
+  
+    <!--회원 관리  -->
+    
+    <!--아이디  -->
+    <update id="setUpdateSeq" parameterType="MemberSeqVO">
+   		<selectKey keyProperty="memberSeq" resultType="Long" order="BEFORE">
+      SELECT MEMBERSEQ+1 FROM MEMBERSEQ
+      WHERE YEAR =#{year}
+   		</selectKey>
+     UPDATE MEMBERSEQ SET MEMBERSEQ = #{memberSeq} WHERE YEAR = #{year}
+	</update>
+	<select id="getYearSeq" resultType="Long" parameterType="MemberSeqVO">
+		SELECT YEAR FROM MEMBERSEQ
+		WHERE YEAR=#{year}
+	</select>
+	<select id="getMemberSeq" resultType="Long" parameterType="MemberSeqVO">
+		SELECT MEMBERSEQ FROM MEMBERSEQ
+		WHERE YEAR=#{year}
+	</select>
+	
+	<insert id="setInsertSeq" parameterType="MemberSeqVO">
+		INSERT INTO MEMBERSEQ
+		VALUES(#{year},1)
+	</insert>
+	<select id="getCollege" resultType="CollegeVO">
+		SELECT * FROM COLLEGE
+	</select>
+	<select id="getDepartment" resultType="DepartmentVO">
+		SELECT * FROM DEPARTMENT
+	</select>
+	
+	
+	
+	
+  	<!--계정 생성  -->
+  	<insert id="setMemberAdd" parameterType="MemberVO" useGeneratedKeys="true" keyProperty="username">
+  		INSERT INTO MEMBER
+  		VALUES(#{username},#{password},#{email},#{category},1)
+  	</insert>
+  	<insert id="setStudentAdd" parameterType="StudentVO" >
+  		INSERT INTO STUDENT
+  		VALUES(#{username},#{deptNum},1,#{name},#{phone},#{birth},#{address},0)
+  	</insert>
+  	<insert id="setAdministratorAdd" parameterType="AdministratorVO">
+  		INSERT INTO ADMINISTRATOR
+  		VALUES(#{username},#{deptNum},#{name},#{phone},#{birth},#{address},0)
+  	</insert>
+  	<insert id="setProfessorAdd" parameterType="ProfessorVO">
+  		INSERT INTO PROFESSOR
+  		VALUES(#{username},#{deptNum},#{name},#{professorRoom},#{phone},#{birth},#{address},0)
+  	</insert>
+  	<insert id="setRoleAdd" parameterType="Map">
+  			INSERT INTO MEMBER_ROLE
+	  		VALUES(#{username}, #{roleNum})
+  	</insert>
+  	
+	 <!-- 회원 조회 -->
+  	
+  	
+  	<select id="getTotalCountProfessor" resultType="Long">
+  		SELECT COUNT(USERNAME) FROM PROFESSOR
+  	</select>
+  	
+  	<select id="getTotalCountStudent" resultType="Long">
+  		SELECT COUNT(USERNAME) FROM STUDENT
+  	</select><select id="getTotalCountAdministrator" resultType="Long">
+  		SELECT COUNT(USERNAME) FROM ADMINISTRATOR
+  	</select>
+  
+  	<select id="getStudentList" parameterType="Pagination" resultMap="StudentList">
   		SELECT * FROM MEMBER M
 		LEFT OUTER JOIN
 			MEMBERFILES MF
@@ -18,6 +87,8 @@
 					INNER JOIN 
 						COLLEGE C 
 					USING(COLLEGENUM)
+		WHERE CATEGORY=2
+		LIMIT #{startRow},#{perPage}					
   	</select>
   	<resultMap type="CollegeVO" id="StudentList">
   		<id column="COLLEGENUM" property="collegeNum"/>
@@ -54,6 +125,8 @@
 					INNER JOIN
 						COLLEGE C
 					USING(COLLEGENUM)
+		WHERE CATEGORY=1			
+		LIMIT #{startRow},#{perPage}			
   	</select>
   	<resultMap type="CollegeVO" id="ProfessorList">
   		<id column="COLLEGENUM" property="collegeNum"/>
@@ -76,5 +149,64 @@
   			</collection>
   		</collection>
   	</resultMap>
+  
+  <select id="getAdministratorList" resultMap="AdminIstratorList">
+  	SELECT * FROM MEMBER M
+		LEFT OUTER JOIN
+			MEMBERFILES MF 
+		USING(USERNAME)
+			INNER JOIN
+				ADMINISTRATOR A
+			USING(USERNAME)
+				INNER JOIN 
+					DEPARTMENT D 
+				USING(DEPTNUM)
+	WHERE CATEGORY=0			
+	LIMIT #{startRow},#{perPage}			
+  </select>
+  
+  <resultMap type="DepartmentVO" id="AdminIstratorList">
+  	<id column="DEPTNUM" property="deptNum"/>
+  	<result column="DEPTNAME" property="deptName"/>
+		<collection property="administratorVOs" javaType="List" ofType="AdministratorVO">
+			<result column="NAME" property="name"/>
+			<result column="EMAIL" property="email"/>
+			<result column="PHONE" property="phone"/>
+			<result column="STATUS" property="status"/>
+			<collection property="memberFilesVOs" javaType="List" ofType="MemberFilesVO">
+				<id column="FILENUM" property="fileNum"/>
+				<result column="FILENAME" property="fileName"/>
+				<result column="ORINAME" property="oriName"/>
+			</collection>
+		</collection>
+  </resultMap>
+  
+  	<!-- 강의실 관리 -->
+    
+    <!-- 강의실 조회 -->
+	<select id="getLectureRoomList" parameterType="Pagination" resultType="LectureRoomVO">
+		SELECT * FROM LECTURE_ROOM
+		LIMIT #{startRow},#{perPage}
+	</select>
+  
+  	<select id="getTotalCountLectureRoom" resultType="Long">
+  		SELECT COUNT(LECTUREROOM) FROM LECTURE_ROOM
+  	</select>
+ 	<!-- 강의실 등록 -->
+ 	<insert id="setLectureRoomAdd" parameterType="LectureRoomVO">
+ 		INSERT INTO LECTURE_ROOM
+ 		VALUES(#{lectureBuilding},#{lectureRoom},#{personel},1)
+ 	</insert>
+ 	<!--강의실 수정 -->
+ 	<update id="setLectureRoomUpdate" parameterType="LectureRoomVO">
+ 		UPDATE LECTURE_ROOM
+ 		SET PERSONEL=#{personel},STATUS=#{status}
+ 		WHERE LECTUREBUILDING = #{lectureBuilding} AND LECTUREROOM = #{lectureRoom}
+ 	</update>
+ 	
+ 
+ 	
+  
+  
   	
   </mapper>
