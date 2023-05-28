@@ -1,1 +1,0 @@
-$("#dept").html("<option value=''>${departmentVO.deptName}</option>")

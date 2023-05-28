@@ -14,8 +14,8 @@
 </head>
 <c:import url="../temp/header.jsp"></c:import>
 <body>
-	<h1>학생 계정 생성</h1>
-	<form action="./studentAdd" method="post">
+	<h1>교수 계정 생성</h1>
+	<form action="./professorAdd" method="post">
 		입학년도 <input type="text" name="year"><br>
 		비밀번호 <input type="text" name="password"><br>
 		이메일 <input type="text" name="email"><br>
@@ -30,16 +30,19 @@
 		<select name="deptNum" id="dept">
 			<option value="1">컴퓨터공학과</option>
 		</select> <br>
+		교수사무실
+		<select name="professorRoom">
+			<option value="30">30호</option>
+		</select><br>
 		
 		이름 <input type="text" name="name"><br>
 		전화번호 <input type="text" name="phone"><br>
 		생년월일 <input type="text" name="birth"><br>
 		주소 <input type="text" name="address"><br>
-		<input type="hidden" name="category" value="2">
+		<input type="hidden" name="category" value="1">
 		
-		<button type="submit">학생가입</button>
+		<button type="submit">교수가입</button>
 		
 	</form>
-	
 </body>
 </html>
