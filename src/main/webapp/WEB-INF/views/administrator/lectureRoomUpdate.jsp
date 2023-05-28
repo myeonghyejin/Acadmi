@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<form action="./lectureRommUpdate" method="post">
+		
+	</form>
 </body>
 </html>

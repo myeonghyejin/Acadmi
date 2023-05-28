@@ -19,5 +19,5 @@ public class DepartmentVO {
 	private Integer status;
 	private List<StudentVO> studentVOs;
 	private List<ProfessorVO> professorVOs;
-	private List<AdministratorVO> adminIstratorVOs;
+	private List<AdministratorVO> administratorVOs;
 }
