@@ -15,16 +15,7 @@
 <c:import url="../temp/header.jsp"></c:import>
 <body>
 	<h1>교수 목록 조회</h1>
-	<div class="card-body">
-		<div>교수번호</div>
-		<input type="text" name="username" id="username">
-		<div>성명</div>
-		<input type="text" name="name" id="name">
-		<div>담당대학</div>
-		<select></select>
-		<div>담당학과</div>
-		<select></select>
-	</div>
+
 
 	<table class="table table-hover" border="1">
 		<thead>

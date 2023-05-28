@@ -194,8 +194,6 @@
  		WHERE LECTUREBUILDING = #{lectureBuilding} AND LECTUREROOM = #{lectureRoom}
  	</update>
  	
- 
- 	
   
   
   	

@@ -32,7 +32,7 @@
 					<c:if test="${lectureVO.status eq 1 }">
 						<td>사용가능</td>
 					</c:if>
-				<td><a href="./lectureRoomUpdate?lectureBuilding=${lectureRoom.lectureBuilding}&lectureRoom=${lectureRoom.lectureRoom}"><button type="button" id="update">수정</button></a></td>	
+				<td><a href="./lectureRoomUpdate?lectureBuilding=${lectureVO.lectureBuilding}&lectureRoom=${lectureVO.lectureRoom}"><button type="button" id="update">수정</button></a></td>	
 				
 			</tr>
 		</c:forEach>

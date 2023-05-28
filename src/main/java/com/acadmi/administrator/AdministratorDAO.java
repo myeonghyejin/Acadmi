@@ -51,7 +51,7 @@ public interface AdministratorDAO {
 	public int setLectureRoomAdd(LectureRoomVO lectureRoomVO) throws Exception;
 	//강의실 수정
 	public int setLectureRoomUpdate(LectureRoomVO lectureRoomVO) throws Exception;
-	
+
 	
  	
 //	public int setMemberInsert(MemberVO memberVO) throws Exception;

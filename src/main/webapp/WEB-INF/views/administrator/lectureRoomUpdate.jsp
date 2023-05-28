@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +9,17 @@
 </head>
 <body>
 	<form action="./lectureRommUpdate" method="post">
+		강의실 건물 
+		<select name="lectureBuilding"">
 		
+		</select>
+		깅의실 호수 <input type="text" name="lectureRoom">
+		최대수용인원 <input type="text" name="personel">
+		
+		<input type="radio" name="status" value="1" checked >사용가능
+		<input type="radio" name="status" value="0"> 사용불가
+		
+		<button type="submit">등록</button>
 	</form>
 </body>
 </html>

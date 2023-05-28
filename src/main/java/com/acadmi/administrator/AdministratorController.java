@@ -203,14 +203,14 @@ public class AdministratorController {
 		return mv;
 	}
 	
+	
 	@GetMapping("lectureRoomUpdate")
 	public ModelAndView setLectureRoomUpdate(LectureRoomVO lectureRoomVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 	
 		
-		mv.addObject("lectureRoom",lectureRoomVO);
 		mv.setViewName("administrator/lectureRoomUpdate");
-		
+		ne
 		return mv;
 		
 	}
