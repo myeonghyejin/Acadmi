@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.acadmi.college.CollegeVO;
+import com.acadmi.department.DepartmentVO;
 import com.acadmi.lecture.LectureVO;
 import com.acadmi.lectureroom.LectureRoomVO;
+import com.acadmi.member.MemberSeqVO;
 import com.acadmi.member.MemberVO;
 import com.acadmi.professor.ProfessorVO;
 import com.acadmi.student.StudentVO;
@@ -35,21 +38,26 @@ public class AdministratorController {
 	
 	//계정 관리
 	@GetMapping("studentAdd")
-	public ModelAndView setStudentAdd() throws Exception {
+	public ModelAndView setStudentAdd(MemberSeqVO memberSeqVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
+		List<CollegeVO>ar = administratorService.getCollege();
+		List<DepartmentVO> ar2 = administratorService.getDepartment();
 		
+		
+		mv.addObject("college", ar);
+		mv.addObject("department", ar2);
 		mv.setViewName("administrator/studentAdd");
 		
 		return mv;
 		
 	}
 	@PostMapping("studentAdd")
-	public ModelAndView setStudentAdd(@Valid StudentVO studentVO, BindingResult bindingResult, MemberVO memberVO) throws Exception{
+	public ModelAndView setStudentAdd(@Valid StudentVO studentVO, BindingResult bindingResult, MemberVO memberVO, MemberSeqVO memberSeqVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
-		
-			int result = administratorService.setStudentAdd(studentVO,memberVO);
+			
+			int result = administratorService.setStudentAdd(studentVO,memberVO, memberSeqVO);
 		
 			if(bindingResult.hasErrors()) {
 				log.warn("검중에 실패");
@@ -83,10 +91,10 @@ public class AdministratorController {
 	}
 	
 	@PostMapping("administratorAdd")
-	public ModelAndView setAdministratorAdd(@Valid AdministratorVO administratorVO, BindingResult bindingResult, MemberVO memberVO) throws Exception {
+	public ModelAndView setAdministratorAdd(@Valid AdministratorVO administratorVO, BindingResult bindingResult, MemberVO memberVO, MemberSeqVO memberSeqVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		int result = administratorService.setAdministratorAdd(administratorVO, memberVO);
+		int result = administratorService.setAdministratorAdd(administratorVO, memberVO, memberSeqVO);
 		
 		if(bindingResult.hasErrors()) {
 			log.warn("검중에 실패");

@@ -20,9 +20,12 @@ public interface AdministratorDAO {
 	//회원관리
 	
 	//아이디 
-//	public int setMemberSeqAdd(MemberSeqVO memberSeqVO) throws Exception;
-//	public MemberSeqVO getMemberSeq(MemberSeqVO memberSeqVO) throws Exception;
-//	public int setMemberSeqUpdate(MemberSeqVO memberSeqVO) throws Exception;
+	public int setUpdateSeq(MemberSeqVO memberSeqVO) throws Exception;
+	public Long getYearSeq(MemberSeqVO memberSeqVO) throws Exception;
+	public Long getMemberSeq(MemberSeqVO memberSeqVO) throws Exception;
+	public int setInsertSeq(MemberSeqVO memberSeqVO) throws Exception;
+	public List<CollegeVO> getCollege() throws Exception;
+	public List<DepartmentVO> getDepartment() throws Exception;
 	
 	//계정 생성
 	public int setMemberAdd(MemberVO memberVO) throws Exception;

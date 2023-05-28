@@ -8,22 +8,34 @@
     <!--회원 관리  -->
     
     <!--아이디  -->
-   <!--  <insert id="setMemberSeqAdd" parameterType="MemberSeqVO">
-    	INSERT INTO MEMBERSEQ
-    	VALUES(#{year},1)
-    </insert>
-    
-    <select id="getMemberSeq" parameterType="MemberSeqVO" resultType="MemberSeqVO">
-    	SELECT * FROM MEMBERSEQ
-    	WHERE YEAR=#{year}
-    </select>
-    
-    <update id="setMemberSeqUpdate" parameterType="MemberSeqVO">
-    	UPDATE UPDATE MEMBERSEQ 
-		SET MEMBERSEQ = #{memberSeq}
-		WHERE YEAR = #{year};
-    </update> -->
-    
+    <update id="setUpdateSeq" parameterType="MemberSeqVO">
+   		<selectKey keyProperty="memberSeq" resultType="Long" order="BEFORE">
+      SELECT MEMBERSEQ+1 FROM MEMBERSEQ
+      WHERE YEAR =#{year}
+   		</selectKey>
+     UPDATE MEMBERSEQ SET MEMBERSEQ = #{memberSeq} WHERE YEAR = #{year}
+	</update>
+	<select id="getYearSeq" resultType="Long" parameterType="MemberSeqVO">
+		SELECT YEAR FROM MEMBERSEQ
+		WHERE YEAR=#{year}
+	</select>
+	<select id="getMemberSeq" resultType="Long" parameterType="MemberSeqVO">
+		SELECT MEMBERSEQ FROM MEMBERSEQ
+		WHERE YEAR=#{year}
+	</select>
+	
+	<insert id="setInsertSeq" parameterType="MemberSeqVO">
+		INSERT INTO MEMBERSEQ
+		VALUES(#{year},1)
+	</insert>
+	<select id="getCollege" resultType="CollegeVO">
+		SELECT * FROM COLLEGE
+	</select>
+	<select id="getDepartment" resultType="DepartmentVO">
+		SELECT * FROM DEPARTMENT
+	</select>
+	
+	
   	<!--계정 생성  -->
   	<insert id="setMemberAdd" parameterType="MemberVO" useGeneratedKeys="true" keyProperty="username">
   		INSERT INTO MEMBER
@@ -39,15 +51,15 @@
   	</insert>
   	
 	 <!-- 회원 조회 -->
-  	<select id="getTotalCountStudent" resultType="Long">
-  		SELECT COUNT(USERNAME) FROM STUDENT
-  	</select>
+  	
   	
   	<select id="getTotalCountProfessor" resultType="Long">
   		SELECT COUNT(USERNAME) FROM PROFESSOR
   	</select>
   	
-  	<select id="getTotalCountAdministrator" resultType="Long">
+  	<select id="getTotalCountStudent" resultType="Long">
+  		SELECT COUNT(USERNAME) FROM STUDENT
+  	</select><select id="getTotalCountAdministrator" resultType="Long">
   		SELECT COUNT(USERNAME) FROM ADMINISTRATOR
   	</select>
   

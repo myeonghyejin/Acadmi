@@ -18,25 +18,12 @@
 	<h1>직원 목록 조회</h1>
 	
 	
-	
-	<div class="card-body">
-		<div>직원번호</div>
-		<input type="text" name="username" id="username">
-		<div>성명</div>
-		<input type="text" name="name" id="name" placeholder="이름을 입력하세요">
-		<div>상태</div>
-		<select id="status" name="status">
-			<option value="1">재직</option>
-			<option value="2">휴직</option>
-			<option value="3">퇴직</option>
-		</select>
-	</div>
-	
 	<table class="table table-hover" border="1">
 		<thead>
    	 		`	<tr>
    	 				<th>쪽지</th>
    	 				<th>사진</th>
+   	 				<th>직원번호</th>
    	 				<th>성명</th>
    	 				<th>연락처</th>
    	 				<th>이메일</th>

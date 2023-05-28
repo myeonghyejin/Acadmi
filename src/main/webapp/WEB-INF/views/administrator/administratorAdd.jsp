@@ -16,7 +16,7 @@
 <body>
 	<h1>직원 계정 생성</h1>
 	<form action="./administratorAdd" method="post">
-		입학년도 <input type="text" name="username"> <br>
+		입학년도 <input type="text" name="year"> <br>
 		비밀번호 <input type="text" name="password"><br>
 		이메일 <input type="email"name="email" > <br>
 		담당학과 
