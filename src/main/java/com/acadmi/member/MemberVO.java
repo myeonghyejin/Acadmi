@@ -10,6 +10,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.acadmi.administrator.AdministratorVO;
+import com.acadmi.professor.ProfessorVO;
+import com.acadmi.student.StudentVO;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -25,8 +27,8 @@ public class MemberVO implements UserDetails {
 	private boolean enabled;
 	private List<MemberFilesVO> memberFilesVOs;
 	private List<RoleVO> roleVOs;
-	private AdministratorVO adminIstratorVO;
 	
+
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

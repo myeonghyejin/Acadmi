@@ -148,13 +148,16 @@
 			</div>
 			<div class="info">
 				<sec:authorize access="hasRole('STUDENT')">
-					<a href="/member/studentPage" class="d-block">STUDENT</a>
+				<sec:authentication property="Principal" var="user"/>
+					<a href="/member/studentPage?username=${user.username}">STUDENT</a>
 				</sec:authorize>
 				<sec:authorize access="hasRole('PROFESSOR')">
-					<a href="/member/professorPage" class="d-block">PROFESSOR</a>
+				<sec:authentication property="Principal" var="user"/>
+					<a href="/member/professorPage?username=${user.username}">PROFESSOR</a>
 				</sec:authorize>
 				<sec:authorize access="hasRole('ADMINISTRATOR')">
-					<a href="/member/administratorPage" class="d-block">ADMINISTRATOR</a>
+				<sec:authentication property="Principal" var="user"/>
+					<a href="/member/administratorPage?username=${user.username}">ADMINISTRATOR</a>
 				</sec:authorize>
 			</div>
 		</div>

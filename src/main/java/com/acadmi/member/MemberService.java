@@ -18,6 +18,9 @@ import org.springframework.validation.BindingResult;
 
 import com.acadmi.administrator.AdministratorDAO;
 import com.acadmi.administrator.AdministratorVO;
+import com.acadmi.department.DepartmentVO;
+import com.acadmi.professor.ProfessorVO;
+import com.acadmi.student.StudentVO;
 import com.acadmi.util.MailManager;
 
 import lombok.extern.slf4j.Slf4j;
@@ -105,19 +108,19 @@ public class MemberService implements UserDetailsService{
 		
 	}
 	
-	public AdministratorVO getStudent(MemberVO memberVO) throws Exception {
+	public DepartmentVO getStudent(StudentVO studentVO) throws Exception {
 		
-		return memberDAO.getStudent(memberVO);
+		return memberDAO.getStudent(studentVO);
 	}
 	
-	public AdministratorVO getProfessor(MemberVO memberVO) throws Exception {
+	public DepartmentVO getProfessor(ProfessorVO professorVO) throws Exception {
 		
-		return memberDAO.getProfessor(memberVO);
+		return memberDAO.getProfessor(professorVO);
 	}
 
-	public AdministratorVO getAdministrator(MemberVO memberVO) throws Exception {
+	public DepartmentVO getAdministrator(AdministratorVO administratorVO) throws Exception {
 	
-		return memberDAO.getAdministrator(memberVO);
+		return memberDAO.getAdministrator(administratorVO);
 	}
 	
 //	======================================================================================================================

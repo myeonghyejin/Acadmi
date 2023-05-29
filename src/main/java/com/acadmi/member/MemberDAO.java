@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.acadmi.administrator.AdministratorVO;
 import com.acadmi.college.CollegeVO;
 import com.acadmi.department.DepartmentVO;
+import com.acadmi.professor.ProfessorVO;
 import com.acadmi.student.StudentVO;
 
 @Mapper
@@ -21,9 +22,9 @@ public interface MemberDAO {
 	public MemberVO getFindPw(MemberVO memberVO) throws Exception;
 	public int setPwUpdate(MemberVO memberVO) throws Exception;
 	
-	public AdministratorVO getStudent(MemberVO memberVO) throws Exception;
-	public AdministratorVO getProfessor(MemberVO memberVO) throws Exception;
-	public AdministratorVO getAdministrator(MemberVO memberVO) throws Exception;
+	public DepartmentVO getStudent(StudentVO studentVO) throws Exception;
+	public DepartmentVO getProfessor(ProfessorVO professorVO) throws Exception;
+	public DepartmentVO getAdministrator(AdministratorVO administratorVO) throws Exception;
 	
 	public int setStudent(MemberVO memberVO) throws Exception;
 	public int setProfessor(MemberVO memberVO) throws Exception;

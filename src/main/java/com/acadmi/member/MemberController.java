@@ -20,6 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.acadmi.administrator.AdministratorService;
+import com.acadmi.administrator.AdministratorVO;
+import com.acadmi.department.DepartmentVO;
+import com.acadmi.professor.ProfessorVO;
+import com.acadmi.student.StudentService;
+import com.acadmi.student.StudentVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -147,47 +152,37 @@ public class MemberController {
 	   
 	   
 	   @GetMapping("studentPage")
-	   public ModelAndView getStudent(HttpSession session) throws Exception {
+	   public ModelAndView getStudent(StudentVO studentVO) throws Exception {
 	      ModelAndView mv = new ModelAndView();
-		     
-	      MemberVO memberVO = new MemberVO();
 	      
-		  Object object = session.getAttribute("SPRING_SECURITY_CONTEXT");
-		  
-		  	 if(object != null) {
-			  mv.setViewName("member/studentPage");
-		     } 
-		     else {
-		        mv.setViewName("redirect:/");
-		     } 
-		  
+	      DepartmentVO departmentVO =  memberService.getStudent(studentVO);
+	      
+	      mv.addObject("departmentVO", departmentVO);
+		  mv.setViewName("member/studentPage");
+		     
 		  return mv;
 	   }
 	   
 	   @GetMapping("professorPage")
-	   public ModelAndView getProfessor(HttpSession session) throws Exception {
+	   public ModelAndView getProfessor(ProfessorVO professorVO) throws Exception {
 		   ModelAndView mv = new ModelAndView();
 		     
-		      MemberVO memberVO = new MemberVO();
-				 
-			  Object object = session.getAttribute("SPRING_SECURITY_CONTEXT");
-			  
-			  mv.addObject("memberVO", object); 
-			  mv.setViewName("member/professorPage");
+		   DepartmentVO departmentVO =  memberService.getProfessor(professorVO);
+		   
+		   mv.addObject("departmentVO", departmentVO);
+		   mv.setViewName("member/professorPage");
 	      
 	      return mv;
 	   }
 	   
 	   @GetMapping("administratorPage")
-	   public ModelAndView getAdministrator(HttpSession session) throws Exception {
+	   public ModelAndView getAdministrator(AdministratorVO administratorVO) throws Exception {
 		   ModelAndView mv = new ModelAndView();
 		     
-		      MemberVO memberVO = new MemberVO();
-				 
-			  Object object = session.getAttribute("SPRING_SECURITY_CONTEXT");
-			  
-			  mv.addObject("memberVO", object); 
-			  mv.setViewName("member/administratorPage");
+		   DepartmentVO departmentVO =  memberService.getAdministrator(administratorVO);
+		   
+		   mv.addObject("departmentVO", departmentVO);
+		   mv.setViewName("member/administratorPage");
 	      
 	      return mv;
 	   }
