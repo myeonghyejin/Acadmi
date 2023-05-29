@@ -22,14 +22,16 @@ public interface MemberDAO {
 	public MemberVO getFindPw(MemberVO memberVO) throws Exception;
 	public int setPwUpdate(MemberVO memberVO) throws Exception;
 	
+//	========================================================================================
+	
 	public DepartmentVO getStudent(StudentVO studentVO) throws Exception;
 	public DepartmentVO getProfessor(ProfessorVO professorVO) throws Exception;
 	public DepartmentVO getAdministrator(AdministratorVO administratorVO) throws Exception;
 	
-	public int setStudent(MemberVO memberVO) throws Exception;
-	public int setProfessor(MemberVO memberVO) throws Exception;
-	public int setAdministrator(MemberVO memberVO) throws Exception;
+//	=========================================================================================
 	
-//	========================================================================================
+	public String setStudentUpdate(StudentVO studentVO) throws Exception;
+	public String setProfessorUpdate(ProfessorVO professorVO) throws Exception;
+	public String setAdministratorUpdate(AdministratorVO administratorVO) throws Exception;
 
 }

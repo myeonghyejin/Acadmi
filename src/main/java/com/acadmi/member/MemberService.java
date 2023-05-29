@@ -108,6 +108,8 @@ public class MemberService implements UserDetailsService{
 		
 	}
 	
+//	======================================================================================================================
+	
 	public DepartmentVO getStudent(StudentVO studentVO) throws Exception {
 		
 		return memberDAO.getStudent(studentVO);
@@ -123,6 +125,20 @@ public class MemberService implements UserDetailsService{
 		return memberDAO.getAdministrator(administratorVO);
 	}
 	
+	
 //	======================================================================================================================
+	
+	
+	public String setStudentUpdate(StudentVO studentVO) throws Exception{
+		return memberDAO.setStudentUpdate(studentVO);
+	}
+	
+	public String setProfessorUpdate(ProfessorVO professorVO) throws Exception{
+		return memberDAO.setProfessorUpdate(professorVO);
+	}
+	
+	public String setAdministratorUpdate(AdministratorVO administratorVO) throws Exception{
+		return memberDAO.setAdministratorUpdate(administratorVO);
+	}
 	
 }

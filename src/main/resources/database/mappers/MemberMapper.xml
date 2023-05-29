@@ -51,7 +51,9 @@
   			UPDATE MEMBER SET PASSWORD = #{password} WHERE USERNAME = #{username}
   		</update>
   		
-  		<!-- ===================================================================== -->
+  		
+ <!-- ============================================================================================================================ -->
+  		
   		
   		<select id="getStudent" parameterType="StudentVO" resultMap="studentResult">
 	  		SELECT * FROM MEMBER M

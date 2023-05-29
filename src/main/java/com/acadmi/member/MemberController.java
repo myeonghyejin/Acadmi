@@ -3,6 +3,7 @@ package com.acadmi.member;
 import java.util.Enumeration;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -151,11 +152,15 @@ public class MemberController {
 		}
 	   
 	   
+//	   ========================================멤버 권한에 따른 마이페이지========================================
+	   
 	   @GetMapping("studentPage")
-	   public ModelAndView getStudent(StudentVO studentVO) throws Exception {
+	   public ModelAndView getStudent(StudentVO studentVO, HttpServletRequest request) throws Exception {
 	      ModelAndView mv = new ModelAndView();
+	      HttpSession session = request.getSession();
 	      
 	      DepartmentVO departmentVO =  memberService.getStudent(studentVO);
+	      session.setAttribute("departmentVO", departmentVO);
 	      
 	      mv.addObject("departmentVO", departmentVO);
 		  mv.setViewName("member/studentPage");
@@ -187,6 +192,89 @@ public class MemberController {
 	      return mv;
 	   }
 	   
-//	   ================================================================================================================
-	  
+	   
+//	   ==================================studentUpdate==================================
+	   
+	   
+//	   @GetMapping("studentUpdate")
+//	   public ModelAndView setStudentUpdate(StudentVO studentVO, HttpServletRequest request) throws Exception {
+//	       ModelAndView mv = new ModelAndView();
+//
+//	       DepartmentVO departmentVO = memberService.getStudent(studentVO);
+//
+//	       mv.addObject("departmentVO", departmentVO);
+//
+//	       // 사용자 정보를 세션에 저장합니다.
+//	       HttpSession session = request.getSession();
+//	       session.setAttribute("departmentVO", departmentVO);
+//
+//	       mv.setViewName("member/studentUpdate");
+//
+//	       return mv;
+//	   }
+//
+//	   
+//	   @PostMapping("studentUpdate")
+//	   public ModelAndView setStudentUpdate(StudentVO studentVO, ModelAndView mv) throws Exception {
+//	
+//	      String student =  memberService.setStudentUpdate(studentVO);
+//	      
+//	      mv.addObject("student", student);
+//		  mv.setViewName("member/studentUpdate");
+//		     
+//		  return mv;
+//	   }
+//	   
+////	   ==================================professorUpdate==================================
+//	   
+//	   @GetMapping("professorUpdate")
+//	   public ModelAndView setProfessorUpdate(ProfessorVO professorVO) throws Exception {
+//		   ModelAndView mv = new ModelAndView();
+//		     
+//		   DepartmentVO departmentVO =  memberService.getProfessor(professorVO);
+//		   
+//		   mv.addObject("departmentVO", departmentVO);
+//		   mv.setViewName("member/professorUpdate");
+//	      
+//	      return mv;
+//	   }
+//	   
+//	   @PostMapping("professorUpdate")
+//	   public ModelAndView setProfessorUpdate(ProfessorVO professorVO, ModelAndView mv) throws Exception {
+//		     
+//		   DepartmentVO departmentVO =  memberService.getProfessor(professorVO);
+//		   
+//		   mv.addObject("departmentVO", departmentVO);
+//		   mv.setViewName("member/professorUpdate");
+//	      
+//	      return mv;
+//	   }
+//	   
+//	   
+////	   ==================================administratorUpdate==================================
+//	   
+//	   
+//	   @GetMapping("administratorUpdate")
+//	   public ModelAndView setAdministratorUpdate(AdministratorVO administratorVO) throws Exception {
+//		   ModelAndView mv = new ModelAndView();
+//		     
+//		   DepartmentVO departmentVO =  memberService.getAdministrator(administratorVO);
+//		   
+//		   mv.addObject("departmentVO", departmentVO);
+//		   mv.setViewName("member/administratorUpdate");
+//	      
+//	      return mv;
+//	   }
+//	   
+//	   @PostMapping("administratorUpdate")
+//	   public ModelAndView setAdministratorUpdate(AdministratorVO administratorVO, ModelAndView mv) throws Exception {
+//		     
+//		   DepartmentVO departmentVO =  memberService.getAdministrator(administratorVO);
+//		   
+//		   mv.addObject("departmentVO", departmentVO);
+//		   mv.setViewName("member/administratorUpdate");
+//	      
+//	      return mv;
+//	   }
+	   
 }

@@ -38,7 +38,7 @@
      	 						
                         <div class="col-lg-3">
                             <div class="d-flex align-items-center mt-lg-5 mb-4">
-                                <img class="img-fluid " src="/images/iu.jpg" alt="..." />
+                                <img class="img-fluid " src="https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927" alt="..." />
                                 <div class="ms-3">
                                     <div class="fw-bold"></div>
                                 </div>

@@ -1,5 +1,7 @@
+<%@page import="com.acadmi.department.DepartmentVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!-- Preloader -->
@@ -137,24 +139,28 @@
 		<div class="user-panel mt-3 pb-3 mb-3 d-flex">
 			<div class="image">
 				<sec:authorize access="hasRole('STUDENT')">
-					<img src="/images/iu.jpg" class="img-circle elevation-2" alt="User Image">
+					<img src="https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927" class="img-circle elevation-2" alt="User Image">
 				</sec:authorize>
+				
 				<sec:authorize access="hasRole('PROFESSOR')">
-					<img src="/images/iu.jpg" class="img-circle elevation-2" alt="User Image">
+					<img src="https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927" class="img-circle elevation-2" alt="User Image">
 				</sec:authorize>
+				
 				<sec:authorize access="hasRole('ADMINISTRATOR')">
-					<img src="/images/iu.jpg" class="img-circle elevation-2" alt="User Image">
+					<img src="https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927" class="img-circle elevation-2" alt="User Image">
 				</sec:authorize>
 			</div>
 			<div class="info">
 				<sec:authorize access="hasRole('STUDENT')">
-				<sec:authentication property="Principal" var="user"/>
-					<a href="/member/studentPage?username=${user.username}">STUDENT</a>
-				</sec:authorize>
+                <sec:authentication property="Principal" var="user"/>
+                    <a href="/member/studentPage?username=${user.username}">STUDENT</a>
+                </sec:authorize>
+                
 				<sec:authorize access="hasRole('PROFESSOR')">
 				<sec:authentication property="Principal" var="user"/>
 					<a href="/member/professorPage?username=${user.username}">PROFESSOR</a>
 				</sec:authorize>
+				
 				<sec:authorize access="hasRole('ADMINISTRATOR')">
 				<sec:authentication property="Principal" var="user"/>
 					<a href="/member/administratorPage?username=${user.username}">ADMINISTRATOR</a>

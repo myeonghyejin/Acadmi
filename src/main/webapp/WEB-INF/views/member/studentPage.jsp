@@ -36,9 +36,9 @@
      	 					<%-- <c:forEach items="${studentVO}" var="memberFilesVOs">
      	 						<c:set value="${memberFilesVOs.fileName}" var="memberFileName"></c:set> --%>
      	 						
-                        <div class="col-lg-3">
+                        <div class="col-lg-3 ">
                             <div class="d-flex align-items-center mt-lg-5 mb-4">
-                                <img class="img-fluid " src="/images/iu.jpg" alt="..." />
+                                <img class="img-fluid ml-auto" src="https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927" alt="..." />
                                 <div class="ms-3">
                                     <div class="fw-bold"></div>
                                 </div>
@@ -51,13 +51,13 @@
                                 <!-- Post header-->
                                 <header class="mb-4">
 		                            <!-- Post title-->
-		                            <h4 class="fw-bolder mb-1 mt-5 mx-5">학과이름 : <c:out value="${studentDeptName}"></c:out></h4>
-		                            <h4 class="fw-bolder mb-1 mt-5 mx-5">학년 : <c:out value="${studentGrade}"></c:out>학년</h4>
-		                            <h4 class="fw-bolder mb-1 mt-5 mx-5">이름 : <c:out value="${studentName}"></c:out></h4>
-		                            <h4 class="fw-bolder mb-1 mt-5 mx-5">전화번호 : <c:out value="${studentPhone}"></c:out></h4>
-		                            <h4 class="fw-bolder mb-1 mt-5 mx-5">생년월일 : <c:out value="${studentBirth}"></c:out></h4>
-		                            <h4 class="fw-bolder mb-1 mt-5 mx-5">이메일 : <c:out value="${studentEmail}"></c:out></h4>
-		                            <h4 class="fw-bolder mb-1 mt-5 mx-5">주소 : <c:out value="${studentAddress}"></c:out></h4>
+		                            <h4 class="fw-bolder mb-1 mt-5 mx-5">학과이름 : &ensp;<c:out value="${studentDeptName}"></c:out></h4>
+		                            <h4 class="fw-bolder mb-1 mt-5 mx-5">학년 : &ensp;<c:out value="${studentGrade}"></c:out>학년</h4>
+		                            <h4 class="fw-bolder mb-1 mt-5 mx-5">이름 : &ensp;<c:out value="${studentName}"></c:out></h4>
+		                            <h4 class="fw-bolder mb-1 mt-5 mx-5">전화번호 : &ensp;<c:out value="${studentPhone}"></c:out></h4>
+		                            <h4 class="fw-bolder mb-1 mt-5 mx-5">생년월일 : &ensp;<c:out value="${studentBirth}"></c:out></h4>
+		                            <h4 class="fw-bolder mb-1 mt-5 mx-5">이메일 : &ensp;<c:out value="${studentEmail}"></c:out></h4>
+		                            <h4 class="fw-bolder mb-1 mt-5 mx-5">주소 : &ensp;<c:out value="${studentAddress}"></c:out></h4>
                                 </header>
                             </article>
                         </div>
@@ -65,7 +65,10 @@
                     <%--     </c:forEach> --%>
                     </div>
                       <div class="d-grid">
-						<button class="btn btn-primary float-right" id="submitButton" type="submit">수정</button>
+                      <sec:authentication property="Principal" var="user"/>
+						<a href="/member/studentUpdate?username=${user.username}" id="studentUpdate" class="btn btn-primary float-right">수정</a>
+                      <%--<a href="./update?num=${boardVO.num}" id="update" class="btn btn-primary float-right">수정</a>
+						<button class="btn btn-primary float-right" id="submitButton" type="submit">수정</button> --%>
 	                  </div>
 	                  
 	           </div>

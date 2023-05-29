@@ -22,16 +22,19 @@
 			
         		 <!-- Page Content-->
             <section class="py-5">
-            
+            <form class="row g-3" action="./studentUpdate" method="post" enctype="multipart/form-data">
+            	<sec:authentication property="Principal" var="user"/>
+				<input type="hidden" name="username" value="${useer.username}">
                 <div class="container px-5 my-5">
                     <div class="row gx-5">
-                    <c:set value="${departmentVO.deptName}" var="administratorDeptName"></c:set>
-                    <c:forEach items="${departmentVO.administratorVOs}" var="administratorVO">
-                    	<c:set var="administratorName" value="${administratorVO.name}"></c:set>
-     	 				<c:set var="administratorPhone" value="${administratorVO.phone}"></c:set>
-     	 				<c:set var="administratorBirth" value="${administratorVO.birth}"></c:set>
-     	 				<c:set var="administratorAddress" value="${administratorVO.address}"></c:set>
-     	 				<c:set var="administratorEmail" value="${administratorVO.email}"></c:set>
+                    <c:set value="${departmentVO.deptName}" var="studentDeptName"></c:set>
+                    <c:forEach items="${departmentVO.studentVOs}" var="studentVO">
+     	 				<c:set var="studentGrade" value="${studentVO.grade}"></c:set>
+                    	<c:set var="studentName" value="${studentVO.name}"></c:set>
+     	 				<c:set var="studentPhone" value="${studentVO.phone}"></c:set>
+     	 				<c:set var="studentBirth" value="${studentVO.birth}"></c:set>
+     	 				<c:set var="studentAddress" value="${studentVO.address}"></c:set>
+     	 				<c:set var="studentEmail" value="${studentVO.email}"></c:set>
      	 					<%-- <c:forEach items="${studentVO}" var="memberFilesVOs">
      	 						<c:set value="${memberFilesVOs.fileName}" var="memberFileName"></c:set> --%>
      	 						
@@ -50,23 +53,26 @@
                                 <!-- Post header-->
                                 <header class="mb-4">
 		                            <!-- Post title-->
-		                            <h4 class="fw-bolder mb-1 mt-5 mx-5">학과이름 : <c:out value="${administratorDeptName}"></c:out></h4>
-		                            <h4 class="fw-bolder mb-1 mt-5 mx-5">이름 : <c:out value="${administratorName}"></c:out></h4>
-		                            <h4 class="fw-bolder mb-1 mt-5 mx-5">전화번호 : <c:out value="${administratorPhone}"></c:out></h4>
-		                            <h4 class="fw-bolder mb-1 mt-5 mx-5">생년월일 : <c:out value="${administratorBirth}"></c:out></h4>
-		                            <h4 class="fw-bolder mb-1 mt-5 mx-5">이메일 : <c:out value="${administratorEmail}"></c:out></h4>
-		                            <h4 class="fw-bolder mb-1 mt-5 mx-5">주소 : <c:out value="${administratorAddress}"></c:out></h4>
+		                            <h4 class="fw-bolder mb-1 mt-5 mx-5">학과이름 : <c:out value="${studentDeptName}"></c:out></h4>
+		                            <h4 class="fw-bolder mb-1 mt-5 mx-5">학년 : <c:out value="${studentGrade}"></c:out>학년</h4>
+		                            <h4 class="fw-bolder mb-1 mt-5 mx-5">이름 : <c:out value="${studentName}"></c:out></h4>
+		                            <h4 class="fw-bolder mb-1 mt-5 mx-5">전화번호 : <c:out value="${studentPhone}"></c:out></h4>
+		                            <h4 class="fw-bolder mb-1 mt-5 mx-5">생년월일 : <c:out value="${studentBirth}"></c:out></h4>
+		                            <h4 class="fw-bolder mb-1 mt-5 mx-5">이메일 : <c:out value="${studentEmail}"></c:out></h4>
+		                            <h4 class="fw-bolder mb-1 mt-5 mx-5">주소 : <c:out value="${studentAddress}"></c:out></h4>
                                 </header>
                             </article>
                         </div>
                         </c:forEach>
                     <%--     </c:forEach> --%>
                     </div>
+              
                       <div class="d-grid">
 						<button class="btn btn-primary float-right" id="submitButton" type="submit">수정</button>
 	                  </div>
 	                  
 	           </div>
+	           </form>
 	     	</section>
      	
 
