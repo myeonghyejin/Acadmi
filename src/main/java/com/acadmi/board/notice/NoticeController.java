@@ -74,7 +74,9 @@ public class NoticeController {
 		
 		int result = noticeService.setInsert(noticeVO, addfiles);
 		
-		result = notificationService.setIptNotice(noticeVO);
+		if(noticeVO.getImportant()==1) {
+			result = notificationService.setIptNotice(noticeVO);
+		}
 		
 		mv.setViewName("redirect:./list");
 		

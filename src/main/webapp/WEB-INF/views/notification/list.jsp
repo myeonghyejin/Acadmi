@@ -107,10 +107,10 @@
 												</td>
 												<td>${notificationVO.notificationDate}</td>
 												<c:if test="${notificationVO.notificationStatus == 0 or notificationVO.notificationStatus == 1}">
-													<td><button type="button" class="float-right btn btn-primary" id="saveNotification" data-notification-num="${notificationVO.notificationNum}" data-notification-kind="${notificationVO.notificationKind}">알림저장</button></td>
+													<td><button type="button" class="float-right btn btn-primary saveNotification" data-notification-num="${notificationVO.notificationNum}" data-notification-kind="${notificationVO.notificationKind}">알림저장</button></td>
 												</c:if>
 												<c:if test="${notificationVO.notificationStatus eq 2}">
-													<td><button type="button" class="float-right btn btn-primary" id="cancleNotification" data-notification-num="${notificationVO.notificationNum}" data-notification-kind="${notificationVO.notificationKind}">저장취소</button></td>
+													<td><button type="button" class="float-right btn btn-primary cancleNotification" data-notification-num="${notificationVO.notificationNum}" data-notification-kind="${notificationVO.notificationKind}">저장취소</button></td>
 												</c:if>
 									 		</tr>
 									 	</c:forEach>
