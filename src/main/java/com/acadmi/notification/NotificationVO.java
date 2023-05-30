@@ -11,7 +11,6 @@ public class NotificationVO {
 	
 	private Long notificationNum;
 	private String recipient;
-	private String sender;
 	private String notificationMsg;
 	private Date notificationDate;
 	private Integer notificationStatus;

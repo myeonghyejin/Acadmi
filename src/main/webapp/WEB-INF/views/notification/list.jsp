@@ -29,6 +29,7 @@
 					<!-- Contents -->
 					<div class="col">
 						<div class=layout>
+							<!-- 알림의 종류의 네비바 -->
 							<div>
 								<ul class="navbar navbar-pills nav-fill">
 									<li class="nav-item">
@@ -63,6 +64,7 @@
 									</sec:authorize>
 								</ul>
 							</div>
+							<!-- 알림 내용 -->
 							<div class="row">
 								<table class="table">
 									 <thead>
@@ -70,6 +72,7 @@
 									 		<th>번호</th>
 									 		<th>알림</th>
 									 		<th>날짜</th>
+									 		<th></th>
 									 	</tr>
 									 </thead>
 									 <tbody>
@@ -77,15 +80,38 @@
 									 		<tr>
 									 			<td>${notificationVO.notificationNum}</td>
 									 			<td>
+									 				<!-- 나중에 a링크 경로 바꿔야한다 -->
 									 				<c:if test="${notificationVO.notificationKind eq 1}">
-									 					[공지]
+									 					<a href="../notice/detail?num=${notificationVO.num}&notificationNum=${notificationVO.notificationNum}">
 									 				</c:if>
 									 				<c:if test="${notificationVO.notificationKind eq 2}">
-									 					[답글]
+									 					<a href="../qna/detail?num=${notificationVO.num}">
 									 				</c:if>
-									 				${notificationVO.notificationMsg}
+									 				<c:if test="${notificationVO.notificationKind eq 3}">
+									 					<a href="../qna/detail?num=${notificationVO.num}">
+									 				</c:if>
+									 				<c:if test="${notificationVO.notificationKind eq 4}">
+									 					<a href="../lecture/notice/detail?num=${notificationVO.num}">
+									 				</c:if>
+									 				<c:if test="${notificationVO.notificationKind eq 5}">
+									 					<a href="../lecture/qna/detail?num=${notificationVO.num}">
+									 				</c:if>
+									 				<c:if test="${notificationVO.notificationKind eq 6}">
+									 					<a href="../lecture/qna/detail?num=${notificationVO.num}">
+									 				</c:if>
+									 				<c:if test="${notificationVO.notificationKind eq 7}">
+									 					<a href="../lecture/detail?num=${notificationVO.lectureNum}">
+									 				</c:if>
+									 						${notificationVO.notificationMsg}
+									 					</a>
 												</td>
 												<td>${notificationVO.notificationDate}</td>
+												<c:if test="${notificationVO.notificationStatus == 0 or notificationVO.notificationStatus == 1}">
+													<td><button type="button" class="float-right btn btn-primary" id="saveNotification" data-notification-num="${notificationVO.notificationNum}" data-notification-kind="${notificationVO.notificationKind}">알림저장</button></td>
+												</c:if>
+												<c:if test="${notificationVO.notificationStatus eq 2}">
+													<td><button type="button" class="float-right btn btn-primary" id="cancleNotification" data-notification-num="${notificationVO.notificationNum}" data-notification-kind="${notificationVO.notificationKind}">저장취소</button></td>
+												</c:if>
 									 		</tr>
 									 	</c:forEach>
 									 </tbody>
@@ -99,9 +125,8 @@
 		<!-- Footer 적용 -->
 		<c:import url="../temp/footer.jsp"></c:import>
 		<!-- Footer 끝 -->
-
+		<script src="../js/notification/notificationList.js"></script>
 	</div>
 <!-- ./wrapper -->
-	<script src="../js/notification/notificationList.js"></script>
 </body>
 </html>

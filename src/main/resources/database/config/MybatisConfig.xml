@@ -5,7 +5,7 @@
   
   <configuration>
   	<typeAliases>
-  		<typeAlias type="com.acadmi.student.Student_lectureVO" alias="Student_lectureVO"/>
+  		<typeAlias type="com.acadmi.student.lecture.Student_lectureVO" alias="Student_lectureVO"/>
   		<typeAlias type="com.acadmi.board.lectureQna.LectureQnaVO" alias="LectureQnaVO"/>
   		<typeAlias type="java.lang.Long" alias="Long"/>
   		

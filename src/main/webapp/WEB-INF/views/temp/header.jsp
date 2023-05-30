@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!-- Preloader -->
 <div class="preloader flex-column justify-content-center align-items-center">
@@ -22,27 +23,53 @@
 		<li class="nav-item dropdown">
 			<a class="nav-link" data-toggle="dropdown" href="#">
 				<i class="far fa-bell"></i>
-				<span class="badge badge-warning navbar-badge" id="notification">1</span>
+				<span class="badge badge-warning navbar-badge" id="notification"></span>
 			</a>
 			<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-				<span class="dropdown-item dropdown-header" id="allNotification">0개의 알림</span>
+				<span class="dropdown-item dropdown-header" id="allNotification"></span>
 					<div class="dropdown-divider"></div>
 						<a href="/notification/list?notificationKind=1" class="dropdown-item">
-							<i class="fas fa-envelope mr-2" id="noticeNotification"></i> 
-							<span>4 new messages</span>
+							<i class="fas fa-envelope mr-2"></i> 
+							<span id="noticeNotification"></span>
 						</a>
+					<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
 					<div class="dropdown-divider"></div>
 						<a href="/notification/list?notificationKind=2" class="dropdown-item">
-							<i class="fas fa-users mr-2" id="qnaNotification"></i>
-							<span>8 friend requests</span>
+							<i class="fas fa-users mr-2"></i>
+							<span id="qnaNotification"></span>
 						</a>
 					<div class="dropdown-divider"></div>
-						<a href="/notification/list?notificationKind=3" class="dropdown-item">
+						<a href="/notification/list?notificationKind=7" class="dropdown-item">
 							<i class="fas fa-file mr-2"></i>
-							<span>3 new reports</span>
+							<span id="lectureNotification"></span>
 						</a>
+					</sec:authorize>
+					<sec:authorize access="hasRole('ROLE_PROFESSOR')">
+						<a href="/notification/list?notificationKind=3" class="dropdown-item">
+							<i class="fas fa-users mr-2"></i>
+							<span id="qnaReplyNotification"></span>
+						</a>
+						<a href="/notification/list?notificationKind=5" class="dropdown-item">
+							<i class="fas fa-users mr-2"></i>
+							<span id="lectureQnaNotification"></span>
+						</a>
+					</sec:authorize>
+					<sec:authorize access="hasRole('ROLE_STUDENT')">
+						<a href="/notification/list?notificationKind=4" class="dropdown-item">
+							<i class="fas fa-users mr-2"></i>
+							<span id="lectureNoticeNotification"></span>
+						</a>
+						<a href="/notification/list?notificationKind=3" class="dropdown-item">
+							<i class="fas fa-users mr-2"></i>
+							<span id="qnaReplyNotification"></span>
+						</a>
+						<a href="/notification/list?notificationKind=6" class="dropdown-item">
+							<i class="fas fa-users mr-2"></i>
+							<span id="lectureQnaReplyNotification"></span>
+						</a>
+					</sec:authorize>
 					<div class="dropdown-divider"></div>
-				<a href="/notification/list?notificationKind=1" class="dropdown-item dropdown-footer">See All Notifications</a>
+				<a href="/notification/list?notificationKind=1" class="dropdown-item dropdown-footer">알림 전체보기</a>
 			</div>
 		</li>
 

@@ -1,4 +1,4 @@
-package com.acadmi.student;
+package com.acadmi.student.lecture;
 
 import lombok.Getter;
 import lombok.Setter;

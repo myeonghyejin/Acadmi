@@ -11,15 +11,21 @@ import com.acadmi.board.lectureQna.LectureQnaVO;
 import com.acadmi.board.qna.QnaVO;
 import com.acadmi.lecture.LectureVO;
 import com.acadmi.student.StudentVO;
-import com.acadmi.student.Student_lectureVO;
+import com.acadmi.student.lecture.Student_lectureVO;
 
 @Mapper
 public interface NotificationDAO {
 	
+	//전체 알림 list
+	public List<NotificationVO> getnotificationist(NotificationVO notificationVO) throws Exception;
+	
+	//kind에 따른 새 알림 list
+	public List<NotificationVO> getnotificationKindList(NotificationVO notificationVO) throws Exception;
+	
 	//kind에 따른 알림 list
 	public List<NotificationVO> getKindList(NotificationVO notificationVO) throws Exception;
 	
-	//알림 저장
+	//알림 생성
 	public int setNotification(NotificationVO notificationVO) throws Exception;
 	
 	//알림 보낼 전체 멤버list 출력
@@ -45,5 +51,15 @@ public interface NotificationDAO {
 	
 	//lectureQna의 원글을 가져오는 것
 	public LectureQnaVO getOriginalLectureQna(LectureQnaVO lectureQnaVO) throws Exception;
+	
+	//읽은 알림 삭제
+	public int setDelete(NotificationVO notificationVO) throws Exception;
+	
+	//알림 detail
+	public NotificationVO getDetail(NotificationVO notificationVO) throws Exception;
+	
+	//알림의 저장 처리
+	public int setNotificationSave(NotificationVO notificationVO) throws Exception;
+	
 
 }
