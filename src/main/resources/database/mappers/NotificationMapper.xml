@@ -14,7 +14,7 @@
   	<!-- kind에 따른 새 알림 list -->
   	<select id="getnotificationKindList" parameterType="NotificationVO" resultType="NotificationVO">
   		SELECT * FROM NOTIFICATION
-  		WEHRE NOTIFICATIONKIND = #{notificationKind} AND RECIPIENT = #{recipient} AND NOTIFICATIONSTATUS = 0
+  		WHERE NOTIFICATIONKIND = #{notificationKind} AND RECIPIENT = #{recipient} AND NOTIFICATIONSTATUS = 0
   	</select>
   	
   	<!-- kind에 따른 알림 list -->
