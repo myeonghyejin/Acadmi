@@ -36,13 +36,13 @@ public class StudentLectureService {
 	}
 	
 	//내 수강 신청 조회
-	public List<StudentLectureVO> getMyLectureList(StudentLectureVO studentLectureVO, HttpSession session, Pagination pagination) throws Exception {
-		return studentLectureDAO.getMyLectureList(studentLectureVO, pagination);
+	public List<StudentLectureVO> getMyLectureList(StudentLectureVO studentLectureVO) throws Exception {
+		return studentLectureDAO.getMyLectureList(studentLectureVO);
 	}
 	
 	//내 장바구니 조회
-	public List<FavoriteLectureVO> getMyFavoriteList(FavoriteLectureVO favoriteLectureVO, HttpSession session, Pagination pagination) throws Exception {
-		return studentLectureDAO.getMyFavoriteList(favoriteLectureVO, pagination);
+	public List<FavoriteLectureVO> getMyFavoriteList(FavoriteLectureVO favoriteLectureVO) throws Exception {
+		return studentLectureDAO.getMyFavoriteList(favoriteLectureVO);
 	}
 	
 	//수강한 강의인지 아닌지 확인

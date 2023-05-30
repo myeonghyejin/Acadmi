@@ -5,6 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -49,16 +51,13 @@ public class StudentLectureController {
 	
 	//내 수강 신청 조회
 	@GetMapping("my_lecture")
-	public ModelAndView getMyLectureList(StudentLectureVO studentLectureVO, HttpSession session, Pagination pagination, ModelAndView mv) throws Exception {
-//		MemberVO memberVO = (MemberVO)session.getAttribute("member");
-//		
-//		studentLectureVO.setUsername(memberVO.getUsername());
-//		
-//		studentLectureVO.setUsername("student");
+	public ModelAndView getMyLectureList(StudentLectureVO studentLectureVO, HttpSession session, ModelAndView mv) throws Exception {
+		Object obj = session.getAttribute("SPRING_SECURITY_CONTEXT");
+		SecurityContextImpl contextImpl = (SecurityContextImpl)obj;
+		Authentication authentication = contextImpl.getAuthentication();
+		studentLectureVO.setUsername(authentication.getName());
 		
-//		log.error("member : {}", studentLectureVO.getUsername());
-		
-		List<StudentLectureVO> ar = studentLectureService.getMyLectureList(studentLectureVO, session, pagination);
+		List<StudentLectureVO> ar = studentLectureService.getMyLectureList(studentLectureVO);
 		
 		mv.addObject("list", ar);
 		mv.setViewName("student/lecture/my_lecture");
@@ -68,12 +67,21 @@ public class StudentLectureController {
 	
 	//내 장바구니 조회
 	@GetMapping("my_favorite")
-	public ModelAndView getMyFavoriteList(FavoriteLectureVO favoriteLectureVO, HttpSession session, Pagination pagination, ModelAndView mv) throws Exception {
-//		MemberVO memberVO = (MemberVO)session.getAttribute("member");
-//		
-//		favoriteLectureVO.setUsername(memberVO.getUsername());
+	public ModelAndView getMyFavoriteList(ModelAndView mv) throws Exception {
+		mv.setViewName("student/lecture/my_favorite");
 		
-		List<FavoriteLectureVO> ar = studentLectureService.getMyFavoriteList(favoriteLectureVO, session, pagination);
+		return mv;
+	}
+	
+	//ajax 내 장바구니 조회
+	@GetMapping("my_favorite/list")
+	public ModelAndView getMyFavoriteList(FavoriteLectureVO favoriteLectureVO, HttpSession session, ModelAndView mv) throws Exception {		
+		Object obj = session.getAttribute("SPRING_SECURITY_CONTEXT");
+		SecurityContextImpl contextImpl = (SecurityContextImpl)obj;
+		Authentication authentication = contextImpl.getAuthentication();
+		favoriteLectureVO.setUsername(authentication.getName());
+		
+		List<FavoriteLectureVO> ar = studentLectureService.getMyFavoriteList(favoriteLectureVO);
 		
 		mv.addObject("list", ar);
 		mv.setViewName("student/lecture/my_favorite");
@@ -84,7 +92,7 @@ public class StudentLectureController {
 	//시간표 조회
 	@GetMapping("timetable")
 	public ModelAndView getTimetableList(StudentLectureVO studentLectureVO, HttpSession session, Pagination pagination, ModelAndView mv) throws Exception {
-		List<StudentLectureVO> ar = studentLectureService.getMyLectureList(studentLectureVO, session, pagination);
+		List<StudentLectureVO> ar = studentLectureService.getMyLectureList(studentLectureVO);
 		
 		mv.addObject("list", ar);
 		mv.setViewName("student/lecture/timetable");
@@ -98,9 +106,10 @@ public class StudentLectureController {
 	public ModelAndView setStudentLectureInsert(StudentLectureVO studentLectureVO, LectureVO lectureVO, HttpSession session, ModelAndView mv) throws Exception {
 		int result = 0;
 		
-//		MemberVO memberVO = (MemberVO)session.getAttribute("member");
-//		
-//		studentLectureVO.setUsername(memberVO.getUsername());
+		Object obj = session.getAttribute("SPRING_SECURITY_CONTEXT");
+		SecurityContextImpl contextImpl = (SecurityContextImpl)obj;
+		Authentication authentication = contextImpl.getAuthentication();
+		studentLectureVO.setUsername(authentication.getName());
 		
 		if(studentLectureService.getMyLecture(studentLectureVO) == null) {
 			studentLectureService.setSubscriptionAddUpdate(lectureVO);
@@ -120,9 +129,10 @@ public class StudentLectureController {
 	public ModelAndView setFavoriteLectureInsert(FavoriteLectureVO favoriteLectureVO, LectureVO lectureVO, HttpSession session, ModelAndView mv) throws Exception {
 		int result = 0;
 		
-//		MemberVO memberVO = (MemberVO)session.getAttribute("member");
-//		
-//		favoriteLectureVO.setUsername(memberVO.getUsername());
+		Object obj = session.getAttribute("SPRING_SECURITY_CONTEXT");
+		SecurityContextImpl contextImpl = (SecurityContextImpl)obj;
+		Authentication authentication = contextImpl.getAuthentication();
+		favoriteLectureVO.setUsername(authentication.getName());
 		
 		if(studentLectureService.getMyFavorite(favoriteLectureVO) == null) {
 			result = studentLectureService.setFavoriteLectureInsert(favoriteLectureVO, lectureVO, session);
@@ -140,9 +150,10 @@ public class StudentLectureController {
 	public ModelAndView setStudentLectureDelete(StudentLectureVO studentLectureVO, LectureVO lectureVO, HttpSession session, ModelAndView mv) throws Exception {
 		int result = 0;
 		
-//		MemberVO memberVO = (MemberVO)session.getAttribute("member");
-//		
-//		studentLectureVO.setUsername(memberVO.getUsername());
+		Object obj = session.getAttribute("SPRING_SECURITY_CONTEXT");
+		SecurityContextImpl contextImpl = (SecurityContextImpl)obj;
+		Authentication authentication = contextImpl.getAuthentication();
+		studentLectureVO.setUsername(authentication.getName());
 		
 		if(studentLectureService.getMyLecture(studentLectureVO) != null) {
 			studentLectureService.setSubscriptionDeleteUpdate(lectureVO);
@@ -160,9 +171,10 @@ public class StudentLectureController {
 	public ModelAndView setFavoriteLectureDelete(FavoriteLectureVO favoriteLectureVO, LectureVO lectureVO, HttpSession session, ModelAndView mv) throws Exception {
 		int result = 0;
 		
-//		MemberVO memberVO = (MemberVO)session.getAttribute("member");
-//		
-//		favoriteLectureVO.setUsername(memberVO.getUsername());
+		Object obj = session.getAttribute("SPRING_SECURITY_CONTEXT");
+		SecurityContextImpl contextImpl = (SecurityContextImpl)obj;
+		Authentication authentication = contextImpl.getAuthentication();
+		favoriteLectureVO.setUsername(authentication.getName());
 		
 		if(studentLectureService.getMyFavorite(favoriteLectureVO) != null) {
 			log.error("hi");

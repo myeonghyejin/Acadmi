@@ -43,7 +43,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		LIMIT #{startRow}, #{perPage}
 	</select>
 	
-	<select id="getMyLectureList" parameterType="Pagination" resultMap="LectureList">
+	<select id="getMyLectureList" parameterType="StudentLectureVO" resultMap="LectureList">
 		SELECT L.*, D.DEPTNAME
 		FROM STUDENT_LECTURE SL
 			LEFT OUTER JOIN
@@ -52,14 +52,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				INNER JOIN
 				DEPARTMENT D
 				ON D.DEPTNUM = L.DEPTNUM
-					<!-- INNER JOIN
+					INNER JOIN
 					STUDENT S
 					ON S.USERNAME = SL.USERNAME
-		WHERE S.USERNAME = #{username} -->
+		WHERE S.USERNAME = #{username}
 		ORDER BY LECTURENUM DESC
 	</select>
 	
-	<select id="getMyFavoriteList" parameterType="Pagination" resultMap="LectureList">
+	<select id="getMyFavoriteList" parameterType="FavoriteLectureVO" resultMap="LectureList">
 		SELECT FL.FAVORITENUM, L.*, D.DEPTNAME
 		FROM FAVORITE_LECTURE FL
 			LEFT OUTER JOIN
@@ -68,10 +68,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				INNER JOIN
 				DEPARTMENT D
 				ON D.DEPTNUM = L.DEPTNUM
-					<!-- INNER JOIN
+					INNER JOIN
 					STUDENT S
 					ON S.USERNAME = FL.USERNAME
-		WHERE S.USERNAME = #{username} -->
+		WHERE S.USERNAME = #{username}
 		ORDER BY FAVORITENUM DESC
 	</select>
 	
@@ -146,14 +146,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT *
 		FROM STUDENT_LECTURE
 		WHERE LECTURENUM = #{lectureNum}
-		<!-- AND USERNAME = #{username} -->
+		AND USERNAME = #{username}
 	</select>
 	
 	<select id="getMyFavorite" parameterType="FavoriteLectureVO" resultType="FavoriteLectureVO">
 		SELECT *
 		FROM FAVORITE_LECTURE
 		WHERE LECTURENUM = #{lectureNum}
-		<!-- AND USERNAME = #{username} -->
+		AND USERNAME = #{username}
 	</select>
 	
 	<!-- INSERT -->
@@ -164,7 +164,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<insert id="setFavoriteLectureInsert" parameterType="FavoriteLectureVO">
 		INSERT INTO FAVORITE_LECTURE (FAVORITENUM, LECTURENUM, USERNAME)
-		VALUES (#{favoriteNum}, #{lectureNum}, #{username})
+		VALUES (#{favoriteNum}, #{lectureNum}, 'student')
 	</insert>
 	
 	<!-- UPDATE -->
@@ -185,7 +185,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		DELETE
 		FROM STUDENT_LECTURE
 		WHERE LECTURENUM = #{lectureNum}
-		<!-- AND USERNAME = #{username} -->
+		AND USERNAME = #{username}
 	</delete>
 	
 	<delete id="setFavoriteLectureDelete" parameterType="FavoriteLectureVO">
