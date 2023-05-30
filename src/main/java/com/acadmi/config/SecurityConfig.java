@@ -49,12 +49,12 @@ public class SecurityConfig {
                
                .authorizeRequests()
                   // URL과 권한 매칭
-//                  .antMatchers("/member/login").permitAll()
-//                  .antMatchers("/member/join").permitAll()
+                  .antMatchers("/member/login").permitAll()
+                  .antMatchers("/member/join").permitAll()
 //                  .antMatchers("/test").authenticated()
 //                  	.antMatchers("/").permitAll()
                   .antMatchers("/").hasAnyRole("ADMIN", "ADMINISTRATOR", "PROFESSOR", "STUDENT")
-                  .anyRequest().permitAll()
+//                  .anyRequest().permitAll()
                   .and()
                .formLogin()
                   .loginPage("/member/login")
