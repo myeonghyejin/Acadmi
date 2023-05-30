@@ -51,7 +51,7 @@
 					<section class="content">
 					
 						<!-- Search -->
-						<form action="./all_lecture/list">
+						<form action="./all_lecture/list" id="search-form">
 							<input type="hidden" name="page" value="1">
 							<div class="row justify-content-center mx-auto mb-3">
 								<div class="col-md-6">
@@ -94,7 +94,7 @@
 										<div class="input-group input-group-lg">
 											<input type="text" class="form-control form-control-lg" placeholder="강의 이름을 입력하세요." name="search" value="${pagination.search}">
 											<div class="input-group-append">
-												<button type="submit" class="btn btn-lg btn-default">
+												<button type="submit" class="btn btn-lg btn-default" id="submit">
 													<i class="fa fa-search"></i>
 												</button>
 											</div>

@@ -18,6 +18,9 @@ $("#allLectureList").on("click",".page-button", function(e){
     e.preventDefault();
 });
 
+//search
+
+
 //my_lecture_insert
 $("#allLectureList").on("click","#mli",function(e){
 	let check = window.confirm("신청하시겠습니까?");
