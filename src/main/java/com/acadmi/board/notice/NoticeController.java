@@ -15,6 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.acadmi.board.BoardVO;
+import com.acadmi.notification.NotificationService;
+import com.acadmi.notification.NotificationVO;
 import com.acadmi.util.FileVO;
 import com.acadmi.util.Pagination;
 
@@ -24,6 +26,9 @@ public class NoticeController {
 
 	@Autowired
 	private NoticeService noticeService;
+	
+	@Autowired
+	private NotificationService notificationService;
 	
 	@ModelAttribute("board")
 	public String getBoardName() {
@@ -69,18 +74,24 @@ public class NoticeController {
 		
 		int result = noticeService.setInsert(noticeVO, addfiles);
 		
+		result = notificationService.setIptNotice(noticeVO);
+		
 		mv.setViewName("redirect:./list");
 		
 		return mv;
 	}
 	
 	@GetMapping("detail")
-	public ModelAndView getDetail(NoticeVO noticeVO) throws Exception {
+	public ModelAndView getDetail(NoticeVO noticeVO, NotificationVO notificationVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
 		noticeVO = (NoticeVO)noticeService.getDetail(noticeVO);
 		
 		int result = noticeService.setNoticeHit(noticeVO);
+		
+		if(notificationVO != null) {
+			result = notificationService.setDelete(notificationVO);
+		}
 		
 		mv.addObject("boardVO", noticeVO);
 		mv.setViewName("board/detail");

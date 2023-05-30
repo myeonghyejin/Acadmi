@@ -27,7 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Slf4j
 @Transactional(rollbackFor = Exception.class)
-public class AdministratorService implements UserDetailsService{
+public class AdministratorService {
 	
 	@Autowired
 	private AdministratorDAO administratorDAO;
@@ -395,17 +395,7 @@ public class AdministratorService implements UserDetailsService{
 		return administratorDAO.setLectureRoomUpdate(lectureRoomVO);
 	}
 
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		// TODO Auto-generated method stub
-				log.error("============Spring Security Login============");
-				log.error("====================={}=====================", username);
-				
-				MemberVO memberVO = new MemberVO();
-				memberVO.setUsername(username);
-				
-				return memberVO;
-	}
+	
 	
 
 }
