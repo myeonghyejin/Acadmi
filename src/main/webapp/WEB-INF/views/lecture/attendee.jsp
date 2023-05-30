@@ -22,25 +22,27 @@
 			<c:import url="../temp/sidebar/professor_lecture.jsp"></c:import>
 					<section class="bg-light py-5">
 		                <div class="container px-5 my-5">
-		                <h1 class="fw-bolder">${main.lectureName}</h1>
-		                <form action="./main" method="get">
+		                <h1 class="fw-bolder">${attendee.lectureName}</h1>
+		                <form action="./attendee" method="get">
 		                    <div class="row gx-5 my-3">
 		                    
 		                    	<table class="table table-hover">
 		                    		<thead style="background-color: black; color: white;">
 			                    		<tr>
-			                    			<th>교수명</th>
-			                    			<th>사무실</th>
-			                    			<th>전화번호</th>
+			                    			<th>학번</th>
+			                    			<th>이름</th>
+			                    			<th>학과</th>
 			                    			<th>이메일</th>
+			                    			<th>전화번호</th>
 			                    		</tr>
 			                    	</thead>
 			                    	<tbody>
 			                    			<tr>
-			                    				<td>${main.professorVO.name}</td>
-			                    					<td>${main.professorVO.professorRoom}</td>
-		 											<td>${main.professorVO.phone}</td>
-		 											<td>${main.professorVO.email}</td>
+			                    				<td>${attendee.studentVO.userName}</td>
+			                    					<td>${attendee.studentVO.name}</td>
+		 											<td>${attendee.studentVO.deptNum}</td>
+		 											<td>${attendee.studentVO.email}</td>
+		 											<td>${attendee.studentVO.phone}</td>
 			                    			</tr>
 			                    	</tbody>
 		                    	</table>

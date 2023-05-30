@@ -11,7 +11,6 @@ import lombok.Setter;
 @Setter
 public class ProfessorVO extends MemberVO{
 	private Integer deptNum;
-	private String userName;
 	private String name;
 	private String professorRoom;
 	private String phone;

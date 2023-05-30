@@ -10,6 +10,7 @@ public interface LectureDAO {
 	public List<LectureVO> getLectureList(LectureVO lectureVO) throws Exception;
 	public LectureVO getLectureDetail(LectureVO lectureVO) throws Exception;
 	public LectureVO getLectureMain(LectureVO lectureVO) throws Exception;
+	public LectureVO getLectureAttendee(LectureVO lectureVO) throws Exception;
 	public int setLectureAdd(LectureVO lectureVO) throws Exception;
 	public int setTemporaryAdd(LectureVO lectureVO) throws Exception;
 	public int setLectureUpdate(LectureVO lectureVO) throws Exception;

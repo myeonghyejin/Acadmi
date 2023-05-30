@@ -18,7 +18,7 @@
 	<div id="submenu_1" class="sidebar-dropdown-content">
 		<a href="./info?lectureNum=2">강의 상세</a>
 		<a href="./syllabus">강의 계획서</a>
-		<a href="./attendee">참여자 목록</a>
+		<a href="./attendee?lectureNum=2">참여자 목록</a>
 	</div>
 	
 	<!-- Submenu_2 -->

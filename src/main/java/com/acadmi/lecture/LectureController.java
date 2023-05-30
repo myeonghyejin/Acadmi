@@ -103,5 +103,14 @@ public class LectureController {
 		mv.setViewName("lecture/info");
 		return mv;
 	}
+	
+	@GetMapping("attendee")
+	public ModelAndView getLectureAttendee(LectureVO lectureVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		lectureVO = lectureService.getLectureAttendee(lectureVO);
+		mv.addObject("attendee",lectureVO);
+		mv.setViewName("lecture/attendee");
+		return mv;
+	}
 
 }
