@@ -57,12 +57,12 @@ public class StudentLectureService {
 	
 	/** INSERT **/
 	//수강 신청
-	public int setStudentLectureInsert(StudentLectureVO studentLectureVO, LectureVO lectureVO) throws Exception {
+	public int setStudentLectureInsert(StudentLectureVO studentLectureVO, LectureVO lectureVO, HttpSession session) throws Exception {
 		return studentLectureDAO.setStudentLectureInsert(studentLectureVO);
 	}
 	
 	//장바구니 담기
-	public int setFavoriteLectureInsert(FavoriteLectureVO favoriteLectureVO, LectureVO lectureVO) throws Exception {
+	public int setFavoriteLectureInsert(FavoriteLectureVO favoriteLectureVO, LectureVO lectureVO, HttpSession session) throws Exception {
 		return studentLectureDAO.setFavoriteLectureInsert(favoriteLectureVO);
 	}
 	
@@ -79,12 +79,12 @@ public class StudentLectureService {
 	
 	/** DELETE **/
 	//수강 취소
-	public int setStudentLectureDelete(StudentLectureVO studentLectureVO, LectureVO lectureVO) throws Exception {
+	public int setStudentLectureDelete(StudentLectureVO studentLectureVO, LectureVO lectureVO, HttpSession session) throws Exception {
 		return studentLectureDAO.setStudentLectureDelete(studentLectureVO);
 	}
 	
 	//장바구니 빼기
-	public int setFavoriteLectureDelete(FavoriteLectureVO favoriteLectureVO, LectureVO lectureVO) throws Exception {
+	public int setFavoriteLectureDelete(FavoriteLectureVO favoriteLectureVO, LectureVO lectureVO, HttpSession session) throws Exception {
 		return studentLectureDAO.setFavoriteLectureDelete(favoriteLectureVO);
 	}
 	

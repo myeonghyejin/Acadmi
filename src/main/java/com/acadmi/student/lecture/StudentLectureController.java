@@ -34,6 +34,7 @@ public class StudentLectureController {
 		return mv;
 	}
 	
+	//ajax 수강 신청 & 장바구니 조회
 	@GetMapping("all_lecture/list")
 	public ModelAndView getAllLectureList(Pagination pagination, ModelAndView mv) throws Exception {
 		List<LectureVO> ar = studentLectureService.getAllLectureList(pagination);
@@ -50,8 +51,10 @@ public class StudentLectureController {
 	@GetMapping("my_lecture")
 	public ModelAndView getMyLectureList(StudentLectureVO studentLectureVO, HttpSession session, Pagination pagination, ModelAndView mv) throws Exception {
 //		MemberVO memberVO = (MemberVO)session.getAttribute("member");
-		
+//		
 //		studentLectureVO.setUsername(memberVO.getUsername());
+//		
+//		studentLectureVO.setUsername("student");
 		
 //		log.error("member : {}", studentLectureVO.getUsername());
 		
@@ -67,7 +70,7 @@ public class StudentLectureController {
 	@GetMapping("my_favorite")
 	public ModelAndView getMyFavoriteList(FavoriteLectureVO favoriteLectureVO, HttpSession session, Pagination pagination, ModelAndView mv) throws Exception {
 //		MemberVO memberVO = (MemberVO)session.getAttribute("member");
-		
+//		
 //		favoriteLectureVO.setUsername(memberVO.getUsername());
 		
 		List<FavoriteLectureVO> ar = studentLectureService.getMyFavoriteList(favoriteLectureVO, session, pagination);
@@ -91,79 +94,83 @@ public class StudentLectureController {
 	
 	/** INSERT **/
 	//수강 신청
-	@PostMapping("my_lecture_insert")
-	public ModelAndView setStudentLectureInsert(StudentLectureVO studentLectureVO, LectureVO lectureVO, ModelAndView mv) throws Exception {
+	@PostMapping("my_lecture/insert")
+	public ModelAndView setStudentLectureInsert(StudentLectureVO studentLectureVO, LectureVO lectureVO, HttpSession session, ModelAndView mv) throws Exception {
 		int result = 0;
-		String message = "신청되지 않았습니다.";
+		
+//		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+//		
+//		studentLectureVO.setUsername(memberVO.getUsername());
 		
 		if(studentLectureService.getMyLecture(studentLectureVO) == null) {
 			studentLectureService.setSubscriptionAddUpdate(lectureVO);
-			result = studentLectureService.setStudentLectureInsert(studentLectureVO, lectureVO);
-			message = "신청되었습니다.";
+			result = studentLectureService.setStudentLectureInsert(studentLectureVO, lectureVO, session);
 			FavoriteLectureVO favoriteLectureVO = new FavoriteLectureVO();
-			result = studentLectureService.setFavoriteLectureDelete(favoriteLectureVO, lectureVO);
+			result = studentLectureService.setFavoriteLectureDelete(favoriteLectureVO, lectureVO, session);
 		}
 		
-		mv.addObject("result", message);
-		mv.addObject("URL", "./my_lecture");
-		mv.setViewName("common/result");
+		mv.addObject("result", result);
+		mv.setViewName("common/ajaxResult");
 		
 		return mv;
 	}
 	
 	//장바구니 담기
-	@PostMapping("my_favorite_insert")
-	public ModelAndView setFavoriteLectureInsert(FavoriteLectureVO favoriteLectureVO, LectureVO lectureVO, ModelAndView mv) throws Exception {
+	@PostMapping("my_favorite/insert")
+	public ModelAndView setFavoriteLectureInsert(FavoriteLectureVO favoriteLectureVO, LectureVO lectureVO, HttpSession session, ModelAndView mv) throws Exception {
 		int result = 0;
-		String message = "담기지 못했습니다.";
+		
+//		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+//		
+//		favoriteLectureVO.setUsername(memberVO.getUsername());
 		
 		if(studentLectureService.getMyFavorite(favoriteLectureVO) == null) {
-			result = studentLectureService.setFavoriteLectureInsert(favoriteLectureVO, lectureVO);
-			message = "담겼습니다.";
+			result = studentLectureService.setFavoriteLectureInsert(favoriteLectureVO, lectureVO, session);
 		}
 		
-		mv.addObject("result", message);
-		mv.addObject("URL", "./all_lecture");
-		mv.setViewName("common/result");
+		mv.addObject("result", result);
+		mv.setViewName("common/ajaxResult");
 			
 		return mv;
 	}
 	
 	/** DELETE **/
 	//수강 취소
-	@PostMapping("my_lecture_delete")
-	public ModelAndView setStudentLectureDelete(StudentLectureVO studentLectureVO, LectureVO lectureVO, ModelAndView mv) throws Exception {
+	@PostMapping("my_lecture/delete")
+	public ModelAndView setStudentLectureDelete(StudentLectureVO studentLectureVO, LectureVO lectureVO, HttpSession session, ModelAndView mv) throws Exception {
 		int result = 0;
-		String message = "취소되지 않았습니다.";
+		
+//		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+//		
+//		studentLectureVO.setUsername(memberVO.getUsername());
 		
 		if(studentLectureService.getMyLecture(studentLectureVO) != null) {
 			studentLectureService.setSubscriptionDeleteUpdate(lectureVO);
-			result = studentLectureService.setStudentLectureDelete(studentLectureVO, lectureVO);
-			message = "취소되었습니다.";
+			result = studentLectureService.setStudentLectureDelete(studentLectureVO, lectureVO, session);
 		}
 		
-		mv.addObject("result", message);
-		mv.addObject("URL", "./my_lecture");
-		mv.setViewName("common/result");
+		mv.addObject("result", result);
+		mv.setViewName("common/ajaxResult");
 		
 		return mv;
 	}
 	
 	//장바구니 빼기
-	@PostMapping("my_favorite_delete")
-	public ModelAndView setFavoriteLectureDelete(FavoriteLectureVO favoriteLectureVO, LectureVO lectureVO, ModelAndView mv) throws Exception {
+	@PostMapping("my_favorite/delete")
+	public ModelAndView setFavoriteLectureDelete(FavoriteLectureVO favoriteLectureVO, LectureVO lectureVO, HttpSession session, ModelAndView mv) throws Exception {
 		int result = 0;
-		String message = "빼지 못했습니다.";
+		
+//		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+//		
+//		favoriteLectureVO.setUsername(memberVO.getUsername());
 		
 		if(studentLectureService.getMyFavorite(favoriteLectureVO) != null) {
 			log.error("hi");
-			result = studentLectureService.setFavoriteLectureDelete(favoriteLectureVO, lectureVO);
-			message = "뺐습니다.";
+			result = studentLectureService.setFavoriteLectureDelete(favoriteLectureVO, lectureVO, session);
 		}
 		
-		mv.addObject("result", message);
-		mv.addObject("URL", "./my_favorite");
-		mv.setViewName("common/result");
+		mv.addObject("result", result);
+		mv.setViewName("common/ajaxResult");
 			
 		return mv;
 	}

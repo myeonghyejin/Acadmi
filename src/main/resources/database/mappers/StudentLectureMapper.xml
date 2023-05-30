@@ -152,7 +152,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getMyFavorite" parameterType="FavoriteLectureVO" resultType="FavoriteLectureVO">
 		SELECT *
 		FROM FAVORITE_LECTURE
-		WHERE FAVORITENUM = #{favoriteNum}
+		WHERE LECTURENUM = #{lectureNum}
+		<!-- AND USERNAME = #{username} -->
 	</select>
 	
 	<!-- INSERT -->

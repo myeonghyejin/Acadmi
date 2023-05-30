@@ -2,7 +2,7 @@
 getList(1);
 
 function getList(page){
-    fetch("/student/lecture/all_lecture_list?page="+page, {
+    fetch("/student/lecture/all_lecture/list?page="+page, {
         method:'GET'
     })
     .then((response)=>response.text())
@@ -13,110 +13,53 @@ function getList(page){
 
 //page
 $("#allLectureList").on("click",".page-button", function(e){
-    let page = $(this).attr("data-board-page");
+    let page = $(this).attr("data-list-page");
     getList(page);
     e.preventDefault();
 });
 
-//add
-$("#boardCommentAdd").click(function(){
-    $.ajax({
-        url:'../board/comment/add',
-        type:'POST',
-        data:{
-            'boardNum': $("#boardCommentAdd").attr('data-board-num'),
-            'boardCommentContents': $("#boardCommentContents").val().replace(/(?:\r\n|\r|\n)/g, '<br>')
-        },
-        success:(res)=>{
-            if(res.trim()==1){
-                alert('댓글이 등록되었습니다.')
-                $("#boardCommentContents").val("");
-                getList(1);            
-            }else {
-                alert('등록 실패!')
-            }
-        }
-    })
-})
-
-//delete
-$("#allLectureList").on("click",".delete",function(e){
-	let check = window.confirm("삭제하시겠습니까?");
+//my_lecture_insert
+$("#allLectureList").on("click","#mli",function(e){
+	let check = window.confirm("신청하시겠습니까?");
     if(check) {
-	    fetch("../board/comment/delete", {
+	    fetch("./my_lecture/insert", {
 	        method:'POST',
 	        headers:{
 	           "Content-type":"application/x-www-form-urlencoded"
 	       },
-	       body:"boardCommentNum="+$(this).attr("data-boardcomment-num")
+	       body:"lectureNum="+$(this).attr("data-mli-num")
 	       }).then((response)=>{return response.text()})
 	         .then((res)=>{
 	           if(res.trim()!=0){
-					alert('댓글이 삭제되었습니다.');
+					alert('신청되었습니다.');
 					getList(1);
 	           }else {
-	               alert('삭제 실패!');
+	               alert('신청되지 않았습니다.');
 	           }
 	         })
 	         e.preventDefault();
 	}
 })
 
-//update
-$("#boardCommentListResult").on("click", ".update", function(e){
-    let boardCommentNum = $(this).attr("data-boardcomment-num");
-    $("#boardCommentEdit").val($("#boardCommentContents"+boardCommentNum).text().trim());
-    $("#updateConfirm").attr("data-boardcomment-num", boardCommentNum);
-    e.preventDefault();
-})
-
-//update confirm
-$("#updateConfirm").click(function(){
-    $.ajax({
-        url:'../board/comment/update',
-        type:'POST',
-        data:{
-            'boardCommentNum': $(this).attr("data-boardcomment-num"),
-            'boardCommentContents': $("#boardCommentEdit").val().replace(/(?:\r\n|\r|\n)/g, '<br>')
-        },
-        success:(res)=>{
-            if(res.trim()!=0){
-                alert('댓글이 수정되었습니다.');
-                $("#closeUpdateModal").click();
-                getList(1);            
-            }else {
-                alert('수정 실패!');
-            }
-        }
-    })
-})
-
-//reply
-$("#allLectureList").on("click", ".reply", function(e){
-    let boardCommentNum = $(this).attr("data-boardcomment-num");
-    $("#replyConfirm").attr("data-boardcomment-num", boardCommentNum);
-    e.preventDefault();
-})
-
-//reply confirm
-$("#replyConfirm").click(function(){
-    $.ajax({
-        url:'../board/comment/reply',
-        type:'POST',
-        data:{
-            'boardNum': $("#boardCommentAdd").attr('data-board-num'),
-            'boardCommentNum': $(this).attr("data-boardcomment-num"),
-            'boardCommentContents': $("#boardCommentReply").val().replace(/(?:\r\n|\r|\n)/g, '<br>')
-        },
-        success:(res)=>{
-            if(res.trim()!=0){
-                alert('답글이 등록되었습니다.');
-                $("#closeReplyModal").click();
-                $("#boardCommentReply").val("");
-                getList(1);
-            }else {
-                alert('등록 실패!');
-            }
-        }
-    })
+//my_favorite_insert
+$("#allLectureList").on("click","#mfi",function(e){
+	let check = window.confirm("담겠습니까?");
+    if(check) {
+	    fetch("./my_favorite/insert", {
+	        method:'POST',
+	        headers:{
+	           "Content-type":"application/x-www-form-urlencoded"
+	       },
+	       body:"favoriteNum="+$(this).attr("data-mfi-num")
+	       }).then((response)=>{return response.text()})
+	         .then((res)=>{
+	           if(res.trim()!=0){
+					alert('담았습니다.');
+					getList(1);
+	           }else {
+	               alert('담기에 실패했습니다.');
+	           }
+	         })
+	         e.preventDefault();
+	}
 })

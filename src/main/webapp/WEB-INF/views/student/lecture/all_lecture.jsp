@@ -120,7 +120,7 @@
 							</div>
 							
 							<div class="card-body p-0">
-								<div class="row" id="allLectureList">
+								<div id="allLectureList">
 								</div>
 							</div>
 							<!-- /.card-body -->
@@ -129,30 +129,7 @@
 					</section>
 					<!-- /.content -->
 					
-					<!-- Pagination -->
-					<div class="row justify-content-center mx-auto my-5">
-						<nav aria-label="Page navigation example">
-							<ul class="pagination">
-								<c:if test="${pagination.pre}">
-									<li class="page-item">
-										<a class="page-link" href="./all_lecture?page=${pagination.startNum - 1}&category=${pagination.category}&grade=${grade}&department=${pagination.department}&search=${pagination.search}" aria-label="Previous">
-											<span aria-hidden="true">&laquo;</span>
-										</a>
-									</li>
-								</c:if>
-								<c:forEach begin="${pagination.startNum}" end="${pagination.lastNum}" var="page">
-									<li class="page-item"><a class="page-link" href="./all_lecture?page=${page}&category=${pagination.category}&grade=${grade}&department=${pagination.department}&search=${pagination.search}">${page}</a></li>
-								</c:forEach>
-								<c:if test="${pagination.next}">
-									<li class="page-item">
-										<a class="page-link" href="./all_lecture?page=${pagination.lastNum + 1}&category=${pagination.category}&grade=${grade}&department=${pagination.department}&search=${pagination.search}" aria-label="Next">
-											<span aria-hidden="true">&raquo;</span>
-										</a>
-									</li>
-								</c:if>
-							</ul>
-						</nav>
-					</div>
+					
 					
 				</div>
 			</div>
@@ -164,7 +141,7 @@
 
 	</div>
 <!-- ./wrapper -->
-<script src="/resources/js/student/lecture/all_lecture_list.js"></script>
+<script src="/js/student/lecture/all_lecture_list.js"></script>
 <script>
     $(function () {
       $('.select2').select2()
