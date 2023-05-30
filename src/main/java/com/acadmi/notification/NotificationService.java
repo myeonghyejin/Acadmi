@@ -49,7 +49,7 @@ public class NotificationService {
 		SecurityContextImpl contextImpl = (SecurityContextImpl)ojt;
 		Authentication authentication = (Authentication) contextImpl.getAuthentication();
 		notificationVO.setRecipient(authentication.getName());
-		return notificationDAO.getKindList(notificationVO);
+		return notificationDAO.getnotificationKindList(notificationVO);
 	}
 	
 	//kind에 따른 알림 list
