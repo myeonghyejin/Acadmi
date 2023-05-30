@@ -5,10 +5,10 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.acadmi.administrator.AdminIstratorDAO;
-import com.acadmi.administrator.AdminIstratorVO;
+import com.acadmi.administrator.AdministratorVO;
 import com.acadmi.college.CollegeVO;
 import com.acadmi.department.DepartmentVO;
+import com.acadmi.professor.ProfessorVO;
 import com.acadmi.student.StudentVO;
 
 @Mapper
@@ -22,14 +22,16 @@ public interface MemberDAO {
 	public MemberVO getFindPw(MemberVO memberVO) throws Exception;
 	public int setPwUpdate(MemberVO memberVO) throws Exception;
 	
-	public List<AdminIstratorVO> getStudent(MemberVO memberVO) throws Exception;
-	public List<AdminIstratorVO> getProfessor(MemberVO memberVO) throws Exception;
-	public List<AdminIstratorVO> getAdministrator(MemberVO memberVO) throws Exception;
-	
-	public int setStudent(MemberVO memberVO) throws Exception;
-	public int setProfessor(MemberVO memberVO) throws Exception;
-	public int setAdministrator(MemberVO memberVO) throws Exception;
-	
 //	========================================================================================
+	
+	public DepartmentVO getStudent(StudentVO studentVO) throws Exception;
+	public DepartmentVO getProfessor(ProfessorVO professorVO) throws Exception;
+	public DepartmentVO getAdministrator(AdministratorVO administratorVO) throws Exception;
+	
+//	=========================================================================================
+	
+	public MemberVO setStudentUpdate(StudentVO studentVO) throws Exception;
+	public MemberVO setProfessorUpdate(ProfessorVO professorVO) throws Exception;
+	public MemberVO setAdministratorUpdate(AdministratorVO administratorVO) throws Exception;
 
 }

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailSender;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,9 +16,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.acadmi.administrator.AdminIstratorDAO;
-import com.acadmi.administrator.AdminIstratorVO;
+import com.acadmi.administrator.AdministratorDAO;
+import com.acadmi.administrator.AdministratorVO;
+import com.acadmi.department.DepartmentVO;
+import com.acadmi.professor.ProfessorVO;
+import com.acadmi.student.StudentVO;
 import com.acadmi.util.MailManager;
 
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +36,9 @@ public class MemberService implements UserDetailsService{
 	
 	@Autowired
 	private MemberDAO memberDAO;
+	
+	@Value("${app.upload.member}")
+	private String path;
 	
 	@Autowired
 	private MailManager mailManager;
@@ -105,21 +113,37 @@ public class MemberService implements UserDetailsService{
 		
 	}
 	
-	public List<AdminIstratorVO> getStudent(MemberVO memberVO) throws Exception {
+//	======================================================================================================================
+	
+	public DepartmentVO getStudent(StudentVO studentVO, MultipartFile multipartFile) throws Exception {
 		
-		return memberDAO.getStudent(memberVO);
+		return memberDAO.getStudent(studentVO);
 	}
 	
-	public List<AdminIstratorVO> getProfessor(MemberVO memberVO) throws Exception {
+	public DepartmentVO getProfessor(ProfessorVO professorVO, MultipartFile multipartFile) throws Exception {
 		
-		return memberDAO.getProfessor(memberVO);
+		return memberDAO.getProfessor(professorVO);
 	}
 
-	public List<AdminIstratorVO> getAdministrator(MemberVO memberVO) throws Exception {
+	public DepartmentVO getAdministrator(AdministratorVO administratorVO, MultipartFile multipartFile) throws Exception {
 	
-		return memberDAO.getAdministrator(memberVO);
+		return memberDAO.getAdministrator(administratorVO);
 	}
 	
+	
 //	======================================================================================================================
+	
+	
+	public MemberVO setStudentUpdate(StudentVO studentVO) throws Exception{
+		return memberDAO.setStudentUpdate(studentVO);
+	}
+	
+	public MemberVO setProfessorUpdate(ProfessorVO professorVO) throws Exception{
+		return memberDAO.setProfessorUpdate(professorVO);
+	}
+	
+	public MemberVO setAdministratorUpdate(AdministratorVO administratorVO) throws Exception{
+		return memberDAO.setAdministratorUpdate(administratorVO);
+	}
 	
 }

@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +23,9 @@
 			
         		 <!-- Page Content-->
             <section class="py-5">
-            
+            <form class="row g-3" action="./studentUpdate" method="post" enctype="multipart/form-data">
+            	<sec:authentication property="Principal" var="user"/>
+				<input type="hidden" name="username" value="${user.username}">
                 <div class="container px-5 my-5">
                     <div class="row gx-5">
                     <c:set value="${departmentVO.deptName}" var="studentDeptName"></c:set>
@@ -34,15 +37,24 @@
      	 				<c:set var="studentAddress" value="${studentVO.address}"></c:set>
      	 				<c:set var="studentEmail" value="${studentVO.email}"></c:set>
      	 					<%-- <c:forEach items="${studentVO}" var="memberFilesVOs">
-     	 						<c:set value="${memberFilesVOs.fileNum}" var="memberFileNum"></c:set> --%>
+     	 						<c:set value="${memberFilesVOs.fileNum}" var="memberFileNum"></c:set>
+     	 						<c:set value="${memberFilesVOs.oriName}" var="memberOriName"></c:set> --%>
      	 						
-                        <div class="col-lg-3 ">
+                        <div class="col-lg-3">
                             <div class="d-flex align-items-center mt-lg-5 mb-4">
-                                <img class="img-fluid ml-auto" src="https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927" alt="..." />
+                                <img class="img-fluid" src="https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927"  alt="..." />
                                 <div class="ms-3">
                                     <div class="fw-bold"></div>
                                 </div>
                             </div>
+	                          
+								<%-- <div class="input-group mb-3 my-3">
+									<div class="input-group-text">
+										<input class="form-check-input mt-0 deleteCheck" type="checkbox" name="fileNum" value="${memberFileNum}" aria-label="Checkbox for following text input">
+									</div>
+										<input type="text" disabled value="${memberOriName}" class="form-control" aria-label="Text input with checkbox">
+			
+	                            </div> --%>
                         </div>
                         <div class="col-lg-9">
                             <!-- Post content-->
@@ -51,11 +63,11 @@
                                 <!-- Post header-->
                                 <header class="mb-4">
 		                            <!-- Post title-->
-		                            <h4 class="fw-bolder mb-1 mt-5 mx-5">학과이름 : &ensp;<c:out value="${studentDeptName}"></c:out></h4>
+		                          	<h4 class="fw-bolder mb-1 mt-5 mx-5">학과이름 : &ensp;<c:out value="${studentDeptName}"></c:out></h4>
 		                            <h4 class="fw-bolder mb-1 mt-5 mx-5">학년 : &ensp;<c:out value="${studentGrade}"></c:out>학년</h4>
 		                            <h4 class="fw-bolder mb-1 mt-5 mx-5">이름 : &ensp;<c:out value="${studentName}"></c:out></h4>
-		                            <h4 class="fw-bolder mb-1 mt-5 mx-5">생년월일 : &ensp;<c:out value="${studentBirth}"></c:out></h4>
 		                            <h4 class="fw-bolder mb-1 mt-5 mx-5">전화번호 : &ensp;<c:out value="${studentPhone}"></c:out></h4>
+		                            <h4 class="fw-bolder mb-1 mt-5 mx-5">생년월일 : &ensp;<c:out value="${studentBirth}"></c:out></h4>
 		                            <h4 class="fw-bolder mb-1 mt-5 mx-5">이메일 : &ensp;<c:out value="${studentEmail}"></c:out></h4>
 		                            <h4 class="fw-bolder mb-1 mt-5 mx-5">주소 : &ensp;<c:out value="${studentAddress}"></c:out></h4>
                                 </header>
@@ -64,14 +76,16 @@
                         </c:forEach>
                         <%-- </c:forEach> --%>
                     </div>
+              
                       <div class="d-grid">
-                      <sec:authentication property="Principal" var="user"/>
-						<a href="/member/studentUpdate?username=${user.username}" id="studentUpdate" class="btn btn-primary float-right">수정</a>
-                      <%--<a href="./update?num=${boardVO.num}" id="update" class="btn btn-primary float-right">수정</a>
-						<button class="btn btn-primary float-right" id="submitButton" type="submit">수정</button> --%>
+						<button class="btn btn-primary float-right" id="submitButton" type="submit">수정</button>
 	                  </div>
 	                  
+	                  <sec:authentication property="Principal" var="user"/>
+	                  <a href="/member/studentPage?username=${user.username}" class="btn btn-danger float-right mx-3">취소</a>
+	                  
 	           </div>
+	           </form>
 	     	</section>
      	
 
