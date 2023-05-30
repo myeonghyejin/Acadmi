@@ -29,14 +29,14 @@
 			</tr>
 		</thead>
 		<c:forEach items="${list}" var="lectureRoomVO">
-			<tr>
+			<tr class="find">
 					
 					<c:if test="${lectureRoomVO.status eq 0}">
 						<td class="lectureRoom" style="color: #E2E2E2;">${lectureRoomVO.lectureBuilding}</td>
 						<td class="lectureRoom" style="color: #E2E2E2;">${lectureRoomVO.lectureRoom}</td>
 						<td class="lectureRoom" style="color: #E2E2E2;">${lectureRoomVO.personal}</td>
 						<td>
-							<select name="status" class="status0">
+							<select name="status" class="status">
 								<option value="0"selected >사용불가</option>
 								<option value="1">사용가능</option>
 							</select>
@@ -47,7 +47,7 @@
 						<td>${lectureRoomVO.lectureRoom}</td>
 						<td >${lectureRoomVO.personal}</td>
 						<td>
-							<select name="status" class="status1">
+							<select name="status" class="status">
 								<option value="0" >사용불가</option>
 								<option value="1"selected>사용가능</option>
 							</select>
