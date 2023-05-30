@@ -21,7 +21,7 @@
 
 	<table class="table table-hover" border="1">
      	 		<thead>
-     	 		`	<tr>
+     	 			<tr>
      	 				<th>쪽지</th>
      	 				<th>사진</th>
      	 				<th>학번</th>	
@@ -94,5 +94,22 @@
      	 <c:if test="${pagination.next}">
 			<a href="./studentList?page=${pagination.lastNum+1}">다음</a>
 		</c:if> 
+		
+		<form action="./studentList" method="get" id="searchForm">
+			<select name="kind">
+     	 		<option value="name">성명</option>
+     	 	</select>
+     	 		<input type="text" name="search"><br>
+     	 	<select name="kind">
+     	 		<option value="username">학번</option>
+     	 	</select>
+     	 		<input type="text" name="search"><br>
+     	 		
+     	 	
+     	 	
+			
+			<button type="submit">검색</button>
+			
+		</form>
 </body>
 </html>

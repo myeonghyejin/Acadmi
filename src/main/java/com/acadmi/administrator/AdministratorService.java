@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.acadmi.college.CollegeVO;
 import com.acadmi.department.DepartmentVO;
-import com.acadmi.lectureroom.LectureRoomVO;
+import com.acadmi.lecture.room.LectureRoomVO;
 import com.acadmi.member.MemberSeqVO;
 import com.acadmi.member.MemberVO;
 import com.acadmi.professor.ProfessorVO;
@@ -27,7 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Slf4j
 @Transactional(rollbackFor = Exception.class)
-public class AdministratorService implements UserDetailsService{
+public class AdministratorService {
 	
 	@Autowired
 	private AdministratorDAO administratorDAO;
@@ -82,7 +82,7 @@ public class AdministratorService implements UserDetailsService{
 			map.put("username", memberVO.getUsername());
 			
 			if(memberVO.getCategory() == 0) {
-				map.put("roleNum", 1);
+				map.put("roleNum", 2);
 			}else if(memberVO.getCategory() == 1) {
 				map.put("roleNum", 2);
 			}else if(memberVO.getCategory() == 2) {
@@ -389,24 +389,33 @@ public class AdministratorService implements UserDetailsService{
 		
 		return administratorDAO.setLectureRoomAdd(lectureRoomVO);
 	}
+	
+	public List<LectureRoomVO> getLectureBuilding() throws Exception {
+		
+		return administratorDAO.getLectureBuilding();
+	}
+	
 	//강의실 수정
 	public int setLectureRoomUpdate(LectureRoomVO lectureRoomVO) throws Exception {
 		
 		return administratorDAO.setLectureRoomUpdate(lectureRoomVO);
 	}
 
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		// TODO Auto-generated method stub
-				log.error("============Spring Security Login============");
-				log.error("====================={}=====================", username);
-				
-				MemberVO memberVO = new MemberVO();
-				memberVO.setUsername(username);
-				
-				return memberVO;
+	
+	//학과 관리
+	
+	//학과 조회
+	public List<DepartmentVO>  getDepartmentList(Pagination pagination) throws Exception {
+		Long totalCount = administratorDAO.getTotalCountDepartment(pagination);
+		
+		pagination.makeNum(totalCount);
+		pagination.makeStartRow();
+		
+		return administratorDAO.getDepartmentList(pagination);
 	}
 	
-	
+	public int setDepartmentAdd(DepartmentVO departmentVO) throws Exception {
+		return administratorDAO.setDepartmentAdd(departmentVO);
+	}
 
 }

@@ -59,7 +59,7 @@ public class SecurityConfig {
                .formLogin()
                   .loginPage("/member/login")
                   .defaultSuccessUrl("/")
-//                  .successHandler(new UserSuccessHandler())
+                  //.successHandler(new UserSuccessHandler())
                   .failureHandler(new UserLoginFailHandler())
                   .permitAll()
                   .and()

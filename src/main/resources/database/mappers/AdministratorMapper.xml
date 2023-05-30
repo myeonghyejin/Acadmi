@@ -5,6 +5,16 @@
   
   <mapper namespace="com.acadmi.administrator.AdministratorDAO">
   
+  <sql id="search">
+  
+ 			<if test="kind == 'username'"  >
+ 				AND USERNAME LIKE CONCAT('%', #{search} '%')
+ 			</if>
+ 			<if test="kind == 'name'">
+ 				AND NAME LIKE CONCAT('%', #{search} '%')
+ 			</if>
+ 			
+ 	</sql>
     <!--회원 관리  -->
     
     <!--아이디  -->
@@ -69,7 +79,8 @@
   	
   	<select id="getTotalCountStudent" resultType="Long">
   		SELECT COUNT(USERNAME) FROM STUDENT
-  	</select><select id="getTotalCountAdministrator" resultType="Long">
+  	</select>
+  	<select id="getTotalCountAdministrator" resultType="Long">
   		SELECT COUNT(USERNAME) FROM ADMINISTRATOR
   	</select>
   
@@ -87,7 +98,10 @@
 					INNER JOIN 
 						COLLEGE C 
 					USING(COLLEGENUM)
-		WHERE CATEGORY=2
+				WHERE CATEGORY=2
+				<include refid="search"></include>
+				
+		
 		LIMIT #{startRow},#{perPage}					
   	</select>
   	<resultMap type="CollegeVO" id="StudentList">
@@ -195,16 +209,46 @@
  	<!-- 강의실 등록 -->
  	<insert id="setLectureRoomAdd" parameterType="LectureRoomVO">
  		INSERT INTO LECTURE_ROOM
- 		VALUES(#{lectureBuilding},#{lectureRoom},#{personel},1)
+ 		VALUES(#{lectureBuilding},#{lectureRoom},#{personal},1)
  	</insert>
+ 	<select id="getLectureBuilding" resultType="LectureRoomVO">
+ 		SELECT DISTINCT LECTUREBUILDING 
+		FROM LECTURE_ROOM 
+ 	</select>
  	<!--강의실 수정 -->
  	<update id="setLectureRoomUpdate" parameterType="LectureRoomVO">
  		UPDATE LECTURE_ROOM
- 		SET PERSONEL=#{personel},STATUS=#{status}
+ 		SET STATUS=#{status}
  		WHERE LECTUREBUILDING = #{lectureBuilding} AND LECTUREROOM = #{lectureRoom}
  	</update>
- 	
+ 	<select id=""></select>
   
+  <!--학과 관리  -->
   
+  <!--학과 조회 -->
+  	<select id="getDepartmentList" parameterType="Pagination" resultMap="DepartmentList">
+  		SELECT * FROM DEPARTMENT D
+			INNER JOIN 
+				COLLEGE C 
+			USING(COLLEGENUM)
+  		LIMIT #{startRow},#{perPage}
+  	</select>
+  	<resultMap type="CollegeVO" id="DepartmentList">
+  		<result column="COLLEGENAME" property="collegeName"/>
+  		<collection property="departmentVOs" javaType="List" ofType="DepartmentVO">
+  			<id column="DEPTNUM" property="deptNum"/>
+  			<result column="DEPTNAME" property="deptName"/>
+  			<result column="STATUS" property="status"/>
+  		</collection>
+  	</resultMap>
+  	
+  	<select id="getTotalCountDepartment" resultType="Long">
+  		SELECT COUNT(DEPTNUM) FROM DEPARTMENT
+  	</select>
+  <!--학과 등록 -->
+  <insert id="setDepartmentAdd" parameterType="DepartmentVO">
+  	INSERT INTO DEPARTMENT 
+	VALUES(0,#{deptNum},#{collegeNum},#{deptName},#{status})
+  </insert>	
   	
   </mapper>

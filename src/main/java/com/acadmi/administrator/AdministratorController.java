@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.acadmi.college.CollegeVO;
 import com.acadmi.department.DepartmentVO;
 import com.acadmi.lecture.LectureVO;
-import com.acadmi.lectureroom.LectureRoomVO;
+import com.acadmi.lecture.room.LectureRoomVO;
 import com.acadmi.member.MemberSeqVO;
 import com.acadmi.member.MemberVO;
 import com.acadmi.professor.ProfessorVO;
@@ -205,11 +205,22 @@ public class AdministratorController {
 		
 		return mv;
 	}
+	@PostMapping("lectureRoomList")
+	public ModelAndView setLectureRoomUpdate(LectureRoomVO lectureRoomVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		int result =  administratorService.setLectureRoomUpdate(lectureRoomVO);
+		
+		
+		return mv;
+	}
+	
 	//강의실 등록
 	@GetMapping("lectureRoomAdd")
 	public ModelAndView getLectureRoomAdd() throws Exception {
 		ModelAndView mv = new ModelAndView();
-		
+		List<LectureRoomVO> ar = administratorService.getLectureBuilding();
+		mv.addObject("lectureRoom", ar);
 		mv.setViewName("administrator/lectureRoomAdd");
 		
 		return mv;
@@ -221,6 +232,7 @@ public class AdministratorController {
 		
 		int result = administratorService.setLectureRoomAdd(lectureRoomVO);
 		
+		
 		if(bindingResult.hasErrors()) {
 			log.warn("검증에 실패");
 			mv.setViewName("administrator/lectureRoomAdd");
@@ -229,6 +241,7 @@ public class AdministratorController {
 		}
 		
 		String message="등록 실패";
+		
 		
 		if(result > 0) {
 			message = "등록 되었습니다";
@@ -242,16 +255,58 @@ public class AdministratorController {
 		return mv;
 	}
 	
+	//학과 관리
 	
-	@GetMapping("lectureRoomUpdate")
-	public ModelAndView setLectureRoomUpdate(LectureRoomVO lectureRoomVO) throws Exception {
+	//학과 조회
+	@GetMapping("departmentList")
+	public ModelAndView  getDepartmentList(Pagination pagination) throws Exception {
 		ModelAndView mv = new ModelAndView();
-	
 		
-		mv.setViewName("administrator/lectureRoomUpdate");
-		ne
+		List<DepartmentVO> ar = administratorService.getDepartmentList(pagination);
+		
+		mv.addObject("list", ar);
+		mv.setViewName("administrator/departmentList");
+		
 		return mv;
+	}
+	
+	//학과 등록
+	@GetMapping("departmentAdd")
+	public ModelAndView setDepartmentAdd(CollegeVO collegeVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
 		
+		List<CollegeVO> ar =  administratorService.getCollege();
+//		log.error("college:::: {}",ar.get(0).getCollegeNum());
+		mv.addObject("list", ar);
+		mv.setViewName("administrator/departmentAdd");
+		
+		return mv;
+	}
+	
+	@PostMapping("departmentAdd")
+	public ModelAndView setDepartmentAdd(@Valid DepartmentVO departmentVO, BindingResult bindingResult) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		int result = administratorService.setDepartmentAdd(departmentVO);
+		
+		if(bindingResult.hasErrors()) {
+			log.warn("검증에 실패");
+			mv.setViewName("administrator/departmentAdd");
+			return mv;
+		}
+		
+		String message = "등록 실패";
+		
+		if(result > 0) {
+			message = "등록되었습니다";
+			
+		}
+		
+		mv.addObject("result", message);
+		mv.setViewName("administrator/result");
+		
+		mv.addObject("url", "./departmentList");
+		return mv;
 	}
 
 }

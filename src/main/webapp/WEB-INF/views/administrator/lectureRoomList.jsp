@@ -6,12 +6,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<c:import url="../temp/style.jsp"></c:import>
+<link
+	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
+	rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 </head>
 <body>
 
+<c:import url="../temp/header.jsp"></c:import>
+
 	<h1>강의실 조회</h1>
 	
-	<table border="1">
+	<table class="table table-hover" border="1" id="table1">
 		<thead>
 			<tr>
 				<th>강의실 건물</th>
@@ -21,24 +28,40 @@
 				<th></th>
 			</tr>
 		</thead>
-		<c:forEach items="${list}" var="lectureVO">
+		<c:forEach items="${list}" var="lectureRoomVO">
 			<tr>
-				<td>${lectureVO.lectureBuilding}</td>
-				<td>${lectureVO.lectureRoom}</td>
-				<td>${lectureVO.personel}</td>
-					<c:if test="${lectureVO.status eq 0}">
-						<td style="color:red;">사용불가</td>
+					
+					<c:if test="${lectureRoomVO.status eq 0}">
+						<td class="lectureRoom" style="color: #E2E2E2;">${lectureRoomVO.lectureBuilding}</td>
+						<td class="lectureRoom" style="color: #E2E2E2;">${lectureRoomVO.lectureRoom}</td>
+						<td class="lectureRoom" style="color: #E2E2E2;">${lectureRoomVO.personal}</td>
+						<td>
+							<select name="status" class="status0">
+								<option value="0"selected >사용불가</option>
+								<option value="1">사용가능</option>
+							</select>
+						</td>
 					</c:if>
-					<c:if test="${lectureVO.status eq 1 }">
-						<td>사용가능</td>
+					<c:if test="${lectureRoomVO.status eq 1 }">
+						<td>${lectureRoomVO.lectureBuilding}</td>
+						<td>${lectureRoomVO.lectureRoom}</td>
+						<td >${lectureRoomVO.personal}</td>
+						<td>
+							<select name="status" class="status1">
+								<option value="0" >사용불가</option>
+								<option value="1"selected>사용가능</option>
+							</select>
+						</td>
 					</c:if>
-				<td><a href="./lectureRoomUpdate?lectureBuilding=${lectureVO.lectureBuilding}&lectureRoom=${lectureVO.lectureRoom}"><button type="button" id="update">수정</button></a></td>	
+				<td><button type="button" class="btn btn-primary" id="update" data-lecture="${lectureRoomVO.lectureBuilding}${lectureRoomVO.lectureRoom}"
+				data-lectureBuilding="${lectureRoomVO.lectureBuilding}" data-lectureRoom="${lectureRoomVO.lectureRoom }">
+				수정</button> </td>
 				
 			</tr>
 		</c:forEach>
 	</table>
 	
-	<a href="./lectureRoomAdd"><button type="button" id="add">작성</button></a>
+	<a href="./lectureRoomAdd"><button type="button" id="add" class="btn btn-primary">작성</button></a>
 	
 	<c:if test="${pagination.pre}">
 		<a href="./lectureRoomList?page=${pagination.startNum-1}">이전</a>
@@ -49,5 +72,6 @@
    	<c:if test="${pagination.next}">
 		<a href="./lectureRoomList?page=${pagination.lastNum+1}">다음</a>
 	</c:if> 
+	<script type="text/javascript" src="../js/administrator/lectureRoomList.js"></script>
 </body>
 </html>

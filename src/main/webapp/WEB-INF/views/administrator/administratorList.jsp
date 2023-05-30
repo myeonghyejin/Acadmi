@@ -44,7 +44,9 @@
 	   	 					<c:set var="memberFiles" value="${memberFilesVO.fileName}"></c:set>
 	   	 				</c:forEach>
 	   	 			<td></td>
-	   	 			<td></td>
+	   	 			<td>
+	   	 				<img alt="" src="/file/${board}/${boardFileVO.fileName}" width="500rem" height="500rem">
+	   	 			</td>
 	   	 			<td><c:out value="${administratorName}"></c:out></td>
 	   	 			<td><c:out value="${administratorPhone}"></c:out></td>
 	   	 			<td><c:out value="${administratorEmail}"></c:out></td>

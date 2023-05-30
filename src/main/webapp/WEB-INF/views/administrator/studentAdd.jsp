@@ -28,7 +28,7 @@
 		</select><br>
 		학과 
 		<select name="deptNum" id="dept">
-			<option value="1">컴퓨터공학과</option>
+			<option value="">전체</option>
 		</select> <br>
 		
 		이름 <input type="text" name="name"><br>
@@ -40,6 +40,33 @@
 		<button type="submit">학생가입</button>
 		
 	</form>
+	<script type="text/javascript">
+
+	//선택된 단과대에 따라 학과 옵션 추가
+	let college = new Array()
+	<c:forEach items="${college}" var="collegeVO">	
+		college.push("${collegeVO.collegeName}")
+	</c:forEach>
+		let finalCollege = college
+		console.log(finalCollege)
+		
+	let department = new Array()
+	<c:forEach items="${department}" var="departmentVO">
+		department.push("${departmentVO.deptName}")
+	</c:forEach>	
+		let finalDepartment = department
+		console.log(finalDepartment)
 	
+	
+	function updateDepartmentOptions() {
+		for(let i=0; i<finalCollege.length; i++) {
+			if(finalCollege[i] == 0) {
+				finalDepartment
+			}
+		}
+	
+	}
+</script>
+
 </body>
 </html>
