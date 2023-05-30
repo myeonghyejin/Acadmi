@@ -34,7 +34,7 @@
      	 				<c:set var="studentAddress" value="${studentVO.address}"></c:set>
      	 				<c:set var="studentEmail" value="${studentVO.email}"></c:set>
      	 					<%-- <c:forEach items="${studentVO}" var="memberFilesVOs">
-     	 						<c:set value="${memberFilesVOs.fileName}" var="memberFileName"></c:set> --%>
+     	 						<c:set value="${memberFilesVOs.fileNum}" var="memberFileNum"></c:set> --%>
      	 						
                         <div class="col-lg-3 ">
                             <div class="d-flex align-items-center mt-lg-5 mb-4">
@@ -54,15 +54,15 @@
 		                            <h4 class="fw-bolder mb-1 mt-5 mx-5">학과이름 : &ensp;<c:out value="${studentDeptName}"></c:out></h4>
 		                            <h4 class="fw-bolder mb-1 mt-5 mx-5">학년 : &ensp;<c:out value="${studentGrade}"></c:out>학년</h4>
 		                            <h4 class="fw-bolder mb-1 mt-5 mx-5">이름 : &ensp;<c:out value="${studentName}"></c:out></h4>
-		                            <h4 class="fw-bolder mb-1 mt-5 mx-5">전화번호 : &ensp;<c:out value="${studentPhone}"></c:out></h4>
 		                            <h4 class="fw-bolder mb-1 mt-5 mx-5">생년월일 : &ensp;<c:out value="${studentBirth}"></c:out></h4>
+		                            <h4 class="fw-bolder mb-1 mt-5 mx-5">전화번호 : &ensp;<c:out value="${studentPhone}"></c:out></h4>
 		                            <h4 class="fw-bolder mb-1 mt-5 mx-5">이메일 : &ensp;<c:out value="${studentEmail}"></c:out></h4>
 		                            <h4 class="fw-bolder mb-1 mt-5 mx-5">주소 : &ensp;<c:out value="${studentAddress}"></c:out></h4>
                                 </header>
                             </article>
                         </div>
                         </c:forEach>
-                    <%--     </c:forEach> --%>
+                        <%-- </c:forEach> --%>
                     </div>
                       <div class="d-grid">
                       <sec:authentication property="Principal" var="user"/>

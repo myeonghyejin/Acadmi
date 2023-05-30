@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailSender;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.acadmi.administrator.AdministratorDAO;
 import com.acadmi.administrator.AdministratorVO;
@@ -34,6 +36,9 @@ public class MemberService implements UserDetailsService{
 	
 	@Autowired
 	private MemberDAO memberDAO;
+	
+	@Value("${app.upload.member}")
+	private String path;
 	
 	@Autowired
 	private MailManager mailManager;
@@ -110,17 +115,17 @@ public class MemberService implements UserDetailsService{
 	
 //	======================================================================================================================
 	
-	public DepartmentVO getStudent(StudentVO studentVO) throws Exception {
+	public DepartmentVO getStudent(StudentVO studentVO, MultipartFile multipartFile) throws Exception {
 		
 		return memberDAO.getStudent(studentVO);
 	}
 	
-	public DepartmentVO getProfessor(ProfessorVO professorVO) throws Exception {
+	public DepartmentVO getProfessor(ProfessorVO professorVO, MultipartFile multipartFile) throws Exception {
 		
 		return memberDAO.getProfessor(professorVO);
 	}
 
-	public DepartmentVO getAdministrator(AdministratorVO administratorVO) throws Exception {
+	public DepartmentVO getAdministrator(AdministratorVO administratorVO, MultipartFile multipartFile) throws Exception {
 	
 		return memberDAO.getAdministrator(administratorVO);
 	}
@@ -129,15 +134,15 @@ public class MemberService implements UserDetailsService{
 //	======================================================================================================================
 	
 	
-	public String setStudentUpdate(StudentVO studentVO) throws Exception{
+	public MemberVO setStudentUpdate(StudentVO studentVO) throws Exception{
 		return memberDAO.setStudentUpdate(studentVO);
 	}
 	
-	public String setProfessorUpdate(ProfessorVO professorVO) throws Exception{
+	public MemberVO setProfessorUpdate(ProfessorVO professorVO) throws Exception{
 		return memberDAO.setProfessorUpdate(professorVO);
 	}
 	
-	public String setAdministratorUpdate(AdministratorVO administratorVO) throws Exception{
+	public MemberVO setAdministratorUpdate(AdministratorVO administratorVO) throws Exception{
 		return memberDAO.setAdministratorUpdate(administratorVO);
 	}
 	

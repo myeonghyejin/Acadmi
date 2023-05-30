@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextImpl;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import com.acadmi.department.DepartmentVO;
@@ -46,6 +47,15 @@ public class UserSuccessHandler implements AuthenticationSuccessHandler{
 //				}
 //			}
 		
-			
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        
+        // 필요한 정보를 세션에 저장합니다.
+        HttpSession session = request.getSession();
+        session.setAttribute("username", userDetails.getUsername());
+        session.setAttribute("name", userDetails.getAuthorities());
+        // 추가적인 필드들을 세션에 저장할 수 있습니다.
+        
+        // 인증 성공 후에 이동할 페이지로 리다이렉트합니다.
+        response.sendRedirect("/");
 	}
 }

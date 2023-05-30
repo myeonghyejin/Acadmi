@@ -30,8 +30,8 @@ public interface MemberDAO {
 	
 //	=========================================================================================
 	
-	public String setStudentUpdate(StudentVO studentVO) throws Exception;
-	public String setProfessorUpdate(ProfessorVO professorVO) throws Exception;
-	public String setAdministratorUpdate(AdministratorVO administratorVO) throws Exception;
+	public MemberVO setStudentUpdate(StudentVO studentVO) throws Exception;
+	public MemberVO setProfessorUpdate(ProfessorVO professorVO) throws Exception;
+	public MemberVO setAdministratorUpdate(AdministratorVO administratorVO) throws Exception;
 
 }

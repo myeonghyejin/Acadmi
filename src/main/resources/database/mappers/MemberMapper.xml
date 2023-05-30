@@ -81,7 +81,8 @@
 	  			<result property="address" column="ADDRESS"/>
 	  			<result property="email" column="EMAIL"/>
   				<collection property="memberFilesVOs" javaType="List" ofType="MemberFilesVO">
-  					<id column="FILENAME" property="fileName"/>
+  					<id column="FILENUM" property="fileNum"/>
+  					<result column="ORINAME" property="oriName"/>
   				</collection>
   			</collection>
   		</resultMap>
@@ -113,7 +114,8 @@
 	  			<result property="email" column="EMAIL"/>
   				<result column="STATUS" property="status"/>
   				<collection property="memberFilesVOs" javaType="List" ofType="MemberFilesVO">
-  					<id column="FILENAME" property="fileName"/>
+  					<id column="FILENUM" property="fileNum"/>
+  					<result column="ORINAME" property="oriName"/>
   				</collection>
   			</collection>
   		</resultMap>
@@ -144,9 +146,23 @@
 	  			<result property="email" column="EMAIL"/>
   				<result column="STATUS" property="status"/>
   				<collection property="memberFilesVOs" javaType="List" ofType="MemberFilesVO">
-  					<id column="FILENAME" property="fileName"/>
+  					<id column="FILENUM" property="fileNum"/>
+  					<result column="ORINAME" property="oriName"/>
   				</collection>
   			</collection>
   		</resultMap>
+  		
+  		
+ <!-- ============================================================================================================================ -->
+ 
+ 		<update id="setStudentUpdate" parameterType="MemberVO">
+ 			UPDATE MEMBER M
+				 RIGHT JOIN STUDENT S ON (S.USERNAME  = M.USERNAME)
+					  SET  S.NAME = #{name},
+					   	   S.PHONE = #{phone},
+					   	   S.BIRTH = #{birth},
+					   	   S.ADDRESS = #{address}
+				 WHERE M.USERNAME = #{username}
+ 		</update>
   		
   </mapper>

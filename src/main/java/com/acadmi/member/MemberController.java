@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.acadmi.administrator.AdministratorService;
@@ -155,13 +157,11 @@ public class MemberController {
 //	   ========================================멤버 권한에 따른 마이페이지========================================
 	   
 	   @GetMapping("studentPage")
-	   public ModelAndView getStudent(StudentVO studentVO, HttpServletRequest request) throws Exception {
+	   public ModelAndView getStudent(StudentVO studentVO, MultipartFile multipartFile) throws Exception {
 	      ModelAndView mv = new ModelAndView();
-	      HttpSession session = request.getSession();
 	      
-	      DepartmentVO departmentVO =  memberService.getStudent(studentVO);
-	      session.setAttribute("departmentVO", departmentVO);
-	      
+	      DepartmentVO departmentVO =  memberService.getStudent(studentVO, multipartFile);
+	     
 	      mv.addObject("departmentVO", departmentVO);
 		  mv.setViewName("member/studentPage");
 		     
@@ -169,10 +169,10 @@ public class MemberController {
 	   }
 	   
 	   @GetMapping("professorPage")
-	   public ModelAndView getProfessor(ProfessorVO professorVO) throws Exception {
+	   public ModelAndView getProfessor(ProfessorVO professorVO, MultipartFile multipartFile) throws Exception {
 		   ModelAndView mv = new ModelAndView();
 		     
-		   DepartmentVO departmentVO =  memberService.getProfessor(professorVO);
+		   DepartmentVO departmentVO =  memberService.getProfessor(professorVO, multipartFile);
 		   
 		   mv.addObject("departmentVO", departmentVO);
 		   mv.setViewName("member/professorPage");
@@ -181,10 +181,10 @@ public class MemberController {
 	   }
 	   
 	   @GetMapping("administratorPage")
-	   public ModelAndView getAdministrator(AdministratorVO administratorVO) throws Exception {
+	   public ModelAndView getAdministrator(AdministratorVO administratorVO, MultipartFile multipartFile) throws Exception {
 		   ModelAndView mv = new ModelAndView();
 		     
-		   DepartmentVO departmentVO =  memberService.getAdministrator(administratorVO);
+		   DepartmentVO departmentVO =  memberService.getAdministrator(administratorVO, multipartFile);
 		   
 		   mv.addObject("departmentVO", departmentVO);
 		   mv.setViewName("member/administratorPage");
@@ -196,85 +196,80 @@ public class MemberController {
 //	   ==================================studentUpdate==================================
 	   
 	   
-//	   @GetMapping("studentUpdate")
-//	   public ModelAndView setStudentUpdate(StudentVO studentVO, HttpServletRequest request) throws Exception {
-//	       ModelAndView mv = new ModelAndView();
-//
-//	       DepartmentVO departmentVO = memberService.getStudent(studentVO);
-//
-//	       mv.addObject("departmentVO", departmentVO);
-//
-//	       // 사용자 정보를 세션에 저장합니다.
-//	       HttpSession session = request.getSession();
-//	       session.setAttribute("departmentVO", departmentVO);
-//
-//	       mv.setViewName("member/studentUpdate");
-//
-//	       return mv;
-//	   }
-//
-//	   
-//	   @PostMapping("studentUpdate")
-//	   public ModelAndView setStudentUpdate(StudentVO studentVO, ModelAndView mv) throws Exception {
-//	
-//	      String student =  memberService.setStudentUpdate(studentVO);
-//	      
-//	      mv.addObject("student", student);
-//		  mv.setViewName("member/studentUpdate");
-//		     
-//		  return mv;
-//	   }
-//	   
-////	   ==================================professorUpdate==================================
-//	   
-//	   @GetMapping("professorUpdate")
-//	   public ModelAndView setProfessorUpdate(ProfessorVO professorVO) throws Exception {
-//		   ModelAndView mv = new ModelAndView();
-//		     
-//		   DepartmentVO departmentVO =  memberService.getProfessor(professorVO);
-//		   
-//		   mv.addObject("departmentVO", departmentVO);
-//		   mv.setViewName("member/professorUpdate");
-//	      
-//	      return mv;
-//	   }
-//	   
-//	   @PostMapping("professorUpdate")
-//	   public ModelAndView setProfessorUpdate(ProfessorVO professorVO, ModelAndView mv) throws Exception {
-//		     
-//		   DepartmentVO departmentVO =  memberService.getProfessor(professorVO);
-//		   
-//		   mv.addObject("departmentVO", departmentVO);
-//		   mv.setViewName("member/professorUpdate");
-//	      
-//	      return mv;
-//	   }
-//	   
-//	   
-////	   ==================================administratorUpdate==================================
-//	   
-//	   
-//	   @GetMapping("administratorUpdate")
-//	   public ModelAndView setAdministratorUpdate(AdministratorVO administratorVO) throws Exception {
-//		   ModelAndView mv = new ModelAndView();
-//		     
-//		   DepartmentVO departmentVO =  memberService.getAdministrator(administratorVO);
-//		   
-//		   mv.addObject("departmentVO", departmentVO);
-//		   mv.setViewName("member/administratorUpdate");
-//	      
-//	      return mv;
-//	   }
-//	   
-//	   @PostMapping("administratorUpdate")
-//	   public ModelAndView setAdministratorUpdate(AdministratorVO administratorVO, ModelAndView mv) throws Exception {
-//		     
-//		   DepartmentVO departmentVO =  memberService.getAdministrator(administratorVO);
-//		   
-//		   mv.addObject("departmentVO", departmentVO);
-//		   mv.setViewName("member/administratorUpdate");
-//	      
-//	      return mv;
-//	   }
+	   @GetMapping("studentUpdate")
+	   public ModelAndView setStudentUpdate(StudentVO studentVO, MultipartFile multipartFile) throws Exception {
+	       ModelAndView mv = new ModelAndView();
+
+	       DepartmentVO departmentVO = memberService.getStudent(studentVO, multipartFile);
+	       
+	       mv.addObject("departmentVO", departmentVO);
+	       mv.setViewName("member/studentUpdate");
+
+	       return mv;
+	   }
+
+	   
+	   @PostMapping("studentUpdate")
+	   public ModelAndView setStudentUpdate(StudentVO studentVO, ModelAndView mv) throws Exception {
+	
+		  MemberVO memberVO =  memberService.setStudentUpdate(studentVO);
+	      
+	      mv.addObject("memberVO", memberVO);
+		  mv.setViewName("redirect:/");
+		     
+		  return mv;
+	   }
+	   
+//	   ==================================professorUpdate==================================
+	   
+	   @GetMapping("professorUpdate")
+	   public ModelAndView setProfessorUpdate(ProfessorVO professorVO, MultipartFile multipartFile) throws Exception {
+		   ModelAndView mv = new ModelAndView();
+		     
+		   DepartmentVO departmentVO =  memberService.getProfessor(professorVO, multipartFile);
+		   
+		   mv.addObject("departmentVO", departmentVO);
+		   mv.setViewName("member/professorUpdate");
+	      
+	      return mv;
+	   }
+	   
+	   @PostMapping("professorUpdate")
+	   public ModelAndView setProfessorUpdate(ProfessorVO professorVO, ModelAndView mv) throws Exception {
+		     
+		   MemberVO memberVO =  memberService.setProfessorUpdate(professorVO);
+		   
+		   mv.addObject("memberVO", memberVO);
+		   mv.setViewName("redirect:/");
+	      
+	      return mv;
+	   }
+	   
+	   
+//	   ==================================administratorUpdate==================================
+	   
+	   
+	   @GetMapping("administratorUpdate")
+	   public ModelAndView setAdministratorUpdate(AdministratorVO administratorVO, MultipartFile multipartFile) throws Exception {
+		   ModelAndView mv = new ModelAndView();
+		     
+		   DepartmentVO departmentVO =  memberService.getAdministrator(administratorVO, multipartFile);
+		   
+		   mv.addObject("departmentVO", departmentVO);
+		   mv.setViewName("member/administratorUpdate");
+	      
+	      return mv;
+	   }
+	   
+	   @PostMapping("administratorUpdate")
+	   public ModelAndView setAdministratorUpdate(AdministratorVO administratorVO, ModelAndView mv) throws Exception {
+		     
+		   MemberVO memberVO =  memberService.setAdministratorUpdate(administratorVO);
+		   
+		   mv.addObject("memberVO", memberVO);
+		   mv.setViewName("redirect:/");
+	      
+	      return mv;
+	   }
 	   
 }
