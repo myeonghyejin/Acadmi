@@ -30,19 +30,11 @@ public class StudentLectureController {
 	/** SELECT **/
 	//수강 신청 & 장바구니 조회
 	@GetMapping("all_lecture")
-	public ModelAndView getAllLectureList(ModelAndView mv) throws Exception {
-		mv.setViewName("student/lecture/all_lecture");
-			
-		return mv;
-	}
-	
-	//ajax 수강 신청 & 장바구니 조회
-	@GetMapping("all_lecture/list")
 	public ModelAndView getAllLectureList(Pagination pagination, ModelAndView mv) throws Exception {
 		List<LectureVO> ar = studentLectureService.getAllLectureList(pagination);
 		
 		mv.addObject("list", ar);
-		mv.setViewName("student/lecture/ajax/all_lecture_list");
+		mv.setViewName("student/lecture/all_lecture");
 			
 		return mv;
 	}

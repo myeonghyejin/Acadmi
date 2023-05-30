@@ -1,25 +1,9 @@
-//list
-getList(1);
-
-function getList(page){
-    fetch("/student/lecture/all_lecture/list?page="+page, {
-        method:'GET'
-    })
-    .then((response)=>response.text())
-    .then((res)=>{
-        $("#allLectureList").html(res.trim());
-    })
-}
-
 //page
 $("#allLectureList").on("click",".page-button", function(e){
     let page = $(this).attr("data-list-page");
     getList(page);
     e.preventDefault();
 });
-
-//search
-
 
 //my_lecture_insert
 $("#allLectureList").on("click","#mli",function(e){
@@ -36,7 +20,7 @@ $("#allLectureList").on("click","#mli",function(e){
 	         .then((res)=>{
 	           if(res.trim()==0){
 					alert('신청되었습니다.');
-					getList(1);
+					document.location.reload();
 	           }else {
 	               alert('신청되지 않았습니다.');
 	           }
@@ -59,7 +43,7 @@ $("#allLectureList").on("click","#mfi",function(e){
 	         .then((res)=>{
 	           if(res.trim()==0){
 					alert('담았습니다.');
-					getList(1);
+					document.location.reload();
 	           }else {
 	               alert('담기에 실패했습니다.');
 	           }
