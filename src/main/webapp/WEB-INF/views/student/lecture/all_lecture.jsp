@@ -51,7 +51,7 @@
 					<section class="content">
 					
 						<!-- Search -->
-						<form action="./all_lecture">
+						<form action="./all_lecture/list">
 							<input type="hidden" name="page" value="1">
 							<div class="row justify-content-center mx-auto mb-3">
 								<div class="col-md-6">
@@ -129,8 +129,6 @@
 					</section>
 					<!-- /.content -->
 					
-					
-					
 				</div>
 			</div>
 		</div>
@@ -146,30 +144,6 @@
     $(function () {
       $('.select2').select2()
     });
-    
-    /* 신청 버튼 */
-/* 	const mli = document.getElementById("my_lecture_insert");
-
-	mli.addEventListener("click", function(){
-		let check = window.confirm("신청하시겠습니까?");
-		if(check) {
-			mli+data-frm-num.setAttribute("action", "./my_lecture_insert");
-			mli+data-frm-num.setAttribute("method", "post");
-			mli+data-frm-num.submit();
-		}
-	}) */
-	
-	/* 담기 버튼 */
-/* 	const mfi = document.getElementById("my_favorite_insert");
-
-	mfi.addEventListener("click", function(){
-		let check = window.confirm("담으시겠습니까?");
-		if(check) {
-			mfi+data-frm-num.setAttribute("action", "./my_favorite_insert");
-			mfi+data-frm-num.setAttribute("method", "post");
-			mfi+data-frm-num.submit();
-		}
-	}) */
 </script>
 </body>
 </html>

@@ -2,7 +2,7 @@
 getList(1);
 
 function getList(page){
-    fetch("/student/lecture/my_favorite/list, {
+    fetch("/student/lecture/my_favorite/list", {
         method:'GET'
     })
     .then((response)=>response.text())
@@ -10,13 +10,6 @@ function getList(page){
         $("#myFavoriteList").html(res.trim());
     })
 }
-
-//page
-$("#myFavoriteList").on("click",".page-button", function(e){
-    let page = $(this).attr("data-list-page");
-    getList(page);
-    e.preventDefault();
-});
 
 //my_lecture_insert
 $("#myFavoriteList").on("click","#mli",function(e){

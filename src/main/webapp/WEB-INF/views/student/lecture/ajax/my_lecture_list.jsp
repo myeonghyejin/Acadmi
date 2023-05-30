@@ -61,46 +61,14 @@
 				<td>${lectureVO.lectureRoomVO.lectureBuilding} ${lectureVO.lectureRoomVO.lectureRoom}</td>
 				<td>${lectureVO.subscription}/${lectureVO.personal}명</td>
 				<td class="project-actions text-right">
-						<input type="hidden" name="lectureNum" value="${lectureVO.lectureNum}">
-						<input type="hidden" name="username" value="${member.username}">
-						<button class="btn btn-info btn-sm" id="mli" type="button" data-mli-num="${lectureVO.lectureNum}">
-							<i class="fas fa-circle-check"></i>
-							신청
-						</button>
-						<input type="hidden" name="favoriteNum" value="${lectureVO.favoriteLectureVO.favoriteNum}">
-						<button class="btn btn-primary btn-sm" id="mfi" type="button" data-mfi-num="${lectureVO.favoriteLectureVO.favoriteNum}">
-							<i class="fas fa-basket-shopping"></i>
-							담기
-						</button>
+					<input type="hidden" name="lectureNum" value="${lectureVO.lectureNum}">
+					<input type="hidden" name="username" value="${member.username}">
+					<button class="btn btn-danger btn-sm" id="mld" type="button" data-mld-num="${lectureVO.lectureNum}">
+						<i class="fas fa-xmark"></i>
+						취소
+					</button>
 				</td>
 			</tr>
 		</c:forEach>
 	</tbody>
 </table>
-								
-<!-- Pagination -->
-<div class="row justify-content-center mx-auto my-3">
-	<nav aria-label="Page navigation example">
-		<ul class="pagination">
-			<c:if test="${pagination.pre}">
-				<li class="page-item">
-					<a class="page-link" data-list-page="${pagination.startNum - 1}" href="#" aria-label="Previous">
-						<span aria-hidden="true">&laquo;</span>
-					</a>
-				</li>
-			</c:if>
-			<c:forEach begin="${pagination.startNum}" end="${pagination.lastNum}" var="page">
-				<li class="page-item">
-					<a class="page-link" href="#">${page}</a>
-				</li>
-			</c:forEach>
-			<c:if test="${pagination.next}">
-				<li class="page-item">
-					<a class="page-link" data-list-page="${pagination.lastNum + 1}" href="#" aria-label="Next">
-						<span aria-hidden="true">&raquo;</span>
-					</a>
-				</li>
-			</c:if>
-		</ul>
-	</nav>
-</div>

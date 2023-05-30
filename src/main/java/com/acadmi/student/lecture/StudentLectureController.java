@@ -41,8 +41,6 @@ public class StudentLectureController {
 	public ModelAndView getAllLectureList(Pagination pagination, ModelAndView mv) throws Exception {
 		List<LectureVO> ar = studentLectureService.getAllLectureList(pagination);
 		
-//		log.error("ar : {}", ar.isEmpty());
-		
 		mv.addObject("list", ar);
 		mv.setViewName("student/lecture/ajax/all_lecture_list");
 			
@@ -51,6 +49,14 @@ public class StudentLectureController {
 	
 	//내 수강 신청 조회
 	@GetMapping("my_lecture")
+	public ModelAndView getMyLectureList(ModelAndView mv) throws Exception {
+		mv.setViewName("student/lecture/my_lecture");
+		
+		return mv;
+	}
+	
+	//ajax 내 수강 신청 조회
+	@GetMapping("my_lecture/list")
 	public ModelAndView getMyLectureList(StudentLectureVO studentLectureVO, HttpSession session, ModelAndView mv) throws Exception {
 		Object obj = session.getAttribute("SPRING_SECURITY_CONTEXT");
 		SecurityContextImpl contextImpl = (SecurityContextImpl)obj;
@@ -60,7 +66,7 @@ public class StudentLectureController {
 		List<StudentLectureVO> ar = studentLectureService.getMyLectureList(studentLectureVO);
 		
 		mv.addObject("list", ar);
-		mv.setViewName("student/lecture/my_lecture");
+		mv.setViewName("student/lecture/ajax/my_lecture_list");
 		
 		return mv;
 	}
@@ -84,7 +90,7 @@ public class StudentLectureController {
 		List<FavoriteLectureVO> ar = studentLectureService.getMyFavoriteList(favoriteLectureVO);
 		
 		mv.addObject("list", ar);
-		mv.setViewName("student/lecture/my_favorite");
+		mv.setViewName("student/lecture/ajax/my_favorite_list");
 		
 		return mv;
 	}

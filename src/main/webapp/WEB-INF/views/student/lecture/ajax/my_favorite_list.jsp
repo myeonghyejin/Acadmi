@@ -77,30 +77,3 @@
 		</c:forEach>
 	</tbody>
 </table>
-								
-<!-- Pagination -->
-<div class="row justify-content-center mx-auto my-5">
-	<nav aria-label="Page navigation example">
-		<ul class="pagination">
-			<c:if test="${pagination.pre}">
-				<li class="page-item">
-					<a class="page-link" data-list-page="${pagination.startNum - 1}" href="#" aria-label="Previous">
-						<span aria-hidden="true">&laquo;</span>
-					</a>
-				</li>
-			</c:if>
-			<c:forEach begin="${pagination.startNum}" end="${pagination.lastNum}" var="page">
-				<li class="page-item">
-					<a class="page-link" href="#">${page}</a>
-				</li>
-			</c:forEach>
-			<c:if test="${pagination.next}">
-				<li class="page-item">
-					<a class="page-link" data-list-page="${pagination.lastNum + 1}" href="#" aria-label="Next">
-						<span aria-hidden="true">&raquo;</span>
-					</a>
-				</li>
-			</c:if>
-		</ul>
-	</nav>
-</div>
