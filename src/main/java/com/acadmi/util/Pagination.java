@@ -8,7 +8,6 @@ import lombok.Setter;
 public class Pagination {
 	
 	//강의 관련 검색
-	private String name;
 	private String category;
 	private Integer department;
 	private Integer grade;
@@ -20,7 +19,7 @@ public class Pagination {
 	private Long startNum;
 	private Long lastNum;		
 	private String kind;		
-	private String search;		
+	private String search;
 	private boolean pre;		
 	private boolean next;
 	

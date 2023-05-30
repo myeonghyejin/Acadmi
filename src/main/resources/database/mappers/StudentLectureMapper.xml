@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- SQL -->
 	<sql id="search">
 		<trim prefix="WHERE" prefixOverrides="AND |OR ">
-			<if test="name != null and !name.equals('')">
+			<if test="search != null and !search.equals('')">
 				AND LECTURENAME LIKE CONCAT('%', #{search}, '%')
 			</if>
 			<if test="category != null and !category.equals('')">
@@ -43,35 +43,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		LIMIT #{startRow}, #{perPage}
 	</select>
 	
-	<select id="getMyLectureList" parameterType="StudentLectureVO" resultMap="LectureList">
+	<select id="getMyLectureList" parameterType="Pagination" resultMap="LectureList">
 		SELECT L.*, D.DEPTNAME
 		FROM STUDENT_LECTURE SL
-			RIGHT OUTER JOIN
+			LEFT OUTER JOIN
 			LECTURE L
 			USING (LECTURENUM)
 				INNER JOIN
 				DEPARTMENT D
 				ON D.DEPTNUM = L.DEPTNUM
-					INNER JOIN
+					<!-- INNER JOIN
 					STUDENT S
 					ON S.USERNAME = SL.USERNAME
-		WHERE S.USERNAME = #{username}
+		WHERE S.USERNAME = #{username} -->
 		ORDER BY LECTURENUM DESC
 	</select>
 	
-	<select id="getMyFavoriteList" parameterType="FavoriteLectureVO" resultMap="LectureList">
-		SELECT L.*, D.DEPTNAME
+	<select id="getMyFavoriteList" parameterType="Pagination" resultMap="LectureList">
+		SELECT FL.FAVORITENUM, L.*, D.DEPTNAME
 		FROM FAVORITE_LECTURE FL
-			RIGHT OUTER JOIN
+			LEFT OUTER JOIN
 			LECTURE L
 			ON L.LECTURENUM = FL.LECTURENUM
 				INNER JOIN
 				DEPARTMENT D
 				ON D.DEPTNUM = L.DEPTNUM
-					INNER JOIN
+					<!-- INNER JOIN
 					STUDENT S
 					ON S.USERNAME = FL.USERNAME
-		WHERE S.USERNAME = #{username}
+		WHERE S.USERNAME = #{username} -->
 		ORDER BY FAVORITENUM DESC
 	</select>
 	
@@ -119,6 +119,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<result column="DEPTNAME" property="deptName"/>
 			<result column="STATUS" property="status"/>
 		</association>
+		<association property="favoriteLectureVO" javaType="FavoriteLectureVO">
+			<id column="FAVORITENUM" property="favoriteNum"/>
+		</association>
 	</resultMap>
 	
 	<select id="getAllLectureCount" parameterType="Pagination" resultType="Long">
@@ -138,5 +141,56 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM FAVORITE_LECTURE
 		<include refid="search"></include>
 	</select>
+	
+	<select id="getMyLecture" parameterType="StudentLectureVO" resultType="StudentLectureVO">
+		SELECT *
+		FROM STUDENT_LECTURE
+		WHERE LECTURENUM = #{lectureNum}
+		<!-- AND USERNAME = #{username} -->
+	</select>
+	
+	<select id="getMyFavorite" parameterType="FavoriteLectureVO" resultType="FavoriteLectureVO">
+		SELECT *
+		FROM FAVORITE_LECTURE
+		WHERE FAVORITENUM = #{favoriteNum}
+	</select>
+	
+	<!-- INSERT -->
+	<insert id="setStudentLectureInsert" parameterType="StudentLectureVO">
+		INSERT INTO STUDENT_LECTURE (LECTURENUM, USERNAME, RETAKE)
+		VALUES (#{lectureNum}, #{username}, #{retake})
+	</insert>
+	
+	<insert id="setFavoriteLectureInsert" parameterType="FavoriteLectureVO">
+		INSERT INTO FAVORITE_LECTURE (FAVORITENUM, LECTURENUM, USERNAME)
+		VALUES (#{favoriteNum}, #{lectureNum}, #{username})
+	</insert>
+	
+	<!-- UPDATE -->
+	<update id="setSubscriptionAddUpdate" parameterType="LectureVO">
+		UPDATE LECTURE
+		SET SUBSCRIPTION = SUBSCRIPTION + 1
+		WHERE LECTURENUM = #{lectureNum}
+	</update>
+	
+	<update id="setSubscriptionDeleteUpdate" parameterType="LectureVO">
+		UPDATE LECTURE
+		SET SUBSCRIPTION = SUBSCRIPTION - 1
+		WHERE LECTURENUM = #{lectureNum}
+	</update>
+	
+	<!-- DELETE -->
+	<delete id="setStudentLectureDelete" parameterType="StudentLectureVO">
+		DELETE
+		FROM STUDENT_LECTURE
+		WHERE LECTURENUM = #{lectureNum}
+		<!-- AND USERNAME = #{username} -->
+	</delete>
+	
+	<delete id="setFavoriteLectureDelete" parameterType="FavoriteLectureVO">
+		DELETE
+		FROM FAVORITE_LECTURE
+		WHERE FAVORITENUM = #{favoriteNum}
+	</delete>
 	
 </mapper>

@@ -25,8 +25,8 @@
 		내역 조회
 	</button>
 	<div id="submenu_2" class="sidebar-dropdown-content">
-		<a href="/student/lecture/my_lecture?username=${member.username}">내 수강 신청</a>
-		<a href="/student/lecture/my_favorite?username=${member.username}">내 장바구니</a>
+		<a href="/student/lecture/my_lecture">내 수강 신청</a>
+		<a href="/student/lecture/my_favorite">내 장바구니</a>
 	</div>
 	
 	<!-- Submenu_3 -->

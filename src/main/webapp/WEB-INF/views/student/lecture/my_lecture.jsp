@@ -49,7 +49,26 @@
 
 					<!-- Content -->
 					<section class="content">
-
+						
+						<!-- Search -->
+						<form action="./my_lecture">
+							<input type="hidden" name="page" value="1">
+							<div class="row justify-content-center mx-auto mb-3">
+								<div class="col-md-6">
+									<div class="form-group">
+										<div class="input-group input-group-lg">
+											<input type="text" class="form-control form-control-lg" placeholder="강의 이름을 입력하세요." name="search" value="${pagination.search}">
+											<div class="input-group-append">
+												<button type="submit" class="btn btn-lg btn-default">
+													<i class="fa fa-search"></i>
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+						
 						<!-- Default box -->
 						<div class="card">
 							<div class="card-header">
@@ -122,7 +141,7 @@
 													</small>
 												</td>
 												<td>
-													${lectureVO.grade}
+													${lectureVO.grade}학년
 												</td>
 												<td>
 													<c:if test="${lectureVO.category eq '전공 필수'}">
@@ -215,58 +234,21 @@
 													${lectureVO.lectureRoomVO.lectureBuilding} ${lectureVO.lectureRoomVO.lectureRoom}
 												</td>
 												<td>
-													${lectureVO.personal}
+													${lectureVO.subscription}/${lectureVO.personal}명
 												</td>
 												<td class="project-actions text-right">
-													<a class="btn btn-danger btn-sm" href="#">
-														<i class="fas fa-xmark">
-														</i>
-														취소
-													</a>
+													<form action="./my_lecture_delete" id="frm" style="display:inline-block;">
+														<input type="hidden" name="lectureNum" value="${lectureVO.lectureNum}">
+														<input type="hidden" name="username" value="${member.username}">
+														<button class="btn btn-danger btn-sm" id="my_lecture_delete" type="button">
+															<i class="fas fa-xmark">
+															</i>
+															취소
+														</button>
+													</form>
 												</td>
 											</tr>
 										</c:forEach>
-											
-											<tr>
-												<td>
-													#
-												</td>
-												<td>
-													<a>
-														AdminLTE v3
-													</a>
-													<br/>
-													<small>
-														Created 01.01.2019
-													</small>
-												</td>
-												<td>
-												</td>
-												<td>
-												</td>
-												<td>
-												</td>
-												<td>
-												</td>
-												<td>
-												</td>
-												<td>
-												</td>
-												<td>
-												</td>
-												<td>
-												</td>
-												<td>
-												</td>
-												<td class="project-actions text-right">
-													<a class="btn btn-danger btn-sm" href="#">
-														<i class="fas fa-xmark">
-														</i>
-														취소
-													</a>
-												</td>
-											</tr>
-					
 									</tbody>
 								</table>
 							</div>
@@ -285,5 +267,18 @@
 
 	</div>
 <!-- ./wrapper -->
+<script>
+    /* 취소 버튼 */
+	const d = document.getElementById("my_lecture_delete");
+
+	d.addEventListener("click", function(){
+		let check = window.confirm("취소하시겠습니까?");
+		if(check) {
+			frm.setAttribute("action", "./my_lecture_delete");
+			frm.setAttribute("method", "post");
+			frm.submit();
+		}
+	})
+</script>
 </body>
 </html>

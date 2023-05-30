@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.acadmi.college.CollegeVO;
 import com.acadmi.department.DepartmentVO;
-import com.acadmi.lectureroom.LectureRoomVO;
+import com.acadmi.lecture.room.LectureRoomVO;
 import com.acadmi.member.MemberSeqVO;
 import com.acadmi.member.MemberVO;
 import com.acadmi.professor.ProfessorVO;

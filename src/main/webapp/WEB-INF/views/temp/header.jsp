@@ -189,13 +189,13 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="/student/lecture/my_lecture?username=${member.username}" class="nav-link">
+							<a href="/student/lecture/my_lecture" class="nav-link">
 								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>내 수강 신청</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="/student/lecture/my_favorite?username=${member.username}" class="nav-link">
+							<a href="/student/lecture/my_favorite" class="nav-link">
 								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>내 장바구니</p>
 							</a>
