@@ -25,6 +25,7 @@
                 <div class="container px-5 my-5">
                 <h1 class="fw-bolder">강의 수정</h1>
 	                <form action="./update" method="post">
+	                 <div class="row gx-5 my-3">
 	                <input type="hidden" name="lectureNum" value="${update.lectureNum}">
 	                <!-- 필수 -->
 	                	<p class="col-6">강의 학기</p>
@@ -153,6 +154,7 @@
 	                    <button type="submit" name="buttonType" value="0">임시등록</button>
 	                    <button type="submit" name="buttonType" value="1">등록</button>
 	                    <button><a href="./list" style="color: black;">뒤로가기</a></button>
+	                    </div>
 	                 </form>
                 </div>
              </section>

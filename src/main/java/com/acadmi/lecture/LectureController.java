@@ -75,26 +75,31 @@ public class LectureController {
 	public ModelAndView setLectureDelete(LectureVO lectureVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		int result = lectureService.setLectureDelete(lectureVO);
-		mv.setViewName("redirect:./list");
+		String message = "삭제 실패";
+		if(result>0) {
+			message = "게시물이 삭제되었습니다";
+		}
+		mv.addObject("result", message);
+		mv.addObject("url", "./list");
+		mv.setViewName("common/lecture");
 		return mv;
 	}
-	
-	
 	
 	
 	@GetMapping("main")
 	public ModelAndView getLectureMain(LectureVO lectureVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		lectureVO = lectureService.getLectureDetail(lectureVO);
+		lectureVO = lectureService.getLectureMain(lectureVO);
 		mv.addObject("main",lectureVO);
 		mv.setViewName("lecture/main");
 		return mv;
 	}
-	@GetMapping("main/info")
+	
+	@GetMapping("info")
 	public ModelAndView getLectureInfo(LectureVO lectureVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		lectureVO = lectureService.getLectureDetail(lectureVO);
-		mv.addObject("main",lectureVO);
+		mv.addObject("info",lectureVO);
 		mv.setViewName("lecture/info");
 		return mv;
 	}

@@ -21,6 +21,10 @@ public class LectureService {
 		return lectureDAO.getLectureDetail(lectureVO);
 	}
 	
+	public LectureVO getLectureMain(LectureVO lectureVO) throws Exception{
+		return lectureDAO.getLectureMain(lectureVO);
+	}
+	
 	public int setLectureAdd(LectureVO lectureVO) throws Exception{
 		log.error("ddd");
 		return lectureDAO.setLectureAdd(lectureVO);

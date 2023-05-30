@@ -16,7 +16,7 @@
 		강의 정보
 	</button>
 	<div id="submenu_1" class="sidebar-dropdown-content">
-		<a href="./info">강의 상세</a>
+		<a href="./info?lectureNum=2">강의 상세</a>
 		<a href="./syllabus">강의 계획서</a>
 		<a href="./attendee">참여자 목록</a>
 	</div>

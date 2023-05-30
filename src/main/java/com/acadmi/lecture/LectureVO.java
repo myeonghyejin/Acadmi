@@ -27,6 +27,8 @@ public class LectureVO {
 	private Integer status;
 	private String note;
 	private Integer temporary;
+	
+	private ProfessorVO professorVO;
 
 
 }

@@ -25,10 +25,10 @@
 		                <form action="./list" method="get">
 		                    <div class="row gx-5 my-3">
 		                    <select class="form-select" id="temporary" name="temporary" onchange="this.form.submit()">
-		                    	<option name="temporary" id="temporary" value=" ">전체</option>
+		                    	<option name="temporary" id="temporary" value=" ">강의 조회</option>
 								<option for="temporary" value=" " >전체</option>
-								<option for="temporary" value="1">등록</option>
-								<option for="temporary" value="0">미등록</option>
+								<option for="temporary" value="1" ${temporary.value == 1 ? 'selected' : ''}>등록</option>
+								<option for="temporary" value="0" ${temporary.value == 0 ? 'selected' : ''}>미등록</option>
 							</select>
 		                    <button><a href="./add" style="color: black;">강의 등록</a></button>
 		                    	<table class="table table-hover">
@@ -51,7 +51,13 @@
 			                    					<td>${LectureVO.year}</td>
 		 											<td>${LectureVO.semester}학기</td>
 		 											<td>${LectureVO.grade}</td>
-		 											<td><a href="./main?lectureNum=${LectureVO.lectureNum}" style="color: black;">${LectureVO.lectureName}</a></td>
+		 											<c:if test="${LectureVO.temporary eq 0}">
+		 												<td>${LectureVO.lectureName}</td>
+		 											</c:if>
+		 											<c:if test="${LectureVO.temporary eq 1}">
+		 												<td><a href="./main?lectureNum=${LectureVO.lectureNum}" style="color: black;">${LectureVO.lectureName}</a></td>
+		 											</c:if>
+		 											
 		 											<td>${LectureVO.category}</td>
 		 											<td>
 		 												<c:if test="${LectureVO.temporary eq 1}">등록</c:if> 

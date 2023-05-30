@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;import org.springframework.boot.context.properties.ConfigurationPropertiesBinding;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +24,7 @@ import com.acadmi.student.StudentVO;
 import com.acadmi.util.Pagination;
 
 import lombok.extern.slf4j.Slf4j;
-
+@CrossOrigin(origins="localhost")
 @Controller
 @RequestMapping("/administrator/*")
 @Slf4j

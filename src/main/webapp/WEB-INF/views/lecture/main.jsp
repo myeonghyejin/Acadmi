@@ -37,10 +37,10 @@
 			                    	</thead>
 			                    	<tbody>
 			                    			<tr>
-			                    				<td>${main.lectureNum}</td>
-			                    					<td>${main.year}</td>
-		 											<td>${main.semester}학기</td>
-		 											<td>${main.grade}</td>
+			                    				<td>${main.professorVO.name}</td>
+			                    					<td>${main.professorVO.professorRoom}</td>
+		 											<td>${main.professorVO.phone}</td>
+		 											<td>${main.professorVO.email}</td>
 		 											
 			                    			</tr>
 			                    	</tbody>
