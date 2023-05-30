@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Schema 추가 -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.acadmi.notification.NotificationDAO">
+  	
+  	<!-- 전체 알림 list -->
+  	<select id="getnotificationist" parameterType="NotificationVO" resultType="NotificationVO">
+  		SELECT * FROM NOTIFICATION WHERE RECIPIENT = #{recipient} AND NOTIFICATIONSTATUS = #{notificationStatus}
+  	</select>
+  	
+  	<!-- kind에 따른 새 알림 list -->
+  	<select id="getnotificationKindList" parameterType="NotificationVO" resultType="NotificationVO">
+  		SELECT * FROM NOTIFICATION
+  		WHERE NOTIFICATIONKIND = #{notificationKind} AND RECIPIENT = #{recipient} AND NOTIFICATIONSTATUS = 0
+  	</select>
+  	
+  	<!-- kind에 따른 알림 list -->
+  	<select id="getKindList" parameterType="NotificationVO" resultType="NotificationVO">
+  		SELECT * FROM NOTIFICATION
+  		WHERE NOTIFICATIONKIND = #{notificationKind} AND RECIPIENT = #{recipient}
+  	</select>
+  	
+  	<!-- notification add -->
+  	<insert id="setNotification" parameterType="NotificationVO">
+  		INSERT INTO NOTIFICATION
+  		VALUES (0, #{recipient}, #{notificationMsg}, now(), 0, #{notificationKind}, #{num}, #{lectureNum})
+  	</insert>
+  	
+  	<!-- 중요 공지 알림을 위한 memberVO의 list -->
+  	<select id="getMemberList" resultType="MemberVO">
+  		SELECT * FROM MEMBER
+  	</select>
+  	
+  	<!-- 직원 알림을 위한 직원의 memberVO의 list -->
+  	<select id="getAdministratorList" resultType="AdministratorVO">
+  		SELECT * FROM MEMBER M
+			  		  INNER JOIN
+					  ADMINISTRATOR A
+					  USING (USERNAME)
+		WHERE CATEGORY = 0
+  	</select>
+  	
+  	<!-- 교수의 정보를 가져오는 detail -->
+  	<select id="getProfessorDetail" parameterType="MemberVO" resultType="ProfessorVO">
+  		SELECT * FROM MEMBER M
+  					  INNER JOIN
+  					  PROFESSOR P
+  					  USING (USERNAME)
+  		WHERE CATEGORY = 1 AND USERNAME = #{username}
+  	</select>
+  	<!-- 학생의 정보를 가져오는 detail -->
+  	<select id="getStudentDetail" parameterType="MemberVO" resultType="StudentVO">
+  		SELECT * FROM MEMBER M
+  					  INNER JOIN
+  					  STUDENT S
+  					  USING (USERNAME)
+  		WHERE CATEGORY = 2 AND USERNAME = #{username}
+  	</select>
+  	
+  	<!-- qna의 원문을 가져오는 쿼리 -->
+  	<select id="getOriginalQna" parameterType="QnaVO" resultType="QnaVO">
+  		SELECT * FROM QNA WHERE NUM #{num}
+  	</select>
+  	
+  	<!-- 강의 정보를 가져오는 쿼리 -->
+  	<select id="getLecture" parameterType="LectureVO" resultType="LectureVO">
+  		SELECT * FROM LECTURE WHERE LECTURENUM = #{lectureNum}
+  	</select>
+  	
+  	<!-- 수강 강의 정보를 가져오는 List -->
+  	<select id="getStudentLectureList" parameterType="LectureVO" resultType="Student_lectureVO">
+  		SELECT * FROM STUDENT_LECTURE WHERE LECTURENUM = #{lectureNum}
+  	</select>
+  	
+  	<!-- lectureQna의 원문을 가져오는 쿼리 -->
+  	<select id="getOriginalLectureQna" parameterType="LectureQnaVO" resultType="LectureQnaVO">
+  		SELECT * FROM LECTUREQNA WHERE NUM = #{num}
+  	</select>
+  	
+  	<!-- 읽은 알림 삭제 -->
+  	<delete id="setDelete" parameterType="NotificationVO">
+  		DELETE FROM NOTIFICATION WHERE NOTIFICATIONNUM = #{notificationNum} 
+  	</delete>
+  	
+  	<!-- 알림 detail -->
+  	<select id="getDetail" parameterType="NotificationVO" resultType="NotificationVO">
+  		SELECT * FROM NOTIFICATION WHERE NOTIFICATIONNUM = #{notificationNum}
+  	</select>
+  	
+  	<!-- 알림 저장 처리 -->
+  	<update id="setNotificationSave" parameterType="NotificationVO">
+  		UPDATE NOTIFICATION SET NOTIFICATIONSTATUS = #{notificationStatus} WHERE NOTIFICATIONNUM = #{notificationNum}
+  	</update>
+    
+  </mapper>
