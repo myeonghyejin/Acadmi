@@ -95,7 +95,7 @@
 						</table>
 						
 						<div class="col-12 float-right">	
-							<sec:authorize access="hasRole('ROLE_ADMIN')">
+							<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
 						    	<a class="float-right btn btn-primary" href="./add">작성</a>
 						    </sec:authorize>
 						</div>
