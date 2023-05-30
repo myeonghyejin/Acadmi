@@ -1,7 +1,6 @@
 package com.acadmi.member;
 
 import java.util.ArrayList;
-
 import java.util.Collection;
 import java.util.List;
 
@@ -35,12 +34,12 @@ public class MemberVO implements UserDetails {
 		// TODO Auto-generated method stub
 		
 		List<GrantedAuthority> authorities = new ArrayList<>();
-		
-		for(RoleVO roleVO : roleVOs) {
+		for(RoleVO roleVO:roleVOs) {
 			authorities.add(new SimpleGrantedAuthority(roleVO.getRoleName()));
 		}
 		
 		return authorities;
+		
 	}
 
 	@Override
