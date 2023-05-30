@@ -39,7 +39,7 @@
 
 		<div class="row col-md-7 mx-auto">
 			<form class="row g-3" action="./reply" method="post">
-				<input type="hidden" name="num" value="${boardVO.num}">
+				<input type="hidden" name="num" value="${qnaVO.num}">
 			
 				<div class="col-md-12 mt-3">
 					<label for="title" class="form-label strongFont2">제목</label> 

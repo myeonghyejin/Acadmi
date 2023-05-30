@@ -154,5 +154,6 @@
 		
 	<c:import url="../temp/footer.jsp"></c:import>
 	<script src="/js/notice.js"></script>
+	
 </body>
 </html>

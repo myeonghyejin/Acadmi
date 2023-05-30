@@ -41,6 +41,15 @@
 		WHERE NUM = #{num}
   	</select>
   	
+  	 <select id="getReplyDetail" parameterType="QnaVO" resultMap="getDetailResult">
+  		SELECT *
+		FROM QNA 
+			 LEFT JOIN
+			 QNAFILES
+			 USING(NUM)
+		WHERE NUM = #{num} AND STEP = #{step}
+  	</select>
+  	
   	<resultMap type="QnaVO" id="getDetailResult">
   		<id column="num" property="num"/>
   		<result column="title" property="title"/>
@@ -93,7 +102,10 @@
   		WHERE REF = #{ref} AND STEP > #{step}
   	</update>
   		
-  	<insert id="setReplyAdd" parameterType="QnaVO" useGeneratedKeys="true" keyProperty="num">
+  	<insert id="setReplyAdd" parameterType="QnaVO">
+  		<selectKey keyProperty="num" resultType="Long" order="BEFORE">
+		  SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_NAME = 'QNA'
+		</selectKey>
   		INSERT INTO QNA (NUM, TITLE, WRITER, CONTENTS, REGDATE, REF, STEP, DEPTH)
   		VALUES (#{num}, #{title}, #{writer}, #{contents},  now(), #{ref}, #{step}, #{depth})
   	</insert>

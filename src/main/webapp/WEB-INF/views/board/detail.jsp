@@ -65,16 +65,24 @@
 							 
 							<c:if test="${board eq 'qna'}">
 								<div class="mt-6 mb-6 float-right">
-									<a href="./reply" class="btn btn-primary">답글</a>
+									<a href="./reply?num=${boardVO.num}" class="btn btn-primary">답글</a>
 								</div>
 							</c:if>
+							
+							
+							
+							<div class="replyDetail" data-num-id="${boardVO.num}">
+								
+							</div>
+							
+							
 
 							<div class="my-5">	
 								<div>
-									<sec:authorize access="hasRole('ROLE_ADMIN')">
+									<%-- <sec:authorize access="hasRole('ROLE_ADMIN')"> --%>
 						    			<a href="./update?num=${boardVO.num}" id="update" class="btn btn-primary float-right">수정</a>	
 										<a href="./delete?num=${boardVO.num}" id="delete" class="btn btn-primary float-right">삭제</a>
-						    		</sec:authorize>
+						    		<%-- </sec:authorize> --%>
 								</div>
 							</div>
 						</div>
@@ -85,6 +93,6 @@
 		
 	<c:import url="../temp/footer.jsp"></c:import>
 	<script src="/js/notice.js"></script>
-	
+	<script src="/js/qnaReply.js"></script>
 </body>
 </html>

@@ -35,4 +35,6 @@ public interface BoardDAO {
 	
 	public int setReplyAdd(QnaVO qnaVO) throws Exception;
 	
+	public QnaVO getReplyDetail(QnaVO qnaVO) throws Exception;
+	
 }

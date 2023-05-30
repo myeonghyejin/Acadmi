@@ -113,4 +113,8 @@ public class QnaService implements BoardService {
 		return result; 
 		
 	}
+	
+	public QnaVO getReplyDetail(QnaVO qnaVO) throws Exception {
+		return qnaDAO.getReplyDetail(qnaVO);
+	}
 }

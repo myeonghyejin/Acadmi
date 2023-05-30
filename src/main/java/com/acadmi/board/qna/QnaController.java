@@ -2,6 +2,8 @@ package com.acadmi.board.qna;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,13 +46,26 @@ public class QnaController {
 	}
 	
 	@GetMapping(value = "detail")
-	public ModelAndView getDetail(QnaVO qnaVO) throws Exception {
+	public ModelAndView getDetail(QnaVO qnaVO, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
 		qnaVO = (QnaVO)qnaService.getDetail(qnaVO);
+		session.setAttribute("qnaVO", qnaVO);
 		
 		mv.addObject("boardVO", qnaVO);
 		mv.setViewName("board/detail");
+		
+		return mv;
+	}
+	
+	@GetMapping(value = "replyDetail")
+	public ModelAndView getReplyDetail(QnaVO qnaVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		qnaVO = qnaService.getReplyDetail(qnaVO);
+		
+		mv.addObject("reply", qnaVO);
+		mv.setViewName("board/replyDetail");
 		
 		return mv;
 	}
@@ -145,10 +160,11 @@ public class QnaController {
 		ModelAndView mv = new ModelAndView();
 		
 		int result = qnaService.setReplyAdd(qnaVO);
-		
-		mv.addObject("url", "./detail?num=" + qnaVO.getNum());
-		mv.setViewName("common/replyResult");
+		                             
+		mv.setViewName("redirect:./detail?num=" + qnaVO.getNum());
 		
 		return mv;
 	}
+	
+	
 }

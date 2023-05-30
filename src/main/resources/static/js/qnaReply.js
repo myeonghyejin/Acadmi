@@ -1,3 +1,19 @@
+$(document).ready(function(){
+
+    $.ajax({
+        url: "/qna/detail",
+        type: "GET",
+        data: {
+            num: $(".replyDetail").attr("data-num-id"),
+        },
+        success: function(result) {
+            $(".replyDetail").html(result);
+        },
+    });
+
+})
+
+
 /*$(".submitButton").on("click", function(){
     let num = $(".submitButton").attr("data-qna-num");
 
@@ -61,6 +77,8 @@ function getList(page){
         }
     });
 }
+
+
 
 $("#commentListResult").on("click", ".page-link", function() {
     let page = $(this).attr("data-board-page");
