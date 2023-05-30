@@ -49,9 +49,9 @@ public class QnaService implements BoardService {
 				if(!multipartFile.isEmpty()) {
 					String fileName = fileManager.saveFile(path, multipartFile);
 					FileVO fileVO = new FileVO();
+					fileVO.setNum(boardVO.getNum());
 					fileVO.setFileName(fileName);
 					fileVO.setOriName(multipartFile.getOriginalFilename());
-					fileVO.setNum(boardVO.getNum());
 					
 					result = qnaDAO.setBoardFileAdd(fileVO);
 				}
@@ -62,12 +62,28 @@ public class QnaService implements BoardService {
 	
 	@Override
 	public int setUpdate(BoardVO boardVO, MultipartFile [] multipartFiles) throws Exception {
-		return 0;
+		
+		int result = qnaDAO.setUpdate(boardVO);
+		
+		if(multipartFiles != null) {
+			for(MultipartFile multipartFile : multipartFiles) {
+				if(!multipartFile.isEmpty()) {
+					String fileName = fileManager.saveFile(path, multipartFile);
+					FileVO fileVO = new FileVO();
+					fileVO.setNum(boardVO.getNum());
+					fileVO.setFileName(fileName);
+					fileVO.setOriName(multipartFile.getOriginalFilename());
+					
+					result = qnaDAO.setBoardFileAdd(fileVO);
+				}
+			}
+		}
+		return result;		
 	}
 
 	@Override
 	public int setDelete(BoardVO boardVO) throws Exception {
-		return 0;
+		return qnaDAO.setDelete(boardVO);
 	}
 
 	@Override
@@ -77,6 +93,24 @@ public class QnaService implements BoardService {
 
 	@Override
 	public int setBoardFileDelete(FileVO fileVO) throws Exception {
-		return 0;
+		return qnaDAO.setBoardFileDelete(fileVO);
+	}
+	
+	public int setReplyAdd(QnaVO qnaVO) throws Exception {
+		
+		QnaVO parent = (QnaVO)qnaDAO.getDetail(qnaVO);
+		
+		qnaVO.setRef(parent.getRef());
+				
+		qnaVO.setStep(parent.getStep() + 1);
+				
+		qnaVO.setDepth(parent.getDepth() + 1);
+				
+		int result = qnaDAO.setStepUpdate(parent);
+				
+		result = qnaDAO.setReplyAdd(qnaVO);
+			
+		return result; 
+		
 	}
 }

@@ -18,7 +18,12 @@
 				<div class="row">
 					<div class="col-12">
 						<header class="entry-header wow fadeInDown" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInDown;">
-							<h1>공지사항</h1>
+							<c:if test="${board eq 'notice'}">
+								공지사항
+							</c:if>
+							<c:if test="${board eq 'qna'}">
+								질의응답게시판
+							</c:if>
 						</header>
 					</div>
 				</div>
@@ -30,8 +35,14 @@
 	
 			<div class="container-fluid my-5">
 		<div class="row mb-4">
-			<h3
-				class="col-md-7 mx-auto text-center border-bottom border-dark pb-4">공지사항 수정</h3>
+			<h3 class="col-md-7 mx-auto text-center border-bottom border-dark pb-4">
+				<c:if test="${board eq 'notice'}">
+					공지사항
+				</c:if>
+				<c:if test="${board eq 'qna'}">
+					질의응답게시판
+				</c:if>
+			</h3>
 		</div>
 
 		<div class="row col-md-7 mx-auto">
@@ -41,8 +52,6 @@
 				<div class="col-md-4">
 					<label for="writer" class="form-label strongFont2">작성자</label> 
 					<input type="text" name="writer" class="form-control" id="writer" value="${dto.writer}">
-						<%-- <label for="writer" class="form-label strongFont2">작성자</label> <input
-						type="text" name="writer" class="form-control" id="writer" readonly value="${member.id}"> --%>
 				</div>
 
 				<div class="col-md-12 mt-3">
@@ -50,15 +59,17 @@
 					<input type="text" class="form-control" name="title" id="title" value="${dto.title}">
 				</div>
 				
-				<div class="col-md-12 mt-3">
-					<label for="important" class="form-label strongFont2">중요표시</label>
-					<c:if test="${dto.important == 0 || empty dto.important}">
-						<input type="checkbox" class="form-control" name="important" id="important">
-					</c:if>
-					<c:if test="${dto.important == 1}">
-						<input type="checkbox" class="form-control" name="important" id="important" checked>
-					</c:if>
-				</div>
+				<c:if test="${board eq 'notice'}">
+					<div class="col-md-12 mt-3">
+						<label for="important" class="form-label strongFont2">중요표시</label>
+						<c:if test="${dto.important == 0 || empty dto.important}">
+							<input type="checkbox" class="form-control" name="important" id="important">
+						</c:if>
+						<c:if test="${dto.important == 1}">
+							<input type="checkbox" class="form-control" name="important" id="important" checked>
+						</c:if>
+					</div>
+				</c:if>
 
 				<div class="col-md-12 mt-3">
 					<label for="contents" class="form-label strongFont2">내용</label>

@@ -14,8 +14,15 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-12">
-						<header class="entry-header wow fadeInDown" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInDown;">
-							<h1>공지사항</h1>
+						<header class="entry-header wow fadeInDown">
+							<h1>
+								<c:if test="${board eq 'notice'}">
+									공지사항
+								</c:if>
+								<c:if test="${board eq 'qna'}">
+									질의응답게시판
+								</c:if>
+							</h1>
 						</header>
 					</div>
 				</div>
@@ -29,24 +36,21 @@
 					<div class="row col-md-7 mx-auto ">
 						<div class="row col-md-12 d-flex justify-content-end">
 							<div class="col-md-10 mx-auto">
-							<h1 class="wow fadeInUp" data-wow-delay="0.1s"
-								style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
-								${boardVO.title}</h1>
-							<div class="border-bottom border-dark pb-4 pt-4 wow fadeInUp" data-wow-delay="0.1s"
-								style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
-								<div class="strongFont3 wow fadeInUp" data-wow-delay="0.1s"
-									style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
+							<h1 class="wow fadeInUp">${boardVO.title}</h1>
+							<div class="border-bottom border-dark pb-4 pt-4 wow fadeInUp">
+								<div class="strongFont3 wow fadeInUp">
 									<span class="mr-4">작성자</span>
 									<span class="mr-4 fontlight">${boardVO.writer}</span>
 									<span class="mr-4">작성일</span>
 									<span class="mr-4 fontlight">${boardVO.regDate}</span>
-									<span class="mr-4">조회수</span>
-									<span class="mr-4 fontlight">${boardVO.hit}</span>
+									<c:if test="${board eq 'notice'}">
+										<span class="mr-4">조회수</span>
+										<span class="mr-4 fontlight">${boardVO.hit}</span>
+									</c:if>
 								</div>
 							</div>
 
-							<div class="mt-5 mb-5 wow fadeInUp" data-wow-delay="0.1s"
-								style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
+							<div class="mt-5 mb-5 wow fadeInUp">
 								<p>${boardVO.contents}</p>
 							</div>
 							
@@ -58,6 +62,12 @@
 							<div class="mt-6 mb-6 ">
 								<a href="./list" class="btn btn-primary">목록</a>
 							</div>
+							 
+							<c:if test="${board eq 'qna'}">
+								<div class="mt-6 mb-6 float-right">
+									<a href="./reply" class="btn btn-primary">답글</a>
+								</div>
+							</c:if>
 
 							<div class="my-5">	
 								<div>
@@ -75,5 +85,6 @@
 		
 	<c:import url="../temp/footer.jsp"></c:import>
 	<script src="/js/notice.js"></script>
+	
 </body>
 </html>

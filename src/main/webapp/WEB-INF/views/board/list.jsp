@@ -14,7 +14,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-12">
-						<header class="entry-header wow fadeInDown" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInDown;">
+						<header class="entry-header wow fadeInDown">
 							<h1>
 								<c:if test="${board eq 'notice'}">
 									공지사항
@@ -67,7 +67,9 @@
 									<th>제목</th>
 									<th>작성자</th>
 									<th>등록일</th>
-									<th>조회수</th>
+									<c:if test="${board eq 'notice'}">
+										<th>조회수</th>
+									</c:if>
 								</tr>
 							</thead>
 								
@@ -77,27 +79,43 @@
 									
 								</tr>
 								
-								
 								<c:forEach items="${list}" var="dto">
-									<tr class="check-item" data-num-important="${dto.important}">
+									<c:if test="${board eq 'notice'}">
+										<tr class="check-item" data-num-important="${dto.important}">
+											<td class="noticeNum" data-num-id="${dto.num}">${dto.num}</td>
+											<td class="d-flex align-items-center">								
+												<a class="title" href="./detail?num=${dto.num}">${dto.title}</a>
+											</td>
+											<td>${dto.writer}</td>
+											<td>${dto.regDate}</td>
+											<td>${dto.hit}</td>
+										</tr>
+									</c:if>
 									
-										<td class="noticeNum" data-num-id="${dto.num}">${dto.num}</td>
+									<c:if test="${board eq 'qna'}">
+										<tr class="check-item">
 										
-										<td class="d-flex align-items-center">
-											<a class="title" href="./detail?num=${dto.num}">${dto.title}</a>
-										</td>
-										<td>${dto.writer}</td>
-										<td>${dto.regDate}</td>
-										<td>${dto.hit}</td>
-									</tr>
+											<td class="qnaNum" data-num-id="${dto.num}">${dto.num}</td>
+											
+											<td class="d-flex align-items-center">
+												<c:catch>
+													<c:forEach begin="1" end="${dto.depth}">--</c:forEach>							
+												</c:catch>								
+												<a class="title" href="./detail?num=${dto.num}">${dto.title}</a>
+											</td>
+											<td>${dto.writer}</td>
+											<td>${dto.regDate}</td>
+										</tr>
+									</c:if>	
+									
 								</c:forEach>
 							</tbody>
 						</table>
 						
 						<div class="col-12 float-right">	
-							<sec:authorize access="hasRole('ROLE_ADMIN')">
+							<%-- <sec:authorize access="hasRole('ROLE_ADMIN')"> --%>
 						    	<a class="float-right btn btn-primary" href="./add">작성</a>
-						    </sec:authorize>
+						   <%--  </sec:authorize> --%>
 						</div>
 						
 				<div class="row d-flex justify-content-between">

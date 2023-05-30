@@ -28,7 +28,7 @@
   	<select id="getList" parameterType="Pagination" resultType="QnaVO">
   		SELECT * FROM QNA 
   		<include refid="search"></include>
-  		ORDER BY NUM DESC
+  		ORDER BY REF DESC, STEP ASC
   		LIMIT #{startRow}, #{perPage}
   	</select>
   	
@@ -51,25 +51,51 @@
   		<result column="step" property="step"/>
   		<result column="depth" property="depth"/>
   		
-  		<collection property="qnaFileVOs" javaType="List" ofType="QnaFileVO">
+  		<collection property="fileVOs" javaType="List" ofType="FileVO">
   			<id column="fileNum" property="fileNum"/>
   			<result column="fileName" property="fileName"/>
   			<result column="oriName" property="oriName"/>
   		</collection>
   	</resultMap>
   	
-  	<insert id="setInsert" parameterType="QnaVO" useGeneratedKeys="true" keyProperty="num">
+	<insert id="setInsert" parameterType="QnaVO">
+		<selectKey keyProperty="num" resultType="Long" order="BEFORE">
+		  SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_NAME = 'QNA'
+		</selectKey>
   		INSERT INTO QNA (NUM, TITLE, WRITER, CONTENTS, REGDATE, REF, STEP, DEPTH)
-  		VALUES (#{num}, #{title}, #{writer}, #{contents}, now(), 0, 0, 0)
+  		VALUES (#{num}, #{title}, #{writer}, #{contents}, now(), #{num}, 0, 0)
   	</insert>
   	
-  	<insert id="setBoardFileAdd" parameterType="QnaFileVO">
+  	<update id="setUpdate" parameterType="QnaVO">
+  		UPDATE QNA SET TITLE = #{title}, CONTENTS = #{contents}
+  		WHERE NUM = #{num}
+  	</update>
+  	
+  	<delete id="setDelete" parameterType="QnaVO">
+  		DELETE FROM QNA WHERE NUM = #{num}
+  	</delete>
+  	
+  	<insert id="setBoardFileAdd" parameterType="FileVO">
   		INSERT INTO QNAFILES (NUM, FILENAME, ORINAME)
   		VALUES(#{num}, #{fileName}, #{oriName})
   	</insert>
   	
-  	<select id="getFileDetail" parameterType="QnaFileVO" resultType="QnaFileVO">
+  	<select id="getFileDetail" parameterType="FileVO" resultType="FileVO">
   		SELECT * FROM QNAFILES WHERE FILENUM = #{fileNum}
   	</select>
+  	
+  	<delete id="setBoardFileDelete" parameterType="FileVO">
+  		DELETE FROM QNAFILES WHERE FILENUM = #{fileNum}
+  	</delete>
+  	
+  	<update id="setStepUpdate" parameterType="QnaVO">
+  		UPDATE QNA SET STEP = STEP + 1
+  		WHERE REF = #{ref} AND STEP > #{step}
+  	</update>
+  		
+  	<insert id="setReplyAdd" parameterType="QnaVO" useGeneratedKeys="true" keyProperty="num">
+  		INSERT INTO QNA (NUM, TITLE, WRITER, CONTENTS, REGDATE, REF, STEP, DEPTH)
+  		VALUES (#{num}, #{title}, #{writer}, #{contents},  now(), #{ref}, #{step}, #{depth})
+  	</insert>
   	
   </mapper>
