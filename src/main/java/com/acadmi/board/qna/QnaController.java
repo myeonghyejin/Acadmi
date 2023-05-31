@@ -45,13 +45,29 @@ public class QnaController {
 		return mv;
 	}
 	
+	/*
+	 * @GetMapping(value = "qnaList") public ModelAndView getQnaList(QnaVO qnaVO)
+	 * throws Exception { ModelAndView mv = new ModelAndView();
+	 * 
+	 * List<QnaVO> ar = qnaService.getQnaList(qnaVO);
+	 * 
+	 * mv.addObject("list", ar); mv.setViewName("board/detail");
+	 * 
+	 * return mv; }
+	 */
+	
 	@GetMapping(value = "detail")
 	public ModelAndView getDetail(QnaVO qnaVO, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
+		Long num = qnaService.getQnaList(qnaVO);
+		System.out.println(num);
+		
 		qnaVO = (QnaVO)qnaService.getDetail(qnaVO);
+		
 		session.setAttribute("qnaVO", qnaVO);
 		
+		mv.addObject("num", num);
 		mv.addObject("boardVO", qnaVO);
 		mv.setViewName("board/detail");
 		

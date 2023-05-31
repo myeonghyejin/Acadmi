@@ -25,8 +25,11 @@
   		<include refid="search"></include>
   	</select>
   
-  	<select id="getList" resultType="NoticeVO" parameterType="Pagination">
+  	<select id="getList" resultMap="getDetailResult" parameterType="Pagination">
   		SELECT * FROM NOTICE
+  			LEFT JOIN
+  			NOTICEFILES 
+  			USING(NUM)
   		<include refid="search"></include>
   		ORDER BY NUM DESC
   		LIMIT #{startRow}, #{perPage}

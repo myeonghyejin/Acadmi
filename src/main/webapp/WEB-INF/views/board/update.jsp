@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,14 +45,16 @@
 				</c:if>
 			</h3>
 		</div>
-
+	
+		<sec:authentication property="principal.username" var="userName" />
+		
 		<div class="row col-md-7 mx-auto">
 			<form class="row g-3" action="./update" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="num" value="${dto.num}">
 				
 				<div class="col-md-4">
 					<label for="writer" class="form-label strongFont2">작성자</label> 
-					<input type="text" name="writer" class="form-control" id="writer" value="${dto.writer}">
+					<input type="text" name="writer" class="form-control" id="writer" readonly value="${userName}">
 				</div>
 
 				<div class="col-md-12 mt-3">
@@ -95,7 +98,7 @@
 							<span>수정</span>
 						</button>
 		
-						<a href="./detail?num=${dto.num}" class="btn btn-primary">취소</a>
+						<a href="./detail?num=${dto.num}" class="btn btn-danger">취소</a>
 					</div>
 				</div>
 			</form>

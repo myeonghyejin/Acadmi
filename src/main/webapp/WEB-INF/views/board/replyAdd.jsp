@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,6 +38,8 @@
 			</h3>
 		</div>
 
+		<sec:authentication property="principal.username" var="userName" />
+
 		<div class="row col-md-7 mx-auto">
 			<form class="row g-3" action="./reply" method="post">
 				<input type="hidden" name="num" value="${qnaVO.num}">
@@ -48,7 +51,7 @@
 			
 				<div class="col-md-4">
 					<label for="writer" class="form-label strongFont2">작성자</label> 
-					<input type="text" name="writer" class="form-control" id="writer">
+					<input type="text" name="writer" class="form-control" id="writer" readonly value="${userName}">
 				</div>
 
 				<div class="col-md-12 mt-3">
@@ -63,7 +66,7 @@
 							<span>등록</span>
 						</button>
 						
-						<button type="button" class="btn btn-primary" onclick="location.href='./list'">
+						<button type="button" class="btn btn-danger" onclick="location.href='./list'">
 							<span>취소</span>
 						</button>
 					</div>
@@ -73,7 +76,7 @@
 	</div>
 
 	<script>
-		$("#contents").summernote({
+		$("#replyContents").summernote({
 			height : 500,
 			width : 1187.48
 		});
@@ -81,5 +84,6 @@
 		
 	<c:import url="../temp/footer.jsp"></c:import>
 	<script src="/js/filemanager.js"></script>
+	<script src="/js/qnaReply.js"></script>
 </body>
 </html>

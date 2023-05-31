@@ -60,36 +60,44 @@
                            	</c:forEach>
 
 							<div class="mt-6 mb-6 ">
-								<a href="./list" class="btn btn-primary">목록</a>
+								<a href="./list" class="btn btn-light">목록</a>
 							</div>
 							 
 							<c:if test="${board eq 'qna'}">
 								<div class="mt-6 mb-6 float-right">
-									<a href="./reply?num=${boardVO.num}" class="btn btn-primary">답글</a>
+									<c:if test="${num ne 2}">
+									 	<c:if test="${boardVO.step ne 1}">
+											<a href="./reply?num=${boardVO.num}" class="btn btn-primary">답글</a>
+										</c:if>
+									</c:if>
 								</div>
 							</c:if>
 							
+							<sec:authentication property="principal.username" var="userName" />
 							
-							
-							<div class="replyDetail" data-num-id="${boardVO.num}">
-								
-							</div>
-							
-							
-
 							<div class="my-5">	
 								<div>
-									<%-- <sec:authorize access="hasRole('ROLE_ADMIN')"> --%>
-						    			<a href="./update?num=${boardVO.num}" id="update" class="btn btn-primary float-right">수정</a>	
-										<a href="./delete?num=${boardVO.num}" id="delete" class="btn btn-primary float-right">삭제</a>
-						    		<%-- </sec:authorize> --%>
+									<sec:authorize access="hasRole('ROLE_ADMIN')">
+										<c:if test="${userName eq boardVO.writer}">
+											<a href="./update?num=${boardVO.num}" id="update" class="btn btn-info float-right">수정</a>	
+											<a href="./delete?num=${boardVO.num}" id="delete" class="btn btn-danger float-right">삭제</a>
+										</c:if>
+						    		</sec:authorize>
 								</div>
 							</div>
+							
+							<c:if test="${num eq 2}">
+								<div class="replyDetail" data-num-id="${boardVO.num}">
+											
+								</div>
+							</c:if>
 						</div>
 					</div>
 				</div>
 			</div>
 		</header>
+		
+		
 		
 	<c:import url="../temp/footer.jsp"></c:import>
 	<script src="/js/notice.js"></script>

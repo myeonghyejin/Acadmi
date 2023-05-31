@@ -8,18 +8,6 @@ $(".submitButton").on("click", function(){
     }
 })
 
-// $(document).ready(function() {
-//     $(".check-item").each(function() {
-//         if($(this).attr('data-num-important') == '1') {
-//             let $row = $(this).closest('tr').addClass("trfirst");
-//             $row.insertBefore($row.parent().find('tr:first').addClass("trfirst"));
-//             $row.find('.title').addClass("checkcolor");
-//             $(this).css("background-color", "yellow");
-//          }
-//      });
-//  });
-
-
 $(document).ready(function(){
 
     $.ajax({

@@ -37,4 +37,6 @@ public interface BoardDAO {
 	
 	public QnaVO getReplyDetail(QnaVO qnaVO) throws Exception;
 	
+	public Long getQnaList(QnaVO qnaVO) throws Exception;
+	
 }

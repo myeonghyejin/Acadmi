@@ -25,11 +25,20 @@
 		<include refid="search"></include>
   	</select>
   
-  	<select id="getList" parameterType="Pagination" resultType="QnaVO">
+  	<select id="getList" parameterType="Pagination" resultMap="getDetailResult">
   		SELECT * FROM QNA 
+  			LEFT JOIN
+  			QNAFILES
+  			USING(NUM)
   		<include refid="search"></include>
   		ORDER BY REF DESC, STEP ASC
   		LIMIT #{startRow}, #{perPage}
+  	</select>
+  	
+  	<select id="getQnaList" parameterType="QnaVO" resultType="Long">
+  		SELECT COUNT(REF)
+		FROM QNA
+		WHERE REF = #{num}
   	</select>
   	
   	<select id="getDetail" parameterType="QnaVO" resultMap="getDetailResult">
@@ -47,7 +56,7 @@
 			 LEFT JOIN
 			 QNAFILES
 			 USING(NUM)
-		WHERE NUM = #{num} AND STEP = #{step}
+		WHERE REF = #{ref} AND STEP = #{step}
   	</select>
   	
   	<resultMap type="QnaVO" id="getDetailResult">
