@@ -57,7 +57,7 @@ public class StudentLectureController {
 	
 	//내 장바구니 조회
 	@GetMapping("my_favorite")
-	public ModelAndView getMyFavoriteList(FavoriteLectureVO favoriteLectureVO, HttpSession session, ModelAndView mv) throws Exception {		
+	public ModelAndView getMyFavoriteList(FavoriteLectureVO favoriteLectureVO, LectureVO lectureVO, HttpSession session, ModelAndView mv) throws Exception {		
 		Object obj = session.getAttribute("SPRING_SECURITY_CONTEXT");
 		SecurityContextImpl contextImpl = (SecurityContextImpl)obj;
 		Authentication authentication = contextImpl.getAuthentication();
@@ -159,7 +159,6 @@ public class StudentLectureController {
 		favoriteLectureVO.setUsername(authentication.getName());
 		
 		if(studentLectureService.getMyFavorite(favoriteLectureVO) != null) {
-			log.error("hi");
 			result = studentLectureService.setFavoriteLectureDelete(favoriteLectureVO, lectureVO, session);
 		}
 		

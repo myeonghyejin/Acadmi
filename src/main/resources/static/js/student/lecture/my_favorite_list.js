@@ -11,7 +11,7 @@ $("#myFavoriteList").on("click","#mli",function(e){
             "lectureNum="+$(this).attr("data-mli-num")
 	       }).then((response)=>{return response.text()})
 	         .then((res)=>{
-	           if(res.trim()!=0){
+	           if(res.trim()==0){
 					alert('신청되었습니다.');
 					document.location.reload();
 	           }else {

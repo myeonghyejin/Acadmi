@@ -65,7 +65,7 @@
 								</div>
 							</div>
 							
-							<div class="card-body p-0">
+							<div class="card-body p-0" id="myFavoriteList">
 								<table class="table table-striped projects">
 									<thead>
 										<tr>
@@ -132,7 +132,7 @@
 														신청
 													</button>
 													<input type="hidden" name="favoriteNum" value="${lectureVO.favoriteLectureVO.favoriteNum}">
-													<button class="btn btn-danger btn-sm" id="mfd" type="button" data-mfi-num="${lectureVO.favoriteLectureVO.favoriteNum}">
+													<button class="btn btn-danger btn-sm" id="mfd" type="button" data-mfd-num="${lectureVO.favoriteLectureVO.favoriteNum}">
 														<i class="fas fa-basket-shopping"></i>
 														빼기
 													</button>

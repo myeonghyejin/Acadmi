@@ -33,7 +33,7 @@ public interface StudentLectureDAO {
 	public StudentLectureVO getMyLecture(StudentLectureVO studentLectureVO) throws Exception;
 	
 	//장바구니에 담은 강의인지 아닌지 확인
-	public StudentLectureVO getMyFavorite(FavoriteLectureVO favoriteLectureVO) throws Exception;
+	public FavoriteLectureVO getMyFavorite(FavoriteLectureVO favoriteLectureVO) throws Exception;
 	
 	/** INSERT **/
 	//수강 신청
