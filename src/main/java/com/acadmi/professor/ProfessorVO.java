@@ -1,7 +1,9 @@
 package com.acadmi.professor;
 
 import java.sql.Date;
+import java.util.List;
 
+import com.acadmi.department.DepartmentVO;
 import com.acadmi.member.MemberVO;
 
 import lombok.Getter;
