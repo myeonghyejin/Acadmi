@@ -21,13 +21,7 @@
 
 		<!-- Main Contents -->
 		<div class="container-fluid">
-			<div class="row">
-				<!-- 2레벨 Sidebar 적용 -->
-				<div class="content-wrapper">
-					<c:import url="../temp/sidebar/professor_lecture.jsp"></c:import>
-				</div>
-				<!-- 2레벨 Sidebar 끝 -->
-				
+			<div class="content-wrapper">
 				<!-- Contents -->
 				<div class="col">
 					<h1>강의 등록</h1>
@@ -40,22 +34,23 @@
 						</select>
 
 	               		<p class="col-6">학과</p>
-	               		<select class="form-select" id="collegeNum" name="collegeNum" onchange="updateDepartments()">
+	               		<%-- <select class="form-select" id="collegeNum" name="collegeNum" onchange="updateDepartments()">
 		                    <option name="collegeNum" id="collegeNum">단과대 선택</option>
 							<c:forEach items="${college}" var="col">
 		                    	<option for="collegeNum" value="${col.collegeNum}">${col.collegeName}</option>
 		                    </c:forEach>
-						</select>
+						</select> --%>
 						<select class="form-select" id="deptNum" name="deptNum">
-		                    	<!-- <option name="deptNum" id="deptNum">학과 선택</option> -->
-								<!-- <option for="deptNum" value="1" >국어국문학과</option>
-								<option for="deptNum" value="2" >영어영문학과</option> -->
+							<option name="deptNum" id="deptNum">학과 선택</option>
+		                    	<c:forEach items="${department}" var="dept">
+		                    		<option for="deptNum" value="${dept.deptNum}">${dept.deptName}</option>
+		                    </c:forEach>
 						</select>
-						<script>
+						<!-- <script>
+						const collegeSelect = document.getElementById("collegeNum");
+						const departmentSelect = document.getElementById("deptNum");
 							function updateDepartments(){
-								const collegeSelect = document.getElementById("collegeNum");
-								const departmentSelect = document.getElementById("deptNum");
-						        
+								
 								const selectedCollege = collegeSelect.value;
 						        departmentSelect.innerHTML = ""; 
 						        departmentSelect.disabled = false;
@@ -79,14 +74,16 @@
 						        option.text = text;
 						        selectElement.appendChild(option);
 						    }
-						</script>
+						</script> -->
 						<p class="col-6">강의이름</p>
 						<input type="text" name="lectureName" class="form-control" id="lectureName" placeholder="강의 이름 입력"><br>
 						<p class="col-6">구분</p>
 						<select class="form-select" id="category" name="category">
 		                    <option name="category" id="category" value="">구분 선택</option>
-							<option for="category" value="전공" >전공</option>
-							<option for="category" value="교양">교양</option>
+							<option for="category" value="전공 필수" >전공 필수</option>
+							<option for="category" value="전공 선택">전공 선택</option>
+							<option for="category" value="교양 필수">교양 필수</option>
+							<option for="category" value="교양 선택">교양 선택</option>
 						</select>
 						<p class="col-6">대상 학년</p>
 						<select class="form-select" id="grade" name="grade">
@@ -99,7 +96,7 @@
 						<p class="col-6">강의 연도</p>
 						<select class="form-select" id="year" name="year">
 		                    <option name="year" id="year" value="">강의 연도 선택</option>
-		                    <c:forEach items="${period}" var="year">
+		                    <c:forEach items="${period}" var="period">
 		                    	<option for="year" value="${period.year}">${period.year}</option>
 		                    </c:forEach>
 						</select>
@@ -166,12 +163,12 @@
 		                    	<option for="personal" value="${i}" >${i}</option>
 		                    </c:forEach>
 						</select>
-						
-						<p class="col-6">비고</p>
-						<input type="text" name="note" class="form-control" id="note" placeholder="비고 입력"><br>
-	                    <button class="btn btn-primary mx-2" type="submit" name="buttonType" value="0">임시등록</button>
-	                    <button class="btn btn-info" type="submit" name="buttonType" value="1">등록</button>
-	                    <button class="btn btn-danger mx-2"><a href="./list" style="color: white;">뒤로가기</a></button>
+						 <br>
+						<div class="my-3">
+		                    <button class="btn btn-primary" type="submit" name="buttonType" value="0">임시등록</button>
+		                    <button class="btn btn-info" type="submit" name="buttonType" value="1">등록</button>
+		                    <button class="btn btn-danger"><a href="./list" style="color: white;">뒤로가기</a></button>
+	                    </div>
 					</form>
 				</div>
 			</div>

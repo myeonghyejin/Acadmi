@@ -21,18 +21,12 @@
 
 		<!-- Main Contents -->
 		<div class="container-fluid">
-			<div class="row">
-				<!-- 2레벨 Sidebar 적용 -->
-				<div class="content-wrapper">
-					<c:import url="../temp/sidebar/professor_lecture.jsp"></c:import>
-				</div>
-				<!-- 2레벨 Sidebar 끝 -->
-				
+			<div class="content-wrapper">
 				<!-- Contents -->
 				<div class="col">
 					<h1>강의 수정</h1>
 					<form action="./update" method="post">
-	                 <div class="row gx-5 my-3">
+	                 <!-- <div class="row gx-5 my-3"> -->
 	                <input type="hidden" name="lectureNum" value="${update.lectureNum}">
 	                <!-- 필수 -->
 	                	<p class="col-6">강의 학기</p>
@@ -44,7 +38,7 @@
 						<!-- 필수 -->
 						<!-- 학과 수정 필요 -->
 	               		<p class="col-6">학과</p>
-	               		<select class="form-select" id="collegeNum" name="collegeNum" onchange="updateDepartments()">
+	               		<%-- <select class="form-select" id="collegeNum" name="collegeNum" onchange="updateDepartments()">
 		                    	<option name="collegeNum" id="collegeNum">단과대 선택</option>
 		                    	<c:if test="${update.deptNum >='1' && update.deptNum<='2'}">
 								<option for="collegeNum" value="1" selected="selected">정보대</option>
@@ -54,15 +48,14 @@
 								<option for="collegeNum" value="1">정보대</option>
 								<option for="collegeNum" value="2" selected="selected">인문대</option>
 								</c:if>
-						</select>
+						</select> --%>
 						<select class="form-select" id="deptNum" name="deptNum">
 		                    	<option name="deptNum" id="deptNum">학과 선택</option>
-								<option for="deptNum" value="1" ${update.deptNum eq '1' ?'selected':''}>컴퓨터공학과</option>
-								<option for="deptNum" value="2" ${update.deptNum eq '2' ?'selected':''}>정보통신학과</option>
-								<option for="deptNum" value="1" ${update.deptNum eq '3' ?'selected':''}>국어국문학과</option>
-								<option for="deptNum" value="2" ${update.deptNum eq '4' ?'selected':''}>영어영문학과</option>
+		                    	<c:forEach items="${department}" var="dept">
+		                    		<option for="deptNum" value="${dept.deptNum}" ${update.deptNum == dept.deptNum ?'selected':''}>${dept.deptName}</option>
+		                    </c:forEach>
 						</select>
-						<script>
+						<!-- <script>
 							function updateDepartments(){
 								const collegeSelect = document.getElementById("collegeNum");
 								const departmentSelect = document.getElementById("deptNum");
@@ -90,16 +83,17 @@
 						        option.text = text;
 						        selectElement.appendChild(option);
 						    }
-							</script>
+							</script> -->
 						<p class="col-6">강의이름</p>
 						<input type="text" name="lectureName" class="form-control" id="lectureName" 
 						value="${update.lectureName}" placeholder="강의 이름 입력"><br>
 						<p class="col-6">구분</p>
 						<select class="form-select" id="category" name="category">
 		                    	<option name="category" id="category">구분 선택</option>
-								<option for="category" value="전공" ${update.category eq '전공' ?'selected':''}>전공</option>
-								<option for="category" value="교양" ${update.category eq '교양' ?'selected':''}>교양</option>
-						</select>
+								<option for="category" value="전공 필수" ${update.category eq '전공 필수' ?'selected':''}>전공 필수</option>
+								<option for="category" value="전공 선택" ${update.category eq '전공 선택' ?'selected':''}>전공 선택</option>
+								<option for="category" value="교양 필수" ${update.category eq '교양 필수' ?'selected':''}>교양 필수</option>
+								<option for="category" value="교양 선택" ${update.category eq '교양 선택' ?'selected':''}>교양 선택</option>						</select>
 						<p class="col-6">대상 학년</p>
 						<select class="form-select" id="grade" name="grade">
 		                    	<option name="grade" id="grade" value="">학년 선택</option>
@@ -111,12 +105,10 @@
 						<!-- 년도 선택 -->
 						<p class="col-6">강의 연도</p>
 						<select class="form-select" id="year" name="year">
-		                    	<option name="year" id="year" value="">강의 연도 선택</option>
-		                    	<jsp:useBean id="now" class="java.util.Date" />
-								<fmt:formatDate value="${now}" pattern="yyyy" var="startYear"/>
-		                    	<c:forEach begin="${startYear}" end="${startYear+5}" step="1" var="i">
-		                    		<option for="year" value="${i}" ${update.year == i ?'selected':''}>${i}</option>
-		                    	</c:forEach>
+		                    <option name="year" id="year" value="">강의 연도 선택</option>
+		                    <c:forEach items="${period}" var="period">
+		                    	<option for="year" value="${period.year}" ${update.year == period.year ?'selected':''}>${period.year}</option>
+		                    </c:forEach>
 						</select>
 						<p class="col-6">강의 요일</p>
 						<select class="form-select" id="weekday" name="weekday">
@@ -155,13 +147,13 @@
 		                    		<option for="personal" value="${i}" ${update.personal == i ?'selected':''}>${i}</option>
 		                    	</c:forEach>
 						</select>
-						<p class="col-6">비고</p>
-						<input type="text" name="note" class="form-control" id="note" placeholder="비고 입력" value="${update.note}"><br>
 						
-	                    <button class="btn btn-primary mx-2" type="submit" name="buttonType" value="0">임시등록</button>
-	                    <button class="btn btn-info" type="submit" name="buttonType" value="1">등록</button>
-	                    <button class="btn btn-danger mx-2"><a href="./list" style="color: white;">뒤로가기</a></button>
+	                    <div class="my-3">
+		                    <button class="btn btn-primary" type="submit" name="buttonType" value="0">임시등록</button>
+		                    <button class="btn btn-info" type="submit" name="buttonType" value="1">등록</button>
+		                    <button class="btn btn-danger"><a href="./list" style="color: white;">뒤로가기</a></button>
 	                    </div>
+	                    <!-- </div> -->
 	                 </form>
 				</div>
 			</div>

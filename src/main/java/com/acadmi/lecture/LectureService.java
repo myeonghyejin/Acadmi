@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.acadmi.college.CollegeVO;
+import com.acadmi.department.DepartmentVO;
 import com.acadmi.period.PeriodVO;
 import com.acadmi.student.StudentVO;
 
@@ -50,8 +51,8 @@ public class LectureService {
 	}
 	
 	
-	public List<CollegeVO> getDepartmentList(CollegeVO collegeVO) throws Exception{
-		return lectureDAO.getDepartmentList(collegeVO);
+	public List<DepartmentVO> getDepartmentList(DepartmentVO departmentVO) throws Exception{
+		return lectureDAO.getDepartmentList(departmentVO);
 	}
 	public List<CollegeVO> getCollegeList(CollegeVO collegeVO) throws Exception{
 		return lectureDAO.getCollegeList(collegeVO);

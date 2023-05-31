@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.acadmi.college.CollegeVO;
+import com.acadmi.department.DepartmentVO;
 import com.acadmi.period.PeriodVO;
 import com.acadmi.student.StudentVO;
 
@@ -51,14 +52,12 @@ public class LectureController {
 	
 	
 	@GetMapping("add")
-	public ModelAndView setLectureAdd(@ModelAttribute LectureVO lectureVO, CollegeVO collegeVO, PeriodVO periodVO) throws Exception{
+	public ModelAndView setLectureAdd(@ModelAttribute LectureVO lectureVO, DepartmentVO departmentVO, PeriodVO periodVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		log.error("getMapping");
-		List<CollegeVO> college = lectureService.getCollegeList(collegeVO);
-		List<CollegeVO> department = lectureService.getDepartmentList(collegeVO);
+		List<DepartmentVO> department = lectureService.getDepartmentList(departmentVO);
 		List<PeriodVO> period = lectureService.getSemesterList(periodVO);
 		mv.addObject("period",period);
-		mv.addObject("college",college);
 		mv.addObject("department",department);
 		mv.setViewName("lecture/add");
 		return mv;
@@ -80,8 +79,12 @@ public class LectureController {
 	}
 	
 	@GetMapping("update")
-	public ModelAndView setLectureUpdate(LectureVO lectureVO) throws Exception{
+	public ModelAndView setLectureUpdate(LectureVO lectureVO, DepartmentVO departmentVO, PeriodVO periodVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
+		List<DepartmentVO> department = lectureService.getDepartmentList(departmentVO);
+		List<PeriodVO> period = lectureService.getSemesterList(periodVO);
+		mv.addObject("period",period);
+		mv.addObject("department",department);
 		lectureVO = lectureService.getLectureDetail(lectureVO);
 		mv.addObject("update",lectureVO);
 		mv.setViewName("lecture/update");
@@ -135,7 +138,7 @@ public class LectureController {
 	public ModelAndView getLectureAttendee(LectureVO lectureVO, StudentVO studentVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		List<StudentVO> ar = lectureService.getLectureAttendee(lectureVO);
-		mv.addObject("attendee",ar);
+		mv.addObject("list",ar);
 		mv.setViewName("lecture/attendee");
 		return mv;
 	}

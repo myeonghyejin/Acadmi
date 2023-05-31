@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.acadmi.college.CollegeVO;
+import com.acadmi.department.DepartmentVO;
 import com.acadmi.period.PeriodVO;
 import com.acadmi.student.StudentVO;
 
@@ -21,7 +22,7 @@ public interface LectureDAO {
 	public int setTemporaryUpdate(LectureVO lectureVO) throws Exception;
 	public int setLectureDelete(LectureVO lectureVO) throws Exception;
 	
-	public List<CollegeVO> getDepartmentList(CollegeVO collegeVO) throws Exception;
+	public List<DepartmentVO> getDepartmentList(DepartmentVO departmentVO) throws Exception;
 	public List<CollegeVO> getCollegeList(CollegeVO collegeVO) throws Exception;
 	public List<PeriodVO> getSemesterList(PeriodVO periodVO) throws Exception;
 	

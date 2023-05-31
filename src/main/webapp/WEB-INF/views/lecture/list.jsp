@@ -20,13 +20,7 @@
 
 		<!-- Main Contents -->
 		<div class="container-fluid">
-			<div class="row">
-				<!-- 2레벨 Sidebar 적용 -->
-				<div class="content-wrapper">
-					<c:import url="../temp/sidebar/professor_lecture.jsp"></c:import>
-				</div>
-				<!-- 2레벨 Sidebar 끝 -->
-				
+			<div class="content-wrapper">
 				<!-- Contents -->
 				<div class="col">
 					<h1>내 강의 조회</h1>
@@ -35,8 +29,8 @@
 							<select class="form-select" id="temporary" name="temporary" onchange="this.form.submit()">
 		                    	<option name="temporary" id="temporary" value=" ">강의 조회</option>
 								<option for="temporary" value=" " >전체</option>
-								<option for="temporary" value="1" ${temporary.value == 1 ? 'selected' : ''}>등록</option>
-								<option for="temporary" value="0" ${temporary.value == 0 ? 'selected' : ''}>미등록</option>
+								<option for="temporary" value="1">등록</option>
+								<option for="temporary" value="0">미등록</option>
 							</select>
 		                    <a class="btn btn-info" href="./add">강의 등록</a></button>
 		                    <table class="table table-hover">

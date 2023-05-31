@@ -31,11 +31,11 @@
 	<select id="getCollegeList" parameterType="CollegeVO" resultType="CollegeVO">
 		SELECT * FROM COLLEGE
 	</select>
-	<select id="getDepartmentList" parameterType="CollegeVO" resultType="CollegeVO">
-		SELECT * FROM DEPARTMENT D LEFT OUTER JOIN COLLEGE C ON(C.COLLEGENUM=D.COLLEGENUM)
+	<select id="getDepartmentList" parameterType="DepartmentVO" resultType="DepartmentVO">
+		SELECT * FROM DEPARTMENT
 	</select>
 	<select id="getSemesterList" parameterType="PeriodVO" resultType="PeriodVO">
-		SELECT * FROM Semester
+		SELECT DISTINCT(YEAR) FROM PERIOD
 	</select>
   	<insert id="setLectureAdd" parameterType="LectureVO" useGeneratedKeys="true" keyProperty="lectureNum">
   		INSERT INTO LECTURE (USERNAME,LECTURENAME,SEMESTER,CATEGORY,DEPTNUM,GRADE,
