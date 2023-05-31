@@ -161,12 +161,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND LECTURENUM = #{lectureNum}
 	</select>
 	
-	<select id="getMyFavoriteLectures" parameterType="String" resultType="Long">
-		SELECT FAVORITENUM
-		FROM FAVORITE_LECTURE
-		WHERE USERNAME = #{username}
-	</select>
-	
 	<select id="getMyFavorite" parameterType="FavoriteLectureVO" resultType="FavoriteLectureVO">
 		SELECT *
 		FROM FAVORITE_LECTURE
