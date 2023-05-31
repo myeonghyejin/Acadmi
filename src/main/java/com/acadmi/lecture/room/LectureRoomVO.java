@@ -1,4 +1,4 @@
-package com.acadmi.lectureroom;
+package com.acadmi.lecture.room;
 
 import lombok.Getter;
 import lombok.Setter;
