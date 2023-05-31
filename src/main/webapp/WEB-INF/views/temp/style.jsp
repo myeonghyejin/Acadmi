@@ -22,8 +22,6 @@
 <link rel="stylesheet" href="/plugins/daterangepicker/daterangepicker.css">
 <!-- summernote -->
 <link rel="stylesheet" href="/plugins/summernote/summernote-bs4.min.css">
-<!-- fullCalendar -->
-<link rel="stylesheet" href="/plugins/fullcalendar/main.css">
 <!-- Select2 -->
 <link rel="stylesheet" href="/plugins/select2/css/select2.css">
 
@@ -59,8 +57,5 @@
 <script src="/js/adminlte.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="/js/pages/dashboard.js"></script>
-<!-- fullCalendar 2.2.5 -->
-<script src="/plugins/moment/moment.min.js"></script>
-<script src="/plugins/fullcalendar/main.js"></script>
 <!-- Select2 -->
 <script src="/plugins/select2/js/select2.full.min.js"></script>

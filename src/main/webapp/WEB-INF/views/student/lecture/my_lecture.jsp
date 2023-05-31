@@ -8,7 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Acadmi!</title>
 	<!-- CSS/favicon 적용 -->
-	<c:import url="../../temp/style.jsp"></c:import>
+	<c:import url="../../temp/style.jsp"></c:import>>
 	<!-- CSS/favicon 끝 -->
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -58,9 +58,6 @@
 								<div class="card-tools">
 									<button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
 										<i class="fas fa-minus"></i>
-									</button>
-									<button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-										<i class="fas fa-times"></i>
 									</button>
 								</div>
 							</div>

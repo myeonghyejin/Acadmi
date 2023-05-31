@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.acadmi.lecture.LectureVO;
-import com.acadmi.member.MemberVO;
 import com.acadmi.util.Pagination;
 
 import lombok.extern.slf4j.Slf4j;
@@ -40,7 +39,7 @@ public class StudentLectureController {
 		
 		mv.addObject("list", ar);
 		mv.setViewName("student/lecture/all_lecture");
-			
+
 		return mv;
 	}
 	
@@ -90,7 +89,7 @@ public class StudentLectureController {
 	/** INSERT **/
 	//수강 신청
 	@PostMapping("my_lecture/insert")
-	public ModelAndView setStudentLectureInsert(StudentLectureVO studentLectureVO, LectureVO lectureVO, HttpSession session, ModelAndView mv) throws Exception {
+	public ModelAndView insertToStudentLecture(StudentLectureVO studentLectureVO, LectureVO lectureVO, HttpSession session, ModelAndView mv) throws Exception {
 		int result = 0;
 		
 		Object obj = session.getAttribute("SPRING_SECURITY_CONTEXT");
@@ -99,8 +98,8 @@ public class StudentLectureController {
 		studentLectureVO.setUsername(authentication.getName());
 		
 		if(studentLectureService.getMyLecture(studentLectureVO) == null) {
-			studentLectureService.setSubscriptionAddUpdate(lectureVO);
-			result = studentLectureService.setStudentLectureInsert(studentLectureVO, lectureVO, session);
+			studentLectureService.addToSubscription(lectureVO);
+			result = studentLectureService.insertToStudentLecture(studentLectureVO, lectureVO, session);
 		}
 		
 		mv.addObject("result", result);
@@ -111,7 +110,7 @@ public class StudentLectureController {
 	
 	//장바구니 담기
 	@PostMapping("my_favorite/insert")
-	public ModelAndView setFavoriteLectureInsert(FavoriteLectureVO favoriteLectureVO, LectureVO lectureVO, HttpSession session, ModelAndView mv) throws Exception {
+	public ModelAndView insertToFavoriteLecture(FavoriteLectureVO favoriteLectureVO, LectureVO lectureVO, HttpSession session, ModelAndView mv) throws Exception {
 		int result = 0;
 		
 		Object obj = session.getAttribute("SPRING_SECURITY_CONTEXT");
@@ -120,8 +119,8 @@ public class StudentLectureController {
 		favoriteLectureVO.setUsername(authentication.getName());
 		
 		if(studentLectureService.getMyFavorite(favoriteLectureVO) == null) {
-			log.error("hi");
-			result = studentLectureService.setFavoriteLectureInsert(favoriteLectureVO, lectureVO, session);
+			studentLectureService.addToFavorite(lectureVO);
+			result = studentLectureService.insertToFavoriteLecture(favoriteLectureVO, lectureVO, session);
 		}
 		
 		mv.addObject("result", result);
@@ -133,7 +132,7 @@ public class StudentLectureController {
 	/** DELETE **/
 	//수강 취소
 	@PostMapping("my_lecture/delete")
-	public ModelAndView setStudentLectureDelete(StudentLectureVO studentLectureVO, LectureVO lectureVO, HttpSession session, ModelAndView mv) throws Exception {
+	public ModelAndView deleteToStudentLecture(StudentLectureVO studentLectureVO, LectureVO lectureVO, HttpSession session, ModelAndView mv) throws Exception {
 		int result = 0;
 		
 		Object obj = session.getAttribute("SPRING_SECURITY_CONTEXT");
@@ -142,8 +141,8 @@ public class StudentLectureController {
 		studentLectureVO.setUsername(authentication.getName());
 		
 		if(studentLectureService.getMyLecture(studentLectureVO) != null) {
-			studentLectureService.setSubscriptionDeleteUpdate(lectureVO);
-			result = studentLectureService.setStudentLectureDelete(studentLectureVO, lectureVO, session);
+			studentLectureService.deleteToSubscription(lectureVO);
+			result = studentLectureService.deleteToStudentLecture(studentLectureVO, lectureVO, session);
 		}
 		
 		mv.addObject("result", result);
@@ -154,7 +153,7 @@ public class StudentLectureController {
 	
 	//장바구니 빼기
 	@PostMapping("my_favorite/delete")
-	public ModelAndView setFavoriteLectureDelete(FavoriteLectureVO favoriteLectureVO, LectureVO lectureVO, HttpSession session, ModelAndView mv) throws Exception {
+	public ModelAndView deleteToFavoriteLecture(FavoriteLectureVO favoriteLectureVO, LectureVO lectureVO, HttpSession session, ModelAndView mv) throws Exception {
 		int result = 0;
 		
 		Object obj = session.getAttribute("SPRING_SECURITY_CONTEXT");
@@ -163,7 +162,8 @@ public class StudentLectureController {
 		favoriteLectureVO.setUsername(authentication.getName());
 		
 		if(studentLectureService.getMyFavorite(favoriteLectureVO) != null) {
-			result = studentLectureService.setFavoriteLectureDelete(favoriteLectureVO, lectureVO, session);
+			studentLectureService.deleteToFavorite(lectureVO);
+			result = studentLectureService.deleteToFavoriteLecture(favoriteLectureVO, lectureVO, session);
 		}
 		
 		mv.addObject("result", result);
