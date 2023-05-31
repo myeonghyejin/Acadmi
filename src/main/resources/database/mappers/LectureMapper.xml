@@ -5,103 +5,25 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.acadmi.lecture.LectureDAO">
-  <sql id="lectureCondition">
-  	<trim prefix="WHERE" prefixOverrides="AND">
-  		<if test="temporary==null">
-  			(TEMPORARY = 0 OR TEMPORARY=1)
-  		</if>
-  		<if test="temporary!=null">
-  			TEMPORARY = #{temporary}
-  		</if>
-  		<if test="username!=null">
-  			AND USERNAME=#{username}
-  		</if>
-
-  	</trim>
-  	
-  </sql>
-  	<select id="getLectureList" parameterType="LectureVO" resultType="LectureVO">
-  		SELECT * FROM LECTURE <include refid="lectureCondition"></include>
+  	<select id="getLectureList" resultType="LectureVO">
+  		SELECT * FROM LECTURE WHERE TEMPORARY=0
   	</select>
-  	<select id="getLectureDetail" parameterType="LectureVO" resultType="LectureVO">
-  		SELECT * FROM LECTURE WHERE LECTURENUM=#{lectureNum}
+  	<select id="getTemporaryList" resultType="LectureVO">
+  		SELECT * FROM LECTURE WHERE TEMPORARY=1
   	</select>
-
-	<!-- insert -->
   	<insert id="setLectureAdd" parameterType="LectureVO" useGeneratedKeys="true" keyProperty="lectureNum">
-  		INSERT INTO LECTURE (USERNAME,LECTURENAME,SEMESTER,CATEGORY,DEPTNUM,GRADE,
-  		YEAR,WEEKDAY, STARTTIME, ENDTIME, PERSONAL, COMPLETIONGRADE,NOTE,TEMPORARY)
-  		VALUES (#{username},#{lectureName},#{semester},#{category},#{deptNum},#{grade},#{year},#{weekday},
-  		#{startTime},#{endTime},#{personal},#{completionGrade},#{note},1)
+  		INSERT INTO LECTURE (USERNAME,LECTURENAME,SEMESTER,LECTUREBUILDING,LECTUREROOM,DEPTNUM,YEAR,TEMPORARY)
+  		VALUES (20190821,#{lectureName},1,'정보관',101,1,2022,0)
   	</insert>
   	<insert id="setTemporaryAdd" parameterType="LectureVO" useGeneratedKeys="true" keyProperty="lectureNum">
-  		INSERT INTO LECTURE (USERNAME,LECTURENAME,SEMESTER,CATEGORY,DEPTNUM,GRADE,
-  		YEAR,WEEKDAY, STARTTIME, ENDTIME, PERSONAL, COMPLETIONGRADE,NOTE,TEMPORARY)
-  		VALUES (#{username},#{lectureName},#{semester},#{category},#{deptNum},#{grade},#{year},#{weekday},
-  		#{startTime},#{endTime},#{personal},#{completionGrade},#{note},0)
+  		INSERT INTO LECTURE (USERNAME,LECTURENAME,SEMESTER,LECTUREBUILDING,LECTUREROOM,DEPTNUM,YEAR,TEMPORARY)
+  		VALUES (20190821,#{lectureName},1,'정보관',101,1,2022,1)
   	</insert>
-  
-  	<!-- update -->
   	<update id="setLectureUpdate" parameterType="LectureVO">
  		UPDATE LECTURE SET SEMESTER=#{semester}, DEPTNUM=#{deptNum},LECTURENAME=#{lectureName},CATEGORY=#{category},
- 		GRADE= #{grade},YEAR=#{year}, WEEKDAY=#{weekday},STARTTIME=#{startTime},ENDTIME=#{endTime},PERSONAL=#{personal},
- 		COMPLETIONGRADE=#{completionGrade},NOTE=#{note},TEMPORARY=1 WHERE LECTURENUM=#{lectureNum}
+ 		YEAR=#{year}, WEEKDAY=#{weekday},STARTTIME=#{startTime},ENDTIME=#{endTime},LECTUREBUILDING=#{lectureBuilding},
+ 		LECTUREROOM=#{lectureRoom},GRADE= #{grade},PERSONAL=#{personal},COMPLETIONGRADE=#{completionGrade},NOTE=#{note} 
+ 		WHERE LECTURENUM=#{lectureNum}
  	</update>
- 	<update id="setTemporaryUpdate" parameterType="LectureVO">
- 		UPDATE LECTURE SET SEMESTER=#{semester}, DEPTNUM=#{deptNum},LECTURENAME=#{lectureName},CATEGORY=#{category},
- 		GRADE= #{grade},YEAR=#{year}, WEEKDAY=#{weekday},STARTTIME=#{startTime},ENDTIME=#{endTime},PERSONAL=#{personal},
- 		COMPLETIONGRADE=#{completionGrade},NOTE=#{note}, TEMPORARY=0 WHERE LECTURENUM=#{lectureNum}
- 	</update>
-
- 	<delete id="setLectureDelete" parameterType="LectureVO">
- 		DELETE FROM LECTURE WHERE LECTURENUM=#{lectureNum}
- 	</delete>
- 	
- 	<select id="getLectureMain" parameterType="LectureVO" resultMap="LectureProfessorResult">
-  		SELECT * FROM `MEMBER` M INNER JOIN PROFESSOR P ON (M.USERNAME=P.USERNAME) 
-		INNER JOIN LECTURE L ON (P.USERNAME=L.USERNAME) WHERE LECTURENUM=#{lectureNum}
-  	</select>
-  	
-  	<select id="getLectureAttendee" parameterType="LectureVO" resultType="StudentVO">
-  		SELECT S.*,M.EMAIL  FROM `MEMBER` M INNER JOIN STUDENT S ON (M.USERNAME=S.USERNAME) 
-		INNER JOIN STUDENT_LECTURE SL ON (M.USERNAME=SL.USERNAME) WHERE LECTURENUM=#{lectureNum}
-  	</select>
-  	
-  	<resultMap type="LectureVO" id="LectureProfessorResult">
-  		<id column="LECTURENUM" property="lectureNum"/>
-  		<result column="LECTURENAME" property="lectureName"/>
-  		<result column="SEMESTER" property="semester"/>
-  		<result column="CATEGORY" property="category"/>
-  		<result column="LECTUREBUILDING" property="lectureBuilding"/>
-  		<result column="LECTUREROOM" property="lectureRoom"/>
-  		<result column="DEPTNUM" property="deptNum"/>
-  		<result column="GRADE" property="grade"/>
-  		<result column="SUBSCRIPTION" property="subscription"/>
-  		<result column="PERSONAL" property="personal"/>
-  		<result column="YEAR" property="year"/>
-  		<result column="WEEKDAY" property="weekday"/>
-  		<result column="STARTTIME" property="startTime"/>
-  		<result column="ENDTIME" property="endTime"/>
-  		<result column="COMPLETIONGRADE" property="completionGrade"/>
-  		<result column="STATUS" property="status"/>
-  		<result column="NOTE" property="note"/>
-  		<result column="TEMPORARY" property="temporary"/>
-  		<result column="USERNAME" property="username"/>
-  		
-  		<collection property="professorVO" javaType="ProfessorVO">
-  			<id column="USERNAME" property="username"/>
-  			<result column="DEPTNUM" property="deptNum"/>
-  			<result column="NAME" property="name"/>
-  			<result column="PROFESSORROOM" property="professorRoom"/>
-  			<result column="PHONE" property="phone"/>
-  			<result column="BIRTH" property="birth"/>
-  			<result column="ADDRESS" property="address"/>
-  			<result column="STATUS" property="status"/>
-  			<result column="EMAIL" property="email"/>
-  		</collection>
-  		
-  	</resultMap>
-  	
-  	
-	
+  
   </mapper>
