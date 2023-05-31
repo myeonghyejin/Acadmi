@@ -8,7 +8,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Chat_messageVO {
+public class ChatMessageVO {
 	
 	private Long msgNum;
 	private String username;
