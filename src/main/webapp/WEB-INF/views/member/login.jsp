@@ -1,89 +1,63 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
+
 <head>
- <head>
-     <meta charset="utf-8">
+
+<head>
+	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Acadmi!</title>
 	<!-- CSS/favicon 적용 -->
 	<c:import url="../temp/style.jsp"></c:import>
 	<!-- CSS/favicon 끝 -->
-</head>
- 		<body class="hold-transition sidebar-mini layout-fixed">
-		<div class="wrapper">
-       
-      		<!-- Header 적용 -->
-				<c:import url="../temp/header.jsp"></c:import>
-			<!-- Header 끝 --> 
-        
-            <!-- Main Contents -->
-		<div class="container-fluid">
-			<div class="row">
-	<%-- 			<!-- 2레벨 Sidebar 적용 -->
-				<div class="content-wrapper">
-					<c:import url="./temp/sidebar/std_lecture.jsp"></c:import>
-				</div>
-				<!-- 2레벨 Sidebar 끝 --> --%>
-				
-				<!-- Contents -->
-				<div class="col">
-					 <section class="py-5">
-                 <div class="container px-5">
-                    <!-- Contact form-->
-                    <div class="bg-light rounded-3 py-5 px-4 px-md-5 mb-5">
-                        <div class="text-center mb-5">
-                            <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-envelope"></i></div>
-                            <h1 class="fw-bolder">로그인</h1>
-                            <p>Acadmi에 오신걸 환영합니다</p>
-                        </div>
-                        <div class="row gx-5 justify-content-center">
-                            <div class="col-lg-8 col-xl-6">
-                                
-                                <form id="contactForm" action="./login" method="post" data-sb-form-api-token="API_TOKEN">
-                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-                                    <!-- Name input-->
-                                    <div class="form-floating mb-3">
-                                        <label for="username">아이디</label>
-                                        <input class="form-control" id="username" value="${cookie.remember.value}" name="username"  placeholder="아이디를 입력하세요"/>
-                                    </div>
-                                    <!-- pw address input-->
-                                    <div class="form-floating mb-3">
-                                        <label for="password">비밀번호</label>
-                                        <input class="form-control" id="password" name="password" type="password" placeholder="비밀번호를 입력하세요"/>
-                                    </div>
-                                    
-                                    <div>
-                                    	<a href="./findPw">비밀번호 찾기</a><br>
-                                    	<a href="./join">회원가입</a>
-                                    </div>
-                                    
-	                                <c:if test="${not empty param.errorMessage}">
-	                                	<h3>${param.errorMessage}</h3>
-	                                </c:if>
-	                                <div class="d-grid">
-	                                	<button class="btn btn-primary float-right" id="submitButton" type="submit">로그인</button>
-	                                </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-				</div>
-			</div>
-		</div>
-       
-		<!-- Footer 적용 -->
-			<c:import url="../temp/footer.jsp"></c:import>
-		<!-- Footer 끝 -->
 
-	</div>
-<!-- ./wrapper -->
-</body>
-</html>
+	<script nonce="51733e18-25fc-4635-9e00-babae35f8483">(function (w, d) { !function (a, b, c, d) { a[c] = a[c] || {}; a[c].executed = []; a.zaraz = { deferred: [], listeners: [] }; a.zaraz.q = []; a.zaraz._f = function (e) { return function () { var f = Array.prototype.slice.call(arguments); a.zaraz.q.push({ m: e, a: f }) } }; for (const g of ["track", "set", "debug"]) a.zaraz[g] = a.zaraz._f(g); a.zaraz.init = () => { var h = b.getElementsByTagName(d)[0], i = b.createElement(d), j = b.getElementsByTagName("title")[0]; j && (a[c].t = b.getElementsByTagName("title")[0].text); a[c].x = Math.random(); a[c].w = a.screen.width; a[c].h = a.screen.height; a[c].j = a.innerHeight; a[c].e = a.innerWidth; a[c].l = a.location.href; a[c].r = b.referrer; a[c].k = a.screen.colorDepth; a[c].n = b.characterSet; a[c].o = (new Date).getTimezoneOffset(); if (a.dataLayer) for (const n of Object.entries(Object.entries(dataLayer).reduce(((o, p) => ({ ...o[1], ...p[1] })), {}))) zaraz.set(n[0], n[1], { scope: "page" }); a[c].q = []; for (; a.zaraz.q.length;) { const q = a.zaraz.q.shift(); a[c].q.push(q) } i.defer = !0; for (const r of [localStorage, sessionStorage]) Object.keys(r || {}).filter((t => t.startsWith("_zaraz_"))).forEach((s => { try { a[c]["z_" + s.slice(7)] = JSON.parse(r.getItem(s)) } catch { a[c]["z_" + s.slice(7)] = r.getItem(s) } })); i.referrerPolicy = "origin"; i.src = "/cdn-cgi/zaraz/s.js?z=" + btoa(encodeURIComponent(JSON.stringify(a[c]))); h.parentNode.insertBefore(i, h) };["complete", "interactive"].includes(b.readyState) ? zaraz.init() : a.addEventListener("DOMContentLoaded", zaraz.init) }(w, d, "zarazData", "script"); })(window, document);</script>
+</head>
+
+				<body class="hold-transition login-page">
+					<div class="login-box">
+
+						<div class="card card-outline card-primary">
+							<div class="card-header text-center">
+								<b>Acadmi</b>
+							</div>
+							<div class="card-body">
+								<p class="login-box-msg">로그인하여 Acadmi에 접속하세요!</p>
+								<form id="contactForm" action="./login" method="post" data-sb-form-api-token="API_TOKEN">
+            						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+									<div class="input-group mb-3">
+										<input class="form-control" id="username" value="${cookie.remember.value}" name="username"  placeholder="아이디를 입력하세요"/>
+										<div class="input-group-append">
+											<div class="input-group-text">
+												<span class="fas fa-user"></span>
+											</div>
+										</div>
+									</div>
+									<div class="input-group mb-3">
+										<input class="form-control" id="password" name="password" type="password" placeholder="비밀번호를 입력하세요"/>
+										<div class="input-group-append">
+											<div class="input-group-text">
+												<span class="fas fa-lock"></span>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+
+										<div class="col-4">
+											<button class="btn btn-info btn-block float-right" id="submitButton" type="submit">로그인</button>
+										</div>
+
+									</div>
+								</form>
+
+								<p class="mb-1">
+									<a href="./findPw">비밀번호 찾기</a>
+								</p>
+							</div>
+						</div>
+
+					</div>
