@@ -11,6 +11,7 @@ public class Pagination {
 	private String category;
 	private Integer department;
 	private Integer grade;
+	private String username;
 	
 	private Long page;
 	private Long perPage;

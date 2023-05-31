@@ -18,7 +18,7 @@ $("#allLectureList").on("click","#mli",function(e){
             "lectureNum="+$(this).attr("data-mli-num")
 	       }).then((response)=>{return response.text()})
 	         .then((res)=>{
-	           if(res.trim()==0){
+	           if(res.trim()!=0){
 					alert('신청되었습니다.');
 					document.location.reload();
 	           }else {
@@ -41,7 +41,7 @@ $("#allLectureList").on("click","#mfi",function(e){
 	       body:"lectureNum="+$(this).attr("data-mfi-num")
 	       }).then((response)=>{return response.text()})
 	         .then((res)=>{
-	           if(res.trim()==0){
+	           if(res.trim()!=0){
 					alert('담았습니다.');
 					document.location.reload();
 	           }else {

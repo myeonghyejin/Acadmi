@@ -19,8 +19,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="department != null and !department.equals('')">
 				AND DEPTNUM = #{deptNum}
 			</if>
+			AND LECTURENUM NOT IN (SELECT LECTURENUM FROM STUDENT_LECTURE WHERE USERNAME = #{username})
 		</trim>
 	</sql>	
+	
+	<sql id="favorite">
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+			<if test="favoriteNum != null">
+				AND FAVORITENUM = #{favoriteNum}
+			</if>
+			<if test="lectureNum != null">
+				AND LECTURENUM = #{lectureNum}
+			</if>
+			<if test="username != null">
+				AND USERNAME = #{username}
+			</if>
+		</trim>
+	</sql>
 
 	<!-- ResultMap -->
 	<resultMap type="LectureVO" id="allLectureList">
@@ -131,7 +146,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					INNER JOIN
 					STUDENT S
 					ON S.USERNAME = FL.USERNAME
-		WHERE S.USERNAME = #{username}
+		WHERE FL.LECTURENUM NOT IN (SELECT LECTURENUM FROM STUDENT_LECTURE WHERE USERNAME = #{username})
 		ORDER BY FAVORITENUM DESC
 	</select>
 	
@@ -172,7 +187,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		VALUES (#{lectureNum}, #{username}, #{retake})
 	</insert>
 	
-	<insert id="setFavoriteLectureInsert" parameterType="FavoriteLectureVO">
+	<insert id="setFavoriteLectureInsert" parameterType="FavoriteLectureVO" useGeneratedKeys="true" keyProperty="favoriteNum">
 		INSERT INTO FAVORITE_LECTURE (FAVORITENUM, LECTURENUM, USERNAME)
 		VALUES (#{favoriteNum}, #{lectureNum}, #{username})
 	</insert>

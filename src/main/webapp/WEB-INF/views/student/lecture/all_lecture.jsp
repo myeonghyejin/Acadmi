@@ -179,17 +179,16 @@
 												<td>${lectureVO.lectureRoomVO.lectureBuilding} ${lectureVO.lectureRoomVO.lectureRoom}</td>
 												<td>${lectureVO.subscription}/${lectureVO.personal}명</td>
 												<td class="project-actions text-right">
-														<input type="hidden" name="lectureNum" value="${lectureVO.lectureNum}">
-														<input type="hidden" name="username" value="${member.username}">
-														<button class="btn btn-info btn-sm" id="mli" type="button" data-mli-num="${lectureVO.lectureNum}">
-															<i class="fas fa-circle-check"></i>
-															신청
-														</button>
-														<input type="hidden" name="favoriteNum" value="${lectureVO.favoriteLectureVO.favoriteNum}">
-														<button class="btn btn-primary btn-sm" id="mfi" type="button" data-mfi-num="${lectureVO.favoriteLectureVO.favoriteNum}">
-															<i class="fas fa-basket-shopping"></i>
-															담기
-														</button>
+													<input type="hidden" name="username" value="${member.username}">
+													<input type="hidden" name="lectureNum" value="${lectureVO.lectureNum}">
+													<button class="btn btn-info btn-sm" id="mli" type="button" data-mli-num="${lectureVO.lectureNum}">
+														<i class="fas fa-circle-check"></i>
+														신청
+													</button>
+													<button class="btn btn-primary btn-sm" id="mfi" type="button" data-mfi-num="${lectureVO.lectureNum}">
+														<i class="fas fa-basket-shopping"></i>
+														담기
+													</button>
 												</td>
 											</tr>
 										</c:forEach>

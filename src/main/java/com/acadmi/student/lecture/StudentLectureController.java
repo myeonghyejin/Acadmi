@@ -30,7 +30,12 @@ public class StudentLectureController {
 	/** SELECT **/
 	//수강 신청 & 장바구니 조회
 	@GetMapping("all_lecture")
-	public ModelAndView getAllLectureList(Pagination pagination, ModelAndView mv) throws Exception {
+	public ModelAndView getAllLectureList(Pagination pagination, HttpSession session, ModelAndView mv) throws Exception {
+		Object obj = session.getAttribute("SPRING_SECURITY_CONTEXT");
+		SecurityContextImpl contextImpl = (SecurityContextImpl)obj;
+		Authentication authentication = contextImpl.getAuthentication();
+		pagination.setUsername(authentication.getName());
+		
 		List<LectureVO> ar = studentLectureService.getAllLectureList(pagination);
 		
 		mv.addObject("list", ar);
@@ -96,8 +101,6 @@ public class StudentLectureController {
 		if(studentLectureService.getMyLecture(studentLectureVO) == null) {
 			studentLectureService.setSubscriptionAddUpdate(lectureVO);
 			result = studentLectureService.setStudentLectureInsert(studentLectureVO, lectureVO, session);
-			FavoriteLectureVO favoriteLectureVO = new FavoriteLectureVO();
-			result = studentLectureService.setFavoriteLectureDelete(favoriteLectureVO, lectureVO, session);
 		}
 		
 		mv.addObject("result", result);
@@ -117,6 +120,7 @@ public class StudentLectureController {
 		favoriteLectureVO.setUsername(authentication.getName());
 		
 		if(studentLectureService.getMyFavorite(favoriteLectureVO) == null) {
+			log.error("hi");
 			result = studentLectureService.setFavoriteLectureInsert(favoriteLectureVO, lectureVO, session);
 		}
 		
