@@ -3,10 +3,9 @@ package com.acadmi.lecture;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
 @Setter
+@Getter
 public class LectureVO {
-	
 	private Long lectureNum;
 	private String username;
 	private String lectureName;
@@ -21,8 +20,9 @@ public class LectureVO {
 	private Integer year;
 	private String weekday;
 	private Integer startTime;
-	private Integer lastTime;
-	private Double completionGrade;
+	private Integer endTime;
+	private Float completionGrade;
+	private Integer status;
 	private String note;
 	private Integer temporary;
 

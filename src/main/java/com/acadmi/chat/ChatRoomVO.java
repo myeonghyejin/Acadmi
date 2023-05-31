@@ -7,12 +7,12 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Chat_roomVO {
+public class ChatRoomVO {
 	
 	private Long chatNum;
 	private Integer chatStatus;
 	private String sender;
 	private String recipient;
-	private List<Chat_messageVO> chat_messages;
+	private List<ChatMessageVO> chat_messages;
 
 }
