@@ -11,5 +11,4 @@ public class LectureRoomVO {
 	private Integer lectureRoom;
 	private Integer personal;
 	private Integer status;
-
 }
