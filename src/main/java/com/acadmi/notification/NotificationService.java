@@ -19,7 +19,7 @@ import com.acadmi.member.MemberVO;
 import com.acadmi.professor.ProfessorVO;
 import com.acadmi.board.qna.QnaVO;
 import com.acadmi.student.StudentVO;
-import com.acadmi.student.lecture.Student_lectureVO;
+import com.acadmi.student.lecture.StudentLectureVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -189,8 +189,8 @@ public class NotificationService {
 		//강의 공지사항의 글번호
 		notificationVO.setNum(lectureNoticeVO.getNum());
 		//수강강의에 강의 번호를 가지고있는 학생(username)들을 recipient에 넣는다
-		List<Student_lectureVO> ar = notificationDAO.getStudentLectureList(lectureVO);
-		for(Student_lectureVO student_lectureVO:ar) {
+		List<StudentLectureVO> ar = notificationDAO.getStudentLectureList(lectureVO);
+		for(StudentLectureVO student_lectureVO:ar) {
 			notificationVO.setRecipient(student_lectureVO.getUsername());
 			result = notificationDAO.setNotification(notificationVO);
 		}

@@ -13,10 +13,9 @@ import com.acadmi.student.lecture.StudentLectureVO;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
 @Setter
+@Getter
 public class LectureVO {
-	
 	private Long lectureNum;
 	private String username;
 	private String lectureName;
