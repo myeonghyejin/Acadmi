@@ -84,6 +84,6 @@
 		
 	<c:import url="../temp/footer.jsp"></c:import>
 	<script src="/js/filemanager.js"></script>
-	<script src="/js/qnaReply.js"></script>
+	<script src="/js/board/qnaReply.js"></script>
 </body>
 </html>

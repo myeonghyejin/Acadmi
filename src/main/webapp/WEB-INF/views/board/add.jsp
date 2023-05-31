@@ -103,6 +103,6 @@
 		
 	<c:import url="../temp/footer.jsp"></c:import>
 	<script src="/js/filemanager.js"></script>
-	<script src="/js/notice.js"></script>
+	<script src="/js/board/notice.js"></script>
 </body>
 </html>

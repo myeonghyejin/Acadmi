@@ -18,7 +18,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-12">
-						<header class="entry-header wow fadeInDown" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInDown;">
+						<header class="entry-header">
 							<c:if test="${board eq 'notice'}">
 								공지사항
 							</c:if>
@@ -107,7 +107,7 @@
 
 	<c:import url="../temp/footer.jsp"></c:import>
 	<script src="/js/filemanager.js"></script>
-	<script src="/js/notice.js"></script>
+	<script src="/js/board/notice.js"></script>
 	<script>
 		setCount(${dto.fileVOs.size()});
 	

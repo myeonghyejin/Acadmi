@@ -11,7 +11,7 @@
 			<span class="mr-4">작성일</span>
 			<span class="mr-4 fontlight">${reply.regDate}</span>
 			<span class="mr-4">내용</span>
-			<span class="mr-4 fontlight">${reply.contents}</span>
+			<span class="mr-4 fontlight"><a href="./detail?num=${reply.num}">${reply.contents}</a></span>
 
 			<span class="mr-4 fontlight">
 				<c:forEach items="${reply.fileVOs}" var="fileVO">
