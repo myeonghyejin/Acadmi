@@ -41,14 +41,6 @@ public class StudentLectureController {
 	
 	//내 수강 신청 조회
 	@GetMapping("my_lecture")
-	public ModelAndView getMyLectureList(ModelAndView mv) throws Exception {
-		mv.setViewName("student/lecture/my_lecture");
-		
-		return mv;
-	}
-	
-	//ajax 내 수강 신청 조회
-	@GetMapping("my_lecture/list")
 	public ModelAndView getMyLectureList(StudentLectureVO studentLectureVO, HttpSession session, ModelAndView mv) throws Exception {
 		Object obj = session.getAttribute("SPRING_SECURITY_CONTEXT");
 		SecurityContextImpl contextImpl = (SecurityContextImpl)obj;
@@ -58,21 +50,13 @@ public class StudentLectureController {
 		List<StudentLectureVO> ar = studentLectureService.getMyLectureList(studentLectureVO);
 		
 		mv.addObject("list", ar);
-		mv.setViewName("student/lecture/ajax/my_lecture_list");
+		mv.setViewName("student/lecture/my_lecture");
 		
 		return mv;
 	}
 	
 	//내 장바구니 조회
 	@GetMapping("my_favorite")
-	public ModelAndView getMyFavoriteList(ModelAndView mv) throws Exception {
-		mv.setViewName("student/lecture/my_favorite");
-		
-		return mv;
-	}
-	
-	//ajax 내 장바구니 조회
-	@GetMapping("my_favorite/list")
 	public ModelAndView getMyFavoriteList(FavoriteLectureVO favoriteLectureVO, HttpSession session, ModelAndView mv) throws Exception {		
 		Object obj = session.getAttribute("SPRING_SECURITY_CONTEXT");
 		SecurityContextImpl contextImpl = (SecurityContextImpl)obj;
@@ -82,7 +66,7 @@ public class StudentLectureController {
 		List<FavoriteLectureVO> ar = studentLectureService.getMyFavoriteList(favoriteLectureVO);
 		
 		mv.addObject("list", ar);
-		mv.setViewName("student/lecture/ajax/my_favorite_list");
+		mv.setViewName("student/lecture/my_favorite");
 		
 		return mv;
 	}

@@ -1,16 +1,3 @@
-//list
-getList(1);
-
-function getList(page){
-    fetch("/student/lecture/my_lecture/list", {
-        method:'GET'
-    })
-    .then((response)=>response.text())
-    .then((res)=>{
-        $("#myLectureList").html(res.trim());
-    })
-}
-
 //my_lecture_delete
 $("#myLectureList").on("click","#mld",function(e){
 	let check = window.confirm("취소하시겠습니까?");
@@ -26,7 +13,7 @@ $("#myLectureList").on("click","#mld",function(e){
 	         .then((res)=>{
 	           if(res.trim()!=0){
 					alert('취소되었습니다.');
-					getList(1);
+					document.location.reload();
 	           }else {
 	               alert('취소되지 않았습니다.');
 	           }

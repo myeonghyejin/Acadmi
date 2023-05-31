@@ -1,16 +1,3 @@
-//list
-getList(1);
-
-function getList(page){
-    fetch("/student/lecture/my_favorite/list", {
-        method:'GET'
-    })
-    .then((response)=>response.text())
-    .then((res)=>{
-        $("#myFavoriteList").html(res.trim());
-    })
-}
-
 //my_lecture_insert
 $("#myFavoriteList").on("click","#mli",function(e){
 	let check = window.confirm("신청하시겠습니까?");
@@ -26,7 +13,7 @@ $("#myFavoriteList").on("click","#mli",function(e){
 	         .then((res)=>{
 	           if(res.trim()!=0){
 					alert('신청되었습니다.');
-					getList(1);
+					document.location.reload();
 	           }else {
 	               alert('신청되지 않았습니다.');
 	           }
@@ -37,7 +24,7 @@ $("#myFavoriteList").on("click","#mli",function(e){
 
 //my_favorite_delete
 $("#myFavoriteList").on("click","#mfd",function(e){
-	let check = window.confirm("삭제하시겠습니까?");
+	let check = window.confirm("빼시겠습니까?");
     if(check) {
 	    fetch("./my_favorite/delete", {
 	        method:'POST',
@@ -48,10 +35,10 @@ $("#myFavoriteList").on("click","#mfd",function(e){
 	       }).then((response)=>{return response.text()})
 	         .then((res)=>{
 	           if(res.trim()!=0){
-					alert('삭제되었습니다.');
-					getList(1);
+					alert('뺐습니다.');
+					document.location.reload();
 	           }else {
-	               alert('삭제 실패했습니다.');
+	               alert('빼기에 실패했습니다.');
 	           }
 	         })
 	         e.preventDefault();
