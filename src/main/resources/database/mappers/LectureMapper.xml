@@ -1,34 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Schema 추가 -->
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
-<mapper namespace="com.acadmi.lecture.LectureDAO">
-	<!-- SQL -->
-	<sql id="search">
-		<where>
-			<if test="kind == 'name'">
-				LECTURENAME LIKE CONCAT('%', #{search}, '%')
-			</if>
-			<if test="kind == 'category'">
-				CATEGORY = #{category}
-			</if>
-			<if test="kind == 'grade'">
-				GRADE = #{grade}
-			</if>
-			<if test="kind == 'dept'">
-				DEPTNUM = #{deptNum}
-			</if>
-		</where>
-	</sql>
-	
-	<!-- SELECT -->
-	<select id="getList" parameterType="Pagination" resultType="LectureVO">
-		SELECT *
-		FROM NOTICE
-		<include refid="search"></include>
-		ORDER BY NUM DESC
-		LIMIT #{startRow}, #{perPage}
-	</select>
-	
-</mapper>
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.acadmi.lecture.LectureDAO">
+  	<select id="getLectureList" resultType="LectureVO">
+  		SELECT * FROM LECTURE WHERE TEMPORARY=0
+  	</select>
+  	<select id="getTemporaryList" resultType="LectureVO">
+  		SELECT * FROM LECTURE WHERE TEMPORARY=1
+  	</select>
+  	<insert id="setLectureAdd" parameterType="LectureVO" useGeneratedKeys="true" keyProperty="lectureNum">
+  		INSERT INTO LECTURE (USERNAME,LECTURENAME,SEMESTER,LECTUREBUILDING,LECTUREROOM,DEPTNUM,YEAR,TEMPORARY)
+  		VALUES (20190821,#{lectureName},1,'정보관',101,1,2022,0)
+  	</insert>
+  	<insert id="setTemporaryAdd" parameterType="LectureVO" useGeneratedKeys="true" keyProperty="lectureNum">
+  		INSERT INTO LECTURE (USERNAME,LECTURENAME,SEMESTER,LECTUREBUILDING,LECTUREROOM,DEPTNUM,YEAR,TEMPORARY)
+  		VALUES (20190821,#{lectureName},1,'정보관',101,1,2022,1)
+  	</insert>
+  	<update id="setLectureUpdate" parameterType="LectureVO">
+ 		UPDATE LECTURE SET SEMESTER=#{semester}, DEPTNUM=#{deptNum},LECTURENAME=#{lectureName},CATEGORY=#{category},
+ 		YEAR=#{year}, WEEKDAY=#{weekday},STARTTIME=#{startTime},ENDTIME=#{endTime},LECTUREBUILDING=#{lectureBuilding},
+ 		LECTUREROOM=#{lectureRoom},GRADE= #{grade},PERSONAL=#{personal},COMPLETIONGRADE=#{completionGrade},NOTE=#{note} 
+ 		WHERE LECTURENUM=#{lectureNum}
+ 	</update>
+  
+  </mapper>
