@@ -12,7 +12,7 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <title>Insert title here</title>
 </head>
-<c:import url="../temp/header.jsp"></c:import>
+<c:import url="../temp/administrator.jsp"></c:import>
 <body>
 	<h1>교수 목록 조회</h1>
 

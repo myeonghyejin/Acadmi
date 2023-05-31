@@ -6,13 +6,7 @@
   <mapper namespace="com.acadmi.administrator.AdministratorDAO">
   
   <sql id="search">
-  
- 			<if test="kind == 'username'"  >
- 				AND USERNAME LIKE CONCAT('%', #{search} '%')
- 			</if>
- 			<if test="kind == 'name'">
- 				AND NAME LIKE CONCAT('%', #{search} '%')
- 			</if>
+  	
  			
  	</sql>
     <!--회원 관리  -->
@@ -100,8 +94,6 @@
 					USING(COLLEGENUM)
 				WHERE CATEGORY=2
 				<include refid="search"></include>
-				
-		
 		LIMIT #{startRow},#{perPage}					
   	</select>
   	<resultMap type="CollegeVO" id="StudentList">
@@ -245,6 +237,14 @@
   	<select id="getTotalCountDepartment" resultType="Long">
   		SELECT COUNT(DEPTNUM) FROM DEPARTMENT
   	</select>
+  	
+  <!--학과 수정 -->
+  <update id="setDepartmentUpdate" parameterType="DepartmentVO">
+  	UPDATE DEPARTMENT
+  	SET STATUS=#{status}
+  	WHERE DEPTNUM=#{deptNum}
+  </update>
+  
   <!--학과 등록 -->
   <insert id="setDepartmentAdd" parameterType="DepartmentVO">
   	INSERT INTO DEPARTMENT 

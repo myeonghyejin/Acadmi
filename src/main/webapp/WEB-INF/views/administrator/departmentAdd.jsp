@@ -14,8 +14,7 @@
 </head>
 <body>
 
-<c:import url="../temp/header.jsp"></c:import>
-
+<c:import url="../temp/administrator.jsp"></c:import>
 	<h1>학과 등록</h1>
 	
 	<form action="./departmentAdd" method="post">

@@ -270,6 +270,15 @@ public class AdministratorController {
 		return mv;
 	}
 	
+	@PostMapping("departmentList")
+	public ModelAndView setDepartmentUpdate(@Valid DepartmentVO departmentVO, BindingResult bindingResult) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		int result =  administratorService.setDepartmentUpdate(departmentVO);
+		
+		return mv;
+	}
+	
 	//학과 등록
 	@GetMapping("departmentAdd")
 	public ModelAndView setDepartmentAdd(CollegeVO collegeVO) throws Exception {

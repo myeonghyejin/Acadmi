@@ -164,7 +164,7 @@
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
-							<a href="#" class="nav-link">
+							<a href="/notice/list" class="nav-link">
 								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>공지사항</p>
 							</a>
@@ -208,7 +208,7 @@
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
-							<a href="/notice/list" class="nav-link">
+							<a href="#" class="nav-link">
 								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>계정 관리</p>
 							</a>
@@ -231,6 +231,14 @@
 							<i class="fas fa-angle-left right"></i>
 						</p>
 					</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item">
+							<a href="#" class="nav-link">
+								<i class="fa-solid fa-circle fa-2xs"></i>
+								<p>기관 관리</p>
+							</a>
+						</li>
+					</ul>
 					
 				</li>
 				
@@ -239,10 +247,19 @@
 					<a href="#" class="nav-link">
 						<i class="nav-icon fas fa-comment-dots"></i>
 						<p>
-							강의실 목록
+							강의실 관리
 							<i class="fas fa-angle-left right"></i>
 						</p>
 					</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item">
+							<a href="#" class="nav-link">
+								<i class="fa-solid fa-circle fa-2xs"></i>
+								<p>강의실 목록</p>
+							</a>
+						</li>
+					</ul>
+					
 				</li>
 				
 				<!-- 학사 관리 -->

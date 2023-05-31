@@ -16,7 +16,7 @@
 </head>
 <body>
 
-<c:import url="../temp/header.jsp"></c:import>
+<c:import url="../temp/administrator.jsp"></c:import>
 	<h1>학생 목록 조회</h1>
 
 	<table class="table table-hover" border="1">

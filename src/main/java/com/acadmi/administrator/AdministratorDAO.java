@@ -1,5 +1,6 @@
 package com.acadmi.administrator;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -65,6 +66,9 @@ public interface AdministratorDAO {
 	
 	//학과 등록
 	public int setDepartmentAdd(DepartmentVO departmentVO) throws Exception;
+	
+	//학과 수정
+	public int setDepartmentUpdate(DepartmentVO departmentVO) throws Exception;
 
 
 }

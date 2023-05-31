@@ -14,7 +14,7 @@
 </head>
 <body>
 
-<c:import url="../temp/header.jsp"></c:import>
+<c:import url="../temp/administrator.jsp"></c:import>
 
 	<h1>강의실 조회</h1>
 	
