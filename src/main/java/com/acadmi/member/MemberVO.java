@@ -64,10 +64,6 @@ public class MemberVO implements UserDetails {
 		return true;
 	}
 
-	@Override
-	public String getUsername() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 	
 }

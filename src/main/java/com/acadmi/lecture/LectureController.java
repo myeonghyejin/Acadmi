@@ -2,9 +2,12 @@ package com.acadmi.lecture;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.acadmi.student.StudentVO;
+
 import lombok.extern.slf4j.Slf4j;
-@CrossOrigin(origins="localhost")
+
 @Slf4j
 @Controller
 @RequestMapping("/lecture/")
@@ -24,8 +29,18 @@ public class LectureController {
 	private LectureService lectureService;
 	
 	@GetMapping("list")
-	public ModelAndView getLectureList(LectureVO lectureVO) throws Exception{
+	public ModelAndView getLectureList(LectureVO lectureVO, HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
+		/* 이렇게 세션에서 받아와야함.
+		 * Object obj = session.getAttribute("SPRING_SECURITY_CONTEXT");
+		 * SecurityContextImpl contextImpl = (SecurityContextImpl) obj; Authentication
+		 * authentication = contextImpl.getAuthentication();
+		 */
+		Object obj = session.getAttribute("SPRING_SECURITY_CONTEXT");
+		SecurityContextImpl contextImpl = (SecurityContextImpl) obj; 
+		Authentication authentication = contextImpl.getAuthentication();
+		lectureVO.setUsername(authentication.getName());
+		
 		List<LectureVO> ar = lectureService.getLectureList(lectureVO);
 		mv.addObject("list",ar);
 		mv.setViewName("lecture/list");
@@ -41,7 +56,11 @@ public class LectureController {
 		return mv;
 	}
 	@PostMapping("add")
-	public ModelAndView setLectureAdd(LectureVO lectureVO, ModelAndView mv, @RequestParam("buttonType")String buttonType) throws Exception{
+	public ModelAndView setLectureAdd(LectureVO lectureVO, ModelAndView mv, @RequestParam("buttonType")String buttonType,HttpSession session) throws Exception{
+		Object obj = session.getAttribute("SPRING_SECURITY_CONTEXT");
+		SecurityContextImpl contextImpl = (SecurityContextImpl) obj; 
+		Authentication authentication = contextImpl.getAuthentication();
+		lectureVO.setUsername(authentication.getName());
 		if(buttonType.equals("1")) {
 			int result = lectureService.setLectureAdd(lectureVO);
 		} else if(buttonType.equals("0")){
@@ -105,10 +124,10 @@ public class LectureController {
 	}
 	
 	@GetMapping("attendee")
-	public ModelAndView getLectureAttendee(LectureVO lectureVO) throws Exception{
+	public ModelAndView getLectureAttendee(LectureVO lectureVO, StudentVO studentVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		lectureVO = lectureService.getLectureAttendee(lectureVO);
-		mv.addObject("attendee",lectureVO);
+		List<StudentVO> ar = lectureService.getLectureAttendee(lectureVO);
+		mv.addObject("attendee",ar);
 		mv.setViewName("lecture/attendee");
 		return mv;
 	}

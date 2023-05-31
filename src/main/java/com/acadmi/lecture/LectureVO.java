@@ -12,7 +12,7 @@ import lombok.Setter;
 @Getter
 public class LectureVO {
 	private Long lectureNum;
-	private String userName;
+	private String username;
 	private String lectureName;
 	private Integer semester;
 	private String category;

@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.acadmi.student.StudentVO;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -24,16 +26,14 @@ public class LectureService {
 	public LectureVO getLectureMain(LectureVO lectureVO) throws Exception{
 		return lectureDAO.getLectureMain(lectureVO);
 	}
-	public LectureVO getLectureAttendee(LectureVO lectureVO) throws Exception{
-		return lectureDAO.getLectureAttendee(lectureVO);
+	public List<StudentVO> getLectureAttendee(LectureVO lectureVO) throws Exception{
+		return (List<StudentVO>) lectureDAO.getLectureAttendee(lectureVO);
 	}
 	
 	public int setLectureAdd(LectureVO lectureVO) throws Exception{
-		log.error("ddd");
 		return lectureDAO.setLectureAdd(lectureVO);
 	}
 	public int setTemporaryAdd(LectureVO lectureVO) throws Exception{
-		log.error("ddd");
 		return lectureDAO.setTemporaryAdd(lectureVO);
 	}
 	

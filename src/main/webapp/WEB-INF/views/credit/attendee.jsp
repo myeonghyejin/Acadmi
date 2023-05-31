@@ -11,39 +11,36 @@
 	<!-- CSS/favicon 끝 -->
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
-	<div class="wrapper">
+	<div class="wrapper"> 
 
 		<!-- Header 적용 -->
 		<c:import url="../temp/header.jsp"></c:import>
 		<!-- Header 끝 -->
-		<div class="content-wrapper">
 		
+		<div class="content-wrapper">
 			<main class="flex-shrink-0">
-			<c:import url="../temp/sidebar/professor_lecture.jsp"></c:import>
 					<section class="bg-light py-5">
 		                <div class="container px-5 my-5">
-		                <h1 class="fw-bolder"></h1>
-		                <form action="./attendee" method="get">
+		                <h1 class="fw-bolder">학생 관리 | ${detail.lectureName}</h1>
+		                <form action="./list" method="get">
 		                    <div class="row gx-5 my-3">
-		                    
+		                    <button class="btn btn-primary"><a href="./add?lectureNum=${detail.lectureNum}" style="color: white;">성적 입력</a></button>
 		                    	<table class="table table-hover">
 		                    		<thead style="background-color: black; color: white;">
 			                    		<tr>
 			                    			<th>학번</th>
-			                    			<th>이름</th>
 			                    			<th>학과</th>
-			                    			<th>이메일</th>
-			                    			<th>전화번호</th>
+			                    			<th>이름</th>
+			                    			<th>학년</th>
 			                    		</tr>
 			                    	</thead>
 			                    	<tbody>
 			                    		<c:forEach items="${attendee}" var="attendee">
 			                    			<tr>
 			                    				<td>${attendee.username}</td>
-			                    					<td>${attendee.name}</td>
-		 											<td>${attendee.deptNum}</td>
-		 											<td>${attendee.email}</td>
-		 											<td>${attendee.phone}</td>
+			                    				<td>${attendee.deptNum}</td>
+			                    				<td>${attendee.name}</td>
+			                    				<td>${attendee.grade}</td>
 			                    			</tr>
 			                    		</c:forEach>
 			                    	</tbody>
