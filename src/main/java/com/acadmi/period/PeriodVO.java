@@ -16,5 +16,5 @@ public class PeriodVO {
 	private Date favoriteStart;
 	private Date favoriteEnd;
 	private Date deadline;
-
+	
 }

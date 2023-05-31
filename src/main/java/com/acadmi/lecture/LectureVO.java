@@ -10,10 +10,9 @@ import com.acadmi.professor.ProfessorVO;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
 @Setter
+@Getter
 public class LectureVO {
-	
 	private Long lectureNum;
 	private String username;
 	private String lectureName;
@@ -23,7 +22,7 @@ public class LectureVO {
 	private Integer lectureRoom;
 	private Integer deptNum;
 	private Integer grade;
-	private Integer subscription;
+	private Integer suvScription;
 	private Integer personal;
 	private Integer year;
 	private String weekday;

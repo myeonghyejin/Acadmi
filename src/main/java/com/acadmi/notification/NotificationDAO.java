@@ -11,7 +11,7 @@ import com.acadmi.board.lectureQna.LectureQnaVO;
 import com.acadmi.board.qna.QnaVO;
 import com.acadmi.lecture.LectureVO;
 import com.acadmi.student.StudentVO;
-import com.acadmi.student.lecture.Student_lectureVO;
+import com.acadmi.student.lecture.StudentLectureVO;
 
 @Mapper
 public interface NotificationDAO {
@@ -47,7 +47,7 @@ public interface NotificationDAO {
 	public LectureVO getLecture(LectureVO lectureVO) throws Exception;
 	
 	//수강 강의 정보를 가져오는 List
-	public List<Student_lectureVO> getStudentLectureList(LectureVO lectureVO) throws Exception;
+	public List<StudentLectureVO> getStudentLectureList(LectureVO lectureVO) throws Exception;
 	
 	//lectureQna의 원글을 가져오는 것
 	public LectureQnaVO getOriginalLectureQna(LectureQnaVO lectureQnaVO) throws Exception;

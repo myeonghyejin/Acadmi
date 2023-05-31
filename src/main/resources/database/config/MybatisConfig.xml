@@ -5,8 +5,6 @@
   
   <configuration>
   	<typeAliases>
-  		<typeAlias type="com.acadmi.student.lecture.Student_lectureVO" alias="Student_lectureVO"/>
-  		<typeAlias type="com.acadmi.board.lectureQna.LectureQnaVO" alias="LectureQnaVO"/>
   		<typeAlias type="java.lang.Long" alias="Long"/>
   		
   		<typeAlias type="com.acadmi.util.Pagination" alias="Pagination"/>
@@ -25,6 +23,8 @@
   		<typeAlias type="com.acadmi.student.lecture.StudentLectureVO" alias="StudentLectureVO"/>
   		<typeAlias type="com.acadmi.student.lecture.FavoriteLectureVO" alias="FavoriteLectureVO"/>
   		<typeAlias type="com.acadmi.student.StudentVO" alias="StudentVO"/>
+  		<typeAlias type="com.acadmi.student.lecture.StudentLectureVO" alias="StudentLectureVO"/>
+  		<typeAlias type="com.acadmi.student.lecture.FavoriteLectureVO" alias="FavoriteLectureVO"/>
   		
   		<typeAlias type="com.acadmi.department.DepartmentVO" alias="DepartmentVO"/>
   		
@@ -39,10 +39,16 @@
   		<typeAlias type="com.acadmi.board.notice.NoticeFileVO" alias="NoticeFileVO"/>
   		<typeAlias type="com.acadmi.board.qna.QnaVO" alias="QnaVO"/>
   		<typeAlias type="com.acadmi.board.qna.QnaFileVO" alias="QnaFileVO"/>
+  		<typeAlias type="com.acadmi.board.lectureNotice.LectureNoticeVO" alias="LectureNoticeVO"/>
+  		<typeAlias type="com.acadmi.board.lectureQna.LectureQnaVO" alias="LectureQnaVO"/>
 
   		<typeAlias type="com.acadmi.period.PeriodVO" alias="PeriodVO"/>
 
-  		
+  		<typeAlias type="com.acadmi.chat.ChatMessageVO" alias="ChatMessageVO"/>
+		<typeAlias type="com.acadmi.chat.ChatRoomVO" alias="ChatRoomVO"/>
+		<typeAlias type="com.acadmi.chat.ChatFilesVO" alias="ChatFilesVO"/>
+		
+		<typeAlias type="com.acadmi.credit.CreditVO" alias="CreditVO"/>
   		
   		
   	</typeAliases>
