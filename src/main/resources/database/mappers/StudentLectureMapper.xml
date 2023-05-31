@@ -22,20 +22,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			AND LECTURENUM NOT IN (SELECT LECTURENUM FROM STUDENT_LECTURE WHERE USERNAME = #{username})
 		</trim>
 	</sql>	
-	
-	<sql id="favorite">
-		<trim prefix="WHERE" prefixOverrides="AND |OR ">
-			<if test="favoriteNum != null">
-				AND FAVORITENUM = #{favoriteNum}
-			</if>
-			<if test="lectureNum != null">
-				AND LECTURENUM = #{lectureNum}
-			</if>
-			<if test="username != null">
-				AND USERNAME = #{username}
-			</if>
-		</trim>
-	</sql>
 
 	<!-- ResultMap -->
 	<resultMap type="LectureVO" id="allLectureList">
@@ -173,6 +159,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM STUDENT_LECTURE
 		WHERE USERNAME = #{username}
 		AND LECTURENUM = #{lectureNum}
+	</select>
+	
+	<select id="getMyFavoriteLectures" parameterType="String" resultType="Long">
+		SELECT FAVORITENUM
+		FROM FAVORITE_LECTURE
+		WHERE USERNAME = #{username}
 	</select>
 	
 	<select id="getMyFavorite" parameterType="FavoriteLectureVO" resultType="FavoriteLectureVO">
