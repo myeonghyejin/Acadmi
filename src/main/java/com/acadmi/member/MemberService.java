@@ -23,6 +23,8 @@ import com.acadmi.administrator.AdministratorVO;
 import com.acadmi.department.DepartmentVO;
 import com.acadmi.professor.ProfessorVO;
 import com.acadmi.student.StudentVO;
+import com.acadmi.util.FileManager;
+import com.acadmi.util.FileVO;
 import com.acadmi.util.MailManager;
 
 import lombok.extern.slf4j.Slf4j;
@@ -42,6 +44,9 @@ public class MemberService implements UserDetailsService{
 	
 	@Autowired
 	private MailManager mailManager;
+	
+	@Autowired
+	private FileManager fileManager;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -122,15 +127,30 @@ public class MemberService implements UserDetailsService{
 //	======================================================================================================================
 	
 	
-	public MemberVO setStudentUpdate(StudentVO studentVO) throws Exception{
-		return memberDAO.setStudentUpdate(studentVO);
+	public MemberVO setStudentUpdate(StudentVO studentVO, MultipartFile multipartFile) throws Exception{
+		MemberVO memberVO = memberDAO.setStudentUpdate(studentVO);
+		
+		if(multipartFile != null) {
+			
+			if(!multipartFile.isEmpty()) {
+				String fileName = fileManager.saveFile(path, multipartFile);
+				MemberFilesVO memberFilesVO = new MemberFilesVO();
+				memberFilesVO.setUsername(studentVO.getUsername());
+				memberFilesVO.setFileName(fileName);
+				memberFilesVO.setOriName(multipartFile.getOriginalFilename());
+				
+				memberVO = memberDAO.setFileUpdate(memberFilesVO);
+			}
+		}
+		return memberVO;		
+		    
 	}
 	
-	public MemberVO setProfessorUpdate(ProfessorVO professorVO) throws Exception{
+	public MemberVO setProfessorUpdate(ProfessorVO professorVO, MultipartFile multipartFile) throws Exception{
 		return memberDAO.setProfessorUpdate(professorVO);
 	}
 	
-	public MemberVO setAdministratorUpdate(AdministratorVO administratorVO) throws Exception{
+	public MemberVO setAdministratorUpdate(AdministratorVO administratorVO, MultipartFile multipartFile) throws Exception{
 		return memberDAO.setAdministratorUpdate(administratorVO);
 	}
 	

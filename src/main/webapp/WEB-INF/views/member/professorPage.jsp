@@ -43,9 +43,18 @@
 											<div class="card card-info card-outline ml-5">
 												<div class="card-body box-profile">
 													<div class="text-center">
-														<img class="profile-user-img img-fluid img-circle"
-															src="https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927"
-															alt="User profile picture">
+		     	 										<c:choose>
+															<c:when test="${empty memberFilesVO.filName}">
+																<img class="profile-user-img img-fluid img-circle"
+																	src="/images/profile.jpg"
+																    alt="User profile picture">
+															</c:when>
+															<c:otherwise>
+																<img class="profile-user-img img-fluid img-circle"
+																	src="C:/production/upload/member/${memberFilesVO.fileName}"
+																    alt="User profile picture">
+															</c:otherwise>
+														</c:choose>
 													</div>
 													<c:forEach items="${departmentVO.professorVOs}" var="professorVO">
 														<c:set var="professorName" value="${professorVO.name}"></c:set>

@@ -20,6 +20,8 @@ public interface MemberDAO {
 	public int setRoleAdd(Map<String, Object> map) throws Exception;
 	public MemberVO getFindPw(MemberVO memberVO) throws Exception;
 	public int setPwUpdate(MemberVO memberVO) throws Exception;
+	public MemberVO setFileUpdate(MemberFilesVO memberFilesVO) throws Exception;
+	public MemberVO setFileDelete(MemberFilesVO memberFilesVO) throws Exception;
 	
 //	========================================================================================
 	

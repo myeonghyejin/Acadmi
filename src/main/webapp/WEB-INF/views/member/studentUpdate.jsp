@@ -58,6 +58,7 @@
 															<c:set var="studentBirth" value="${studentVO.birth}"></c:set>
 															<c:set var="studentAddress" value="${studentVO.address}"></c:set>
 															<c:set var="studentEmail" value="${studentVO.email}"></c:set>
+															
 
 														<div class="card-body">
 															<strong><i class="fas fa-book mr-1"></i> 학과, 학년</strong>

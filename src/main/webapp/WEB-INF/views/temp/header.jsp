@@ -165,15 +165,15 @@
 		<div class="user-panel mt-3 pb-3 mb-3 d-flex">
 			<div class="image">
 				<sec:authorize access="hasRole('STUDENT')">
-					<img src="https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927" class="img-circle elevation-2" alt="User Image">
+					<img src="/images/profile.jpg" class="img-circle elevation-2" alt="User Image">
 				</sec:authorize>
 				
 				<sec:authorize access="hasRole('PROFESSOR')">
-					<img src="https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927" class="img-circle elevation-2" alt="User Image">
+					<img src="/images/profile.jpg" class="img-circle elevation-2" alt="User Image">
 				</sec:authorize>
 				
 				<sec:authorize access="hasRole('ADMINISTRATOR')">
-					<img src="https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927" class="img-circle elevation-2" alt="User Image">
+					<img src="/images/profile.jpg" class="img-circle elevation-2" alt="User Image">
 				</sec:authorize>
 			</div>
 			<div class="info">

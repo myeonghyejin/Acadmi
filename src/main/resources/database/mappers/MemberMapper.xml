@@ -80,10 +80,9 @@
   				<result property="birth" column="BIRTH"/>
 	  			<result property="address" column="ADDRESS"/>
 	  			<result property="email" column="EMAIL"/>
-  				<collection property="memberFilesVOs" javaType="List" ofType="MemberFilesVO">
-  					<id column="FILENUM" property="fileNum"/>
-  					<result column="ORINAME" property="oriName"/>
-  				</collection>
+  				<association property="memberFilesVO" javaType="MemberFilesVO">
+           			<id column="FILENAME" property="fileName"/>
+        		</association>
   			</collection>
   		</resultMap>
   		
@@ -113,10 +112,9 @@
 	  			<result property="address" column="ADDRESS"/>
 	  			<result property="email" column="EMAIL"/>
   				<result column="STATUS" property="status"/>
-  				<collection property="memberFilesVOs" javaType="List" ofType="MemberFilesVO">
-  					<id column="FILENUM" property="fileNum"/>
-  					<result column="ORINAME" property="oriName"/>
-  				</collection>
+  				<association property="memberFilesVO" javaType="MemberFilesVO">
+           			<id column="FILENAME" property="fileName"/>
+        		</association>
   			</collection>
   		</resultMap>
   		
@@ -145,10 +143,9 @@
 	  			<result property="address" column="ADDRESS"/>
 	  			<result property="email" column="EMAIL"/>
   				<result column="STATUS" property="status"/>
-  				<collection property="memberFilesVOs" javaType="List" ofType="MemberFilesVO">
-  					<id column="FILENUM" property="fileNum"/>
-  					<result column="ORINAME" property="oriName"/>
-  				</collection>
+  				<association property="memberFilesVO" javaType="MemberFilesVO">
+           			<id column="FILENAME" property="fileName"/>
+        		</association>
   			</collection>
   		</resultMap>
   		
