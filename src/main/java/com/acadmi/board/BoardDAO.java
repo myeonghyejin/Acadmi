@@ -2,6 +2,7 @@ package com.acadmi.board;
 
 import java.util.List;
 
+import com.acadmi.board.lectureNotice.LectureNoticeVO;
 import com.acadmi.board.notice.NoticeVO;
 import com.acadmi.board.qna.QnaVO;
 import com.acadmi.util.FileVO;
@@ -30,6 +31,8 @@ public interface BoardDAO {
 	public List<BoardVO> getImportantList(NoticeVO noticeVO) throws Exception;
 	
 	public int setNoticeHit(NoticeVO noticeVO) throws Exception;
+	
+	public int setLectureNoticeHit(LectureNoticeVO lectureNoticeVO) throws Exception;
 	
 	public int setStepUpdate(QnaVO qnaVO) throws Exception;
 	

@@ -4,8 +4,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="com.acadmi.board.notice.NoticeDAO">
-  	
+  <mapper namespace="com.acadmi.board.lectureNotice.LectureNoticeDAO">
+  
   	<sql id="search">
   		<where>
   			<if test="kind == 'title'">
@@ -21,39 +21,34 @@
   	</sql>
   
   	<select id="getTotalCount" resultType="Long" parameterType="Pagination">
-  		SELECT COUNT(NUM) FROM NOTICE
+  		SELECT COUNT(NUM) FROM LECTURE_NOTICE
   		<include refid="search"></include>
   	</select>
   
   	<select id="getList" resultMap="getDetailResult" parameterType="Pagination">
-  		SELECT * FROM NOTICE
+  		SELECT * FROM LECTURE_NOTICE
   			LEFT JOIN
-  			NOTICEFILES 
+  			LECTURE_NOTICEFILES
   			USING(NUM)
   		<include refid="search"></include>
   		ORDER BY NUM DESC
   		LIMIT #{startRow}, #{perPage}
   	</select>
   	
-  	<select id="getImportantList" resultType="NoticeVO" parameterType="NoticeVO">
-  		SELECT * FROM NOTICE
-  		WHERE IMPORTANT = #{important}
-  	</select>
-  	
-  	<select id="getDetail" parameterType="NoticeVO" resultMap="getDetailResult">
+  	<select id="getDetail" parameterType="LectureNoticeVO" resultMap="getDetailResult">
   		SELECT *
-		FROM NOTICE 
+		FROM LECTURE_NOTICE 
 			 LEFT JOIN
-			 NOTICEFILES 
+			 LECTURE_NOTICEFILES 
 			 USING(NUM)
 		WHERE NUM = #{num}
   	</select>
   
- 	<resultMap type="NoticeVO" id="getDetailResult">
+ 	<resultMap type="LectureNoticeVO" id="getDetailResult">
   		<id column="num" property="num"/>
+  		<result column="lectureNum" property="lectureNum"/>
   		<result column="title" property="title"/>
   		<result column="writer" property="writer"/>
-  		<result column="important" property="important"/>
   		<result column="contents" property="contents"/>
   		<result column="hit" property="hit"/>
   		<result column="regDate" property="regDate"/>
@@ -66,36 +61,36 @@
   		</collection>
   	</resultMap>
   	
-  	<insert id="setInsert" parameterType="NoticeVO" useGeneratedKeys="true" keyProperty="num">
-  		INSERT INTO NOTICE (NUM, TITLE, WRITER, IMPORTANT, CONTENTS, HIT, REGDATE, MODIFYDATE)
-  		VALUES (#{num}, #{title}, #{writer}, #{important}, #{contents}, 0, now(), now())
+  	<insert id="setInsert" parameterType="LectureNoticeVO" useGeneratedKeys="true" keyProperty="num">
+  		INSERT INTO LECTURE_NOTICE (NUM, LECTURENUM, TITLE, WRITER, CONTENTS, HIT, REGDATE, MODIFYDATE)
+  		VALUES (#{num}, #{lectureNum}, #{title}, #{writer}, #{contents}, 0, now(), now())
   	</insert>
   	
-  	<update id="setUpdate" parameterType="NoticeVO">
-  		UPDATE NOTICE SET TITLE = #{title}, CONTENTS = #{contents}, IMPORTANT = #{important}, MODIFYDATE = now()
+  	<update id="setUpdate" parameterType="LectureNoticeVO">
+  		UPDATE LECTURE_NOTICE SET TITLE = #{title}, CONTENTS = #{contents}, MODIFYDATE = now()
   		WHERE NUM = #{num}
   	</update>
   	
-  	<delete id="setDelete" parameterType="NoticeVO">
-  		DELETE FROM NOTICE WHERE NUM = #{num}
+  	<delete id="setDelete" parameterType="LectureNoticeVO">
+  		DELETE FROM LECTURE_NOTICE WHERE NUM = #{num}
   	</delete>
   	
   	<insert id="setBoardFileAdd" parameterType="FileVO">
-  		INSERT INTO NOTICEFILES (NUM, FILENAME, ORINAME)
+  		INSERT INTO LECTURE_NOTICEFILES (NUM, FILENAME, ORINAME)
   		VALUES(#{num}, #{fileName}, #{oriName})
   	</insert>
   	
   	<select id="getFileDetail" parameterType="FileVO" resultType="FileVO">
-  		SELECT * FROM NOTICEFILES WHERE FILENUM = #{fileNum}
+  		SELECT * FROM LECTURE_NOTICEFILES WHERE FILENUM = #{fileNum}
   	</select>
   	
   	<delete id="setBoardFileDelete" parameterType="FileVO">
-  		DELETE FROM NOTICEFILES WHERE FILENUM = #{fileNum}
+  		DELETE FROM LECTURE_NOTICEFILES WHERE FILENUM = #{fileNum}
   	</delete>
   	
-  	<update id="setNoticeHit" parameterType="NoticeVO">
-		UPDATE NOTICE SET HIT = #{hit} + 1 
+  	<update id="setLectureNoticeHit" parameterType="LectureNoticeVO">
+		UPDATE LECTURE_NOTICE SET HIT = #{hit} + 1 
 		WHERE NUM = #{num}
    	</update>
-  	
+   	
   </mapper>

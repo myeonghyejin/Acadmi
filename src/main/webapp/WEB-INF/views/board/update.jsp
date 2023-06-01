@@ -25,6 +25,9 @@
 							<c:if test="${board eq 'qna'}">
 								질의응답게시판
 							</c:if>
+							<c:if test="${board eq 'lectureNotice'}">
+								강의공지사항
+							</c:if>
 						</header>
 					</div>
 				</div>
@@ -38,10 +41,13 @@
 		<div class="row mb-4">
 			<h3 class="col-md-7 mx-auto text-center border-bottom border-dark pb-4">
 				<c:if test="${board eq 'notice'}">
-					공지사항
+					공지사항 수정
 				</c:if>
 				<c:if test="${board eq 'qna'}">
-					질의응답게시판
+					질의응답게시판 수정
+				</c:if>
+				<c:if test="${board eq 'lectureNotice'}">
+					강의공지사항 수정
 				</c:if>
 			</h3>
 		</div>

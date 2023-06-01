@@ -1,7 +1,6 @@
-package com.acadmi.board.notice;
+package com.acadmi.board.lectureNotice;
 
 import java.util.List;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,31 +12,26 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.acadmi.board.BoardVO;
-import com.acadmi.notification.NotificationService;
-import com.acadmi.notification.NotificationVO;
 import com.acadmi.util.FileVO;
 import com.acadmi.util.Pagination;
 
 @Controller
-@RequestMapping("/notice/*")
-public class NoticeController {
+@RequestMapping("/lectureNotice/*")
+public class LectureNoticeController {
 
 	@Autowired
-	private NoticeService noticeService;
-	
-	@Autowired
-	private NotificationService notificationService;
+	private LectureNoticeService lectureNoticeService;
 	
 	@ModelAttribute("board")
 	public String getBoardName() {
-		return "notice";
+		return "lectureNotice";
 	}
 	
 	@GetMapping("list")
 	public ModelAndView getList(Pagination pagination) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		List<BoardVO> ar = noticeService.getList(pagination);
+		List<BoardVO> ar = lectureNoticeService.getList(pagination);
 		
 		mv.addObject("list", ar);
 		mv.setViewName("board/list");
@@ -45,20 +39,8 @@ public class NoticeController {
 		return mv;
 	}
 	
-	@GetMapping("importantList")
-	public ModelAndView getImportantList(NoticeVO noticeVO) throws Exception {
-		ModelAndView mv = new ModelAndView();
-		
-		List<BoardVO> ar = noticeService.getImportantList(noticeVO);
-		
-		mv.addObject("importantList", ar);
-		mv.setViewName("board/importantList");
-		
-		return mv;
-	}
-	
 	@GetMapping("add")
-	public ModelAndView setInsert(NoticeVO noticeVO) throws Exception {
+	public ModelAndView setInsert(LectureNoticeVO lectureNoticeVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
 		mv.setViewName("board/add");
@@ -67,14 +49,10 @@ public class NoticeController {
 	}
 	
 	@PostMapping("add")
-	public ModelAndView setInsert(NoticeVO noticeVO, MultipartFile [] addfiles) throws Exception {
+	public ModelAndView setInsert(LectureNoticeVO lectureNoticeVO, MultipartFile [] addfiles) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		int result = noticeService.setInsert(noticeVO, addfiles);
-		
-		if(noticeVO.getImportant()==1) {
-			result = notificationService.setIptNotice(noticeVO);
-		}
+		int result = lectureNoticeService.setInsert(lectureNoticeVO, addfiles);
 		
 		mv.setViewName("redirect:./list");
 		
@@ -82,18 +60,14 @@ public class NoticeController {
 	}
 	
 	@GetMapping("detail")
-	public ModelAndView getDetail(NoticeVO noticeVO, NotificationVO notificationVO) throws Exception {
+	public ModelAndView getDetail(LectureNoticeVO lectureNoticeVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		noticeVO = (NoticeVO)noticeService.getDetail(noticeVO);
+		lectureNoticeVO = (LectureNoticeVO)lectureNoticeService.getDetail(lectureNoticeVO);
 		
-		int result = noticeService.setNoticeHit(noticeVO);
+		int result = lectureNoticeService.setLectureNoticeHit(lectureNoticeVO);
 		
-		if(notificationVO != null) {
-			result = notificationService.setDelete(notificationVO);
-		}
-		
-		mv.addObject("boardVO", noticeVO);
+		mv.addObject("boardVO", lectureNoticeVO);
 		mv.setViewName("board/detail");
 		
 		return mv;
@@ -103,7 +77,7 @@ public class NoticeController {
 	public ModelAndView getFileDown(FileVO fileVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		fileVO = noticeService.getFileDetail(fileVO);
+		fileVO = lectureNoticeService.getFileDetail(fileVO);
 		
 		mv.addObject("fileVO", fileVO);
 		mv.setViewName("fileManager");
@@ -112,20 +86,20 @@ public class NoticeController {
 	}
 	
 	@GetMapping("update")
-	public ModelAndView setUpdate(NoticeVO noticeVO) throws Exception {
+	public ModelAndView setUpdate(LectureNoticeVO lectureNoticeVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		noticeVO = (NoticeVO)noticeService.getDetail(noticeVO);
+		lectureNoticeVO = (LectureNoticeVO)lectureNoticeService.getDetail(lectureNoticeVO);
 		
-		mv.addObject("dto", noticeVO);
+		mv.addObject("dto", lectureNoticeVO);
 		mv.setViewName("board/update");
 		
 		return mv;
 	}
 	
 	@PostMapping("update")
-	public ModelAndView setUpdate(ModelAndView mv, NoticeVO noticeVO, MultipartFile [] addfiles) throws Exception {
+	public ModelAndView setUpdate(ModelAndView mv, LectureNoticeVO lectureNoticeVO, MultipartFile [] addfiles) throws Exception {
 		
-		int result = noticeService.setUpdate(noticeVO, addfiles);
+		int result = lectureNoticeService.setUpdate(lectureNoticeVO, addfiles);
 		
 		mv.setViewName("redirect:./list");
 		
@@ -136,7 +110,7 @@ public class NoticeController {
 	public ModelAndView setDelete(BoardVO boardVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		int result = noticeService.setDelete(boardVO);
+		int result = lectureNoticeService.setDelete(boardVO);
 		
 		mv.setViewName("redirect:./list");
 		
@@ -147,12 +121,12 @@ public class NoticeController {
 	public ModelAndView setBoardFileDelete(FileVO fileVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		int result = noticeService.setBoardFileDelete(fileVO);
+		int result = lectureNoticeService.setBoardFileDelete(fileVO);
 		
 		mv.addObject("result", result);
 		mv.setViewName("common/result");
 		
 		return mv;
 	}
-
+	
 }

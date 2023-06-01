@@ -29,13 +29,16 @@
 						<c:if test="${board eq 'qna'}">
 							질의응답게시판
 						</c:if>
+						<c:if test="${board eq 'lectureNotice'}">
+							강의공지사항
+						</c:if>
 					</h1>
 				</div>
 			  </div>
 			</div>
 		  </section>
 	  
-		  <section class="content">
+		<section class="content">
 			<div class="card">
 			  <div class="card-header">
 				<h3 class="card-title">
@@ -44,6 +47,9 @@
 					</c:if>
 					<c:if test="${board eq 'qna'}">
 						질의응답 상세
+					</c:if>
+					<c:if test="${board eq 'lecutureNotice'}">
+						강의공지사항 상세
 					</c:if>
 				</h3>
 	  
@@ -70,6 +76,15 @@
 						<span class="mr-4" style="margin-left: 200px;">작성일</span>
 						<span class="mr-4 fontlight">${boardVO.regDate}</span>
 						<c:if test="${board eq 'notice'}">
+							<span class="mr-4" style="margin-left: 200px;">수정일</span>
+							<span class="mr-4 fontlight">${boardVO.modifiyDate}</span>
+							<span class="mr-4">조회수</span>
+							<span class="mr-4 fontlight">${boardVO.hit}</span>
+						</c:if>
+						
+						<c:if test="${board eq 'lectureNotice'}">
+							<span class="mr-4" style="margin-left: 200px;">수정일</span>
+							<span class="mr-4 fontlight">${boardVO.modifiyDate}</span>
 							<span class="mr-4">조회수</span>
 							<span class="mr-4 fontlight">${boardVO.hit}</span>
 						</c:if>
@@ -85,15 +100,15 @@
 					<div class="row" style="margin-top: 200px;">
 						<p>${boardVO.contents}</p>
 					</div>
+					
+					<sec:authentication property="principal.username" var="userName" />
 
 					<div class="row" style="margin-top: 200px;">
 						<a href="./list" class="btn btn-light">목록</a>
-						<sec:authorize access="hasRole('ROLE_ADMIN')">
-							<c:if test="${userName eq boardVO.writer}">
-								<a href="./update?num=${boardVO.num}" id="update" class="btn btn-info float-right">수정</a>	
-								<a href="./delete?num=${boardVO.num}" id="delete" class="btn btn-danger float-right">삭제</a>
-							</c:if>
-						</sec:authorize>
+						<c:if test="${userName eq boardVO.writer}">
+							<a href="./update?num=${boardVO.num}" id="update" class="btn btn-info float-right">수정</a>	
+							<a href="./delete?num=${boardVO.num}" id="delete" class="btn btn-danger float-right">삭제</a>
+						</c:if>
 					</div>
 							 
 					<c:if test="${board eq 'qna'}">
@@ -104,32 +119,29 @@
 								</c:if>
 							</c:if>
 						</div>
-					</c:if>
-
-					<sec:authentication property="principal.username" var="userName" />
-							
+						
 								<div class="row">
 									<div class="col-12">
 										<hr>
 										<div class="post">
-									  		<div class="user-block">
-										  		<c:if test="${num eq 2}">
-											  		<div class="replyDetail" data-num-id="${boardVO.num}">
-
-											  		</div>
-										  		</c:if>
-									  		</div>
+										  	<div class="user-block">
+											  	<c:if test="${num eq 2}">
+												  	<div class="replyDetail" data-num-id="${boardVO.num}">
+	
+												  	</div>
+											  	</c:if>
+										  	</div>
 										</div>
 									</div>
 								</div>
-					    	</div>
-				   		</div>
-					</div>
+							</c:if>
+					    </div>
+				   	</div>
 				</div>
 			</div>
 		</section>
 	</div>
-
+</div>
 		
 	<c:import url="../temp/footer.jsp"></c:import>
 	<script src="/js/board/notice.js"></script>

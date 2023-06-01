@@ -26,6 +26,9 @@
 								<c:if test="${board eq 'qna'}">
 									질의응답게시판
 								</c:if>
+								<c:if test="${board eq 'lectureNotice'}">
+									강의공지사항
+								</c:if>
 							</h1>
 						</header>
 					</div>
@@ -40,10 +43,13 @@
 		<div class="row mb-4">
 			<h3 class="col-md-7 mx-auto text-center border-bottom border-dark pb-4">
 				<c:if test="${board eq 'notice'}">
-					공지사항
+					공지사항 등록
 				</c:if>
 				<c:if test="${board eq 'qna'}">
-					질의응답게시판
+					질의응답게시판 등록
+				</c:if>
+				<c:if test="${board eq 'lectureNotice'}">
+					강의공지사항 등록
 				</c:if>
 			</h3>
 		</div>
@@ -51,7 +57,15 @@
 		<sec:authentication property="principal.username" var="userName" />
 		
 		<div class="row col-md-7 mx-auto">
-			<form class="row g-3" action="./add" method="post" enctype="multipart/form-data">				
+			<form class="row g-3" action="./add" method="post" enctype="multipart/form-data">
+				
+				<c:if test="${board eq 'lectureNotice'}">
+					<div class="col-md-12 mt-3">
+						<label for="lectureNum" class="form-label strongFont2">강의번호</label> 
+						<input type="text" class="form-control" name="lectureNum" id="lectureNum">
+					</div>
+				</c:if>
+						
 				<div class="col-md-4">
 					<label for="writer" class="form-label strongFont2">작성자</label>
 					<input type="text" name="writer" class="form-control" id="writer" readonly value="${userName}">

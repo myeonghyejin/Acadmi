@@ -27,6 +27,9 @@
 					<c:if test="${board eq 'qna'}">
 						<h1>질의응답게시판</h1>
 					</c:if>
+					<c:if test="${board eq 'lectureNotice'}">
+						<h1>강의공지사항</h1>
+					</c:if>
 				</div>
 			  </div>
 			</div>
@@ -38,18 +41,24 @@
 				<div class="col-12">
 				  <div class="callout callout-info">
 					<h5 style="margin-bottom: 20px;"><i class="fas fa-info" style="margin-right: 10px;"></i>
-					<c:if test="${board eq 'notice'}">
-						공지사항 목록
-					</c:if>
-					<c:if test="${board eq 'qna'}">
-						질의응답 목록
-					</c:if>
+						<c:if test="${board eq 'notice'}">
+							공지사항 목록
+						</c:if>
+						<c:if test="${board eq 'qna'}">
+							질의응답 목록
+						</c:if>
+						<c:if test="${board eq 'lectureNotice'}">
+							강의공지사항 목록
+						</c:if>
 					</h5>
 					<c:if test="${board eq 'notice'}">
-						공지사항 게시판은 기관, 회사, 커뮤니티 등에서 중요한 정보를 전달하고 공지하는 데 사용되는 게시판입니다.
+						공지사항 게시판은 행정에서 교수, 학생 등에게 중요한 정보를 전달하고 공지하는 데 사용되는 게시판입니다.
 					</c:if>
 					<c:if test="${board eq 'qna'}">
-						질의응답게시판(Q&A 게시판)은 사용자들이 질문을 하고, 다른 사용자들이 그에 대한 답변을 제공하는 게시판입니다.
+						질의응답게시판(Q&A 게시판)은 사용자들이 질문을 하고, 행정이 그에 대한 답변을 제공하는 게시판입니다.
+					</c:if>
+					<c:if test="${board eq 'lectureNotice'}">
+						강의 공지사항 게시판은 해당 강의 안에서 교수가 학생들에게 중요한 정보를 전달하고 공지하는 데 사용되는 게시판입니다.
 					</c:if>
 				  </div>
 
@@ -84,13 +93,17 @@
 									<th>작성자</th>
 									<th>등록일</th>
 									<c:if test="${board eq 'notice'}">
+										<th>수정일</th>
 										<th>조회수</th>
 									</c:if>
 								</tr>
 							</thead>
-							<tbody>			
+							<tbody>		
+								
 								<tr class="importantList" style="background-color: #f2f2f2;"></tr>
+								
 								<c:forEach items="${list}" var="dto">
+								
 									<c:if test="${board eq 'notice'}">
 										<tr class="check-item" data-num-important="${dto.important}">
 											<td class="noticeNum" data-num-id="${dto.num}">${dto.num}</td>
@@ -104,6 +117,7 @@
 											</td>
 											<td>${dto.writer}</td>
 											<td>${dto.regDate}</td>
+											<td>${dto.modifiyDate}</td>
 											<td>${dto.hit}</td>
 										</tr>
 									</c:if>
@@ -126,6 +140,25 @@
 											<td>${dto.regDate}</td>
 										</tr>
 									</c:if>	
+									
+									<c:if test="${board eq 'lectureNotice'}">
+										<tr class="check-item">
+											<td class="noticeNum" data-num-id="${dto.num}">${dto.num}</td>
+											<td class="d-flex align-items-center">								
+												<a class="title" href="./detail?num=${dto.num}">${dto.title}</a>
+												<c:forEach items="${dto.fileVOs}" var="fileVO">
+													<c:if test="${fileVO.oriName ne null}">
+														<img class="fileIcon" src="/images/fileIcon.png">
+													</c:if>
+												</c:forEach>
+											</td>
+											<td>${dto.writer}</td>
+											<td>${dto.regDate}</td>
+											<td>${dto.modifiyDate}</td>
+											<td>${dto.hit}</td>
+										</tr>
+									</c:if>
+									
 								</c:forEach>
 							</tbody>
 						</table>
@@ -147,6 +180,12 @@
 								<sec:authorize access="hasRole('ROLE_PROFESSOR')">
 						    		<a class="float-right btn btn-primary" href="./add">작성</a>
 						  		 </sec:authorize>
+							</c:if>
+							
+							<c:if test="${board eq 'lectureNotice'}">
+								<sec:authorize access="hasRole('ROLE_PROFESSOR')">
+						    		<a class="float-right btn btn-primary" href="./add">작성</a>
+						  		</sec:authorize>
 							</c:if>
 						</div>
 					  </div>

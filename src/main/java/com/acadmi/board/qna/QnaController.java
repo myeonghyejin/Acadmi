@@ -14,15 +14,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.acadmi.board.BoardVO;
-import com.acadmi.board.notice.NoticeVO;
 import com.acadmi.util.FileVO;
 import com.acadmi.util.Pagination;
 
-import lombok.extern.slf4j.Slf4j;
-
 @Controller
 @RequestMapping("/qna/*")
-@Slf4j
 public class QnaController {
 
 	@Autowired
@@ -45,23 +41,11 @@ public class QnaController {
 		return mv;
 	}
 	
-	/*
-	 * @GetMapping(value = "qnaList") public ModelAndView getQnaList(QnaVO qnaVO)
-	 * throws Exception { ModelAndView mv = new ModelAndView();
-	 * 
-	 * List<QnaVO> ar = qnaService.getQnaList(qnaVO);
-	 * 
-	 * mv.addObject("list", ar); mv.setViewName("board/detail");
-	 * 
-	 * return mv; }
-	 */
-	
 	@GetMapping(value = "detail")
 	public ModelAndView getDetail(QnaVO qnaVO, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
 		Long num = qnaService.getQnaList(qnaVO);
-		System.out.println(num);
 		
 		qnaVO = (QnaVO)qnaService.getDetail(qnaVO);
 		
