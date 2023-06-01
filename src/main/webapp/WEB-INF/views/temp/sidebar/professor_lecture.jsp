@@ -13,29 +13,31 @@
 	<!-- Submenu_1 -->
 	<button onclick="myFunction_1()" class="sidebar-menu">
 		<i class="fas fa-angle-down fa-2xs"></i>&nbsp
-		수강 신청
+		강의 정보
 	</button>
 	<div id="submenu_1" class="sidebar-dropdown-content">
-		<a href="/student/lecture/all_lecture">수강 신청 & 장바구니</a>
+		<a href="./info?lectureNum=2">강의 상세</a>
+		<a href="./syllabus">강의 계획서</a>
+		<a href="./attendee?lectureNum=2">참여자 목록</a>
 	</div>
 	
 	<!-- Submenu_2 -->
 	<button onclick="myFunction_2()" class="sidebar-menu">
 		<i class="fas fa-angle-down fa-2xs"></i>&nbsp
-		내역 조회
+		과목 게시판
 	</button>
 	<div id="submenu_2" class="sidebar-dropdown-content">
-		<a href="/student/lecture/my_lecture">내 수강 신청</a>
-		<a href="/student/lecture/my_favorite">내 장바구니</a>
+		<a href="#">강의 공지사항</a>
+		<a href="#">강의 질의응답</a>
 	</div>
 	
 	<!-- Submenu_3 -->
 	<button onclick="myFunction_3()" class="sidebar-menu">
 		<i class="fas fa-angle-down fa-2xs"></i>&nbsp
-		시간표
+		학습 활동
 	</button>
 	<div id="submenu_3" class="sidebar-dropdown-content">
-		<a href="/student/lecture/timetable">시간표 조회</a>
+		<a href="#">과제</a>
 	</div>
 	
 </div>

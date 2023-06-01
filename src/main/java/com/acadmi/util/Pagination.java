@@ -7,6 +7,12 @@ import lombok.Setter;
 @Setter
 public class Pagination {
 	
+	//강의 관련 검색
+	private String category;
+	private Integer department;
+	private Integer grade;
+	private String username;
+	
 	private Long page;
 	private Long perPage;
 	private Long totalPage;
@@ -14,10 +20,10 @@ public class Pagination {
 	private Long startNum;
 	private Long lastNum;		
 	private String kind;		
-	private String search;		
+	private String search;
 	private boolean pre;		
 	private boolean next;
-		
+	
 	public void makeNum(Long totalCount) {
 		totalPage = totalCount / this.getPerPage();
 		if(totalCount % this.getPerPage() != 0) {
