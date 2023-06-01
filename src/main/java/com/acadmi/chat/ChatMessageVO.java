@@ -16,6 +16,6 @@ public class ChatMessageVO {
 	private Date msgDate;
 	private Integer msgStatus;
 	private Long chatNum;
-	private List<ChatFilesVO> chatFiles;
+	private List<ChatFilesVO> chatFilesVOs;
 
 }

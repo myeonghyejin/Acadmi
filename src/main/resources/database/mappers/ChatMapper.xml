@@ -4,6 +4,35 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="SampleMapper">
+  <mapper namespace="com.acadmi.chat.ChatDAO">
+  
+  	<!-- 채팅방을 불러오는 쿼리 -->
+  	<select id="getChatRoomDetail" parameterType="ChatRoomVO" resultMap="getChatRoomDetailResult">
+  		SELECT * FROM CHAR_ROOM CR
+  				 INNER JOIN
+  				 CHAT_MESSAGE CM
+  				 USING(CHATNUM)
+  				 INNER JOIN
+  				 CHATFILES
+  				 USING(MSGNUM)
+  		WHERE RECIPIENT = #{recipient} AND SENDER = #{sender}
+  	</select>
+  	<resultMap type="ChatRoomVO" id="getChatRoomDetailResult">
+  		<id column="CHATNUM" property="chatNum"/>
+  		<result column="CHATSTATUS" property="chatStatus"/>
+  		<result column="SENDER" property="sender"/>
+  		<result column="RECIPIENT" property="recipient"/>
+  		<collection property="chatMessageVOs" javaType="List" ofType="ChatMessageVO">
+  			<id column="MSGNUM" property="msgNum"/>
+  			<result column="USERNAME" property="username"/>
+  			<result column="MSGCONTENTS" property="msgContents"/>
+  			<result column="MSGDATE" property="msgDate"/>
+  			<collection property="chatFileVOs" javaType="List" ofType="ChatFilesVO">
+  				<id column="FILENUM" property="fileNum"/>
+  				<result column="FILENAME" property="fileName"/>
+  				<result column="ORINAME" property="oriName"/>
+  			</collection>
+  		</collection>
+  	</resultMap>
   
   </mapper>

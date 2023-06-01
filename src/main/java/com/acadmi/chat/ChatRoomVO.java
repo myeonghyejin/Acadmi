@@ -13,6 +13,6 @@ public class ChatRoomVO {
 	private Integer chatStatus;
 	private String sender;
 	private String recipient;
-	private List<ChatMessageVO> chat_messages;
+	private List<ChatMessageVO> chatMessageVOs;
 
 }

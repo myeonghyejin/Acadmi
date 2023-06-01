@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
@@ -12,7 +13,8 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class WebSocketHandler extends TextWebSocketHandler {
+@Component
+public class ChatWebSocketHandler extends TextWebSocketHandler {
 	
 	private Map<String, WebSocketSession> sessions = new HashMap<>();
 	
