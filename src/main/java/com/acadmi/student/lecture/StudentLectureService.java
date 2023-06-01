@@ -57,35 +57,45 @@ public class StudentLectureService {
 	
 	/** INSERT **/
 	//수강 신청
-	public int setStudentLectureInsert(StudentLectureVO studentLectureVO, LectureVO lectureVO, HttpSession session) throws Exception {
-		return studentLectureDAO.setStudentLectureInsert(studentLectureVO);
+	public int insertToStudentLecture(StudentLectureVO studentLectureVO, LectureVO lectureVO, HttpSession session) throws Exception {
+		return studentLectureDAO.insertToStudentLecture(studentLectureVO);
 	}
 	
 	//장바구니 담기
-	public int setFavoriteLectureInsert(FavoriteLectureVO favoriteLectureVO, LectureVO lectureVO, HttpSession session) throws Exception {
-		return studentLectureDAO.setFavoriteLectureInsert(favoriteLectureVO);
+	public int insertToFavoriteLecture(FavoriteLectureVO favoriteLectureVO, LectureVO lectureVO, HttpSession session) throws Exception {
+		return studentLectureDAO.insertToFavoriteLecture(favoriteLectureVO);
 	}
 	
 	/** UPDATE **/
 	//수강 신청 인원 증가
-	public int setSubscriptionAddUpdate(LectureVO lectureVO) throws Exception {
-		return studentLectureDAO.setSubscriptionAddUpdate(lectureVO);
+	public int addToSubscription(LectureVO lectureVO) throws Exception {
+		return studentLectureDAO.addToSubscription(lectureVO);
 	}
 	
 	//수강 신청 인원 감소
-	public int setSubscriptionDeleteUpdate(LectureVO lectureVO) throws Exception {
-		return studentLectureDAO.setSubscriptionDeleteUpdate(lectureVO);
+	public int deleteToSubscription(LectureVO lectureVO) throws Exception {
+		return studentLectureDAO.deleteToSubscription(lectureVO);
+	}
+	
+	//장바구니에 담음
+	public int addToFavorite(LectureVO lectureVO) throws Exception {
+		return studentLectureDAO.addToFavorite(lectureVO);
+	}
+	
+	//장바구니에서 뺌
+	public int deleteToFavorite(LectureVO lectureVO) throws Exception {
+		return studentLectureDAO.deleteToFavorite(lectureVO);
 	}
 	
 	/** DELETE **/
 	//수강 취소
-	public int setStudentLectureDelete(StudentLectureVO studentLectureVO, LectureVO lectureVO, HttpSession session) throws Exception {
-		return studentLectureDAO.setStudentLectureDelete(studentLectureVO);
+	public int deleteToStudentLecture(StudentLectureVO studentLectureVO, LectureVO lectureVO, HttpSession session) throws Exception {
+		return studentLectureDAO.deleteToStudentLecture(studentLectureVO);
 	}
 	
 	//장바구니 빼기
-	public int setFavoriteLectureDelete(FavoriteLectureVO favoriteLectureVO, LectureVO lectureVO, HttpSession session) throws Exception {
-		return studentLectureDAO.setFavoriteLectureDelete(favoriteLectureVO);
+	public int deleteToFavoriteLecture(FavoriteLectureVO favoriteLectureVO, LectureVO lectureVO, HttpSession session) throws Exception {
+		return studentLectureDAO.deleteToFavoriteLecture(favoriteLectureVO);
 	}
 	
 }

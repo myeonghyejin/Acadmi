@@ -33,8 +33,8 @@ public class LectureVO {
 	private Integer endTime;
 	private Float completionGrade;
 	private Integer status;
-	private String note;
 	private Integer temporary;
+	private Integer favorite;
 	
 	private StudentLectureVO studentLectureVO;
 	private FavoriteLectureVO favoriteLectureVO;

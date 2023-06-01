@@ -37,23 +37,29 @@ public interface StudentLectureDAO {
 	
 	/** INSERT **/
 	//수강 신청
-	public int setStudentLectureInsert(StudentLectureVO studentLectureVO) throws Exception;
+	public int insertToStudentLecture(StudentLectureVO studentLectureVO) throws Exception;
 	
 	//장바구니 담기
-	public int setFavoriteLectureInsert(FavoriteLectureVO favoriteLectureVO) throws Exception;
+	public int insertToFavoriteLecture(FavoriteLectureVO favoriteLectureVO) throws Exception;
 	
 	/** UPDATE **/
 	//수강 신청 인원 증가
-	public int setSubscriptionAddUpdate(LectureVO lectureVO) throws Exception;
+	public int addToSubscription(LectureVO lectureVO) throws Exception;
 	
 	//수강 신청 인원 감소
-	public int setSubscriptionDeleteUpdate(LectureVO lectureVO) throws Exception;
+	public int deleteToSubscription(LectureVO lectureVO) throws Exception;
+	
+	//장바구니에 담음
+	public int addToFavorite(LectureVO lectureVO) throws Exception;
+	
+	//장바구니에서 뺌
+	public int deleteToFavorite(LectureVO lectureVO) throws Exception;
 	
 	/** DELETE **/
 	//수강 취소
-	public int setStudentLectureDelete(StudentLectureVO studentLectureVO) throws Exception;
+	public int deleteToStudentLecture(StudentLectureVO studentLectureVO) throws Exception;
 	
 	//장바구니 빼기
-	public int setFavoriteLectureDelete(FavoriteLectureVO favoriteLectureVO) throws Exception;	
+	public int deleteToFavoriteLecture(FavoriteLectureVO favoriteLectureVO) throws Exception;	
 
 }
