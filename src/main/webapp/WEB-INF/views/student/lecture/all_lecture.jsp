@@ -113,9 +113,6 @@
 									<button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
 										<i class="fas fa-minus"></i>
 									</button>
-									<button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-										<i class="fas fa-times"></i>
-									</button>
 								</div>
 							</div>
 							
@@ -181,14 +178,35 @@
 												<td class="project-actions text-right">
 													<input type="hidden" name="username" value="${member.username}">
 													<input type="hidden" name="lectureNum" value="${lectureVO.lectureNum}">
-													<button class="btn btn-info btn-sm" id="mli" type="button" data-mli-num="${lectureVO.lectureNum}">
-														<i class="fas fa-circle-check"></i>
-														신청
-													</button>
-													<button class="btn btn-primary btn-sm" id="mfi" type="button" data-mfi-num="${lectureVO.lectureNum}">
-														<i class="fas fa-basket-shopping"></i>
-														담기
-													</button>
+													<c:choose>
+														<c:when test="${lectureVO.subscription ge lectureVO.personal}">
+															<button class="btn btn-danger btn-sm" id="mli" type="button" data-mli-num="${lectureVO.lectureNum}" disabled>
+																<i class="fas fa-circle-xmark"></i>
+																마감
+															</button>
+														</c:when>
+														<c:otherwise>
+															<button class="btn btn-info btn-sm" id="mli" type="button" data-mli-num="${lectureVO.lectureNum}">
+																<i class="fas fa-circle-check"></i>
+																신청
+															</button>
+														</c:otherwise>
+													</c:choose>
+													<c:choose>
+														<c:when test="${lectureVO.favorite eq 1}">
+															<button class="btn btn-danger btn-sm" id="mfi" type="button" data-mfi-num="${lectureVO.lectureNum}" disabled>
+																<i class="fas fa-solid fa-heart"></i>
+																담김
+															</button>
+														</c:when>
+														<c:otherwise>
+															<button class="btn btn-primary btn-sm" id="mfi" type="button" data-mfi-num="${lectureVO.lectureNum}">
+																<i class="fa-regular fa-heart"></i>
+																담기
+															</button>
+														</c:otherwise>
+													</c:choose>
+													
 												</td>
 											</tr>
 										</c:forEach>

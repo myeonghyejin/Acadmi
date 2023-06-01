@@ -38,6 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="STATUS" property="status"/>
 		<result column="NOTE" property="note"/>
 		<result column="TEMPORARY" property="temporary"/>
+		<result column="FAVORITE" property="favorite"/>
 		<association property="professorVO" javaType="ProfessorVO">
 			<id column="USERNAME" property="username"/>
 			<result column="NAME" property="name"/>
@@ -174,38 +175,50 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- INSERT -->
-	<insert id="setStudentLectureInsert" parameterType="StudentLectureVO">
+	<insert id="insertToStudentLecture" parameterType="StudentLectureVO">
 		INSERT INTO STUDENT_LECTURE (LECTURENUM, USERNAME, RETAKE)
 		VALUES (#{lectureNum}, #{username}, #{retake})
 	</insert>
 	
-	<insert id="setFavoriteLectureInsert" parameterType="FavoriteLectureVO" useGeneratedKeys="true" keyProperty="favoriteNum">
+	<insert id="insertToFavoriteLecture" parameterType="FavoriteLectureVO" useGeneratedKeys="true" keyProperty="favoriteNum">
 		INSERT INTO FAVORITE_LECTURE (FAVORITENUM, LECTURENUM, USERNAME)
 		VALUES (#{favoriteNum}, #{lectureNum}, #{username})
 	</insert>
 	
 	<!-- UPDATE -->
-	<update id="setSubscriptionAddUpdate" parameterType="LectureVO">
+	<update id="addToSubscription" parameterType="LectureVO">
 		UPDATE LECTURE
 		SET SUBSCRIPTION = SUBSCRIPTION + 1
 		WHERE LECTURENUM = #{lectureNum}
 	</update>
 	
-	<update id="setSubscriptionDeleteUpdate" parameterType="LectureVO">
+	<update id="deleteToSubscription" parameterType="LectureVO">
 		UPDATE LECTURE
 		SET SUBSCRIPTION = SUBSCRIPTION - 1
 		WHERE LECTURENUM = #{lectureNum}
 	</update>
 	
+	<update id="addToFavorite" parameterType="LectureVO">
+		UPDATE LECTURE
+		SET FAVORITE = 1
+		WHERE LECTURENUM = #{lectureNum}
+	</update>
+	
+	<update id="deleteToFavorite" parameterType="LectureVO">
+		UPDATE LECTURE
+		SET FAVORITE = 0
+		WHERE LECTURENUM = #{lectureNum}
+	</update>
+	
 	<!-- DELETE -->
-	<delete id="setStudentLectureDelete" parameterType="StudentLectureVO">
+	<delete id="deleteToStudentLecture" parameterType="StudentLectureVO">
 		DELETE
 		FROM STUDENT_LECTURE
 		WHERE USERNAME = #{username}
 		AND LECTURENUM = #{lectureNum}
 	</delete>
 	
-	<delete id="setFavoriteLectureDelete" parameterType="FavoriteLectureVO">
+	<delete id="deleteToFavoriteLecture" parameterType="FavoriteLectureVO">
 		DELETE
 		FROM FAVORITE_LECTURE
 		WHERE FAVORITENUM = #{favoriteNum}
