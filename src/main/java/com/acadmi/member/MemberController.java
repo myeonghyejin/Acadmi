@@ -106,33 +106,6 @@ public class MemberController {
 		log.error("====== Detail :  {} ======", authentication.getDetails());
 		log.error("====== MemberVO :  {} ======", authentication.getPrincipal());
 	}
-	
-	   @GetMapping("join")
-	   public ModelAndView setMemberAdd(@ModelAttribute MemberVO memberVO) throws Exception {
-	      ModelAndView mv = new ModelAndView();
-	      
-	      mv.setViewName("member/join");
-	      
-	      return mv;
-	   }
-	   
-	   @PostMapping("join")
-	   public ModelAndView setMemberAdd(@Valid MemberVO memberVO, BindingResult bindingResult) throws Exception {
-	      ModelAndView mv = new ModelAndView();
-	      
-//	      boolean check = memberService.passwordCheck(memberVO, bindingResult);
-//	      
-//	      if(check) {
-//	         mv.setViewName("member/join");
-//	         return mv;
-//	      }
-	      
-	      int result = memberService.setJoin(memberVO);
-	      
-	      mv.setViewName("redirect:./login");
-	      
-	      return mv;
-	   }
 	   
 	   @GetMapping("findPw")
 		public ModelAndView getFindPw(MemberVO memberVO) throws Exception {
