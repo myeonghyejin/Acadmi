@@ -71,7 +71,8 @@
   	</select>
   	
   	<!-- 수강 강의 정보를 가져오는 List -->
-  	<select id="getStudentLectureList" parameterType="LectureVO" resultType="Student_lectureVO">
+
+  	<select id="getStudentLectureList" parameterType="LectureVO" resultType="StudentLectureVO">
   		SELECT * FROM STUDENT_LECTURE WHERE LECTURENUM = #{lectureNum}
   	</select>
   	

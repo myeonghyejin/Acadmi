@@ -210,31 +210,25 @@
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
-							<a href="#" class="nav-link">
+							<a href="/student/lecture/all_lecture" class="nav-link">
 								<i class="fa-solid fa-circle fa-2xs"></i>
-								<p>수강 신청</p>
+								<p>수강 신청 & 장바구니</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="#" class="nav-link">
+							<a href="/student/lecture/my_lecture" class="nav-link">
 								<i class="fa-solid fa-circle fa-2xs"></i>
-								<p>수강 신청 내역</p>
+								<p>내 수강 신청</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="#" class="nav-link">
-								<i class="fa-solid fa-circle fa-2xs"></i>
-								<p>장바구니</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="#" class="nav-link">
+							<a href="/student/lecture/my_favorite" class="nav-link">
 								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>내 장바구니</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="#" class="nav-link">
+							<a href="/student/lecture/timetable" class="nav-link">
 								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>시간표 조회</p>
 							</a>
