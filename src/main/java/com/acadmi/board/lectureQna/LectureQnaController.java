@@ -1,4 +1,4 @@
-package com.acadmi.board.qna;
+package com.acadmi.board.lectureQna;
 
 import java.util.List;
 
@@ -14,26 +14,28 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.acadmi.board.BoardVO;
+import com.acadmi.board.qna.QnaService;
+import com.acadmi.board.qna.QnaVO;
 import com.acadmi.util.FileVO;
 import com.acadmi.util.Pagination;
 
 @Controller
-@RequestMapping("/qna/*")
-public class QnaController {
-
+@RequestMapping("/lectureQna/*")
+public class LectureQnaController {
+	
 	@Autowired
-	private QnaService qnaService;
+	private LectureQnaService lectureQnaService;
 	
 	@ModelAttribute("board")
 	public String getBoardName() {
-		return "qna";
+		return "lectureQna";
 	}
 	
 	@GetMapping(value = "list")
 	public ModelAndView getList(Pagination pagination) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		List<BoardVO> ar = qnaService.getList(pagination);
+		List<BoardVO> ar = lectureQnaService.getList(pagination);
 		
 		mv.addObject("list", ar);
 		mv.setViewName("board/list");
@@ -42,36 +44,36 @@ public class QnaController {
 	}
 	
 	@GetMapping(value = "detail")
-	public ModelAndView getDetail(QnaVO qnaVO, HttpSession session) throws Exception {
+	public ModelAndView getDetail(LectureQnaVO lectureQnaVO, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		Long num = qnaService.getQnaList(qnaVO);
+		Long num = lectureQnaService.getQnaList(lectureQnaVO);
 		
-		qnaVO = (QnaVO)qnaService.getDetail(qnaVO);
+		lectureQnaVO = (LectureQnaVO)lectureQnaService.getDetail(lectureQnaVO);
 		
-		session.setAttribute("qnaVO", qnaVO);
+		session.setAttribute("qnaVO", lectureQnaVO);
 		
 		mv.addObject("num", num);
-		mv.addObject("boardVO", qnaVO);
+		mv.addObject("boardVO", lectureQnaVO);
 		mv.setViewName("board/detail");
 		
 		return mv;
 	}
 	
 	@GetMapping(value = "replyDetail")
-	public ModelAndView getReplyDetail(QnaVO qnaVO) throws Exception {
+	public ModelAndView getReplyDetail(LectureQnaVO lectureQnaVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		qnaVO = qnaService.getReplyDetail(qnaVO);
+		lectureQnaVO = (LectureQnaVO) lectureQnaService.getReplyDetail(lectureQnaVO);
 		
-		mv.addObject("reply", qnaVO);
+		mv.addObject("reply", lectureQnaVO);
 		mv.setViewName("board/replyDetail");
 		
 		return mv;
 	}
 	
 	@GetMapping(value = "add")
-	public ModelAndView setInsert(QnaVO qnaVO) throws Exception {
+	public ModelAndView setInsert(LectureQnaVO lectureQnaVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
 		mv.setViewName("board/add");
@@ -80,10 +82,10 @@ public class QnaController {
 	}
 	
 	@PostMapping(value = "add")
-	public ModelAndView setInsert(QnaVO qnaVO, MultipartFile [] addfiles) throws Exception {
+	public ModelAndView setInsert(LectureQnaVO lectureQnaVO, MultipartFile [] addfiles) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		int result = qnaService.setInsert(qnaVO, addfiles);
+		int result = lectureQnaService.setInsert(lectureQnaVO, addfiles);
 		
 		mv.setViewName("redirect:./list");
 		
@@ -94,7 +96,7 @@ public class QnaController {
 	public ModelAndView getFileDown(FileVO fileVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		fileVO = qnaService.getFileDetail(fileVO);
+		fileVO = lectureQnaService.getFileDetail(fileVO);
 		
 		mv.addObject("fileVO", fileVO);
 		mv.setViewName("fileManager");
@@ -103,21 +105,21 @@ public class QnaController {
 	}
 	
 	@GetMapping("update")
-	public ModelAndView setUpdate(QnaVO qnaVO) throws Exception {
+	public ModelAndView setUpdate(LectureQnaVO lectureQnaVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		qnaVO = (QnaVO)qnaService.getDetail(qnaVO);
+		lectureQnaVO = (LectureQnaVO)lectureQnaService.getDetail(lectureQnaVO);
 		
-		mv.addObject("dto", qnaVO);
+		mv.addObject("dto", lectureQnaVO);
 		mv.setViewName("board/update");
 		
 		return mv;
 	}
 	
 	@PostMapping("update")
-	public ModelAndView setUpdate(ModelAndView mv, QnaVO qnaVO, MultipartFile [] addfiles) throws Exception {
+	public ModelAndView setUpdate(ModelAndView mv, LectureQnaVO lectureQnaVO, MultipartFile [] addfiles) throws Exception {
 		
-		int result = qnaService.setUpdate(qnaVO, addfiles);
+		int result = lectureQnaService.setUpdate(lectureQnaVO, addfiles);
 		
 		mv.setViewName("redirect:./list");
 		
@@ -128,7 +130,7 @@ public class QnaController {
 	public ModelAndView setDelete(BoardVO boardVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		int result = qnaService.setDelete(boardVO);
+		int result = lectureQnaService.setDelete(boardVO);
 		
 		mv.setViewName("redirect:./list");
 		
@@ -139,7 +141,7 @@ public class QnaController {
 	public ModelAndView setBoardFileDelete(FileVO fileVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		int result = qnaService.setBoardFileDelete(fileVO);
+		int result = lectureQnaService.setBoardFileDelete(fileVO);
 		
 		mv.addObject("result", result);
 		mv.setViewName("common/ajaxResult");
@@ -148,7 +150,7 @@ public class QnaController {
 	}
 	
 	@GetMapping(value = "reply")
-	public ModelAndView setReplyAdd(ModelAndView mv ,QnaVO qnaVO) throws Exception {
+	public ModelAndView setReplyAdd(ModelAndView mv ,LectureQnaVO lectureQnaVO) throws Exception {
 		
 		mv.setViewName("board/replyAdd");
 		
@@ -156,15 +158,14 @@ public class QnaController {
 	}
 	
 	@PostMapping(value = "reply")
-	public ModelAndView setReplyAdd(QnaVO qnaVO) throws Exception {
+	public ModelAndView setReplyAdd(LectureQnaVO lectureQnaVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		int result = qnaService.setReplyAdd(qnaVO);
+		int result = lectureQnaService.setReplyAdd(lectureQnaVO);
 		                             
-		mv.setViewName("redirect:./detail?num=" + qnaVO.getNum());
+		mv.setViewName("redirect:./detail?num=" + lectureQnaVO.getNum());
 		
 		return mv;
 	}
-	
 	
 }

@@ -124,7 +124,7 @@ public class LectureNoticeController {
 		int result = lectureNoticeService.setBoardFileDelete(fileVO);
 		
 		mv.addObject("result", result);
-		mv.setViewName("common/result");
+		mv.setViewName("common/ajaxResult");
 		
 		return mv;
 	}

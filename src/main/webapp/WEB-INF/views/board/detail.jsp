@@ -27,10 +27,13 @@
 							공지사항
 						</c:if>
 						<c:if test="${board eq 'qna'}">
-							질의응답게시판
+							질의응답
 						</c:if>
 						<c:if test="${board eq 'lectureNotice'}">
 							강의공지사항
+						</c:if>
+						<c:if test="${board eq 'lectureQna'}">
+							강의질의응답
 						</c:if>
 					</h1>
 				</div>
@@ -51,6 +54,9 @@
 					<c:if test="${board eq 'lecutureNotice'}">
 						강의공지사항 상세
 					</c:if>
+					<c:if test="${board eq 'lectureQna'}">
+						강의질의응답 상세
+					</c:if>
 				</h3>
 	  
 				<div class="card-tools">
@@ -65,15 +71,17 @@
 	  
 			  <div class="card-body">
 				<div class="row">
-				  <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
-					<div class="row">
+					<div>
+					<div class="row" style="display: flex; justify-content: center; align-items: center;">
 						<h1>${boardVO.title}</h1>
 					</div>
-
-					<div class="row">
+					
+					<hr style="width: 2090px;  margin-left: auto; margin-right: auto;">
+					
+					<div class="row" style="margin-top: 20px; display: flex; justify-content: center; align-items: center;">
 						<span class="mr-4">작성자</span>
 						<span class="mr-4 fontlight">${boardVO.writer}</span>
-						<span class="mr-4" style="margin-left: 200px;">작성일</span>
+						<span class="mr-4" style="margin-left: 150px;">작성일</span>
 						<span class="mr-4 fontlight">${boardVO.regDate}</span>
 						<c:if test="${board eq 'notice'}">
 							<span class="mr-4" style="margin-left: 200px;">수정일</span>
@@ -88,54 +96,54 @@
 							<span class="mr-4">조회수</span>
 							<span class="mr-4 fontlight">${boardVO.hit}</span>
 						</c:if>
+						
+						<c:forEach items="${boardVO.fileVOs}" var="fileVO">
+	                        <%-- <img alt="" src="/file/${board}/${fileVO.fileName}"> --%>
+							<span class="mr-4" style="margin-left: 150px;">첨부파일</span>
+							<img class="fileIcon" width="30" height="30" src="/images/fileIcon.png" style="margin-right: 5px">
+	                        <a href="./fileDown?fileNum=${fileVO.fileNum}">${fileVO.oriName}</a>
+                    	</c:forEach>
 					</div>
 
-					<c:forEach items="${boardVO.fileVOs}" var="fileVO">
-                        <img alt="" src="/file/${board}/${fileVO.fileName}">
-						<!-- <span class="mr-4">첨부파일</span>
-						<img class="fileIcon" src="/images/fileIcon.png"> -->
-                        <a href="./fileDown?fileNum=${fileVO.fileNum}">${fileVO.oriName}</a>
-                    </c:forEach>
-
-					<div class="row" style="margin-top: 200px;">
+					<div class="row" style="margin-top: 200px; margin-left: 650px">
 						<p>${boardVO.contents}</p>
 					</div>
 					
 					<sec:authentication property="principal.username" var="userName" />
 
-					<div class="row" style="margin-top: 200px;">
-						<a href="./list" class="btn btn-light">목록</a>
-						<c:if test="${userName eq boardVO.writer}">
-							<a href="./update?num=${boardVO.num}" id="update" class="btn btn-info float-right">수정</a>	
-							<a href="./delete?num=${boardVO.num}" id="delete" class="btn btn-danger float-right">삭제</a>
-						</c:if>
-					</div>
-							 
-					<c:if test="${board eq 'qna'}">
-						<div class="mt-6 mb-6 float-right">
+					<div class="row" style="margin-top: 200px; display: flex; justify-content: center; align-items: center;">
+						<a href="./list" class="btn btn-light" style="margin-right: 650px;">목록</a>
+						
+						<c:if test="${board eq 'qna'}">
 							<c:if test="${num ne 2}">
 								<c:if test="${boardVO.step ne 1}">
-									<a href="./reply?num=${boardVO.num}" class="btn btn-primary">답글</a>
+									<a href="./reply?num=${boardVO.num}" class="btn btn-primary" style="margin-right: 5px">답글</a>
 								</c:if>
 							</c:if>
-						</div>
-						
-								<div class="row">
-									<div class="col-12">
-										<hr>
-										<div class="post">
-										  	<div class="user-block">
-											  	<c:if test="${num eq 2}">
-												  	<div class="replyDetail" data-num-id="${boardVO.num}">
-	
-												  	</div>
-											  	</c:if>
-										  	</div>
+						</c:if>
+						<%-- <c:if test="${userName eq boardVO.writer}"> --%>
+							<a href="./update?num=${boardVO.num}" id="update" class="btn btn-info float-right" style="margin-right: 5px">수정</a>	
+							<a href="./delete?num=${boardVO.num}" id="delete" class="btn btn-danger float-right">삭제</a>
+						<%-- </c:if> --%>
+					</div>
+							 
+						<c:if test="${board eq 'qna'}">
+							<div class="row">
+								<div class="col-12">
+									<hr style="margin-top: 50px">
+									<div class="post" style="margin-top: 50px">
+										<div class="user-block">
+											<c:if test="${num eq 2}">
+												<div class="replyDetail" data-num-id="${boardVO.num}">
+		
+												</div>
+											</c:if>
 										</div>
 									</div>
 								</div>
-							</c:if>
-					    </div>
+							</div>
+						</c:if>
+				   		</div>
 				   	</div>
 				</div>
 			</div>

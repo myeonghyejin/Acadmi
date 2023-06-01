@@ -25,10 +25,13 @@
 						<h1>공지사항</h1>
 					</c:if>
 					<c:if test="${board eq 'qna'}">
-						<h1>질의응답게시판</h1>
+						<h1>질의응답</h1>
 					</c:if>
 					<c:if test="${board eq 'lectureNotice'}">
 						<h1>강의공지사항</h1>
+					</c:if>
+					<c:if test="${board eq 'lectureQna'}">
+						<h1>강의질의응답</h1>
 					</c:if>
 				</div>
 			  </div>
@@ -50,6 +53,9 @@
 						<c:if test="${board eq 'lectureNotice'}">
 							강의공지사항 목록
 						</c:if>
+						<c:if test="${board eq 'lectureQna'}">
+							강의질의응답 목록
+						</c:if>
 					</h5>
 					<c:if test="${board eq 'notice'}">
 						공지사항 게시판은 행정에서 교수, 학생 등에게 중요한 정보를 전달하고 공지하는 데 사용되는 게시판입니다.
@@ -59,6 +65,9 @@
 					</c:if>
 					<c:if test="${board eq 'lectureNotice'}">
 						강의 공지사항 게시판은 해당 강의 안에서 교수가 학생들에게 중요한 정보를 전달하고 공지하는 데 사용되는 게시판입니다.
+					</c:if>
+					<c:if test="${board eq 'lectureQna'}">
+						강의 질의응답 게시판은 해당 강의 안에서 학생들이 교수에게 질문을 하고, 교수가 그에 대한 답변을 제공하는 게시판입니다.
 					</c:if>
 				  </div>
 
@@ -111,7 +120,7 @@
 												<a class="title" href="./detail?num=${dto.num}">${dto.title}</a>
 												<c:forEach items="${dto.fileVOs}" var="fileVO">
 													<c:if test="${fileVO.oriName ne null}">
-														<img class="fileIcon" src="/images/fileIcon.png">
+														<img class="fileIcon" width="30" height="30" src="/images/fileIcon.png" style="margin-left: 5px">
 													</c:if>
 												</c:forEach>
 											</td>
@@ -127,12 +136,14 @@
 											<td class="qnaNum" data-num-id="${dto.num}">${dto.num}</td>
 											<td class="d-flex align-items-center">
 												<c:catch>
-													<c:forEach begin="1" end="${dto.depth}">--</c:forEach>							
+													<c:forEach begin="1" end="${dto.depth}">
+														<img class="fileIcon2" width="20" height="20" src="/images/reply.png" style="margin-right: 5px">
+													</c:forEach>							
 												</c:catch>								
 												<a class="title" href="./detail?num=${dto.num}">${dto.title}</a>
 												<c:forEach items="${dto.fileVOs}" var="fileVO">
 													<c:if test="${fileVO.oriName ne null}">
-														<img class="fileIcon" src="/images/fileIcon.png">
+														<img class="fileIcon" width="30" height="30" src="/images/fileIcon.png" style="margin-left: 5px">
 													</c:if>
 												</c:forEach>
 											</td>
@@ -148,7 +159,7 @@
 												<a class="title" href="./detail?num=${dto.num}">${dto.title}</a>
 												<c:forEach items="${dto.fileVOs}" var="fileVO">
 													<c:if test="${fileVO.oriName ne null}">
-														<img class="fileIcon" src="/images/fileIcon.png">
+														<img class="fileIcon" width="30" height="30" src="/images/fileIcon.png" style="margin-left: 5px">
 													</c:if>
 												</c:forEach>
 											</td>
@@ -184,6 +195,12 @@
 							
 							<c:if test="${board eq 'lectureNotice'}">
 								<sec:authorize access="hasRole('ROLE_PROFESSOR')">
+						    		<a class="float-right btn btn-primary" href="./add">작성</a>
+						  		</sec:authorize>
+							</c:if>
+							
+							<c:if test="${board eq 'lectureQna'}">
+								<sec:authorize access="hasRole('ROLE_STUDENT')">
 						    		<a class="float-right btn btn-primary" href="./add">작성</a>
 						  		</sec:authorize>
 							</c:if>

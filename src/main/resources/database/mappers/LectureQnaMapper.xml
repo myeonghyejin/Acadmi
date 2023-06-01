@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Schema 추가 -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.acadmi.board.lectureQna.LectureQnaDAO">
+  
+  	<sql id="search">
+  		<where>
+  			<if test="kind == 'title'">
+  				TITLE LIKE CONCAT('%', #{search}, '%')
+  			</if>
+  			<if test="kind == 'content'">
+  				CONTENTS LIKE CONCAT('%', #{search}, '%')
+  			</if>
+  			<if test="kind == 'writer'">
+  				WRITER LIKE CONCAT('%', #{search}, '%')
+  			</if>
+  		</where>
+  	</sql>
+  	
+  	<select id="getTotalCount" resultType="Long" parameterType="Pagination">
+  		SELECT COUNT(NUM) FROM LECTURE_QNA
+		<include refid="search"></include>
+  	</select>
+  
+  	<select id="getList" parameterType="Pagination" resultMap="getDetailResult">
+  		SELECT * FROM LECTURE_QNA 
+  			LEFT JOIN
+  			LECTURE_QNAFILES
+  			USING(NUM)
+  		<include refid="search"></include>
+  		ORDER BY REF DESC, STEP ASC
+  		LIMIT #{startRow}, #{perPage}
+  	</select>
+  	
+  	<select id="getQnaList" parameterType="LectureQnaVO" resultType="Long">
+  		SELECT COUNT(REF)
+		FROM LECTURE_QNA
+		WHERE REF = #{num}
+  	</select>
+  	
+  	<select id="getDetail" parameterType="LectureQnaVO" resultMap="getDetailResult">
+  		SELECT *
+		FROM LECTURE_QNA 
+			 LEFT JOIN
+			 LECTURE_QNAFILES 
+			 USING(NUM)
+		WHERE NUM = #{num}
+  	</select>
+  	
+  	 <select id="getReplyDetail" parameterType="LectureQnaVO" resultMap="getDetailResult">
+  		SELECT *
+		FROM LECTURE_QNA 
+			 LEFT JOIN
+			 LECTURE_QNAFILES
+			 USING(NUM)
+		WHERE REF = #{ref} AND STEP = #{step}
+  	</select>
+  	
+  	<resultMap type="LectureQnaVO" id="getDetailResult">
+  		<id column="num" property="num"/>
+  		<result column="lectureNum" property="lectureNum"/>
+  		<result column="title" property="title"/>
+  		<result column="writer" property="writer"/>
+  		<result column="contents" property="contents"/>
+  		<result column="regDate" property="regDate"/>
+  		<result column="secret" property="secret"/>
+  		<result column="ref" property="ref"/>
+  		<result column="step" property="step"/>
+  		<result column="depth" property="depth"/>
+  		
+  		<collection property="fileVOs" javaType="List" ofType="FileVO">
+  			<id column="fileNum" property="fileNum"/>
+  			<result column="fileName" property="fileName"/>
+  			<result column="oriName" property="oriName"/>
+  		</collection>
+  	</resultMap>
+  	
+	<insert id="setInsert" parameterType="LectureQnaVO">
+		<selectKey keyProperty="num" resultType="Long" order="BEFORE">
+		  SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_NAME = 'LECTURE_QNA'
+		</selectKey>
+  		INSERT INTO LECTURE_QNA (NUM, LECTURENUM, TITLE, WRITER, CONTENTS, REGDATE, SECRET, REF, STEP, DEPTH)
+  		VALUES (#{num}, #{lectureNum}, #{title}, #{writer}, #{contents}, now(), #{secret}, #{num}, 0, 0)
+  	</insert>
+  	
+  	<update id="setUpdate" parameterType="LectureQnaVO">
+  		UPDATE LECTURE_QNA SET TITLE = #{title}, CONTENTS = #{contents}, SECRET = #{secret}
+  		WHERE NUM = #{num}
+  	</update>
+  	
+  	<delete id="setDelete" parameterType="LectureQnaVO">
+  		DELETE FROM LECTURE_QNA WHERE NUM = #{num}
+  	</delete>
+  	
+  	<insert id="setBoardFileAdd" parameterType="FileVO">
+  		INSERT INTO LECTURE_QNAFILES (NUM, FILENAME, ORINAME)
+  		VALUES(#{num}, #{fileName}, #{oriName})
+  	</insert>
+  	
+  	<select id="getFileDetail" parameterType="FileVO" resultType="FileVO">
+  		SELECT * FROM LECTURE_QNAFILES WHERE FILENUM = #{fileNum}
+  	</select>
+  	
+  	<delete id="setBoardFileDelete" parameterType="FileVO">
+  		DELETE FROM LECTURE_QNAFILES WHERE FILENUM = #{fileNum}
+  	</delete>
+  	
+  	<update id="setStepUpdate" parameterType="LectureQnaVO">
+  		UPDATE LECTURE_QNA SET STEP = STEP + 1
+  		WHERE REF = #{ref} AND STEP > #{step}
+  	</update>
+  	
+  	<insert id="setReplyAdd" parameterType="LectureQnaVO">
+  		<selectKey keyProperty="num" resultType="Long" order="BEFORE">
+		  SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_NAME = 'LECTURE_QNA'
+		</selectKey>
+  		INSERT INTO LECTURE_QNA (NUM, LECTURENUM, TITLE, WRITER, CONTENTS, REGDATE, SECRET, REF, STEP, DEPTH)
+  		VALUES (#{num}, #{lectureNum}, #{title}, #{writer}, #{contents},  now(), #{ref}, #{step}, #{depth})
+  	</insert>
+  	
+  </mapper>
