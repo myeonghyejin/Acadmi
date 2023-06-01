@@ -59,9 +59,6 @@
 									<button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
 										<i class="fas fa-minus"></i>
 									</button>
-									<button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-										<i class="fas fa-times"></i>
-									</button>
 								</div>
 							</div>
 							
@@ -127,10 +124,20 @@
 												<td class="project-actions text-right">
 													<input type="hidden" name="lectureNum" value="${lectureVO.lectureNum}">
 													<input type="hidden" name="username" value="${member.username}">
-													<button class="btn btn-info btn-sm" id="mli" type="button" data-mli-num="${lectureVO.lectureNum}">
-														<i class="fas fa-circle-check"></i>
-														신청
-													</button>
+													<c:choose>
+														<c:when test="${lectureVO.subscription ge lectureVO.personal}">
+															<button class="btn btn-danger btn-sm" id="mli" type="button" data-mli-num="${lectureVO.lectureNum}" disabled>
+																<i class="fas fa-circle-xmark"></i>
+																마감
+															</button>
+														</c:when>
+														<c:otherwise>
+															<button class="btn btn-info btn-sm" id="mli" type="button" data-mli-num="${lectureVO.lectureNum}">
+																<i class="fas fa-circle-check"></i>
+																신청
+															</button>
+														</c:otherwise>
+													</c:choose>
 													<input type="hidden" name="favoriteNum" value="${lectureVO.favoriteLectureVO.favoriteNum}">
 													<button class="btn btn-danger btn-sm" id="mfd" type="button" data-mfd-num="${lectureVO.favoriteLectureVO.favoriteNum}">
 														<i class="fas fa-basket-shopping"></i>
