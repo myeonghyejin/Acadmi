@@ -70,18 +70,6 @@ public class MemberService implements UserDetailsService{
 		return memberVO;
 	}
 	
-	public int setJoin(MemberVO memberVO) throws Exception{
-		//memberVO.setEnabled(true);
-		memberVO.setPassword(passwordEncoder.encode(memberVO.getPassword()));
-		
-		int result = memberDAO.setJoin(memberVO);
-		Map<String, Object> map = new HashMap<>();
-		map.put("username", memberVO.getUsername());
-		map.put("num", 1);
-		result = memberDAO.setRoleAdd(map);
-		return result;
-	}
-	
 	public boolean getFindPw(MemberVO memberVO, BindingResult bindingResult) throws Exception {
 		boolean result = false;
 		
