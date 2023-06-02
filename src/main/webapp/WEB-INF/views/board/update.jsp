@@ -88,26 +88,34 @@
 							</div>
 							
 							<c:if test="${board eq 'notice'}">
-								<div class="col-md-12 mt-3">
-									<label for="important" class="form-label strongFont2">중요표시</label>
-									<c:if test="${dto.important == 0 || empty dto.important}">
-										<input type="checkbox" class="form-control" name="important" id="important">
-									</c:if>
-									<c:if test="${dto.important == 1}">
-										<input type="checkbox" class="form-control" name="important" id="important" checked>
-									</c:if>
+								<div class="row mt-3">
+								  <div style="display: flex; align-items: center;">
+								    <label for="important" class="form-label strongFont2" style="margin-bottom: 0; margin-left:15px">중요표시</label>
+								    <div style="margin-left: 10px;">
+								    	<c:if test="${dto.important == 0 || empty dto.important}">
+								      		<input type="checkbox" class="form-control" name="important" id="important" style="width: 20px; height: 20px; margin-bottom: 0;">
+								    	</c:if>
+								    	<c:if test="${dto.important == 1}">
+								    		<input type="checkbox" class="form-control" name="important" id="important" style="width: 20px; height: 20px; margin-bottom: 0;" checked>
+								    	</c:if>
+								    </div>
+								  </div>
 								</div>
 							</c:if>
 							
 							<c:if test="${board eq 'lectureQna'}">
-								<div class="col-md-12 mt-3">
-									<label for="secret" class="form-label strongFont2">비밀글</label>
-									<c:if test="${dto.secret == 0 || empty dto.secret}">
-										<input type="checkbox" class="form-control" name="secret" id="secret">
-									</c:if>
-									<c:if test="${dto.secret == 1}">
-										<input type="checkbox" class="form-control" name="secret" id="secret" checked>
-									</c:if>
+								<div class="row mt-3">
+								  <div style="display: flex; align-items: center;">
+								    <label for="secret" class="form-label strongFont2" style="margin-bottom: 0; margin-left:15px">비밀글</label>
+								    <div style="margin-left: 10px;">
+									    <c:if test="${dto.secret == 0 || empty dto.secret}">
+									    	<input type="checkbox" class="form-control" name="secret" id="secret" style="width: 20px; height: 20px; margin-bottom: 0;">
+									    </c:if>
+									    <c:if test="${dto.secret == 1}">
+									    	<input type="checkbox" class="form-control" name="secret" id="secret" style="width: 20px; height: 20px; margin-bottom: 0;" checked>
+									    </c:if>
+								    </div>
+								  </div>
 								</div>
 							</c:if>
 			

@@ -114,20 +114,20 @@
 					<div class="row" style="margin-top: 200px; display: flex; justify-content: center; align-items: center;">
 						<a href="./list" class="btn btn-light" style="margin-right: 650px;">목록</a>
 						
-						<c:if test="${board eq 'qna'}">
+						<c:if test="${board eq 'qna' || board eq 'lectureQna'}">
 							<c:if test="${num ne 2}">
 								<c:if test="${boardVO.step ne 1}">
 									<a href="./reply?num=${boardVO.num}" class="btn btn-primary" style="margin-right: 5px">답글</a>
 								</c:if>
 							</c:if>
 						</c:if>
-						<%-- <c:if test="${userName eq boardVO.writer}"> --%>
+						<c:if test="${userName eq boardVO.writer}">
 							<a href="./update?num=${boardVO.num}" id="update" class="btn btn-info float-right" style="margin-right: 5px">수정</a>	
 							<a href="./delete?num=${boardVO.num}" id="delete" class="btn btn-danger float-right">삭제</a>
-						<%-- </c:if> --%>
+						</c:if>
 					</div>
 							 
-						<c:if test="${board eq 'qna'}">
+						<c:if test="${board eq 'qna' || board eq 'lectureQna'}">
 							<div class="row">
 								<div class="col-12">
 									<hr style="margin-top: 50px">

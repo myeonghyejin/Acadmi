@@ -118,7 +118,7 @@
 		  SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_NAME = 'LECTURE_QNA'
 		</selectKey>
   		INSERT INTO LECTURE_QNA (NUM, LECTURENUM, TITLE, WRITER, CONTENTS, REGDATE, SECRET, REF, STEP, DEPTH)
-  		VALUES (#{num}, #{lectureNum}, #{title}, #{writer}, #{contents},  now(), #{ref}, #{step}, #{depth})
+  		VALUES (#{num}, #{lectureNum}, #{title}, #{writer}, #{contents},  now(), #{secret}, #{ref}, #{step}, #{depth})
   	</insert>
   	
   </mapper>

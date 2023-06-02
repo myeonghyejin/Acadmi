@@ -108,6 +108,8 @@
 								</tr>
 							</thead>
 							<tbody>		
+							
+								<sec:authentication property="principal.username" var="userName" />
 								
 								<tr class="importantList" style="background-color: #f2f2f2;"></tr>
 								
@@ -169,6 +171,49 @@
 											<td>${dto.hit}</td>
 										</tr>
 									</c:if>
+									
+									<c:if test="${board eq 'lectureQna'}">
+										<tr class="check-item">
+											<td class="qnaNum" data-num-id="${dto.num}">${dto.num}</td>
+											<td class="d-flex align-items-center">
+												<c:catch>
+													<c:forEach begin="1" end="${dto.depth}">
+														<img class="fileIcon2" width="20" height="20" src="/images/reply.png" style="margin-right: 5px">
+													</c:forEach>							
+												</c:catch>
+														
+												<c:if test="${dto.secret == 1 && dto.writer ne userName}">
+													<a class="title">비밀글입니다.</a>			
+												</c:if>
+															
+												<c:if test="${dto.secret == 1 && dto.writer eq userName}">
+													<a class="title" href="./detail?num=${dto.num}">${dto.title}</a>						
+												</c:if>
+												
+												<!-- 교수 권환 수정 -->
+												<c:if test="${dto.secret == 1}">
+													<sec:authorize access="hasRole('ROLE_PROFESSOR')">
+											    		<a class="title" href="./detail?num=${dto.num}">${dto.title}</a>	
+											  		 </sec:authorize>
+												</c:if>
+												
+												<c:if test="${dto.secret == 0 || empty dto.secret}">						
+													<a class="title" href="./detail?num=${dto.num}">${dto.title}</a>
+												</c:if>
+												
+												<c:if test="${dto.secret == 1}">
+													<img class="lockIcon" width="30" height="30" src="/images/lock.png" style="margin-left: 5px">
+												</c:if>
+												<c:forEach items="${dto.fileVOs}" var="fileVO">
+													<c:if test="${fileVO.oriName ne null}">
+														<img class="fileIcon" width="30" height="30" src="/images/fileIcon.png" style="margin-left: 5px">						
+													</c:if>
+												</c:forEach>
+											</td>
+											<td>${dto.writer}</td>
+											<td>${dto.regDate}</td>
+										</tr>
+									</c:if>	
 									
 								</c:forEach>
 							</tbody>
@@ -253,7 +298,3 @@
 	<script src="../../dist/js/demo.js"></script>
 </body>
 </html>
-
-
-
-

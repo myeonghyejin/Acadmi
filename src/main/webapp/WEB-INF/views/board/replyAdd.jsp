@@ -24,7 +24,14 @@
 			<div class="container-fluid">
 			  <div class="row mb-2">
 				<div class="col-sm-6">
-				  <h1>질의응답게시판</h1>
+				<h1>
+					<c:if test="${board eq 'qna'}">
+						질의응답
+					</c:if>
+					<c:if test="${board eq 'lectureQna'}">
+						강의질의응답
+					</c:if>
+				  </h1>
 				</div>
 			  </div>
 			</div>
@@ -50,17 +57,35 @@
 					<div class="row col-md-7 mx-auto">
 						<form class="row g-3" action="./reply" method="post">
 							<input type="hidden" name="num" value="${qnaVO.num}">
+							
+							<%-- 	<c:if test="${board eq 'lectureQna'}">
+								<div class="col-md-12 mt-3">
+									<label for="lectureNum" class="form-label strongFont2">강의번호</label> 
+									<input type="text" class="form-control" name="lectureNum" id="lectureNum">
+								</div>
+							</c:if> --%>
 						
 							<div class="col-md-12" style="margin-top: 30px;">
 								<label for="title" class="form-label strongFont2">제목</label> 
 								<input type="text" class="form-control" name="title" id="title" placeholder="제목을 입력하세요">
 							</div>
-						
-							<div class="col-md-4" style="margin-top: 20px;">
+							
+							<div class="col-md-12" style="margin-top: 20px;">
 								<label for="writer" class="form-label strongFont2">작성자</label> 
 								<input type="text" name="writer" class="form-control" id="writer" readonly value="${userName}">
 							</div>
-			
+							
+							<c:if test="${board eq 'lectureQna'}">
+								<div class="row mt-4">
+									  <div style="display: flex; align-items: center;">
+									    <label for="secret" class="form-label strongFont2" style="margin-bottom: 0; margin-left:15px">비밀글</label>
+									    <div style="margin-left: 10px;">
+									      <input type="checkbox" class="form-control" name="secret" id="secret" style="width: 20px; height: 20px; margin-bottom: 0;">
+									    </div>
+									 </div>
+								</div>
+							</c:if>
+							
 							<div class="col-md-12 mt-4">
 								<label for="contents" class="form-label strongFont2">내용</label>
 								<textarea class="form-control " name="contents" id="replyContents"
@@ -92,6 +117,7 @@
 
 	<script src="/js/filemanager.js"></script>
 	<script src="/js/board/qnaReply.js"></script>
+	<script src="/js/board/notice.js"></script>
 	<script src="../../plugins/jquery/jquery.min.js"></script>
 	<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="../../dist/js/adminlte.min.js"></script>

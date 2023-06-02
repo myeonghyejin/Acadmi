@@ -14,8 +14,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.acadmi.board.BoardVO;
-import com.acadmi.board.qna.QnaService;
-import com.acadmi.board.qna.QnaVO;
 import com.acadmi.util.FileVO;
 import com.acadmi.util.Pagination;
 
@@ -36,7 +34,7 @@ public class LectureQnaController {
 		ModelAndView mv = new ModelAndView();
 		
 		List<BoardVO> ar = lectureQnaService.getList(pagination);
-		
+		          
 		mv.addObject("list", ar);
 		mv.setViewName("board/list");
 		

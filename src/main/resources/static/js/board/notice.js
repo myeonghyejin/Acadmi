@@ -1,10 +1,16 @@
 
 $(".submitButton").on("click", function(){
 
-    if($("#important").prop("checked")) {
+   	if($("#important").prop("checked")) {
         $("#important").val(1);
     } else {
         $("#important").val(0);
+    }
+    
+    if($("#secret").prop("checked")) {
+        $("#secret").val(1);
+    } else {
+        $("#secret").val(0);
     }
 })
 

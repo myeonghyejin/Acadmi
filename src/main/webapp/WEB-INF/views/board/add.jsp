@@ -76,12 +76,12 @@
 					<div class="row col-md-7 mx-auto">
 						<form class="row g-3" action="./add" method="post" enctype="multipart/form-data">
 							
-							<c:if test="${board eq 'lectureNotice'}">
+						<%-- 	<c:if test="${board eq 'lectureNotice' || board eq 'lectureQna'}">
 								<div class="col-md-12 mt-3">
 									<label for="lectureNum" class="form-label strongFont2">강의번호</label> 
 									<input type="text" class="form-control" name="lectureNum" id="lectureNum">
 								</div>
-							</c:if>
+							</c:if> --%>
 									
 							<div class="col-md-4" style="margin-top: 20px;">
 								<label for="writer" class="form-label strongFont2">작성자</label>
@@ -94,16 +94,24 @@
 							</div>
 							
 							<c:if test="${board eq 'notice'}">
-								<div class="col-md-12 mt-3">
-									<label for="important" class="form-label strongFont2">중요표시</label> 
-									<input type="checkbox" class="form-control" name="important" id="important">
+								<div class="row mt-3">
+								  <div style="display: flex; align-items: center;">
+								    <label for="important" class="form-label strongFont2" style="margin-bottom: 0; margin-left:15px">중요표시</label>
+								    <div style="margin-left: 10px;">
+								      <input type="checkbox" class="form-control" name="important" id="important" style="width: 20px; height: 20px; margin-bottom: 0;">
+								    </div>
+								  </div>
 								</div>
 							</c:if>
 							
 							<c:if test="${board eq 'lectureQna'}">
-								<div class="col-md-12 mt-3">
-									<label for="secret" class="form-label strongFont2">비밀글</label> 
-									<input type="checkbox" class="form-control" name="secret" id="secret">
+								<div class="row mt-3">
+								  <div style="display: flex; align-items: center;">
+								    <label for="secret" class="form-label strongFont2" style="margin-bottom: 0; margin-left:15px">비밀글</label>
+								    <div style="margin-left: 10px;">
+								      <input type="checkbox" class="form-control" name="secret" id="secret" style="width: 20px; height: 20px; margin-bottom: 0;">
+								    </div>
+								  </div>
 								</div>
 							</c:if>
 							
