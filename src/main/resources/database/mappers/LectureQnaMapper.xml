@@ -91,9 +91,14 @@
   		WHERE NUM = #{num}
   	</update>
   	
-  	<delete id="setDelete" parameterType="LectureQnaVO">
+  	<!-- <delete id="setDelete" parameterType="LectureQnaVO">
   		DELETE FROM LECTURE_QNA WHERE NUM = #{num}
-  	</delete>
+  	</delete> -->
+  	
+  	<update id="setDelete" parameterType="LectureQnaVO">
+  		UPDATE LECTURE_QNA SET TITLE = '삭제된 글입니다.'
+  		WHERE NUM = ${num}
+  	</update>
   	
   	<insert id="setBoardFileAdd" parameterType="FileVO">
   		INSERT INTO LECTURE_QNAFILES (NUM, FILENAME, ORINAME)

@@ -5,7 +5,7 @@
 	<tr>
 		<td class="noticeNum" data-num-id="${importantList.num}">${importantList.num}</td>
 		<td class="d-flex align-items-center">
-		<a class="title" href="./detail?num=${importantList.num}">${importantList.title}</a>
+			<a class="title" href="./detail?num=${importantList.num}">${importantList.title}</a>
 		</td>
 		<td>${importantList.writer}</td>
 		<td>${importantList.regDate}</td>

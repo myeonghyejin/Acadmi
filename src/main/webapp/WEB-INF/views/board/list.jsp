@@ -181,9 +181,9 @@
 														<img class="fileIcon2" width="20" height="20" src="/images/reply.png" style="margin-right: 5px">
 													</c:forEach>							
 												</c:catch>
-														
+																								 																				 
 												<c:if test="${dto.secret == 1 && dto.writer ne userName}">
-													<a class="title">비밀글입니다.</a>			
+													<a class="title">비밀글입니다.</a>		
 												</c:if>
 															
 												<c:if test="${dto.secret == 1 && dto.writer eq userName}">
@@ -209,7 +209,7 @@
 														<img class="fileIcon" width="30" height="30" src="/images/fileIcon.png" style="margin-left: 5px">						
 													</c:if>
 												</c:forEach>
-											</td>
+											</td>								
 											<td>${dto.writer}</td>
 											<td>${dto.regDate}</td>
 										</tr>
@@ -220,8 +220,14 @@
 						</table>
 						
 						<div class="col-12 float-right">
-							<c:if test="${board eq 'notice'}">
+							<%-- <c:if test="${board eq 'notice'}">
 								<sec:authorize access="hasRole('ROLE_ADMIN')">
+						    		<a class="float-right btn btn-primary" href="./add">작성</a>
+						  		 </sec:authorize>
+							</c:if> --%>
+							
+							<c:if test="${board eq 'notice'}">
+								<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
 						    		<a class="float-right btn btn-primary" href="./add">작성</a>
 						  		 </sec:authorize>
 							</c:if>
