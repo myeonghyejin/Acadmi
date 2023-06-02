@@ -1,13 +1,70 @@
-$.ajax({
-    url: "./lectureRoomAdd", // 요청을 보낼 URL
-    type: "POST", // HTTP 메서드 (POST, GET 등)
-    data: yourData, // 전송할 데이터
-    success: function(response) {
-      // 성공적으로 요청이 처리되었을 때의 콜백 함수
-      alert("요청이 성공적으로 처리되었습니다.");
-    },
-    error: function(xhr, status, error) {
-      // 요청이 실패하거나 오류가 발생했을 때의 콜백 함수
-      alert("중복된 값이 존재합니다.");
+let check= [false,false,false]
+
+ //강의실호수 필수입력사항
+ 
+$("#lectureRoom").blur(function() {
+    if($("#lectureRoom").val() == '') {
+        check[0] = false
+        $("#lecture").html("<p style='color : red;'>강의실 호수는 필수사항입니다</p>")
+
+    }else {
+        $.ajax ( {
+            url : './lectureRoomDuplicateCheck',
+            type : 'GET',
+            data : {
+                lectureBuilding : $('#lectureBuilding').val(),
+                lectureRoom : $('#lectureRoom').val()
+            },
+    
+            success : function(result) {
+                console.log(result)
+                if(result) {
+                    $("#lecture").html("<p>등록가능한 강의실입니다</p>")
+                    check[0] = true
+                }else {
+                    $("#lecture").html("<p style='color : red;'>중복된 강의실입니다</p>")
+                    check[0] = false
+                }
+            },
+            error :function() {
+                console.log("error")
+            }
+        })
     }
-  });
+
+   
+
+}) 
+
+$("#personal").blur(function() {
+    if($("#personal").val()== '') {
+        check[1] = false
+        $("#personalResult").html("<p style='color : red;'>최대수용인원은 필수사항입니다</p>")
+    }else {
+       check[1] = true
+       $("#personalResult").html("")
+    }
+})
+
+if($("#radioPrimary1").val() == 1) {
+    check[2] = true
+}
+
+$("#roomAdd").click(function() {
+    if(!check.includes(false) || check[2]) {
+        if($("#lectureRoom").val() == '') {
+            alert("강의실 호수는 필수사항입니다")
+            return
+        }
+        if(!check[0]) {
+            alert("중복된 강의실입니다")
+            return;
+        }
+        if(!check[1]) {
+            alert("최대수용인원을 입력하세요")
+            return;
+        }
+        //console.log("성공")
+        $("#lectureRoomForm").submit()
+    }
+})

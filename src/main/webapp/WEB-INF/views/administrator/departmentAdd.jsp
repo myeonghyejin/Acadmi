@@ -11,26 +11,81 @@
 	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
 	rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+<style type="text/css">
+	.col {
+		margin : 30px 0 0 0;
+	}
+	.card{
+		margin : 30px 0 20px 0;
+		width : 80%;
+	}
+	h3 {
+		margin : 30px;
+	}
+	.content {
+		margin: 30px;
+	}
+</style>
 </head>
-<body>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+	<!-- Header 적용 -->
+	<c:import url="../temp/administrator.jsp"></c:import>
+	<!-- Header 끝 -->
+		<div class="content-wrapper">
+			<div class="content-fluid">
+				<div class="row">
+					<div class="col">
+						<h3>학과 등록</h3>
+							<section class="content">
 
-<c:import url="../temp/administrator.jsp"></c:import>
-	<h1>학과 등록</h1>
+					      <!-- Default box -->
+					      <div class="card">
+					        <div class="card-body row">
+					          <div class="col-7">
+						         <form action="./departmentAdd" method="post">
+						         <input type="hidden" name="deptNum" >
+						          	 <div class="form-group">
+						           	  <label>단과대학</label>
+					                  <select class="form-control select2" style="width: 100%;" name="collegeNum">
+					                  	<c:forEach items="${list}" var="collegeVO">
+											<option value="${collegeVO.collegeNum}">${collegeVO.collegeName }</option>
+										</c:forEach>
+					                  </select>
+						           </div>
+						           <div class="form-group">
+						              <label for="deptName">학과 이름</label>
+						              <input type="text" id="deptName" class="form-control" name="deptName"/>
+						            </div>
+						           
+						            <div class="form-group clearfix">
+						            <div class="icheck-primary d-inline">
+				                        <input type="radio" id="radioPrimary1" name="status" value="1" checked>
+				                        	<label for="radioPrimary1">
+				                        	사용가능
+				                       		</label>
+				                     </div>
+				                     
+					                      <div class="icheck-primary d-inline">
+					                        <input type="radio" id="radioPrimary1" name="status" value="0">
+				                        	<label for="radioPrimary1">
+				                        	사용불가
+				                       		</label>
+					                     </div>
+				                     </div>
+					                
+						            <button type="submit" class="btn btn-info">등록</button> 
+						          </form>
+					          </div>
+					        </div>
+					      </div>
+			
+			    	</section>
+					</div>
+				</div>
+			</div>
+		</div>	
+</div>
 	
-	<form action="./departmentAdd" method="post">
-		<input type="hidden" name="deptNum" >
-		단과대학
-		<select name="collegeNum">
-			<c:forEach items="${list}" var="collegeVO">
-				<option value="${collegeVO.collegeNum}">${collegeVO.collegeName }</option>
-			</c:forEach>
-		</select><br>
-		학과이름  <input type="text" name="deptName" ><br>
-		
-		<input type="radio" name="status" value="1" checked >사용가능
-		<input type="radio" name="status" value="0"> 사용불가
-		
-		<button type="submit" >등록</button>
-	</form>
 </body>
 </html>

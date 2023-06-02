@@ -22,7 +22,7 @@ public class MemberVO implements UserDetails {
 	private String email;
 	private Integer category;
 	private Integer enabled;
-	private List<MemberFilesVO> memberFilesVOs;
+	private MemberFilesVO memberFilesVO;
 	
 	private List<RoleVO> roleVOs;
 	

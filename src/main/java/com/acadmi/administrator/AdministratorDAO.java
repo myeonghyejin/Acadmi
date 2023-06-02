@@ -54,6 +54,8 @@ public interface AdministratorDAO {
 	//강의실 등록
 	public int setLectureRoomAdd(LectureRoomVO lectureRoomVO) throws Exception;
 	public List<LectureRoomVO> getLectureBuilding() throws Exception;
+	//강의실 중복 체크
+	public LectureRoomVO LectureRoomDuplicateCheck(LectureRoomVO lectureRoomVO) throws Exception;
 	//강의실 수정
 	public int setLectureRoomUpdate(LectureRoomVO lectureRoomVO) throws Exception;
 

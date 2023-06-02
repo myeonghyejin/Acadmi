@@ -49,7 +49,7 @@
   	</insert>
   	<insert id="setStudentAdd" parameterType="StudentVO" >
   		INSERT INTO STUDENT
-  		VALUES(#{username},#{deptNum},1,#{name},#{phone},#{birth},#{address},0)
+  		VALUES(#{username},#{deptNum},#{grade},#{name},#{phone},#{birth},#{address},0)
   	</insert>
   	<insert id="setAdministratorAdd" parameterType="AdministratorVO">
   		INSERT INTO ADMINISTRATOR
@@ -108,11 +108,11 @@
   				<result column="NAME" property="name"/>
   				<result column="PHONE" property="phone"/>
   				<result column="STATUS" property="status"/>
-  				<collection property="memberFilesVOs" javaType="List" ofType="MemberFilesVO">
+  				<association property="memberFilesVO" javaType="MemberFilesVO">
   					<id column="FILENUM" property="fileNum"/>
   					<result column="FILENAME" property="fileName"/>
   					<result column="ORINAME" property="oriName"/>
-  				</collection>
+  				</association>
   			</collection>
   		</collection>
   	</resultMap>
@@ -147,11 +147,11 @@
   				<result column="PHONE" property="phone"/>
   				<result column="PROFESSORROOM" property="professorRoom"/>
   				<result column="STATUS" property="status"/>
-  				<collection property="memberFilesVOs" javaType="List" ofType="MemberFilesVO">
+  				<association property="memberFilesVO" javaType="MemberFilesVO">
   					<id column="FILENUM" property="fileNum"/>
   					<result column="FILENAME" property="fileName"/>
   					<result column="ORINAME" property="oriName"/>
-  				</collection>
+  				</association>
   			</collection>
   		</collection>
   	</resultMap>
@@ -179,11 +179,11 @@
 			<result column="EMAIL" property="email"/>
 			<result column="PHONE" property="phone"/>
 			<result column="STATUS" property="status"/>
-			<collection property="memberFilesVOs" javaType="List" ofType="MemberFilesVO">
+			<association property="memberFilesVO" javaType="MemberFilesVO">
 				<id column="FILENUM" property="fileNum"/>
 				<result column="FILENAME" property="fileName"/>
 				<result column="ORINAME" property="oriName"/>
-			</collection>
+			</association>
 		</collection>
   </resultMap>
   
@@ -207,13 +207,18 @@
  		SELECT DISTINCT LECTUREBUILDING 
 		FROM LECTURE_ROOM 
  	</select>
+ 	<!--강의실 중복 체크 -->
+ 	<select id="LectureRoomDuplicateCheck" parameterType="LectureRoomVO" resultType="LectureRoomVO">
+ 		SELECT LECTUREBUILDING,LECTUREROOM 
+		FROM LECTURE_ROOM 
+		WHERE LECTUREBUILDING =#{lectureBuilding} AND LECTUREROOM = #{lectureRoom}
+ 	</select>
  	<!--강의실 수정 -->
  	<update id="setLectureRoomUpdate" parameterType="LectureRoomVO">
  		UPDATE LECTURE_ROOM
  		SET STATUS=#{status}
  		WHERE LECTUREBUILDING = #{lectureBuilding} AND LECTUREROOM = #{lectureRoom}
  	</update>
- 	<select id=""></select>
   
   <!--학과 관리  -->
   
@@ -248,7 +253,7 @@
   <!--학과 등록 -->
   <insert id="setDepartmentAdd" parameterType="DepartmentVO">
   	INSERT INTO DEPARTMENT 
-	VALUES(0,#{deptNum},#{collegeNum},#{deptName},#{status})
+	VALUES(#{deptNum},#{collegeNum},#{deptName},#{status})
   </insert>	
   	
   </mapper>

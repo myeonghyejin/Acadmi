@@ -396,6 +396,11 @@ public class AdministratorService {
 		return administratorDAO.getLectureBuilding();
 	}
 	
+	//강의실 중복 체크
+	public LectureRoomVO LectureRoomDuplicateCheck(LectureRoomVO lectureRoomVO) throws Exception {
+		return administratorDAO.LectureRoomDuplicateCheck(lectureRoomVO);
+	}
+	
 	//강의실 수정
 	public int setLectureRoomUpdate(LectureRoomVO lectureRoomVO) throws Exception {
 		

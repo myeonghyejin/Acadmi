@@ -7,9 +7,11 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;import org.springframework.boot.context.properties.ConfigurationPropertiesBinding;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.acadmi.college.CollegeVO;
@@ -55,7 +57,10 @@ public class AdministratorController {
 	@PostMapping("studentAdd")
 	public ModelAndView setStudentAdd(@Valid StudentVO studentVO, BindingResult bindingResult, MemberVO memberVO, MemberSeqVO memberSeqVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		
+//			List<FieldError> e= bindingResult.getFieldErrors();
+//			for(FieldError fieldError:e) {
+//				log.error("Error : {}", fieldError);
+//			}
 		
 			if(bindingResult.hasErrors()) {
 				log.warn("검중에 실패");
@@ -83,6 +88,12 @@ public class AdministratorController {
 	public ModelAndView setAdministratorAdd() throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
+		List<CollegeVO>ar = administratorService.getCollege();
+		List<DepartmentVO> ar2 = administratorService.getDepartment();
+		
+		
+		mv.addObject("college", ar);
+		mv.addObject("department", ar2);
 		
 		mv.setViewName("administrator/administratorAdd");
 		
@@ -122,6 +133,12 @@ public class AdministratorController {
 	public ModelAndView setProfessorAdd() throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
+		List<CollegeVO>ar = administratorService.getCollege();
+		List<DepartmentVO> ar2 = administratorService.getDepartment();
+		
+		
+		mv.addObject("college", ar);
+		mv.addObject("department", ar2);
 		
 		mv.setViewName("administrator/professorAdd");
 		
@@ -135,11 +152,11 @@ public class AdministratorController {
 		
 		int result = administratorService.setProfessorAdd(professorVO, memberVO, memberSeqVO);
 		
-		if(bindingResult.hasErrors()) {
-			log.warn("검중에 실패");
-			mv.setViewName("administrator/professorAdd");
-			return mv;
-		}
+//		if(bindingResult.hasErrors()) {
+//			log.warn("검중에 실패");
+//			mv.setViewName("administrator/professorAdd");
+//			return mv;
+//		}
 		
 		String message="등록 실패";
 		
@@ -253,6 +270,20 @@ public class AdministratorController {
 		
 		mv.addObject("url", "./lectureRoomList");
 		return mv;
+	}
+	
+	//강의실 중복 체크
+	@GetMapping("lectureRoomDuplicateCheck")
+	@ResponseBody
+	public boolean LectureRoomDuplicateCheck(LectureRoomVO lectureRoomVO) throws Exception {
+		boolean check = true;
+		lectureRoomVO = administratorService.LectureRoomDuplicateCheck(lectureRoomVO);
+		
+		if(lectureRoomVO !=null) {
+			check = false;
+		}
+		
+		return check;
 	}
 	
 	//학과 관리
