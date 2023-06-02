@@ -183,12 +183,11 @@ public class MemberController {
 
 	   @PostMapping("studentUpdate")
 	   public ModelAndView postStudentUpdate(StudentVO studentVO, ModelAndView mv, MultipartFile multipartFile) throws Exception {
-	       MemberVO memberVO = memberService.setStudentUpdate(studentVO, multipartFile);
 	       
 	       // 회원 정보를 업데이트한 후, 다시 학생 정보를 조회하여 DepartmentVO에 담아 반환합니다.
-	       DepartmentVO departmentVO = memberService.getStudent(studentVO, multipartFile);
+	       MemberVO memberVO = memberService.setStudentUpdate(studentVO, multipartFile);
 
-	       mv.addObject("departmentVO", departmentVO);
+	       mv.addObject("memberVO", memberVO);
 	       mv.setViewName("member/studentUpdate");
 
 	       return mv;

@@ -42,9 +42,10 @@
 										<div class="col-md-6">
 											<div class="card card-info card-outline ml-5">
 												<div class="card-body box-profile">
+													<form action="./studentUpdate" method="post">
 													<div class="text-center">
 														<img class="profile-user-img img-fluid img-circle"
-															src="https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927"
+															src="/images/profile.jpg"
 															alt="User profile picture">
 													</div>
 													<c:forEach items="${departmentVO.studentVOs}" var="studentVO">
@@ -82,6 +83,8 @@
 															
 														</div>
 													</c:forEach>
+
+													</form>
 
 														<button class="btn btn-info float-right" id="submitButton" type="submit">수정</button>
 														

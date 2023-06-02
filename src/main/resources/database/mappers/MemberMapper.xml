@@ -153,13 +153,8 @@
  <!-- ============================================================================================================================ -->
  
  		<update id="setStudentUpdate" parameterType="MemberVO">
- 			UPDATE MEMBER M
-				 RIGHT JOIN STUDENT S ON (S.USERNAME  = M.USERNAME)
-					  SET  S.NAME = #{name},
-					   	   S.PHONE = #{phone},
-					   	   S.BIRTH = #{birth},
-					   	   S.ADDRESS = #{address}
-				 WHERE M.USERNAME = #{username}
+ 			UPDATE MEMBERFILES SET FILENAME ='한글' WHERE  FILENUM = 2
+
  		</update>
  		
   </mapper>
