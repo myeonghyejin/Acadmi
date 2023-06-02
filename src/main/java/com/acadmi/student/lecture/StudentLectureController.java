@@ -78,9 +78,17 @@ public class StudentLectureController {
 	//시간표 조회
 	@GetMapping("timetable")
 	public ModelAndView getTimetableList(StudentLectureVO studentLectureVO, HttpSession session, Pagination pagination, ModelAndView mv) throws Exception {
+		Object obj = session.getAttribute("SPRING_SECURITY_CONTEXT");
+		SecurityContextImpl contextImpl = (SecurityContextImpl)obj;
+		Authentication authentication = contextImpl.getAuthentication();
+		studentLectureVO.setUsername(authentication.getName());
+		
 		List<StudentLectureVO> ar = studentLectureService.getMyLectureList(studentLectureVO);
 		
+		String[] arr = {"월","화", "수", "목", "금"};
+		
 		mv.addObject("list", ar);
+		mv.addObject("day", arr);
 		mv.setViewName("student/lecture/timetable");
 		
 		return mv;

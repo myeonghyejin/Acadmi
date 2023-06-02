@@ -55,6 +55,11 @@ public class StudentLectureService {
 		return studentLectureDAO.getMyFavorite(favoriteLectureVO);
 	}
 	
+	//수강한 강의 총 학점 계산
+	public Long getGradeCount(StudentLectureVO studentLectureVO) throws Exception {
+		return studentLectureDAO.getGradeCount(studentLectureVO);
+	}
+	
 	/** INSERT **/
 	//수강 신청
 	public int insertToStudentLecture(StudentLectureVO studentLectureVO, LectureVO lectureVO, HttpSession session) throws Exception {

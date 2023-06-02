@@ -31,7 +31,7 @@ public class LectureVO {
 	private String weekday;
 	private Integer startTime;
 	private Integer endTime;
-	private Float completionGrade;
+	private Integer completionGrade;
 	private Integer status;
 	private Integer temporary;
 	private Integer favorite;

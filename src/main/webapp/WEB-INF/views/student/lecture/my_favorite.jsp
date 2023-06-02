@@ -84,17 +84,17 @@
 										<c:forEach items="${list}" var="lectureVO">
 											<tr>
 												<td>${lectureVO.lectureNum}</td>
-												<td><a>${lectureVO.lectureName}</a><br/><small> ${lectureVO.professorVO.username}</small></td>
+												<td><a>${lectureVO.lectureName}</a><br/><small>${lectureVO.professorVO.username}</small></td>
 												<td>${lectureVO.grade}학년</td>
 												<td>
 													<c:if test="${lectureVO.category eq '전공 필수'}">전공 필수</c:if>
 													<c:if test="${lectureVO.category eq '전공 선택'}">전공 선택</c:if>
-													<c:if test="${lectureVO.category eq '필수 교양'}">필수 교양</c:if>
-													<c:if test="${lectureVO.category eq '선택 교양'}">선택 교양</c:if>
+													<c:if test="${lectureVO.category eq '교양 필수'}">교양 필수</c:if>
+													<c:if test="${lectureVO.category eq '교양 선택'}">교양 선택</c:if>
 												</td>
 												<td>${lectureVO.departmentVO.deptName}</td>
 												<td>${lectureVO.completionGrade}</td>
-												<td>${lectureVO.weekday}</td>
+												<td>${lectureVO.weekday}요일</td>
 												<td>
 													<c:if test="${lectureVO.startTime eq 1}">AM 09:00</c:if>
 													<c:if test="${lectureVO.startTime eq 2}">AM 10:00</c:if>
@@ -108,16 +108,16 @@
 													<c:if test="${lectureVO.startTime eq 10}">PM 18:00</c:if>
 												</td>
 												<td>
-													<c:if test="${lectureVO.endTime eq 1}">AM 09:00</c:if>
-													<c:if test="${lectureVO.endTime eq 2}">AM 10:00</c:if>
-													<c:if test="${lectureVO.endTime eq 3}">AM 11:00</c:if>
-													<c:if test="${lectureVO.endTime eq 4}">PM 12:00</c:if>
-													<c:if test="${lectureVO.endTime eq 5}">PM 13:00</c:if>
-													<c:if test="${lectureVO.endTime eq 6}">PM 14:00</c:if>
-													<c:if test="${lectureVO.endTime eq 7}">PM 15:00</c:if>
-													<c:if test="${lectureVO.endTime eq 8}">PM 16:00</c:if>
-													<c:if test="${lectureVO.endTime eq 9}">PM 17:00</c:if>
-													<c:if test="${lectureVO.endTime eq 10}">PM 18:00</c:if>
+													<c:if test="${lectureVO.endTime eq 1}">AM 10:00</c:if>
+													<c:if test="${lectureVO.endTime eq 2}">AM 11:00</c:if>
+													<c:if test="${lectureVO.endTime eq 3}">PM 12:00</c:if>
+													<c:if test="${lectureVO.endTime eq 4}">PM 13:00</c:if>
+													<c:if test="${lectureVO.endTime eq 5}">PM 14:00</c:if>
+													<c:if test="${lectureVO.endTime eq 6}">PM 15:00</c:if>
+													<c:if test="${lectureVO.endTime eq 7}">PM 16:00</c:if>
+													<c:if test="${lectureVO.endTime eq 8}">PM 17:00</c:if>
+													<c:if test="${lectureVO.endTime eq 9}">PM 18:00</c:if>
+													<c:if test="${lectureVO.endTime eq 10}">PM 19:00</c:if>
 												</td>
 												<td>${lectureVO.lectureRoomVO.lectureBuilding} ${lectureVO.lectureRoomVO.lectureRoom}</td>
 												<td>${lectureVO.subscription}/${lectureVO.personal}명</td>
@@ -164,7 +164,7 @@
 
 	</div>
 <!-- ./wrapper -->
-<script src="/js/student/lecture/my_favorite_list.js"></script>
+<script src="/js/student/lecture/my_favorite.js"></script>
 <script>
 </script>
 </body>

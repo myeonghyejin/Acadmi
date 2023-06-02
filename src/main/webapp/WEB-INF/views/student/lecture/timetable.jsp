@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,112 +54,53 @@
 						<div class="card card-primary">
 							<div class="card-body p-0">
 
-	<!-- time-table -->
-	<div class="content">
-		<div class="container">
-			<div class="row">
-				<div class="table-responsive">
-					<table class="timetable table table-striped ">
-						<thead>
-							<tr class="text-center">
-								<th scope="col"></th>
-								<th scope="col">Monday</th>
-								<th scope="col">Tuesday</th>
-								<th scope="col">Wednesday</th>
-								<th scope="col">Thursday</th>
-								<th scope="col">Friday</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th scope="row">09:00 Am - 10:00 Am</th>
-								<td></td>
-								<td></td>
-								<td class="timetable-workout">30 MINUTES
-									<br> 12:35 pm - 01:05 pm</td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<th scope="row">10:00 Am - 11:00 Am</th>
-                                <td></td>
-                                <td></td>
-                                <td class="timetable-workout">Classes Name</td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">11:00 Am - 12:00 Pm</th>
-                                <td class="timetable-workout">30 MINUTES
-                                    <br> 12:35 pm - 01:05 pm</td>
-                                <td class="timetable-workout">30 MINUTES
-                                    <br> 12:35 pm - 01:05 pm</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">12:00 Pm - 13:00 Pm</th>
-                                <td class="timetable-workout">Classes Name</td>
-                                <td class="timetable-workout">Classes Name</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">13:00 Pm - 14:00 Pm</th>
-                                <td></td>
-                                <td class="timetable-workout">30 MINUTES
-                                    <br> 12:35 pm - 01:05 pm</td>
-                                <td></td>
-                                <td class="timetable-workout">30 MINUTES
-                                    <br> 12:35 pm - 01:05 pm</td>
-                                <td class="timetable-workout">30 MINUTES
-                                    <br> 12:35 pm - 01:05 pm</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">14:00 Pm - 15:00 Pm</th>
-                                <td></td>
-                                <td class="timetable-workout">Classes Name</td>
-                                <td></td>
-                                <td class="timetable-workout">Classes Name</td>
-                                <td class="timetable-workout">Classes Name</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">15:00 Pm - 16:00 Pm</th>
-                                <td class="timetable-workout">30 MINUTES
-                                    <br> 12:35 pm - 01:05 pm</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">16:00 Pm - 17:00 Pm</th>
-                                <td class="timetable-workout">Classes Name</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">17:00 Pm - 18:00 Pm</th>
-                                <td class="timetable-workout">30 MINUTES
-                                    <br> 12:35 pm - 01:05 pm</td>
-                                <td></td>
-                                <td></td>
-                                <td class="timetable-workout">30 MINUTES
-                                    <br> 12:35 pm - 01:05 pm</td>
-                                <td></td>
-                            </tr>
-						</tbody>
-					</table>
-				</div>
-				<!-- timetable -->
-			</div>
-		</div>
-	</div>
-	<!-- /.time-table -->
+							<!-- time-table -->
+							<div class="content">
+								<div class="container">
+									<div class="row">
+										<div class="table-responsive">
+											<table class="timetable table table-striped ">
+												<thead>
+													<tr class="text-center">
+														<th scope="col" style="width: 10%"></th>
+														<th scope="col" style="width: 15%">Monday</th>
+														<th scope="col" style="width: 15%">Tuesday</th>
+														<th scope="col" style="width: 15%">Wednesday</th>
+														<th scope="col" style="width: 15%">Thursday</th>
+														<th scope="col" style="width: 15%">Friday</th>
+													</tr>
+												</thead>				
+												<tbody>
+													<c:forEach begin="1" end="10" var="hour">
+														<tr>
+															<th scope="row">${hour + 8}:00</th>
+															<c:set var="lectureExists" value="false" />
+															<c:forEach items="${day}" var="day">
+																<c:set var="hasLecture" value="false" />
+																<c:forEach items="${list}" var="lectureVO">
+																	<c:if test="${lectureVO.weekday eq day && lectureVO.startTime <= hour && lectureVO.endTime >= hour}">
+																		<td class="timetable-workout">${lectureVO.lectureName}<br>
+																			<small>${lectureVO.professorVO.username}</small><br>
+																			<small>${lectureVO.lectureRoomVO.lectureBuilding} ${lectureVO.lectureRoomVO.lectureRoom}</small>
+																		</td>
+																		<c:set var="hasLecture" value="true" />
+																		<c:set var="lectureExists" value="true" />
+																	</c:if>
+																</c:forEach>
+																<c:if test="${not hasLecture}">
+																	<td></td>
+																</c:if>
+															</c:forEach>	
+														</tr>
+													</c:forEach>
+												</tbody>
+											</table>
+										</div>
+										<!-- timetable -->
+									</div>
+								</div>
+							</div>
+							<!-- /.time-table -->
 
 							</div>
 							<!-- /.card-body -->

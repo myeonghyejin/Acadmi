@@ -117,7 +117,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					INNER JOIN
 					STUDENT S
 					ON S.USERNAME = SL.USERNAME
-		WHERE S.USERNAME = #{username}
+		WHERE S.USERNAME = #{username} AND ENABLED = 1
 		ORDER BY LECTURENUM DESC
 	</select>
 	
@@ -162,22 +162,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND LECTURENUM = #{lectureNum}
 	</select>
 	
-	<select id="getMyFavoriteLectures" parameterType="String" resultType="Long">
-		SELECT FAVORITENUM
-		FROM FAVORITE_LECTURE
-		WHERE USERNAME = #{username}
-	</select>
-	
 	<select id="getMyFavorite" parameterType="FavoriteLectureVO" resultType="FavoriteLectureVO">
 		SELECT *
 		FROM FAVORITE_LECTURE
 		WHERE FAVORITENUM = #{favoriteNum}
 	</select>
 	
+	<select id="getGradeCount" parameterType="StudentLectureVO" resultType="Long">
+		SELECT SUM(COMPLETIONGRADE)
+		FROM LECTURE L
+			LEFT OUTER JOIN
+			STUDENT_LECTURE SL
+			ON SL.LECTURENUM = L.LECTURENUM
+		WHERE SL.USERNAME = #{username};
+	</select>
+	
 	<!-- INSERT -->
 	<insert id="insertToStudentLecture" parameterType="StudentLectureVO">
-		INSERT INTO STUDENT_LECTURE (LECTURENUM, USERNAME, RETAKE)
-		VALUES (#{lectureNum}, #{username}, #{retake})
+		INSERT INTO STUDENT_LECTURE (LECTURENUM, USERNAME, ENABLED)
+		VALUES (#{lectureNum}, #{username}, 1)
 	</insert>
 	
 	<insert id="insertToFavoriteLecture" parameterType="FavoriteLectureVO" useGeneratedKeys="true" keyProperty="favoriteNum">

@@ -35,6 +35,9 @@ public interface StudentLectureDAO {
 	//장바구니에 담은 강의인지 아닌지 확인
 	public FavoriteLectureVO getMyFavorite(FavoriteLectureVO favoriteLectureVO) throws Exception;
 	
+	//수강한 강의 총 학점 계산
+	public Long getGradeCount(StudentLectureVO studentLectureVO) throws Exception;
+	
 	/** INSERT **/
 	//수강 신청
 	public int insertToStudentLecture(StudentLectureVO studentLectureVO) throws Exception;
