@@ -127,20 +127,20 @@ public class MemberService implements UserDetailsService{
 //	======================================================================================================================
 	
 	
-	public MemberVO setStudentUpdate(StudentVO studentVO, MultipartFile multipartFile) throws Exception{
-		MemberVO memberVO = memberDAO.setStudentUpdate(studentVO);
+	public int setStudentUpdate(StudentVO studentVO, MultipartFile multipartFile) throws Exception{
+		int result = memberDAO.setStudentUpdate(studentVO);
 			
-			if(!multipartFile.isEmpty()) {
+			if(multipartFile != null) {
 				String fileName = fileManager.saveFile(path, multipartFile);
 				MemberFilesVO memberFilesVO = new MemberFilesVO();
 				memberFilesVO.setUsername(studentVO.getUsername());
 				memberFilesVO.setFileName(fileName);
 				memberFilesVO.setOriName(multipartFile.getOriginalFilename());
 				
-				memberVO = memberDAO.setFileUpdate(memberFilesVO);
+				result = memberDAO.setFileUpdate(memberFilesVO);
 			}
 			
-		return memberVO;		
+		return result;		
 		    
 	}
 	

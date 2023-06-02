@@ -42,7 +42,7 @@
 										<div class="col-md-6">
 											<div class="card card-info card-outline ml-5">
 												<div class="card-body box-profile">
-													<form action="./studentUpdate" method="post">
+													<form action="./studentUpdate" method="post" enctype="multipart/form-data">
 													<div class="text-center">
 														<img class="profile-user-img img-fluid img-circle"
 															src="/images/profile.jpg"
@@ -50,9 +50,9 @@
 													</div>
 													<c:forEach items="${departmentVO.studentVOs}" var="studentVO">
 														<c:set var="studentName" value="${studentVO.name}"></c:set>
-															<h3 class="profile-username text-center"><c:out value="${studentName}"></c:out></h3>
+															<h3 class="profile-username text-center"><input value="${studentVO.name}" type="text" id="name" name="name"></h3>
 													</c:forEach>
-
+<%-- <c:out value="${studentName}"></c:out> --%>
 													<c:forEach items="${departmentVO.studentVOs}" var="studentVO">
 															<c:set var="studentGrade" value="${studentVO.grade}"></c:set>
 															<c:set var="studentPhone" value="${studentVO.phone}"></c:set>
@@ -83,10 +83,10 @@
 															
 														</div>
 													</c:forEach>
+														<button class="btn btn-info float-right" id="submitButton" type="submit">수정</button>
 
 													</form>
 
-														<button class="btn btn-info float-right" id="submitButton" type="submit">수정</button>
 														
 														<sec:authentication property="Principal" var="user"/>
 	                 										<a href="/member/studentPage?username=${user.username}" class="btn btn-danger float-right mx-3">취소</a>

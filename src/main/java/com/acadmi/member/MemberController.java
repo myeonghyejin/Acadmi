@@ -185,10 +185,10 @@ public class MemberController {
 	   public ModelAndView postStudentUpdate(StudentVO studentVO, ModelAndView mv, MultipartFile multipartFile) throws Exception {
 	       
 	       // 회원 정보를 업데이트한 후, 다시 학생 정보를 조회하여 DepartmentVO에 담아 반환합니다.
-	       MemberVO memberVO = memberService.setStudentUpdate(studentVO, multipartFile);
+	       int result = memberService.setStudentUpdate(studentVO, multipartFile);
 
-	       mv.addObject("memberVO", memberVO);
-	       mv.setViewName("member/studentUpdate");
+	     
+	       mv.setViewName("redirect:/");
 
 	       return mv;
 	   }
