@@ -13,6 +13,6 @@ public class LectureNoticeVO extends BoardVO {
 	
 	private Long lectureNum;
 	private Long hit;
-	private Date modifiyDate;
+	private Date modifyDate;
 
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -101,17 +102,19 @@
 									<th>제목</th>
 									<th>작성자</th>
 									<th>등록일</th>
-									<c:if test="${board eq 'notice'}">
+									<c:if test="${board eq 'notice' || board eq 'lectureNotice'}">
 										<th>수정일</th>
 										<th>조회수</th>
 									</c:if>
 								</tr>
 							</thead>
-							<tbody>		
+							<c:if test="${board eq 'notice'}">
+								<tbody class="importantList">		
+							</c:if>
 							
 								<sec:authentication property="principal.username" var="userName" />
 								
-								<tr class="importantList" style="background-color: #f2f2f2;"></tr>
+								<sec:authentication property="principal.category" var="category" />
 								
 								<c:forEach items="${list}" var="dto">
 								
@@ -128,7 +131,7 @@
 											</td>
 											<td>${dto.writer}</td>
 											<td>${dto.regDate}</td>
-											<td>${dto.modifiyDate}</td>
+											<td>${dto.modifyDate}</td>
 											<td>${dto.hit}</td>
 										</tr>
 									</c:if>
@@ -167,7 +170,7 @@
 											</td>
 											<td>${dto.writer}</td>
 											<td>${dto.regDate}</td>
-											<td>${dto.modifiyDate}</td>
+											<td>${dto.modifyDate}</td>
 											<td>${dto.hit}</td>
 										</tr>
 									</c:if>
@@ -183,19 +186,20 @@
 												</c:catch>
 																								 																				 
 												<c:if test="${dto.secret == 1 && dto.writer ne userName}">
-													<a class="title">비밀글입니다.</a>		
+																				
+													<c:choose>
+													    <c:when test="${category == 1}">
+													        <a class="title" href="./detail?num=${dto.num}">${dto.title}</a>
+													    </c:when>
+													    <c:otherwise>
+													        <a class="title">비밀글입니다.</a>	
+													    </c:otherwise>
+													</c:choose>																	
 												</c:if>
 															
 												<c:if test="${dto.secret == 1 && dto.writer eq userName}">
 													<a class="title" href="./detail?num=${dto.num}">${dto.title}</a>						
-												</c:if>
-												
-												<!-- 교수 권환 수정 -->
-												<c:if test="${dto.secret == 1}">
-													<sec:authorize access="hasRole('ROLE_PROFESSOR')">
-											    		<a class="title" href="./detail?num=${dto.num}">${dto.title}</a>	
-											  		 </sec:authorize>
-												</c:if>
+												</c:if>		
 												
 												<c:if test="${dto.secret == 0 || empty dto.secret}">						
 													<a class="title" href="./detail?num=${dto.num}">${dto.title}</a>
@@ -204,6 +208,7 @@
 												<c:if test="${dto.secret == 1}">
 													<img class="lockIcon" width="30" height="30" src="/images/lock.png" style="margin-left: 5px">
 												</c:if>
+												
 												<c:forEach items="${dto.fileVOs}" var="fileVO">
 													<c:if test="${fileVO.oriName ne null}">
 														<img class="fileIcon" width="30" height="30" src="/images/fileIcon.png" style="margin-left: 5px">						

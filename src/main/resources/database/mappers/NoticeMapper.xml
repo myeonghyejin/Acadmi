@@ -35,8 +35,11 @@
   		LIMIT #{startRow}, #{perPage}
   	</select>
   	
-  	<select id="getImportantList" resultType="NoticeVO" parameterType="NoticeVO">
+  	<select id="getImportantList" resultMap="getDetailResult" parameterType="NoticeVO">
   		SELECT * FROM NOTICE
+  			 LEFT JOIN
+			 NOTICEFILES
+			 USING(NUM)
   		WHERE IMPORTANT = #{important}
   	</select>
   	
@@ -44,7 +47,7 @@
   		SELECT *
 		FROM NOTICE 
 			 LEFT JOIN
-			 NOTICEFILES 
+			 NOTICEFILES
 			 USING(NUM)
 		WHERE NUM = #{num}
   	</select>

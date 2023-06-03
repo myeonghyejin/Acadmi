@@ -83,16 +83,17 @@
 						<span class="mr-4 fontlight">${boardVO.writer}</span>
 						<span class="mr-4" style="margin-left: 150px;">작성일</span>
 						<span class="mr-4 fontlight">${boardVO.regDate}</span>
+						
 						<c:if test="${board eq 'notice'}">
 							<span class="mr-4" style="margin-left: 200px;">수정일</span>
-							<span class="mr-4 fontlight">${boardVO.modifiyDate}</span>
+							<span class="mr-4 fontlight">${boardVO.modifyDate}</span>
 							<span class="mr-4">조회수</span>
 							<span class="mr-4 fontlight">${boardVO.hit}</span>
 						</c:if>
 						
 						<c:if test="${board eq 'lectureNotice'}">
 							<span class="mr-4" style="margin-left: 200px;">수정일</span>
-							<span class="mr-4 fontlight">${boardVO.modifiyDate}</span>
+							<span class="mr-4 fontlight">${boardVO.modifyDate}</span>
 							<span class="mr-4">조회수</span>
 							<span class="mr-4 fontlight">${boardVO.hit}</span>
 						</c:if>
@@ -110,17 +111,32 @@
 					</div>
 					
 					<sec:authentication property="principal.username" var="userName" />
+					
+					<sec:authentication property="principal.category" var="category" />
 
 					<div class="row" style="margin-top: 200px; display: flex; justify-content: center; align-items: center;">
 						<a href="./list" class="btn btn-light" style="margin-right: 650px;">목록</a>
 						
-						<c:if test="${board eq 'qna' || board eq 'lectureQna'}">
+						<c:if test="${board eq 'qna'}">
 							<c:if test="${num ne 2}">
 								<c:if test="${boardVO.step ne 1}">
-									<a href="./reply?num=${boardVO.num}" class="btn btn-primary" style="margin-right: 5px">답글</a>
+									<c:if test="${category == 0}">
+										<a href="./reply?num=${boardVO.num}" class="btn btn-primary" style="margin-right: 5px">답글</a>
+									</c:if>
 								</c:if>
 							</c:if>
 						</c:if>
+						
+						<c:if test="${board eq 'lectureQna'}">
+							<c:if test="${num ne 2}">
+								<c:if test="${boardVO.step ne 1}">
+									<c:if test="${category == 1}">
+										<a href="./reply?num=${boardVO.num}" class="btn btn-primary" style="margin-right: 5px">답글</a>
+									</c:if>
+								</c:if>
+							</c:if>
+						</c:if>
+						
 						<c:if test="${userName eq boardVO.writer}">
 							<a href="./update?num=${boardVO.num}" id="update" class="btn btn-info float-right" style="margin-right: 5px">수정</a>	
 							<a href="./delete?num=${boardVO.num}" id="delete" class="btn btn-danger float-right">삭제</a>
