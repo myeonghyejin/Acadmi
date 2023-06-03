@@ -20,8 +20,10 @@ public interface MemberDAO {
 	public int setRoleAdd(Map<String, Object> map) throws Exception;
 	public MemberVO getFindPw(MemberVO memberVO) throws Exception;
 	public int setPwUpdate(MemberVO memberVO) throws Exception;
+	public MemberVO getFirstEmail(MemberVO memberVO) throws Exception;
+	public int setEnabledUpdate(MemberVO memberVO) throws Exception;
 	
-	public int setFileUpdate(MemberFilesVO memberFilesVO) throws Exception;
+	public int setFileAdd(MemberFilesVO memberFilesVO) throws Exception;
 	public int setFileDelete(MemberFilesVO memberFilesVO) throws Exception;
 	
 //	========================================================================================
@@ -32,8 +34,8 @@ public interface MemberDAO {
 	
 //	=========================================================================================
 	
-	public int setStudentUpdate(StudentVO studentVO) throws Exception;
-	public MemberVO setProfessorUpdate(ProfessorVO professorVO) throws Exception;
-	public MemberVO setAdministratorUpdate(AdministratorVO administratorVO) throws Exception;
+	public int setStudentUpdate(MemberVO memberVO) throws Exception;
+	public int setProfessorUpdate(ProfessorVO professorVO) throws Exception;
+	public int setAdministratorUpdate(AdministratorVO administratorVO) throws Exception;
 
 }

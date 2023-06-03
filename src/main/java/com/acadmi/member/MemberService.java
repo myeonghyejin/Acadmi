@@ -106,7 +106,10 @@ public class MemberService implements UserDetailsService{
 		
 	}
 	
-
+	public int setFileDelete(MemberFilesVO memberFilesVO) throws Exception{
+		return memberDAO.setFileDelete(memberFilesVO);
+	}
+	
 //	======================================================================================================================
 	
 	public DepartmentVO getStudent(StudentVO studentVO, MultipartFile multipartFile) throws Exception {
@@ -138,19 +141,43 @@ public class MemberService implements UserDetailsService{
 				memberFilesVO.setFileName(fileName);
 				memberFilesVO.setOriName(multipartFile.getOriginalFilename());
 				
-				result = memberDAO.setFileUpdate(memberFilesVO);
+				result = memberDAO.setFileAdd(memberFilesVO);
 			}
 			
 		return result;		
 		    
 	}
 	
-	public MemberVO setProfessorUpdate(ProfessorVO professorVO, MultipartFile multipartFile) throws Exception{
-		return memberDAO.setProfessorUpdate(professorVO);
+	public int setProfessorUpdate(ProfessorVO professorVO, MultipartFile multipartFile) throws Exception{
+		int result = memberDAO.setStudentUpdate(professorVO);
+		
+		if(multipartFile != null) {
+			String fileName = fileManager.saveFile(path, multipartFile);
+			MemberFilesVO memberFilesVO = new MemberFilesVO();
+			memberFilesVO.setUsername(professorVO.getUsername());
+			memberFilesVO.setFileName(fileName);
+			memberFilesVO.setOriName(multipartFile.getOriginalFilename());
+			
+			result = memberDAO.setFileAdd(memberFilesVO);
+		}
+		
+	return result;
 	}
 	
-	public MemberVO setAdministratorUpdate(AdministratorVO administratorVO, MultipartFile multipartFile) throws Exception{
-		return memberDAO.setAdministratorUpdate(administratorVO);
+	public int setAdministratorUpdate(AdministratorVO administratorVO, MultipartFile multipartFile) throws Exception{
+		int result = memberDAO.setStudentUpdate(administratorVO);
+		
+		if(multipartFile != null) {
+			String fileName = fileManager.saveFile(path, multipartFile);
+			MemberFilesVO memberFilesVO = new MemberFilesVO();
+			memberFilesVO.setUsername(administratorVO.getUsername());
+			memberFilesVO.setFileName(fileName);
+			memberFilesVO.setOriName(multipartFile.getOriginalFilename());
+			
+			result = memberDAO.setFileAdd(memberFilesVO);
+		}
+		
+	return result;
 	}
 	
 }

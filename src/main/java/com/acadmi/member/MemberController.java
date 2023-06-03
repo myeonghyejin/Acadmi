@@ -126,6 +126,17 @@ public class MemberController {
 			return mv;
 		}
 	   
+	   @PostMapping("fileDelete")
+	   public ModelAndView setFileDelete(MemberFilesVO memberFilesVO) throws Exception{
+		   ModelAndView mv = new ModelAndView();
+		   
+		   int result = memberService.setFileDelete(memberFilesVO);
+		   
+		   mv.addObject("result", result);
+		   mv.setViewName("common/ajaxResult");
+		   
+		   return mv;
+	   }
 	   
 //	   ========================================멤버 권한에 따른 마이페이지========================================
 	   
@@ -184,11 +195,9 @@ public class MemberController {
 	   @PostMapping("studentUpdate")
 	   public ModelAndView postStudentUpdate(StudentVO studentVO, ModelAndView mv, MultipartFile multipartFile) throws Exception {
 	       
-	       // 회원 정보를 업데이트한 후, 다시 학생 정보를 조회하여 DepartmentVO에 담아 반환합니다.
 	       int result = memberService.setStudentUpdate(studentVO, multipartFile);
 
-	     
-	       mv.setViewName("redirect:/");
+	       mv.setViewName("redirect:./studentPage");
 
 	       return mv;
 	   }
@@ -212,10 +221,9 @@ public class MemberController {
 	   @PostMapping("professorUpdate")
 	   public ModelAndView setProfessorUpdate(ProfessorVO professorVO, ModelAndView mv, MultipartFile multipartFile) throws Exception {
 		     
-		   MemberVO memberVO =  memberService.setProfessorUpdate(professorVO, multipartFile);
-		   
-		   mv.addObject("memberVO", memberVO);
-		   mv.setViewName("redirect:/");
+		   int result = memberService.setProfessorUpdate(professorVO, multipartFile);
+
+	       mv.setViewName("redirect:./administratorPage");
 	      
 	      return mv;
 	   }
@@ -239,10 +247,9 @@ public class MemberController {
 	   @PostMapping("administratorUpdate")
 	   public ModelAndView setAdministratorUpdate(AdministratorVO administratorVO, ModelAndView mv, MultipartFile multipartFile) throws Exception {
 		     
-		   MemberVO memberVO =  memberService.setAdministratorUpdate(administratorVO, multipartFile);
-		   
-		   mv.addObject("memberVO", memberVO);
-		   mv.setViewName("redirect:/");
+	       int result = memberService.setAdministratorUpdate(administratorVO, multipartFile);
+
+	       mv.setViewName("redirect:./administratorPage");
 	      
 	      return mv;
 	   }

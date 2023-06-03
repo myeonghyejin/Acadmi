@@ -44,14 +44,14 @@
 												<div class="card-body box-profile">
 													<div class="text-center">
 		     	 												<c:choose>
-																    <c:when test="${empty memberFilesVO.filName}">
+																    <c:when test="${empty memberFilesVO.oriName}">
 																        <img class="profile-user-img img-fluid img-circle"
 																             src="/images/profile.jpg"
 																             alt="User profile picture">
 																    </c:when>
 																    <c:otherwise>
 																        <img class="profile-user-img img-fluid img-circle"
-																             src="C:/production/upload/member/${memberFilesVO.fileName}"
+																             src="C:/production/upload/member/${memberFilesVO.oriName}"
 																             alt="User profile picture">
 																    </c:otherwise>
 																</c:choose>

@@ -81,7 +81,9 @@
 	  			<result property="address" column="ADDRESS"/>
 	  			<result property="email" column="EMAIL"/>
   				<association property="memberFilesVO" javaType="MemberFilesVO">
-           			<id column="FILENAME" property="fileName"/>
+           			<id column="FILENUM" property="fileNum"/>
+           			<result property="fileName" column="FILENAME"/>
+           			<result property="oriName" column="ORINAME"/>
         		</association>
   			</collection>
   		</resultMap>
@@ -113,7 +115,8 @@
 	  			<result property="email" column="EMAIL"/>
   				<result column="STATUS" property="status"/>
   				<association property="memberFilesVO" javaType="MemberFilesVO">
-           			<id column="FILENAME" property="fileName"/>
+           			<id column="FILENUM" property="fileNum"/>
+           			<result property="fileName" column="FILENAME"/>
         		</association>
   			</collection>
   		</resultMap>
@@ -144,7 +147,8 @@
 	  			<result property="email" column="EMAIL"/>
   				<result column="STATUS" property="status"/>
   				<association property="memberFilesVO" javaType="MemberFilesVO">
-           			<id column="FILENAME" property="fileName"/>
+           			<id column="FILENUM" property="fileNum"/>
+           			<result property="fileName" column="FILENAME"/>
         		</association>
   			</collection>
   		</resultMap>
@@ -152,16 +156,25 @@
 	
  <!-- ============================================================================================================================ -->
  
- 		<update id="setStudentUpdate" parameterType="StudentVO">
- 			UPDATE STUDENT S
- 				RIGHT JOIN MEMBERFILES MF ON (S.USERNAME  = MF.USERNAME)
+ 		<update id="setStudentUpdate" parameterType="MemberVO">
+ 			UPDATE MEMBER M
+ 				LEFT JOIN STUDENT S ON (M.USERNAME  = S.USERNAME)
+ 				LEFT JOIN MEMBERFILES MF ON (M.USERNAME  = MF.USERNAME)
 				   SET MF.FILENAME = #{fileName},
 				   	   S.NAME = #{name},
 				   	   S.PHONE = #{phone},
-				   	   S.BIRTH = #{birth},
 				   	   S.ADDRESS = #{address},
 				   	   M.EMAIL = #{email}
  			WHERE M.USERNAME = #{username}
  		</update>
+ 		
+ 		<insert id="setFileAdd" parameterType="MemberFilesVO">
+ 			INSERT INTO MEMBERFILES(USERNAME, FILENAME, ORINAME)
+ 			VALUES(#{username}, #{fileName}, #{oriName})
+ 		</insert>
+ 		
+ 		<delete id="setFileDelete" parameterType="MemberFilesVO">
+ 			DELETE FROM MEMBERFILES WHERE FILENUM = #{fileNum}
+ 		</delete>
  		
   </mapper>
