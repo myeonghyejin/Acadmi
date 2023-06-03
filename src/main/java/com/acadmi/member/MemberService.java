@@ -106,6 +106,7 @@ public class MemberService implements UserDetailsService{
 		
 	}
 	
+
 //	======================================================================================================================
 	
 	public DepartmentVO getStudent(StudentVO studentVO, MultipartFile multipartFile) throws Exception {
