@@ -1,0 +1,52 @@
+package com.acadmi.chat;
+
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.acadmi.util.Pagination;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Controller
+@RequestMapping("/chat/*")
+@Slf4j
+public class ChatController {
+	
+	@Autowired
+	private ChatService chatService;
+	
+	@GetMapping("list")
+	public ModelAndView getChatRoomList(Pagination pagination, HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		List<ChatRoomVO> ar = chatService.getChatRoomList(pagination, session);
+		for(ChatRoomVO chatRoomVO:ar) {
+			for(ChatMessageVO chatMessageVO:chatRoomVO.getChatMessageVOs()) {
+				log.info("======status : {}", chatMessageVO.getMsgStatus());				
+			}
+		}
+		mv.addObject("list", ar);
+		mv.setViewName("chat/list");
+		return mv;
+	}
+	
+	@GetMapping("detail")
+	public ModelAndView getChatRoomDetail(ChatMessageVO chatMessageVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		List<ChatMessageVO> ar = chatService.getChatMessage(chatMessageVO);
+		log.info("=====ar : {}",ar.size());
+		for(ChatMessageVO chatMessageVO2:ar) {
+			log.info("========= contents : {}",chatMessageVO2.getMsgContents());
+		}
+		mv.addObject("messageList", ar);
+		mv.setViewName("chat/detail");
+		return mv;
+	}
+
+}

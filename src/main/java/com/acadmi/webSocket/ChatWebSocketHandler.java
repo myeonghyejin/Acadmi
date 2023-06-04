@@ -4,7 +4,11 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -13,15 +17,9 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@Component
 public class ChatWebSocketHandler extends TextWebSocketHandler {
 	
 	private Map<String, WebSocketSession> sessions = new HashMap<>();
-	
-	// security에서 username을 뽑아오는 코드
-	private String getUsernameFromSecurityContext() {
-		return SecurityContextHolder.getContext().getAuthentication().getName();
-	}
 	
 	//메세지를 보내는 메서드
 	private void sendMessage(String recipient, String message) throws IOException {
@@ -36,7 +34,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 	//웹소켓에 클라이언트가 연결되었을때 실행되는 코드
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		String username = getUsernameFromSecurityContext();
+		String username=session.getPrincipal().getName();
 		sessions.put(username, session);
 		log.info("클라이언트가 연결되었습니다. 세션 ID : {}",username);
 	}
@@ -45,6 +43,8 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		String receicedmessage = message.getPayload();
+		log.info(receicedmessage);
+		
 	}
 	
 	

@@ -11,13 +11,10 @@ import com.acadmi.webSocket.ChatWebSocketHandler;
 @Configuration
 @EnableWebSocket
 public class WebsocketConfig implements WebSocketConfigurer {
-	
-	@Autowired
-	private ChatWebSocketHandler chatWebSocketHandler;
 
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-		registry.addHandler(chatWebSocketHandler, "/chat").setAllowedOrigins("*");
+		registry.addHandler(new ChatWebSocketHandler(), "/chat").setAllowedOrigins("*");
 	}
 	
 	

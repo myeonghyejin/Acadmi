@@ -17,13 +17,20 @@
 		<!-- Header 적용 -->
 		<c:import url="../temp/header.jsp"></c:import>
 		<!-- Header 끝 -->
-		<div class="content-wrapper">
-			<h1>contents</h1>
+		<div class="container-fluid">
+			<div class="row">
+				<!-- 2레벨 Sidebar 적용 -->
+				<div class="content-wrapper">
+				</div>
+				<!-- 2레벨 Sidebar 끝 -->
+				<!-- Contents -->
+				<div class="col">
+				</div>	
+				<!-- Footer 적용 -->
+				<c:import url="../temp/footer.jsp"></c:import>
+				<!-- Footer 끝 -->
+			</div>
 		</div>
-		<!-- Footer 적용 -->
-		<c:import url="../temp/footer.jsp"></c:import>
-		<!-- Footer 끝 -->
-
 	</div>
 <!-- ./wrapper -->
 </body>
