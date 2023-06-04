@@ -193,11 +193,11 @@ public class MemberController {
 	   }
 
 	   @PostMapping("studentUpdate")
-	   public ModelAndView postStudentUpdate(StudentVO studentVO, ModelAndView mv, MultipartFile multipartFile) throws Exception {
+	   public ModelAndView postStudentUpdate(String username, StudentVO studentVO, ModelAndView mv, MultipartFile multipartFile) throws Exception {
 	       
 	       int result = memberService.setStudentUpdate(studentVO, multipartFile);
 
-	       mv.setViewName("redirect:./studentPage");
+	       mv.setViewName("redirect:./studentPage?username=" + username);
 
 	       return mv;
 	   }
@@ -219,11 +219,11 @@ public class MemberController {
 	   }
 	   
 	   @PostMapping("professorUpdate")
-	   public ModelAndView setProfessorUpdate(ProfessorVO professorVO, ModelAndView mv, MultipartFile multipartFile) throws Exception {
+	   public ModelAndView setProfessorUpdate(String username, ProfessorVO professorVO, ModelAndView mv, MultipartFile multipartFile) throws Exception {
 		     
 		   int result = memberService.setProfessorUpdate(professorVO, multipartFile);
 
-	       mv.setViewName("redirect:./administratorPage");
+	       mv.setViewName("redirect:./professorPage?username=" + username);
 	      
 	      return mv;
 	   }
@@ -245,11 +245,11 @@ public class MemberController {
 	   }
 	   
 	   @PostMapping("administratorUpdate")
-	   public ModelAndView setAdministratorUpdate(AdministratorVO administratorVO, ModelAndView mv, MultipartFile multipartFile) throws Exception {
+	   public ModelAndView setAdministratorUpdate(String username, AdministratorVO administratorVO, ModelAndView mv, MultipartFile multipartFile) throws Exception {
 		     
 	       int result = memberService.setAdministratorUpdate(administratorVO, multipartFile);
 
-	       mv.setViewName("redirect:./administratorPage");
+	       mv.setViewName("redirect:./administratorPage?username=" + username);
 	      
 	      return mv;
 	   }

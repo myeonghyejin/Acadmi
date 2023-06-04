@@ -78,11 +78,11 @@
 																	<strong><i class="fa-solid fa-cake-candles mr-1"></i> 생년월일</strong>
 																			<p class="text-muted"><c:out value="${professorBirth}"></c:out></p>
 																<hr>
-																	<strong><i class="fa-solid fa-phone mr-1"></i> 전화번호</strong>
-																		<p class="text-muted"><c:out value="${professorPhone}"></c:out></p>
-																<hr>
 																	<strong><i class="fa-solid fa-briefcase mr-1"></i> 사무실</strong>
 																		<p class="text-muted"><c:out value="${professorRoom}"></c:out>호</p>
+																<hr>
+																	<strong><i class="fa-solid fa-phone mr-1"></i> 전화번호</strong>
+																		<p class="text-muted"><c:out value="${professorPhone}"></c:out></p>
 																<hr>
 																	<strong><i class="fas fa-envelope mr-1"></i> 이메일</strong>
 																		<p class="text-muted"><c:out value="${professorEmail}"></c:out></p>
@@ -94,7 +94,7 @@
 													</c:forEach>
 
 														<sec:authentication property="Principal" var="user"/>
-														<a href="/member/studentUpdate?username=${user.username}" id="studentUpdate" class="btn btn-info float-right">수정</a>
+														<a href="/member/professorUpdate?username=${user.username}" id="professorUpdate" class="btn btn-info float-right">수정</a>
 
 												</div>
 											</div>

@@ -149,7 +149,7 @@ public class MemberService implements UserDetailsService{
 	}
 	
 	public int setProfessorUpdate(ProfessorVO professorVO, MultipartFile multipartFile) throws Exception{
-		int result = memberDAO.setStudentUpdate(professorVO);
+		int result = memberDAO.setProfessorUpdate(professorVO);
 		
 		if(multipartFile != null) {
 			String fileName = fileManager.saveFile(path, multipartFile);
@@ -165,7 +165,7 @@ public class MemberService implements UserDetailsService{
 	}
 	
 	public int setAdministratorUpdate(AdministratorVO administratorVO, MultipartFile multipartFile) throws Exception{
-		int result = memberDAO.setStudentUpdate(administratorVO);
+		int result = memberDAO.setAdministratorUpdate(administratorVO);
 		
 		if(multipartFile != null) {
 			String fileName = fileManager.saveFile(path, multipartFile);

@@ -200,17 +200,17 @@
 			<div class="info">
 				<sec:authorize access="hasRole('STUDENT')">
                 <sec:authentication property="Principal" var="user"/>
-                    <a href="/member/studentPage?username=${user.username}">STUDENT</a>
+                    <a href="/member/studentPage?username=${user.username}">${user.username}</a>
                 </sec:authorize>
                 
 				<sec:authorize access="hasRole('PROFESSOR')">
 				<sec:authentication property="Principal" var="user"/>
-					<a href="/member/professorPage?username=${user.username}">PROFESSOR</a>
+					<a href="/member/professorPage?username=${user.username}">${user.username}</a>
 				</sec:authorize>
 				
 				<sec:authorize access="hasRole('ADMINISTRATOR')">
 				<sec:authentication property="Principal" var="user"/>
-					<a href="/member/administratorPage?username=${user.username}">ADMINISTRATOR</a>
+					<a href="/member/administratorPage?username=${user.username}">${user.username}</a>
 				</sec:authorize>
 			</div>
 		</div>

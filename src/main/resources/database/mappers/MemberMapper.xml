@@ -32,7 +32,7 @@
   		</resultMap>
   	
   	
-  		<insert id="setJoin" parameterType="MemberVO">
+  		<!-- <insert id="setJoin" parameterType="MemberVO">
 	  		INSERT INTO MEMBER
 	  		VALUES(#{username}, #{password}, #{email}, #{category}, 0)
   		</insert>
@@ -40,7 +40,7 @@
   		<insert id="setRoleAdd" parameterType="Map">
 	  		INSERT INTO MEMBER_ROLE
 	  		VALUES(#{username}, 1)
-  		</insert>
+  		</insert> -->
   		
   		<select id="getFindPw" parameterType="MemberVO" resultType="MemberVO">
 	  		SELECT USERNAME, EMAIL FROM MEMBER
@@ -79,6 +79,7 @@
   				<result column="PHONE" property="phone"/>
   				<result property="birth" column="BIRTH"/>
 	  			<result property="address" column="ADDRESS"/>
+	  			<result property="addressDetail" column="ADDRESSDETAIL"/>
 	  			<result property="email" column="EMAIL"/>
   				<association property="memberFilesVO" javaType="MemberFilesVO">
            			<id column="FILENUM" property="fileNum"/>
@@ -112,6 +113,7 @@
   				<result column="PHONE" property="phone"/>
   				<result property="birth" column="BIRTH"/>
 	  			<result property="address" column="ADDRESS"/>
+	  			<result property="addressDetail" column="ADDRESSDETAIL"/>
 	  			<result property="email" column="EMAIL"/>
   				<result column="STATUS" property="status"/>
   				<association property="memberFilesVO" javaType="MemberFilesVO">
@@ -144,6 +146,7 @@
   				<result column="PHONE" property="phone"/>
   				<result property="birth" column="BIRTH"/>
 	  			<result property="address" column="ADDRESS"/>
+	  			<result property="addressDetail" column="ADDRESSDETAIL"/>
 	  			<result property="email" column="EMAIL"/>
   				<result column="STATUS" property="status"/>
   				<association property="memberFilesVO" javaType="MemberFilesVO">
@@ -159,11 +162,35 @@
  		<update id="setStudentUpdate" parameterType="MemberVO">
  			UPDATE MEMBER M
  				LEFT JOIN STUDENT S ON (M.USERNAME  = S.USERNAME)
- 				LEFT JOIN MEMBERFILES MF ON (M.USERNAME  = MF.USERNAME)
-				   SET MF.FILENAME = #{fileName},
+				   SET 
 				   	   S.NAME = #{name},
 				   	   S.PHONE = #{phone},
 				   	   S.ADDRESS = #{address},
+				   	   S.ADDRESSDETAIL = #{addressDetail},
+				   	   M.EMAIL = #{email}
+ 			WHERE M.USERNAME = #{username}
+ 		</update>
+ 		
+ 		<update id="setProfessorUpdate" parameterType="MemberVO">
+ 			UPDATE MEMBER M
+ 				LEFT JOIN PROFESSOR P ON (M.USERNAME  = P.USERNAME)
+				   SET 
+				   	   P.NAME = #{name},
+				   	   P.PHONE = #{phone},
+				   	   P.ADDRESS = #{address},
+				   	   P.ADDRESSDETAIL = #{addressDetail},
+				   	   M.EMAIL = #{email}
+ 			WHERE M.USERNAME = #{username}
+ 		</update>
+ 		
+ 		<update id="setAdministratorUpdate" parameterType="MemberVO">
+ 			UPDATE MEMBER M
+ 				LEFT JOIN ADMINISTRATOR A ON (M.USERNAME  = A.USERNAME)
+				   SET 
+				   	   A.NAME = #{name},
+				   	   A.PHONE = #{phone},
+				   	   A.ADDRESS = #{address},
+				   	   A.ADDRESSDETAIL = #{addressDetail},
 				   	   M.EMAIL = #{email}
  			WHERE M.USERNAME = #{username}
  		</update>
