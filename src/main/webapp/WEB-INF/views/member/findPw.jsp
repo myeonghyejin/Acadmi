@@ -1,65 +1,65 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
+
 <head>
- <head>
-     <meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Acadmi!</title>
-	<!-- CSS/favicon 적용 -->
-	<c:import url="../temp/style.jsp"></c:import>
-	<!-- CSS/favicon 끝 -->
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Acadmi!</title>
+    <!-- CSS/favicon 적용 -->
+    <c:import url="../temp/style.jsp"></c:import>
+    <!-- CSS/favicon 끝 -->
+    <script nonce="f1cf7028-b6d4-4877-9946-a29be428bdc3">(function (w, d) { !function (a, b, c, d) { a[c] = a[c] || {}; a[c].executed = []; a.zaraz = { deferred: [], listeners: [] }; a.zaraz.q = []; a.zaraz._f = function (e) { return function () { var f = Array.prototype.slice.call(arguments); a.zaraz.q.push({ m: e, a: f }) } }; for (const g of ["track", "set", "debug"]) a.zaraz[g] = a.zaraz._f(g); a.zaraz.init = () => { var h = b.getElementsByTagName(d)[0], i = b.createElement(d), j = b.getElementsByTagName("title")[0]; j && (a[c].t = b.getElementsByTagName("title")[0].text); a[c].x = Math.random(); a[c].w = a.screen.width; a[c].h = a.screen.height; a[c].j = a.innerHeight; a[c].e = a.innerWidth; a[c].l = a.location.href; a[c].r = b.referrer; a[c].k = a.screen.colorDepth; a[c].n = b.characterSet; a[c].o = (new Date).getTimezoneOffset(); if (a.dataLayer) for (const n of Object.entries(Object.entries(dataLayer).reduce(((o, p) => ({ ...o[1], ...p[1] })), {}))) zaraz.set(n[0], n[1], { scope: "page" }); a[c].q = []; for (; a.zaraz.q.length;) { const q = a.zaraz.q.shift(); a[c].q.push(q) } i.defer = !0; for (const r of [localStorage, sessionStorage]) Object.keys(r || {}).filter((t => t.startsWith("_zaraz_"))).forEach((s => { try { a[c]["z_" + s.slice(7)] = JSON.parse(r.getItem(s)) } catch { a[c]["z_" + s.slice(7)] = r.getItem(s) } })); i.referrerPolicy = "origin"; i.src = "/cdn-cgi/zaraz/s.js?z=" + btoa(encodeURIComponent(JSON.stringify(a[c]))); h.parentNode.insertBefore(i, h) };["complete", "interactive"].includes(b.readyState) ? zaraz.init() : a.addEventListener("DOMContentLoaded", zaraz.init) }(w, d, "zarazData", "script"); })(window, document);</script>
 </head>
-<body>
-	<body class="hold-transition sidebar-mini layout-fixed">
-	<div class="wrapper">
-       
-      	<!-- Header 적용 -->
-			<c:import url="../temp/header.jsp"></c:import>
-		<!-- Header 끝 --> 
-			
-    	<section class="py-5">
-            <div class="container px-5">
-                <!-- Contact form-->
-                <div class="bg-light rounded-3 py-5 px-4 px-md-5 mb-5">
-                    <div class="text-center mb-5">
-                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-envelope"></i></div>
-                        <h1 class="fw-bolder">비밀번호 찾기</h1>
-                        <p>아이디와 이메일을 입력하면 이메일로 임시비밀번호 발급</p>
-                    </div>
-                    <div class="row gx-5 justify-content-center">
-                        <div class="col-lg-8 col-xl-6">
-                            
-                            <form:form id="contactForm" data-sb-form-api-token="API_TOKEN" modelAttribute="memberVO" action="./findPw" method="post">
-                                <!-- userName input-->
-                                <div class="form-floating mb-3">
-                                    <form:label path="username">아이디</form:label>
-                                    <form:input path="username" cssClass="form-control" id="username" placeholder="아이디를 입력하세요"/>
-                                    <form:errors path="username" cssStyle="color:red;"></form:errors>
+
+            <body class="hold-transition login-page">
+                <div class="login-box">
+                    <div class="card card-outline card-info">
+                        <div class="card-header text-center">
+                            <a href="./login" class="h1"><b>Acadmi</b></a>
+                        </div>
+                        <div class="card-body">
+                            <p class="login-box-msg">비밀번호 잊어버리셨나요? <br> 여기 아이디와 이메일을 입력하여 <br> 임시 비밀번호를 받으세요!</p>
+                            <form:form id="contactForm" modelAttribute="memberVO" action="./findPw" method="post">
+                                <div class="input-group mb-3">
+                                    <form:input path="username" id="username" class="form-control" placeholder="아이디를 입력하세요"></form:input>
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-user"></span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <!-- email input-->
-                                <div class="form-floating mb-3">
-                                    <form:label path="email">이메일</form:label>
-                                	<form:input path="email" cssClass="form-control" id="email" placeholder="이메일을 입력하세요"/>
-                                    <form:errors path="email" cssStyle="color:red;"></form:errors>
+                                <div class="input-group mb-3">
+                                    <form:input path="email" id="email" class="form-control" placeholder="이메일을 입력하세요"></form:input>
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-envelope"></span>
+                                        </div>
+                                    </div>
                                 </div>
-                               <!-- Submit Button-->
-                                <div class="d-grid">
-                                	<button class="btn btn-primary float-right" id="submitButton" type="submit">다음</button>
+
+                                    <div class="row mx-auto">
+
+                                        <p class="mb-1 mx-2">
+                                            <a href="./login">로그인</a>
+                                        </p>
+
+                                        <p class="mx-4">
+                                            <div class="col-4 mx-5">
+                                                <button class="btn btn-info btn-block mx-5" id="submitButton" type="submit">다음</button>
+                                            </div>
+                                        </p>
+
+                                    </div>
                                 </div>
                             </form:form>
                         </div>
+
                     </div>
                 </div>
-            </div>
-        </section>
-        
-    	<!-- Footer 적용 -->
-			<c:import url="../temp/footer.jsp"></c:import>
-		<!-- Footer 끝 -->
-		</div>>
 </body>
 </html>

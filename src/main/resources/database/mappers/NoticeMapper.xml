@@ -25,15 +25,21 @@
   		<include refid="search"></include>
   	</select>
   
-  	<select id="getList" resultType="NoticeVO" parameterType="Pagination">
+  	<select id="getList" resultMap="getDetailResult" parameterType="Pagination">
   		SELECT * FROM NOTICE
+  			LEFT JOIN
+  			NOTICEFILES 
+  			USING(NUM)
   		<include refid="search"></include>
   		ORDER BY NUM DESC
   		LIMIT #{startRow}, #{perPage}
   	</select>
   	
-  	<select id="getImportantList" resultType="NoticeVO" parameterType="NoticeVO">
+  	<select id="getImportantList" resultMap="getDetailResult" parameterType="NoticeVO">
   		SELECT * FROM NOTICE
+  			 LEFT JOIN
+			 NOTICEFILES
+			 USING(NUM)
   		WHERE IMPORTANT = #{important}
   	</select>
   	
@@ -41,7 +47,7 @@
   		SELECT *
 		FROM NOTICE 
 			 LEFT JOIN
-			 NOTICEFILES 
+			 NOTICEFILES
 			 USING(NUM)
 		WHERE NUM = #{num}
   	</select>
@@ -50,11 +56,11 @@
   		<id column="num" property="num"/>
   		<result column="title" property="title"/>
   		<result column="writer" property="writer"/>
+  		<result column="important" property="important"/>
   		<result column="contents" property="contents"/>
+  		<result column="hit" property="hit"/>
   		<result column="regDate" property="regDate"/>
   		<result column="modifyDate" property="modifyDate"/>
-  		<result column="hit" property="hit"/>
-  		<result column="important" property="important"/>
   		
   		<collection property="fileVOs" javaType="List" ofType="FileVO">
   			<id column="fileNum" property="fileNum"/>
@@ -64,12 +70,12 @@
   	</resultMap>
   	
   	<insert id="setInsert" parameterType="NoticeVO" useGeneratedKeys="true" keyProperty="num">
-  		INSERT INTO NOTICE (NUM, TITLE, WRITER, CONTENTS, HIT, REGDATE, MODIFYDATE, IMPORTANT)
-  		VALUES (#{num}, #{title}, #{writer}, #{contents}, 0, now(), now(), #{important})
+  		INSERT INTO NOTICE (NUM, TITLE, WRITER, IMPORTANT, CONTENTS, HIT, REGDATE, MODIFYDATE)
+  		VALUES (#{num}, #{title}, #{writer}, #{important}, #{contents}, 0, now(), now())
   	</insert>
   	
   	<update id="setUpdate" parameterType="NoticeVO">
-  		UPDATE NOTICE SET TITLE = #{title}, CONTENTS = #{contents}, IMPORTANT = #{important}
+  		UPDATE NOTICE SET TITLE = #{title}, CONTENTS = #{contents}, IMPORTANT = #{important}, MODIFYDATE = now()
   		WHERE NUM = #{num}
   	</update>
   	

@@ -33902,10 +33902,7 @@ a.close.disabled, a.disabled.mailbox-attachment-close {
   position: relative;
 }
 
-.direct-chat.chat-pane-open .direct-chat-contacts {
-  -webkit-transform: translate(0, 0);
-  transform: translate(0, 0);
-}
+
 
 .direct-chat.timestamp-light .direct-chat-timestamp {
   color: #30465f;
@@ -33939,7 +33936,7 @@ a.close.disabled, a.disabled.mailbox-attachment-close {
 }
 
 .direct-chat-messages,
-.direct-chat-contacts {
+.direct-chat-contacts-light {
   transition: -webkit-transform .5s ease-in-out;
   transition: transform .5s ease-in-out;
   transition: transform .5s ease-in-out, -webkit-transform .5s ease-in-out;
@@ -34014,26 +34011,24 @@ a.close.disabled, a.disabled.mailbox-attachment-close {
   color: #697582;
 }
 
-.direct-chat-contacts-open .direct-chat-contacts {
-  -webkit-transform: translate(0, 0);
-  transform: translate(0, 0);
-}
-
 .direct-chat-contacts {
-  -webkit-transform: translate(101%, 0);
-  transform: translate(101%, 0);
   background-color: #343a40;
   bottom: 0;
   color: #fff;
-  height: 250px;
+  height: 500px;
   overflow: auto;
-  position: absolute;
   top: 0;
   width: 100%;
 }
 
 .direct-chat-contacts-light {
   background-color: #f8f9fa;
+  bottom: 0;
+  color: #fff;
+  height: 500px;
+  overflow: auto;
+  top: 0;
+  width: 100%;
 }
 
 .direct-chat-contacts-light .contacts-list-name {
@@ -34051,9 +34046,6 @@ a.close.disabled, a.disabled.mailbox-attachment-close {
 .contacts-list {
   padding-left: 0;
   list-style: none;
-}
-
-.contacts-list > li {
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   margin: 0;
   padding: 10px;
@@ -34213,13 +34205,13 @@ a.close.disabled, a.disabled.mailbox-attachment-close {
 }
 
 .direct-chat-lime .right > .direct-chat-text {
-  background-color: #01ff70;
-  border-color: #01ff70;
+  background-color: #fffde8;
+  border-color: #fffde8;
   color: #1f2d3d;
 }
 
 .direct-chat-lime .right > .direct-chat-text::after, .direct-chat-lime .right > .direct-chat-text::before {
-  border-left-color: #01ff70;
+  border-left-color: #fffde8;
 }
 
 .direct-chat-fuchsia .right > .direct-chat-text {
