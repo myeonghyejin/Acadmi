@@ -22,6 +22,7 @@ import com.acadmi.department.DepartmentVO;
 import com.acadmi.period.PeriodVO;
 import com.acadmi.student.StudentVO;
 import com.acadmi.syllabus.ClassVO;
+import com.acadmi.syllabus.SyllabusVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -110,9 +111,11 @@ public class LectureController {
 	public ModelAndView setLectureDelete(LectureVO lectureVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		int result = lectureService.setLectureDelete(lectureVO);
-		String message = "삭제 실패";
+		String message = "";
 		if(result>0) {
 			message = "게시물이 삭제되었습니다";
+		}else {
+			message = "삭제실패";
 		}
 		mv.addObject("result", message);
 		mv.addObject("url", "./list");
@@ -126,6 +129,8 @@ public class LectureController {
 		ModelAndView mv = new ModelAndView();
 		lectureVO = lectureService.getLectureProfessor(lectureVO);
 		mv.addObject("lecture",lectureVO);
+		int exists = lectureService.getSyllabusExists(lectureVO);
+		mv.addObject("exists",exists);
 		mv.setViewName("temp/sidebar/professor_lecture");
 		mv.setViewName("lecture/main");
 		return mv;
@@ -136,6 +141,8 @@ public class LectureController {
 		ModelAndView mv = new ModelAndView();
 		lectureVO = lectureService.getLectureDetail(lectureVO);
 		mv.addObject("lecture",lectureVO);
+		int exists = lectureService.getSyllabusExists(lectureVO);
+		mv.addObject("exists",exists);
 		mv.setViewName("temp/sidebar/professor_lecture");
 		mv.setViewName("lecture/info");
 		return mv;
@@ -148,36 +155,67 @@ public class LectureController {
 		mv.addObject("list",ar);
 		lectureVO = lectureService.getLectureDetail(lectureVO);
 		mv.addObject("lecture",lectureVO);
+		int exists = lectureService.getSyllabusExists(lectureVO);
+		mv.addObject("exists",exists);
 		mv.setViewName("temp/sidebar/professor_lecture");
 		mv.setViewName("lecture/attendee");
 		return mv;
 	}
 	
-	@GetMapping("syllabus/add")
+	@GetMapping("syllabusAdd")
 	public ModelAndView setSyllabusAdd(@ModelAttribute LectureVO lectureVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		lectureVO = lectureService.getLectureDetail(lectureVO);
 		mv.addObject("lecture",lectureVO);
+		int exists = lectureService.getSyllabusExists(lectureVO);
+		mv.addObject("exists",exists);
 		mv.setViewName("temp/sidebar/professor_lecture");
-		mv.setViewName("syllabus/add");
+		mv.setViewName("lecture/syllabusAdd");
 		return mv;
 	}
-	@PostMapping("syllabus/add")
-	public ModelAndView setSyllabusAdd(LectureVO lectureVO, ModelAndView mv) throws Exception{
-		int result = lectureService.setSyllabusAdd(lectureVO);
-		mv.setViewName("redirect:../list");
+	@PostMapping("syllabusAdd")
+	public ModelAndView setSyllabusAdd(LectureVO lectureVO, ModelAndView mv, SyllabusVO syllabusVO) throws Exception{
+		int result = lectureService.setSyllabusAdd(syllabusVO);
+		lectureVO = lectureService.getLectureDetail(lectureVO);
+		mv.setViewName("common/result");
+		mv.addObject("result","등록성공");
+		mv.addObject("url","./syllabusDetail?lectureName="+lectureVO.getLectureName());
 		return mv;
 	}
 	
-	@GetMapping("syllabus/detail")
+	@GetMapping("syllabusDetail")
 	public ModelAndView setSyllabusDetail(@ModelAttribute LectureVO lectureVO, ClassVO classVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		lectureVO = lectureService.getSyllabusDetail(lectureVO);
 		mv.addObject("lecture", lectureVO);
 		List<ClassVO> ar = lectureService.getSyllabusClass(lectureVO);
 		mv.addObject("classes",ar);
+		int exists = lectureService.getSyllabusExists(lectureVO);
+		mv.addObject("exists",exists);
 		mv.setViewName("temp/sidebar/professor_lecture");
-		mv.setViewName("syllabus/detail");
+		mv.setViewName("lecture/syllabusDetail");
+		return mv;
+	}
+	@GetMapping("syllabusUpdate")
+	public ModelAndView setSyllabusUpdate(LectureVO lectureVO,SyllabusVO syllabusVO,ClassVO classVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		lectureVO = lectureService.getSyllabusDetail(lectureVO);
+		mv.addObject("lecture", lectureVO);
+		List<ClassVO> ar = lectureService.getSyllabusClass(lectureVO);
+		mv.addObject("classes",ar);
+		mv.setViewName("temp/sidebar/professor_lecture");
+		mv.setViewName("lecture/syllabusUpdate");
+		return mv;
+	}
+	@PostMapping("syllabusUpdate")
+	public ModelAndView setSyllabusUpdate(LectureVO lectureVO,SyllabusVO syllabusVO,ClassVO classVO,ModelAndView mv) throws Exception{
+		int result = lectureService.setSyllabusUpdate(syllabusVO);
+		lectureVO = lectureService.getLectureDetail(lectureVO);
+		mv.addObject("result","수정성공");
+		log.error(lectureVO.getLectureName());
+		String str = lectureVO.getLectureName();
+		mv.addObject("url","./syllabusDetail?lectureName="+str);
+		mv.setViewName("common/result");
 		return mv;
 	}
 	

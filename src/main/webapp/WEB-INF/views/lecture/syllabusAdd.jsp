@@ -40,7 +40,7 @@
 					<!-- header end -->
 					
 					<!-- form start -->
-					<form action=".syllabus/add" method="post">
+					<form action="./syllabusAdd" method="post">
 						<div class="card card-default">
           					<!-- card-header start -->
 							<div class="card-body">
@@ -124,8 +124,8 @@
               						<!-- table-body end -->
 								</div>
 								<div style="width:auto; float: right; margin-top: 25px">
-					                <button class="btn btn-info" type="submit" name="buttonType" value="1">등록</button>
-					                <a class="btn btn-danger" href="/lecture/main?lectureNum=${lecture.lectureNum}" style="color: white;">뒤로가기</a>
+					                <button class="btn btn-info" type="submit">등록</button>
+					                <a class="btn btn-danger" href="/lecture/main?lectureNum=${lecture.lectureNum}" style="color: white;">취소</a>
 				                </div>
 							</div>
 						</div>

@@ -43,74 +43,42 @@
 						<input type="hidden" name="lectureNum" value="${lecture.lectureNum}">
           					<!-- card-header start -->
           					<div class="card-body">
-          						<div class="row" style="margin-top: 10px">
-									<div class="col-12">
-					                  	<label>강의 이름</label>
-					                  	<input type="text" name="lectureName" class="form-control" id="lectureName" 
-										value="${lecture.lectureName}" readonly="readonly" style="background-color: white"><br>
-					              	</div>
-					            </div>
-          						<div class="row">
-									<div class="col-6">
-                						<label>강의 연도</label>
-										<input type="text" name="lectureName" class="form-control" id="lectureName" 
-		                				value="${lecture.year}" readonly="readonly" style="background-color: white"><br>
-									</div>
-									<div class="col-6">
-	                					<label>강의 학기</label>
-										<input type="text" name="lectureName" class="form-control" id="lectureName" 
-	                					value="${lecture.semester}" readonly="readonly" style="background-color: white"><br>
-									</div>
-	              				</div>
-	              				<div class="row" >
-									<div class="col-6">
-						                <label>학과</label>
-	                					<input type="text" name="lectureName" class="form-control" id="lectureName" 
-		                				value="${lecture.departmentVO.deptName}" readonly="readonly" style="background-color: white"><br>
-									</div>
-                					<div class="col-6">
-                						<label>구분</label>
-										<input type="text" name="lectureName" class="form-control" id="lectureName" 
-		                				value="${lecture.category}" readonly="readonly" style="background-color: white"><br>
-                  					</div>
-            					</div>
-								<div class="row">
-									<div class="col-4">
-						              	<label>강의 요일</label>
-										<input type="text" name="lectureName" class="form-control" id="lectureName" 
-		                				value="${lecture.weekday}" readonly="readonly" style="background-color: white"><br>
-									</div>
-									<div class="col-4">
-						              	<label>시작 시간</label>
-										<input type="text" name="startTime" class="form-control" id="startTime" 
-		                				value="${lecture.startTime}" readonly="readonly" style="background-color: white"><br>
-									</div>
-									<div class="col-4">
-						              	<label>종료 시간</label>
-										<input type="text" name="endTime" class="form-control" id="endTime" 
-		                				value="${lecture.endTime}" readonly="readonly" style="background-color: white"><br>
-									</div>
-								</div>
-								<div class="row"> 
-					              	<div class="col-4">
-					              		<label>대상 학년</label>
-										<input type="text" name="lectureName" class="form-control" id="lectureName" 
-		                				value="${lecture.grade}" readonly="readonly" style="background-color: white"><br>
-									</div>
-									<div class="col-4">
-						              	<label>수강인원</label>
-										<input type="text" name="lectureName" class="form-control" id="lectureName" 
-		                				value="${lecture.personal}" readonly="readonly" style="background-color: white"><br>
-									</div>
-									<div class="col-4">
-						              	<label>학점</label>
-										<input type="text" name="lectureName" class="form-control" id="lectureName" 
-		                				value="${lecture.completionGrade}" readonly="readonly" style="background-color: white"><br>
-									</div>
-								</div>
-								<%-- <div style="width:auto; float: right; margin-top: 25px">
-					                <a class="btn btn-info" href="./main?lectureNum=${lecture.lectureNum}" style="color: white;">뒤로가기</a>
-				                </div> --%>
+          						<table class="table table-bordered" style="text-align: center;">
+							    	<tbody>
+							        	<tr>
+							            	<th style="background-color:#f8f9fa;color:#17a2b8;">강의 이름</th>
+							                <td colspan="5">${lecture.lectureName}</td>
+										</tr>
+							            <tr>
+							            	<th style="background-color:#f8f9fa;color:#17a2b8;">강의연도</th>
+							                <td colspan="2">${lecture.year}년</td>
+							                <th style="background-color:#f8f9fa;color:#17a2b8;">강의학기</th>
+							                <td colspan="2">${lecture.lectureNum}학기</td>
+										</tr>
+							            <tr>
+							            	<th style="background-color:#f8f9fa;color:#17a2b8;">학부(과)</th>
+							                <td colspan="2">${lecture.departmentVO.deptName}</td>
+							                <th style="background-color:#f8f9fa;color:#17a2b8;">교과구분</th>
+							                <td colspan="2">${lecture.category}</td>
+										</tr>
+							            <tr>
+							            	<th style="background-color:#f8f9fa;color:#17a2b8;">강의요일</th>
+							                <td>${lecture.weekday}요일</td>
+							                <th style="background-color:#f8f9fa;color:#17a2b8;">강의시간</th>
+							                <td>${lecture.startTime}교시</td>
+							                <th style="background-color:#f8f9fa;color:#17a2b8;">종료시간</th>
+											<td>${lecture.endTime}교시</td>
+							            </tr>
+							            <tr>
+							            	<th style="background-color:#f8f9fa;color:#17a2b8;">대상학년</th>
+							                <td>${lecture.grade}학년</td>
+							                <th style="background-color:#f8f9fa;color:#17a2b8;">수강인원</th>
+							                <td>${lecture.personal}명</td>
+							                <th style="background-color:#f8f9fa;color:#17a2b8;">학점</th>
+							                <td>${lecture.completionGrade}학점</td>
+										</tr>
+									</tbody>
+								</table>
 		            		</div>
 						</div>
 					</form>

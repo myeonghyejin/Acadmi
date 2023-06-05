@@ -151,7 +151,7 @@
               						<!-- table-body end -->
 								</div>
 								<div style="width:auto; float: right; margin-top: 25px;margin-right: 10px">
-					                <a class="btn btn-info" href="/lecture/main?lectureNum=${lecture.lectureNum}" style="color: white;">뒤로가기</a>
+					                <a class="btn btn-info" href="./syllabusUpdate?lectureName=${lecture.lectureName}" style="color: white;">수정</a>
 				                </div>
 							</div>
 						</div>

@@ -67,7 +67,7 @@
 										            <th style="width:30%">강의이름</th>
 										            <th>구분</th>
 										            <th>등록 상태</th>
-										            <th>관리</th>
+										            <th></th>
 							                    </tr>
 											</thead>
 								            <tbody>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <link rel="stylesheet" href="/css/sidebar.css">
 
@@ -17,7 +18,12 @@
 	</button>
 	<div id="submenu_1" class="sidebar-dropdown-content">
 		<a href="/lecture/info?lectureNum=${lecture.lectureNum}">강의 상세</a>
-		<a href="/lecture/syllabus/add?lectureNum=${lecture.lectureNum}">강의 계획서</a>
+		<c:if test="${exists==1}">
+			<a href="/lecture/syllabusDetail?lectureName=${lecture.lectureName}">강의 계획서</a>
+		</c:if>
+		<c:if test="${exists==0}">
+			<a href="/lecture/syllabusAdd?lectureNum=${lecture.lectureNum}">강의 계획서</a>
+		</c:if>
 		<a href="/lecture/attendee?lectureNum=${lecture.lectureNum}">참여자 목록</a>
 	</div>
 	

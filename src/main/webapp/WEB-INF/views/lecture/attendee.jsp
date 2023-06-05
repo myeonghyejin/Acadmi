@@ -60,7 +60,7 @@
               						<!-- table-body start -->
               						<div class="card-body">
                 						<table class="table table-bordered" style="text-align: center;">
-                  							<thead>
+                  							<thead style="background-color: #f8f9fa;">
                     							<tr>
                     								<th></th>
 							                    	<th>학번</th>
