@@ -1,7 +1,6 @@
 package com.acadmi.member;
 
 import java.util.ArrayList;
-
 import java.util.Collection;
 import java.util.List;
 
@@ -9,6 +8,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.acadmi.administrator.AdministratorVO;
+import com.acadmi.professor.ProfessorVO;
+import com.acadmi.student.StudentVO;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -26,18 +28,19 @@ public class MemberVO implements UserDetails {
 	
 	private List<RoleVO> roleVOs;
 	
+
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
 		
 		List<GrantedAuthority> authorities = new ArrayList<>();
-		
-		for(RoleVO roleVO : roleVOs) {
+		for(RoleVO roleVO:roleVOs) {
 			authorities.add(new SimpleGrantedAuthority(roleVO.getRoleName()));
 		}
 		
 		return authorities;
+		
 	}
 
 	@Override
@@ -61,7 +64,7 @@ public class MemberVO implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
-		return true;
+		return this.enabled;
 	}
 	
 }

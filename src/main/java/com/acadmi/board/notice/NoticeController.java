@@ -2,11 +2,9 @@ package com.acadmi.board.notice;
 
 import java.util.List;
 
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -152,7 +150,7 @@ public class NoticeController {
 		int result = noticeService.setBoardFileDelete(fileVO);
 		
 		mv.addObject("result", result);
-		mv.setViewName("common/result");
+		mv.setViewName("common/ajaxResult");
 		
 		return mv;
 	}

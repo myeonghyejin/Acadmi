@@ -2,6 +2,8 @@ package com.acadmi.chat;
 
 import java.util.List;
 
+import com.acadmi.member.MemberFilesVO;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,6 +15,7 @@ public class ChatRoomVO {
 	private Integer chatStatus;
 	private String sender;
 	private String recipient;
-	private List<ChatMessageVO> chat_messages;
+	private List<ChatMessageVO> chatMessageVOs;
+	private MemberFilesVO memberFilesVO;
 
 }

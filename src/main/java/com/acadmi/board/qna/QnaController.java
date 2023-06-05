@@ -2,6 +2,8 @@ package com.acadmi.board.qna;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +26,7 @@ public class QnaController {
 	
 	@ModelAttribute("board")
 	public String getBoardName() {
-		return "Qna";
+		return "qna";
 	}
 	
 	@GetMapping(value = "list")
@@ -40,19 +42,36 @@ public class QnaController {
 	}
 	
 	@GetMapping(value = "detail")
-	public ModelAndView getDetail(QnaVO qnaVO) throws Exception {
+	public ModelAndView getDetail(QnaVO qnaVO, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
+		
+		Long num = qnaService.getQnaList(qnaVO);
 		
 		qnaVO = (QnaVO)qnaService.getDetail(qnaVO);
 		
+		session.setAttribute("qnaVO", qnaVO);
+		
+		mv.addObject("num", num);
 		mv.addObject("boardVO", qnaVO);
 		mv.setViewName("board/detail");
 		
 		return mv;
 	}
 	
+	@GetMapping(value = "replyDetail")
+	public ModelAndView getReplyDetail(QnaVO qnaVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		qnaVO = qnaService.getReplyDetail(qnaVO);
+		
+		mv.addObject("reply", qnaVO);
+		mv.setViewName("board/replyDetail");
+		
+		return mv;
+	}
+	
 	@GetMapping(value = "add")
-	public ModelAndView setInsert(@ModelAttribute BoardVO boardVO) throws Exception {
+	public ModelAndView setInsert(QnaVO qnaVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
 		mv.setViewName("board/add");
@@ -61,10 +80,10 @@ public class QnaController {
 	}
 	
 	@PostMapping(value = "add")
-	public ModelAndView setInsert(QnaVO qnaVO, MultipartFile [] boardFiles) throws Exception {
+	public ModelAndView setInsert(QnaVO qnaVO, MultipartFile [] addfiles) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		int result = qnaService.setInsert(qnaVO, boardFiles);
+		int result = qnaService.setInsert(qnaVO, addfiles);
 		
 		mv.setViewName("redirect:./list");
 		
@@ -77,9 +96,75 @@ public class QnaController {
 		
 		fileVO = qnaService.getFileDetail(fileVO);
 		
-		mv.addObject("boardFileVO", fileVO);
+		mv.addObject("fileVO", fileVO);
 		mv.setViewName("fileManager");
 		
 		return mv;
 	}
+	
+	@GetMapping("update")
+	public ModelAndView setUpdate(QnaVO qnaVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		qnaVO = (QnaVO)qnaService.getDetail(qnaVO);
+		
+		mv.addObject("dto", qnaVO);
+		mv.setViewName("board/update");
+		
+		return mv;
+	}
+	
+	@PostMapping("update")
+	public ModelAndView setUpdate(ModelAndView mv, QnaVO qnaVO, MultipartFile [] addfiles) throws Exception {
+		
+		int result = qnaService.setUpdate(qnaVO, addfiles);
+		
+		mv.setViewName("redirect:./list");
+		
+		return mv;
+	}
+	
+	@GetMapping("delete")
+	public ModelAndView setDelete(BoardVO boardVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		int result = qnaService.setDelete(boardVO);
+		
+		mv.setViewName("redirect:./list");
+		
+		return mv;
+	}
+	
+	@PostMapping("boardFileDelete")
+	public ModelAndView setBoardFileDelete(FileVO fileVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		int result = qnaService.setBoardFileDelete(fileVO);
+		
+		mv.addObject("result", result);
+		mv.setViewName("common/ajaxResult");
+		
+		return mv;
+	}
+	
+	@GetMapping(value = "reply")
+	public ModelAndView setReplyAdd(ModelAndView mv ,QnaVO qnaVO) throws Exception {
+		
+		mv.setViewName("board/replyAdd");
+		
+		return mv;
+	}
+	
+	@PostMapping(value = "reply")
+	public ModelAndView setReplyAdd(QnaVO qnaVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		int result = qnaService.setReplyAdd(qnaVO);
+		                             
+		mv.setViewName("redirect:./detail?num=" + qnaVO.getNum());
+		
+		return mv;
+	}
+	
+	
 }
