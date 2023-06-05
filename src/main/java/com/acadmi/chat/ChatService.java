@@ -37,6 +37,7 @@ public class ChatService {
 		chatRoomVO.setRecipient(chatMessageVO.getRecipient());
 		chatRoomVO = chatDAO.getChatRoomDetail(chatRoomVO);
 		if(chatRoomVO == null) {
+			chatRoomVO = new ChatRoomVO();
 			chatRoomVO.setSender(chatMessageVO.getSender());
 			chatRoomVO.setRecipient(chatMessageVO.getRecipient());
 			int result = chatDAO.setSenderChatRoom(chatRoomVO);

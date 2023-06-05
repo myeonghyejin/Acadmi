@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 </head>
 <!DOCTYPE html>
@@ -53,7 +54,8 @@
 										</tr>
      	 							</c:forEach>
 	     	 							<td>
-				     	 					<a href="../chat/detail?"><i class="fa-regular fa-envelope fa-2xl" style="margin:30px 0 0 0;"></i></a>
+	     	 							<sec:authentication property="principal.username" var="username"/>
+				     	 					<a href="../chat/detail?sender=${username}&recipient=${studentVO.username}"><i class="fa-regular fa-envelope fa-2xl" style="margin:30px 0 0 0;"></i></a>
 				                        </td>
 	     	 							<td></td>
 	     	 							<td><c:out value="${studentUsername}"></c:out></td>
