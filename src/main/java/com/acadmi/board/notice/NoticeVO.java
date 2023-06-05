@@ -1,10 +1,9 @@
 package com.acadmi.board.notice;
 
 import java.sql.Date;
-import java.util.List;
 
 import com.acadmi.board.BoardVO;
-import com.acadmi.util.FileVO;
+
 
 import lombok.Getter;
 import lombok.Setter;
