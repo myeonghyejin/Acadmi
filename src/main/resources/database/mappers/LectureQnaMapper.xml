@@ -4,8 +4,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="com.acadmi.board.qna.QnaDAO">
-  	
+  <mapper namespace="com.acadmi.board.lectureQna.LectureQnaDAO">
+  
   	<sql id="search">
   		<where>
   			<if test="kind == 'title'">
@@ -21,50 +21,52 @@
   	</sql>
   	
   	<select id="getTotalCount" resultType="Long" parameterType="Pagination">
-  		SELECT COUNT(NUM) FROM QNA
+  		SELECT COUNT(NUM) FROM LECTURE_QNA
 		<include refid="search"></include>
   	</select>
   
   	<select id="getList" parameterType="Pagination" resultMap="getDetailResult">
-  		SELECT * FROM QNA 
+  		SELECT * FROM LECTURE_QNA 
   			LEFT JOIN
-  			QNAFILES
+  			LECTURE_QNAFILES
   			USING(NUM)
   		<include refid="search"></include>
   		ORDER BY REF DESC, STEP ASC
   		LIMIT #{startRow}, #{perPage}
   	</select>
   	
-  	<select id="getQnaList" parameterType="QnaVO" resultType="Long">
+  	<select id="getQnaList" parameterType="LectureQnaVO" resultType="Long">
   		SELECT COUNT(REF)
-		FROM QNA
+		FROM LECTURE_QNA
 		WHERE REF = #{num}
   	</select>
   	
-  	<select id="getDetail" parameterType="QnaVO" resultMap="getDetailResult">
+  	<select id="getDetail" parameterType="LectureQnaVO" resultMap="getDetailResult">
   		SELECT *
-		FROM QNA 
+		FROM LECTURE_QNA 
 			 LEFT JOIN
-			 QNAFILES 
+			 LECTURE_QNAFILES 
 			 USING(NUM)
 		WHERE NUM = #{num}
   	</select>
   	
-  	 <select id="getReplyDetail" parameterType="QnaVO" resultMap="getDetailResult">
+  	 <select id="getReplyDetail" parameterType="LectureQnaVO" resultMap="getDetailResult">
   		SELECT *
-		FROM QNA 
+		FROM LECTURE_QNA 
 			 LEFT JOIN
-			 QNAFILES
+			 LECTURE_QNAFILES
 			 USING(NUM)
 		WHERE REF = #{ref} AND STEP = #{step}
   	</select>
   	
-  	<resultMap type="QnaVO" id="getDetailResult">
+  	<resultMap type="LectureQnaVO" id="getDetailResult">
   		<id column="num" property="num"/>
+  		<result column="lectureNum" property="lectureNum"/>
   		<result column="title" property="title"/>
   		<result column="writer" property="writer"/>
   		<result column="contents" property="contents"/>
   		<result column="regDate" property="regDate"/>
+  		<result column="secret" property="secret"/>
   		<result column="ref" property="ref"/>
   		<result column="step" property="step"/>
   		<result column="depth" property="depth"/>
@@ -76,47 +78,52 @@
   		</collection>
   	</resultMap>
   	
-	<insert id="setInsert" parameterType="QnaVO">
+	<insert id="setInsert" parameterType="LectureQnaVO">
 		<selectKey keyProperty="num" resultType="Long" order="BEFORE">
-		  SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_NAME = 'QNA'
+		  SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_NAME = 'LECTURE_QNA'
 		</selectKey>
-  		INSERT INTO QNA (NUM, TITLE, WRITER, CONTENTS, REGDATE, REF, STEP, DEPTH)
-  		VALUES (#{num}, #{title}, #{writer}, #{contents}, now(), #{num}, 0, 0)
+  		INSERT INTO LECTURE_QNA (NUM, LECTURENUM, TITLE, WRITER, CONTENTS, REGDATE, SECRET, REF, STEP, DEPTH)
+  		VALUES (#{num}, #{lectureNum}, #{title}, #{writer}, #{contents}, now(), #{secret}, #{num}, 0, 0)
   	</insert>
   	
-  	<update id="setUpdate" parameterType="QnaVO">
-  		UPDATE QNA SET TITLE = #{title}, CONTENTS = #{contents}
+  	<update id="setUpdate" parameterType="LectureQnaVO">
+  		UPDATE LECTURE_QNA SET TITLE = #{title}, CONTENTS = #{contents}, SECRET = #{secret}
   		WHERE NUM = #{num}
   	</update>
   	
-  	<delete id="setDelete" parameterType="QnaVO">
-  		DELETE FROM QNA WHERE NUM = #{num}
+  	<delete id="setDelete" parameterType="LectureQnaVO">
+  		DELETE FROM LECTURE_QNA WHERE NUM = #{num}
   	</delete>
   	
+  	<!-- <update id="setDelete" parameterType="LectureQnaVO">
+  		UPDATE LECTURE_QNA SET TITLE = '삭제된 글입니다.'
+  		WHERE NUM = ${num}
+  	</update> -->
+  	
   	<insert id="setBoardFileAdd" parameterType="FileVO">
-  		INSERT INTO QNAFILES (NUM, FILENAME, ORINAME)
+  		INSERT INTO LECTURE_QNAFILES (NUM, FILENAME, ORINAME)
   		VALUES(#{num}, #{fileName}, #{oriName})
   	</insert>
   	
   	<select id="getFileDetail" parameterType="FileVO" resultType="FileVO">
-  		SELECT * FROM QNAFILES WHERE FILENUM = #{fileNum}
+  		SELECT * FROM LECTURE_QNAFILES WHERE FILENUM = #{fileNum}
   	</select>
   	
   	<delete id="setBoardFileDelete" parameterType="FileVO">
-  		DELETE FROM QNAFILES WHERE FILENUM = #{fileNum}
+  		DELETE FROM LECTURE_QNAFILES WHERE FILENUM = #{fileNum}
   	</delete>
   	
-  	<update id="setStepUpdate" parameterType="QnaVO">
-  		UPDATE QNA SET STEP = STEP + 1
+  	<update id="setStepUpdate" parameterType="LectureQnaVO">
+  		UPDATE LECTURE_QNA SET STEP = STEP + 1
   		WHERE REF = #{ref} AND STEP > #{step}
   	</update>
-  		
-  	<insert id="setReplyAdd" parameterType="QnaVO">
+  	
+  	<insert id="setReplyAdd" parameterType="LectureQnaVO">
   		<selectKey keyProperty="num" resultType="Long" order="BEFORE">
-		  SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_NAME = 'QNA'
+		  SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_NAME = 'LECTURE_QNA'
 		</selectKey>
-  		INSERT INTO QNA (NUM, TITLE, WRITER, CONTENTS, REGDATE, REF, STEP, DEPTH)
-  		VALUES (#{num}, #{title}, #{writer}, #{contents},  now(), #{ref}, #{step}, #{depth})
+  		INSERT INTO LECTURE_QNA (NUM, LECTURENUM, TITLE, WRITER, CONTENTS, REGDATE, SECRET, REF, STEP, DEPTH)
+  		VALUES (#{num}, #{lectureNum}, #{title}, #{writer}, #{contents},  now(), #{secret}, #{ref}, #{step}, #{depth})
   	</insert>
   	
   </mapper>

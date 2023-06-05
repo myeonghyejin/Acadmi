@@ -1,4 +1,4 @@
-package com.acadmi.board.qna;
+package com.acadmi.board.lectureQna;
 
 import java.util.List;
 
@@ -9,20 +9,22 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.acadmi.board.BoardService;
 import com.acadmi.board.BoardVO;
+
+import com.acadmi.board.qna.QnaVO;
 import com.acadmi.util.FileManager;
 import com.acadmi.util.FileVO;
 import com.acadmi.util.Pagination;
 
 @Service
-public class QnaService implements BoardService {
-	
+public class LectureQnaService implements BoardService {
+
 	@Autowired
-	private QnaDAO qnaDAO;
+	private LectureQnaDAO lectureQnaDAO;
 	
 	@Autowired
 	private FileManager fileManager;
 	
-	@Value("${app.upload.qna}")
+	@Value("${app.upload.lectureQna}")
 	private String path;
 	
 	@Override
@@ -30,19 +32,19 @@ public class QnaService implements BoardService {
 		
 		pagination.makeStartRow();
 		
-		pagination.makeNum(qnaDAO.getTotalCount(pagination));
+		pagination.makeNum(lectureQnaDAO.getTotalCount(pagination));
 		
-		return qnaDAO.getList(pagination);
+		return lectureQnaDAO.getList(pagination);
 	}
 
 	@Override
 	public BoardVO getDetail(BoardVO boardVO) throws Exception {
-		return qnaDAO.getDetail(boardVO);
+		return lectureQnaDAO.getDetail(boardVO);
 	}
 	
 	@Override
 	public int setInsert(BoardVO boardVO, MultipartFile[] multipartFiles) throws Exception {
-		int result = qnaDAO.setInsert(boardVO);
+		int result = lectureQnaDAO.setInsert(boardVO);
 		
 		if(multipartFiles != null) {
 			for(MultipartFile multipartFile : multipartFiles) {
@@ -53,7 +55,7 @@ public class QnaService implements BoardService {
 					fileVO.setFileName(fileName);
 					fileVO.setOriName(multipartFile.getOriginalFilename());
 					
-					result = qnaDAO.setBoardFileAdd(fileVO);
+					result = lectureQnaDAO.setBoardFileAdd(fileVO);
 				}
 			}
 		}
@@ -63,7 +65,7 @@ public class QnaService implements BoardService {
 	@Override
 	public int setUpdate(BoardVO boardVO, MultipartFile [] multipartFiles) throws Exception {
 		
-		int result = qnaDAO.setUpdate(boardVO);
+		int result = lectureQnaDAO.setUpdate(boardVO);
 		
 		if(multipartFiles != null) {
 			for(MultipartFile multipartFile : multipartFiles) {
@@ -74,7 +76,7 @@ public class QnaService implements BoardService {
 					fileVO.setFileName(fileName);
 					fileVO.setOriName(multipartFile.getOriginalFilename());
 					
-					result = qnaDAO.setBoardFileAdd(fileVO);
+					result = lectureQnaDAO.setBoardFileAdd(fileVO);
 				}
 			}
 		}
@@ -83,42 +85,43 @@ public class QnaService implements BoardService {
 
 	@Override
 	public int setDelete(BoardVO boardVO) throws Exception {
-		return qnaDAO.setDelete(boardVO);
+		return lectureQnaDAO.setDelete(boardVO);
 	}
 
 	@Override
 	public FileVO getFileDetail(FileVO fileVO) throws Exception {
-		return qnaDAO.getFileDetail(fileVO);
+		return lectureQnaDAO.getFileDetail(fileVO);
 	}
 
 	@Override
 	public int setBoardFileDelete(FileVO fileVO) throws Exception {
-		return qnaDAO.setBoardFileDelete(fileVO);
+		return lectureQnaDAO.setBoardFileDelete(fileVO);
 	}
 	
-	public int setReplyAdd(QnaVO qnaVO) throws Exception {
+	public int setReplyAdd(LectureQnaVO lectureQnaVO) throws Exception {
 		
-		QnaVO parent = (QnaVO)qnaDAO.getDetail(qnaVO);
+		LectureQnaVO parent = (LectureQnaVO)lectureQnaDAO.getDetail(lectureQnaVO);
 		
-		qnaVO.setRef(parent.getRef());
+		lectureQnaVO.setRef(parent.getRef());
 				
-		qnaVO.setStep(parent.getStep() + 1);
+		lectureQnaVO.setStep(parent.getStep() + 1);
 				
-		qnaVO.setDepth(parent.getDepth() + 1);
+		lectureQnaVO.setDepth(parent.getDepth() + 1);
 				
-		int result = qnaDAO.setStepUpdate(parent);
+		int result = lectureQnaDAO.setStepUpdate(parent);
 				
-		result = qnaDAO.setReplyAdd(qnaVO);
+		result = lectureQnaDAO.setReplyAdd(lectureQnaVO);
 			
 		return result; 
 		
 	}
 	
-	public QnaVO getReplyDetail(QnaVO qnaVO) throws Exception {
-		return qnaDAO.getReplyDetail(qnaVO);
+	public LectureQnaVO getReplyDetail(LectureQnaVO lectureQnaVO) throws Exception {
+		return (LectureQnaVO) lectureQnaDAO.getReplyDetail(lectureQnaVO);
+	}
+	                      
+	public Long getQnaList(LectureQnaVO lectureQnaVO) throws Exception {	
+		return lectureQnaDAO.getQnaList(lectureQnaVO);
 	}
 	
-	public Long getQnaList(QnaVO qnaVO) throws Exception {	
-		return qnaDAO.getQnaList(qnaVO);
-	}
 }

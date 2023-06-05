@@ -1,9 +1,6 @@
 package com.acadmi.board.qna;
 
-import java.util.List;
-
 import com.acadmi.board.BoardVO;
-import com.acadmi.util.FileVO;
 
 import lombok.Getter;
 import lombok.Setter;
