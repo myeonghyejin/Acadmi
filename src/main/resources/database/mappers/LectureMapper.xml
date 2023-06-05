@@ -16,6 +16,9 @@
   		<if test="username!=null">
   			AND USERNAME=#{username}
   		</if>
+  		<if test="year!=null">
+  			AND YEAR>=DATE_FORMAT(now(),'%Y')
+  		</if>
 
   	</trim>
   	
@@ -23,8 +26,8 @@
   	<select id="getLectureList" parameterType="LectureVO" resultType="LectureVO">
   		SELECT * FROM LECTURE <include refid="lectureCondition"></include>
   	</select>
-  	<select id="getLectureDetail" parameterType="LectureVO" resultType="LectureVO">
-  		SELECT * FROM LECTURE WHERE LECTURENUM=#{lectureNum}
+  	<select id="getLectureDetail" parameterType="LectureVO" resultMap="LectureResult">
+  		SELECT * FROM LECTURE L INNER JOIN DEPARTMENT D ON(L.DEPTNUM=D.DEPTNUM) WHERE LECTURENUM=#{lectureNum}
   	</select>
 
 	<!-- insert -->
@@ -39,34 +42,34 @@
 	</select>
   	<insert id="setLectureAdd" parameterType="LectureVO" useGeneratedKeys="true" keyProperty="lectureNum">
   		INSERT INTO LECTURE (USERNAME,LECTURENAME,SEMESTER,CATEGORY,DEPTNUM,GRADE,
-  		YEAR,WEEKDAY, STARTTIME, ENDTIME, PERSONAL, COMPLETIONGRADE,NOTE,TEMPORARY)
+  		YEAR,WEEKDAY, STARTTIME, ENDTIME, PERSONAL, COMPLETIONGRADE,TEMPORARY)
   		VALUES (#{username},#{lectureName},#{semester},#{category},#{deptNum},#{grade},#{year},#{weekday},
-  		#{startTime},#{endTime},#{personal},#{completionGrade},#{note},1)
+  		#{startTime},#{endTime},#{personal},#{completionGrade},1)
   	</insert>
   	<insert id="setTemporaryAdd" parameterType="LectureVO" useGeneratedKeys="true" keyProperty="lectureNum">
   		INSERT INTO LECTURE (USERNAME,LECTURENAME,SEMESTER,CATEGORY,DEPTNUM,GRADE,
-  		YEAR,WEEKDAY, STARTTIME, ENDTIME, PERSONAL, COMPLETIONGRADE,NOTE,TEMPORARY)
+  		YEAR,WEEKDAY, STARTTIME, ENDTIME, PERSONAL, COMPLETIONGRADE,TEMPORARY)
   		VALUES (#{username},#{lectureName},#{semester},#{category},#{deptNum},#{grade},#{year},#{weekday},
-  		#{startTime},#{endTime},#{personal},#{completionGrade},#{note},0)
+  		#{startTime},#{endTime},#{personal},#{completionGrade},0)
   	</insert>
   
   	<!-- update -->
   	<update id="setLectureUpdate" parameterType="LectureVO">
  		UPDATE LECTURE SET SEMESTER=#{semester}, DEPTNUM=#{deptNum},LECTURENAME=#{lectureName},CATEGORY=#{category},
  		GRADE= #{grade},YEAR=#{year}, WEEKDAY=#{weekday},STARTTIME=#{startTime},ENDTIME=#{endTime},PERSONAL=#{personal},
- 		COMPLETIONGRADE=#{completionGrade},NOTE=#{note},TEMPORARY=1 WHERE LECTURENUM=#{lectureNum}
+ 		COMPLETIONGRADE=#{completionGrade},TEMPORARY=1 WHERE LECTURENUM=#{lectureNum}
  	</update>
  	<update id="setTemporaryUpdate" parameterType="LectureVO">
  		UPDATE LECTURE SET SEMESTER=#{semester}, DEPTNUM=#{deptNum},LECTURENAME=#{lectureName},CATEGORY=#{category},
  		GRADE= #{grade},YEAR=#{year}, WEEKDAY=#{weekday},STARTTIME=#{startTime},ENDTIME=#{endTime},PERSONAL=#{personal},
- 		COMPLETIONGRADE=#{completionGrade},NOTE=#{note}, TEMPORARY=0 WHERE LECTURENUM=#{lectureNum}
+ 		COMPLETIONGRADE=#{completionGrade}, TEMPORARY=0 WHERE LECTURENUM=#{lectureNum}
  	</update>
 
  	<delete id="setLectureDelete" parameterType="LectureVO">
  		DELETE FROM LECTURE WHERE LECTURENUM=#{lectureNum}
  	</delete>
  	
- 	<select id="getLectureMain" parameterType="LectureVO" resultMap="LectureProfessorResult">
+ 	<select id="getLectureProfessor" parameterType="LectureVO" resultMap="LectureResult">
   		SELECT * FROM `MEMBER` M INNER JOIN PROFESSOR P ON (M.USERNAME=P.USERNAME) 
 		INNER JOIN LECTURE L ON (P.USERNAME=L.USERNAME) WHERE LECTURENUM=#{lectureNum}
   	</select>
@@ -76,7 +79,23 @@
 		INNER JOIN STUDENT_LECTURE SL ON (M.USERNAME=SL.USERNAME) WHERE LECTURENUM=#{lectureNum}
   	</select>
   	
-  	<resultMap type="LectureVO" id="LectureProfessorResult">
+  	<select id="getSyllabusDetail" parameterType="LectureVO" resultMap="LectureResult">
+  		SELECT * FROM SYLLABUS S INNER JOIN LECTURE L ON(S.LECTURENUM=L.LECTURENUM) 
+  		INNER JOIN PROFESSOR P ON(L.USERNAME=P.USERNAME)INNER JOIN MEMBER M ON(M.USERNAME=P.USERNAME)
+  		INNER JOIN DEPARTMENT D ON(L.DEPTNUM=D.DEPTNUM) WHERE LECTURENAME=#{lectureName}
+  	</select>
+  	<select id="getSyllabusClass" parameterType="LectureVO" resultType="ClassVO">
+  		 SELECT C.* FROM SYLLABUS S INNER JOIN CLASS C ON(S.SYLLABUSNUM=C.SYLLABUSNUM) 
+  		 INNER JOIN LECTURE L ON(S.LECTURENUM=L.LECTURENUM) WHERE LECTURENAME=#{lectureName}
+  	</select>
+  	<insert id="setSyllabusAdd" parameterType="LectureVO"  useGeneratedKeys="true" keyProperty="syllabusNum">
+  		INSERT INTO SYLLABUS VALUES LECTURENUM, CURRICULUMOUTLINE, GOAL, EVALUATION, METHOD, BOOKNAME, 
+  		BOOKAUTHOR, BOOKPUBLISHER, BOOKPUBLICATIONDATE, BOOKISBN, BOOKNOTE(#{lectureNum},#{curriculumOutline},
+  		 #{goal},#{evaluation},#{method},#{bookName},#{bookAuthor},#{bookPublisher},#{bookPublicationDate},
+  		  #{bookISBN},#{bookNote}
+  	</insert>
+  	
+  	<resultMap type="LectureVO" id="LectureResult">
   		<id column="LECTURENUM" property="lectureNum"/>
   		<result column="LECTURENAME" property="lectureName"/>
   		<result column="SEMESTER" property="semester"/>
@@ -93,10 +112,22 @@
   		<result column="ENDTIME" property="endTime"/>
   		<result column="COMPLETIONGRADE" property="completionGrade"/>
   		<result column="STATUS" property="status"/>
-  		<result column="NOTE" property="note"/>
   		<result column="TEMPORARY" property="temporary"/>
   		<result column="USERNAME" property="username"/>
-  		
+  		<association property="syllabusVO" javaType="SyllabusVO">
+  			<id column="SYLLABUSNUM" property="syllabusNum"/>
+  			<result column="LECTURENUM" property="lectureNum"/>
+  			<result column="CURRICULUMOUTLINE" property="curriculumOutline"/>
+  			<result column="GOAL" property="goal"/>
+  			<result column="EVALUATION" property="evaluation"/>
+  			<result column="METHOD" property="method"/>
+  			<result column="BOOKNAME" property="bookName"/>
+  			<result column="BOOKAUTHOR" property="bookAuthor"/>
+  			<result column="BOOKPUBLISHER" property="bookPublisher"/>
+  			<result column="BOOKPUBLICATIONDATE" property="bookPublicationDate"/>
+  			<result column="BOOKISBN" property="bookISBN"/>
+  			<result column="BOOKNOTE" property="bookNote"/>
+  		</association>
   		<collection property="professorVO" javaType="ProfessorVO">
   			<id column="USERNAME" property="username"/>
   			<result column="DEPTNUM" property="deptNum"/>
@@ -108,7 +139,34 @@
   			<result column="STATUS" property="status"/>
   			<result column="EMAIL" property="email"/>
   		</collection>
+  		<collection property="departmentVO" javaType="DepartmentVO">
+  			<id column="DEPTNUM" property="deptNum"/>
+  			<result column="DEPTNAME" property="deptName"/>
+  		</collection>
   		
+  	</resultMap>
+  	
+  	<resultMap type="SyllabusVO" id="SyllabusResult">
+  		<id column="SYLLABUSNUM" property="syllabusNum"/>
+  			<result column="LECTURENUM" property="lectureNum"/>
+  			<result column="CURRICULUMOUTLINE" property="curriculumOutline"/>
+  			<result column="GOAL" property="goal"/>
+  			<result column="EVALUATION" property="evaluation"/>
+  			<result column="METHOD" property="method"/>
+  			<result column="BOOKNAME" property="bookName"/>
+  			<result column="BOOKAUTHOR" property="bookAuthor"/>
+  			<result column="BOOKPUBLISHER" property="bookPublisher"/>
+  			<result column="BOOKPUBLICATIONDATE" property="bookPublicationDate"/>
+  			<result column="BOOKISBN" property="bookISBN"/>
+  			<result column="BOOKNOTE" property="bookNote"/>
+  			<collection property="classVOs" javaType="List" ofType="ClassVO">
+  				<id column="SYLLABUSNUM" property="syllabusNum"/>
+  				<result column="ORDER" property="order"/>
+  				<result column="SUBJECT" property="subject"/>
+  				<result column="GOAL" property="goal"/>
+  				<result column="CAPABILITY" property="capability"/>
+  				<result column="NOTE" property="note"/>
+  			</collection>
   	</resultMap>
   	
   </mapper>

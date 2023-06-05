@@ -26,31 +26,71 @@
 					<c:import url="../temp/sidebar/professor_lecture.jsp"></c:import>
 				</div>
 				<!-- 2레벨 Sidebar 끝 -->
-				
+
 				<!-- Contents -->
-				<div class="col">
-					<h1>${main.lectureName} 메인 페이지</h1>
+				<div class="col" style="padding-top:80px">
 					<form action="./main" method="get">
-		            	<div class="row gx-5 my-3">
-		                	<table class="table table-hover">
-		                    	<thead style="background-color: black; color: white;">
-			                    	<tr>
-			                    		<th>교수명</th>
-			                    		<th>사무실</th>
-			                    		<th>전화번호</th>
-			                    		<th>이메일</th>
-			                    	</tr>
-			                    </thead>
-			                    <tbody>
-			                    	<tr>
-			                    		<td>${main.professorVO.name}</td>
-			                    		<td>${main.professorVO.professorRoom}</td>
-		 								<td>${main.professorVO.phone}</td>
-		 								<td>${main.professorVO.email}</td>
-			                    	</tr>
-			                    </tbody>
-		                    </table>
-						</div>
+		            	<table class="table table-bordered" style="text-align: center;">
+							                <tbody>
+							                	<tr>
+							                		<th style="background-color:#f8f9fa;color:#17a2b8;vertical-align:middle;" rowspan="2">담당교수</th>
+							                		<th style="background-color:#f8f9fa;color:#17a2b8;">성명</th>
+							                		<th style="background-color:#f8f9fa;color:#17a2b8;">전화번호</th>
+							                		<th style="background-color:#f8f9fa;color:#17a2b8;">연구실</th>
+							                		<th style="background-color:#f8f9fa;color:#17a2b8;">이메일</th>
+							                	</tr>
+							                	<tr>
+							                		<td>${lecture.professorVO.name}</td>
+							                		<td>${lecture.professorVO.phone}</td>
+							                		<td>${lecture.professorVO.professorRoom}</td>
+							                		<td>wldnjsqkek29@naver.com</td>
+							                	</tr>
+							                	
+											</tbody>
+										</table>
+	                	<div class="card">
+							<!-- table-header start -->
+							<div class="card-header"style="background-color:#f8f9fa;">
+					        	<h3 class="card-title" style="font-weight:normal;">강의 개요</h3>
+					        </div>
+              				<div class="card-body">
+              					<div row>
+	              					<div class="column">
+	              						<i class="fas fa-microphone"></i>
+	                					<a href="#">공지사항</a>
+	                				</div>
+	                				<div class="column">
+	                				<i class="fas fa-question"></i>
+	                					<a href="#">질의응답</a>
+	                				</div>
+                				</div>
+              				</div>
+              				<!-- table-body end -->
+            			</div>
+            			<div class="card">
+									<!-- table-header start -->
+									<div class="card-header" style="height:60px;background-color: #17a2b8;">
+					                	<h3 class="card-title" style="font-weight:normal;color:white;margin-top: 10px">주차별 학습목표</h3>
+									</div>
+					              	<!-- table-header end -->
+              
+              						<!-- table-body start -->
+              						<div class="card-body table-responsive p-0">
+                						<table class="table table-hover text-nowrap">
+                  							<thead>
+                    					
+											</thead>
+								            <tbody>
+								            	<c:forEach begin="1" end="8" var="i">
+			                    				<tr>
+			                    					<td><h5>${i}주차 학습목표</h5><br>그날의 학습 목표 작성</td>
+			                    				 </tr>
+			                    				 </c:forEach>			
+			                    			</tbody>
+                						</table>
+              						</div>
+              						<!-- table-body end -->
+            					</div>
 					</form>
 				</div>
 			</div>

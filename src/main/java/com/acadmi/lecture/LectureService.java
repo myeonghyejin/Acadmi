@@ -9,6 +9,7 @@ import com.acadmi.college.CollegeVO;
 import com.acadmi.department.DepartmentVO;
 import com.acadmi.period.PeriodVO;
 import com.acadmi.student.StudentVO;
+import com.acadmi.syllabus.ClassVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,11 +27,21 @@ public class LectureService {
 		return lectureDAO.getLectureDetail(lectureVO);
 	}
 	
-	public LectureVO getLectureMain(LectureVO lectureVO) throws Exception{
-		return lectureDAO.getLectureMain(lectureVO);
+	public LectureVO getLectureProfessor(LectureVO lectureVO) throws Exception{
+		return lectureDAO.getLectureProfessor(lectureVO);
 	}
 	public List<StudentVO> getLectureAttendee(LectureVO lectureVO) throws Exception{
 		return (List<StudentVO>) lectureDAO.getLectureAttendee(lectureVO);
+	}
+	
+	public LectureVO getSyllabusDetail(LectureVO lectureVO) throws Exception{
+		return lectureDAO.getSyllabusDetail(lectureVO);
+	}
+	public List<ClassVO> getSyllabusClass(LectureVO lectureVO) throws Exception{
+		return lectureDAO.getSyllabusClass(lectureVO);
+	}
+	public int setSyllabusAdd(LectureVO lectureVO) throws Exception{
+		return lectureDAO.setSyllabusAdd(lectureVO);
 	}
 	
 	public int setLectureAdd(LectureVO lectureVO) throws Exception{

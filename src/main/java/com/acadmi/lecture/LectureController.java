@@ -21,6 +21,7 @@ import com.acadmi.college.CollegeVO;
 import com.acadmi.department.DepartmentVO;
 import com.acadmi.period.PeriodVO;
 import com.acadmi.student.StudentVO;
+import com.acadmi.syllabus.ClassVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -52,12 +53,14 @@ public class LectureController {
 	
 	
 	@GetMapping("add")
-	public ModelAndView setLectureAdd(@ModelAttribute LectureVO lectureVO, DepartmentVO departmentVO, PeriodVO periodVO) throws Exception{
+	public ModelAndView setLectureAdd(@ModelAttribute LectureVO lectureVO,CollegeVO collegeVO, DepartmentVO departmentVO, PeriodVO periodVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		log.error("getMapping");
 		List<DepartmentVO> department = lectureService.getDepartmentList(departmentVO);
+		List<CollegeVO> college = lectureService.getCollegeList(collegeVO);
 		List<PeriodVO> period = lectureService.getSemesterList(periodVO);
 		mv.addObject("period",period);
+		mv.addObject("college", college);
 		mv.addObject("department",department);
 		mv.setViewName("lecture/add");
 		return mv;
@@ -79,11 +82,13 @@ public class LectureController {
 	}
 	
 	@GetMapping("update")
-	public ModelAndView setLectureUpdate(LectureVO lectureVO, DepartmentVO departmentVO, PeriodVO periodVO) throws Exception{
+	public ModelAndView setLectureUpdate(LectureVO lectureVO,CollegeVO collegeVO, DepartmentVO departmentVO, PeriodVO periodVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		List<DepartmentVO> department = lectureService.getDepartmentList(departmentVO);
+		List<CollegeVO> college = lectureService.getCollegeList(collegeVO);
 		List<PeriodVO> period = lectureService.getSemesterList(periodVO);
 		mv.addObject("period",period);
+		mv.addObject("college", college);
 		mv.addObject("department",department);
 		lectureVO = lectureService.getLectureDetail(lectureVO);
 		mv.addObject("update",lectureVO);
@@ -119,8 +124,9 @@ public class LectureController {
 	@GetMapping("main")
 	public ModelAndView getLectureMain(LectureVO lectureVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		lectureVO = lectureService.getLectureMain(lectureVO);
-		mv.addObject("main",lectureVO);
+		lectureVO = lectureService.getLectureProfessor(lectureVO);
+		mv.addObject("lecture",lectureVO);
+		mv.setViewName("temp/sidebar/professor_lecture");
 		mv.setViewName("lecture/main");
 		return mv;
 	}
@@ -129,7 +135,8 @@ public class LectureController {
 	public ModelAndView getLectureInfo(LectureVO lectureVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		lectureVO = lectureService.getLectureDetail(lectureVO);
-		mv.addObject("info",lectureVO);
+		mv.addObject("lecture",lectureVO);
+		mv.setViewName("temp/sidebar/professor_lecture");
 		mv.setViewName("lecture/info");
 		return mv;
 	}
@@ -139,8 +146,41 @@ public class LectureController {
 		ModelAndView mv = new ModelAndView();
 		List<StudentVO> ar = lectureService.getLectureAttendee(lectureVO);
 		mv.addObject("list",ar);
+		lectureVO = lectureService.getLectureDetail(lectureVO);
+		mv.addObject("lecture",lectureVO);
+		mv.setViewName("temp/sidebar/professor_lecture");
 		mv.setViewName("lecture/attendee");
 		return mv;
 	}
+	
+	@GetMapping("syllabus/add")
+	public ModelAndView setSyllabusAdd(@ModelAttribute LectureVO lectureVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		lectureVO = lectureService.getLectureDetail(lectureVO);
+		mv.addObject("lecture",lectureVO);
+		mv.setViewName("temp/sidebar/professor_lecture");
+		mv.setViewName("syllabus/add");
+		return mv;
+	}
+	@PostMapping("syllabus/add")
+	public ModelAndView setSyllabusAdd(LectureVO lectureVO, ModelAndView mv) throws Exception{
+		int result = lectureService.setSyllabusAdd(lectureVO);
+		mv.setViewName("redirect:../list");
+		return mv;
+	}
+	
+	@GetMapping("syllabus/detail")
+	public ModelAndView setSyllabusDetail(@ModelAttribute LectureVO lectureVO, ClassVO classVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		lectureVO = lectureService.getSyllabusDetail(lectureVO);
+		mv.addObject("lecture", lectureVO);
+		List<ClassVO> ar = lectureService.getSyllabusClass(lectureVO);
+		mv.addObject("classes",ar);
+		mv.setViewName("temp/sidebar/professor_lecture");
+		mv.setViewName("syllabus/detail");
+		return mv;
+	}
+	
+	
 
 }

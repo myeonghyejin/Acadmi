@@ -6,7 +6,7 @@
 <div class="sidebar-dropdown">
 
 	<!-- Menu -->
-	<h4>수강</h4>
+	<h3 style="margin-top: 20px; text-align: center;"><a href="/lecture/main?lectureNum=${lecture.lectureNum}">${lecture.lectureName}</a></h3>
 	
 	<!-- 더 많은 개수의 submenu가 필요할 경우
 	필요한 수 만큼 복사하고 div 태그의 아이디 'submenu_숫자' 형식으로 수정하여 사용하면 됨 -->
@@ -16,9 +16,9 @@
 		강의 정보
 	</button>
 	<div id="submenu_1" class="sidebar-dropdown-content">
-		<a href="./info?lectureNum=2">강의 상세</a>
-		<a href="./syllabus">강의 계획서</a>
-		<a href="./attendee?lectureNum=2">참여자 목록</a>
+		<a href="/lecture/info?lectureNum=${lecture.lectureNum}">강의 상세</a>
+		<a href="/lecture/syllabus/add?lectureNum=${lecture.lectureNum}">강의 계획서</a>
+		<a href="/lecture/attendee?lectureNum=${lecture.lectureNum}">참여자 목록</a>
 	</div>
 	
 	<!-- Submenu_2 -->
