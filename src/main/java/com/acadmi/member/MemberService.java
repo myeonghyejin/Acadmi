@@ -65,13 +65,16 @@ public class MemberService implements UserDetailsService{
 		log.error("====================={}=====================", username);
 		
 		MemberVO memberVO = new MemberVO();
+		MemberFilesVO memberFilesVO = new MemberFilesVO();
 		memberVO.setUsername(username);
+		
 		try {
 			memberVO = memberDAO.getLogin(memberVO);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		return memberVO;
 	}
 	

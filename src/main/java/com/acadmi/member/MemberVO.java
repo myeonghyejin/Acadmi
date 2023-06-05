@@ -31,7 +31,6 @@ public class MemberVO implements UserDetails {
 	private ProfessorVO professorVO;
 	private AdministratorVO administratorVO;
 	
-
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
