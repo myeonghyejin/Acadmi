@@ -52,7 +52,9 @@
 											<td><img src="/${memberFilesVO.fileName}"></td>
 										</tr>
      	 							</c:forEach>
-	     	 							<td></td>
+	     	 							<td>
+				     	 					<a href="../chat/detail?"><i class="fa-regular fa-envelope fa-2xl" style="margin:30px 0 0 0;"></i></a>
+				                        </td>
 	     	 							<td></td>
 	     	 							<td><c:out value="${studentUsername}"></c:out></td>
 				     	 				<td><c:out value="${studentName}"></c:out></td>

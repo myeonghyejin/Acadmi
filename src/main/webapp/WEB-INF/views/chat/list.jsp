@@ -37,7 +37,7 @@
 										<div class="contacts-list">
 											<c:forEach items="${chatRoomVO.chatMessageVOs}" var="chatMessageVO" varStatus="i">
 												<c:if test="${i.last}">
-													<li><a href="./detail?sender=${chatMessageVO.sender}&recipient=${chatMessageVO.recipient}&chatNum=${chatRoomVO.chatNum}">
+													<li><a href="./detail?sender=${chatMessageVO.sender}&recipient=${chatMessageVO.recipient}">
 														<img class="contacts-list-img" src="" alt="...">
 																<div class="contacts-list-info">
 																	<span class="contacts-list-name">

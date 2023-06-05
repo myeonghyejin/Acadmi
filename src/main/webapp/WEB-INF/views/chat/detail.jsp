@@ -29,7 +29,7 @@
 							<h3 class="card-title">메세지</h3>
 						</div>
 						<div class="card-body">
-							<div class="direct-chat-messages">
+							<div class="direct-chat-messages" id="messageList">
 								<!-- Message. Default to the left -->
 								<c:forEach items="${messageList}" var="chatMessageVO">
 									<c:if test="${chatMessageVO.sender eq param.recipient}">
@@ -65,7 +65,7 @@
 								
 								<!-- /.direct-chat-msg -->
 							<!--/.direct-chat-messages-->
-						</div>
+							</div>
 						<!-- /.card-body -->
 						<div class="card-footer">
 							<form action="#" method="post">

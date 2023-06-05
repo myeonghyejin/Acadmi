@@ -37,9 +37,25 @@ public class ChatService {
 		chatRoomVO.setRecipient(chatMessageVO.getRecipient());
 		chatRoomVO = chatDAO.getChatRoomDetail(chatRoomVO);
 		if(chatRoomVO == null) {
-			
+			chatRoomVO.setSender(chatMessageVO.getSender());
+			chatRoomVO.setRecipient(chatMessageVO.getRecipient());
+			int result = chatDAO.setSenderChatRoom(chatRoomVO);
+			result = chatDAO.setRecipientChatRoom(chatRoomVO);
+		} else {
+			chatMessageVO.setChatNum(chatRoomVO.getChatNum());
 		}
 		return chatDAO.getChatMessage(chatMessageVO);
+	}
+	
+	//메세지 저장
+	public int setSaveMessage(ChatMessageVO chatMessageVO) throws Exception {
+		ChatRoomVO chatRoomVO = new ChatRoomVO();
+		chatRoomVO.setSender(chatMessageVO.getSender());
+		chatRoomVO.setRecipient(chatMessageVO.getRecipient());
+		chatRoomVO = chatDAO.getChatRoomDetail(chatRoomVO);
+		chatMessageVO.setChatNum(chatRoomVO.getChatNum());
+		int result = chatDAO.setSaveMessage(chatMessageVO);
+		return result;
 	}
 	
 

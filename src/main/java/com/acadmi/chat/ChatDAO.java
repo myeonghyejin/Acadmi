@@ -23,4 +23,7 @@ public interface ChatDAO {
 	//채팅방 메세지 출력
 	public List<ChatMessageVO> getChatMessage(ChatMessageVO chatMessageVO) throws Exception;
 	
+	//메세지 입력
+	public int setSaveMessage(ChatMessageVO chatMessageVO) throws Exception;
+	
 }

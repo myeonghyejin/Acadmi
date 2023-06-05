@@ -68,5 +68,11 @@
   		WHERE CHATNUM = #{chatNum}
   		ORDER BY MSGNUM ASC
   	</select>
+  	
+  	<!-- 메세지 입력 -->
+  	<insert id="setSaveMessage" parameterType="ChatMessageVO">
+  		INSERT INTO CHAT_MESSAGE
+  		VALUES (0, #{sender}, #{recipient}, #{msgContents}, now(), #{msgStatus}, #{chatNum})
+  	</insert>
   
   </mapper>
