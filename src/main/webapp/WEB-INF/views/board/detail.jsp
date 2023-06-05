@@ -139,7 +139,7 @@
 						
 						<c:if test="${userName eq boardVO.writer}">
 							<a href="./update?num=${boardVO.num}" id="update" class="btn btn-info float-right" style="margin-right: 5px">수정</a>	
-							<a href="./delete?num=${boardVO.num}" id="delete" class="btn btn-danger float-right">삭제</a>
+							<a id="delete" data-board-num="${boardVO.num}" data-board-name="${board}" class="btn btn-danger float-right">삭제</a>
 						</c:if>
 					</div>
 							 

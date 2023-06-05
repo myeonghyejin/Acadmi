@@ -185,8 +185,7 @@
 													</c:forEach>							
 												</c:catch>
 																								 																				 
-												<c:if test="${dto.secret == 1 && dto.writer ne userName}">
-																				
+												<c:if test="${dto.secret == 1 && dto.writer ne userName}">																	
 													<c:choose>
 													    <c:when test="${category == 1}">
 													        <a class="title" href="./detail?num=${dto.num}">${dto.title}</a>
@@ -200,8 +199,8 @@
 												<c:if test="${dto.secret == 1 && dto.writer eq userName}">
 													<a class="title" href="./detail?num=${dto.num}">${dto.title}</a>						
 												</c:if>		
-												
-												<c:if test="${dto.secret == 0 || empty dto.secret}">						
+																				
+												<c:if test="${dto.secret == 0 || empty dto.secret}">		
 													<a class="title" href="./detail?num=${dto.num}">${dto.title}</a>
 												</c:if>
 												
