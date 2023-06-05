@@ -10,5 +10,5 @@ import lombok.Setter;
 public class LectureQnaVO extends QnaVO {
 	
 	private Long lectureNum;
-
+	private Long secret;
 }
