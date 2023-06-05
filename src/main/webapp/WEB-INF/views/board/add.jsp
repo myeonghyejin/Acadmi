@@ -124,7 +124,7 @@
 								<div id="fileList">
 									<button class="col-md-12 mt-5 btn btn-primary" id="fileAdd" type="button">파일추가</button>
 								</div> 
-							</div>
+							</div> 
 
 							<div class="row" style="margin-top: 50px; margin-left: 1080px;">		
 								<button type="submit" class="submitButton btn btn-info" style="margin-right: 5px;">등록</button>
