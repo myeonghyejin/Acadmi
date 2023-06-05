@@ -1,5 +1,6 @@
 let check = [false, false, false,false,false,false,false]
 
+
 //입학년도 필수사항
 $("#year").blur(function() {
     if($("#year").val() == '') {
@@ -17,7 +18,7 @@ $("#password").blur(function() {
         check[1] = false
         $("#passwordResult").html("<p style='color : red;'>비밀번호는 필수사항입니다</p>")
     }else {
-       check[1] = false
+       check[1] = true
        $("#passwordResult").html("")
     }
 })
@@ -81,9 +82,12 @@ $("#professorBtn").click(function() {
     if(!check.includes(false)) {
         // console.log("성공")
         $("#professorForm").submit()
-    }else {
+        console.log("test1")
+    }
+    else {
         // console.log("실패")
         alert("모든 사항을 입력하세요")
+        
     }
 })
 

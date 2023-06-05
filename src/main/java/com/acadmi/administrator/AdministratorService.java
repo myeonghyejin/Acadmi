@@ -1,11 +1,14 @@
 package com.acadmi.administrator;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;import org.springframework.jdbc.support.lob.AbstractLobHandler;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -18,6 +21,7 @@ import com.acadmi.department.DepartmentVO;
 import com.acadmi.lecture.room.LectureRoomVO;
 import com.acadmi.member.MemberSeqVO;
 import com.acadmi.member.MemberVO;
+import com.acadmi.period.PeriodVO;
 import com.acadmi.professor.ProfessorVO;
 import com.acadmi.student.StudentVO;
 import com.acadmi.util.Pagination;
@@ -27,7 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Slf4j
 @Transactional(rollbackFor = Exception.class)
-public class AdministratorService {
+public class AdministratorService{
 	
 	@Autowired
 	private AdministratorDAO administratorDAO;
@@ -427,5 +431,15 @@ public class AdministratorService {
 	public int setDepartmentUpdate(DepartmentVO departmentVO) throws Exception {
 		return administratorDAO.setDepartmentUpdate(departmentVO);
 	}
+	
+	//기간 설정
+	public int setPeriodAdd(PeriodVO periodVO) throws Exception {
+		int result = administratorDAO.setPeriodAdd(periodVO);
+		return result;
+		
+	}
+	
+	
+	
 
 }

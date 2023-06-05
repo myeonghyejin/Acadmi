@@ -50,9 +50,17 @@
 				
 				<!-- 2레벨 Sidebar 끝 -->
 				<div class="col" style="background-color : white;">
-						<h3>교수 목록 조회</h3>
+						<!-- header start -->
+	               <div class="row" style="padding-top:10px">
+	                  <div class="col-12">
+	                     <div class="card">
+	                        <h3 class="my-3 mx-3">교수 목록 조회</h3>
+	                     </div>
+	                  </div>
+	               </div>
+               <!-- header end -->
 						
-							<!-- Main content -->
+					<!-- Main content -->
 				    <section class="content">
 				
 				      <!-- Default box -->
@@ -118,7 +126,9 @@
 										<c:set var="memberFiles" value="${professorVO.memberFilesVO }"></c:set>
 										<tr>
 											
-										<td></td>
+										<td>
+											<i class="fa-regular fa-envelope fa-2xl" style="margin : 30px 0 0 0 "></i>
+										</td>
 										<td>
 				   	 						<img alt="" src="/file/${board}/${boardFileVO.fileName}" width="60rem" height="60rem">
 				   	 					</td>

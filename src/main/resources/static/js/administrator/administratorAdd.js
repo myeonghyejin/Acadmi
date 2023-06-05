@@ -17,7 +17,7 @@ $("#password").blur(function() {
         check[1] = false
         $("#passwordResult").html("<p style='color : red;'>비밀번호는 필수사항입니다</p>")
     }else {
-       check[1] = false
+       check[1] = true
        $("#passwordResult").html("")
     }
 })

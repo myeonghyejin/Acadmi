@@ -90,15 +90,10 @@
 				            </div>
 				            <div id="phoneResult"></div>
 				             <!-- Date -->
-			                <div class="form-group">
-			                  <label>생년월일</label>
-			                    <div class="input-group date" id="reservationdate" data-target-input="nearest">
-			                    	 <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate"/>
-			                     	 <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
-		                           	 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-		                        </div>
-			                    </div>
-			                </div>
+			              	<div class="form-group">
+			                 	<label>생년월일</label>
+			                   	 <input type="date" class="form-control" name="birth"/>     	
+			               	</div>
 			                 <div class="form-group">
 				              <label for="address_kakao">주소</label>
 				              <input type="text" id="address_kakao" readonly class="form-control" name="address"/>
@@ -124,6 +119,7 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="../js/administrator/administratorAdd.js"></script>
 <script type="text/javascript">
+
 //카카오 주소 api	
 	//주소 입력
 	document.getElementById("address_kakao").addEventListener("click", function(){ //주소입력칸을 클릭하면

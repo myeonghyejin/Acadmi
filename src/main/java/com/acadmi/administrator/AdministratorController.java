@@ -20,6 +20,7 @@ import com.acadmi.lecture.LectureVO;
 import com.acadmi.lecture.room.LectureRoomVO;
 import com.acadmi.member.MemberSeqVO;
 import com.acadmi.member.MemberVO;
+import com.acadmi.period.PeriodVO;
 import com.acadmi.professor.ProfessorVO;
 import com.acadmi.student.StudentVO;
 import com.acadmi.util.Pagination;
@@ -347,6 +348,45 @@ public class AdministratorController {
 		
 		mv.addObject("url", "./departmentList");
 		return mv;
+	}
+	
+	//기간 설정
+	@GetMapping("periodAdd")
+	public ModelAndView setPeriodAdd() throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("administrator/periodAdd");
+		
+		return mv;
+	}
+	
+	
+	@PostMapping("periodAdd")
+	public ModelAndView setPeriodAdd(@Valid PeriodVO periodVO, BindingResult bindingResult) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		int result = administratorService.setPeriodAdd(periodVO);
+		
+		if(bindingResult.hasErrors()) {
+			log.warn("검증에 실패");
+			mv.setViewName("administrator/periodAdd");
+			return mv;
+		}
+		
+		String message= "등록 실패";
+		
+		if(result > 0) {
+			message = "등록되었습니다";
+			
+		}
+		
+		mv.addObject("result", message);
+		mv.setViewName("administrator/result");
+		
+		mv.addObject("url", "./periodAdd");
+		return mv;
+		
+		
 	}
 
 }

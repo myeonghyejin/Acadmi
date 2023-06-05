@@ -1,5 +1,6 @@
 package com.acadmi.administrator;
 
+import java.time.Period;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import com.acadmi.department.DepartmentVO;
 import com.acadmi.lecture.room.LectureRoomVO;
 import com.acadmi.member.MemberSeqVO;
 import com.acadmi.member.MemberVO;
+import com.acadmi.period.PeriodVO;
 import com.acadmi.professor.ProfessorVO;
 import com.acadmi.student.StudentVO;
 import com.acadmi.util.Pagination;
@@ -73,4 +75,6 @@ public interface AdministratorDAO {
 	public int setDepartmentUpdate(DepartmentVO departmentVO) throws Exception;
 
 
+	//기간 설정
+	public int setPeriodAdd(PeriodVO periodVO) throws Exception;
 }

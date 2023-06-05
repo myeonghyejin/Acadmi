@@ -102,13 +102,10 @@
 	              <input type="text" id="phone" class="form-control" name="phone"/>
 	            </div>
 	            <div id="phoneResult"></div>
-	             <!-- Date -->
-                <div class="form-group">
-                  <label>생년월일</label>
-                    <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                     	<input type="date" name="birth"><br>
-                    </div>
-                </div>
+	          	<div class="form-group">
+                 	<label>생년월일</label>
+                   	 <input type="date" class="form-control" name="birth"/>     	
+               	</div>
                  <div class="form-group">
 	              <label for="address_kakao">주소</label>
 	              <input type="text" id="address_kakao" readonly class="form-control" name="address"/>
@@ -177,7 +174,7 @@
 	console.log(department)
 }
 
-	
+
 </script>	
 </body>
 </html>

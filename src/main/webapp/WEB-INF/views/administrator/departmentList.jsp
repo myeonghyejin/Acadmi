@@ -47,7 +47,15 @@
 		<div class="container-fulid">
 			<div class="row">
 				<div class="col">
-					<h3>학과 관리</h3>
+					<!-- header start -->
+	               <div class="row" style="padding-top:10px">
+	                  <div class="col-12">
+	                     <div class="card">
+	                        <h3 class="my-3 mx-3">학과 조회</h3>
+	                     </div>
+	                  </div>
+	               </div>
+               <!-- header end -->
 					<!-- Main content -->
 				    <section class="content">
 				

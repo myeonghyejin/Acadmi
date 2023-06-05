@@ -98,13 +98,10 @@
 	              <input type="text" id="phone" class="form-control" name="phone"/>
 	            </div>
 	             <div id="phoneResult"></div>
-	             <!-- Date -->
-                <div class="form-group">
-                  <label>생년월일</label>
-                    <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                     	<input type="date" name="birth"><br>
-                    </div>
-                </div>
+	             <div class="form-group">
+                 	<label>생년월일</label>
+                   	 <input type="date" class="form-control" name="birth"/>     	
+               	</div>
                  <div id="birthResult"></div>
                  <div class="form-group">
 	              <label for="address_kakao">주소</label>
@@ -116,6 +113,7 @@
 	            </div>
 	            <input type="hidden" name="category" value="1">
 	            <button type="button" class="btn btn-info" id="professorBtn">교수가입</button> 
+	           <!-- <button type="submit" class="btn btn-info">교수가입</button> -->
 	          </form>
           </div>
         </div>
@@ -172,6 +170,7 @@
 		console.log(department)
 	}
 	
+
 </script>	
 </body>
 </html>

@@ -5,10 +5,7 @@
   
   <mapper namespace="com.acadmi.administrator.AdministratorDAO">
   
-  <sql id="search">
-  	
- 			
- 	</sql>
+ 
     <!--회원 관리  -->
     
     <!--아이디  -->
@@ -93,7 +90,6 @@
 						COLLEGE C 
 					USING(COLLEGENUM)
 				WHERE CATEGORY=2
-				<include refid="search"></include>
 		LIMIT #{startRow},#{perPage}					
   	</select>
   	<resultMap type="CollegeVO" id="StudentList">
@@ -142,6 +138,7 @@
   			<id column="DEPTNUM" property="deptNum"/>
   			<result column="DEPTNAME" property="deptName"/>
   			<collection property="professorVOs" javaType="List" ofType="ProfessorVO">
+  				<id column="USERNAME" property="username"/>
   				<result column="NAME" property="name"/>
   				<result column="EMAIL" property="email"/>
   				<result column="PHONE" property="phone"/>
@@ -175,6 +172,7 @@
   	<id column="DEPTNUM" property="deptNum"/>
   	<result column="DEPTNAME" property="deptName"/>
 		<collection property="administratorVOs" javaType="List" ofType="AdministratorVO">
+			<id column="USERNAME" property="username"/>
 			<result column="NAME" property="name"/>
 			<result column="EMAIL" property="email"/>
 			<result column="PHONE" property="phone"/>
@@ -255,5 +253,18 @@
   	INSERT INTO DEPARTMENT 
 	VALUES(#{deptNum},#{collegeNum},#{deptName},#{status})
   </insert>	
+  
+  <!--기간 설정  -->
+  <insert id="setPeriodAdd" parameterType="PeriodVO">
+  	INSERT INTO PERIOD
+  	VALUES(#{year},#{semester},#{applicationStart},#{applicationEnd},#{favoriteStart},#{favoriteEnd},#{deadline})
+  	
+  </insert>
+  
+  <!--강의 목록 조회  -->
+  <select id="getLectureList" resultType="LectureVO">
+  	SELECT * FROM LECTURE
+
+  </select>  
   	
   </mapper>
