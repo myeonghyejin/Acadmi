@@ -164,38 +164,7 @@
 		<!-- Sidebar user panel (optional) -->
 		<div class="user-panel mt-3 pb-3 mb-3 d-flex">
 			<div class="image">
-				<sec:authorize access="hasRole('STUDENT')">
-					<c:choose>
-						<c:when test="${empty memberFilesVO.filName}">
-							<img src="/images/profile.jpg" class="img-circle elevation-2" alt="User Image">
-						</c:when>
-						<c:otherwise>
-							<img class="profile-user-img img-fluid img-circle" src="C:/production/upload/member/${memberFilesVO.fileName}" alt="User profile picture">
-						</c:otherwise>
-					</c:choose>
-				</sec:authorize>
-				
-				<sec:authorize access="hasRole('PROFESSOR')">
-					<c:choose>
-						<c:when test="${empty memberFilesVO.filName}">
-							<img src="/images/profile.jpg" class="img-circle elevation-2" alt="User Image">
-						</c:when>
-						<c:otherwise>
-							<img class="profile-user-img img-fluid img-circle" src="C:/production/upload/member/${memberFilesVO.fileName}" alt="User profile picture">
-						</c:otherwise>
-					</c:choose>
-				</sec:authorize>
-				
-				<sec:authorize access="hasRole('ADMINISTRATOR')">
-					<c:choose>
-						<c:when test="${empty memberFilesVO.filName}">
-							<img src="/images/profile.jpg" class="img-circle elevation-2" alt="User Image">
-						</c:when>
-						<c:otherwise>
-							<img class="profile-user-img img-fluid img-circle" src="C:/production/upload/member/${memberFilesVO.fileName}" alt="User profile picture">
-						</c:otherwise>
-					</c:choose>
-				</sec:authorize>
+				<img src="/images/profile.jpg" class="img-circle elevation-2" alt="User Image">
 			</div>
 			<div class="info">
 				<sec:authorize access="hasRole('STUDENT')">

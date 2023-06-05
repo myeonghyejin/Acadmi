@@ -126,17 +126,17 @@ public class MemberController {
 			return mv;
 		}
 	   
-	   @PostMapping("fileDelete")
-	   public ModelAndView setFileDelete(MemberFilesVO memberFilesVO) throws Exception{
-		   ModelAndView mv = new ModelAndView();
-		   
-		   int result = memberService.setFileDelete(memberFilesVO);
-		   
-		   mv.addObject("result", result);
-		   mv.setViewName("common/ajaxResult");
-		   
-		   return mv;
-	   }
+//	   @PostMapping("fileDelete")
+//	   public ModelAndView setFileDelete(MemberFilesVO memberFilesVO) throws Exception{
+//		   ModelAndView mv = new ModelAndView();
+//		   
+//		   int result = memberService.setFileDelete(memberFilesVO);
+//		   
+//		   mv.addObject("result", result);
+//		   mv.setViewName("common/ajaxResult");
+//		   
+//		   return mv;
+//	   }
 	   
 //	   ========================================멤버 권한에 따른 마이페이지========================================
 	   
@@ -193,7 +193,7 @@ public class MemberController {
 	   }
 
 	   @PostMapping("studentUpdate")
-	   public ModelAndView postStudentUpdate(String username, StudentVO studentVO, ModelAndView mv, MultipartFile multipartFile) throws Exception {
+	   public ModelAndView setStudentUpdate(String username, StudentVO studentVO, ModelAndView mv, MultipartFile multipartFile) throws Exception {
 	       
 	       int result = memberService.setStudentUpdate(studentVO, multipartFile);
 

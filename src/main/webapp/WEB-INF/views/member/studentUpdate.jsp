@@ -51,10 +51,19 @@
 															src="/images/profile.jpg"
 															alt="User profile picture">
 													</div> -->
-													
-													<%-- <div class="input-group">
+													<div class="text-center">
+														<c:choose>
+															<c:when test="${empty memberFilesVO.filName}">
+																<img src="/images/profile.jpg"  class="profile-user-img img-fluid img-circle" alt="User Image">
+															</c:when>
+															<c:otherwise>
+																<img class="profile-user-img img-fluid img-circle" src="C:/production/upload/member/${memberFilesVO.fileName}" alt="User profile picture">
+															</c:otherwise>
+														</c:choose>
+													</div>
+													<div class="input-group">
 													  <input class="form-check-input deleteCheck" type="checkbox" name="fileNum" value="${memberFilesVO.fileNum}">
-													</div> --%>
+													</div>
 													
 													<c:forEach items="${departmentVO.studentVOs}" var="studentVO">
 														<h3 class="profile-username text-center">이름 : <input value="${studentVO.name}" type="text" id="name" name="name"></h3>
@@ -87,8 +96,8 @@
 																<hr>
 																	<strong><i class="fas fa-map-marker-alt mr-1"></i> 주소</strong>
 																		<p class="text-muted"><input value="${studentVO.address}" type="text" id="address" name="address"></p>
-																		<strong><i class="mr-1"></i> 상세 주소 입력</strong>
-																		<p class="text-muted"><input value="${studentVO.address}" type="text" name="address"></p>
+																		<%-- <strong><i class="mr-1"></i> 상세 주소 입력</strong>
+																		<p class="text-muted"><input value="${studentVO.address}" type="text" name="address"></p> --%>
 															
 														</div>
 													</c:forEach>
