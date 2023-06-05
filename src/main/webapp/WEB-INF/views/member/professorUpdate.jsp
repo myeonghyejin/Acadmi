@@ -62,7 +62,7 @@
 																	</c:forEach>
 																<div class="col-md-12 mt-3">
 											                        <div id="fileList">
-											                           <button class="col-md-3  btn btn-primary" id="fileAdd" type="button">파일추가</button>
+											                           <button class="col-md-3  btn btn-info" id="fileAdd" type="button">파일추가</button>
 											                        </div> 
 											                     </div> 
 															</div>
