@@ -45,16 +45,27 @@
 													<form action="./administratorUpdate" method="post" enctype="multipart/form-data">
 														<sec:authentication property="Principal" var="user"/>
 															<input type="hidden" name="username" value="${user.username}">
-															
-													<!-- <div class="text-center">
-														<img class="profile-user-img img-fluid img-circle"
-															src="/images/profile.jpg"
-															alt="User profile picture">
-													</div> -->
-													
-													<%-- <div class="input-group">
-													  <input class="form-check-input deleteCheck" type="checkbox" name="fileNum" value="${memberFilesVO.fileNum}">
-													</div> --%>
+																<div class="text-center">
+																	<c:forEach items="${departmentVO.administratorVOs}" var="administratorVO">
+				     	 												<c:choose>
+																		    <c:when test="${empty administratorVO.memberFilesVO.fileName}">
+																		        <img class="profile-user-img img-fluid img-circle"
+																		             src="/images/profile.jpg"
+																		             alt="User profile picture">
+																		    </c:when>
+																		    <c:otherwise>	
+																				<img class="img-fluid img-size"
+																				     src="/file/member/${administratorVO.memberFilesVO.fileName}"
+																				     alt="User profile picture">
+																		    </c:otherwise>
+																		</c:choose>
+																	</c:forEach>
+																<div class="col-md-12 mt-3">
+											                        <div id="fileList">
+											                           <button class="col-md-3  btn btn-info" id="fileAdd" type="button">파일추가</button>
+											                        </div> 
+											                     </div> 
+															</div>
 													
 													<c:forEach items="${departmentVO.administratorVOs}" var="administratorVO">
 														<h3 class="profile-username text-center">이름 : <input value="${administratorVO.name}" type="text" id="name" name="name"></h3>
@@ -68,10 +79,10 @@
 															
 
 														<div class="card-body">
-															<strong><i class="fas fa-book mr-1"></i> 학과</strong>
+															<strong><i class="fas fa-book mr-1"></i> 학과, 학년</strong>
 															<p class="text-muted">
 																<c:set value="${departmentVO.deptName}" var="administratorDeptName"></c:set>
-																	학과 이름 : &ensp;<c:out value="${administratorDeptName}"></c:out>
+																	학과 이름 : &ensp;<c:out value="${administratorDeptName}"></c:out><br>
 															</p>
 																<hr>
 																	<strong><i class="fa-solid fa-cake-candles mr-1"></i> 생년월일</strong>
@@ -85,6 +96,8 @@
 																<hr>
 																	<strong><i class="fas fa-map-marker-alt mr-1"></i> 주소</strong>
 																		<p class="text-muted"><input value="${administratorVO.address}" type="text" id="address" name="address"></p>
+																		<%-- <strong><i class="mr-1"></i> 상세 주소 입력</strong>
+																		<p class="text-muted"><input value="${studentVO.address}" type="text" name="address"></p> --%>
 															
 														</div>
 													</c:forEach>
@@ -110,6 +123,20 @@
 			<!-- Footer 끝 -->
 
 <script type="text/javascript" src="/js/filemanager.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+	window.onload = function(){
+    document.getElementById("address").addEventListener("click", function(){ //주소입력칸을 클릭하면
+        //카카오 지도 발생
+        new daum.Postcode({
+            oncomplete: function(data) { //선택시 입력값 세팅
+                document.getElementById("address").value = data.address; // 주소 넣기
+               
+            }
+        }).open();
+    });
+}
+</script>
 
 </body>
 </html>

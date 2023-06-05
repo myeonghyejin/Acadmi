@@ -45,25 +45,27 @@
 													<form action="./studentUpdate" method="post" enctype="multipart/form-data">
 														<sec:authentication property="Principal" var="user"/>
 															<input type="hidden" name="username" value="${user.username}">
-															
-													<!-- <div class="text-center">
-														<img class="profile-user-img img-fluid img-circle"
-															src="/images/profile.jpg"
-															alt="User profile picture">
-													</div> -->
-													<div class="text-center">
-														<c:choose>
-															<c:when test="${empty memberFilesVO.filName}">
-																<img src="/images/profile.jpg"  class="profile-user-img img-fluid img-circle" alt="User Image">
-															</c:when>
-															<c:otherwise>
-																<img class="profile-user-img img-fluid img-circle" src="C:/production/upload/member/${memberFilesVO.fileName}" alt="User profile picture">
-															</c:otherwise>
-														</c:choose>
-													</div>
-													<div class="input-group">
-													  <input class="form-check-input deleteCheck" type="checkbox" name="fileNum" value="${memberFilesVO.fileNum}">
-													</div>
+																<div class="text-center">
+																	<c:forEach items="${departmentVO.studentVOs}" var="studentVO">
+				     	 												<c:choose>
+																		    <c:when test="${empty studentVO.memberFilesVO.fileName}">
+																		        <img class="profile-user-img img-fluid img-circle"
+																		             src="/images/profile.jpg"
+																		             alt="User profile picture">
+																		    </c:when>
+																		    <c:otherwise>	
+																				<img class="img-fluid img-size"
+																				     src="/file/member/${studentVO.memberFilesVO.fileName}"
+																				     alt="User profile picture">
+																		    </c:otherwise>
+																		</c:choose>
+																	</c:forEach>
+																<div class="col-md-12 mt-3">
+											                        <div id="fileList">
+											                           <button class="col-md-3  btn btn-primary" id="fileAdd" type="button">파일추가</button>
+											                        </div> 
+											                     </div> 
+															</div>
 													
 													<c:forEach items="${departmentVO.studentVOs}" var="studentVO">
 														<h3 class="profile-username text-center">이름 : <input value="${studentVO.name}" type="text" id="name" name="name"></h3>

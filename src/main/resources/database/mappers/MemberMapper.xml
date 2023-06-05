@@ -178,7 +178,7 @@
 				   	   P.NAME = #{name},
 				   	   P.PHONE = #{phone},
 				   	   P.ADDRESS = #{address},
-				   	   P.ADDRESSDETAIL = #{addressDetail},
+				   	   <!-- P.ADDRESSDETAIL = #{addressDetail}, -->
 				   	   M.EMAIL = #{email}
  			WHERE M.USERNAME = #{username}
  		</update>
@@ -190,10 +190,14 @@
 				   	   A.NAME = #{name},
 				   	   A.PHONE = #{phone},
 				   	   A.ADDRESS = #{address},
-				   	   A.ADDRESSDETAIL = #{addressDetail},
+				   	   <!-- A.ADDRESSDETAIL = #{addressDetail}, -->
 				   	   M.EMAIL = #{email}
  			WHERE M.USERNAME = #{username}
  		</update>
+ 		
+ 		<select id="getFileDetail" parameterType="MemberFilesVO" resultType="MemberFilesVO">
+ 			SELECT FILENAME, ORINAME FROM MEMBERFILES WHERE USERNAME = #{username}
+ 		</select>
  		
  		<insert id="setFileAdd" parameterType="MemberFilesVO">
  			INSERT INTO MEMBERFILES(USERNAME, FILENAME, ORINAME)
@@ -203,5 +207,10 @@
  		<delete id="setFileDelete" parameterType="MemberFilesVO">
  			DELETE FROM MEMBERFILES WHERE FILENUM = #{fileNum}
  		</delete>
+ 		
+ 		<update id="setFileUpdate" parameterType="MemberFilesVO">
+ 			UPDATE MEMBERFILES SET FILENAME = #{fileName}, ORINAME = #{oriName}
+ 			WHERE USERNAME = #{username}
+ 		</update>
  		
   </mapper>

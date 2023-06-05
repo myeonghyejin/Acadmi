@@ -23,7 +23,9 @@ public interface MemberDAO {
 	public MemberVO getFirstEmail(MemberVO memberVO) throws Exception;
 	public int setEnabledUpdate(MemberVO memberVO) throws Exception;
 	
+	public MemberFilesVO getFileDetail(MemberFilesVO memberFilesVO) throws Exception;
 	public int setFileAdd(MemberFilesVO memberFilesVO) throws Exception;
+	public int setFileUpdate(MemberFilesVO memberFilesVO) throws Exception;
 	public int setFileDelete(MemberFilesVO memberFilesVO) throws Exception;
 	
 //	========================================================================================
@@ -35,7 +37,7 @@ public interface MemberDAO {
 //	=========================================================================================
 	
 	public int setStudentUpdate(MemberVO memberVO) throws Exception;
-	public int setProfessorUpdate(ProfessorVO professorVO) throws Exception;
-	public int setAdministratorUpdate(AdministratorVO administratorVO) throws Exception;
+	public int setProfessorUpdate(MemberVO memberVO) throws Exception;
+	public int setAdministratorUpdate(MemberVO memberVO) throws Exception;
 
 }

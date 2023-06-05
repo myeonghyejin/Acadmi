@@ -35146,6 +35146,7 @@ a.close.disabled, a.disabled.mailbox-attachment-close {
   margin: 0 auto;
   padding: 3px;
   width: 100px;
+  
 }
 
 .profile-username {
@@ -44498,7 +44499,7 @@ select.form-control-sm ~ .select2-container--default .select2-selection--multipl
 
 .img-bordered-sm {
   border: 2px solid #adb5bd;
-  padding: 2px;
+  padding: 4px;
 }
 
 .img-rounded {
@@ -44507,6 +44508,13 @@ select.form-control-sm ~ .select2-container--default .select2-selection--multipl
 
 .img-circle {
   border-radius: 50%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.img-size {
+  width: 180px;
+  height: 210px;
 }
 
 .img-size-64,
