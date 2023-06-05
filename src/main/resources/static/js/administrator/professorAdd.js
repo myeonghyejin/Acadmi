@@ -1,4 +1,4 @@
-let check = [false, false, false,false,false,false,false]
+let check = [true,true,true,true,true,true,true,true,true]
 
 
 //입학년도 필수사항
@@ -74,6 +74,28 @@ $("#dept").blur(function() {
     }else {
         check[6] = true
         $("#deptResult").html("")
+    }
+})
+
+//생년월일 필수사항
+$("#birth").blur(function() {
+    if($("#birth").val() == '') {
+        check[7] = false
+        $("#birthResult").html("<p style='color : red;'>생년월일 필수사항입니다</p>")
+    }else {
+        check[7] = true
+        $("#birthResult").html("")
+    }
+})
+
+//주소 필수사항
+$("#address_kakao").blur(function() {
+    if($("#address_kakao").val() == '') {
+        check[8] = false
+        $("#addressResult").html("<p style='color : red;'>주소는 필수사항입니다</p>")
+    }else {
+        check[8] = true
+        $("#addressResult").html("")
     }
 })
 

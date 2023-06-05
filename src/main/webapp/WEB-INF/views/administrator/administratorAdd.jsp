@@ -47,7 +47,7 @@
 			      <div class="card">
 			        <div class="card-body row">
 			          <div class="col-7">
-				         <form action="./administratorAdd" method="post">
+				         <form action="./administratorAdd" method="post" id="adminForm">
 				            <div class="form-group">
 				              <label for="year">입학년도</label>
 				              <input type="text" id="year" class="form-control" name="year"/>
@@ -92,12 +92,16 @@
 				             <!-- Date -->
 			              	<div class="form-group">
 			                 	<label>생년월일</label>
-			                   	 <input type="date" class="form-control" name="birth"/>     	
+			                   	 <input type="date" class="form-control" name="birth" id="birth"/>     	
 			               	</div>
+			               	 <div id="birthResult"></div>
+			               	 
 			                 <div class="form-group">
 				              <label for="address_kakao">주소</label>
 				              <input type="text" id="address_kakao" readonly class="form-control" name="address"/>
 				            </div>
+				             <div id="addressResult"></div>
+				             
 				             <div class="form-group">
 				              <label for="detailAddress">상세주소</label>
 				              <input type="text" id="detailAddress"  class="form-control" name="address"/>

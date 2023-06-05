@@ -1,4 +1,5 @@
-let check = [false, false, false,false,false,false]
+let check = [true,true,true,true,true,true,true,true]
+
 
 //입학년도 필수사항
 $("#year").blur(function() {
@@ -67,12 +68,33 @@ $("#dept").blur(function() {
     }
 })
 
+//생년월일 필수사항
+$("#birth").blur(function() {
+    if($("#birth").val() == '') {
+        check[6] = false
+        $("#birthResult").html("<p style='color : red;'>생년월일 필수사항입니다</p>")
+    }else {
+        check[6] = true
+        $("#birthResult").html("")
+    }
+})
+
+//주소 필수사항
+$("#address_kakao").blur(function() {
+    if($("#address_kakao").val() == '') {
+        check[7] = false
+        $("#addressResult").html("<p style='color : red;'>주소는 필수사항입니다</p>")
+    }else {
+        check[7] = true
+        $("#addressResult").html("")
+    }
+})
 
 
 $("#adminBtn").click(function() {
     if(!check.includes(false)) {
         // console.log("성공")
-        $("#professorForm").submit()
+        $("#adminForm").submit()
     }else {
         // console.log("실패")
         alert("모든 사항을 입력하세요")

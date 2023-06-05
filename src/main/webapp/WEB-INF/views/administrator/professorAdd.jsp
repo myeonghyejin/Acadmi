@@ -98,22 +98,25 @@
 	              <input type="text" id="phone" class="form-control" name="phone"/>
 	            </div>
 	             <div id="phoneResult"></div>
-	             <div class="form-group">
+	             <!-- Date -->
+              	<div class="form-group">
                  	<label>생년월일</label>
-                   	 <input type="date" class="form-control" name="birth"/>     	
+                   	 <input type="date" class="form-control" name="birth" id="birth"/>     	
                	</div>
-                 <div id="birthResult"></div>
+               	 <div id="birthResult"></div>
+               	 
                  <div class="form-group">
 	              <label for="address_kakao">주소</label>
 	              <input type="text" id="address_kakao" readonly class="form-control" name="address"/>
 	            </div>
+	            <div id="addressResult"></div>
+	            
 	             <div class="form-group">
 	              <label for="detailAddress">상세주소</label>
 	              <input type="text" id="detailAddress"  class="form-control" name="address"/>
 	            </div>
 	            <input type="hidden" name="category" value="1">
 	            <button type="button" class="btn btn-info" id="professorBtn">교수가입</button> 
-	           <!-- <button type="submit" class="btn btn-info">교수가입</button> -->
 	          </form>
           </div>
         </div>

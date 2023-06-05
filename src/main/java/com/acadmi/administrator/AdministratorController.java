@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;import org.springframework.boot.context.properties.ConfigurationPropertiesBinding;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -365,13 +366,14 @@ public class AdministratorController {
 	public ModelAndView setPeriodAdd(@Valid PeriodVO periodVO, BindingResult bindingResult) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
+		log.error("applicationStart ::: {}", periodVO.getApplicationStart());
 		int result = administratorService.setPeriodAdd(periodVO);
 		
-		if(bindingResult.hasErrors()) {
-			log.warn("검증에 실패");
-			mv.setViewName("administrator/periodAdd");
-			return mv;
-		}
+//		if(bindingResult.hasErrors()) {
+//			log.warn("검증에 실패");
+//			mv.setViewName("administrator/periodAdd");
+//			return mv;
+//		}
 		
 		String message= "등록 실패";
 		

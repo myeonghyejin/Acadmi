@@ -256,8 +256,8 @@
   
   <!--기간 설정  -->
   <insert id="setPeriodAdd" parameterType="PeriodVO">
-  	INSERT INTO PERIOD
-  	VALUES(#{year},#{semester},#{applicationStart},#{applicationEnd},#{favoriteStart},#{favoriteEnd},#{deadline})
+  INSERT INTO PERIOD (YEAR,SEMESTER,APPLICATIONSTART,APPLICATIONEND,FAVORITESTAR,FAVORITEEND,DEADLINE) 
+  VALUES (#{year},#{semester},STR_TO_DATE(#{applicationStart},'%Y-%m-%dT%H:%i'), STR_TO_DATE('2023-06-03T14:30', '%Y-%m-%dT%H:%i'),STR_TO_DATE('2023-06-03T14:30', '%Y-%m-%dT%H:%i'),STR_TO_DATE('2023-06-03T14:30', '%Y-%m-%dT%H:%i'),STR_TO_DATE('2023-06-03T14:30', '%Y-%m-%dT%H:%i'))	
   	
   </insert>
   
