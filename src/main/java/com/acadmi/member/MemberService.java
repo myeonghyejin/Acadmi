@@ -1,10 +1,13 @@
 package com.acadmi.member;
 
 import java.security.SecureRandom;
+
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailSender;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,7 +16,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.acadmi.administrator.AdministratorDAO;
+import com.acadmi.administrator.AdministratorVO;
+import com.acadmi.department.DepartmentVO;
+import com.acadmi.professor.ProfessorVO;
+import com.acadmi.student.StudentVO;
 import com.acadmi.util.MailManager;
 
 import lombok.extern.slf4j.Slf4j;
@@ -23,8 +32,13 @@ import lombok.extern.slf4j.Slf4j;
 @Transactional(rollbackFor = Exception.class)
 public class MemberService implements UserDetailsService{
 	
+//	Member
+	
 	@Autowired
 	private MemberDAO memberDAO;
+	
+	@Value("${app.upload.member}")
+	private String path;
 	
 	@Autowired
 	private MailManager mailManager;
@@ -34,13 +48,6 @@ public class MemberService implements UserDetailsService{
 	
 	public MemberVO getLogin(MemberVO memberVO) throws Exception{
 		return memberDAO.getLogin(memberVO);
-	}
-	
-	public MemberVO getMyPage(MemberVO memberVO) throws Exception {
-		
-		memberVO = memberDAO.getLogin(memberVO);
-		
-		return memberVO;
 	}
 	
 	public int setLogout(MemberVO memberVO) throws Exception{
@@ -61,19 +68,6 @@ public class MemberService implements UserDetailsService{
 			e.printStackTrace();
 		}
 		return memberVO;
-	}
-	
-	public int setJoin(MemberVO memberVO) throws Exception{
-		//memberVO.setEnabled(true);
-		memberVO.setPassword(passwordEncoder.encode(memberVO.getPassword()));
-		
-		int result = memberDAO.setJoin(memberVO);
-		
-		Map<String, Object> map = new HashMap<>();
-		map.put("username", memberVO.getUsername());
-		map.put("num", 1);
-		result = memberDAO.setRoleAdd(map);
-		return result;
 	}
 	
 	public boolean getFindPw(MemberVO memberVO, BindingResult bindingResult) throws Exception {
@@ -105,6 +99,39 @@ public class MemberService implements UserDetailsService{
 		
 		return result;
 		
+	}
+	
+//	======================================================================================================================
+	
+	public DepartmentVO getStudent(StudentVO studentVO, MultipartFile multipartFile) throws Exception {
+		
+		return memberDAO.getStudent(studentVO);
+	}
+	
+	public DepartmentVO getProfessor(ProfessorVO professorVO, MultipartFile multipartFile) throws Exception {
+		
+		return memberDAO.getProfessor(professorVO);
+	}
+
+	public DepartmentVO getAdministrator(AdministratorVO administratorVO, MultipartFile multipartFile) throws Exception {
+	
+		return memberDAO.getAdministrator(administratorVO);
+	}
+	
+	
+//	======================================================================================================================
+	
+	
+	public MemberVO setStudentUpdate(StudentVO studentVO) throws Exception{
+		return memberDAO.setStudentUpdate(studentVO);
+	}
+	
+	public MemberVO setProfessorUpdate(ProfessorVO professorVO) throws Exception{
+		return memberDAO.setProfessorUpdate(professorVO);
+	}
+	
+	public MemberVO setAdministratorUpdate(AdministratorVO administratorVO) throws Exception{
+		return memberDAO.setAdministratorUpdate(administratorVO);
 	}
 	
 }
