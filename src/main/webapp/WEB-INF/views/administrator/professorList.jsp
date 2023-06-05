@@ -46,7 +46,10 @@
 								<c:forEach items="${professorVO.memberFilesVOs}" var="memberFilesVO">
 									<td><img src="/file/member/${memberFiles.fileName}"></td>
 								</c:forEach>
-							<td></td>
+							<td>
+	     	 					<sec:authentication property="principal.username" var="username"/>
+				     	 			<a href="../chat/detail?sender=${username}&recipient=${studentVO.username}"><i class="fa-regular fa-envelope fa-2xl" style="margin:30px 0 0 0;"></i></a>
+				            </td>
 							<td></td>
 							<td><c:out value="${professorName}"></c:out></td>
 							<td><c:out value="${collegeName}"></c:out></td>	
