@@ -12,8 +12,8 @@ import lombok.Setter;
 public class ChatMessageVO {
 	
 	private Long msgNum;
-	private String sender;
-	private String recipient;
+	private String msgSender;
+	private String msgRecipient;
 	private String msgContents;
 	private LocalDateTime msgDate;
 	private Integer msgStatus;

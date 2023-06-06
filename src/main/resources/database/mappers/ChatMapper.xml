@@ -6,23 +6,39 @@
   
   <mapper namespace="com.acadmi.chat.ChatDAO">
   	
+  		<!-- select -->
+  		
   	<!-- 채팅방 목록 list -->
-  	<select id="getChatRoomList" parameterType="pagination" resultMap="getChatRoomListResult">
+  	<select id="getChatRoomList" parameterType="pagination" resultMap="getChatRoomResult">
   		SELECT * FROM CHAT_ROOM CR
   				 LEFT JOIN MEMBERFILES MF
-  				 ON(CR.RECIPIENT = MF.USERNAME)
+  				 ON(CR.ROOMRECIPIENT = MF.USERNAME)
   				 LEFT JOIN CHAT_MESSAGE CM
   				 ON(CR.CHATNUM = CM.CHATNUM)
   				 LEFT JOIN CHATFILES CF
   				 ON(CM.MSGNUM = CF.MSGNUM)
-  		WHERE CR.SENDER = #{username}
-  		ORDER BY CHATSTATUS ASC ,CM.MSGDATE ASC
+  		WHERE CR.ROOMSENDER = #{username}
+  		ORDER BY CHATSTATUS ASC ,CM.MSGDATE DESC
   	</select>
-  	<resultMap type="ChatRoomVO" id="getChatRoomListResult">
+  	
+  	<!-- 채팅방의 메세지들을 뽑아오는 것 -->
+  	<select id="getChatRoom" parameterType="ChatRoomVO" resultMap="getChatRoomResult">
+  		SELECT * FROM CHAT_ROOM CR
+				 LEFT JOIN MEMBERFILES MF
+				 ON(CR.ROOMSENDER=MF.USERNAME)
+				 LEFT JOIN CHAT_MESSAGE CM
+				 ON(CR.CHATNUM=CM.CHATNUM)
+				 LEFT JOIN CHATFILES CF
+				 ON(CM.MSGNUM=CF.MSGNUM)
+		WHERE CR.ROOMSENDER = #{roomSender} AND CR.ROOMRECIPIENT = #{roomRecipient}
+		ORDER BY MSGDATE ASC
+  	</select>
+  	
+  	<resultMap type="ChatRoomVO" id="getChatRoomResult">
   		<id column="CHATNUM" property="chatNum"/>
   		<result column="CHATSTATUS" property="chatStatus"/>
-  		<result column="SENDER" property="sender"/>
-  		<result column="RECIPIENT" property="recipient"/>
+  		<result column="ROOMSENDER" property="roomSender"/>
+  		<result column="ROOMRECIPIENT" property="roomRecipient"/>
   		<association property="memberFilesVO" javaType="MemberFilesVO">
   			<id column="FILENUM" property="fileNum"/>
   			<result column="USERNAME" property="username"/>
@@ -31,8 +47,8 @@
   		</association>
   		<collection property="chatMessageVOs" javaType="List" ofType="ChatMessageVO">
   			<id column="MSGNUM" property="msgNum"/>
-  			<result column="SENDER" property="sender"/>
-  			<result column="RECIPIENT" property="recipient"/>
+  			<result column="MSGSENDER" property="msgSender"/>
+  			<result column="MSGRECIPIENT" property="msgRecipient"/>
   			<result column="MSGCONTENTS" property="msgContents"/>
   			<result column="MSGDATE" property="msgDate"/>
   			<result column="MSGSTATUS" property="msgStatus"/>
@@ -44,35 +60,44 @@
   		</collection>
   	</resultMap>
   	
-  	<!-- 채팅방 확인 -->
-  	<select id="getChatRoomDetail" parameterType="chatRoomVO" resultType="chatRoomVO">
-  		SELECT * FROM CHAT_ROOM
-  		WHERE SENDER=#{sender} AND RECIPIENT = #{recipient}
-  	</select>
+  		<!-- insert -->
   	
   	<!-- 채팅방 만들기 -->
   	<!-- sender -->
-  	<insert id="setSenderChatRoom" parameterType="chatRoomVO">
+  	<insert id="setSenderChatRoom" parameterType="ChatRoomVO">
   		INSERT INTO CHAT_ROOM
-  		VALUES (0, #{sender}, #{recipient}, 1)
-  	</insert>
-  	<!-- recipient -->
-  	<insert id="setRecipientChatRoom" parameterType="chatRoomVO">
-  		INSERT INTO CHAT_ROOM
-  		VALUES (0, #{recipient}, #{sender}, 0)
+  		VALUES (0, #{roomSender}, #{roomRecipient}, 1)
   	</insert>
   	
-  	<!-- 채팅방의 메세지들을 뽑아오는 것 -->
-  	<select id="getChatMessage" parameterType="ChatMessageVO" resultType="chatMessageVO">
-  		SELECT * FROM CHAT_MESSAGE
-  		WHERE CHATNUM = #{chatNum}
-  		ORDER BY MSGNUM ASC
-  	</select>
+  	<!-- recipient -->
+  	<insert id="setRecipientChatRoom" parameterType="ChatRoomVO">
+  		INSERT INTO CHAT_ROOM
+  		VALUES (0, #{roomRecipient}, #{roomSender}, 0)
+  	</insert>
   	
   	<!-- 메세지 입력 -->
   	<insert id="setSaveMessage" parameterType="ChatMessageVO">
   		INSERT INTO CHAT_MESSAGE
-  		VALUES (0, #{sender}, #{recipient}, #{msgContents}, now(), #{msgStatus}, #{chatNum})
+  		VALUES (0, #{msgSender}, #{msgRecipient}, #{msgContents}, now(), #{msgStatus}, #{chatNum})
   	</insert>
+  	
+  		<!-- update -->
+  	
+  	<!-- 채팅방 상태 변경 -->
+  	<update id="setChatRoomUpdate" parameterType="ChatRoomVO">
+  		UPDATE CHAT_ROOM SET CHATSTATUS = #{chatStatus} WHERE CHATNUM = #{chatNum}
+  	</update>
+  	
+  	<!-- 내 채팅방 메세지 상태 변경 -->
+  	<update id="setMyChatMessageUpdate" parameterType="ChatMessageVO">
+  		UPDATE CHAT_MESSAGE SET MSGSTATUS = 1 WHERE CHATNUM = #{chatNum} AND MSGSENDER = #{msgRecipient}
+  	</update>
+  	
+  	<!-- 상대 채팅방 메세지 상태 변경 -->
+  	<update id="setYourChatMessageUpdate">
+  		UPDATE CHAT_MESSAGE SET MSGSTATUS = 1 WHERE CHATNUM = #{chatNum} AND MSGRECIPIENT = #{msgSender}
+  	</update>
+  	
+  	
   
   </mapper>

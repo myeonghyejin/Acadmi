@@ -36,18 +36,21 @@
 									<c:forEach items="${list}" var="chatRoomVO">
 										<div class="contacts-list">
 											<c:forEach items="${chatRoomVO.chatMessageVOs}" var="chatMessageVO" varStatus="i">
-												<c:if test="${i.last}">
-													<li><a href="./detail?sender=${chatMessageVO.sender}&recipient=${chatMessageVO.recipient}">
+												<c:if test="${chatMessageVO.msgStatus eq 0}">
+													<c:set var="count" value="${count + 1}"></c:set>
+												</c:if>
+												<c:if test="${i.first}">
+													<li><a href="./detail?roomSender=${chatRoomVO.roomSender}&roomRecipient=${chatRoomVO.roomRecipient}">
 														<img class="contacts-list-img" src="" alt="...">
 																<div class="contacts-list-info">
 																	<span class="contacts-list-name">
-																		${chatMessageVO.recipient}
+																		${chatRoomVO.roomRecipient}
 																		<small class="contacts-list-date float-right">${chatMessageVO.msgDate}</small>
 																	</span>
 																	<span class="contacts-list-msg">
 																		${chatMessageVO.msgContents}
-																		<c:if test="${chatMessageVO.msgStatus eq 0}">
-																			<small class="contacts-list-date float-right">!</small>
+																		<c:if test="${chatRoomVO.chatStatus eq 0}">
+																			<span class="right badge badge-info">${count}</span>
 																		</c:if>
 																	</span>
 																</div>

@@ -16,7 +16,9 @@ import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.acadmi.chat.ChatDAO;
 import com.acadmi.chat.ChatMessageVO;
+import com.acadmi.chat.ChatRoomVO;
 import com.acadmi.chat.ChatService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -31,37 +33,45 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 	@Autowired
 	private ChatService chatService;
 	
+	@Autowired
+	private ChatDAO chatDAO;
+	
 	//메세지를 보내는 메서드
 	private void sendMessage(ChatMessageVO chatMessageVO) throws Exception {
 		int result = 0;
-		WebSocketSession session = sessions.get(chatMessageVO.getRecipient());
+		WebSocketSession session = sessions.get(chatMessageVO.getMsgRecipient());
 		if(session != null && session.isOpen()) {
 			chatMessageVO.setMsgStatus(1);
 			result = chatService.setSaveMessage(chatMessageVO);
 			session.sendMessage(new TextMessage(chatMessageVO.getMsgContents()));
 		} else {
-			log.info("msgContents : {}",chatMessageVO.getMsgContents());
 			chatMessageVO.setMsgStatus(0);
 			result = chatService.setSaveMessage(chatMessageVO);
-			String sender = chatMessageVO.getRecipient();
-			String recipient = chatMessageVO.getSender();
-			chatMessageVO.setSender(sender);
-			chatMessageVO.setRecipient(recipient);
+			ChatRoomVO yourChatRoomVO = new ChatRoomVO();
+			yourChatRoomVO.setRoomSender(chatMessageVO.getMsgRecipient());
+			yourChatRoomVO.setRoomRecipient(chatMessageVO.getMsgSender());
+			yourChatRoomVO = chatDAO.getChatRoom(yourChatRoomVO);
+			yourChatRoomVO.setChatStatus(0);
+			result = chatDAO.setChatRoomUpdate(yourChatRoomVO);
+			chatMessageVO.setChatNum(yourChatRoomVO.getChatNum());
 			result = chatService.setSaveMessage(chatMessageVO);
 		}
 	}
 	
 	//메세지를 받는 메서드
 	private void receiveMessage(ChatMessageVO chatMessageVO) throws Exception {
-		int result = 0;
-		WebSocketSession session = sessions.get(chatMessageVO.getSender());
-		if(session != null && session.isOpen()) {
-			chatMessageVO.setMsgStatus(1);
-			result = chatService.setSaveMessage(chatMessageVO);
-		} else {
-			chatMessageVO.setMsgStatus(0);
-			result = chatService.setSaveMessage(chatMessageVO);
-		}
+		chatMessageVO.setMsgStatus(1);
+		int result = chatService.setSaveMessage(chatMessageVO);
+//		WebSocketSession session = sessions.get(chatMessageVO.getMsgSender());
+//		if(session != null && session.isOpen()) {
+//			chatMessageVO.setMsgStatus(1);
+//			result = chatService.setSaveMessage(chatMessageVO);
+//		} else {
+//			chatMessageVO.setMsgStatus(0);
+//			result = chatService.setSaveMessage(chatMessageVO);
+//			ChatRoomVO yourChatRoom = new ChatRoomVO();
+//			yourChatRoom = 
+//		}
 	}
 	
 	//JSON으로 온 메세지 처리
@@ -84,17 +94,17 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 	public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
 		String payload = (String)message.getPayload();
 		ChatMessageVO chatMessageVO = this.processMessage(payload);
-		log.info("=====session의 sender : {}",session.getPrincipal().getName());
-		log.info("=====chatVO의 sender : {}",chatMessageVO.getSender());
-		if(session.getPrincipal().getName().equals(chatMessageVO.getSender())) {
+		if(session.getPrincipal().getName().equals(chatMessageVO.getMsgSender())) {
 			log.info("=======보내는 msgContents : {}",chatMessageVO.getMsgContents());
-			log.info("=======보내는 recipient : {}",chatMessageVO.getRecipient());
-			log.info("=======보내는 sender : {}",chatMessageVO.getSender());
+			log.info("=======보내는 recipient : {}",chatMessageVO.getMsgRecipient());
+			log.info("=======보내는 sender : {}",chatMessageVO.getMsgSender());
+			log.info("=======보내는 chatNum : {}",chatMessageVO.getChatNum());
 			this.sendMessage(chatMessageVO);
 		} else {
 			log.info("=======받는 msgContents : {}",chatMessageVO.getMsgContents());
-			log.info("=======받는 recipient : {}",chatMessageVO.getRecipient());
-			log.info("=======받는 sender : {}",chatMessageVO.getSender());
+			log.info("=======받는 recipient : {}",chatMessageVO.getMsgRecipient());
+			log.info("=======받는 sender : {}",chatMessageVO.getMsgSender());
+			log.info("=======받는 chatNum : {}",chatMessageVO.getChatNum());
 			this.receiveMessage(chatMessageVO);
 		}
 	}

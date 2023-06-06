@@ -13,8 +13,8 @@ public class ChatRoomVO {
 	
 	private Long chatNum;
 	private Integer chatStatus;
-	private String sender;
-	private String recipient;
+	private String roomSender;
+	private String roomRecipient;
 	private List<ChatMessageVO> chatMessageVOs;
 	private MemberFilesVO memberFilesVO;
 

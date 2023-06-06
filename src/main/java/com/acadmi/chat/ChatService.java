@@ -31,30 +31,38 @@ public class ChatService {
 	}
 	
 	//채팅방 메세지 출력
-	public List<ChatMessageVO> getChatMessage(ChatMessageVO chatMessageVO) throws Exception {
-		ChatRoomVO chatRoomVO = new ChatRoomVO();
-		chatRoomVO.setSender(chatMessageVO.getSender());
-		chatRoomVO.setRecipient(chatMessageVO.getRecipient());
-		chatRoomVO = chatDAO.getChatRoomDetail(chatRoomVO);
+	public ChatRoomVO getChatRoom(ChatRoomVO chatRoomVO) throws Exception {
+		int result = 0;
+		String sender = chatRoomVO.getRoomSender();
+		String recipient = chatRoomVO.getRoomRecipient();
+		chatRoomVO = chatDAO.getChatRoom(chatRoomVO);
+		
 		if(chatRoomVO == null) {
 			chatRoomVO = new ChatRoomVO();
-			chatRoomVO.setSender(chatMessageVO.getSender());
-			chatRoomVO.setRecipient(chatMessageVO.getRecipient());
-			int result = chatDAO.setSenderChatRoom(chatRoomVO);
+			chatRoomVO.setRoomSender(sender);
+			chatRoomVO.setRoomRecipient(recipient);
+			result = chatDAO.setSenderChatRoom(chatRoomVO);
 			result = chatDAO.setRecipientChatRoom(chatRoomVO);
-		} else {
-			chatMessageVO.setChatNum(chatRoomVO.getChatNum());
+			chatRoomVO = chatDAO.getChatRoom(chatRoomVO);
+			log.info("chatNum {}: ",chatRoomVO.getChatNum());
 		}
-		return chatDAO.getChatMessage(chatMessageVO);
+		chatRoomVO.setChatStatus(1);
+		result = chatDAO.setChatRoomUpdate(chatRoomVO);
+		ChatMessageVO chatMessageVO = new ChatMessageVO();
+		chatMessageVO.setChatNum(chatRoomVO.getChatNum());
+		result = chatDAO.setMyChatMessageUpdate(chatMessageVO);
+		ChatRoomVO yourChatRoomVO = new ChatRoomVO();
+		yourChatRoomVO.setRoomSender(recipient);
+		yourChatRoomVO.setRoomRecipient(sender);
+		yourChatRoomVO = chatDAO.getChatRoom(yourChatRoomVO);
+		chatMessageVO.setChatNum(yourChatRoomVO.getChatNum());
+		result = chatDAO.setYourChatMessageUpdate(chatMessageVO);
+		
+		return chatDAO.getChatRoom(chatRoomVO);
 	}
 	
 	//메세지 저장
 	public int setSaveMessage(ChatMessageVO chatMessageVO) throws Exception {
-		ChatRoomVO chatRoomVO = new ChatRoomVO();
-		chatRoomVO.setSender(chatMessageVO.getSender());
-		chatRoomVO.setRecipient(chatMessageVO.getRecipient());
-		chatRoomVO = chatDAO.getChatRoomDetail(chatRoomVO);
-		chatMessageVO.setChatNum(chatRoomVO.getChatNum());
 		int result = chatDAO.setSaveMessage(chatMessageVO);
 		return result;
 	}

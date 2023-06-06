@@ -31,11 +31,11 @@
 						<div class="card-body">
 							<div class="direct-chat-messages" id="messageList">
 								<!-- Message. Default to the left -->
-								<c:forEach items="${messageList}" var="chatMessageVO">
-									<c:if test="${chatMessageVO.sender eq param.recipient}">
+								<c:forEach items="${chatRoom.chatMessageVOs}" var="chatMessageVO">
+									<c:if test="${chatMessageVO.msgSender eq param.roomRecipient}">
 										<div class="direct-chat-msg">
 											<div class="direct-chat-infos clearfix">
-												<span class="direct-chat-name float-left">${chatMessageVO.sender}</span>
+												<span class="direct-chat-name float-left">${chatMessageVO.msgSender}</span>
 												<span class="direct-chat-timestamp float-right">${chatMessageVO.msgDate}</span>
 											</div>
 											<!-- /.direct-chat-infos -->
@@ -45,16 +45,16 @@
 											<!-- /.direct-chat-text -->
 										</div>
 									</c:if>
-									<c:if test="${chatMessageVO.sender eq param.sender}">
+									<c:if test="${chatMessageVO.msgSender eq param.roomSender}">
 										<div class="direct-chat-msg right">
 											<div class="direct-chat-infos clearfix">
-												<span class="direct-chat-name float-right">${chatMessageVO.sender}</span>
+												<span class="direct-chat-name float-right">${chatMessageVO.msgSender}</span>
 												<span class="direct-chat-timestamp float-left">${chatMessageVO.msgDate}</span>
 											</div>
 										<!-- /.direct-chat-infos -->
 											<img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image">
 										<!-- /.direct-chat-img -->
-											<div class="direct-chat-text">${chatMessageVO.msgContents}</div>
+											<div class="direct-chat-text text-right">${chatMessageVO.msgContents}</div>
 										<!-- /.direct-chat-text -->
 										</div>
 									</c:if>
@@ -68,7 +68,8 @@
 							</div>
 						<!-- /.card-body -->
 						<div class="card-footer">
-							<form action="#" method="post">
+							<form>
+								<input type="hidden" id="chatNum" name="chatNum" value="${chatRoom.chatNum}">
 								<div class="input-group">
 									<input id="message" type="text" name="message" placeholder="Type Message ..." class="form-control">
 									<span class="input-group-append">

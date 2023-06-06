@@ -32,10 +32,10 @@ public class ChatController {
 	}
 	
 	@GetMapping("detail")
-	public ModelAndView getChatRoomDetail(ChatMessageVO chatMessageVO) throws Exception {
+	public ModelAndView getChatRoomDetail(ChatRoomVO chatRoomVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		List<ChatMessageVO> ar = chatService.getChatMessage(chatMessageVO);
-		mv.addObject("messageList", ar);
+		chatRoomVO = chatService.getChatRoom(chatRoomVO);
+		mv.addObject("chatRoom", chatRoomVO);
 		mv.setViewName("chat/detail");
 		return mv;
 	}
