@@ -109,6 +109,32 @@ public class MemberService implements UserDetailsService{
 		
 	}
 	
+	public boolean getFirstEmail(MemberVO memberVO, BindingResult bindingResult) throws Exception {
+		boolean result = false;
+		
+		result = bindingResult.hasErrors();
+		log.error("=========== result1 : {} ===========", result);
+
+		if(!memberVO.isEnabled()) {
+			String emailCheck = "<a href=\"http://localhost/member/login'></a>";
+			
+			mailManager.send(memberVO.getEmail(), "이메일 인증", "이메일 인증을 완료하려면 다음 링크를 클릭하세요: " + emailCheck);
+			
+			memberVO.setEnabled(true);
+			memberDAO.setEnabledUpdate(memberVO);
+			log.error("=========== result2 : {} ===========", result);
+
+		} else {
+			bindingResult.rejectValue("email", "member.username.email");
+			result = true;
+			log.error("=========== result3 : {} ===========", result);
+
+			
+		}
+		
+		return result;
+	}
+	
 	public int setFileDelete(MemberFilesVO memberFilesVO) throws Exception{
 		return memberDAO.setFileDelete(memberFilesVO);
 	}

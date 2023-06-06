@@ -126,17 +126,36 @@ public class MemberController {
 			return mv;
 		}
 	   
-//	   @PostMapping("fileDelete")
-//	   public ModelAndView setFileDelete(MemberFilesVO memberFilesVO) throws Exception{
-//		   ModelAndView mv = new ModelAndView();
-//		   
-//		   int result = memberService.setFileDelete(memberFilesVO);
-//		   
-//		   mv.addObject("result", result);
-//		   mv.setViewName("common/ajaxResult");
-//		   
-//		   return mv;
-//	   }
+	   @GetMapping("firstEmail")
+		public ModelAndView getFirstEmail(MemberVO memberVO) throws Exception {
+			ModelAndView mv = new ModelAndView();
+			mv.setViewName("member/firstEmail");
+			return mv;
+		}
+	   
+	   @PostMapping("firstEmail")
+		public ModelAndView getFirstEmail(@Valid MemberVO memberVO, BindingResult bindingResult) throws Exception{
+			ModelAndView mv = new ModelAndView();
+			boolean check = memberService.getFirstEmail(memberVO, bindingResult);
+			if(check) {
+				mv.setViewName("member/firstEmail");
+				return mv;
+			}
+			mv.setViewName("member/firstEmailCheck");
+			return mv;
+		}
+	   
+	   @PostMapping("fileDelete")
+	   public ModelAndView setFileDelete(MemberFilesVO memberFilesVO) throws Exception{
+		   ModelAndView mv = new ModelAndView();
+		   
+		   int result = memberService.setFileDelete(memberFilesVO);
+		   
+		   mv.addObject("result", result);
+		   mv.setViewName("member/fileDelete");
+		   
+		   return mv;
+	   }
 	   
 //	   ========================================멤버 권한에 따른 마이페이지========================================
 	   

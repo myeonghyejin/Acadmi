@@ -165,8 +165,8 @@
 		<div class="user-panel mt-3 pb-3 mb-3 d-flex">
 			<div class="image">
 				<sec:authorize access="hasRole('STUDENT')">
-                <sec:authentication property="principal.memberFilesVO.fileName" var="fileName"/>
-					<img src="/file/member/${fileName}" class="img-circle elevation-2" alt="User Image" >
+                <sec:authentication property="principal" var="user"/>
+					<img src="/images/profile.jpg" class="img-circle elevation-2" alt="User Image" >
 				</sec:authorize>
 				
 				<sec:authorize access="hasRole('PROFESSOR')">

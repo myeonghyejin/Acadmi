@@ -23,7 +23,7 @@
                             <a href="./login" class="h1"><b>Acadmi</b></a>
                         </div>
                         <div class="card-body">
-                            <p class="login-box-msg">비밀번호 잊어버리셨나요? <br> 여기 아이디와 이메일을 입력하여 <br> 임시 비밀번호를 받으세요!</p>
+                            <p class="login-box-msg">비밀번호를 잊어버리셨나요? <br> 아이디와 이메일을 입력하여 <br> 임시 비밀번호를 받으세요!</p>
                             <form:form id="contactForm" modelAttribute="memberVO" action="./findPw" method="post">
                                 <div class="input-group mb-3">
                                     <form:input path="username" id="username" class="form-control" placeholder="아이디를 입력하세요"></form:input>
