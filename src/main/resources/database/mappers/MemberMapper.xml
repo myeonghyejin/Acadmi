@@ -30,17 +30,6 @@
   				<result property="roleName" column="ROLENAME"/>
   			</collection>
   		</resultMap>
-  	
-  	
-  		<!-- <insert id="setJoin" parameterType="MemberVO">
-	  		INSERT INTO MEMBER
-	  		VALUES(#{username}, #{password}, #{email}, #{category}, 0)
-  		</insert>
-  		
-  		<insert id="setRoleAdd" parameterType="Map">
-	  		INSERT INTO MEMBER_ROLE
-	  		VALUES(#{username}, 1)
-  		</insert> -->
   		
   		<select id="getFindPw" parameterType="MemberVO" resultType="MemberVO">
 	  		SELECT EMAIL FROM MEMBER
