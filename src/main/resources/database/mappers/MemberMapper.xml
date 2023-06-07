@@ -87,7 +87,7 @@
   				<result column="PHONE" property="phone"/>
   				<result property="birth" column="BIRTH"/>
 	  			<result property="address" column="ADDRESS"/>
-	  			<!-- <result property="addressDetail" column="ADDRESSDETAIL"/> -->
+	  			<result property="addressDetail" column="ADDRESSDETAIL"/>
 	  			<result property="email" column="EMAIL"/>
   				<association property="memberFilesVO" javaType="MemberFilesVO">
            			<id column="FILENUM" property="fileNum"/>
@@ -121,7 +121,7 @@
   				<result column="PHONE" property="phone"/>
   				<result property="birth" column="BIRTH"/>
 	  			<result property="address" column="ADDRESS"/>
-	  			<!-- <result property="addressDetail" column="ADDRESSDETAIL"/> -->
+	  			<result property="addressDetail" column="ADDRESSDETAIL"/>
 	  			<result property="email" column="EMAIL"/>
   				<result column="STATUS" property="status"/>
   				<association property="memberFilesVO" javaType="MemberFilesVO">
@@ -154,7 +154,7 @@
   				<result column="PHONE" property="phone"/>
   				<result property="birth" column="BIRTH"/>
 	  			<result property="address" column="ADDRESS"/>
-	  			<!-- <result property="addressDetail" column="ADDRESSDETAIL"/> -->
+	  			<result property="addressDetail" column="ADDRESSDETAIL"/>
 	  			<result property="email" column="EMAIL"/>
   				<result column="STATUS" property="status"/>
   				<association property="memberFilesVO" javaType="MemberFilesVO">
@@ -174,7 +174,7 @@
 				   	   S.NAME = #{name},
 				   	   S.PHONE = #{phone},
 				   	   S.ADDRESS = #{address},
-				   	   <!-- S.ADDRESSDETAIL = #{addressDetail}, -->
+				   	   S.ADDRESSDETAIL = #{addressDetail},
 				   	   M.EMAIL = #{email}
  			WHERE M.USERNAME = #{username}
  		</update>
@@ -186,7 +186,7 @@
 				   	   P.NAME = #{name},
 				   	   P.PHONE = #{phone},
 				   	   P.ADDRESS = #{address},
-				   	   <!-- P.ADDRESSDETAIL = #{addressDetail}, -->
+				   	   P.ADDRESSDETAIL = #{addressDetail},
 				   	   M.EMAIL = #{email}
  			WHERE M.USERNAME = #{username}
  		</update>
@@ -198,7 +198,7 @@
 				   	   A.NAME = #{name},
 				   	   A.PHONE = #{phone},
 				   	   A.ADDRESS = #{address},
-				   	   <!-- A.ADDRESSDETAIL = #{addressDetail}, -->
+				   	   A.ADDRESSDETAIL = #{addressDetail},
 				   	   M.EMAIL = #{email}
  			WHERE M.USERNAME = #{username}
  		</update>

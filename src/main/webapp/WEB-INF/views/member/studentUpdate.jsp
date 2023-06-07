@@ -78,7 +78,7 @@
 															<c:set var="studentPhone" value="${studentVO.phone}"></c:set>
 															<c:set var="studentBirth" value="${studentVO.birth}"></c:set>
 															<c:set var="studentAddress" value="${studentVO.address}"></c:set>
-															<%-- <c:set var="studentAddressDetail" value="${studentVO.addressDetail}"></c:set> --%>
+															<c:set var="studentAddressDetail" value="${studentVO.addressDetail}"></c:set>
 															<c:set var="studentEmail" value="${studentVO.email}"></c:set>
 															
 
@@ -101,8 +101,8 @@
 																<hr>
 																	<strong><i class="fas fa-map-marker-alt mr-1"></i> 주소</strong>
 																		<p class="text-muted"><input value="${studentVO.address}" type="text" id="address" name="address"></p>
-																	<!-- <strong><i class="mr-1"></i> 상세 주소 입력</strong> -->
-																		<%-- <p class="text-muted"><input value="${studentVO.addressDetail}" type="text" id="addressDetail" name="addressDetail"></p> --%>
+																	<strong><i class="mr-1"></i> 상세 주소 입력</strong>
+																		<p class="text-muted"><input value="${studentVO.addressDetail}" type="text" id="addressDetail" name="addressDetail"></p>
 															
 														</div>
 													</c:forEach>
@@ -136,7 +136,6 @@
         new daum.Postcode({
             oncomplete: function(data) { //선택시 입력값 세팅
                 document.getElementById("address").value = data.address; // 주소 넣기
-               
             }
         }).open();
     });

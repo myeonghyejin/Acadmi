@@ -17,5 +17,6 @@ public class StudentVO extends MemberVO{
 	private Integer phone;
 	private Date birth;
 	private String address;
+	private String addressDetail;
 	private Integer status;
 }
