@@ -103,12 +103,17 @@ public class StudentLectureController {
 	    Authentication authentication = contextImpl.getAuthentication();
 	    studentLectureVO.setUsername(authentication.getName());
 
+	    log.info("{}", lectureVO.getStartTime());
+	    log.info("{}", lectureVO.getEndTime());
+	    
 	    // 1. 이미 신청한 강의와 요일/시간이 겹치는지 확인
 	    List<LectureVO> duplicateLectures = studentLectureService.getDuplicateTime(lectureVO);
 	    
+	    log.error("{}", duplicateLectures.size());
+	    
 	    for (LectureVO lecture : duplicateLectures) {
 	        log.error("{}", lecture);
-	    }//
+	    }
 	    
 	    if (duplicateLectures != null && !duplicateLectures.isEmpty()) {
 	        mv.addObject("result", 0);

@@ -22,32 +22,20 @@
 
 		<!-- Main Contents -->
 		<div class="container-fluid">
-			<div class="row">
-				<!-- 2레벨 Sidebar 적용 -->
-				<div class="content-wrapper">
-					<c:import url="../../temp/sidebar/student_lecture.jsp"></c:import>
-				</div>
-				<!-- 2레벨 Sidebar 끝 -->
+			<div class="content-wrapper">
 				
 				<!-- Contents -->
 				<div class="col">
 
-					<!-- Content Header (Page header) -->
-					<section class="content-header">
-						<div class="container-fluid">
-							<div class="row mb-2">
-								<div class="col-sm-6">
-									<h1>시간표 조회</h1>
-								</div>
-								<div class="col-sm-6">
-									<ol class="breadcrumb float-sm-right">
-										<li class="breadcrumb-item"><a href="#">Home</a></li>
-										<li class="breadcrumb-item active">시간표 조회</li>
-									</ol>
-								</div>
-							</div>
-						</div><!-- /.container-fluid -->
-					</section>
+				<!-- header start -->
+				<div class="row" style="padding-top:10px">
+					<div class="col-12">
+						<div class="card">
+							<h3 class="my-3 mx-3">시간표 조회</h3>
+						</div>
+					</div>
+				</div>
+				<!-- header end -->
 
 					<!-- Content -->
 					<div class="container-fluid">

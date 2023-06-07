@@ -14,41 +14,26 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 	<div class="wrapper">
 
-		<!-- Header 적용 -->
-		<c:import url="../../temp/header.jsp"></c:import>
-		<!-- Header 끝 -->
+	<!-- Header 적용 -->
+	<c:import url="../../temp/header.jsp"></c:import>
+	<!-- Header 끝 -->
 
-		<!-- Main Contents -->
-		<div class="container-fluid">
-			<div class="row">
-				<!-- 2레벨 Sidebar 적용 -->
-				<div class="content-wrapper">
-					<c:import url="../../temp/sidebar/student_lecture.jsp"></c:import>
-				</div>
-				<!-- 2레벨 Sidebar 끝 -->
+	<!-- Main Contents -->
+	<div class="container-fluid">
+		<div class="content-wrapper">
 				
 				<!-- Contents -->
 				<div class="col">
 
-					<!-- Content Header (Page header) -->
-					<section class="content-header">
-						<div class="container-fluid">
-							<div class="row mb-2">
-								<div class="col-sm-6">
-									<h1>내 장바구니</h1>
-								</div>
-								<div class="col-sm-6">
-									<ol class="breadcrumb float-sm-right">
-										<li class="breadcrumb-item"><a href="/">Home</a></li>
-										<li class="breadcrumb-item active">내 장바구니</li>
-									</ol>
-								</div>
-							</div>
-						</div><!-- /.container-fluid -->
-					</section>
-
-					<!-- Content -->
-					<section class="content">
+				<!-- header start -->
+				<div class="row" style="padding-top:10px">
+					<div class="col-12">
+						<div class="card">
+							<h3 class="my-3 mx-3">내 장바구니</h3>
+						</div>
+					</div>
+				</div>
+				<!-- header end -->
 
 						<!-- Default box -->
 						<div class="card">
@@ -63,7 +48,7 @@
 							</div>
 							
 							<div class="card-body p-0" id="myFavoriteList">
-								<table class="table table-striped projects">
+								<table class="table table-hover text-nowrap">
 									<thead>
 										<tr>
 											<th style="width: 8%">강의 번호</th>
@@ -152,8 +137,7 @@
 							<!-- /.card-body -->
 						</div>
 						<!-- /.card -->
-					</section>
-					<!-- /.content -->
+
 				</div>
 			</div>
 		</div>
