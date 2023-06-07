@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.internet.MimeMessage;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailSender;
@@ -116,7 +118,10 @@ public class MemberService implements UserDetailsService{
 		log.error("=========== result1 : {} ===========", result);
 
 		if(!memberVO.isEnabled()) {
-			String emailCheck = "<a href=\"http://localhost/member/login'></a>";
+			
+			String link = "http://localhost/member/login";
+			String emailCheck = "<html><body><p>Click the following link: <a href=\"" + link + "\">Link</a></p></body></html>";
+			
 			
 			mailManager.send(memberVO.getEmail(), "이메일 인증", "이메일 인증을 완료하려면 다음 링크를 클릭하세요: " + emailCheck);
 			

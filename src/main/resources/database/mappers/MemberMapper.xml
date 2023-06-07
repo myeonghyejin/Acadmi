@@ -154,7 +154,7 @@
   				<result column="PHONE" property="phone"/>
   				<result property="birth" column="BIRTH"/>
 	  			<result property="address" column="ADDRESS"/>
-	  			<result property="addressDetail" column="ADDRESSDETAIL"/>
+	  			<!-- <result property="addressDetail" column="ADDRESSDETAIL"/> -->
 	  			<result property="email" column="EMAIL"/>
   				<result column="STATUS" property="status"/>
   				<association property="memberFilesVO" javaType="MemberFilesVO">
