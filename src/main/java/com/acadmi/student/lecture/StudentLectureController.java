@@ -108,7 +108,7 @@ public class StudentLectureController {
 	    
 	    for (LectureVO lecture : duplicateLectures) {
 	        log.error("{}", lecture);
-	    }
+	    }//
 	    
 	    if (duplicateLectures != null && !duplicateLectures.isEmpty()) {
 	        mv.addObject("result", 0);
