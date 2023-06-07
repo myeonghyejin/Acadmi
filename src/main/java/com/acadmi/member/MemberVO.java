@@ -25,10 +25,12 @@ public class MemberVO implements UserDetails {
 	private Integer category;
 	private boolean enabled;
 	private MemberFilesVO memberFilesVO;
-	
 	private List<RoleVO> roleVOs;
 	
-
+	private StudentVO studentVO;
+	private ProfessorVO professorVO;
+	private AdministratorVO administratorVO;
+	
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

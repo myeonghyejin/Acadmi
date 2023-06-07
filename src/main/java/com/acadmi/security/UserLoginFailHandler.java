@@ -13,6 +13,8 @@ import org.springframework.security.authentication.InternalAuthenticationService
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
+import com.acadmi.member.MemberVO;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -26,6 +28,7 @@ public class UserLoginFailHandler implements AuthenticationFailureHandler{
 		log.error("======={}=======", exception);
 		log.error("======={}=======", exception.getMessage());
 		
+		MemberVO memberVO = new MemberVO();
 		String errorMessage = "";
 		
 		if(exception instanceof BadCredentialsException) {
@@ -34,7 +37,7 @@ public class UserLoginFailHandler implements AuthenticationFailureHandler{
 		else if(exception instanceof InternalAuthenticationServiceException) {
 			errorMessage="ID 확인";
 		}
-		else if(exception instanceof DisabledException) {
+		else if(exception instanceof DisabledException&& !memberVO.isEnabled()) {
 			errorMessage="유효하지 않은 사용자";
 			//enabled가 false인 경우
 		}
