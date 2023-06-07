@@ -258,8 +258,21 @@
   <insert id="setPeriodAdd" parameterType="PeriodVO">
   INSERT INTO PERIOD (YEAR,SEMESTER,APPLICATIONSTART,APPLICATIONEND,FAVORITESTAR,FAVORITEEND,DEADLINE) 
   VALUES (#{year},#{semester},STR_TO_DATE(#{applicationStart},'%Y-%m-%dT%H:%i'), STR_TO_DATE(#{applicationEnd},'%Y-%m-%dT%H:%i'),STR_TO_DATE(#{favoriteStart},'%Y-%m-%dT%H:%i'),STR_TO_DATE(#{favoriteEnd},'%Y-%m-%dT%H:%i'),STR_TO_DATE(#{deadline},'%Y-%m-%dT%H:%i'))	
-  	
   </insert>
+  
+  <select id="getCurrentYear" resultType="java.lang.String">
+  	SELECT YEAR(CURRENT_DATE()) AS year
+	UNION ALL
+	SELECT YEAR(CURRENT_DATE()) + 1
+	UNION ALL
+	SELECT YEAR(CURRENT_DATE()) + 2
+	UNION ALL
+	SELECT YEAR(CURRENT_DATE()) + 3
+	UNION ALL
+	SELECT YEAR(CURRENT_DATE()) + 4
+	UNION ALL
+	SELECT YEAR(CURRENT_DATE()) + 5;
+  </select>
   
   <!--강의 목록 조회  -->
   <select id="getLectureList" resultType="LectureVO" parameterType="Pagination">

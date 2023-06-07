@@ -78,6 +78,7 @@ public interface AdministratorDAO {
 
 	//기간 설정
 	public int setPeriodAdd(PeriodVO periodVO) throws Exception;
+	public List<String> getCurrentYear() throws Exception;
 	
 	//강의 조회
 	public List<LectureVO> getLectureList(Pagination pagination) throws Exception;

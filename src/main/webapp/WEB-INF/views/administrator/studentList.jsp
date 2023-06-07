@@ -15,6 +15,12 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <title>Insert title here</title>
 <style type="text/css">
+
+	#pagination {
+		 display: flex;
+   	 	justify-content: center;
+	
+	}
 	#tableStudent {
 		width : 90%; 
 	}
@@ -168,15 +174,35 @@
 				      <!-- /.card -->
 				
 				    </section>
-			    	<c:if test="${pagination.pre}">
-						<a href="./studentList?page=${pagination.startNum-1}">이전</a>
-					</c:if>
-					<c:forEach begin="${pagination.startNum}" end="${pagination.lastNum}" var="i">
-				   	 	<a href="./studentList?page=${i}">${i}</a>
-				   	 </c:forEach>		
-				   	<c:if test="${pagination.next}">
-						<a href="./studentList?page=${pagination.lastNum+1}">다음</a>
-					</c:if> 
+			    	 <div class="row" style="margin: 20px auto;" id="pagination">
+							<nav aria-label="Page navigation example">
+								<ul class="pagination d-flex justify-content-center">
+									<li class="page-item ${pagination.page eq 1? 'disabled' : '' }">
+										<a class="page-link" href="./studentList?page=1&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="1">
+											<span aria-hidden="true">&laquo;</span>
+										</a>
+									</li>
+									<li class="page-item ${pagination.pre eq false ? 'disabled' : ''}">
+										<a class="page-link" href="./studentList?page=${pagination.startNum-1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="${pagination.startNum-1}">
+											<span aria-hidden="true">&lsaquo;</span>
+										</a>
+									</li>
+									<c:forEach begin="${pagination.startNum}" end="${pagination.lastNum}" var="i">
+										<li class="page-item"><a class="page-link" href="./studentList?page=${i}&kind=${pagination.kind}&search=${pagination.search}" data-board-page="${i}">${i}</a></li>
+									</c:forEach>
+									<li class="page-item ${pagination.next eq false ? 'disabled' : ''}">
+										<a class="page-link" href="./studentList?page=${pagination.lastNum+1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next" data-board-page="${pagination.lastNum+1}">
+											<span aria-hidden="true">&rsaquo;</span>
+										</a>
+									</li>
+									<li class="page-item ${pagination.next eq totalPage ? 'disabled' : ''}">
+										<a class="page-link" href="./studentList?page=${pagination.totalPage}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next" data-board-page="${pagination.totalPage}">
+											<span aria-hidden="true">&raquo;</span>
+										</a>
+									</li>
+								</ul>
+							</nav>
+					</div>
 				</div>
 			</div>
 		</div>

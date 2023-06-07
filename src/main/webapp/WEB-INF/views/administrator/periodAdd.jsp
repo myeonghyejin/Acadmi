@@ -14,21 +14,55 @@
 	
 </style>
 <title>Insert title here</title>
+<style type="text/css">
+	.card-body {
+		margin : 0 30px 20px 0;
+	}
+	.card {
+		margin : 30px 30px 0 30px;
+	}
+	.col {
+		margin : 40px 30px 0 30px ;
+	}
+	.wrapper {
+		margin : 20px 20px 20px 20px;
+	}
+	
+	button {
+		margin : 20px 0 0 0;
+	}
+</style>
 </head>
 <body>
 	<form action="./periodAdd" method="post">
 		<div class="wrapper">
-			수강 년도 <input type="text" name="year"> <br>
-			수강 학기<input type="text" name="semester"><br>
+			<div class="form-group">
+          	  <label>수강년도</label>
+                <select  class="form-control select2" style="width: 100%;" name="year" id="year" >
+					<c:forEach items="${year}" var="year">
+						<option value="${year}">${year }</option>
+					</c:forEach>
+					
+				</select>
+			</div>
+			<div class="form-group">
+          	  <label>수강학기</label>
+                <select  class="form-control select2" style="width: 100%;" name="semester" id="semester">
+					<option value="1">1학기</option>
+					<option value="2">2학기</option>
+				</select>
+			</div>
 		</div>
-		
+			<div class="card">
 			 <div class="card-body p-0">
 			 	<div class="col">
 			 		<label style="font-size : 23px;">수강신청 기간설정</label>
 			 	</div>
 				 	<div class="wrapper">
 					  <div class="form-group">
+					  	
 					    <label>수강신청 시작일</label>
+					   
 					    <input type="datetime-local"  class="form-control datetime" name="applicationStart" style="width: 500px; display: inline-block;" />
 					    ~
 					    <label style="margin-left: 20px;">수강신청 종료일</label>
@@ -62,7 +96,9 @@
 		
 					  </div>
 					</div>	
-			</div>
+			</div>		
+		</div>	
+			
 		<button class="btn btn-info" type="submit">등록</button>
 		
 	</form>

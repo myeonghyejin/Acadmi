@@ -356,7 +356,9 @@ public class AdministratorController {
 	@GetMapping("periodAdd")
 	public ModelAndView setPeriodAdd() throws Exception {
 		ModelAndView mv = new ModelAndView();
+		List<String> result = administratorService.getCurrentYear();
 		
+		mv.addObject("year", result);
 		mv.setViewName("administrator/periodAdd");
 		
 		return mv;

@@ -439,6 +439,11 @@ public class AdministratorService{
 		return result;
 		
 	}
+	public List<String> getCurrentYear() throws Exception {
+		List<String> result = administratorDAO.getCurrentYear();
+		
+		return result;
+	}
 	
 	//강의 조회
 	public List<LectureVO> getLectureList(Pagination pagination) throws Exception {
