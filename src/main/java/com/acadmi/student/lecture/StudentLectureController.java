@@ -98,22 +98,31 @@ public class StudentLectureController {
 	//수강 신청
 	@PostMapping("my_lecture/insert")
 	public ModelAndView insertToStudentLecture(StudentLectureVO studentLectureVO, LectureVO lectureVO, HttpSession session, ModelAndView mv) throws Exception {
-		int result = 0;
-		
-		Object obj = session.getAttribute("SPRING_SECURITY_CONTEXT");
-		SecurityContextImpl contextImpl = (SecurityContextImpl)obj;
-		Authentication authentication = contextImpl.getAuthentication();
-		studentLectureVO.setUsername(authentication.getName());
-		
-		if(studentLectureService.getMyLecture(studentLectureVO) == null) {
-			studentLectureService.addToSubscription(lectureVO);
-			result = studentLectureService.insertToStudentLecture(studentLectureVO, lectureVO, session);
-		}
-		
-		mv.addObject("result", result);
-		mv.setViewName("common/ajaxResult");
-		
-		return mv;
+	    Object obj = session.getAttribute("SPRING_SECURITY_CONTEXT");
+	    SecurityContextImpl contextImpl = (SecurityContextImpl) obj;
+	    Authentication authentication = contextImpl.getAuthentication();
+	    studentLectureVO.setUsername(authentication.getName());
+
+	    // 1. 이미 신청한 강의와 요일/시간이 겹치는지 확인
+	    List<LectureVO> duplicateLectures = studentLectureService.getDuplicateTime(lectureVO);
+	    
+	    for (LectureVO lecture : duplicateLectures) {
+	        log.error("{}", lecture);
+	    }
+	    
+	    if (duplicateLectures != null && !duplicateLectures.isEmpty()) {
+	        mv.addObject("result", 0);
+	        mv.setViewName("common/ajaxResult");
+	        return mv;
+	    }
+
+	    // 수강 신청 성공
+	    studentLectureService.addToSubscription(lectureVO);
+	    int result = studentLectureService.insertToStudentLecture(studentLectureVO, lectureVO, session);
+
+	    mv.addObject("result", result);
+	    mv.setViewName("common/ajaxResult");
+	    return mv;
 	}
 	
 	//장바구니 담기
