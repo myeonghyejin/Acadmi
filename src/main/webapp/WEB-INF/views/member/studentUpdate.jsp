@@ -68,9 +68,9 @@
 															</div>
 													
 													<c:forEach items="${departmentVO.studentVOs}" var="studentVO">
-														<c:set var="studentName" value="${studentVO.name}"></c:set>
+														<h3 class="profile-username text-center"><input value="${studentVO.name}" type="text" id="name" name="name" readonly></h3>
 															<sec:authentication property="Principal" var="user"/>
-																<h3 class="profile-username text-center"><c:out value="${studentName}"></c:out>(${user.username})</h3>
+																<h3 class="profile-username text-center">(${user.username})</h3>
 													</c:forEach>
 													
 													<c:forEach items="${departmentVO.studentVOs}" var="studentVO">

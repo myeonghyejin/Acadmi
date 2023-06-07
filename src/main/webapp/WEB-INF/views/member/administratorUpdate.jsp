@@ -68,16 +68,17 @@
 															</div>
 													
 													<c:forEach items="${departmentVO.administratorVOs}" var="administratorVO">
-														<c:set var="administratorName" value="${administratorVO.name}"></c:set>
 															<sec:authentication property="Principal" var="user"/>
-																	<h3 class="profile-username text-center"><c:out value="${administratorName}"></c:out>(${user.username})</h3>
+																<h3 class="profile-username text-center"><input value="${administratorVO.name}" type="text" id="name" name="name" readonly></h3>
+																	<sec:authentication property="Principal" var="user"/>
+																		<h3 class="profile-username text-center">(${user.username})</h3>
 													</c:forEach>
 													
 													<c:forEach items="${departmentVO.administratorVOs}" var="administratorVO">
 														<c:set var="administratorPhone" value="${administratorVO.phone}"></c:set>
 														<c:set var="administratorBirth" value="${administratorVO.birth}"></c:set>
 														<c:set var="administratorAddress" value="${administratorVO.address}"></c:set>
-														<%-- <c:set var="administratorAddressDetail" value="${administratorVO.addressDetail}"></c:set> --%>
+														<c:set var="administratorAddressDetail" value="${administratorVO.addressDetail}"></c:set>
 														<c:set var="administratorEmail" value="${administratorVO.email}"></c:set>
 															
 
@@ -99,9 +100,8 @@
 																<hr>
 																	<strong><i class="fas fa-map-marker-alt mr-1"></i> 주소</strong>
 																		<p class="text-muted"><input value="${administratorVO.address}" type="text" id="address" name="address"></p>
-																		<%-- <strong><i class="mr-1"></i> 상세 주소 입력</strong>
-																		<p class="text-muted"><input value="${administratorVO.addressDetail}" type="text" id="addressDetail" name="addressDetail"></p> --%>
-															
+																	<strong><i class="mr-1"></i> 상세 주소 입력</strong>
+																		<p class="text-muted"><input value="${administratorVO.addressDetail}" type="text" id="addressDetail" name="addressDetail"></p>
 														</div>
 													</c:forEach>
 														<button class="btn btn-info float-right" id="submitButton" type="submit">수정</button>

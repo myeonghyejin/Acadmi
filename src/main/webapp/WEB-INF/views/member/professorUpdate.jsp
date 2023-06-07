@@ -66,11 +66,12 @@
 											                        </div> 
 											                     </div> 
 															</div>
-													
+												
 													<c:forEach items="${departmentVO.professorVOs}" var="professorVO">
 														<c:set var="professorName" value="${professorVO.name}"></c:set>
-															<sec:authentication property="Principal" var="user"/>
-																<h3 class="profile-username text-center"><c:out value="${professorName}"></c:out>(${user.username})</h3>
+															<h3 class="profile-username text-center"><input value="${professorVO.name}" type="text" id="name" name="name" readonly></h3>
+																<sec:authentication property="Principal" var="user"/>
+																	<h3 class="profile-username text-center">(${user.username})</h3>
 													</c:forEach>
 													
 													<c:forEach items="${departmentVO.professorVOs}" var="professorVO">
@@ -78,7 +79,7 @@
 															<c:set var="professorPhone" value="${professorVO.phone}"></c:set>
 															<c:set var="professorBirth" value="${professorVO.birth}"></c:set>
 															<c:set var="professorAddress" value="${professorVO.address}"></c:set>
-															<%-- <c:set var="professorAddressDetail" value="${professorVO.addressDetail}"></c:set> --%>
+															<c:set var="professorAddressDetail" value="${professorVO.addressDetail}"></c:set>
 															<c:set var="professorEmail" value="${professorVO.email}"></c:set>
 															
 
@@ -92,6 +93,9 @@
 																	<strong><i class="fa-solid fa-cake-candles mr-1"></i> 생년월일</strong>
 																			<p class="text-muted"><c:out value="${professorBirth}"></c:out></p>
 																<hr>
+																	<strong><i class="fa-solid fa-briefcase mr-1"></i> 사무실</strong>
+																			<p class="text-muted"><c:out value="${professorRoom}"></c:out>호</p>
+																<hr>
 																	<strong><i class="fa-solid fa-phone mr-1"></i> 전화번호</strong>
 																		<p class="text-muted"><input value="${professorVO.phone}" type="text" id="phone" name="phone"></p>
 																<hr>
@@ -100,9 +104,8 @@
 																<hr>
 																	<strong><i class="fas fa-map-marker-alt mr-1"></i> 주소</strong>
 																		<p class="text-muted"><input value="${professorVO.address}" type="text" id="address" name="address"></p>
-																		<%-- <strong><i class="mr-1"></i> 상세 주소 입력</strong> --%>
-																		<%-- <p class="text-muted"><input value="${professorVO.addressDetail}" type="text" id="addressDetail" name="addressDetail"></p> --%>
-															
+																	<strong><i class="mr-1"></i> 상세 주소 입력</strong>
+																		<p class="text-muted"><input value="${professorVO.addressDetail}" type="text" id="addressDetail" name="addressDetail"></p>
 														</div>
 													</c:forEach>
 														<button class="btn btn-info float-right" id="submitButton" type="submit">수정</button>

@@ -69,7 +69,7 @@
 															<c:set var="professorPhone" value="${professorVO.phone}"></c:set>
 															<c:set var="professorBirth" value="${professorVO.birth}"></c:set>
 															<c:set var="professorAddress" value="${professorVO.address}"></c:set>
-															<%-- <c:set var="professorAddressDetail" value="${professorVO.addressDetail}"></c:set> --%>
+															<c:set var="professorAddressDetail" value="${professorVO.addressDetail}"></c:set>
 															<c:set var="professorEmail" value="${professorVO.email}"></c:set>
 
 														<div class="card-body">
@@ -92,9 +92,7 @@
 																		<p class="text-muted"><c:out value="${professorEmail}"></c:out></p>
 																<hr>
 																	<strong><i class="fas fa-map-marker-alt mr-1"></i> 주소</strong>
-																		<p class="text-muted"><c:out value="${professorAddress}"></c:out></p>
-																		<%-- <p class="text-muted"><c:out value="${professorAddressDetail}"></c:out></p> --%>
-															
+																		<p class="text-muted"><c:out value="${professorAddress}"></c:out>&ensp;<c:out value="${professorAddressDetail}"></c:out></p>
 														</div>
 													</c:forEach>
 
