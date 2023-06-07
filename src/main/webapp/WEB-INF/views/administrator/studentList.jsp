@@ -14,29 +14,112 @@
 	rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <title>Insert title here</title>
+<style type="text/css">
+
+	#pagination {
+		 display: flex;
+   	 	justify-content: center;
+	
+	}
+	#tableStudent {
+		width : 90%; 
+	}
+	h3 {
+		margin : 40px;
+	}
+	.content {
+		margin: 30px;
+	}
+	#add2 {
+		float : right;
+		clear : both;
+		
+	} 
+	.card-title {
+		margin : 20px 0 20px 40px;
+	}
+	.card-body{
+		display: flex;
+	  	justify-content: center;
+	 	align-items: center;
+	 	margin : 10px 0 30px 0;
+	}
+</style>
 </head>
-<body>
-
-<c:import url="../temp/header.jsp"></c:import>
-	<h1>학생 목록 조회</h1>
-
-	<table class="table table-hover" border="1">
-     	 		<thead>
-     	 		`	<tr>
-     	 				<th>쪽지</th>
-     	 				<th>사진</th>
-     	 				<th>학번</th>	
-     	 				<th>성명</th>
-     	 				<th>연락처</th>
-     	 				<th>단과대</th>
-     	 				<th>학과</th>
-     	 				<th>학년</th>
-     	 				<th>학적상태</th>
-     	 			</tr>
-     	 		</thead>
-     	 		<tbody>
-     	 		
-     	 			<c:forEach items="${list}" var="collegeVO">
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+	<c:import url="../temp/administrator.jsp"></c:import>
+	
+	<div class="content-wrapper">
+		<div class="container-fluid">
+			<div class="row">
+				<!-- 2레벨 Sidebar 적용 -->
+				
+					<c:import url="../temp/sidebar/administrator_memberList.jsp"></c:import>
+				
+				<!-- 2레벨 Sidebar 끝 -->
+				<div class="col" style="background-color : white;">
+					<!-- header start -->
+	               <div class="row" style="padding-top:10px">
+	                  <div class="col-12">
+	                     <div class="card">
+	                        <h3 class="my-3 mx-3">학생 목록 조회</h3>
+	                     </div>
+	                  </div>
+	               </div>
+               <!-- header end -->
+					
+						<!-- Main content -->
+				    <section class="content">
+				
+				      <!-- Default box -->
+				      <div class="card">
+				        <div class="card-header">
+				          <h3 class="card-title">학생 조회</h3>
+				
+				          <div class="card-tools">
+				            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+				              <i class="fas fa-minus"></i>
+				            </button>
+				          </div>
+				          
+				        </div>
+				        <div class="card-body p-0">
+				          <table class="table table-hover text-nowrap" style="text-align : center;"  id="tableStudent">
+				              <thead>
+				                  <tr>
+				                      <th style="width: 10%">
+				                          쪽지
+				                      </th>
+				                      <th style="width: 10%">
+				                          사진
+				                      </th>
+				                       <th style="width: 15%">
+				                      	  학과
+				                      </th>
+				                      <th style="width : 8%">
+				                      	  학번
+				                      </th>
+				                      <th style="width: 8%" class="text-center">
+				                          성명
+				                      </th>
+				                      <th style="width : 15%">
+				                          연락처
+				                      </th>
+				                      <th style="width: 10%" class="text-center">
+				                          단과대학
+				                      </th>
+				                     
+				                      <th style="width:8%">
+				                      	학년
+				                      </th>
+				                      <th style="width: 20%">
+				                      	  학적상태
+				                      </th>
+				                  </tr>
+				              </thead>
+				              <tbody>
+				                 <c:forEach items="${list}" var="collegeVO">
      	 				<tr>
      	 				<c:set var="college" value="${collegeVO.collegeName}"></c:set>
      	 					<c:forEach items="${collegeVO.departmentVOs}" var="departmentVO">
@@ -47,22 +130,21 @@
      	 							<c:set var="studentPhone" value="${studentVO.phone}"></c:set>
      	 							<c:set var="studentGrade" value="${studentVO.grade}"></c:set>
      	 							<c:set var="studentStatus" value="${studentVO.status}"></c:set>
+     	 							<c:set var="memberFiles" value="${studentVO.memberFilesVO }"></c:set>
      	 						<tr>
-     	 							<c:forEach items="${studentVO.memberFilesVOs}" var="memberFilesVO">
-     	 								<tr>
-											<td><img src="/${memberFilesVO.fileName}"></td>
-										</tr>
-     	 							</c:forEach>
+     	 							
 	     	 							<td>
-	     	 							<sec:authentication property="principal.username" var="username"/>
+	     	 								<sec:authentication property="principal.username" var="username"/>
 				     	 					<a href="../chat/detail?sender=${username}&recipient=${studentVO.username}"><i class="fa-regular fa-envelope fa-2xl" style="margin:30px 0 0 0;"></i></a>
-				                        </td>
-	     	 							<td></td>
+	     	 							</td>
+	     	 							<td>
+	   	 									<img alt="" src="/file/${board}/${boardFileVO.fileName}" width="60rem" height="60rem">
+	   	 								</td>
+	   	 								<td><c:out value="${department}"></c:out></td>
 	     	 							<td><c:out value="${studentUsername}"></c:out></td>
 				     	 				<td><c:out value="${studentName}"></c:out></td>
 				     	 				<td><c:out value="${studentPhone}"></c:out></td>
 				     	 				<td><c:out value="${college}"></c:out></td>
-				     	 				<td><c:out value="${department}"></c:out></td>
 				     	 				<td><c:out value="${studentGrade}"></c:out></td>
 				     	 				<c:if test="${studentStatus eq 1}">
 				     	 					<td>재학</td>
@@ -84,19 +166,49 @@
      	 					</c:forEach>
      	 				</tr>
      	 			</c:forEach>
-     	 			
-     	 		</tbody>
-     	 </table>
-     	 
-     	 <c:if test="${pagination.pre}">
-			<a href="./studentList?page=${pagination.startNum-1}">이전</a>
-		</c:if>
-     	 
-     	<c:forEach begin="${pagination.startNum}" end="${pagination.lastNum}" var="i">
-     	 	<a href="./studentList?page=${i}">${i}</a>
-     	</c:forEach>
-     	 <c:if test="${pagination.next}">
-			<a href="./studentList?page=${pagination.lastNum+1}">다음</a>
-		</c:if> 
+				              </tbody>
+				          </table>
+				        </div>
+				        <!-- /.card-body -->
+				      </div>
+				      <!-- /.card -->
+				
+				    </section>
+			    	 <div class="row" style="margin: 20px auto;" id="pagination">
+							<nav aria-label="Page navigation example">
+								<ul class="pagination d-flex justify-content-center">
+									<li class="page-item ${pagination.page eq 1? 'disabled' : '' }">
+										<a class="page-link" href="./studentList?page=1&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="1">
+											<span aria-hidden="true">&laquo;</span>
+										</a>
+									</li>
+									<li class="page-item ${pagination.pre eq false ? 'disabled' : ''}">
+										<a class="page-link" href="./studentList?page=${pagination.startNum-1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="${pagination.startNum-1}">
+											<span aria-hidden="true">&lsaquo;</span>
+										</a>
+									</li>
+									<c:forEach begin="${pagination.startNum}" end="${pagination.lastNum}" var="i">
+										<li class="page-item"><a class="page-link" href="./studentList?page=${i}&kind=${pagination.kind}&search=${pagination.search}" data-board-page="${i}">${i}</a></li>
+									</c:forEach>
+									<li class="page-item ${pagination.next eq false ? 'disabled' : ''}">
+										<a class="page-link" href="./studentList?page=${pagination.lastNum+1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next" data-board-page="${pagination.lastNum+1}">
+											<span aria-hidden="true">&rsaquo;</span>
+										</a>
+									</li>
+									<li class="page-item ${pagination.next eq totalPage ? 'disabled' : ''}">
+										<a class="page-link" href="./studentList?page=${pagination.totalPage}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next" data-board-page="${pagination.totalPage}">
+											<span aria-hidden="true">&raquo;</span>
+										</a>
+									</li>
+								</ul>
+							</nav>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+	
 </body>
 </html>
