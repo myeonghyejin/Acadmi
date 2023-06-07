@@ -129,7 +129,7 @@
 						   	 				
 						   	 			<td>
 	     	 								<sec:authentication property="principal.username" var="username"/>
-				     	 					<a href="../chat/detail?sender=${username}&recipient=${administratorVO.username}"><i class="fa-regular fa-envelope fa-2xl" style="margin:30px 0 0 0;"></i></a>
+				     	 					<a href="../chat/detail?roomSender=${username}&roomRecipient=${administratorVO.username}"><i class="fa-regular fa-envelope fa-2xl" style="margin:30px 0 0 0;"></i></a>
 	     	 							</td>
 						   	 			<td>
 						   	 				<img alt="" src="https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927" width="60rem" height="60rem">

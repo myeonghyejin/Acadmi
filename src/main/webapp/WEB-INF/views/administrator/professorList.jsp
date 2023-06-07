@@ -140,7 +140,7 @@
 											
 										<td>
 	     	 								<sec:authentication property="principal.username" var="username"/>
-				     	 					<a href="../chat/detail?sender=${username}&recipient=${professorVO.username}"><i class="fa-regular fa-envelope fa-2xl" style="margin:30px 0 0 0;"></i></a>
+				     	 					<a href="../chat/detail?roomSender=${username}&roomRecipient=${professorVO.username}"><i class="fa-regular fa-envelope fa-2xl" style="margin:30px 0 0 0;"></i></a>
 	     	 							</td>
 										<td>
 				   	 						<img alt="" src="/file/${board}/${boardFileVO.fileName}" width="60rem" height="60rem">
