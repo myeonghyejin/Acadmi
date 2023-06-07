@@ -43,18 +43,20 @@
 											<div class="card card-info card-outline ml-5">
 												<div class="card-body box-profile">
 													<div class="text-center">
+														<c:forEach items="${departmentVO.studentVOs}" var="studentVO">
 		     	 												<c:choose>
-																    <c:when test="${empty memberFilesVO.filName}">
+																    <c:when test="${empty studentVO.memberFilesVO.fileName}">
 																        <img class="profile-user-img img-fluid img-circle"
 																             src="/images/profile.jpg"
 																             alt="User profile picture">
 																    </c:when>
-																    <c:otherwise>
-																        <img class="profile-user-img img-fluid img-circle"
-																             src="C:/production/upload/member/${memberFilesVO.fileName}"
-																             alt="User profile picture">
+																    <c:otherwise>	
+																		<img class="img-fluid img-size"
+																		     src="/file/member/${studentVO.memberFilesVO.fileName}"
+																		     alt="User profile picture">
 																    </c:otherwise>
 																</c:choose>
+														</c:forEach>
 													</div>
 													<c:forEach items="${departmentVO.studentVOs}" var="studentVO">
 														<c:set var="studentName" value="${studentVO.name}"></c:set>
@@ -66,6 +68,7 @@
 															<c:set var="studentPhone" value="${studentVO.phone}"></c:set>
 															<c:set var="studentBirth" value="${studentVO.birth}"></c:set>
 															<c:set var="studentAddress" value="${studentVO.address}"></c:set>
+															<%-- <c:set var="studentAddressDetail" value="${studentVO.addressDetail}"></c:set> --%>
 															<c:set var="studentEmail" value="${studentVO.email}"></c:set>
 
 														<div class="card-body">
@@ -86,7 +89,7 @@
 																		<p class="text-muted"><c:out value="${studentEmail}"></c:out></p>
 																<hr>
 																	<strong><i class="fas fa-map-marker-alt mr-1"></i> 주소</strong>
-																		<p class="text-muted"><c:out value="${studentAddress}"></c:out></p>
+																		<p class="text-muted"><c:out value="${studentAddress}"></c:out><%-- <c:out value="${studentAddressDetail}"></c:out> --%></p>
 															
 														</div>
 													</c:forEach>

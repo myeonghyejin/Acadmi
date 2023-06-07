@@ -27,7 +27,10 @@ public class MemberVO implements UserDetails {
 	private MemberFilesVO memberFilesVO;
 	private List<RoleVO> roleVOs;
 	
-
+	private StudentVO studentVO;
+	private ProfessorVO professorVO;
+	private AdministratorVO administratorVO;
+	
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -23,35 +23,12 @@
                             <a href="./login" class="h1"><b>Acadmi</b></a>
                         </div>
                         <div class="card-body">
-                            <p class="login-box-msg">처음 로그인이시면 최초 이메일 인증을 완료해주세요!</p>
-                            <form:form id="contactForm" modelAttribute="memberVO" action="./firstEmail" method="post">
-                                <div class="input-group mb-3">
-                                    <form:input path="email" id="email" class="form-control" placeholder="이메일을 입력하세요"></form:input>
-                                    <div class="input-group-append">
-                                        <div class="input-group-text">
-                                            <span class="fas fa-envelope"></span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                    <div class="row mx-auto">
-
-                                        <p class="mb-1 mx-2">
-                                            
-                                        </p>
-
-                                        <p class="mx-5">
-                                            <div class="col-4 mx-5">
-                                                <button class="btn btn-info btn-block mx-5" id="submitButton" type="submit">다음</button>
-                                            </div>
-                                        </p>
-
-                                    </div>
-                           		</form:form>
-                                </div>
+                         	<div class="text-center">
+                        		<h4 class="fa-solid fa-circle-check text-center">이메일을 확인해주세요!</h4>
+                        	</div>
                         </div>
-
-                    </div>
+					</div>
+				</div>
            
 </body>
 </html>
