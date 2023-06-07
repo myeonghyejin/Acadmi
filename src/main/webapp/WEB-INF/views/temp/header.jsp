@@ -165,31 +165,34 @@
 		<div class="user-panel mt-3 pb-3 mb-3 d-flex">
 			<div class="image">
 				<sec:authorize access="hasRole('STUDENT')">
-					<img src="https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927" class="img-circle elevation-2" alt="User Image">
+                <sec:authentication property="principal" var="user"/>
+					<img src="/images/profile.jpg" class="img-circle elevation-2" alt="User Image" >
 				</sec:authorize>
 				
 				<sec:authorize access="hasRole('PROFESSOR')">
-					<img src="https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927" class="img-circle elevation-2" alt="User Image">
+                <sec:authentication property="Principal" var="user"/>
+					<img src="/images/profile.jpg" class="img-circle elevation-2" alt="User Image">
 				</sec:authorize>
 				
 				<sec:authorize access="hasRole('ADMINISTRATOR')">
-					<img src="https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927" class="img-circle elevation-2" alt="User Image">
+                <sec:authentication property="Principal" var="user"/>
+					<img src="/images/profile.jpg" class="img-circle elevation-2" alt="User Image">
 				</sec:authorize>
 			</div>
 			<div class="info">
 				<sec:authorize access="hasRole('STUDENT')">
                 <sec:authentication property="Principal" var="user"/>
-                    <a href="/member/studentPage?username=${user.username}">STUDENT</a>
+                    <a href="/member/studentPage?username=${user.username}">${user.username}</a>
                 </sec:authorize>
                 
 				<sec:authorize access="hasRole('PROFESSOR')">
 				<sec:authentication property="Principal" var="user"/>
-					<a href="/member/professorPage?username=${user.username}">PROFESSOR</a>
+					<a href="/member/professorPage?username=${user.username}">${user.username}</a>
 				</sec:authorize>
 				
 				<sec:authorize access="hasRole('ADMINISTRATOR')">
 				<sec:authentication property="Principal" var="user"/>
-					<a href="/member/administratorPage?username=${user.username}">ADMINISTRATOR</a>
+					<a href="/member/administratorPage?username=${user.username}">${user.username}</a>
 				</sec:authorize>
 			</div>
 		</div>

@@ -43,9 +43,20 @@
 											<div class="card card-info card-outline ml-5">
 												<div class="card-body box-profile">
 													<div class="text-center">
-														<img class="profile-user-img img-fluid img-circle"
-															src="https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927"
-															alt="User profile picture">
+														<c:forEach items="${departmentVO.administratorVOs}" var="administratorVO">
+		     	 												<c:choose>
+																    <c:when test="${empty administratorVO.memberFilesVO.fileName}">
+																        <img class="profile-user-img img-fluid img-circle"
+																             src="/images/profile.jpg"
+																             alt="User profile picture">
+																    </c:when>
+																    <c:otherwise>	
+																		<img class="img-fluid img-size"
+																		     src="/file/member/${administratorVO.memberFilesVO.fileName}"
+																		     alt="User profile picture">
+																    </c:otherwise>
+																</c:choose>
+														</c:forEach>
 													</div>
 													<c:forEach items="${departmentVO.administratorVOs}" var="administratorVO">
 														<c:set var="administratorName" value="${administratorVO.name}"></c:set>
@@ -81,7 +92,7 @@
 													</c:forEach>
 
 														<sec:authentication property="Principal" var="user"/>
-														<a href="/member/studentUpdate?username=${user.username}" id="studentUpdate" class="btn btn-info float-right">수정</a>
+														<a href="/member/administratorUpdate?username=${user.username}" id="studentUpdate" class="btn btn-info float-right">수정</a>
 
 												</div>
 											</div>
