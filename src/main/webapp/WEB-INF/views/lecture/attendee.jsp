@@ -17,7 +17,7 @@
 	<div class="wrapper">
 
 		<!-- Header 적용 -->
-		<c:import url="../temp/header.jsp"></c:import>
+		<c:import url="../temp/professor_header.jsp"></c:import>
 		<!-- Header 끝 -->
 
 		<!-- Main Contents -->
@@ -78,7 +78,7 @@
 							                    		<i class="fa-regular fa-envelope fa-2xl"></i></a></td>
 							                    		<td>${attendee.username}</td>
 							                    		<td>${attendee.name}</td>
-						 								<td>${attendee.deptNum}</td>
+						 								<td>${attendee.departmentVO.deptName}</td>
 						 								<td>${attendee.email}</td>
 						 								<td>${attendee.phone}</td>
 							                    	</tr>

@@ -16,7 +16,7 @@
 	<div class="wrapper">
 
 		<!-- Header 적용 -->
-		<c:import url="../temp/header.jsp"></c:import>
+		<c:import url="../temp/professor_header.jsp"></c:import>
 		<!-- Header 끝 -->
 
 		<!-- Main Contents -->

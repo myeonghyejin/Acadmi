@@ -16,7 +16,7 @@
 	<div class="wrapper">
 
 		<!-- Header 적용 -->
-		<c:import url="../temp/header.jsp"></c:import>
+		<c:import url="../temp/professor_header.jsp"></c:import>
 		<!-- Header 끝 -->
 
 		<!-- Main Contents -->
@@ -72,7 +72,7 @@
 							                		<th style="background-color:#f8f9fa;color:#17a2b8;">수업장소</th>
 							                		<td>${lecture.lectureBuilding}${lecture.lectureRoom}</td>
 							                		<th style="background-color:#f8f9fa;color:#17a2b8;">학점</th>
-							                		<td>${lecture.completionGrade}</td>
+							                		<td>${lecture.completionGrade}학점</td>
 							                	</tr>
 											</tbody>
 										</table>

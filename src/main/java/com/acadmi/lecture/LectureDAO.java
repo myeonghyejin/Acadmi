@@ -26,7 +26,9 @@ public interface LectureDAO {
 	public int setTemporaryUpdate(LectureVO lectureVO) throws Exception;
 	public int setLectureDelete(LectureVO lectureVO) throws Exception;
 	public int setSyllabusAdd(SyllabusVO syllabusVO) throws Exception;
+	public int setClassAdd(ClassVO classVO) throws Exception;
 	public int setSyllabusUpdate(SyllabusVO syllabusVO) throws Exception;
+	public int setClassUpdate(ClassVO classVO) throws Exception;
 	public int getSyllabusExists(LectureVO lectureVO) throws Exception;
 	
 	

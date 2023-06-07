@@ -1,6 +1,7 @@
 package com.acadmi.lecture;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -129,6 +130,8 @@ public class LectureController {
 		ModelAndView mv = new ModelAndView();
 		lectureVO = lectureService.getLectureProfessor(lectureVO);
 		mv.addObject("lecture",lectureVO);
+		List<ClassVO> ar = lectureService.getSyllabusClass(lectureVO);
+		mv.addObject("classes",ar);
 		int exists = lectureService.getSyllabusExists(lectureVO);
 		mv.addObject("exists",exists);
 		mv.setViewName("temp/sidebar/professor_lecture");
@@ -174,8 +177,20 @@ public class LectureController {
 		return mv;
 	}
 	@PostMapping("syllabusAdd")
-	public ModelAndView setSyllabusAdd(LectureVO lectureVO, ModelAndView mv, SyllabusVO syllabusVO) throws Exception{
+	public ModelAndView setSyllabusAdd(LectureVO lectureVO, ModelAndView mv, SyllabusVO syllabusVO,ClassVO classVO,@RequestParam Map<String, String> formData) throws Exception{
 		int result = lectureService.setSyllabusAdd(syllabusVO);
+		classVO.setSyllabusNum(syllabusVO.getSyllabusNum());
+		for(int i=1;i<9;i++) {
+			ClassVO newClassVO = new ClassVO();
+			newClassVO.setSyllabusNum(classVO.getSyllabusNum());
+	        newClassVO.setOrder(i);
+	        newClassVO.setSubject(formData.get("subject" + i));
+	        newClassVO.setGoal(formData.get("goal" + i));
+	        newClassVO.setCapability(formData.get("capability" + i));
+	        newClassVO.setNote(formData.get("note" + i));
+
+	        result = lectureService.setClassAdd(newClassVO);
+		}
 		lectureVO = lectureService.getLectureDetail(lectureVO);
 		mv.setViewName("common/result");
 		mv.addObject("result","등록성공");
@@ -208,9 +223,21 @@ public class LectureController {
 		return mv;
 	}
 	@PostMapping("syllabusUpdate")
-	public ModelAndView setSyllabusUpdate(LectureVO lectureVO,SyllabusVO syllabusVO,ClassVO classVO,ModelAndView mv) throws Exception{
+	public ModelAndView setSyllabusUpdate(LectureVO lectureVO,SyllabusVO syllabusVO,ClassVO classVO,ModelAndView mv,@RequestParam Map<String, String> formData) throws Exception{
 		int result = lectureService.setSyllabusUpdate(syllabusVO);
 		lectureVO = lectureService.getLectureDetail(lectureVO);
+		classVO.setSyllabusNum(syllabusVO.getSyllabusNum());
+		for(int i=1;i<9;i++) {
+			ClassVO newClassVO = new ClassVO();
+			newClassVO.setSyllabusNum(classVO.getSyllabusNum());
+	        newClassVO.setOrder(i);
+	        newClassVO.setSubject(formData.get("subject" + i));
+	        newClassVO.setGoal(formData.get("goal" + i));
+	        newClassVO.setCapability(formData.get("capability" + i));
+	        newClassVO.setNote(formData.get("note" + i));
+
+	        result = lectureService.setClassUpdate(newClassVO);
+		}
 		mv.addObject("result","수정성공");
 		log.error(lectureVO.getLectureName());
 		String str = lectureVO.getLectureName();

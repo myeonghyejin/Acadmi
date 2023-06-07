@@ -74,9 +74,10 @@
 		INNER JOIN LECTURE L ON (P.USERNAME=L.USERNAME) WHERE LECTURENUM=#{lectureNum}
   	</select>
   	
-  	<select id="getLectureAttendee" parameterType="LectureVO" resultType="StudentVO">
-  		SELECT S.*,M.EMAIL  FROM `MEMBER` M INNER JOIN STUDENT S ON (M.USERNAME=S.USERNAME) 
-		INNER JOIN STUDENT_LECTURE SL ON (M.USERNAME=SL.USERNAME) WHERE LECTURENUM=#{lectureNum}
+  	<select id="getLectureAttendee" parameterType="LectureVO" resultMap="StudentResult">
+  		SELECT S.*,M.EMAIL,D.DEPTNAME FROM `MEMBER` M INNER JOIN STUDENT S ON (M.USERNAME=S.USERNAME) 
+		INNER JOIN STUDENT_LECTURE SL ON (M.USERNAME=SL.USERNAME) INNER JOIN DEPARTMENT D ON(S.DEPTNUM=D.DEPTNUM) 
+		WHERE LECTURENUM=#{lectureNum}
   	</select>
   	
   	<select id="getSyllabusDetail" parameterType="LectureVO" resultMap="LectureResult">
@@ -97,10 +98,19 @@
   		 #{goal},#{evaluation},#{method},#{bookName},#{bookAuthor},#{bookPublisher},#{bookPublicationDate},
   		  #{bookISBN},#{bookNote})
   	</insert>
+  	<insert id="setClassAdd" parameterType="ClassVO">
+  		INSERT INTO CLASS (SYLLABUSNUM,`ORDER`,SUBJECT,GOAL,CAPABILITY,NOTE) VALUES (#{syllabusNum},#{order},#{subject},#{goal},
+  		#{capability},#{note})
+  	</insert>
+  	
   	<update id="setSyllabusUpdate" parameterType="SyllabusVO">
   		UPDATE SYLLABUS SET CURRICULUMOUTLINE=#{curriculumOutline},GOAL=#{goal},EVALUATION=#{evaluation},METHOD=#{method},
   		BOOKNAME=#{bookName},BOOKAUTHOR=#{bookAuthor},BOOKPUBLISHER=#{bookPublisher},BOOKPUBLICATIONDATE=#{bookPublicationDate},
   		BOOKISBN=#{bookISBN},BOOKNOTE=#{bookNote} WHERE LECTURENUM=#{lectureNum}
+  	</update>
+  	<update id="setClassUpdate" parameterType="ClassVO">
+  		UPDATE CLASS SET SUBJECT=#{subject},GOAL=#{goal},CAPABILITY=#{capability},NOTE=#{note} 
+  		WHERE `ORDER`=#{order} AND SYLLABUSNUM=#{syllabusNum}
   	</update>
   	
   	<resultMap type="LectureVO" id="LectureResult">
@@ -175,6 +185,21 @@
   				<result column="CAPABILITY" property="capability"/>
   				<result column="NOTE" property="note"/>
   			</collection>
+  	</resultMap>
+  	<resultMap type="StudentVO" id="StudentResult">
+  		<id column="USERNAME" property="username"/>
+  		<result column="DEPTNUM" property="deptNum" />
+  		<result column="GRADE" property="grade" />
+  		<result column="NAME" property="name" />
+  		<result column="PHONE" property="phone" />
+  		<result column="BIRTH" property="birth" />
+  		<result column="ADDRESS" property="address" />
+  		<result column="STATUS" property="status" />
+  		<result column="EMAIL" property="email"/>
+  		<association property="departmentVO" javaType="DepartmentVO">
+  			<id column="DEPTNUM" property="deptNum"/>
+  			<result column="DEPTNAME" property="deptName"/>
+  		</association>
   	</resultMap>
   	
   </mapper>

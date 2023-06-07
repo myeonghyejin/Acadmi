@@ -16,7 +16,7 @@
 	<div class="wrapper">
 
 		<!-- Header 적용 -->
-		<c:import url="../temp/header.jsp"></c:import>
+		<c:import url="../temp/professor_header.jsp"></c:import>
 		<!-- Header 끝 -->
 
 		<!-- Main Contents -->
@@ -108,13 +108,13 @@
                     								<th>관련 역량</th>
                     								<th>비고</th>
 	                    						</tr>
-		                    					<c:forEach begin="1" end="8" var="i">
+		                    					<c:forEach items="${classes}" var="classes">
 		                    						<tr>
-		                    							<td>${i}차수</td>
-	                    								<td></td>
-	                    								<td>></td>
-	                    								<td></td>
-	                    								<td>></td>
+		                    							<td><input type="hidden" name="order">${classes.order}차수</td>
+	                    								<td><input type="text" name="subject" class="form-control" id="subject" value="${classes.subject}"></td>
+	                    								<td><input type="text" name="goal" class="form-control" id="goal"value="${classes.goal}"></td>
+	                    								<td><input type="text" name="capability" class="form-control" id="capability"value="${classes.capability}"></td>
+	                    								<td><input type="text" name="note" class="form-control" id="bookNote"value="${classes.bookNote}"></td>
 	                    							</tr>
 		                    					</c:forEach>
 	                    						

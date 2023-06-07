@@ -15,7 +15,7 @@
 	<div class="wrapper">
 
 		<!-- Header 적용 -->
-		<c:import url="../temp/header.jsp"></c:import>
+		<c:import url="../temp/professor_header.jsp"></c:import>
 		<!-- Header 끝 -->
 
 		<!-- Main Contents -->
@@ -27,7 +27,7 @@
 					<div class="row" style="padding-top:10px">
 						<div class="col-12">
 							<div class="card">
-								<h3 class="my-3 mx-3">내 강의 조회</h3>
+								<h3 class="my-3 mx-3">강의 목록</h3>
 							</div>
 						</div>
 					</div>
@@ -40,11 +40,11 @@
 								<div class="card">
 									<!-- table-header start -->
 									<div class="card-header">
-					                	<h3 class="card-title" style="font-weight:normal;">강의 목록</h3>
+					                	<!-- <h3 class="card-title" style="font-weight:normal;">강의 목록</h3> -->
 					                	<div class="card-tools">
 					                		<div class="input-group input-group-sm" style="width: 230px;">
 					                  			<select class="form-control mx-3" style="height: auto;" id="temporary" name="temporary" onchange="this.form.submit()">
-					                    			<option name="temporary" id="temporary" value=" ">강의 조회</option>
+					                    			<option name="temporary" id="temporary" for="temporary"  value=" ">강의 조회</option>
 													<option for="temporary" value=" " >전체</option>
 													<option for="temporary" value="1">등록</option>
 													<option for="temporary" value="0">미등록</option>
@@ -92,7 +92,7 @@
 					 									<c:if test="${LectureVO.temporary eq 0}">
 						 									<td>
 						 										<a class="btn btn-primary" href="./update?lectureNum=${LectureVO.lectureNum}" style="color: white;">
-						 										<i class="fas fa-pencil-alt"></i>수정</a></button>
+						 										<i class="fas fa-pencil-alt"></i>수정</a>
 						 										<a class="btn btn-danger" href="./delete?lectureNum=${LectureVO.lectureNum}" style="color: white;">
 						 										<i class="fas fa-trash"></i>삭제</a>
 						 										<%-- <input type="hidden" name="lectureNum" value="${LectureVO.lectureNum}"> --%>

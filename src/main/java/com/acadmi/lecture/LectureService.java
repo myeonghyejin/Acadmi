@@ -47,8 +47,14 @@ public class LectureService {
 	public int setSyllabusAdd(SyllabusVO syllabusVO) throws Exception{
 		return lectureDAO.setSyllabusAdd(syllabusVO);
 	}
+	public int setClassAdd(ClassVO classVO) throws Exception{
+		return lectureDAO.setClassAdd(classVO);
+	}
 	public int setSyllabusUpdate(SyllabusVO syllabusVO) throws Exception{
 		return lectureDAO.setSyllabusUpdate(syllabusVO);
+	}
+	public int setClassUpdate(ClassVO classVO) throws Exception{
+		return lectureDAO.setClassUpdate(classVO);
 	}
 	
 	public int setLectureAdd(LectureVO lectureVO) throws Exception{

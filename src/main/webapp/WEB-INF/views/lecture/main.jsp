@@ -15,7 +15,7 @@
 	<div class="wrapper">
 
 		<!-- Header 적용 -->
-		<c:import url="../temp/header.jsp"></c:import>
+		<c:import url="../temp/professor_header.jsp"></c:import>
 		<!-- Header 끝 -->
 
 		<!-- Main Contents -->
@@ -81,9 +81,9 @@
                     					
 											</thead>
 								            <tbody>
-								            	<c:forEach begin="1" end="8" var="i">
+								            	<c:forEach items="${classes}" var="classes">
 			                    				<tr>
-			                    					<td><h5>${i}주차 학습목표</h5><br>그날의 학습 목표 작성</td>
+			                    					<td><h5>${classes.order}주차 학습목표</h5><br>${classes.subject}</td>
 			                    				 </tr>
 			                    				 </c:forEach>			
 			                    			</tbody>

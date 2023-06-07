@@ -2,6 +2,7 @@ package com.acadmi.student;
 
 import java.sql.Date;
 
+import com.acadmi.department.DepartmentVO;
 import com.acadmi.member.MemberVO;
 
 import lombok.Getter;
@@ -18,4 +19,6 @@ public class StudentVO extends MemberVO{
 	private Date birth;
 	private String address;
 	private Integer status;
+	
+	private DepartmentVO departmentVO;
 }
