@@ -45,7 +45,7 @@ public class ChatController {
 	@PostMapping("chatRoomDelete")
 	@ResponseBody
 	public int setChatRoomDelete(ChatRoomVO chatRoomVO) throws Exception {
-		int result = 0;
+		int result = chatService.setChatRoomDelete(chatRoomVO);
 		return result;
 	}
 

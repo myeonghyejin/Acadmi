@@ -68,9 +68,9 @@ public class ChatService {
 	
 	//채팅방 나가기
 	public int setChatRoomDelete(ChatRoomVO chatRoomVO) throws Exception {
+		int result = chatDAO.setChatRoomDelete(chatRoomVO);
 		String sender = chatRoomVO.getRoomSender();
 		String recipient = chatRoomVO.getRoomRecipient();
-		int result = chatDAO.setChatRoomDelete(chatRoomVO);
 		chatRoomVO.setRoomSender(recipient);
 		chatRoomVO.setRoomRecipient(sender);
 		chatRoomVO = chatDAO.getChatRoom(chatRoomVO);
