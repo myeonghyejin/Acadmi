@@ -6,6 +6,8 @@
   
   <mapper namespace="com.acadmi.member.MemberDAO">
   
+  		<!-- ==================================Member================================ -->
+  
   		<select id="getLogin" parameterType="MemberVO" resultMap="loginResult">
   			SELECT *
   			FROM MEMBER M
@@ -22,6 +24,7 @@
   			<id property="username" column="USERNAME"/>
   			<result property="password" column="PASSWORD"/>
   			<result property="category" column="CATEGORY"/>
+  			<result property="enabled" column="ENABLED"/>
   			<collection property="roleVOs" javaType="List" ofType="RoleVO">
   				<id property="roleNum" column="ROLENUM"/>
   				<result property="roleName" column="ROLENAME"/>
@@ -31,7 +34,7 @@
   	
   		<insert id="setJoin" parameterType="MemberVO">
 	  		INSERT INTO MEMBER
-	  		VALUES(#{username}, #{password}, #{email}, #{category}, 1)
+	  		VALUES(#{username}, #{password}, #{email}, #{category}, 0)
   		</insert>
   		
   		<insert id="setRoleAdd" parameterType="Map">
@@ -47,5 +50,119 @@
   		<update id="setPwUpdate" parameterType="MemberVO">
   			UPDATE MEMBER SET PASSWORD = #{password} WHERE USERNAME = #{username}
   		</update>
-  
+  		
+  		
+ <!-- ============================================================================================================================ -->
+  		
+  		
+  		<select id="getStudent" parameterType="StudentVO" resultMap="studentResult">
+	  		SELECT * FROM MEMBER M
+				LEFT OUTER JOIN
+					MEMBERFILES MF
+				USING(USERNAME)
+					INNER JOIN
+						STUDENT S 
+					USING(USERNAME)
+						INNER JOIN
+							DEPARTMENT D 
+						USING(DEPTNUM)
+		 	WHERE M.USERNAME = #{username}
+  		</select>
+  	
+  		<resultMap type="DepartmentVO" id="studentResult">
+  			<id column="DEPTNUM" property="deptNum"/>
+  			<result column="DEPTNAME" property="deptName"/>
+  			<collection property="studentVOs" javaType="List" ofType="StudentVO">
+  				<id column="USERNAME" property="username"/>
+  				<result column="GRADE" property="grade"/>
+  				<result column="NAME" property="name"/>
+  				<result column="PHONE" property="phone"/>
+  				<result property="birth" column="BIRTH"/>
+	  			<result property="address" column="ADDRESS"/>
+	  			<result property="email" column="EMAIL"/>
+  				<collection property="memberFilesVOs" javaType="List" ofType="MemberFilesVO">
+  					<id column="FILENUM" property="fileNum"/>
+  					<result column="ORINAME" property="oriName"/>
+  				</collection>
+  			</collection>
+  		</resultMap>
+  		
+  		<select id="getProfessor" parameterType="ProfessorVO" resultMap="professorResult">
+	  		SELECT * FROM MEMBER M
+				LEFT OUTER JOIN
+					MEMBERFILES MF
+				USING(USERNAME)
+					INNER JOIN
+						PROFESSOR P 
+					USING(USERNAME)
+						INNER JOIN
+							DEPARTMENT D 
+						USING(DEPTNUM)
+		 	WHERE M.USERNAME = #{username}
+  		</select>
+  	
+  		<resultMap type="DepartmentVO" id="professorResult">
+  			<id column="DEPTNUM" property="deptNum"/>
+  			<result column="DEPTNAME" property="deptName"/>
+  			<collection property="professorVOs" javaType="List" ofType="ProfessorVO">
+  				<id column="USERNAME" property="username"/>
+  				<result column="NAME" property="name"/>
+	  			<result column="PROFESSORROOM" property="professorRoom"/>
+  				<result column="PHONE" property="phone"/>
+  				<result property="birth" column="BIRTH"/>
+	  			<result property="address" column="ADDRESS"/>
+	  			<result property="email" column="EMAIL"/>
+  				<result column="STATUS" property="status"/>
+  				<collection property="memberFilesVOs" javaType="List" ofType="MemberFilesVO">
+  					<id column="FILENUM" property="fileNum"/>
+  					<result column="ORINAME" property="oriName"/>
+  				</collection>
+  			</collection>
+  		</resultMap>
+  		
+  		<select id="getAdministrator" parameterType="AdministratorVO" resultMap="administratorResult">
+		 	SELECT * FROM MEMBER M
+				LEFT OUTER JOIN
+					MEMBERFILES MF
+				USING(USERNAME)
+					INNER JOIN
+						ADMINISTRATOR A 
+					USING(USERNAME)
+						INNER JOIN
+							DEPARTMENT D 
+						USING(DEPTNUM)
+		 	WHERE M.USERNAME = #{username}
+  		</select>
+  		
+  		<resultMap type="DepartmentVO" id="administratorResult">
+  			<id column="DEPTNUM" property="deptNum"/>
+  			<result column="DEPTNAME" property="deptName"/>
+  			<collection property="administratorVOs" javaType="List" ofType="AdministratorVO">
+  				<id column="USERNAME" property="username"/>
+  				<result column="NAME" property="name"/>
+  				<result column="PHONE" property="phone"/>
+  				<result property="birth" column="BIRTH"/>
+	  			<result property="address" column="ADDRESS"/>
+	  			<result property="email" column="EMAIL"/>
+  				<result column="STATUS" property="status"/>
+  				<collection property="memberFilesVOs" javaType="List" ofType="MemberFilesVO">
+  					<id column="FILENUM" property="fileNum"/>
+  					<result column="ORINAME" property="oriName"/>
+  				</collection>
+  			</collection>
+  		</resultMap>
+  		
+  		
+ <!-- ============================================================================================================================ -->
+ 
+ 		<update id="setStudentUpdate" parameterType="MemberVO">
+ 			UPDATE MEMBER M
+				 RIGHT JOIN STUDENT S ON (S.USERNAME  = M.USERNAME)
+					  SET  S.NAME = #{name},
+					   	   S.PHONE = #{phone},
+					   	   S.BIRTH = #{birth},
+					   	   S.ADDRESS = #{address}
+				 WHERE M.USERNAME = #{username}
+ 		</update>
+ 		
   </mapper>
