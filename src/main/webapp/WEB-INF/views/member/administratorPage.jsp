@@ -60,13 +60,15 @@
 													</div>
 													<c:forEach items="${departmentVO.administratorVOs}" var="administratorVO">
 														<c:set var="administratorName" value="${administratorVO.name}"></c:set>
-															<h3 class="profile-username text-center"><c:out value="${administratorName}"></c:out></h3>
+															<sec:authentication property="Principal" var="user"/>
+																	<h3 class="profile-username text-center"><c:out value="${administratorName}"></c:out>(${user.username})</h3>							
 													</c:forEach>
 
 													<c:forEach items="${departmentVO.administratorVOs}" var="administratorVO">
 														<c:set var="administratorPhone" value="${administratorVO.phone}"></c:set>
 														<c:set var="administratorBirth" value="${administratorVO.birth}"></c:set>
 														<c:set var="administratorAddress" value="${administratorVO.address}"></c:set>
+														<%-- <c:set var="administratorAddressDetail" value="${administratorVO.addressDetail}"></c:set> --%>
 														<c:set var="administratorEmail" value="${administratorVO.email}"></c:set>
 
 														<div class="card-body">
@@ -87,6 +89,7 @@
 																<hr>
 																	<strong><i class="fas fa-map-marker-alt mr-1"></i> 주소</strong>
 																		<p class="text-muted"><c:out value="${administratorAddress}"></c:out></p>
+																		<%-- <p class="text-muted"><c:out value="${administratorAddressDetail}"></c:out></p> --%>
 															
 														</div>
 													</c:forEach>

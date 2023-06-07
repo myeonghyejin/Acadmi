@@ -68,7 +68,9 @@
 															</div>
 													
 													<c:forEach items="${departmentVO.professorVOs}" var="professorVO">
-														<h3 class="profile-username text-center">이름 : <input value="${professorVO.name}" type="text" id="name" name="name"></h3>
+														<c:set var="professorName" value="${professorVO.name}"></c:set>
+															<sec:authentication property="Principal" var="user"/>
+																<h3 class="profile-username text-center"><c:out value="${professorName}"></c:out>(${user.username})</h3>
 													</c:forEach>
 													
 													<c:forEach items="${departmentVO.professorVOs}" var="professorVO">
@@ -76,6 +78,7 @@
 															<c:set var="professorPhone" value="${professorVO.phone}"></c:set>
 															<c:set var="professorBirth" value="${professorVO.birth}"></c:set>
 															<c:set var="professorAddress" value="${professorVO.address}"></c:set>
+															<%-- <c:set var="professorAddressDetail" value="${professorVO.addressDetail}"></c:set> --%>
 															<c:set var="professorEmail" value="${professorVO.email}"></c:set>
 															
 
@@ -97,8 +100,8 @@
 																<hr>
 																	<strong><i class="fas fa-map-marker-alt mr-1"></i> 주소</strong>
 																		<p class="text-muted"><input value="${professorVO.address}" type="text" id="address" name="address"></p>
-																		<%-- <strong><i class="mr-1"></i> 상세 주소 입력</strong>
-																		<p class="text-muted"><input value="${studentVO.address}" type="text" name="address"></p> --%>
+																		<%-- <strong><i class="mr-1"></i> 상세 주소 입력</strong> --%>
+																		<%-- <p class="text-muted"><input value="${professorVO.addressDetail}" type="text" id="addressDetail" name="addressDetail"></p> --%>
 															
 														</div>
 													</c:forEach>
