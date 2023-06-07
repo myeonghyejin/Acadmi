@@ -2,6 +2,8 @@ package com.acadmi.util;
 
 import java.util.List;
 
+import com.acadmi.lecture.LectureVO;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,6 +16,9 @@ public class Pagination {
 	private Integer department;
 	private Integer grade;
 	private String username;
+	
+	//강의실 배정 조회
+	private Integer status;
 	
 	private Long page;
 	private Long perPage;

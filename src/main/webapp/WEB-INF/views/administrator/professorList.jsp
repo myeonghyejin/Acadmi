@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -84,6 +85,10 @@
 				                      <th style="width: 10%">
 				                          사진
 				                      </th>
+				                      
+				                       <th style="width: 10%">
+				                          번호
+				                      </th>
 				         
 				                      <th style="width: 5%" class="text-center">
 				                          성명
@@ -123,15 +128,18 @@
 										<c:set var="professorEmail" value="${professorVO.email}"></c:set>
 										<c:set var="professorRoom" value="${professorVO.professorRoom}"></c:set>
 										<c:set var="professorStatus" value="${professorVO.status}"></c:set>
+										<c:set var="professoruserName" value="${professorVO.username}"></c:set>
 										<c:set var="memberFiles" value="${professorVO.memberFilesVO }"></c:set>
 										<tr>
 											
 										<td>
-											<i class="fa-regular fa-envelope fa-2xl" style="margin : 30px 0 0 0 "></i>
-										</td>
+	     	 								<sec:authentication property="principal.username" var="username"/>
+				     	 					<a href="../chat/detail?sender=${username}&recipient=${professorVO.username}"><i class="fa-regular fa-envelope fa-2xl" style="margin:30px 0 0 0;"></i></a>
+	     	 							</td>
 										<td>
 				   	 						<img alt="" src="/file/${board}/${boardFileVO.fileName}" width="60rem" height="60rem">
 				   	 					</td>
+				   	 					<td><c:out value="${professoruserName}"></c:out></td>
 										<td><c:out value="${professorName}"></c:out></td>
 										<td><c:out value="${collegeName}"></c:out></td>	
 										<td><c:out value="${department}"></c:out></td>

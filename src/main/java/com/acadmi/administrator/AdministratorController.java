@@ -25,6 +25,7 @@ import com.acadmi.period.PeriodVO;
 import com.acadmi.professor.ProfessorVO;
 import com.acadmi.student.StudentVO;
 import com.acadmi.util.Pagination;
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -369,11 +370,11 @@ public class AdministratorController {
 		log.error("applicationStart ::: {}", periodVO.getApplicationStart());
 		int result = administratorService.setPeriodAdd(periodVO);
 		
-//		if(bindingResult.hasErrors()) {
-//			log.warn("검증에 실패");
-//			mv.setViewName("administrator/periodAdd");
-//			return mv;
-//		}
+		if(bindingResult.hasErrors()) {
+			log.warn("검증에 실패");
+			mv.setViewName("administrator/periodAdd");
+			return mv;
+		}
 		
 		String message= "등록 실패";
 		
@@ -390,5 +391,24 @@ public class AdministratorController {
 		
 		
 	}
+	
+	//강의 조회
+	@GetMapping("lectureList")
+	public ModelAndView getLectureList(Pagination pagination) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		List<LectureVO> ar = administratorService.getLectureList(pagination);
+		
+		mv.addObject("list", ar);
+		mv.setViewName("administrator/lectureList");
+		
+		return mv;
+	}
+
+	//강의실 배정
+//	public ModelAndView getLectureRoomAssignment(Pagination pagination) throws Exception {
+//		ModelAndView mv = new ModelAndView();
+//		
+//	}
 
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -87,6 +88,9 @@
 				                      <th style="width: 10%">
 				                          사진
 				                      </th>
+				                      <th style="width: 10%">
+				                      	  번호
+				                      </th>
 				                      <th style="width: 10%" class="text-center">
 				                          성명
 				                      </th>
@@ -113,16 +117,19 @@
 					   	 				<c:set var="administratorPhone" value="${administratorVO.phone}"></c:set>
 					   	 				<c:set var="administratorEmail" value="${administratorVO.email}"></c:set>
 					   	 				<c:set var="administratorStatus" value="${administratorVO.status}"></c:set>
+					   	 				<c:set var="administratoruserName" value="${administratorVO.username}"></c:set>
 					   	 				<c:set var="memberFiles" value="${memberFilesVO.fileName}"></c:set>
 					   	 				<tr>
 						   	 				
 						   	 			<td>
-						   	 				<i class="fa-regular fa-envelope fa-2xl" style="margin : 30px 0 0 0;"></i>
-						   	 			</td>
+	     	 								<sec:authentication property="principal.username" var="username"/>
+				     	 					<a href="../chat/detail?sender=${username}&recipient=${administratorVO.username}"><i class="fa-regular fa-envelope fa-2xl" style="margin:30px 0 0 0;"></i></a>
+	     	 							</td>
 						   	 			<td>
 						   	 				<img alt="" src="https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927" width="60rem" height="60rem">
 						   	 				<%-- <img alt="" src="/file/${board}/${boardFileVO.fileName}" width="60rem" height="60rem"> --%>
 						   	 			</td>
+						   	 			<td><c:out value="${administratoruserName}"></c:out></td>
 						   	 			<td><c:out value="${administratorName}"></c:out></td>
 						   	 			<td><c:out value="${administratorPhone}"></c:out></td>
 						   	 			<td><c:out value="${administratorEmail}"></c:out></td>

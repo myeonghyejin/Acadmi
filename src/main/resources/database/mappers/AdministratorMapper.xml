@@ -257,14 +257,22 @@
   <!--기간 설정  -->
   <insert id="setPeriodAdd" parameterType="PeriodVO">
   INSERT INTO PERIOD (YEAR,SEMESTER,APPLICATIONSTART,APPLICATIONEND,FAVORITESTAR,FAVORITEEND,DEADLINE) 
-  VALUES (#{year},#{semester},STR_TO_DATE(#{applicationStart},'%Y-%m-%dT%H:%i'), STR_TO_DATE('2023-06-03T14:30', '%Y-%m-%dT%H:%i'),STR_TO_DATE('2023-06-03T14:30', '%Y-%m-%dT%H:%i'),STR_TO_DATE('2023-06-03T14:30', '%Y-%m-%dT%H:%i'),STR_TO_DATE('2023-06-03T14:30', '%Y-%m-%dT%H:%i'))	
+  VALUES (#{year},#{semester},STR_TO_DATE(#{applicationStart},'%Y-%m-%dT%H:%i'), STR_TO_DATE(#{applicationEnd},'%Y-%m-%dT%H:%i'),STR_TO_DATE(#{favoriteStart},'%Y-%m-%dT%H:%i'),STR_TO_DATE(#{favoriteEnd},'%Y-%m-%dT%H:%i'),STR_TO_DATE(#{deadline},'%Y-%m-%dT%H:%i'))	
   	
   </insert>
   
   <!--강의 목록 조회  -->
-  <select id="getLectureList" resultType="LectureVO">
+  <select id="getLectureList" resultType="LectureVO" parameterType="Pagination">
   	SELECT * FROM LECTURE
-
   </select>  
-  	
+  <select id="getTotalCountLecture" resultType="Long">
+  	SELECT COUNT(LECTURENUM) FROM LECTURE
+  </select>
+  
+  <!--강의실 배정  -->
+  <select id="getLectureRoomAssignment" resultType="LectureVO" parameterType="Pagination">
+  	SELECT * FROM LECTURE_ROOM 
+	WHERE STATUS=#{status};
+  </select>
+	
   </mapper>

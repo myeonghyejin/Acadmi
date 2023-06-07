@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.acadmi.college.CollegeVO;
 import com.acadmi.department.DepartmentVO;
+import com.acadmi.lecture.LectureVO;
 import com.acadmi.lecture.room.LectureRoomVO;
 import com.acadmi.member.MemberSeqVO;
 import com.acadmi.member.MemberVO;
@@ -439,7 +440,25 @@ public class AdministratorService{
 		
 	}
 	
+	//강의 조회
+	public List<LectureVO> getLectureList(Pagination pagination) throws Exception {
+		Long totalCount = administratorDAO.getTotalCountLecture(pagination);
+		
+		pagination.makeNum(totalCount);
+		pagination.makeStartRow();
+		
+		return administratorDAO.getLectureList(pagination);
+	}
 	
-	
+	//강의실 배정
+	public List<LectureRoomVO> getLectureRoomAssignment(Pagination pagination) throws Exception {
+		Long totalCount = administratorDAO.getTotalCountLectureRoom(pagination);
+		
+		pagination.makeNum(totalCount);
+		pagination.getStartRow();
+		
+		return administratorDAO.getLectureRoomAssignment(pagination);
+	}
+ 	
 
 }
