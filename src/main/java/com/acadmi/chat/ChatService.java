@@ -70,13 +70,12 @@ public class ChatService {
 	public int setChatRoomDelete(ChatRoomVO chatRoomVO) throws Exception {
 		String sender = chatRoomVO.getRoomSender();
 		String recipient = chatRoomVO.getRoomRecipient();
-		ChatRoomVO yourChatRoom = new ChatRoomVO();
-		yourChatRoom.setRoomSender(recipient);
-		yourChatRoom.setRoomRecipient(sender);
-		yourChatRoom = chatDAO.getChatRoom(yourChatRoom);
-		yourChatRoom.setChatStatus(2);
-		int result = chatDAO.setChatRoomUpdate(yourChatRoom);
-		result = chatDAO.setChatRoomDelete(chatRoomVO);
+		int result = chatDAO.setChatRoomDelete(chatRoomVO);
+		chatRoomVO.setRoomSender(recipient);
+		chatRoomVO.setRoomRecipient(sender);
+		chatRoomVO = chatDAO.getChatRoom(chatRoomVO);
+		chatRoomVO.setChatStatus(2);
+		result = chatDAO.setChatRoomUpdate(chatRoomVO);
 		return result;
 	}
 	

@@ -34,7 +34,7 @@
 
 								<div class="direct-chat-contacts-light">
 									<c:forEach items="${list}" var="chatRoomVO">
-										<div class="contacts-list">
+										<div class="contacts-list chatRoom">
 											<c:forEach items="${chatRoomVO.chatMessageVOs}" var="chatMessageVO" varStatus="i">
 												<c:if test="${chatMessageVO.msgStatus eq 0}">
 													<c:set var="count" value="${count + 1}"></c:set>
@@ -52,6 +52,10 @@
 																		<c:if test="${chatRoomVO.chatStatus eq 0}">
 																			<span class="right badge badge-info">${count}</span>
 																		</c:if>
+																		<small class="contacts-list-date float-right deleteButton" data-chat-num="${chatRoomVO.chatNum}"
+																		data-room-sender="${chatRoomVO.roomSender}" data-room-recipient="${chatRoomVO.roomRecipient}">
+																			<button class="btn btn-block btn-danger btn-xs"><i class="fa-regular fa-trash-can"></i></button>
+																		</small>
 																	</span>
 																</div>
 													</a></li>
@@ -71,5 +75,6 @@
 		<!-- Footer 끝 -->
 	</div>
 	<!-- ./wrapper -->
+	<script src="../js/chat/chatList.js"></script>
 </body>
 </html>
