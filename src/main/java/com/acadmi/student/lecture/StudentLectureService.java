@@ -60,6 +60,11 @@ public class StudentLectureService {
 		return studentLectureDAO.getGradeCount(studentLectureVO);
 	}
 	
+	//이미 수강한 강의와 시간이 겹치는지 확인
+	public List<LectureVO> getDuplicateTime(LectureVO lectureVO) throws Exception {
+		return studentLectureDAO.getDuplicateTime(lectureVO);
+	}
+	
 	/** INSERT **/
 	//수강 신청
 	public int insertToStudentLecture(StudentLectureVO studentLectureVO, LectureVO lectureVO, HttpSession session) throws Exception {

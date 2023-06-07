@@ -169,12 +169,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="getGradeCount" parameterType="StudentLectureVO" resultType="Long">
-		SELECT SUM(COMPLETIONGRADE)
+		SELECT COALESCE(SUM(L.COMPLETIONGRADE), 0)
 		FROM LECTURE L
-			LEFT OUTER JOIN
+			INNER JOIN
 			STUDENT_LECTURE SL
 			ON SL.LECTURENUM = L.LECTURENUM
-		WHERE SL.USERNAME = #{username};
+		WHERE SL.USERNAME = #{username}
+		AND SL.LECTURENUM != #{lectureNum}
+	</select>
+	
+	<select id="getDuplicateTime" parameterType="LectureVO" resultMap="allLectureList">
+		<![CDATA[
+		SELECT *
+		FROM LECTURE L
+			LEFT OUTER JOIN 
+			STUDENT_LECTURE SL
+			ON (SL.LECTURENUM = L.LECTURENUM)
+		WHERE SL.USERNAME = #{username}
+		AND (WEEKDAY = #{weekday} AND (STARTTIME <= #{startTime} AND ENDTIME >= #{startTime})
+			OR (STARTTIME <= #{endTime} AND ENDTIME >= #{endTime}))]]>
 	</select>
 	
 	<!-- INSERT -->

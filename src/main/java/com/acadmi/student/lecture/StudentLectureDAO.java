@@ -38,6 +38,9 @@ public interface StudentLectureDAO {
 	//수강한 강의 총 학점 계산
 	public Long getGradeCount(StudentLectureVO studentLectureVO) throws Exception;
 	
+	//이미 수강한 강의와 시간이 겹치는지 확인
+	public List<LectureVO> getDuplicateTime(LectureVO lectureVO) throws Exception;
+	
 	/** INSERT **/
 	//수강 신청
 	public int insertToStudentLecture(StudentLectureVO studentLectureVO) throws Exception;
