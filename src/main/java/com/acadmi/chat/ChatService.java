@@ -63,7 +63,20 @@ public class ChatService {
 	
 	//메세지 저장
 	public int setSaveMessage(ChatMessageVO chatMessageVO) throws Exception {
-		int result = chatDAO.setSaveMessage(chatMessageVO);
+		return chatDAO.setSaveMessage(chatMessageVO);
+	}
+	
+	//채팅방 나가기
+	public int setChatRoomDelete(ChatRoomVO chatRoomVO) throws Exception {
+		String sender = chatRoomVO.getRoomSender();
+		String recipient = chatRoomVO.getRoomRecipient();
+		ChatRoomVO yourChatRoom = new ChatRoomVO();
+		yourChatRoom.setRoomSender(recipient);
+		yourChatRoom.setRoomRecipient(sender);
+		yourChatRoom = chatDAO.getChatRoom(yourChatRoom);
+		yourChatRoom.setChatStatus(2);
+		int result = chatDAO.setChatRoomUpdate(yourChatRoom);
+		result = chatDAO.setChatRoomDelete(chatRoomVO);
 		return result;
 	}
 	

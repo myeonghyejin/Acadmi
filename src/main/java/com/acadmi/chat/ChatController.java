@@ -39,5 +39,7 @@ public class ChatController {
 		mv.setViewName("chat/detail");
 		return mv;
 	}
+	
+	
 
 }

@@ -9,11 +9,15 @@ import com.acadmi.util.Pagination;
 @Mapper
 public interface ChatDAO {
 	
+		//select
+	
 	//채팅방 목록 list
 	public List<ChatRoomVO> getChatRoomList(Pagination pagination) throws Exception;
 	
 	//채팅방 메세지 출력
 	public ChatRoomVO getChatRoom(ChatRoomVO chatRoomVO) throws Exception;
+	
+		//insert
 	
 	//채팅방 생성
 	//내 채팅방
@@ -24,6 +28,8 @@ public interface ChatDAO {
 	//메세지 입력
 	public int setSaveMessage(ChatMessageVO chatMessageVO) throws Exception;
 	
+		//update
+	
 	//채팅방 상태 변경
 	public int setChatRoomUpdate(ChatRoomVO chatRoomVO) throws Exception;
 	
@@ -32,5 +38,10 @@ public interface ChatDAO {
 	
 	//상대 채팅방 메세지 상태 변경
 	public int setYourChatMessageUpdate(ChatMessageVO chatMessageVO) throws Exception;
+	
+		//delete
+	
+	//채팅방 나가기
+	public int setChatRoomDelete(ChatRoomVO chatRoomVO) throws Exception;
 	
 }
