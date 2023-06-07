@@ -42,62 +42,60 @@
 										<div class="col-md-6">
 											<div class="card card-info card-outline ml-5">
 												<div class="card-body box-profile">
-													<form action="./studentUpdate" method="post" enctype="multipart/form-data">
+													<form action="./administratorUpdate" method="post" enctype="multipart/form-data">
 														<sec:authentication property="Principal" var="user"/>
 															<input type="hidden" name="username" value="${user.username}">
 																<div class="text-center">
-																	<c:forEach items="${departmentVO.studentVOs}" var="studentVO">
+																	<c:forEach items="${departmentVO.administratorVOs}" var="administratorVO">
 				     	 												<c:choose>
-																		    <c:when test="${empty studentVO.memberFilesVO.fileName}">
+																		    <c:when test="${empty administratorVO.memberFilesVO.fileName}">
 																		        <img class="profile-user-img img-fluid img-circle"
 																		             src="/images/profile.jpg"
 																		             alt="User profile picture">
 																		    </c:when>
 																		    <c:otherwise>	
 																				<img class="img-fluid img-size"
-																				     src="/file/member/${studentVO.memberFilesVO.fileName}"
+																				     src="/file/member/${administratorVO.memberFilesVO.fileName}"
 																				     alt="User profile picture">
 																		    </c:otherwise>
 																		</c:choose>
 																	</c:forEach>
 																<div class="col-md-12 mt-3">
 											                        <div id="fileList">
-											                           <button class="col-md-3  btn btn-primary" id="fileAdd" type="button">파일추가</button>
+											                           <button class="col-md-3  btn btn-info" id="fileAdd" type="button">파일추가</button>
 											                        </div> 
 											                     </div> 
 															</div>
 													
-													<c:forEach items="${departmentVO.studentVOs}" var="studentVO">
-														<h3 class="profile-username text-center">이름 : <input value="${studentVO.name}" type="text" id="name" name="name"></h3>
+													<c:forEach items="${departmentVO.administratorVOs}" var="administratorVO">
+														<h3 class="profile-username text-center">이름 : <input value="${administratorVO.name}" type="text" id="name" name="name"></h3>
 													</c:forEach>
 													
-													<c:forEach items="${departmentVO.studentVOs}" var="studentVO">
-															<c:set var="studentGrade" value="${studentVO.grade}"></c:set>
-															<c:set var="studentPhone" value="${studentVO.phone}"></c:set>
-															<c:set var="studentBirth" value="${studentVO.birth}"></c:set>
-															<c:set var="studentAddress" value="${studentVO.address}"></c:set>
-															<c:set var="studentEmail" value="${studentVO.email}"></c:set>
+													<c:forEach items="${departmentVO.administratorVOs}" var="administratorVO">
+														<c:set var="administratorPhone" value="${administratorVO.phone}"></c:set>
+														<c:set var="administratorBirth" value="${administratorVO.birth}"></c:set>
+														<c:set var="administratorAddress" value="${administratorVO.address}"></c:set>
+														<c:set var="administratorEmail" value="${administratorVO.email}"></c:set>
 															
 
 														<div class="card-body">
 															<strong><i class="fas fa-book mr-1"></i> 학과, 학년</strong>
 															<p class="text-muted">
-																<c:set value="${departmentVO.deptName}" var="studentDeptName"></c:set>
-																	학과 이름 : &ensp;<c:out value="${studentDeptName}"></c:out><br>
-																	학년 : &ensp;<c:out value="${studentGrade}"></c:out>학년
+																<c:set value="${departmentVO.deptName}" var="administratorDeptName"></c:set>
+																	학과 이름 : &ensp;<c:out value="${administratorDeptName}"></c:out><br>
 															</p>
 																<hr>
 																	<strong><i class="fa-solid fa-cake-candles mr-1"></i> 생년월일</strong>
-																			<p class="text-muted"><c:out value="${studentBirth}"></c:out></p>
+																			<p class="text-muted"><c:out value="${administratorBirth}"></c:out></p>
 																<hr>
 																	<strong><i class="fa-solid fa-phone mr-1"></i> 전화번호</strong>
-																		<p class="text-muted"><input value="${studentVO.phone}" type="text" id="phone" name="phone"></p>
+																		<p class="text-muted"><input value="${administratorVO.phone}" type="text" id="phone" name="phone"></p>
 																<hr>
 																	<strong><i class="fas fa-envelope mr-1"></i> 이메일</strong>
-																		<p class="text-muted"><input value="${studentVO.email}" type="email" id="email" name="email"></p>
+																		<p class="text-muted"><input value="${administratorVO.email}" type="email" id="email" name="email"></p>
 																<hr>
 																	<strong><i class="fas fa-map-marker-alt mr-1"></i> 주소</strong>
-																		<p class="text-muted"><input value="${studentVO.address}" type="text" id="address" name="address"></p>
+																		<p class="text-muted"><input value="${administratorVO.address}" type="text" id="address" name="address"></p>
 																		<%-- <strong><i class="mr-1"></i> 상세 주소 입력</strong>
 																		<p class="text-muted"><input value="${studentVO.address}" type="text" name="address"></p> --%>
 															
@@ -109,7 +107,7 @@
 
 														
 														<sec:authentication property="Principal" var="user"/>
-	                 										<a href="/member/studentPage?username=${user.username}" class="btn btn-danger float-right mx-3">취소</a>
+	                 										<a href="/member/administratorPage?username=${user.username}" class="btn btn-danger float-right mx-3">취소</a>
 	                 										
 												</div>
 											</div>

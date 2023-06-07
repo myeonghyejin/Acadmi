@@ -126,14 +126,44 @@ public class MemberController {
 			return mv;
 		}
 	   
+	   @GetMapping("firstEmail")
+		public ModelAndView getFirstEmail(MemberVO memberVO) throws Exception {
+			ModelAndView mv = new ModelAndView();
+			mv.setViewName("member/firstEmail");
+			return mv;
+		}
+	   
+	   @PostMapping("firstEmail")
+		public ModelAndView getFirstEmail(@Valid MemberVO memberVO, BindingResult bindingResult) throws Exception{
+			ModelAndView mv = new ModelAndView();
+			boolean check = memberService.getFirstEmail(memberVO, bindingResult);
+			if(check) {
+				mv.setViewName("member/firstEmail");
+				return mv;
+			}
+			mv.setViewName("member/firstEmailCheck");
+			return mv;
+		}
+	   
+	   @PostMapping("fileDelete")
+	   public ModelAndView setFileDelete(MemberFilesVO memberFilesVO) throws Exception{
+		   ModelAndView mv = new ModelAndView();
+		   
+		   int result = memberService.setFileDelete(memberFilesVO);
+		   
+		   mv.addObject("result", result);
+		   mv.setViewName("member/fileDelete");
+		   
+		   return mv;
+	   }
 	   
 //	   ========================================멤버 권한에 따른 마이페이지========================================
 	   
 	   @GetMapping("studentPage")
-	   public ModelAndView getStudent(StudentVO studentVO, MultipartFile multipartFile) throws Exception {
+	   public ModelAndView getStudent(StudentVO studentVO) throws Exception {
 	      ModelAndView mv = new ModelAndView();
 	      
-	      DepartmentVO departmentVO =  memberService.getStudent(studentVO, multipartFile);
+	      DepartmentVO departmentVO =  memberService.getStudent(studentVO);
 	     
 	      mv.addObject("departmentVO", departmentVO);
 		  mv.setViewName("member/studentPage");
@@ -142,10 +172,10 @@ public class MemberController {
 	   }
 	   
 	   @GetMapping("professorPage")
-	   public ModelAndView getProfessor(ProfessorVO professorVO, MultipartFile multipartFile) throws Exception {
+	   public ModelAndView getProfessor(ProfessorVO professorVO) throws Exception {
 		   ModelAndView mv = new ModelAndView();
 		     
-		   DepartmentVO departmentVO =  memberService.getProfessor(professorVO, multipartFile);
+		   DepartmentVO departmentVO =  memberService.getProfessor(professorVO);
 		   
 		   mv.addObject("departmentVO", departmentVO);
 		   mv.setViewName("member/professorPage");
@@ -154,10 +184,10 @@ public class MemberController {
 	   }
 	   
 	   @GetMapping("administratorPage")
-	   public ModelAndView getAdministrator(AdministratorVO administratorVO, MultipartFile multipartFile) throws Exception {
+	   public ModelAndView getAdministrator(AdministratorVO administratorVO) throws Exception {
 		   ModelAndView mv = new ModelAndView();
 		     
-		   DepartmentVO departmentVO =  memberService.getAdministrator(administratorVO, multipartFile);
+		   DepartmentVO departmentVO =  memberService.getAdministrator(administratorVO);
 		   
 		   mv.addObject("departmentVO", departmentVO);
 		   mv.setViewName("member/administratorPage");
@@ -170,10 +200,10 @@ public class MemberController {
 	   
 	   
 	   @GetMapping("studentUpdate")
-	   public ModelAndView setStudentUpdate(StudentVO studentVO, MultipartFile multipartFile) throws Exception {
+	   public ModelAndView getStudentUpdate(StudentVO studentVO) throws Exception {
 	       ModelAndView mv = new ModelAndView();
 
-	       DepartmentVO departmentVO = memberService.getStudent(studentVO, multipartFile);
+	       DepartmentVO departmentVO = memberService.getStudent(studentVO);
 	       
 	       mv.addObject("departmentVO", departmentVO);
 	       mv.setViewName("member/studentUpdate");
@@ -181,25 +211,25 @@ public class MemberController {
 	       return mv;
 	   }
 
-	   
 	   @PostMapping("studentUpdate")
-	   public ModelAndView setStudentUpdate(StudentVO studentVO, ModelAndView mv) throws Exception {
-	
-		  MemberVO memberVO =  memberService.setStudentUpdate(studentVO);
-	      
-	      mv.addObject("memberVO", memberVO);
-		  mv.setViewName("redirect:/");
-		     
-		  return mv;
+	   public ModelAndView setStudentUpdate(String username, StudentVO studentVO, ModelAndView mv, MultipartFile addfiles) throws Exception {
+	       
+	       int result = memberService.setStudentUpdate(studentVO, addfiles);
+	       
+	       mv.setViewName("redirect:./studentPage?username=" + username);
+
+	       return mv;
 	   }
+
+
 	   
 //	   ==================================professorUpdate==================================
 	   
 	   @GetMapping("professorUpdate")
-	   public ModelAndView setProfessorUpdate(ProfessorVO professorVO, MultipartFile multipartFile) throws Exception {
+	   public ModelAndView setProfessorUpdate(ProfessorVO professorVO) throws Exception {
 		   ModelAndView mv = new ModelAndView();
 		     
-		   DepartmentVO departmentVO =  memberService.getProfessor(professorVO, multipartFile);
+		   DepartmentVO departmentVO =  memberService.getProfessor(professorVO);
 		   
 		   mv.addObject("departmentVO", departmentVO);
 		   mv.setViewName("member/professorUpdate");
@@ -208,12 +238,11 @@ public class MemberController {
 	   }
 	   
 	   @PostMapping("professorUpdate")
-	   public ModelAndView setProfessorUpdate(ProfessorVO professorVO, ModelAndView mv) throws Exception {
+	   public ModelAndView setProfessorUpdate(String username, ProfessorVO professorVO, ModelAndView mv, MultipartFile addfiles) throws Exception {
 		     
-		   MemberVO memberVO =  memberService.setProfessorUpdate(professorVO);
-		   
-		   mv.addObject("memberVO", memberVO);
-		   mv.setViewName("redirect:/");
+		   int result = memberService.setProfessorUpdate(professorVO, addfiles);
+
+	       mv.setViewName("redirect:./professorPage?username=" + username);
 	      
 	      return mv;
 	   }
@@ -223,10 +252,10 @@ public class MemberController {
 	   
 	   
 	   @GetMapping("administratorUpdate")
-	   public ModelAndView setAdministratorUpdate(AdministratorVO administratorVO, MultipartFile multipartFile) throws Exception {
+	   public ModelAndView setAdministratorUpdate(AdministratorVO administratorVO) throws Exception {
 		   ModelAndView mv = new ModelAndView();
 		     
-		   DepartmentVO departmentVO =  memberService.getAdministrator(administratorVO, multipartFile);
+		   DepartmentVO departmentVO =  memberService.getAdministrator(administratorVO);
 		   
 		   mv.addObject("departmentVO", departmentVO);
 		   mv.setViewName("member/administratorUpdate");
@@ -235,12 +264,11 @@ public class MemberController {
 	   }
 	   
 	   @PostMapping("administratorUpdate")
-	   public ModelAndView setAdministratorUpdate(AdministratorVO administratorVO, ModelAndView mv) throws Exception {
+	   public ModelAndView setAdministratorUpdate(String username, AdministratorVO administratorVO, ModelAndView mv, MultipartFile addfiles) throws Exception {
 		     
-		   MemberVO memberVO =  memberService.setAdministratorUpdate(administratorVO);
-		   
-		   mv.addObject("memberVO", memberVO);
-		   mv.setViewName("redirect:/");
+	       int result = memberService.setAdministratorUpdate(administratorVO, addfiles);
+
+	       mv.setViewName("redirect:./administratorPage?username=" + username);
 	      
 	      return mv;
 	   }

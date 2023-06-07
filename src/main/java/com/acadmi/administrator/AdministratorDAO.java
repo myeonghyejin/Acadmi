@@ -1,5 +1,7 @@
 package com.acadmi.administrator;
 
+import java.time.Period;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -7,9 +9,11 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.acadmi.college.CollegeVO;
 import com.acadmi.department.DepartmentVO;
+import com.acadmi.lecture.LectureVO;
 import com.acadmi.lecture.room.LectureRoomVO;
 import com.acadmi.member.MemberSeqVO;
 import com.acadmi.member.MemberVO;
+import com.acadmi.period.PeriodVO;
 import com.acadmi.professor.ProfessorVO;
 import com.acadmi.student.StudentVO;
 import com.acadmi.util.Pagination;
@@ -52,16 +56,35 @@ public interface AdministratorDAO {
 	public List<LectureRoomVO> getLectureRoomList(Pagination pagination) throws Exception;
 	//강의실 등록
 	public int setLectureRoomAdd(LectureRoomVO lectureRoomVO) throws Exception;
+	public List<LectureRoomVO> getLectureBuilding() throws Exception;
+	//강의실 중복 체크
+	public LectureRoomVO LectureRoomDuplicateCheck(LectureRoomVO lectureRoomVO) throws Exception;
 	//강의실 수정
 	public int setLectureRoomUpdate(LectureRoomVO lectureRoomVO) throws Exception;
-	
-	
- 	
-//	public int setMemberInsert(MemberVO memberVO) throws Exception;
-//	public int setStudentInsert(StudentVO studentVO)throws Exception;
-//	public int setProfessorInsert(ProfessorVO professorVO)throws Exception;
-//	public int setAdminIstratorInsert(AdministratorVO adminIstratorVO) throws Exception;
-//	
-//	public List<MemberVO> getMember() throws Exception;
 
+	
+ 	//학과 관리
+	
+	//학과 조회
+	public Long getTotalCountDepartment(Pagination pagination) throws Exception;
+	public List<DepartmentVO> getDepartmentList(Pagination pagination) throws Exception;
+	
+	//학과 등록
+	public int setDepartmentAdd(DepartmentVO departmentVO) throws Exception;
+	
+	//학과 수정
+	public int setDepartmentUpdate(DepartmentVO departmentVO) throws Exception;
+
+
+	//기간 설정
+	public int setPeriodAdd(PeriodVO periodVO) throws Exception;
+	public List<String> getCurrentYear() throws Exception;
+	
+	//강의 조회
+	public List<LectureVO> getLectureList(Pagination pagination) throws Exception;
+	
+	public Long getTotalCountLecture(Pagination pagination) throws Exception;
+	
+	//강의실 배정 
+	public List<LectureRoomVO> getLectureRoomAssignment(Pagination pagination) throws Exception;
 }

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,40 +30,33 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 	<!-- Header 적용 -->
-		<c:import url="../temp/administrator.jsp"></c:import>
-		<!-- Header 끝 -->
-	<div class="content-wrapper">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col">
-					<h3>강의실 등록</h3>
-					<section class="content">
+	<c:import url="../temp/administrator.jsp"></c:import>
+	<!-- Header 끝 -->
+		<div class="content-wrapper">
+			<div class="content-fluid">
+				<div class="row">
+					<div class="col">
+						<h3>학과 등록</h3>
+							<section class="content">
 
 					      <!-- Default box -->
 					      <div class="card">
 					        <div class="card-body row">
 					          <div class="col-7">
-						         <form action="./lectureRoomAdd" method="post" id="lectureRoomForm">
+						         <form action="./departmentAdd" method="post">
+						         <input type="hidden" name="deptNum" >
 						          	 <div class="form-group">
-						           	  <label>단과대</label>
-					                  <select class="form-control select2" style="width: 100%;" name="lectureBuilding" id="lectureBuilding">
-					                  	<c:forEach items="${lectureRoom}" var="lectureRoom">
-											<option value="${lectureRoom.lectureBuilding}">${lectureRoom.lectureBuilding}
+						           	  <label>단과대학</label>
+					                  <select class="form-control select2" style="width: 100%;" name="collegeNum">
+					                  	<c:forEach items="${list}" var="collegeVO">
+											<option value="${collegeVO.collegeNum}">${collegeVO.collegeName }</option>
 										</c:forEach>
 					                  </select>
 						           </div>
 						           <div class="form-group">
-						              <label for="lectureRoom">강의실 호수</label>
-						              <input type="text" id="lectureRoom" class="form-control" name="lectureRoom"/>
+						              <label for="deptName">학과 이름</label>
+						              <input type="text" id="deptName" class="form-control" name="deptName"/>
 						            </div>
-						             <div id="lecture">
-						            	
-						            </div>
-						            <div class="form-group">
-						              <label for="personal">최대수용인원</label>
-						              <input type="text" id="personal" class="form-control" name="personal"/>
-						            </div>
-						            <div id="personalResult"></div>
 						           
 						            <div class="form-group clearfix">
 						            <div class="icheck-primary d-inline">
@@ -74,25 +67,25 @@
 				                     </div>
 				                     
 					                      <div class="icheck-primary d-inline">
-					                        <input type="radio" id="radioPrimary2" name="status" value="0" disabled>
+					                        <input type="radio" id="radioPrimary1" name="status" value="0">
 				                        	<label for="radioPrimary1">
 				                        	사용불가
 				                       		</label>
 					                     </div>
 				                     </div>
 					                
-						            <button type="button" id="roomAdd" class="btn btn-info">등록</button> 
+						            <button type="submit" class="btn btn-info">등록</button> 
 						          </form>
 					          </div>
 					        </div>
 					      </div>
 			
 			    	</section>
+					</div>
 				</div>
 			</div>
-		</div>
-	</div>	
+		</div>	
 </div>
-<script type="text/javascript" src="../js/administrator/lectureRoomAdd.js"></script>
+	
 </body>
 </html>

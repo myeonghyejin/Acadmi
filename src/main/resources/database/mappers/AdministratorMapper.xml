@@ -5,6 +5,7 @@
   
   <mapper namespace="com.acadmi.administrator.AdministratorDAO">
   
+ 
     <!--회원 관리  -->
     
     <!--아이디  -->
@@ -45,7 +46,7 @@
   	</insert>
   	<insert id="setStudentAdd" parameterType="StudentVO" >
   		INSERT INTO STUDENT
-  		VALUES(#{username},#{deptNum},1,#{name},#{phone},#{birth},#{address},0)
+  		VALUES(#{username},#{deptNum},#{grade},#{name},#{phone},#{birth},#{address},0)
   	</insert>
   	<insert id="setAdministratorAdd" parameterType="AdministratorVO">
   		INSERT INTO ADMINISTRATOR
@@ -69,7 +70,8 @@
   	
   	<select id="getTotalCountStudent" resultType="Long">
   		SELECT COUNT(USERNAME) FROM STUDENT
-  	</select><select id="getTotalCountAdministrator" resultType="Long">
+  	</select>
+  	<select id="getTotalCountAdministrator" resultType="Long">
   		SELECT COUNT(USERNAME) FROM ADMINISTRATOR
   	</select>
   
@@ -87,7 +89,7 @@
 					INNER JOIN 
 						COLLEGE C 
 					USING(COLLEGENUM)
-		WHERE CATEGORY=2
+				WHERE CATEGORY=2
 		LIMIT #{startRow},#{perPage}					
   	</select>
   	<resultMap type="CollegeVO" id="StudentList">
@@ -102,11 +104,11 @@
   				<result column="NAME" property="name"/>
   				<result column="PHONE" property="phone"/>
   				<result column="STATUS" property="status"/>
-  				<collection property="memberFilesVOs" javaType="List" ofType="MemberFilesVO">
+  				<association property="memberFilesVO" javaType="MemberFilesVO">
   					<id column="FILENUM" property="fileNum"/>
   					<result column="FILENAME" property="fileName"/>
   					<result column="ORINAME" property="oriName"/>
-  				</collection>
+  				</association>
   			</collection>
   		</collection>
   	</resultMap>
@@ -136,16 +138,17 @@
   			<id column="DEPTNUM" property="deptNum"/>
   			<result column="DEPTNAME" property="deptName"/>
   			<collection property="professorVOs" javaType="List" ofType="ProfessorVO">
+  				<id column="USERNAME" property="username"/>
   				<result column="NAME" property="name"/>
   				<result column="EMAIL" property="email"/>
   				<result column="PHONE" property="phone"/>
   				<result column="PROFESSORROOM" property="professorRoom"/>
   				<result column="STATUS" property="status"/>
-  				<collection property="memberFilesVOs" javaType="List" ofType="MemberFilesVO">
+  				<association property="memberFilesVO" javaType="MemberFilesVO">
   					<id column="FILENUM" property="fileNum"/>
   					<result column="FILENAME" property="fileName"/>
   					<result column="ORINAME" property="oriName"/>
-  				</collection>
+  				</association>
   			</collection>
   		</collection>
   	</resultMap>
@@ -169,15 +172,16 @@
   	<id column="DEPTNUM" property="deptNum"/>
   	<result column="DEPTNAME" property="deptName"/>
 		<collection property="administratorVOs" javaType="List" ofType="AdministratorVO">
+			<id column="USERNAME" property="username"/>
 			<result column="NAME" property="name"/>
 			<result column="EMAIL" property="email"/>
 			<result column="PHONE" property="phone"/>
 			<result column="STATUS" property="status"/>
-			<collection property="memberFilesVOs" javaType="List" ofType="MemberFilesVO">
+			<association property="memberFilesVO" javaType="MemberFilesVO">
 				<id column="FILENUM" property="fileNum"/>
 				<result column="FILENAME" property="fileName"/>
 				<result column="ORINAME" property="oriName"/>
-			</collection>
+			</association>
 		</collection>
   </resultMap>
   
@@ -195,18 +199,93 @@
  	<!-- 강의실 등록 -->
  	<insert id="setLectureRoomAdd" parameterType="LectureRoomVO">
  		INSERT INTO LECTURE_ROOM
- 		VALUES(#{lectureBuilding},#{lectureRoom},#{personel},1)
+ 		VALUES(#{lectureBuilding},#{lectureRoom},#{personal},1)
  	</insert>
+ 	<select id="getLectureBuilding" resultType="LectureRoomVO">
+ 		SELECT DISTINCT LECTUREBUILDING 
+		FROM LECTURE_ROOM 
+ 	</select>
+ 	<!--강의실 중복 체크 -->
+ 	<select id="LectureRoomDuplicateCheck" parameterType="LectureRoomVO" resultType="LectureRoomVO">
+ 		SELECT LECTUREBUILDING,LECTUREROOM 
+		FROM LECTURE_ROOM 
+		WHERE LECTUREBUILDING =#{lectureBuilding} AND LECTUREROOM = #{lectureRoom}
+ 	</select>
  	<!--강의실 수정 -->
  	<update id="setLectureRoomUpdate" parameterType="LectureRoomVO">
  		UPDATE LECTURE_ROOM
- 		SET PERSONEL=#{personel},STATUS=#{status}
+ 		SET STATUS=#{status}
  		WHERE LECTUREBUILDING = #{lectureBuilding} AND LECTUREROOM = #{lectureRoom}
  	</update>
- 	
- 
- 	
   
+  <!--학과 관리  -->
   
+  <!--학과 조회 -->
+  	<select id="getDepartmentList" parameterType="Pagination" resultMap="DepartmentList">
+  		SELECT * FROM DEPARTMENT D
+			INNER JOIN 
+				COLLEGE C 
+			USING(COLLEGENUM)
+  		LIMIT #{startRow},#{perPage}
+  	</select>
+  	<resultMap type="CollegeVO" id="DepartmentList">
+  		<result column="COLLEGENAME" property="collegeName"/>
+  		<collection property="departmentVOs" javaType="List" ofType="DepartmentVO">
+  			<id column="DEPTNUM" property="deptNum"/>
+  			<result column="DEPTNAME" property="deptName"/>
+  			<result column="STATUS" property="status"/>
+  		</collection>
+  	</resultMap>
   	
+  	<select id="getTotalCountDepartment" resultType="Long">
+  		SELECT COUNT(DEPTNUM) FROM DEPARTMENT
+  	</select>
+  	
+  <!--학과 수정 -->
+  <update id="setDepartmentUpdate" parameterType="DepartmentVO">
+  	UPDATE DEPARTMENT
+  	SET STATUS=#{status}
+  	WHERE DEPTNUM=#{deptNum}
+  </update>
+  
+  <!--학과 등록 -->
+  <insert id="setDepartmentAdd" parameterType="DepartmentVO">
+  	INSERT INTO DEPARTMENT 
+	VALUES(#{deptNum},#{collegeNum},#{deptName},#{status})
+  </insert>	
+  
+  <!--기간 설정  -->
+  <insert id="setPeriodAdd" parameterType="PeriodVO">
+  INSERT INTO PERIOD (YEAR,SEMESTER,APPLICATIONSTART,APPLICATIONEND,FAVORITESTAR,FAVORITEEND,DEADLINE) 
+  VALUES (#{year},#{semester},STR_TO_DATE(#{applicationStart},'%Y-%m-%dT%H:%i'), STR_TO_DATE(#{applicationEnd},'%Y-%m-%dT%H:%i'),STR_TO_DATE(#{favoriteStart},'%Y-%m-%dT%H:%i'),STR_TO_DATE(#{favoriteEnd},'%Y-%m-%dT%H:%i'),STR_TO_DATE(#{deadline},'%Y-%m-%dT%H:%i'))	
+  </insert>
+  
+  <select id="getCurrentYear" resultType="java.lang.String">
+  	SELECT YEAR(CURRENT_DATE()) AS year
+	UNION ALL
+	SELECT YEAR(CURRENT_DATE()) + 1
+	UNION ALL
+	SELECT YEAR(CURRENT_DATE()) + 2
+	UNION ALL
+	SELECT YEAR(CURRENT_DATE()) + 3
+	UNION ALL
+	SELECT YEAR(CURRENT_DATE()) + 4
+	UNION ALL
+	SELECT YEAR(CURRENT_DATE()) + 5;
+  </select>
+  
+  <!--강의 목록 조회  -->
+  <select id="getLectureList" resultType="LectureVO" parameterType="Pagination">
+  	SELECT * FROM LECTURE
+  </select>  
+  <select id="getTotalCountLecture" resultType="Long">
+  	SELECT COUNT(LECTURENUM) FROM LECTURE
+  </select>
+  
+  <!--강의실 배정  -->
+  <select id="getLectureRoomAssignment" resultType="LectureVO" parameterType="Pagination">
+  	SELECT * FROM LECTURE_ROOM 
+	WHERE STATUS=#{status};
+  </select>
+	
   </mapper>

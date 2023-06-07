@@ -27,7 +27,7 @@ public class MailManager {
 		mimeMessage.setFrom(sender);
 		mimeMessage.addRecipient(RecipientType.TO, new InternetAddress(email));
 		mimeMessage.setSubject(title);
-		mimeMessage.setText(text);
+		mimeMessage.setText(text,"UTF-8","html");
 		javaMailSender.send(mimeMessage);
 	}
 
