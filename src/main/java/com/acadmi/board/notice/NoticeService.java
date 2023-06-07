@@ -85,7 +85,6 @@ public class NoticeService implements BoardService {
 			}
 		}
 		return result;		
-		
 	}
 
 	@Override

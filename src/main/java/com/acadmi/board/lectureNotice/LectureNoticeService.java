@@ -1,10 +1,11 @@
-package com.acadmi.board.qna;
+package com.acadmi.board.lectureNotice;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.acadmi.board.BoardService;
@@ -14,15 +15,16 @@ import com.acadmi.util.FileVO;
 import com.acadmi.util.Pagination;
 
 @Service
-public class QnaService implements BoardService {
-	
+@Transactional(rollbackFor = Exception.class)
+public class LectureNoticeService implements BoardService {
+
 	@Autowired
-	private QnaDAO qnaDAO;
+	private LectureNoticeDAO lectureNoticeDAO;
 	
 	@Autowired
 	private FileManager fileManager;
-	
-	@Value("${app.upload.qna}")
+
+	@Value("${app.upload.lectureNotice}")
 	private String path;
 	
 	@Override
@@ -30,19 +32,19 @@ public class QnaService implements BoardService {
 		
 		pagination.makeStartRow();
 		
-		pagination.makeNum(qnaDAO.getTotalCount(pagination));
+		pagination.makeNum(lectureNoticeDAO.getTotalCount(pagination));
 		
-		return qnaDAO.getList(pagination);
-	}
-
-	@Override
-	public BoardVO getDetail(BoardVO boardVO) throws Exception {
-		return qnaDAO.getDetail(boardVO);
+		return lectureNoticeDAO.getList(pagination);
 	}
 	
 	@Override
-	public int setInsert(BoardVO boardVO, MultipartFile[] multipartFiles) throws Exception {
-		int result = qnaDAO.setInsert(boardVO);
+	public BoardVO getDetail(BoardVO boardVO) throws Exception {
+		return lectureNoticeDAO.getDetail(boardVO);
+	}
+
+	@Override
+	public int setInsert(BoardVO boardVO, MultipartFile [] multipartFiles) throws Exception {
+		int result = lectureNoticeDAO.setInsert(boardVO);
 		
 		if(multipartFiles != null) {
 			for(MultipartFile multipartFile : multipartFiles) {
@@ -53,17 +55,17 @@ public class QnaService implements BoardService {
 					fileVO.setFileName(fileName);
 					fileVO.setOriName(multipartFile.getOriginalFilename());
 					
-					result = qnaDAO.setBoardFileAdd(fileVO);
+					result = lectureNoticeDAO.setBoardFileAdd(fileVO);
 				}
 			}
 		}
 		return result;
 	}
-	
+
 	@Override
 	public int setUpdate(BoardVO boardVO, MultipartFile [] multipartFiles) throws Exception {
 		
-		int result = qnaDAO.setUpdate(boardVO);
+		int result = lectureNoticeDAO.setUpdate(boardVO);
 		
 		if(multipartFiles != null) {
 			for(MultipartFile multipartFile : multipartFiles) {
@@ -74,7 +76,7 @@ public class QnaService implements BoardService {
 					fileVO.setFileName(fileName);
 					fileVO.setOriName(multipartFile.getOriginalFilename());
 					
-					result = qnaDAO.setBoardFileAdd(fileVO);
+					result = lectureNoticeDAO.setBoardFileAdd(fileVO);
 				}
 			}
 		}
@@ -83,42 +85,21 @@ public class QnaService implements BoardService {
 
 	@Override
 	public int setDelete(BoardVO boardVO) throws Exception {
-		return qnaDAO.setDelete(boardVO);
+		return lectureNoticeDAO.setDelete(boardVO);
 	}
 
 	@Override
 	public FileVO getFileDetail(FileVO fileVO) throws Exception {
-		return qnaDAO.getFileDetail(fileVO);
+		return lectureNoticeDAO.getFileDetail(fileVO);
 	}
 
 	@Override
 	public int setBoardFileDelete(FileVO fileVO) throws Exception {
-		return qnaDAO.setBoardFileDelete(fileVO);
+		return lectureNoticeDAO.setBoardFileDelete(fileVO);
 	}
 	
-	public int setReplyAdd(QnaVO qnaVO) throws Exception {
-		
-		QnaVO parent = (QnaVO)qnaDAO.getDetail(qnaVO);
-		
-		qnaVO.setRef(parent.getRef());
-				
-		qnaVO.setStep(parent.getStep() + 1);
-				
-		qnaVO.setDepth(parent.getDepth() + 1);
-				
-		int result = qnaDAO.setStepUpdate(parent);
-				
-		result = qnaDAO.setReplyAdd(qnaVO);
-			
-		return result; 
-		
+	public int setLectureNoticeHit(LectureNoticeVO lectureNoticeVO) throws Exception {
+		return lectureNoticeDAO.setLectureNoticeHit(lectureNoticeVO);
 	}
 	
-	public QnaVO getReplyDetail(QnaVO qnaVO) throws Exception {
-		return qnaDAO.getReplyDetail(qnaVO);
-	}
-	
-	public Long getQnaList(QnaVO qnaVO) throws Exception {	
-		return qnaDAO.getQnaList(qnaVO);
-	}
 }

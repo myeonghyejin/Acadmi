@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Schema 추가 -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.acadmi.chat.ChatDAO">
+  	
+  	<!-- 채팅방 목록 list -->
+  	<select id="getChatRoomList" parameterType="pagination" resultMap="getChatRoomListResult">
+  		SELECT * FROM CHAT_ROOM CR
+  				 LEFT JOIN MEMBERFILES MF
+  				 ON(CR.RECIPIENT = MF.USERNAME)
+  				 LEFT JOIN CHAT_MESSAGE CM
+  				 ON(CR.CHATNUM = CM.CHATNUM)
+  				 LEFT JOIN CHATFILES CF
+  				 ON(CM.MSGNUM = CF.MSGNUM)
+  		WHERE CR.SENDER = #{username}
+  		ORDER BY CHATSTATUS ASC ,CM.MSGDATE ASC
+  	</select>
+  	<resultMap type="ChatRoomVO" id="getChatRoomListResult">
+  		<id column="CHATNUM" property="chatNum"/>
+  		<result column="CHATSTATUS" property="chatStatus"/>
+  		<result column="SENDER" property="sender"/>
+  		<result column="RECIPIENT" property="recipient"/>
+  		<association property="memberFilesVO" javaType="MemberFilesVO">
+  			<id column="FILENUM" property="fileNum"/>
+  			<result column="USERNAME" property="username"/>
+  			<result column="FILENAME" property="fileName"/>
+  			<result column="ORINAME" property="oriName"/>
+  		</association>
+  		<collection property="chatMessageVOs" javaType="List" ofType="ChatMessageVO">
+  			<id column="MSGNUM" property="msgNum"/>
+  			<result column="SENDER" property="sender"/>
+  			<result column="RECIPIENT" property="recipient"/>
+  			<result column="MSGCONTENTS" property="msgContents"/>
+  			<result column="MSGDATE" property="msgDate"/>
+  			<result column="MSGSTATUS" property="msgStatus"/>
+  			<collection property="chatFilesVOs" javaType="List" ofType="ChatFilesVO">
+  				<id column="FILENUM" property="fileNum"/>
+  				<result column="FILENAME" property="fileName"/>
+  				<result column="ORINAME" property="oriName"/>
+  			</collection>
+  		</collection>
+  	</resultMap>
+  	
+  	<!-- 채팅방 확인 -->
+  	<select id="getChatRoomDetail" parameterType="chatRoomVO" resultType="chatRoomVO">
+  		SELECT * FROM CHAT_ROOM
+  		WHERE SENDER=#{sender} AND RECIPIENT = #{recipient}
+  	</select>
+  	
+  	<!-- 채팅방 만들기 -->
+  	<!-- sender -->
+  	<insert id="setSenderChatRoom" parameterType="chatRoomVO">
+  		INSERT INTO CHAT_ROOM
+  		VALUES (0, #{sender}, #{recipient}, 1)
+  	</insert>
+  	<!-- recipient -->
+  	<insert id="setRecipientChatRoom" parameterType="chatRoomVO">
+  		INSERT INTO CHAT_ROOM
+  		VALUES (0, #{recipient}, #{sender}, 0)
+  	</insert>
+  	
+  	<!-- 채팅방의 메세지들을 뽑아오는 것 -->
+  	<select id="getChatMessage" parameterType="ChatMessageVO" resultType="chatMessageVO">
+  		SELECT * FROM CHAT_MESSAGE
+  		WHERE CHATNUM = #{chatNum}
+  		ORDER BY MSGNUM ASC
+  	</select>
+  	
+  	<!-- 메세지 입력 -->
+  	<insert id="setSaveMessage" parameterType="ChatMessageVO">
+  		INSERT INTO CHAT_MESSAGE
+  		VALUES (0, #{sender}, #{recipient}, #{msgContents}, now(), #{msgStatus}, #{chatNum})
+  	</insert>
+  
+  </mapper>

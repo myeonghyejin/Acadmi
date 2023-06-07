@@ -130,7 +130,7 @@
 					<!-- Message End -->
 				</a>
 			<div class="dropdown-divider"></div>
-				<a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+				<a href="/chat/list" class="dropdown-item dropdown-footer">See All Messages</a>
 			</div>
 		</li>
 
@@ -278,7 +278,7 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="#" class="nav-link">
+							<a href="/qna/list" class="nav-link">
 								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>질의응답</p>
 							</a>

@@ -12,7 +12,7 @@ import lombok.Setter;
 public class LectureNoticeVO extends BoardVO {
 	
 	private Long lectureNum;
-	private Integer hit;
-	private Date modifiyDate;
+	private Long hit;
+	private Date modifyDate;
 
 }
