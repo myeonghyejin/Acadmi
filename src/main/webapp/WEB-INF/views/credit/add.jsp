@@ -65,7 +65,7 @@
 					                    		</tr>
 					                    	</thead>
 					                    	<tbody>
-					                    		<c:forEach items="${attendee}" var="attendee">
+					                    		<%-- <c:forEach items="${attendee}" var="attendee"> --%>
 					                    			<tr>
 					                    				<td style="width:10%;">${attendee.username}</td>
 					                    				<td style="width:15%;">${attendee.departmentVO.deptName}</td>
@@ -77,7 +77,7 @@
 					                    				<td><input type="text" name="reportGrade" id="reportGrade" placeholder="과제 점수" style="width:100px;text-align:center;"></td>
 					                    				<td><input type="text" name="attendance" id="attendance" placeholder="출석 점수" style="width:100px;text-align:center;"></td>
 					                    			</tr>
-					                    		</c:forEach>
+					                    		<%-- </c:forEach> --%>
 					                    	</tbody>
 		                    			</table>
 			                   		</div>

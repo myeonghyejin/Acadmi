@@ -57,6 +57,7 @@
 					                    			<th>학과</th>
 					                    			<th>이름</th>
 					                    			<th>학년</th>
+					                    			<th>총점</th>
 					                    		</tr>
 					                    	</thead>
 					                    	<tbody>
@@ -66,6 +67,7 @@
 					                    				<td>${attendee.departmentVO.deptName}</td>
 					                    				<td>${attendee.name}</td>
 					                    				<td>${attendee.grade}학년</td>
+					                    				<td>총점</td>
 					                    			</tr>
 					                    		</c:forEach>
 					                    	</tbody>
