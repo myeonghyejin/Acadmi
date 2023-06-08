@@ -9,8 +9,8 @@
 <title>게시판 상세</title>
 <c:import url="../temp/style.jsp"></c:import>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-<link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-<link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+<!-- <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+<link rel="stylesheet" href="../../dist/css/adminlte.min.css"> -->
 </head>
 <body class="hold-transition sidebar-mini">
 
@@ -58,15 +58,6 @@
 						강의질의응답 상세
 					</c:if>
 				</h3>
-	  
-				<div class="card-tools">
-				  <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-					<i class="fas fa-minus"></i>
-				  </button>
-				  <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-					<i class="fas fa-times"></i>
-				  </button>
-				</div>
 			  </div>
 	  
 			  <div class="card-body">
@@ -151,7 +142,7 @@
 										<div class="user-block">
 											<c:if test="${num eq 2}">
 												<div class="replyDetail" data-num-id="${boardVO.num}">
-		
+													
 												</div>
 											</c:if>
 										</div>
@@ -170,9 +161,9 @@
 	<c:import url="../temp/footer.jsp"></c:import>
 	<script src="/js/board/notice.js"></script>
 	<script src="/js/board/qnaReply.js"></script>
-	<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- 	<script src="../../plugins/jquery/jquery.min.js"></script>
 	<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="../../dist/js/adminlte.min.js"></script>
-	<script src="../../dist/js/demo.js"></script>
+	<script src="../../dist/js/demo.js"></script> -->
 </body>
 </html>

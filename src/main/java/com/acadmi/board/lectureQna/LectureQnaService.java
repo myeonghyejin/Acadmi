@@ -11,6 +11,8 @@ import com.acadmi.board.BoardService;
 import com.acadmi.board.BoardVO;
 
 import com.acadmi.board.qna.QnaVO;
+import com.acadmi.professor.ProfessorVO;
+import com.acadmi.student.StudentVO;
 import com.acadmi.util.FileManager;
 import com.acadmi.util.FileVO;
 import com.acadmi.util.Pagination;
@@ -124,4 +126,12 @@ public class LectureQnaService implements BoardService {
 		return lectureQnaDAO.getQnaList(lectureQnaVO);
 	}
 	
+	public List<StudentVO> getStudent() throws Exception {
+		return lectureQnaDAO.getStudent();
+	}
+	
+	public List<ProfessorVO> getProfessor() throws Exception {
+		return lectureQnaDAO.getProfessor();
+	}
+
 }
