@@ -22,12 +22,12 @@
 	<div class="container-fluid">
 		<div class="content-wrapper">
 				
-				<!-- Contents -->
-				<div class="col">
+			<!-- Contents -->
+			<div class="col">
 
 				<!-- header start -->
 				<div class="row" style="padding-top:10px">
-					<div class="col-12">
+					<div class="col">
 						<div class="card">
 							<h3 class="my-3 mx-3">내 장바구니</h3>
 						</div>
@@ -107,8 +107,6 @@
 												<td>${lectureVO.lectureRoomVO.lectureBuilding} ${lectureVO.lectureRoomVO.lectureRoom}</td>
 												<td>${lectureVO.subscription}/${lectureVO.personal}명</td>
 												<td class="project-actions text-right">
-													<input type="hidden" name="lectureNum" value="${lectureVO.lectureNum}">
-													<input type="hidden" name="username" value="${member.username}">
 													<c:choose>
 														<c:when test="${lectureVO.subscription ge lectureVO.personal}">
 															<button class="btn btn-danger btn-sm" id="mli" type="button" data-mli-num="${lectureVO.lectureNum}" disabled>

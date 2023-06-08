@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.acadmi.department.DepartmentVO;
 import com.acadmi.lecture.LectureVO;
 import com.acadmi.util.Pagination;
 
@@ -36,8 +37,10 @@ public class StudentLectureController {
 		pagination.setUsername(authentication.getName());
 		
 		List<LectureVO> ar = studentLectureService.getAllLectureList(pagination);
+		List<DepartmentVO> ar2 = studentLectureService.getDepartment();
 		
 		mv.addObject("list", ar);
+		mv.addObject("department", ar2);
 		mv.setViewName("student/lecture/all_lecture");
 
 		return mv;
@@ -102,17 +105,19 @@ public class StudentLectureController {
 	    SecurityContextImpl contextImpl = (SecurityContextImpl) obj;
 	    Authentication authentication = contextImpl.getAuthentication();
 	    studentLectureVO.setUsername(authentication.getName());
+	    mv.addObject("studentLectureVO", studentLectureVO);
 
 	    log.info("{}", lectureVO.getStartTime());
 	    log.info("{}", lectureVO.getEndTime());
+	    log.info("{}", lectureVO.getWeekday());
 	    
 	    // 1. 이미 신청한 강의와 요일/시간이 겹치는지 확인
-	    List<LectureVO> duplicateLectures = studentLectureService.getDuplicateTime(lectureVO);
+	    List<LectureVO> duplicateLectures = studentLectureService.getDuplicateTime(studentLectureVO, lectureVO);
 	    
-	    log.error("{}", duplicateLectures.size());
+	    log.info("{}", duplicateLectures.size());
 	    
 	    for (LectureVO lecture : duplicateLectures) {
-	        log.error("{}", lecture);
+	        log.info("{}", lecture);
 	    }
 	    
 	    if (duplicateLectures != null && !duplicateLectures.isEmpty()) {

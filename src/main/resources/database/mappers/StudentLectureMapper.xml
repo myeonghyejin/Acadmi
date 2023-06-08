@@ -69,6 +69,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<result column="DEPTNAME" property="deptName"/>
 			<result column="STATUS" property="status"/>
 		</association>
+		<association property="studentLectureVO" javaType="StudentLectureVO">
+			<id column="LECTURENUM" property="lectureNum"/>
+			<id column="USERNAME" property="username"/>
+			<result column="ENABLED" property="enabled"/>
+		</association>
 		<association property="favoriteLectureVO" javaType="FavoriteLectureVO">
 			<id column="FAVORITENUM" property="favoriteNum"/>
 		</association>
@@ -82,6 +87,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<result column="ADDRESS" property="address"/>
 			<result column="STATUS" property="status"/>
 		</association>
+	</resultMap>
+	
+	<resultMap type="LectureVO" id="duplicateTime">
+		<id column="LECTURENUM" property="lectureNum"/>
+		<result column="WEEKDAY" property="weekday"/>
+		<result column="STARTTIME" property="startTime"/>
+		<result column="ENDTIME" property="endTime"/>
+		<collection property="studentLectureVOs" javaType="List" ofType="StudentLectureVO">
+			<id column="LECTURENUM" property="lectureNum"/>
+			<id column="USERNAME" property="username"/>
+		</collection>
 	</resultMap>
 
 	<!-- SELECT -->
@@ -175,19 +191,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			STUDENT_LECTURE SL
 			ON SL.LECTURENUM = L.LECTURENUM
 		WHERE SL.USERNAME = #{username}
-		AND SL.LECTURENUM != #{lectureNum}
+			AND SL.LECTURENUM != #{lectureNum}
 	</select>
 	
-	<select id="getDuplicateTime" parameterType="LectureVO" resultMap="allLectureList">
+	<select id="getDuplicateTime" parameterType="LectureVO" resultMap="duplicateTime">
 		<![CDATA[
 		SELECT *
 		FROM LECTURE L
-			LEFT OUTER JOIN 
-			STUDENT_LECTURE SL
-			ON (SL.LECTURENUM = L.LECTURENUM)
-		WHERE SL.USERNAME = #{username}
-		AND (WEEKDAY = #{weekday} AND (STARTTIME <= #{startTime} AND ENDTIME >= #{startTime})
-			OR (STARTTIME <= #{endTime} AND ENDTIME >= #{endTime}))]]>
+			LEFT OUTER JOIN STUDENT_LECTURE SL ON (SL.LECTURENUM = L.LECTURENUM)
+		WHERE SL.USERNAME = #{studentLectureVO.username}
+			AND (
+			    (WEEKDAY = #{lectureVO.weekday} AND STARTTIME <= #{lectureVO.startTime} AND ENDTIME >= #{lectureVO.startTime})
+			    OR
+			    (WEEKDAY = #{lectureVO.weekday} AND STARTTIME <= #{lectureVO.endTime} AND ENDTIME >= #{lectureVO.endTime})
+			)]]>
+	</select>
+	
+	<select id="getDepartment" parameterType="DepartmentVO" resultType="DepartmentVO">
+		SELECT *
+		FROM DEPARTMENT
 	</select>
 	
 	<!-- INSERT -->
@@ -231,7 +253,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		DELETE
 		FROM STUDENT_LECTURE
 		WHERE USERNAME = #{username}
-		AND LECTURENUM = #{lectureNum}
+			AND LECTURENUM = #{lectureNum}
 	</delete>
 	
 	<delete id="deleteToFavoriteLecture" parameterType="FavoriteLectureVO">

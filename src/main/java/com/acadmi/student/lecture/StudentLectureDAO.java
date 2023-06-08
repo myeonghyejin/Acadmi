@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.acadmi.department.DepartmentVO;
 import com.acadmi.lecture.LectureVO;
 import com.acadmi.util.Pagination;
 
@@ -39,7 +40,10 @@ public interface StudentLectureDAO {
 	public Long getGradeCount(StudentLectureVO studentLectureVO) throws Exception;
 	
 	//이미 수강한 강의와 시간이 겹치는지 확인
-	public List<LectureVO> getDuplicateTime(LectureVO lectureVO) throws Exception;
+	public List<LectureVO> getDuplicateTime(StudentLectureVO studentLectureVO, LectureVO lectureVO) throws Exception;
+	
+	//학과 조회
+	public List<DepartmentVO> getDepartment() throws Exception;
 	
 	/** INSERT **/
 	//수강 신청

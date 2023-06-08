@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.acadmi.department.DepartmentVO;
 import com.acadmi.lecture.LectureVO;
 import com.acadmi.util.Pagination;
 
@@ -60,9 +61,19 @@ public class StudentLectureService {
 		return studentLectureDAO.getGradeCount(studentLectureVO);
 	}
 	
-	//이미 수강한 강의와 시간이 겹치는지 확인
-	public List<LectureVO> getDuplicateTime(LectureVO lectureVO) throws Exception {
-		return studentLectureDAO.getDuplicateTime(lectureVO);
+	//이미 수강한 강의와 요일/시간이 겹치는지 확인
+	public List<LectureVO> getDuplicateTime(StudentLectureVO studentLectureVO, LectureVO lectureVO) throws Exception {
+		log.info("{} :: startTime", lectureVO.getStartTime());
+		log.info("{} :: endTime", lectureVO.getEndTime());
+		log.info("{} :: weekday", lectureVO.getWeekday());
+		log.info("{} :: username", studentLectureVO.getUsername());
+		
+		return studentLectureDAO.getDuplicateTime(studentLectureVO, lectureVO);
+	}
+	
+	//학과 조회
+	public List<DepartmentVO> getDepartment() throws Exception {
+		return studentLectureDAO.getDepartment();
 	}
 	
 	/** INSERT **/

@@ -27,7 +27,7 @@
 				
 				<!-- header start -->
 				<div class="row" style="padding-top:10px">
-					<div class="col-12">
+					<div class="col">
 						<div class="card">
 							<h3 class="my-3 mx-3">수강 신청 & 장바구니</h3>
 						</div>
@@ -66,8 +66,8 @@
 									<div class="col-4">
 										<div class="form-group">
 											<label>학년</label>
-											<select class="select2" style="width: 100%;" name="grade">
-												<option value="" selected>전체</option>
+											<select class="select2" multiple="multiple" style="width: 100%;" name="grade">
+												<option value="">전체</option>
 												<option value="1">1학년</option>
 												<option value="2">2학년</option>
 												<option value="3">3학년</option>
@@ -80,7 +80,9 @@
 											<label>학과</label>
 											<select class="select2" style="width: 100%;" name="department">
 												<option value="" selected>전체</option>
-												<option value="">Date</option>
+												<c:forEach items="${department}" var="departmentVO" begin="2">
+													<option value="${departmentVO.deptNum}">${departmentVO.deptName}</option>
+												</c:forEach>
 											</select>
 										</div>
 									</div>
@@ -160,19 +162,17 @@
 									<td>${lectureVO.lectureRoomVO.lectureBuilding} ${lectureVO.lectureRoomVO.lectureRoom}</td>
 									<td>${lectureVO.subscription}/${lectureVO.personal}명</td>
 									<td class="project-actions text-right">
-										<input type="hidden" name="username" value="${member.username}">
-										<input type="hidden" name="lectureNum" value="${lectureVO.lectureNum}">
 										<input type="hidden" name="startTime" value="${lectureVO.startTime}">
 										<input type="hidden" name="endTime" value="${lectureVO.endTime}">
 										<c:choose>
 											<c:when test="${lectureVO.subscription ge lectureVO.personal}">
-												<button class="btn btn-danger btn-sm" id="mli" type="button" data-mli-num="${lectureVO.lectureNum}" disabled>
+												<button class="btn btn-danger btn-sm" id="mli" type="button" data-mli-num="${lectureVO.lectureNum}" data-weekday="${lectureVO.weekday}" data-starttime="${lectureVO.startTime}" data-endtime="${lectureVO.endTime}" disabled>
 													<i class="fas fa-circle-xmark"></i>
 													마감
 												</button>
 											</c:when>
 											<c:otherwise>
-												<button class="btn btn-info btn-sm" id="mli" type="button" data-mli-num="${lectureVO.lectureNum}">
+												<button class="btn btn-info btn-sm" id="mli" type="button" data-mli-num="${lectureVO.lectureNum}" data-weekday="${lectureVO.weekday}" data-starttime="${lectureVO.startTime}" data-endtime="${lectureVO.endTime}">
 													<i class="fas fa-circle-check"></i>
 													신청
 												</button>
@@ -213,11 +213,11 @@
 	<c:import url="../../temp/footer.jsp"></c:import>
 	<!-- Footer 끝 -->
 
-<script src="/js/student/lecture/all_lecture.js"></script>
 <script>
     $(function () {
       $('.select2').select2()
     });
 </script>
+<script src="/js/student/lecture/all_lecture.js"></script>
 </body>
 </html>

@@ -37,6 +37,7 @@ public class LectureVO {
 	private Integer favorite;
 	
 	private StudentLectureVO studentLectureVO;
+	private List<StudentLectureVO> studentLectureVOs;
 	private FavoriteLectureVO favoriteLectureVO;
 	private ProfessorVO professorVO;
 	private StudentVO studentVO;
