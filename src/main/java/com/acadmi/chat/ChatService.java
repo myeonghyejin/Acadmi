@@ -37,6 +37,7 @@ public class ChatService {
 		String recipient = chatRoomVO.getRoomRecipient();
 		chatRoomVO = chatDAO.getChatRoom(chatRoomVO);
 		
+		//처음 채팅할때
 		if(chatRoomVO == null) {
 			chatRoomVO = new ChatRoomVO();
 			chatRoomVO.setRoomSender(sender);
@@ -46,15 +47,22 @@ public class ChatService {
 			chatRoomVO = chatDAO.getChatRoom(chatRoomVO);
 			log.info("chatNum {}: ",chatRoomVO.getChatNum());
 		}
+		
+		//상대방이 채팅방을 나갔을때
+		ChatRoomVO yourChatRoomVO = new ChatRoomVO();
+		yourChatRoomVO.setRoomSender(recipient);
+		yourChatRoomVO.setRoomRecipient(sender);
+		yourChatRoomVO = chatDAO.getChatRoom(yourChatRoomVO);
+		if(yourChatRoomVO==null) {
+			return chatDAO.getChatRoom(chatRoomVO);
+		}
+		
+		//정상적인 상황
 		chatRoomVO.setChatStatus(1);
 		result = chatDAO.setChatRoomUpdate(chatRoomVO);
 		ChatMessageVO chatMessageVO = new ChatMessageVO();
 		chatMessageVO.setChatNum(chatRoomVO.getChatNum());
 		result = chatDAO.setMyChatMessageUpdate(chatMessageVO);
-		ChatRoomVO yourChatRoomVO = new ChatRoomVO();
-		yourChatRoomVO.setRoomSender(recipient);
-		yourChatRoomVO.setRoomRecipient(sender);
-		yourChatRoomVO = chatDAO.getChatRoom(yourChatRoomVO);
 		chatMessageVO.setChatNum(yourChatRoomVO.getChatNum());
 		result = chatDAO.setYourChatMessageUpdate(chatMessageVO);
 		
@@ -74,6 +82,9 @@ public class ChatService {
 		chatRoomVO.setRoomSender(recipient);
 		chatRoomVO.setRoomRecipient(sender);
 		chatRoomVO = chatDAO.getChatRoom(chatRoomVO);
+		if(chatRoomVO==null) {
+			return result;
+		}
 		chatRoomVO.setChatStatus(2);
 		result = chatDAO.setChatRoomUpdate(chatRoomVO);
 		return result;

@@ -31,7 +31,7 @@ $(document).ready(function(){
 				success : function(result){
 					if(result>=1){
 						alert('채팅방에서 나왔습니다.')
-						location.href='./chat/list'
+						location.href='./list'
 					} else {
 						alert('나가지 못했습니다.')
 						location.href='./list'
