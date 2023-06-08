@@ -142,7 +142,7 @@
 										<div class="user-block">
 											<c:if test="${num eq 2}">
 												<div class="replyDetail" data-num-id="${boardVO.num}">
-		
+													
 												</div>
 											</c:if>
 										</div>

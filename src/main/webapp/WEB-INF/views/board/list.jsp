@@ -154,7 +154,29 @@
 													</c:if>
 												</c:forEach>
 											</td>
-											<td>${dto.writer}</td>
+											<c:forEach items="${students}" var="student">
+												<c:forEach items="${professors}" var="professor">
+													<%-- <c:if test="${student.username eq dto.writer}">
+														<td>${student.name}</td>
+													</c:if>
+													<c:if test="${professor.username eq dto.writer}">
+														<td>${professor.name} 교수</td>
+													</c:if> --%>
+													
+													<c:choose>
+													    <c:when test="${student.username eq dto.writer}">
+													        <td>${student.name}</td>
+													    </c:when>
+													    <c:when test="${professor.username eq dto.writer}">
+													        <td>${professor.name} 교수</td>
+													    </c:when>
+													    <c:otherwise>
+													         <td>관리자</td>
+													    </c:otherwise>
+													</c:choose>
+													
+												</c:forEach>		
+											</c:forEach>
 											<td>${dto.regDate}</td>
 										</tr>
 									</c:if>	
@@ -170,7 +192,12 @@
 													</c:if>
 												</c:forEach>
 											</td>
-											<td>${dto.writer}</td>
+											
+<%-- 											<c:forEach items="${professors}" var="professor">
+												<c:if test="${professor.username eq dto.writer}">
+													<td>${professor.name} 교수</td>
+												</c:if>
+											</c:forEach> --%>
 											<td>${dto.regDate}</td>
 											<td>${dto.modifyDate}</td>
 											<td>${dto.hit}</td>
@@ -209,14 +236,24 @@
 												<c:if test="${dto.secret == 1}">
 													<img class="lockIcon" width="30" height="30" src="/images/lock.png" style="margin-left: 5px">
 												</c:if>
-												
+												 
 												<c:forEach items="${dto.fileVOs}" var="fileVO">
 													<c:if test="${fileVO.oriName ne null}">
 														<img class="fileIcon" width="30" height="30" src="/images/fileIcon.png" style="margin-left: 5px">						
 													</c:if>
 												</c:forEach>
-											</td>								
-											<td>${dto.writer}</td>
+											</td>			
+											<c:forEach items="${students}" var="student">
+												<c:forEach items="${professors}" var="professor">
+													<c:if test="${student.username eq dto.writer}">
+														<td>${student.name}</td>
+													</c:if>
+													<c:if test="${professor.username eq dto.writer}">
+														<td>${professor.name} 교수</td>
+													</c:if>
+												</c:forEach>		
+											</c:forEach>
+											
 											<td>${dto.regDate}</td>
 										</tr>
 									</c:if>	
