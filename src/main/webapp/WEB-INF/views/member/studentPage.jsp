@@ -43,13 +43,25 @@
 											<div class="card card-info card-outline ml-5">
 												<div class="card-body box-profile">
 													<div class="text-center">
-														<img class="profile-user-img img-fluid img-circle"
-															src="https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927"
-															alt="User profile picture">
+														<c:forEach items="${departmentVO.studentVOs}" var="studentVO">
+		     	 												<c:choose>
+																    <c:when test="${empty studentVO.memberFilesVO.fileName}">
+																        <img class="profile-user-img img-fluid img-circle"
+																             src="/images/profile.jpg"
+																             alt="User profile picture">
+																    </c:when>
+																    <c:otherwise>	
+																		<img class="img-fluid img-size"
+																		     src="/file/member/${studentVO.memberFilesVO.fileName}"
+																		     alt="User profile picture">
+																    </c:otherwise>
+																</c:choose>
+														</c:forEach>
 													</div>
 													<c:forEach items="${departmentVO.studentVOs}" var="studentVO">
 														<c:set var="studentName" value="${studentVO.name}"></c:set>
-															<h3 class="profile-username text-center"><c:out value="${studentName}"></c:out></h3>
+															<sec:authentication property="Principal" var="user"/>
+																<h3 class="profile-username text-center"><c:out value="${studentName}"></c:out>(${user.username})</h3>
 													</c:forEach>
 
 													<c:forEach items="${departmentVO.studentVOs}" var="studentVO">
@@ -57,6 +69,7 @@
 															<c:set var="studentPhone" value="${studentVO.phone}"></c:set>
 															<c:set var="studentBirth" value="${studentVO.birth}"></c:set>
 															<c:set var="studentAddress" value="${studentVO.address}"></c:set>
+															<c:set var="studentAddressDetail" value="${studentVO.addressDetail}"></c:set>
 															<c:set var="studentEmail" value="${studentVO.email}"></c:set>
 
 														<div class="card-body">
@@ -77,7 +90,7 @@
 																		<p class="text-muted"><c:out value="${studentEmail}"></c:out></p>
 																<hr>
 																	<strong><i class="fas fa-map-marker-alt mr-1"></i> 주소</strong>
-																		<p class="text-muted"><c:out value="${studentAddress}"></c:out></p>
+																		<p class="text-muted"><c:out value="${studentAddress}"></c:out>&ensp;<c:out value="${studentAddressDetail}"></c:out></p>
 															
 														</div>
 													</c:forEach>

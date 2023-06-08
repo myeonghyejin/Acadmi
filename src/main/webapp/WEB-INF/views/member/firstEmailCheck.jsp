@@ -23,43 +23,12 @@
                             <a href="./login" class="h1"><b>Acadmi</b></a>
                         </div>
                         <div class="card-body">
-                            <p class="login-box-msg">비밀번호를 잊어버리셨나요? <br> 아이디와 이메일을 입력하여 <br> 임시 비밀번호를 받으세요!</p>
-                            <form:form id="contactForm" modelAttribute="memberVO" action="./findPw" method="post">
-                                <div class="input-group mb-3">
-                                    <form:input path="username" id="username" class="form-control" placeholder="아이디를 입력하세요"></form:input>
-                                    <div class="input-group-append">
-                                        <div class="input-group-text">
-                                            <span class="fas fa-user"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="input-group mb-3">
-                                    <form:input path="email" id="email" class="form-control" placeholder="이메일을 입력하세요"></form:input>
-                                    <div class="input-group-append">
-                                        <div class="input-group-text">
-                                            <span class="fas fa-envelope"></span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                    <div class="row mx-auto">
-
-                                        <p class="mb-1 mx-2">
-                                            <a href="./login">로그인</a>
-                                        </p>
-
-                                        <p class="mx-4">
-                                            <div class="col-4 mx-5">
-                                                <button class="btn btn-info btn-block mx-5" id="submitButton" type="submit">다음</button>
-                                            </div>
-                                        </p>
-
-                                    </div>
-                           		</form:form>
-                                </div>
+                         	<div class="text-center">
+                        		<h4 class="fa-solid fa-circle-check text-center">이메일을 확인해주세요!</h4>
+                        	</div>
                         </div>
-
-                    </div>
+					</div>
+				</div>
            
 </body>
 </html>

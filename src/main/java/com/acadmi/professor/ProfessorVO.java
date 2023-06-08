@@ -14,9 +14,10 @@ import lombok.Setter;
 public class ProfessorVO extends MemberVO{
 	private Integer deptNum;
 	private String name;
-	private Integer professorRoom;
-	private Integer phone;
+	private String professorRoom;
+	private String phone;
 	private Date birth;
 	private String address;
+	private String addressDetail;
 	private Integer status;
 }

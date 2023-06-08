@@ -30,20 +30,9 @@
   				<result property="roleName" column="ROLENAME"/>
   			</collection>
   		</resultMap>
-  	
-  	
-  		<insert id="setJoin" parameterType="MemberVO">
-	  		INSERT INTO MEMBER
-	  		VALUES(#{username}, #{password}, #{email}, #{category}, 0)
-  		</insert>
-  		
-  		<insert id="setRoleAdd" parameterType="Map">
-	  		INSERT INTO MEMBER_ROLE
-	  		VALUES(#{username}, 1)
-  		</insert>
   		
   		<select id="getFindPw" parameterType="MemberVO" resultType="MemberVO">
-	  		SELECT USERNAME, EMAIL FROM MEMBER
+	  		SELECT EMAIL FROM MEMBER
 	  		WHERE USERNAME = #{username} AND EMAIL = #{email}
   		</select>
   		
@@ -51,6 +40,14 @@
   			UPDATE MEMBER SET PASSWORD = #{password} WHERE USERNAME = #{username}
   		</update>
   		
+  		<select id="getFirstEmail" parameterType="MemberVO" resultType="MemberVO">
+	  		SELECT EMAIL FROM MEMBER
+	  		WHERE EMAIL = #{email} AND ENABLED = 0
+  		</select>
+  		
+  		<update id="setEnabledUpdate" parameterType="MemberVO">
+  			UPDATE MEMBER SET ENABLED = 1 WHERE ENABLED = 0
+  		</update>
   		
  <!-- ============================================================================================================================ -->
   		
@@ -79,11 +76,13 @@
   				<result column="PHONE" property="phone"/>
   				<result property="birth" column="BIRTH"/>
 	  			<result property="address" column="ADDRESS"/>
+	  			<result property="addressDetail" column="ADDRESSDETAIL"/>
 	  			<result property="email" column="EMAIL"/>
-  				<collection property="memberFilesVOs" javaType="List" ofType="MemberFilesVO">
-  					<id column="FILENUM" property="fileNum"/>
-  					<result column="ORINAME" property="oriName"/>
-  				</collection>
+  				<association property="memberFilesVO" javaType="MemberFilesVO">
+           			<id column="FILENUM" property="fileNum"/>
+           			<result property="fileName" column="FILENAME"/>
+           			<result property="oriName" column="ORINAME"/>
+        		</association>
   			</collection>
   		</resultMap>
   		
@@ -111,12 +110,13 @@
   				<result column="PHONE" property="phone"/>
   				<result property="birth" column="BIRTH"/>
 	  			<result property="address" column="ADDRESS"/>
+	  			<result property="addressDetail" column="ADDRESSDETAIL"/>
 	  			<result property="email" column="EMAIL"/>
   				<result column="STATUS" property="status"/>
-  				<collection property="memberFilesVOs" javaType="List" ofType="MemberFilesVO">
-  					<id column="FILENUM" property="fileNum"/>
-  					<result column="ORINAME" property="oriName"/>
-  				</collection>
+  				<association property="memberFilesVO" javaType="MemberFilesVO">
+           			<id column="FILENUM" property="fileNum"/>
+           			<result property="fileName" column="FILENAME"/>
+        		</association>
   			</collection>
   		</resultMap>
   		
@@ -143,26 +143,71 @@
   				<result column="PHONE" property="phone"/>
   				<result property="birth" column="BIRTH"/>
 	  			<result property="address" column="ADDRESS"/>
+	  			<result property="addressDetail" column="ADDRESSDETAIL"/>
 	  			<result property="email" column="EMAIL"/>
   				<result column="STATUS" property="status"/>
-  				<collection property="memberFilesVOs" javaType="List" ofType="MemberFilesVO">
-  					<id column="FILENUM" property="fileNum"/>
-  					<result column="ORINAME" property="oriName"/>
-  				</collection>
+  				<association property="memberFilesVO" javaType="MemberFilesVO">
+           			<id column="FILENUM" property="fileNum"/>
+           			<result property="fileName" column="FILENAME"/>
+        		</association>
   			</collection>
   		</resultMap>
   		
-  		
+	
  <!-- ============================================================================================================================ -->
  
  		<update id="setStudentUpdate" parameterType="MemberVO">
  			UPDATE MEMBER M
-				 RIGHT JOIN STUDENT S ON (S.USERNAME  = M.USERNAME)
-					  SET  S.NAME = #{name},
-					   	   S.PHONE = #{phone},
-					   	   S.BIRTH = #{birth},
-					   	   S.ADDRESS = #{address}
-				 WHERE M.USERNAME = #{username}
+ 				LEFT JOIN STUDENT S ON (M.USERNAME  = S.USERNAME)
+				   SET 
+				   	   S.NAME = #{name},
+				   	   S.PHONE = #{phone},
+				   	   S.ADDRESS = #{address},
+				   	   S.ADDRESSDETAIL = #{addressDetail},
+				   	   M.EMAIL = #{email}
+ 			WHERE M.USERNAME = #{username}
+ 		</update>
+ 		
+ 		<update id="setProfessorUpdate" parameterType="MemberVO">
+ 			UPDATE MEMBER M
+ 				LEFT JOIN PROFESSOR P ON (M.USERNAME  = P.USERNAME)
+				   SET 
+				   	   P.NAME = #{name},
+				   	   P.PHONE = #{phone},
+				   	   P.ADDRESS = #{address},
+				   	   P.ADDRESSDETAIL = #{addressDetail},
+				   	   M.EMAIL = #{email}
+ 			WHERE M.USERNAME = #{username}
+ 		</update>
+ 		
+ 		<update id="setAdministratorUpdate" parameterType="MemberVO">
+ 			UPDATE MEMBER M
+ 				LEFT JOIN ADMINISTRATOR A ON (M.USERNAME  = A.USERNAME)
+				   SET 
+				   	   A.NAME = #{name},
+				   	   A.PHONE = #{phone},
+				   	   A.ADDRESS = #{address},
+				   	   A.ADDRESSDETAIL = #{addressDetail},
+				   	   M.EMAIL = #{email}
+ 			WHERE M.USERNAME = #{username}
+ 		</update>
+ 		
+ 		<select id="getFileDetail" parameterType="MemberFilesVO" resultType="MemberFilesVO">
+ 			SELECT FILENAME, ORINAME FROM MEMBERFILES WHERE USERNAME = #{username}
+ 		</select>
+ 		
+ 		<insert id="setFileAdd" parameterType="MemberFilesVO">
+ 			INSERT INTO MEMBERFILES(USERNAME, FILENAME, ORINAME)
+ 			VALUES(#{username}, #{fileName}, #{oriName})
+ 		</insert>
+ 		
+ 		<delete id="setFileDelete" parameterType="MemberFilesVO">
+ 			DELETE FROM MEMBERFILES WHERE FILENUM = #{fileNum}
+ 		</delete>
+ 		
+ 		<update id="setFileUpdate" parameterType="MemberFilesVO">
+ 			UPDATE MEMBERFILES SET FILENAME = #{fileName}, ORINAME = #{oriName}
+ 			WHERE USERNAME = #{username}
  		</update>
  		
   </mapper>

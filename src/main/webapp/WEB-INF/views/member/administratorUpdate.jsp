@@ -42,60 +42,72 @@
 										<div class="col-md-6">
 											<div class="card card-info card-outline ml-5">
 												<div class="card-body box-profile">
-													<div class="text-center">
-														<c:forEach items="${departmentVO.administratorVOs}" var="administratorVO">
-		     	 												<c:choose>
-																    <c:when test="${empty administratorVO.memberFilesVO.fileName}">
-																        <img class="profile-user-img img-fluid img-circle"
-																             src="/images/profile.jpg"
-																             alt="User profile picture">
-																    </c:when>
-																    <c:otherwise>	
-																		<img class="img-fluid img-size"
-																		     src="/file/member/${administratorVO.memberFilesVO.fileName}"
-																		     alt="User profile picture">
-																    </c:otherwise>
-																</c:choose>
-														</c:forEach>
-													</div>
+													<form action="./administratorUpdate" method="post" enctype="multipart/form-data">
+														<sec:authentication property="Principal" var="user"/>
+															<input type="hidden" name="username" value="${user.username}">
+																<div class="text-center">
+																	<c:forEach items="${departmentVO.administratorVOs}" var="administratorVO">
+				     	 												<c:choose>
+																		    <c:when test="${empty administratorVO.memberFilesVO.fileName}">
+																		        <img class="profile-user-img img-fluid img-circle"
+																		             src="/images/profile.jpg"
+																		             alt="User profile picture">
+																		    </c:when>
+																		    <c:otherwise>	
+																				<img class="img-fluid img-size"
+																				     src="/file/member/${administratorVO.memberFilesVO.fileName}"
+																				     alt="User profile picture">
+																		    </c:otherwise>
+																		</c:choose>
+																	</c:forEach>
+																<div class="col-md-12 mt-3">
+											                        <div id="fileList">
+											                           <button class="col-md-3  btn btn-info" id="fileAdd" type="button">파일추가</button>
+											                        </div> 
+											                     </div> 
+															</div>
+													
 													<c:forEach items="${departmentVO.administratorVOs}" var="administratorVO">
-														<c:set var="administratorName" value="${administratorVO.name}"></c:set>
 															<sec:authentication property="Principal" var="user"/>
-																	<h3 class="profile-username text-center read-only"><c:out value="${administratorName}"></c:out>(${user.username})</h3>							
+																<h3 class="profile-username text-center"><input value="${administratorVO.name}" type="text" id="name" name="name" readonly></h3>
+																	<sec:authentication property="Principal" var="user"/>
+																		<h3 class="profile-username text-center">(${user.username})</h3>
 													</c:forEach>
-
+													
 													<c:forEach items="${departmentVO.administratorVOs}" var="administratorVO">
 														<c:set var="administratorPhone" value="${administratorVO.phone}"></c:set>
 														<c:set var="administratorBirth" value="${administratorVO.birth}"></c:set>
 														<c:set var="administratorAddress" value="${administratorVO.address}"></c:set>
 														<c:set var="administratorAddressDetail" value="${administratorVO.addressDetail}"></c:set>
 														<c:set var="administratorEmail" value="${administratorVO.email}"></c:set>
+															
 
 														<div class="card-body">
-															<strong><i class="fas fa-book mr-1"></i> 학과</strong>
+															<strong><i class="fas fa-book mr-1"></i> 학과, 학년</strong>
 															<p class="text-muted">
 																<c:set value="${departmentVO.deptName}" var="administratorDeptName"></c:set>
-																	학과 이름 : &ensp;<c:out value="${administratorDeptName}"></c:out>
+																	학과 이름 : &ensp;<c:out value="${administratorDeptName}"></c:out><br>
 															</p>
 																<hr>
 																	<strong><i class="fa-solid fa-cake-candles mr-1"></i> 생년월일</strong>
 																			<p class="text-muted"><c:out value="${administratorBirth}"></c:out></p>
 																<hr>
 																	<strong><i class="fa-solid fa-phone mr-1"></i> 전화번호</strong>
-																		<p class="text-muted"><c:out value="${administratorPhone}"></c:out></p>
+																		<p class="text-muted"><input value="${administratorVO.phone}" type="text" id="phone" name="phone"></p>
 																<hr>
 																	<strong><i class="fas fa-envelope mr-1"></i> 이메일</strong>
-																		<p class="text-muted"><c:out value="${administratorEmail}"></c:out></p>
+																		<p class="text-muted"><input value="${administratorVO.email}" type="email" id="email" name="email"></p>
 																<hr>
 																	<strong><i class="fas fa-map-marker-alt mr-1"></i> 주소</strong>
-																		<p class="text-muted"><c:out value="${administratorAddress}"></c:out>&ensp;<c:out value="${administratorAddressDetail}"></c:out></p>
-															
+																		<p class="text-muted"><input value="${administratorVO.address}" type="text" id="address" name="address"></p>
+																	<strong><i class="mr-1"></i> 상세 주소 입력</strong>
+																		<p class="text-muted"><input value="${administratorVO.addressDetail}" type="text" id="addressDetail" name="addressDetail"></p>
 														</div>
 													</c:forEach>
-
+														<button class="btn btn-info float-right" id="submitButton" type="submit">수정</button>
+													</form>
 														<sec:authentication property="Principal" var="user"/>
-														<a href="/member/administratorUpdate?username=${user.username}" id="studentUpdate" class="btn btn-info float-right">수정</a>
-
+	                 										<a href="/member/administratorPage?username=${user.username}" class="btn btn-danger float-right mx-3">취소</a>	
 												</div>
 											</div>
 										</div>
@@ -108,6 +120,22 @@
 			<!-- Footer 적용 -->
 				<c:import url="../temp/footer.jsp"></c:import>
 			<!-- Footer 끝 -->
+
+<script type="text/javascript" src="/js/filemanager.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+	window.onload = function(){
+    document.getElementById("address").addEventListener("click", function(){ //주소입력칸을 클릭하면
+        //카카오 지도 발생
+        new daum.Postcode({
+            oncomplete: function(data) { //선택시 입력값 세팅
+                document.getElementById("address").value = data.address; // 주소 넣기
+               
+            }
+        }).open();
+    });
+}
+</script>
 
 </body>
 </html>
