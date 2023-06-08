@@ -45,7 +45,11 @@
 											</div>
 										</div>
 									</div>
+									<c:if test="${not empty param.errorMessage}">
+                                		<p><font color="red">${param.errorMessage}</font></p>
+                                	</c:if>
 									<div class="row mx-auto">
+									
 
 										<p class="mb-1 mx-2">
 											<a href="./findPw">비밀번호 찾기</a>
