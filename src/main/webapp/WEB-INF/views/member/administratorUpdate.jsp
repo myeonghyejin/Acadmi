@@ -68,13 +68,17 @@
 															</div>
 													
 													<c:forEach items="${departmentVO.administratorVOs}" var="administratorVO">
-														<h3 class="profile-username text-center">이름 : <input value="${administratorVO.name}" type="text" id="name" name="name"></h3>
+															<sec:authentication property="Principal" var="user"/>
+																<h3 class="profile-username text-center"><input value="${administratorVO.name}" type="text" id="name" name="name" readonly></h3>
+																	<sec:authentication property="Principal" var="user"/>
+																		<h3 class="profile-username text-center">(${user.username})</h3>
 													</c:forEach>
 													
 													<c:forEach items="${departmentVO.administratorVOs}" var="administratorVO">
 														<c:set var="administratorPhone" value="${administratorVO.phone}"></c:set>
 														<c:set var="administratorBirth" value="${administratorVO.birth}"></c:set>
 														<c:set var="administratorAddress" value="${administratorVO.address}"></c:set>
+														<c:set var="administratorAddressDetail" value="${administratorVO.addressDetail}"></c:set>
 														<c:set var="administratorEmail" value="${administratorVO.email}"></c:set>
 															
 
@@ -96,19 +100,14 @@
 																<hr>
 																	<strong><i class="fas fa-map-marker-alt mr-1"></i> 주소</strong>
 																		<p class="text-muted"><input value="${administratorVO.address}" type="text" id="address" name="address"></p>
-																		<%-- <strong><i class="mr-1"></i> 상세 주소 입력</strong>
-																		<p class="text-muted"><input value="${studentVO.address}" type="text" name="address"></p> --%>
-															
+																	<strong><i class="mr-1"></i> 상세 주소 입력</strong>
+																		<p class="text-muted"><input value="${administratorVO.addressDetail}" type="text" id="addressDetail" name="addressDetail"></p>
 														</div>
 													</c:forEach>
 														<button class="btn btn-info float-right" id="submitButton" type="submit">수정</button>
-
 													</form>
-
-														
 														<sec:authentication property="Principal" var="user"/>
-	                 										<a href="/member/administratorPage?username=${user.username}" class="btn btn-danger float-right mx-3">취소</a>
-	                 										
+	                 										<a href="/member/administratorPage?username=${user.username}" class="btn btn-danger float-right mx-3">취소</a>	
 												</div>
 											</div>
 										</div>
