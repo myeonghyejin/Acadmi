@@ -51,31 +51,21 @@ public class SecurityConfig {
                   // URL과 권한 매칭
                   .antMatchers("/member/login").permitAll()
                   .antMatchers("/member/join").permitAll()
-//                  .antMatchers("/test").authenticated()
-//                  	.antMatchers("/").permitAll()
                   .antMatchers("/").hasAnyRole("ADMIN", "ADMINISTRATOR", "PROFESSOR", "STUDENT")
-//                  .anyRequest().permitAll()
                   .and()
                .formLogin()
                   .loginPage("/member/login")
                   .defaultSuccessUrl("/")
-//                  .failureUrl("/member/firstEmail")
-//                  .successHandler(new UserSuccessHandler())
                   .failureHandler(new UserLoginFailHandler())
                   .permitAll()
                   .and()
                .logout()
                   .logoutUrl("/member/logout")
                   .logoutSuccessUrl("/member/login")
-//                .addLogoutHandler(userLogoutHandler)
                   .invalidateHttpSession(true)
                   .deleteCookies("JSESSIONID")
                   .permitAll()
                   .and();
-//               .sessionManagement()
-//                  .maximumSessions(1) // 최대 허용 가능한 session의 수, -1 : 무제한
-//                  .maxSessionsPreventsLogin(false) // false : 이전 사용자 session을 만료, true : 새로운 사용자 인증 실패
-//                  ;
                
          return httpSecurity.build();
       }

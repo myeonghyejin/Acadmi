@@ -31,7 +31,6 @@ import com.acadmi.util.MailManager;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class MemberService implements UserDetailsService{
@@ -63,9 +62,7 @@ public class MemberService implements UserDetailsService{
 	
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
-		log.error("============Spring Security Login============");
-		log.error("====================={}=====================", username);
-		
+	
 		MemberVO memberVO = new MemberVO();
 		MemberFilesVO memberFilesVO = new MemberFilesVO();
 		memberVO.setUsername(username);
@@ -84,8 +81,7 @@ public class MemberService implements UserDetailsService{
 		boolean result = false;
 		
 		result = bindingResult.hasErrors();
-		log.error("=========== result1 : {} ===========", result);
-
+		
 		if(memberDAO.getFindPw(memberVO) != null) {
 			String charaters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 			SecureRandom random = new SecureRandom();
@@ -97,14 +93,10 @@ public class MemberService implements UserDetailsService{
 			mailManager.send(memberVO.getEmail(), "임시 비밀번호 입니다", "임시비밀번호는 " + password + "입니다.");
 			memberVO.setPassword(passwordEncoder.encode(password));
 			memberDAO.setPwUpdate(memberVO);
-			log.error("=========== result2 : {} ===========", result);
 
 		} else {
 			bindingResult.rejectValue("email", "member.username.email");
 			result = true;
-			log.error("=========== result3 : {} ===========", result);
-
-			
 		}
 		
 		return result;
@@ -115,7 +107,6 @@ public class MemberService implements UserDetailsService{
 		boolean result = false;
 		
 		result = bindingResult.hasErrors();
-		log.error("=========== result1 : {} ===========", result);
 
 		if(!memberVO.isEnabled()) {
 			
@@ -127,14 +118,10 @@ public class MemberService implements UserDetailsService{
 			
 			memberVO.setEnabled(true);
 			memberDAO.setEnabledUpdate(memberVO);
-			log.error("=========== result2 : {} ===========", result);
 
 		} else {
 			bindingResult.rejectValue("email", "member.username.email");
-			result = true;
-			log.error("=========== result3 : {} ===========", result);
-
-			
+			result = true;		
 		}
 		
 		return result;
@@ -186,7 +173,6 @@ public class MemberService implements UserDetailsService{
 					memberFilesVO.setUsername(studentVO.getUsername());
 					memberFilesVO.setFileName(fileName);
 					memberFilesVO.setOriName(multipartFile.getOriginalFilename());
-//					log.info("oriname : {}", memberFilesVO.getUsername());
 					result = memberDAO.setFileUpdate(memberFilesVO);
 				}
 			}
@@ -216,7 +202,6 @@ public class MemberService implements UserDetailsService{
 				memberFilesVO.setUsername(professorVO.getUsername());
 				memberFilesVO.setFileName(fileName);
 				memberFilesVO.setOriName(multipartFile.getOriginalFilename());
-//				log.info("oriname : {}", memberFilesVO.getUsername());
 				result = memberDAO.setFileUpdate(memberFilesVO);
 			}
 		}

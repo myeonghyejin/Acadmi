@@ -15,21 +15,14 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.acadmi.member.MemberController;
 import com.acadmi.member.MemberVO;
 
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 public class UserLoginFailHandler implements AuthenticationFailureHandler{
 	
 	@Override
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException exception) throws IOException, ServletException {
-		// TODO Auto-generated method stub
-		
-		log.error("======={}=======", exception);
-		log.error("======={}=======", exception.getMessage());
 		
 		MemberVO memberVO = new MemberVO();
 		String errorMessage = "";
