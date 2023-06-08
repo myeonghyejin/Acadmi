@@ -70,7 +70,9 @@
                   <select class="form-control select2" style="width: 100%;" name="collegeNum" id="college" onchange="updateDepartmentOptions()">
                   	<option value="단과대">전체</option>
 					<c:forEach items="${college}" var="collegeVO">
-						<option value="${collegeVO.collegeNum}">${collegeVO.collegeName}</option>
+						<c:if test="${collegeVO.collegeNum != 1 && collegeVO.collegeNum != 2}">
+							<option value="${collegeVO.collegeNum}">${collegeVO.collegeName}</option>
+						</c:if>
 					</c:forEach>
                   </select>
 	           </div>
@@ -111,7 +113,7 @@
                	 
                  <div class="form-group">
 	              <label for="address_kakao">주소</label>
-	              <input type="text" id="address_kakao" readonly class="form-control" name="address"/>
+	              <input type="text" id="address_kakao" readonly class="form-control" name="addressDetail"/>
 	            </div>
 	            <div id="addressResult"></div>
 	            
@@ -171,7 +173,9 @@
 		}
 		if($("#college").val() == "단과대") {
 			<c:forEach items="${department}" var="departmentVO">
+				<c:if test="${departmentVO.deptNum != 1 && departmentVO.deptNum != 2}">
 				$("#dept").append("<option value='${departmentVO.deptNum}'>${departmentVO.deptName}</option>")
+				</c:if>
 			</c:forEach>
 		}
 		

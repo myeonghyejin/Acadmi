@@ -18,6 +18,15 @@
    	 	justify-content: center;
 	
 	}
+	
+	.content {
+		margin: 30px;
+	}
+	
+	.selected-page{
+		  background-color: #E2E2E2;
+		  color: white; /* 선택된 페이지의 텍스트 색상도 변경할 수 있습니다 */
+	}
 	#table1 {
 		width : 90%;
 	}
@@ -62,6 +71,31 @@
 	               </div>
                <!-- header end -->
 				    <section class="content">
+				    
+				    <form action="./lectureRoomList" id="search-form">
+						<input type="hidden" name="page" value="1">
+						<div class="card search">
+							<div class="row content" >
+								<label style="margin : 10px;">강의실 건물</label>
+								<select class="form-control select" name="lectureBuilding" style="width: 20%;">
+									<option value="">전체</option>
+									<c:forEach items="${list2}" var="lectureRoom">
+										<option value="${lectureRoom.lectureBuilding}">${lectureRoom.lectureBuilding }</option>
+									</c:forEach>
+								</select>
+								<label style="margin : 10px;">강의실 호수</label>
+								<input type="text" class="form-control" name="lectureRoom" placeholder="내용을 입력해주세요" style="width : 20%">
+								<label style="margin : 10px;">상태</label>
+								<select class="form-control select" name="status" style="width: 20%;">
+									<option value="">전체</option>
+									<option value="1">사용가능</option>
+									<option value="0">사용불가</option>
+									
+								</select>
+								<button type="submit" class="btn btn-info" style="margin : 0 0 0 20px; width : 15%">검색</button>
+							</div>
+						</div>
+					</form>
 				
 				      <!-- Default box -->
 				      <div class="card">
@@ -175,5 +209,9 @@
 </div>
 
 <script type="text/javascript" src="../js/administrator/lectureRoomList.js"></script>
+<script type="text/javascript">
+/* 페이지네이션 선택 색상 */
+
+</script>
 </body>
 </html>

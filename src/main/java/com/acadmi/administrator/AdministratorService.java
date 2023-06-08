@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;import org.springframework.jdbc.support.lob.AbstractLobHandler;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -465,5 +466,8 @@ public class AdministratorService{
 		return administratorDAO.getLectureRoomAssignment(pagination);
 	}
  	
+	public int setLectureRoomAssignmentUpdate(LectureVO lectureVO) throws Exception {
+		return administratorDAO.setLectureRoomAssignmentUpdate(lectureVO);
+	}
 
 }

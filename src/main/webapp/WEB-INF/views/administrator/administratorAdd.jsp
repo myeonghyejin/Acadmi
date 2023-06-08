@@ -66,16 +66,14 @@
 				          	 <div class="form-group">
 				           	  <label>단과대</label>
 			                  <select class="form-control select2" style="width: 100%;" name="collegeNum" id="college" onchange="updateDepartmentOptions()">
-			                  	<option value="단과대">전체</option>
-								<c:forEach items="${college}" var="collegeVO">
-									<option value="${collegeVO.collegeNum}">${collegeVO.collegeName}</option>
-								</c:forEach>
+			               
+								<option value="1">행정</option>
 			                  </select>
 				           </div>
 				           <div class="form-group">
 				           	  <label>학과</label>
 			                  	<select  class="form-control select2" style="width: 100%;" name="deptNum" id="dept">
-									<option value="">전체</option>
+									<option value="1">행정</option>
 								</select>
 				           </div>
 				           <div id="deptResult"></div>
@@ -102,9 +100,10 @@
 				            </div>
 				             <div id="addressResult"></div>
 				             
+				             
 				             <div class="form-group">
 				              <label for="detailAddress">상세주소</label>
-				              <input type="text" id="detailAddress"  class="form-control" name="address"/>
+				              <input type="text" id="detailAddress"  class="form-control" name="addressDetail"/>
 				            </div>
 				          
 				            <input type="hidden" name="category" value="0">
@@ -135,7 +134,7 @@
 	    }).open();
 	});
 	
-	function updateDepartmentOptions() {
+	/* function updateDepartmentOptions() {
 	    let college = new Array()
 		let department = new Array()
 		<c:forEach items = "${college}" var="collegeVO" >
@@ -165,7 +164,7 @@
 			
 		}
 		console.log(department)
-	}
+	} */
 	
 
 	

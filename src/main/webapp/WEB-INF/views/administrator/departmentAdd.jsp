@@ -39,12 +39,11 @@
 						<h3>학과 등록</h3>
 							<section class="content">
 
-					      <!-- Default box -->
+					      <!-- Default box -->	
 					      <div class="card">
 					        <div class="card-body row">
 					          <div class="col-7">
 						         <form action="./departmentAdd" method="post">
-						         <input type="hidden" name="deptNum" >
 						          	 <div class="form-group">
 						           	  <label>단과대학</label>
 					                  <select class="form-control select2" style="width: 100%;" name="collegeNum">
@@ -56,6 +55,7 @@
 						           <div class="form-group">
 						              <label for="deptName">학과 이름</label>
 						              <input type="text" id="deptName" class="form-control" name="deptName"/>
+						              <input type="hidden" name="deptNum">
 						            </div>
 						           
 						            <div class="form-group clearfix">
@@ -73,7 +73,7 @@
 				                       		</label>
 					                     </div>
 				                     </div>
-					                
+					                 
 						            <button type="submit" class="btn btn-info">등록</button> 
 						          </form>
 					          </div>
@@ -86,6 +86,8 @@
 			</div>
 		</div>	
 </div>
+<script type="text/javascript">
 	
+</script>	
 </body>
 </html>

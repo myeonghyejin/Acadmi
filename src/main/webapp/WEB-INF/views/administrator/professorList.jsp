@@ -19,6 +19,11 @@
    	 	justify-content: center;
 	
 	}
+	
+	.selected-page{
+		  background-color: #E2E2E2;
+		  color: white; /* 선택된 페이지의 텍스트 색상도 변경할 수 있습니다 */
+	}
 	#tableProfessor {
 		width : 90%;
 	}
@@ -27,6 +32,10 @@
 	}
 	.content {
 		margin: 30px;
+	}
+	
+	.content2 {
+		margin : 10px 0 30px 30px;
 	}
 	#add2 {
 		float : right;
@@ -69,6 +78,48 @@
 						
 					<!-- Main content -->
 				    <section class="content">
+				    
+				    <!--Search -->
+					<form action="./professorList" id="search-form">
+						<input type="hidden" name="page" value="1">
+						<div class="card search">
+							<div class="row content" >
+								<label style="margin : 10px;">교수 번호</label>
+								<input type="text" class="form-control" name="username" placeholder="내용을 입력해주세요" style="width : 20%">
+								<label style="margin : 10px;">성명</label>
+								<input type="text" class="form-control" name="search" placeholder="내용을 입력해주세요" style="width : 20%">
+								<label style="margin : 10px;">상태</label>
+								<select class="form-control select" name="status" style="width: 20%;">
+									<option value="">전체</option>
+									<option value="1">재직</option>
+									<option value="2">휴직</option>
+									<option value="3">퇴직</option>
+								</select>
+								
+							</div>
+							<div class="row content2">
+								<label style="margin : 10px;">담당대학</label>
+								<select class=" form-control select2" name="collegeName"  id="college" style="width : 15%;" onchange="updateDepartmentOptions()">
+								<option value="">전체</option>
+									<c:forEach items="${college}" var="collegeVO">
+										<c:if test="${collegeVO.collegeNum != 1 && collegeVO.collegeNum != 2}">
+											<option value="${collegeVO.collegeName}">${collegeVO.collegeName }</option>
+										</c:if>	
+									</c:forEach>
+								</select>
+								<label style="margin : 10px;">담당학과</label>
+								<select  class="form-control select3" style="width: 15%;" name="deptName" id="dept">
+									<option value="">전체</option>
+									<c:forEach items="${department}" var="departmentVO">
+										<c:if test="${departmentVO.deptNum !=1 && departmentVO.deptNum !=2 }">
+											<option value="${departmentVO.deptName}">${departmentVO.deptName}</option>
+										</c:if>
+									</c:forEach>
+								</select>
+									<button type="submit" class="btn btn-info" style="margin : 0 0 0 20px; width : 15%">검색</button>
+							</div>
+						</div>
+					</form>
 				
 				      <!-- Default box -->
 				      <div class="card">
@@ -140,7 +191,7 @@
 											
 										<td>
 	     	 								<sec:authentication property="principal.username" var="username"/>
-				     	 					<a href="../chat/detail?sender=${username}&recipient=${professorVO.username}"><i class="fa-regular fa-envelope fa-2xl" style="margin:30px 0 0 0;"></i></a>
+				     	 					<a href="../chat/detail?roomSender=${username}&roomRecipient=${professorVO.username}"><i class="fa-regular fa-envelope fa-2xl" style="margin:30px 0 0 0;"></i></a>
 	     	 							</td>
 										<td>
 				   	 						<img alt="" src="/file/${board}/${boardFileVO.fileName}" width="60rem" height="60rem">
@@ -212,6 +263,12 @@
 	</div>
 </div>
 
+<script type="text/javascript">
+/* 페이지네이션 선택 색상 */
+ 
+ 
+	
 
+</script>
 </body>
 </html>
