@@ -214,8 +214,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- INSERT -->
 	<insert id="insertToStudentLecture" parameterType="StudentLectureVO">
-		INSERT INTO STUDENT_LECTURE (LECTURENUM, USERNAME, ENABLED)
-		VALUES (#{lectureNum}, #{username}, 1)
+		INSERT INTO STUDENT_LECTURE (LECTURENUM, USERNAME, CREDIT, ENABLED)
+		VALUES (#{lectureNum}, #{username}, #{lectureVO.completionGrade}, 1)
 	</insert>
 	
 	<insert id="insertToFavoriteLecture" parameterType="FavoriteLectureVO" useGeneratedKeys="true" keyProperty="favoriteNum">

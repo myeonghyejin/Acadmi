@@ -162,17 +162,15 @@
 									<td>${lectureVO.lectureRoomVO.lectureBuilding} ${lectureVO.lectureRoomVO.lectureRoom}</td>
 									<td>${lectureVO.subscription}/${lectureVO.personal}명</td>
 									<td class="project-actions text-right">
-										<input type="hidden" name="startTime" value="${lectureVO.startTime}">
-										<input type="hidden" name="endTime" value="${lectureVO.endTime}">
 										<c:choose>
 											<c:when test="${lectureVO.subscription ge lectureVO.personal}">
-												<button class="btn btn-danger btn-sm" id="mli" type="button" data-mli-num="${lectureVO.lectureNum}" data-weekday="${lectureVO.weekday}" data-starttime="${lectureVO.startTime}" data-endtime="${lectureVO.endTime}" disabled>
+												<button class="btn btn-danger btn-sm" id="mli" type="button" disabled>
 													<i class="fas fa-circle-xmark"></i>
 													마감
 												</button>
 											</c:when>
 											<c:otherwise>
-												<button class="btn btn-info btn-sm" id="mli" type="button" data-mli-num="${lectureVO.lectureNum}" data-weekday="${lectureVO.weekday}" data-starttime="${lectureVO.startTime}" data-endtime="${lectureVO.endTime}">
+												<button class="btn btn-info btn-sm" id="mli" type="button" data-mli-num="${lectureVO.lectureNum}" data-weekday="${lectureVO.weekday}" data-start-time="${lectureVO.startTime}" data-end-time="${lectureVO.endTime}" data-completion-grade="${lectureVO.completionGrade}">
 													<i class="fas fa-circle-check"></i>
 													신청
 												</button>
@@ -180,7 +178,7 @@
 										</c:choose>
 										<c:choose>
 											<c:when test="${lectureVO.favorite eq 1}">
-												<button class="btn btn-danger btn-sm" id="mfi" type="button" data-mfi-num="${lectureVO.lectureNum}" disabled>
+												<button class="btn btn-danger btn-sm" id="mfi" type="button" disabled>
 													<i class="fas fa-solid fa-heart"></i>
 													담김
 												</button>
@@ -202,6 +200,14 @@
 					
 				</div>
 				<!-- /.card -->
+				
+				<div class="row" style="padding-bottom:10px">
+					<div class="col">
+						<div class="card">
+							<h6 class="my-3 mx-3">총 신청 학점 : ${studentLectureVO.lectureVO.credit}점</h6>
+						</div>
+					</div>
+				</div>
 					
 			</div>
 		</div>

@@ -105,28 +105,26 @@ public class StudentLectureController {
 	    SecurityContextImpl contextImpl = (SecurityContextImpl) obj;
 	    Authentication authentication = contextImpl.getAuthentication();
 	    studentLectureVO.setUsername(authentication.getName());
-	    mv.addObject("studentLectureVO", studentLectureVO);
-
-	    log.info("{}", lectureVO.getStartTime());
-	    log.info("{}", lectureVO.getEndTime());
-	    log.info("{}", lectureVO.getWeekday());
 	    
-	    // 1. 이미 신청한 강의와 요일/시간이 겹치는지 확인
+	    //이미 신청한 강의와 요일/시간이 겹치는지 확인
 	    List<LectureVO> duplicateLectures = studentLectureService.getDuplicateTime(studentLectureVO, lectureVO);
-	    
-	    log.info("{}", duplicateLectures.size());
-	    
-	    for (LectureVO lecture : duplicateLectures) {
-	        log.info("{}", lecture);
-	    }
 	    
 	    if (duplicateLectures != null && !duplicateLectures.isEmpty()) {
 	        mv.addObject("result", 0);
 	        mv.setViewName("common/ajaxResult");
 	        return mv;
 	    }
+	    
+	    //총 학점이 20점을 넘어가는지 확인
+//	    Long totalGrade = studentLectureService.getGradeCount(studentLectureVO);
+//	    int addedGrade = (lectureVO != null) ? lectureVO.getCompletionGrade() : 0;
+//	    if (totalGrade != null && totalGrade + addedGrade > 20) {
+//	        mv.addObject("result", 0);
+//	        mv.setViewName("common/ajaxResult");
+//	        return mv;
+//	    }
 
-	    // 수강 신청 성공
+	    //수강 신청 성공
 	    studentLectureService.addToSubscription(lectureVO);
 	    int result = studentLectureService.insertToStudentLecture(studentLectureVO, lectureVO, session);
 

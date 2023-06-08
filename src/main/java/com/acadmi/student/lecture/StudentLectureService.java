@@ -63,11 +63,6 @@ public class StudentLectureService {
 	
 	//이미 수강한 강의와 요일/시간이 겹치는지 확인
 	public List<LectureVO> getDuplicateTime(StudentLectureVO studentLectureVO, LectureVO lectureVO) throws Exception {
-		log.info("{} :: startTime", lectureVO.getStartTime());
-		log.info("{} :: endTime", lectureVO.getEndTime());
-		log.info("{} :: weekday", lectureVO.getWeekday());
-		log.info("{} :: username", studentLectureVO.getUsername());
-		
 		return studentLectureDAO.getDuplicateTime(studentLectureVO, lectureVO);
 	}
 	

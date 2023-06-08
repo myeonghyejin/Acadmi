@@ -9,14 +9,13 @@ $("#allLectureList").on("click",".page-button", function(e){
 $("#allLectureList").on("click","#mli",function(e){
     let check = window.confirm("신청하시겠습니까?");
     if (check) {
-        let username = "<%= studentLectureVO.getUsername() %>";
 
         fetch("./my_lecture/insert", {
             method:'POST',
             headers:{
                 "Content-type":"application/x-www-form-urlencoded"
             },
-            body: "lectureNum="+$(this).attr("data-mli-num")+"&weekday="+$(this).attr("data-weekday")+"&startTime="+$(this).attr("data-starttime")+"&endTime="+$(this).attr("data-endtime")+"&username="+username
+            body: "lectureNum="+$(this).attr("data-mli-num")+"&weekday="+$(this).attr("data-weekday")+"&startTime="+$(this).attr("data-start-time")+"&endTime="+$(this).attr("data-end-time")+"&completionGrade="+$(this).attr("data-completion-grade")
         }).then((response) => {
             return response.text();
         }).then((res) => {
