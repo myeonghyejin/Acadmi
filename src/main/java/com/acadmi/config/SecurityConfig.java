@@ -22,7 +22,6 @@ import com.acadmi.security.UserLoginFailHandler;
 import com.acadmi.security.UserSuccessHandler;
 
 
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
