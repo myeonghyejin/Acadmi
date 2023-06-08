@@ -9,8 +9,8 @@
 <title>게시판 조회</title>
 <c:import url="../temp/style.jsp"></c:import>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-<link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-<link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+<!-- <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+<link rel="stylesheet" href="../../dist/css/adminlte.min.css" -->>
 </head>
 <body class="hold-transition sidebar-mini">
 	
@@ -100,7 +100,9 @@
 								<tr>
 									<th>No</th>
 									<th>제목</th>
-									<th>작성자</th>
+									<c:if test="${board eq 'qna' || board eq 'lectureQna'}">
+										<th>작성자</th>
+									</c:if>
 									<th>등록일</th>
 									<c:if test="${board eq 'notice' || board eq 'lectureNotice'}">
 										<th>수정일</th>
@@ -129,7 +131,7 @@
 													</c:if>
 												</c:forEach>
 											</td>
-											<td>${dto.writer}</td>
+											<%-- <td>${dto.writer}</td> --%>
 											<td>${dto.regDate}</td>
 											<td>${dto.modifyDate}</td>
 											<td>${dto.hit}</td>
@@ -302,9 +304,9 @@
 		
 	<c:import url="../temp/footer.jsp"></c:import>
 	<script src="/js/board/notice.js"></script>
-	<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- 	<script src="../../plugins/jquery/jquery.min.js"></script>
 	<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="../../dist/js/adminlte.min.js"></script>
-	<script src="../../dist/js/demo.js"></script>
+	<script src="../../dist/js/demo.js"></script> -->
 </body>
 </html>

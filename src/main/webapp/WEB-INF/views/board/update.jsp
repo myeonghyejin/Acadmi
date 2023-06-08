@@ -9,8 +9,8 @@
 <title>게시글 수정</title>
 <c:import url="../temp/style.jsp"></c:import>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-<link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-<link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+<!-- <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+<link rel="stylesheet" href="../../dist/css/adminlte.min.css"> -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 </head>
@@ -61,13 +61,7 @@
 						<c:if test="${board eq 'lectureQna'}">
 							강의질의응답 수정
 						</c:if>
-					</h3>
-	  				
-					<div class="card-tools">
-					  <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-						<i class="fas fa-minus"></i>
-					  </button>
-					</div>
+					</h3>  		
 				  </div>
 				  
 				  <div class="card-body">
@@ -166,9 +160,9 @@
 		});
 	</script>
 	
-	<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- 	<script src="../../plugins/jquery/jquery.min.js"></script>
 	<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="../../dist/js/adminlte.min.js"></script>
-	<script src="../../dist/js/demo.js"></script>
+	<script src="../../dist/js/demo.js"></script> -->
 </body>
 </html>
