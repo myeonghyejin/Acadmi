@@ -109,13 +109,13 @@
 												<td class="project-actions text-right">
 													<c:choose>
 														<c:when test="${lectureVO.subscription ge lectureVO.personal}">
-															<button class="btn btn-danger btn-sm" id="mli" type="button" data-mli-num="${lectureVO.lectureNum}" disabled>
+															<button class="btn btn-danger btn-sm" id="mli" type="button" disabled>
 																<i class="fas fa-circle-xmark"></i>
 																마감
 															</button>
 														</c:when>
 														<c:otherwise>
-															<button class="btn btn-info btn-sm" id="mli" type="button" data-mli-num="${lectureVO.lectureNum}">
+															<button class="btn btn-info btn-sm" id="mli" type="button" data-mli-num="${lectureVO.lectureNum}" data-weekday="${lectureVO.weekday}" data-start-time="${lectureVO.startTime}" data-end-time="${lectureVO.endTime}" data-completion-grade="${lectureVO.completionGrade}">
 																<i class="fas fa-circle-check"></i>
 																신청
 															</button>

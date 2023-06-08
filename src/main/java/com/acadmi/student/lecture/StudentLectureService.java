@@ -74,6 +74,7 @@ public class StudentLectureService {
 	/** INSERT **/
 	//수강 신청
 	public int insertToStudentLecture(StudentLectureVO studentLectureVO, LectureVO lectureVO, HttpSession session) throws Exception {
+		studentLectureVO.setLectureVO(lectureVO);
 		return studentLectureDAO.insertToStudentLecture(studentLectureVO);
 	}
 	

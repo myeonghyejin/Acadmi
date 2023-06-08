@@ -110,19 +110,19 @@ public class StudentLectureController {
 	    List<LectureVO> duplicateLectures = studentLectureService.getDuplicateTime(studentLectureVO, lectureVO);
 	    
 	    if (duplicateLectures != null && !duplicateLectures.isEmpty()) {
-	        mv.addObject("result", 0);
+	        mv.addObject("result", 2);
 	        mv.setViewName("common/ajaxResult");
 	        return mv;
 	    }
 	    
 	    //총 학점이 20점을 넘어가는지 확인
-//	    Long totalGrade = studentLectureService.getGradeCount(studentLectureVO);
-//	    int addedGrade = (lectureVO != null) ? lectureVO.getCompletionGrade() : 0;
-//	    if (totalGrade != null && totalGrade + addedGrade > 20) {
-//	        mv.addObject("result", 0);
-//	        mv.setViewName("common/ajaxResult");
-//	        return mv;
-//	    }
+	    Long totalGrade = studentLectureService.getGradeCount(studentLectureVO);
+	    int addedGrade = (lectureVO != null) ? lectureVO.getCompletionGrade() : 0;
+	    if (totalGrade != null && totalGrade + addedGrade > 20) {
+	        mv.addObject("result", 3);
+	        mv.setViewName("common/ajaxResult");
+	        return mv;
+	    }
 
 	    //수강 신청 성공
 	    studentLectureService.addToSubscription(lectureVO);

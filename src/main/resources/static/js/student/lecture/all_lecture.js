@@ -6,25 +6,34 @@ $("#allLectureList").on("click",".page-button", function(e){
 });
 
 //my_lecture_insert
-$("#allLectureList").on("click","#mli",function(e){
+$("#allLectureList").on("click", "#mli", function(e) {
     let check = window.confirm("신청하시겠습니까?");
     if (check) {
+        const lectureNum = $(this).attr("data-mli-num");
+        const weekday = $(this).attr("data-weekday");
+        const startTime = $(this).attr("data-start-time");
+        const endTime = $(this).attr("data-end-time");
+        const completionGrade = $(this).attr("data-completion-grade");
 
         fetch("./my_lecture/insert", {
-            method:'POST',
-            headers:{
-                "Content-type":"application/x-www-form-urlencoded"
+            method: 'POST',
+            headers: {
+                "Content-type": "application/x-www-form-urlencoded"
             },
-            body: "lectureNum="+$(this).attr("data-mli-num")+"&weekday="+$(this).attr("data-weekday")+"&startTime="+$(this).attr("data-start-time")+"&endTime="+$(this).attr("data-end-time")+"&completionGrade="+$(this).attr("data-completion-grade")
+            body: "lectureNum=" + lectureNum + "&weekday=" + weekday + "&startTime=" + startTime + "&endTime=" + endTime + "&completionGrade=" + completionGrade
         }).then((response) => {
             return response.text();
         }).then((res) => {
-            if (res.trim() != 0) {
+            if (res.trim() == 1) {
                 alert('신청되었습니다.');
                 document.location.reload();
-            } else {
-                alert('신청되지 않았습니다.');
-            }
+            } else if (res.trim() == 2) {
+                alert('이미 수강한 강의와 요일/시간이 겹칩니다.');
+            } else if (res.trim() == 3) {
+				alert('이수 가능한 학점을 초과하였습니다.');
+			} else {
+				alert('신청되지 않았습니다.');
+			}
         });
         e.preventDefault();
     }
