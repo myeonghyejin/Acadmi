@@ -12,7 +12,6 @@
 			</c:if>
 		</c:forEach>
 		</td>
-		<td>${importantList.writer}</td>
 		<td>${importantList.regDate}</td>
 		<td>${importantList.modifyDate}</td>
 		<td>${importantList.hit}</td>

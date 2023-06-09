@@ -31,7 +31,6 @@ import com.acadmi.student.StudentVO;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @Controller
 @RequestMapping("/member/*")
 public class MemberController {
@@ -57,54 +56,6 @@ public class MemberController {
 	     } 
 
 	     return mv;
-	}
-	
-//	@PostMapping(value = "login")
-//	   public ModelAndView getLogin(MemberVO memberVO, HttpSession session)throws Exception{
-//	      ModelAndView mv = new ModelAndView();
-//	      
-//	      memberVO = memberService.getLogin(memberVO);
-//	      mv.setViewName("redirect:./login");
-//	      
-//	      if(memberVO != null) {
-//	         session.setAttribute("member", memberVO);
-//	         mv.setViewName("redirect:../");
-//	      }
-//	      
-//	      return mv;
-//	   }
-	
-	@GetMapping("info")
-	public void info(HttpSession session) {
-//		String pw="yang1234";
-//		
-//		MemberVO memberVO=(MemberVO)memberService.loadUserByUsername("12345");
-//		
-//		log.error("{} ::::: ", memberVO.getPassword());
-//		log.error("{} ::::: ", passwordEncoder.encode(pw));
-//		log.error("{} :::::", memberVO.getPassword().equals(passwordEncoder.encode(pw)));
-//		
-//		boolean check = passwordEncoder.matches(pw, memberVO.getPassword());
-//		log.error("{} :::: ", check);
-//		
-//		
-//		log.error("======== Login Info ===========");
-		//SPRING_SECURITY_CONTEXT
-//		Enumeration<String> names = session.getAttributeNames();
-//		while(names.hasMoreElements()) {
-//			log.error("==== {} === ", names.nextElement());
-//		}
-		Object obj =session.getAttribute("SPRING_SECURITY_CONTEXT"); 
-		log.error("========== {} =========", obj);
-		SecurityContextImpl contextImpl = (SecurityContextImpl)obj;
-		Authentication authentication= contextImpl.getAuthentication();
-		
-		log.error("{}======", authentication.getAuthorities());
-		
-		log.error("====== {} ======", obj);
-		log.error("====== USERNAME :  {} ======", authentication.getName());
-		log.error("====== Detail :  {} ======", authentication.getDetails());
-		log.error("====== MemberVO :  {} ======", authentication.getPrincipal());
 	}
 	   
 	   @GetMapping("findPw")
