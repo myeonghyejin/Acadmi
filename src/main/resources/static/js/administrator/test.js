@@ -1,3 +1,3 @@
-$("#assignment").click(function() {
-		
-	})
+$("#year").onchange(function() {
+	
+})

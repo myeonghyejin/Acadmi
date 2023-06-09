@@ -93,7 +93,7 @@
 									<option value="1">개강</option>
 									
 								</select>
-								<label style="margin : 10px;">강의이름</label>
+								<label style="margin : 10px;">강의</label>
 								<input type="text" class="form-control" name="lectureName" placeholder="강의를 입력해주세요" style="width : 20%">
 								
 									<button type="submit" class="btn btn-info" style="margin : 0 0 0 20px; width : 15%">검색</button>
@@ -145,7 +145,7 @@
 				                  <c:forEach items="${list}" var="lectureVO">
 					   	 		<tr class="container">
 					   	 			<td>
-						   	 				<button class="toggleButton">+</button>
+						   	 				<button class="toggleButton" style="background-color : white; border : none; outline : none; ">+</button>
 						   	 				<div class="toggleContent" style="display:none">
 						   	 					<div class="contentContainer">
 							   	 					  <table class="table table-hover text-nowrap" style="text-align: center;" id="table1">
@@ -180,7 +180,7 @@
 					   	 			<td>${lectureVO.endTime}교시</td>
 					   	 			<td>${lectureVO.personal}</td>
 					   	 			<c:if test="${lectureVO.status eq 1}">
-					   	 				<td>개강</td>
+					   	 				<td>개강</td>	
 					   	 			</c:if>
 					   	 			<c:if test="${lectureVO.status eq 0}">
 					   	 				<td>폐강</td>

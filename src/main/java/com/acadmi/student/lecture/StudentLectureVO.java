@@ -10,5 +10,6 @@ public class StudentLectureVO {
 	private Long lectureNum;
 	private String username;
 	private Integer retake;
+	private Integer enabled;
 
 }

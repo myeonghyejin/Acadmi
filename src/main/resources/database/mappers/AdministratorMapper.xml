@@ -139,15 +139,15 @@
   	</insert>
   	<insert id="setStudentAdd" parameterType="StudentVO" >
   		INSERT INTO STUDENT
-  		VALUES(#{username},#{deptNum},#{grade},#{name},#{phone},#{birth},#{address},#{addressDetail},0)
+  		VALUES(#{username},#{deptNum},#{grade},#{name},#{phone},#{birth},#{address},#{addressDetail},1)
   	</insert>
   	<insert id="setAdministratorAdd" parameterType="AdministratorVO">
   		INSERT INTO ADMINISTRATOR
-  		VALUES(#{username},#{deptNum},#{name},#{phone},#{birth},#{address},#{addressDetail},0)
+  		VALUES(#{username},#{deptNum},#{name},#{phone},#{birth},#{address},#{addressDetail},1)
   	</insert>
   	<insert id="setProfessorAdd" parameterType="ProfessorVO">
   		INSERT INTO PROFESSOR
-  		VALUES(#{username},#{deptNum},#{name},#{professorRoom},#{phone},#{birth},#{address},#{addressDetail},0)
+  		VALUES(#{username},#{deptNum},#{name},#{professorRoom},#{phone},#{birth},#{address},#{addressDetail},1)
   	</insert>
   	<insert id="setRoleAdd" parameterType="Map">
   			INSERT INTO MEMBER_ROLE
@@ -373,12 +373,12 @@
   
   <!--강의 목록 조회  -->
   <select id="getLectureList" resultMap="LectureList" parameterType="Pagination">
-  SELECT * FROM PROFESSOR
+  SELECT D.*,L.*, P.*FROM PROFESSOR P
 	INNER JOIN 
 		DEPARTMENT D 
 	USING(DEPTNUM)
 		INNER JOIN
-			LECTURE l 
+			LECTURE L
 		USING(DEPTNUM)
 	WHERE TEMPORARY = 1	
 	<if test="deptName != null and !deptName.equals('')">
@@ -396,7 +396,9 @@
 	<if test="search != null and !search.equals('')">
 		AND LECTURENAME LIKE CONCAT('%', #{search}, '%')
 	</if>
+	LIMIT #{startRow},#{perPage}
  </select>  
+ 
  <resultMap type="LectureVO" id="LectureList">
  	<id column="LECTURENUM" property="lectureNum"/>
  	<result column="USERNAME" property="username"/>

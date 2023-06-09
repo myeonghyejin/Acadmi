@@ -16,10 +16,11 @@
 
 		<!-- Header 적용 -->
 		<c:import url="./temp/header.jsp"></c:import>
+		<c:import url="./student/main.jsp"></c:import>
 		<!-- Header 끝 -->
-		<div class="content-wrapper">
+		<!-- <div class="content-wrapper">
 			<h1>contents</h1>
-		</div>
+		</div> -->
 		<%-- <!-- Main Contents -->
 		<div class="container-fluid">
 			<div class="row">

@@ -27,20 +27,20 @@
 <div class="wrapper">
 	<!-- Header 적용 -->
 		<c:import url="../temp/administrator.jsp"></c:import>
-		<!-- Header 끝 -->
+	<!-- Header 끝 -->
 <div class="content-wrapper">
 			
 	<div class="container-fluid">
 		<div class="row">
 			<!-- 2레벨 Sidebar 적용 -->
 				
-					<c:import url="../temp/sidebar/administrator_join.jsp"></c:import>
+			<c:import url="../temp/sidebar/administrator_join.jsp"></c:import>
 				
-				<!-- 2레벨 Sidebar 끝 -->
+			<!-- 2레벨 Sidebar 끝 -->
 				
 			<div class="col">
-					<h3>교수 계정 생성</h3>
-			 <section class="content">
+			<h3>교수 계정 생성</h3>
+	<section class="content">
 
       <!-- Default box -->
       <div class="card">
@@ -119,6 +119,7 @@
 	            </div>
 	            <input type="hidden" name="category" value="1">
 	            <button type="button" class="btn btn-info" id="professorBtn">교수가입</button> 
+	            <button type="button" class="btn btn-danger" id="backBtn">취소</button>
 	          </form>
           </div>
         </div>

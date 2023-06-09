@@ -2,6 +2,70 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
   <mapper namespace="com.acadmi.student.StudentDAO">
+
+ 	<!--내 수강 강좌 -->
+ 	<select id="getMyLectureList" parameterType="LectureVO" resultMap="MyLectureList">
+ 		SELECT L.*,SL.*, P.* FROM LECTURE L
+			LEFT OUTER JOIN 
+				STUDENT_LECTURE SL 
+			USING(LECTURENUM)
+				INNER JOIN 
+					STUDENT S 
+				ON S.USERNAME = SL.USERNAME
+					INNER JOIN 
+						PROFESSOR P
+		WHERE S.USERNAME = #{username}
+		<if test="year !=null and !year.equals('')">
+			AND YEAR = #{year}
+		</if>
+		<if test="semester !=null and !semester.equals('')">
+			AND SEMESTER=#{semester}
+		</if>
+ 	</select>
+ 	<resultMap type="LectureVO" id="MyLectureList">
+ 		<id column="LECTURENUM" property="lectureNum"/>
+ 		<result column="USERNAME" property="username"/>
+ 		<result column="LECTURENAME" property="lectureName"/>
+ 		<result column="YEAR" property="year"/>
+ 		<result column="SEMESTER" property="semester"/>
+ 		<result column="CATEGORY" property="category"/>
+ 		<result column="SUBSCRIPTION" property="subscription"/>
+ 		<association property="studentLectureVO" javaType="StudentLectureVO">
+ 			<result column="ENABLED" property="enabled"/>
+ 		</association>
+ 		<association property="studentVO" javaType="StudentVO">
+ 			<result column="USERNAME" property="username"/>
+ 		</association>
+ 		<association property="professorVO" javaType="ProfessorVO">
+ 			<id column="USERNAME" property="username"/>
+ 			<result column="NAME" property="name"/>
+ 		</association>
+
+ 	</resultMap>
+ 	
+ 	<select id="getMaxYear" parameterType="LectureVO" resultMap="MyLecturelist">
+ 		SELECT MAX(YEAR) AS YEAR FROM LECTURE L
+			LEFT OUTER JOIN
+				STUDENT_LECTURE SL 
+			USING(LECTURENUM)
+				INNER JOIN 
+					STUDENT S 
+			WHERE S.USERNAME = #{username}
+ 	</select>
+ 	
+ 	
+ 	<select id="getMinYear" parameterType="LectureVO" resultMap="MyLectureList">
+ 		SELECT MIN(YEAR) AS YEAR FROM LECTURE L
+			LEFT OUTER JOIN
+				STUDENT_LECTURE SL 
+			USING(LECTURENUM)
+				INNER JOIN 
+					STUDENT S 
+			WHERE S.USERNAME = #{username}
+ 	</select>
+
   	
   </mapper>

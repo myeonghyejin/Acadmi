@@ -40,6 +40,7 @@
 	#add2 {
 		float : right;
 		clear : both;
+		width : 10%;
 		
 	} 
 	.card-title {
@@ -180,7 +181,7 @@
 				        <!-- /.card-body -->
 				      </div>
 				      <!-- /.card -->
-				     <a href="./departmentAdd"><button type="button" id="add" class="btn btn-info">작성</button></a>
+				     <a href="./departmentAdd"><button type="button" id="add2" class="btn btn-info">작성</button></a>
 				    </section>
 				
 				    	<div class="row" style="margin: 20px auto;" id="pagination">

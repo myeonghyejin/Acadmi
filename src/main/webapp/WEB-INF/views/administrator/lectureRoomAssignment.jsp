@@ -135,6 +135,7 @@
 				              </thead>
 				              
 				                <tbody>
+				               
 				                <c:forEach items="${list}" var="lectureRoomVO">
 										<tr class="find">
 											<td class="lectureRoom" >${lectureRoomVO.lectureBuilding}</td>
@@ -143,7 +144,8 @@
 											
 											<td>
 												<button type="button" class="btn btn-info" id="assignment" data-lecture="${lectureRoomVO.lectureBuilding}${lectureRoomVO.lectureRoom}"
-													data-lectureBuilding="${lectureRoomVO.lectureBuilding}" data-lectureRoom="${lectureRoomVO.lectureRoom }">
+													data-lectureBuilding="${lectureRoomVO.lectureBuilding}" data-lectureRoom="${lectureRoomVO.lectureRoom }"
+													>
 													배정
 												</button> 
 											</td>

@@ -415,6 +415,7 @@ public class AdministratorController {
 		List<DepartmentVO> ar2 =  administratorService.getDepartment();
 		List<String> ar3 =  administratorService.getCurrentYear();
 		
+		
 		mv.addObject("list", ar);
 		mv.addObject("department", ar2);
 		mv.addObject("year", ar3);
@@ -429,6 +430,7 @@ public class AdministratorController {
 		ModelAndView mv = new ModelAndView();
 		
 		List<LectureRoomVO> ar = administratorService.getLectureRoomAssignment(pagination);
+		
 		
 		mv.addObject("list", ar);
 		mv.setViewName("administrator/lectureRoomAssignment");

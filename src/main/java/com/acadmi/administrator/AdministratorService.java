@@ -453,7 +453,11 @@ public class AdministratorService{
 		pagination.makeNum(totalCount);
 		pagination.makeStartRow();
 		
-		return administratorDAO.getLectureList(pagination);
+		List<LectureVO> ar =  administratorDAO.getLectureList(pagination);
+		
+		log.error("service status :: {}", ar.get(0).getStatus());
+		
+		return ar;
 	}
 	
 	//강의실 배정
@@ -462,6 +466,7 @@ public class AdministratorService{
 		
 		pagination.makeNum(totalCount);
 		pagination.getStartRow();
+		
 		
 		return administratorDAO.getLectureRoomAssignment(pagination);
 	}

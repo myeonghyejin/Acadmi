@@ -45,7 +45,7 @@
 					          <div class="col-7">
 						         <form action="./lectureRoomAdd" method="post" id="lectureRoomForm">
 						          	 <div class="form-group">
-						           	  <label>단과대</label>
+						           	  <label>단과대 건물</label>
 					                  <select class="form-control select2" style="width: 100%;" name="lectureBuilding" id="lectureBuilding">
 					                  	<c:forEach items="${lectureRoom}" var="lectureRoom">
 											<option value="${lectureRoom.lectureBuilding}">${lectureRoom.lectureBuilding}
@@ -82,6 +82,7 @@
 				                     </div>
 					                
 						            <button type="button" id="roomAdd" class="btn btn-info">등록</button> 
+						            <button type="button" class="btn btn-danger" id="backBtn">취소</button>
 						          </form>
 					          </div>
 					        </div>

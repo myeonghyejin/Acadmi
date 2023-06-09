@@ -25,7 +25,7 @@
 		  color: white; /* 선택된 페이지의 텍스트 색상도 변경할 수 있습니다 */
 	}
 	#tableProfessor {
-		width : 90%;
+		width : 100%;
 	}
 	h3 {
 		margin : 40px;
@@ -144,7 +144,7 @@
 				                      </th>
 				                      
 				                       <th style="width: 10%">
-				                          번호
+				                          교수번호
 				                      </th>
 				         
 				                      <th style="width: 5%" class="text-center">
@@ -186,7 +186,7 @@
 										<c:set var="professorRoom" value="${professorVO.professorRoom}"></c:set>
 										<c:set var="professorStatus" value="${professorVO.status}"></c:set>
 										<c:set var="professoruserName" value="${professorVO.username}"></c:set>
-										<c:set var="memberFiles" value="${professorVO.memberFilesVO }"></c:set>
+										<c:set var="memberFiles" value="${professorVO.memberFilesVO.fileName }"></c:set>
 										<tr>
 											
 										<td>
@@ -194,7 +194,14 @@
 				     	 					<a href="../chat/detail?roomSender=${username}&roomRecipient=${professorVO.username}"><i class="fa-regular fa-envelope fa-2xl" style="margin:30px 0 0 0;"></i></a>
 	     	 							</td>
 										<td>
-				   	 						<img alt="" src="/file/${board}/${boardFileVO.fileName}" width="60rem" height="60rem">
+				   	 						<c:if test="${empty memberFiles}">
+						   	 					  <img class="profile-user-img img-fluid img-circle"
+											             src="/images/profile.jpg"
+											             alt="User profile picture">
+						   	 				</c:if>
+						   	 				<c:if test="${not empty memberFiles}">
+						   	 					<img class="img-circle elevation-2" src="/file/member/${memberFiles}" width="70rem" height="70rem">
+						   	 				</c:if>	
 				   	 					</td>
 				   	 					<td><c:out value="${professoruserName}"></c:out></td>
 										<td><c:out value="${professorName}"></c:out></td>

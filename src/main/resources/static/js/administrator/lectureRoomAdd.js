@@ -68,3 +68,14 @@ $("#roomAdd").click(function() {
         $("#lectureRoomForm").submit()
     }
 })
+
+//취소
+$("#backBtn").click(function() {
+    let back = confirm("정말 취소하시겠습니까?")
+
+    if(back == true) {
+        location.href="../administrator/lectureRoomList"
+    }else {
+        return;
+    }
+})

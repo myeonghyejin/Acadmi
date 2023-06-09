@@ -194,7 +194,7 @@
      	 							<c:set var="studentPhone" value="${studentVO.phone}"></c:set>
      	 							<c:set var="studentGrade" value="${studentVO.grade}"></c:set>
      	 							<c:set var="studentStatus" value="${studentVO.status}"></c:set>
-     	 							<c:set var="memberFiles" value="${studentVO.memberFilesVO }"></c:set>
+     	 							<c:set var="memberFiles" value="${studentVO.memberFilesVO.fileName }"></c:set>
      	 						<tr>
      	 							
 	     	 							<td>
@@ -202,7 +202,14 @@
 				     	 					<a href="../chat/detail?roomSender=${username}&roomRecipient=${studentVO.username}"><i class="fa-regular fa-envelope fa-2xl" style="margin:30px 0 0 0;"></i></a>
 	     	 							</td>
 	     	 							<td>
-	   	 									<img alt="" src="/file/${board}/${boardFileVO.fileName}" width="60rem" height="60rem">
+	   	 									<c:if test="${empty memberFiles}">
+						   	 					  <img class="profile-user-img img-fluid img-circle"
+											             src="/images/profile.jpg"
+											             alt="User profile picture">
+						   	 				</c:if>
+						   	 				<c:if test="${not empty memberFiles}">
+						   	 					<img class="img-circle elevation-2" src="/file/member/${memberFiles}" width="70rem" height="70rem">
+						   	 				</c:if>	
 	   	 								</td>
 	   	 								<td><c:out value="${department}"></c:out></td>
 	     	 							<td><c:out value="${studentUsername}"></c:out></td>

@@ -75,6 +75,7 @@
 				                     </div>
 					                 
 						            <button type="submit" class="btn btn-info">등록</button> 
+						            <button type="button" class="btn btn-danger" id="backBtn">취소</button>
 						          </form>
 					          </div>
 					        </div>
@@ -87,7 +88,16 @@
 		</div>	
 </div>
 <script type="text/javascript">
-	
+//취소
+$("#backBtn").click(function() {
+    let back = confirm("정말 취소하시겠습니까?")
+
+    if(back == true) {
+        location.href="../administrator/departmentList"
+    }else {
+        return;
+    }
+})
 </script>	
 </body>
 </html>

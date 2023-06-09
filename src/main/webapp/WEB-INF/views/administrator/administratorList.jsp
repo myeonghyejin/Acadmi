@@ -81,7 +81,7 @@
 	                     </div>
 	                  </div>
 	               </div>
-               <!-- header end -->
+              	 <!-- header end -->
 					
 					<!-- Main content -->
 				    <section class="content">
@@ -158,7 +158,7 @@
 					   	 				<c:set var="administratorEmail" value="${administratorVO.email}"></c:set>
 					   	 				<c:set var="administratorStatus" value="${administratorVO.status}"></c:set>
 					   	 				<c:set var="administratoruserName" value="${administratorVO.username}"></c:set>
-					   	 				<c:set var="memberFiles" value="${memberFilesVO.fileName}"></c:set>
+					   	 				<c:set var="memberFiles" value="${administratorVO.memberFilesVO.fileName}"></c:set>
 					   	 				<tr>
 						   	 				
 						   	 			<td>
@@ -166,8 +166,15 @@
 				     	 					<a href="../chat/detail?roomSender=${username}&roomRecipient=${administratorVO.username}"><i class="fa-regular fa-envelope fa-2xl" style="margin:30px 0 0 0;"></i></a>
 	     	 							</td>
 						   	 			<td>
-						   	 				<img alt="" src="https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927" width="60rem" height="60rem">
-						   	 				<%-- <img alt="" src="/file/${board}/${boardFileVO.fileName}" width="60rem" height="60rem"> --%>
+						   	 				<c:if test="${empty memberFiles}">
+						   	 					  <img class="profile-user-img img-fluid img-circle"
+											             src="/images/profile.jpg"
+											             alt="User profile picture">
+						   	 				</c:if>
+						   	 				<c:if test="${not empty memberFiles}">
+						   	 					<img class="img-circle elevation-2" src="/file/member/${memberFiles}" width="70rem" height="70rem">
+						   	 				</c:if>	
+						   	 				
 						   	 			</td>
 						   	 			<td><c:out value="${administratoruserName}"></c:out></td>
 						   	 			<td><c:out value="${administratorName}"></c:out></td>

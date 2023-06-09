@@ -213,7 +213,7 @@
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
-							<a href="#" class="nav-link">
+							<a href="/student/myLectureList" class="nav-link">
 								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>강의 목록</p>
 							</a>

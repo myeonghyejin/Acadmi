@@ -108,6 +108,7 @@
 				          
 				            <input type="hidden" name="category" value="0">
 				            <button type="button" class="btn btn-info" id="adminBtn" >직원가입</button> 
+				            <button type="button" class="btn btn-danger" id="backBtn">취소</button>
 				          </form>
 			          </div>
 			        </div>
@@ -133,40 +134,6 @@
 	        }
 	    }).open();
 	});
-	
-	/* function updateDepartmentOptions() {
-	    let college = new Array()
-		let department = new Array()
-		<c:forEach items = "${college}" var="collegeVO" >
-			/*  console.log(${collegeVO.collegeNum})*/
-			college.push(${collegeVO.collegeNum})
-			/* 1,2,3,4,5,6 */
-		</c:forEach>
-		$("#dept option[value='']").remove();	
-		$("#dept").empty();
-		
-
-			
-		for(let i=0; i<college.length; i++) {
-			if($("#college").val() == college[i]) {
-				<c:forEach items="${department}" var="departmentVO">
-					if(${departmentVO.collegeNum} == college[i]) {
-						$("#dept").append("<option value='${departmentVO.deptNum}'>${departmentVO.deptName}</option>")
-					}
-					
-				</c:forEach>
-			}
-			if($("#college").val() == "단과대") {
-				<c:forEach items="${department}" var="departmentVO">
-					$("#dept").append("<option value='${departmentVO.deptNum}'>${departmentVO.deptName}</option>")
-				</c:forEach>
-			}
-			
-		}
-		console.log(department)
-	} */
-	
-
 	
 </script>	
 </body>

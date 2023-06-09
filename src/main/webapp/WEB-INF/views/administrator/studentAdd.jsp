@@ -123,6 +123,7 @@
 	            </div>
 	            <input type="hidden" name="category" value="2">
 	            <button type="button" class="btn btn-info" id="studentBtn">학생가입</button> 
+	            <button type="button" class="btn btn-danger" id="backBtn">취소</button>
 	          </form>
           </div>
         </div>

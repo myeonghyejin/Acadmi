@@ -39,6 +39,7 @@
 	#add2 {
 		float : right;
 		clear : both;
+		width : 10%;
 		
 	} 
 	.card-title {

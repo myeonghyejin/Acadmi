@@ -3,16 +3,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+
 <!-- Preloader -->
 <div class="preloader flex-column justify-content-center align-items-center">
-	<img class="animation__shake" src="/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+	<img class="animation__shake" src="/img/AdminLTELogoW.png" alt="AdminLTELogo" height="60" width="60">
 </div>
 
 <!-- Navbar -->
@@ -173,12 +167,39 @@
 		<!-- Sidebar user panel (optional) -->
 		<div class="user-panel mt-3 pb-3 mb-3 d-flex">
 			<div class="image">
-				<img src="/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+				<sec:authorize access="hasRole('STUDENT')">
+                <sec:authentication property="principal" var="user"/>
+					<img src="/images/profile.jpg" class="img-circle elevation-2" alt="User Image" >
+				</sec:authorize>
+				
+				<sec:authorize access="hasRole('PROFESSOR')">
+                <sec:authentication property="Principal" var="user"/>
+					<img src="/images/profile.jpg" class="img-circle elevation-2" alt="User Image">
+				</sec:authorize>
+				
+				<sec:authorize access="hasRole('ADMINISTRATOR')">
+                <sec:authentication property="Principal" var="user"/>
+					<img src="/images/profile.jpg" class="img-circle elevation-2" alt="User Image">
+				</sec:authorize>
 			</div>
 			<div class="info">
-				<a href="#" class="d-block">Alexander Pierce</a>
+				<sec:authorize access="hasRole('STUDENT')">
+                <sec:authentication property="Principal" var="user"/>
+                    <a href="/member/studentPage?username=${user.username}">${user.username}</a>
+                </sec:authorize>
+                
+				<sec:authorize access="hasRole('PROFESSOR')">
+				<sec:authentication property="Principal" var="user"/>
+					<a href="/member/professorPage?username=${user.username}">${user.username}</a>
+				</sec:authorize>
+				
+				<sec:authorize access="hasRole('ADMINISTRATOR')">
+				<sec:authentication property="Principal" var="user"/>
+					<a href="/member/administratorPage?username=${user.username}">${user.username}</a>
+				</sec:authorize>
 			</div>
 		</div>
+		
 
 		<!-- Sidebar Menu -->
 		<nav class="mt-2">
@@ -202,7 +223,7 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="#" class="nav-link">
+							<a href="/qna/list" class="nav-link">
 								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>질의 응답</p>
 							</a>
@@ -221,7 +242,7 @@
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
-							<a href="#" class="nav-link">
+							<a href="/administrator/lectureList" class="nav-link">
 								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>강의 목록</p>
 							</a>
@@ -240,13 +261,13 @@
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
-							<a href="#" class="nav-link">
+							<a href="/administrator/studentAdd" class="nav-link">
 								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>계정 관리</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="#" class="nav-link">
+							<a href="/administrator/studentList" class="nav-link">
 								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>회원 조회</p>
 							</a>
@@ -265,7 +286,7 @@
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
-							<a href="#" class="nav-link">
+							<a href="/administrator/periodAdd" class="nav-link">
 								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>기간 관리</p>
 							</a>
@@ -285,7 +306,7 @@
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
-							<a href="#" class="nav-link">
+							<a href="/administrator/lectureRoomList" class="nav-link">
 								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>강의실 목록</p>
 							</a>
@@ -304,14 +325,9 @@
 						</p>
 					</a>
 					<ul class="nav nav-treeview">
+						
 						<li class="nav-item">
-							<a href="/notice/list" class="nav-link">
-								<i class="fa-solid fa-circle fa-2xs"></i>
-								<p>단과대 관리</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="#" class="nav-link">
+							<a href="/administrator/departmentList" class="nav-link">
 								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>학과 관리</p>
 							</a>
@@ -331,5 +347,3 @@
 	margin: 0 8px;
 }
 </style>
-</body>
-</html>
