@@ -36,14 +36,18 @@ public interface StudentLectureDAO {
 	//장바구니에 담은 강의인지 아닌지 확인
 	public FavoriteLectureVO getMyFavorite(FavoriteLectureVO favoriteLectureVO) throws Exception;
 	
-	//수강한 강의 총 학점 계산
-	public Long getGradeCount(StudentLectureVO studentLectureVO) throws Exception;
+	//현재 수강 중인 강의들의 총 학점 계산
+	public Long getSumCredit(StudentLectureVO studentLectureVO) throws Exception;
+	
+	//수강하고자 하는 강의와 현재 수강 중인 강의들의 총 학점 계산
+	public Long getCalculateCredit(StudentLectureVO studentLectureVO) throws Exception;
 	
 	//이미 수강한 강의와 시간이 겹치는지 확인
 	public List<LectureVO> getDuplicateTime(StudentLectureVO studentLectureVO, LectureVO lectureVO) throws Exception;
 	
 	//학과 조회
 	public List<DepartmentVO> getDepartment() throws Exception;
+	
 	
 	/** INSERT **/
 	//수강 신청

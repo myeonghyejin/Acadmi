@@ -14,20 +14,17 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 	<div class="wrapper">
 
-	<!-- Header 적용 -->
-	<c:import url="../../temp/header.jsp"></c:import>
-	<!-- Header 끝 -->
+		<!-- Header 적용 -->
+		<c:import url="../../temp/header.jsp"></c:import>
+		<!-- Header 끝 -->
 
-	<!-- Main Contents -->
-	<div class="container-fluid">
+		<!-- Main Contents -->
 		<div class="content-wrapper">
-				
-			<!-- Contents -->
 			<div class="col">
 
 				<!-- header start -->
-				<div class="row" style="padding-top:10px">
-					<div class="col">
+				<div class="row">
+					<div class="col mt-3">
 						<div class="card">
 							<h3 class="my-3 mx-3">내 수강 신청</h3>
 						</div>
@@ -118,19 +115,19 @@
 						</table>
 					</div>
 					<!-- /.card-body -->
+					
 				</div>
 				<!-- /.card -->
 
 			</div>
 		</div>
+		
 	</div>
+	<!-- ./wrapper -->
 
 	<!-- Footer 적용 -->
 	<c:import url="../../temp/footer.jsp"></c:import>
 	<!-- Footer 끝 -->
-
-	</div>
-	<!-- ./wrapper -->
 <script src="/js/student/lecture/my_lecture.js"></script>
 <script>
 </script>

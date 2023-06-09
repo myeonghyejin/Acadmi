@@ -72,7 +72,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<association property="studentLectureVO" javaType="StudentLectureVO">
 			<id column="LECTURENUM" property="lectureNum"/>
 			<id column="USERNAME" property="username"/>
-			<result column="ENABLED" property="enabled"/>
+			<result column="YEAR" property="year"/>
+			<result column="SEMESTER" property="semester"/>
+			<result column="CREDIT" property="credit"/>
 		</association>
 		<association property="favoriteLectureVO" javaType="FavoriteLectureVO">
 			<id column="FAVORITENUM" property="favoriteNum"/>
@@ -133,7 +135,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					INNER JOIN
 					STUDENT S
 					ON S.USERNAME = SL.USERNAME
-		WHERE S.USERNAME = #{username} AND ENABLED = 1
+		WHERE S.USERNAME = #{username}
 		ORDER BY LECTURENUM DESC
 	</select>
 	
@@ -183,8 +185,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM FAVORITE_LECTURE
 		WHERE FAVORITENUM = #{favoriteNum}
 	</select>
-	
-	<select id="getGradeCount" parameterType="StudentLectureVO" resultType="Long">
+
+	<select id="getSumCredit" parameterType="StudentLectureVO" resultType="Long">
+		SELECT SUM(CREDIT)
+		FROM STUDENT_LECTURE
+		WHERE USERNAME = #{username};
+	</select>
+
+	<select id="getCalculateCredit" parameterType="StudentLectureVO" resultType="Long">
 		SELECT COALESCE(SUM(L.COMPLETIONGRADE), 0)
 		FROM LECTURE L
 			INNER JOIN
@@ -212,10 +220,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM DEPARTMENT
 	</select>
 	
+	<select id="getTimetable" parameterType="StudentLectureVO" resultMap="allLectureList">
+		SELECT L.*, D.DEPTNAME
+		FROM STUDENT_LECTURE SL
+			LEFT OUTER JOIN
+			LECTURE L
+			USING (LECTURENUM)
+				INNER JOIN
+				DEPARTMENT D
+				ON D.DEPTNUM = L.DEPTNUM
+					INNER JOIN
+					STUDENT S
+					ON S.USERNAME = SL.USERNAME
+		WHERE S.USERNAME = #{username}
+			AND SL.YEAR = #{year} AND SL.SEMESTER = #{semester}
+		ORDER BY LECTURENUM DESC
+	</select>
+	
 	<!-- INSERT -->
 	<insert id="insertToStudentLecture" parameterType="StudentLectureVO">
-		INSERT INTO STUDENT_LECTURE (LECTURENUM, USERNAME, CREDIT, ENABLED)
-		VALUES (#{lectureNum}, #{username}, #{lectureVO.completionGrade}, 1)
+		INSERT INTO STUDENT_LECTURE (LECTURENUM, USERNAME, YEAR, SEMESTER, CREDIT)
+		VALUES (#{lectureNum}, #{username}, #{lectureVO.year}, #{lectureVO.semester}, {lectureVO.completionGrade})
 	</insert>
 	
 	<insert id="insertToFavoriteLecture" parameterType="FavoriteLectureVO" useGeneratedKeys="true" keyProperty="favoriteNum">

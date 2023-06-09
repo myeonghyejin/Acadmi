@@ -31,8 +31,6 @@ public class StudentLectureService {
 			pagination.setNext(false);
 		}
 		
-//		log.error("{}", studentLectureDAO.getAllLectureList(pagination).isEmpty());
-		
 		return studentLectureDAO.getAllLectureList(pagination);
 	}
 	
@@ -56,9 +54,14 @@ public class StudentLectureService {
 		return studentLectureDAO.getMyFavorite(favoriteLectureVO);
 	}
 	
-	//수강한 강의 총 학점 계산
-	public Long getGradeCount(StudentLectureVO studentLectureVO) throws Exception {
-		return studentLectureDAO.getGradeCount(studentLectureVO);
+	//현재 수강 중인 강의들의 총 학점 계산
+	public Long getSumCredit(StudentLectureVO studentLectureVO) throws Exception {
+		return studentLectureDAO.getSumCredit(studentLectureVO);
+	}
+	
+	//수강하고자 하는 강의와 현재 수강 중인 강의들의 총 학점 계산
+	public Long getCalculateCredit(StudentLectureVO studentLectureVO) throws Exception {
+		return studentLectureDAO.getCalculateCredit(studentLectureVO);
 	}
 	
 	//이미 수강한 강의와 요일/시간이 겹치는지 확인

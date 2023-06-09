@@ -30,15 +30,24 @@ public class StudentLectureController {
 	/** SELECT **/
 	//수강 신청 & 장바구니 조회
 	@GetMapping("all_lecture")
-	public ModelAndView getAllLectureList(Pagination pagination, HttpSession session, ModelAndView mv) throws Exception {
+	public ModelAndView getAllLectureList(Pagination pagination, StudentLectureVO studentLectureVO, HttpSession session, ModelAndView mv) throws Exception {
 		Object obj = session.getAttribute("SPRING_SECURITY_CONTEXT");
 		SecurityContextImpl contextImpl = (SecurityContextImpl)obj;
 		Authentication authentication = contextImpl.getAuthentication();
 		pagination.setUsername(authentication.getName());
+		studentLectureVO.setUsername(authentication.getName());
+		
+		log.info("{} : studentLectureVO", studentLectureVO);
 		
 		List<LectureVO> ar = studentLectureService.getAllLectureList(pagination);
 		List<DepartmentVO> ar2 = studentLectureService.getDepartment();
-		
+	    Long totalCredit = studentLectureService.getSumCredit(studentLectureVO);
+	    
+	    log.info("{} : username", studentLectureVO.getUsername());
+	    log.info("{} : credit", studentLectureVO.getCredit());
+	    log.info("{} : totalCredit", totalCredit);
+	    
+	    mv.addObject("credit", totalCredit);
 		mv.addObject("list", ar);
 		mv.addObject("department", ar2);
 		mv.setViewName("student/lecture/all_lecture");
@@ -116,9 +125,9 @@ public class StudentLectureController {
 	    }
 	    
 	    //총 학점이 20점을 넘어가는지 확인
-	    Long totalGrade = studentLectureService.getGradeCount(studentLectureVO);
-	    int addedGrade = (lectureVO != null) ? lectureVO.getCompletionGrade() : 0;
-	    if (totalGrade != null && totalGrade + addedGrade > 20) {
+	    Long totalCredit = studentLectureService.getCalculateCredit(studentLectureVO);
+	    int addedCredit = (lectureVO != null) ? lectureVO.getCompletionGrade() : 0;
+	    if (totalCredit != null && totalCredit + addedCredit > 20) {
 	        mv.addObject("result", 3);
 	        mv.setViewName("common/ajaxResult");
 	        return mv;
@@ -127,7 +136,7 @@ public class StudentLectureController {
 	    //수강 신청 성공
 	    studentLectureService.addToSubscription(lectureVO);
 	    int result = studentLectureService.insertToStudentLecture(studentLectureVO, lectureVO, session);
-
+	    
 	    mv.addObject("result", result);
 	    mv.setViewName("common/ajaxResult");
 	    return mv;

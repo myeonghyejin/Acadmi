@@ -11,8 +11,9 @@ public class StudentLectureVO {
 	
 	private Long lectureNum;
 	private String username;
+	private Integer year;
+	private Integer semester;
 	private Integer credit;
-	private Integer enabled;
 	
 	private LectureVO lectureVO;
 

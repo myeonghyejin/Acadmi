@@ -14,31 +14,27 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 	<div class="wrapper">
 
-	<!-- Header 적용 -->
-	<c:import url="../../temp/header.jsp"></c:import>
-	<!-- Header 끝 -->
-
-	<!-- Main Contents -->
-	<div class="container-fluid">
+		<!-- Header 적용 -->
+		<c:import url="../../temp/header.jsp"></c:import>
+		<!-- Header 끝 -->
+	
 		<div class="content-wrapper">
-		
-			<!-- Contents -->
 			<div class="col">
-				
+					
 				<!-- header start -->
-				<div class="row" style="padding-top:10px">
-					<div class="col">
+				<div class="row">
+					<div class="col mt-3">
 						<div class="card">
 							<h3 class="my-3 mx-3">수강 신청 & 장바구니</h3>
 						</div>
 					</div>
 				</div>
 				<!-- header end -->
-
+	
 				<!-- Default box -->
 				<div class="card">
 					<div class="card-header">
-						
+							
 						<div class="card-tools">
 							<button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
 								<i class="fas fa-minus"></i>
@@ -99,9 +95,10 @@
 								</div>
 							</div>
 						</div>
-					</form>
+						</form>
+						
 					</div>
-								
+									
 					<div class="card-body p-0" id="allLectureList">
 						<table class="table table-hover text-nowrap">
 							<thead>
@@ -127,8 +124,7 @@
 									<td><a>${lectureVO.lectureName}</a><br/><small>${lectureVO.professorVO.username}</small></td>
 									<td>${lectureVO.grade}학년</td>
 									<td>
-										<c:if test="${lectureVO.category eq '전공 필수'}">전공 필수</c:if>
-										<c:if test="${lectureVO.category eq '전공 선택'}">전공 선택</c:if>
+										<c:if test="${lectureVO.category eq '전공 필수'}">전공 필수</c:if>										<c:if test="${lectureVO.category eq '전공 선택'}">전공 선택</c:if>
 										<c:if test="${lectureVO.category eq '교양 필수'}">교양 필수</c:if>
 										<c:if test="${lectureVO.category eq '교양 선택'}">교양 선택</c:if>
 									</td>
@@ -144,8 +140,7 @@
 										<c:if test="${lectureVO.startTime eq 6}">PM 14:00</c:if>
 										<c:if test="${lectureVO.startTime eq 7}">PM 15:00</c:if>
 										<c:if test="${lectureVO.startTime eq 8}">PM 16:00</c:if>
-										<c:if test="${lectureVO.startTime eq 9}">PM 17:00</c:if>
-										<c:if test="${lectureVO.startTime eq 10}">PM 18:00</c:if>
+										<c:if test="${lectureVO.startTime eq 9}">PM 17:00</c:if>										<c:if test="${lectureVO.startTime eq 10}">PM 18:00</c:if>
 									</td>
 									<td>
 										<c:if test="${lectureVO.endTime eq 1}">AM 10:00</c:if>
@@ -170,7 +165,14 @@
 												</button>
 											</c:when>
 											<c:otherwise>
-												<button class="btn btn-info btn-sm" id="mli" type="button" data-mli-num="${lectureVO.lectureNum}" data-weekday="${lectureVO.weekday}" data-start-time="${lectureVO.startTime}" data-end-time="${lectureVO.endTime}" data-completion-grade="${lectureVO.completionGrade}">
+												<button class="btn btn-info btn-sm" id="mli" type="button"
+												data-mli-num="${lectureVO.lectureNum}"
+												data-semester="${lectureVO.semester}"
+												data-year="${lectureVO.year}"
+												data-weekday="${lectureVO.weekday}"
+												data-start-time="${lectureVO.startTime}"
+												data-end-time="${lectureVO.endTime}"
+												data-completion-grade="${lectureVO.completionGrade}">
 													<i class="fas fa-circle-check"></i>
 													신청
 												</button>
@@ -197,28 +199,27 @@
 						</table>
 					</div>
 					<!-- /.card-body -->
-					
+						
 				</div>
 				<!-- /.card -->
 				
-				<div class="row" style="padding-bottom:10px">
+				<div class="row mb-3">
 					<div class="col">
 						<div class="card">
-							<h6 class="my-3 mx-3">총 신청 학점 : ${studentLectureVO.lectureVO.credit}점</h6>
+							<h6 class="my-3 mx-3">신청 학점 : ${credit}점&emsp;|&emsp;잔여 학점 : ${20 - credit}점&emsp;|&emsp;수강 가능한 총 학점 : 20점</h6>
 						</div>
 					</div>
 				</div>
 					
 			</div>
 		</div>
-	</div>
 	
-	</div>
-
+	</div>	
+	<!-- ./wrapper -->
+						
 	<!-- Footer 적용 -->
 	<c:import url="../../temp/footer.jsp"></c:import>
 	<!-- Footer 끝 -->
-
 <script>
     $(function () {
       $('.select2').select2()
