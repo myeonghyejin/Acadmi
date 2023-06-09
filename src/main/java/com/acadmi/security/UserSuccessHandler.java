@@ -17,7 +17,6 @@ import com.acadmi.department.DepartmentVO;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 public class UserSuccessHandler implements AuthenticationSuccessHandler{
 
 	@Override
