@@ -1,8 +1,10 @@
 //my_lecture_insert
-$("#myFavoriteList").on("click", "#mli", function(e) {
+$("#allLectureList").on("click", "#mli", function(e) {
     let check = window.confirm("신청하시겠습니까?");
     if (check) {
         const lectureNum = $(this).attr("data-mli-num");
+        const semester = $(this).attr("data-semester");
+        const year = $(this).attr("data-year");
         const weekday = $(this).attr("data-weekday");
         const startTime = $(this).attr("data-start-time");
         const endTime = $(this).attr("data-end-time");
@@ -13,7 +15,7 @@ $("#myFavoriteList").on("click", "#mli", function(e) {
             headers: {
                 "Content-type": "application/x-www-form-urlencoded"
             },
-            body: "lectureNum=" + lectureNum + "&weekday=" + weekday + "&startTime=" + startTime + "&endTime=" + endTime + "&completionGrade=" + completionGrade
+            body: "lectureNum=" + lectureNum + "&semester=" + semester + "&year=" + year + "&weekday=" + weekday + "&startTime=" + startTime + "&endTime=" + endTime + "&completionGrade=" + completionGrade
         }).then((response) => {
             return response.text();
         }).then((res) => {

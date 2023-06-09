@@ -111,7 +111,14 @@
 													</button>
 												</c:when>
 												<c:otherwise>
-													<button class="btn btn-info btn-sm" id="mli" type="button" data-mli-num="${lectureVO.lectureNum}" data-weekday="${lectureVO.weekday}" data-start-time="${lectureVO.startTime}" data-end-time="${lectureVO.endTime}" data-completion-grade="${lectureVO.completionGrade}">
+													<button class="btn btn-info btn-sm" id="mli" type="button"
+													data-mli-num="${lectureVO.lectureNum}"
+													data-semester="${lectureVO.periodVO.semester}"
+													data-year="${lectureVO.periodVO.year}"
+													data-weekday="${lectureVO.weekday}"
+													data-start-time="${lectureVO.startTime}"
+													data-end-time="${lectureVO.endTime}"
+													data-completion-grade="${lectureVO.completionGrade}">
 														<i class="fas fa-circle-check"></i>
 														신청
 													</button>
