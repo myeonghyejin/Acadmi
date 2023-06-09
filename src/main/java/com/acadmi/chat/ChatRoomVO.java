@@ -15,6 +15,8 @@ public class ChatRoomVO {
 	private Integer chatStatus;
 	private String roomSender;
 	private String roomRecipient;
+	private String senderName;
+	private String recipientName;
 	private List<ChatMessageVO> chatMessageVOs;
 	private MemberFilesVO memberFilesVO;
 

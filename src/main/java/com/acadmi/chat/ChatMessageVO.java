@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.acadmi.member.MemberFilesVO;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,5 +21,6 @@ public class ChatMessageVO {
 	private Integer msgStatus;
 	private Long chatNum;
 	private List<ChatFilesVO> chatFilesVOs;
+	private MemberFilesVO memberFilesVO;
 
 }

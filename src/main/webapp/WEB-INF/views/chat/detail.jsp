@@ -26,7 +26,18 @@
 				<div class="col">
 					<div class="card direct-chat direct-chat-lime">
 						<div class="card-header">
-							<h3 class="card-title">메세지</h3>
+							<h3 class="card-title">${chatRoom.recipientName}</h3>
+							<small class="contacts-list-date float-right">
+								<c:choose>
+									<c:when test="${chatRoom.chatStatus eq 2}">
+										<button id="addButton" class="btn btn-block btn-info btn-xs" data-room-sender="${chatRoom.roomSender}" data-room-recipient="${chatRoom.roomRecipient}"><i class="fa-sharp fa-regular fa-handshake"></i></button>
+									</c:when>
+									<c:otherwise>
+										<button id="deleteButton" class="btn btn-block btn-danger btn-xs" data-chat-num="${chatRoom.chatNum}"
+										data-room-sender="${chatRoom.roomSender}" data-room-recipient="${chatRoom.roomRecipient}"><i class="fa-regular fa-trash-can"></i></button>
+									</c:otherwise>
+								</c:choose>
+							</small>
 						</div>
 						<div class="card-body">
 							<div class="direct-chat-messages" id="messageList">
@@ -35,26 +46,50 @@
 									<c:if test="${chatMessageVO.msgSender eq param.roomRecipient}">
 										<div class="direct-chat-msg">
 											<div class="direct-chat-infos clearfix">
-												<span class="direct-chat-name float-left">${chatMessageVO.msgSender}</span>
+												<span class="direct-chat-name float-left">${chatRoom.recipientName}(${chatMessageVO.msgSender})</span>
 												<span class="direct-chat-timestamp float-right">${chatMessageVO.msgDate}</span>
 											</div>
 											<!-- /.direct-chat-infos -->
-											<img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="...">
+											<c:choose>
+												<c:when test="${empty chatMessageVO.memberFilesVO.fileName}">
+													<img class="direct-chat-img" src="/images/profile.jpg" alt="User profile picture">
+												</c:when>
+												<c:otherwise>
+													<img class="direct-chat-img"  src="/file/member/${chatMessageVO.memberFilesVO.fileName}" alt="message user image">
+												</c:otherwise>
+											</c:choose>
 											<!-- /.direct-chat-img -->
-											<div class="direct-chat-text">${chatMessageVO.msgContents}</div>
+											<div class="direct-chat-text">
+											${chatMessageVO.msgContents}
+											<small class="contacts-list-date float-right">
+												<button class="btn btn-block btn-danger btn-xs deleteMessage" data-msg-num="${chatMessageVO.msgNum}"><i class="fa-regular fa-trash-can"></i></button>
+											</small>
+											</div>
 											<!-- /.direct-chat-text -->
 										</div>
 									</c:if>
 									<c:if test="${chatMessageVO.msgSender eq param.roomSender}">
 										<div class="direct-chat-msg right">
 											<div class="direct-chat-infos clearfix">
-												<span class="direct-chat-name float-right">${chatMessageVO.msgSender}</span>
+												<span class="direct-chat-name float-right">${chatRoom.senderName}(${chatMessageVO.msgSender})</span>
 												<span class="direct-chat-timestamp float-left">${chatMessageVO.msgDate}</span>
 											</div>
 										<!-- /.direct-chat-infos -->
-											<img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image">
+											<c:choose>
+												<c:when test="${empty chatMessageVO.memberFilesVO.fileName}">
+													<img class="direct-chat-img" src="/images/profile.jpg" alt="message user image">
+												</c:when>
+												<c:otherwise>
+													<img class="direct-chat-img"  src="/file/member/${chatMessageVO.memberFilesVO.fileName}" alt="message user image">
+												</c:otherwise>
+											</c:choose>
 										<!-- /.direct-chat-img -->
-											<div class="direct-chat-text text-right">${chatMessageVO.msgContents}</div>
+											<div class="direct-chat-text text-right">
+											${chatMessageVO.msgContents}
+											<small class="contacts-list-date float-left">
+												<button class="btn btn-block btn-danger btn-xs deleteMessage" data-msg-num="${chatMessageVO.msgNum}"><i class="fa-regular fa-trash-can"></i></button>
+											</small>
+											</div>
 										<!-- /.direct-chat-text -->
 										</div>
 									</c:if>

@@ -5,6 +5,115 @@
 
 let websocket = new WebSocket("ws://localhost/chat")
 
+$('#deleteButton').hide();
+$('#addButton').hide()
+$('.deleteMessage').hide()
+
+$('.card-header').on('mouseenter',function(){
+	$('#deleteButton').show();
+	$('#addButton').show();	
+})
+
+	
+$('.card-header').on('mouseleave',function(){
+	$(this).find('#deleteButton').hide()
+	$(this).find('#addButton').hide()
+})
+
+$('.direct-chat-msg, .direct-chat-msg.right').on('mouseenter',function(){
+	$(this).find('.deleteMessage').show()
+})
+
+$('.direct-chat-msg, .direct-chat-msg.right').on('mouseleave',function(){
+	$(this).find('.deleteMessage').hide()
+})
+
+//채팅방 나가기 버튼	
+$('#deleteButton').on('click', function(){
+	let check = confirm('채팅방을 나가시겠습니까?')
+	if(check){		
+		let chatNum = $(this).data('chat-num')
+		let roomSender = $(this).data('room-sender')
+		let roomRecipient = $(this).data('room-recipient')
+		$.ajax({
+			type : "POST",
+			url : "./chatRoomDelete",
+			data : {
+				chatNum : chatNum,
+				roomSender : roomSender,
+				roomRecipient : roomRecipient
+			},
+			success : function(result){
+				if(result>=1){
+					alert('채팅방에서 나왔습니다.')
+					location.href='./list'
+				} else {
+					alert('나가지 못했습니다.')
+					location.href='./list'
+				}
+			},
+			error : function(){
+				console.log('error')
+			}
+		})
+	}
+})
+
+//상대방 재초대 버튼
+$('#addButton').on('click', function(){
+	let check = confirm('상대방을 다시 초대하시겠습니까?')
+	if(check){		
+		let roomSender = $(this).data('room-sender')
+		let roomRecipient = $(this).data('room-recipient')
+		$.ajax({
+			type : "POST",
+			url : "./inviteChat",
+			data : {
+				roomSender : roomSender,
+				roomRecipient : roomRecipient
+			},
+			success : function(result){
+				if(result>=1){
+					alert('초대에 성공하였습니다.')
+				} else {
+					alert('실패했습니다.')
+				}
+			},
+			error : function(){
+				console.log('error')
+			}
+		})
+	}
+})
+
+//메세지 내 채팅방에서만 삭제
+$('.deleteMessage').on('click',function(){
+	let roomSender = getUrlParameter('roomSender')
+	let roomRecipient = getUrlParameter('roomRecipient')
+	let check = confirm('메세지를 삭제하시겠습니까? 나의 채팅방에서만 삭제됩니다')
+	if(check){
+		let msgNum = $(this).data('msg-num')
+		$.ajax({
+			type : "POST",
+			url : "./deleteMessage",
+			data : {
+				msgNum : msgNum
+			},
+			success : function(result){
+				if(result>=1){
+					alert('삭제하였습니다')
+					location.href='./detail?roomSender='+roomSender+"&roomRecipient="+roomRecipient
+				} else {
+					alert('실패했습니다.')
+				}
+			},
+			error : function(){
+				console.log('error')
+			}
+		})
+	}
+})
+
 // 웹소켓이 연결되었을때
 websocket.onopen = function(event){
 	console.log("웹소켓 연결 성공")

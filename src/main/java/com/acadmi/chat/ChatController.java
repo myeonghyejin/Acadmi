@@ -37,6 +37,7 @@ public class ChatController {
 	public ModelAndView getChatRoomDetail(ChatRoomVO chatRoomVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		chatRoomVO = chatService.getChatRoom(chatRoomVO);
+		log.info("chatNum : {}",chatRoomVO.getChatNum());
 		mv.addObject("chatRoom", chatRoomVO);
 		mv.setViewName("chat/detail");
 		return mv;
@@ -47,6 +48,18 @@ public class ChatController {
 	public int setChatRoomDelete(ChatRoomVO chatRoomVO) throws Exception {
 		int result = chatService.setChatRoomDelete(chatRoomVO);
 		return result;
+	}
+	
+	@PostMapping("inviteChat")
+	@ResponseBody
+	public int setInviteChat(ChatRoomVO chatRoomVO) throws Exception{
+		return chatService.setInviteChat(chatRoomVO);
+	}
+	
+	@PostMapping("deleteMessage")
+	@ResponseBody
+	public int setDeleteMessage(ChatMessageVO chatMessageVO) throws Exception {
+		return chatService.setDeleteMessage(chatMessageVO);
 	}
 
 }

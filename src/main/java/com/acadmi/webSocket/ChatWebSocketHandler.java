@@ -51,6 +51,9 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 			yourChatRoomVO.setRoomSender(chatMessageVO.getMsgRecipient());
 			yourChatRoomVO.setRoomRecipient(chatMessageVO.getMsgSender());
 			yourChatRoomVO = chatDAO.getChatRoom(yourChatRoomVO);
+			if(yourChatRoomVO == null) {
+				return ;
+			}
 			yourChatRoomVO.setChatStatus(0);
 			result = chatDAO.setChatRoomUpdate(yourChatRoomVO);
 			chatMessageVO.setChatNum(yourChatRoomVO.getChatNum());

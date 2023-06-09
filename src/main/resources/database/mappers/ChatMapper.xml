@@ -21,24 +21,13 @@
   		ORDER BY CHATSTATUS ASC ,CM.MSGDATE DESC
   	</select>
   	
-  	<!-- 채팅방의 메세지들을 뽑아오는 것 -->
-  	<select id="getChatRoom" parameterType="ChatRoomVO" resultMap="getChatRoomResult">
-  		SELECT * FROM CHAT_ROOM CR
-				 LEFT JOIN MEMBERFILES MF
-				 ON(CR.ROOMSENDER=MF.USERNAME)
-				 LEFT JOIN CHAT_MESSAGE CM
-				 ON(CR.CHATNUM=CM.CHATNUM)
-				 LEFT JOIN CHATFILES CF
-				 ON(CM.MSGNUM=CF.MSGNUM)
-		WHERE CR.ROOMSENDER = #{roomSender} AND CR.ROOMRECIPIENT = #{roomRecipient}
-		ORDER BY MSGDATE ASC
-  	</select>
-  	
   	<resultMap type="ChatRoomVO" id="getChatRoomResult">
   		<id column="CHATNUM" property="chatNum"/>
-  		<result column="CHATSTATUS" property="chatStatus"/>
   		<result column="ROOMSENDER" property="roomSender"/>
   		<result column="ROOMRECIPIENT" property="roomRecipient"/>
+  		<result column="SENDERNAME" property="senderName"/>
+  		<result column="RECIPIENTNAME" property="recipientName"/>
+  		<result column="CHATSTATUS" property="chatStatus"/>
   		<association property="memberFilesVO" javaType="MemberFilesVO">
   			<id column="FILENUM" property="fileNum"/>
   			<result column="USERNAME" property="username"/>
@@ -60,19 +49,80 @@
   		</collection>
   	</resultMap>
   	
+  	<!-- 채팅방의 메세지들을 뽑아오는 것 -->
+  	<select id="getChatRoom" parameterType="ChatRoomVO" resultMap="getChatMessageResult">
+  		SELECT * FROM CHAT_ROOM CR
+				 LEFT JOIN CHAT_MESSAGE CM
+				 ON(CR.CHATNUM=CM.CHATNUM)
+				 LEFT JOIN MEMBERFILES MF
+				 ON(CM.MSGSENDER=MF.USERNAME)
+				 LEFT JOIN CHATFILES CF
+				 ON(CM.MSGNUM=CF.MSGNUM)
+		WHERE CR.ROOMSENDER = #{roomSender} AND CR.ROOMRECIPIENT = #{roomRecipient}
+		ORDER BY MSGDATE ASC
+  	</select>
+  	
+  	<resultMap type="ChatRoomVO" id="getChatMessageResult">
+  		<id column="CHATNUM" property="chatNum"/>
+  		<result column="ROOMSENDER" property="roomSender"/>
+  		<result column="ROOMRECIPIENT" property="roomRecipient"/>
+  		<result column="SENDERNAME" property="senderName"/>
+  		<result column="RECIPIENTNAME" property="recipientName"/>
+  		<result column="CHATSTATUS" property="chatStatus"/>
+  		<collection property="chatMessageVOs" javaType="List" ofType="ChatMessageVO">
+  			<id column="MSGNUM" property="msgNum"/>
+  			<result column="MSGSENDER" property="msgSender"/>
+  			<result column="MSGRECIPIENT" property="msgRecipient"/>
+  			<result column="MSGCONTENTS" property="msgContents"/>
+  			<result column="MSGDATE" property="msgDate"/>
+  			<result column="MSGSTATUS" property="msgStatus"/>
+  			<association property="memberFilesVO" javaType="MemberFilesVO">
+	  			<id column="FILENUM" property="fileNum"/>
+	  			<result column="USERNAME" property="username"/>
+	  			<result column="FILENAME" property="fileName"/>
+	  			<result column="ORINAME" property="oriName"/>
+	  		</association>
+	  		<collection property="chatFilesVOs" javaType="List" ofType="ChatFilesVO">
+  				<id column="FILENUM" property="fileNum"/>
+  				<result column="FILENAME" property="fileName"/>
+  				<result column="ORINAME" property="oriName"/>
+  			</collection>
+  		</collection>
+  	</resultMap>
+  	
+  	
+  	
+  	<!-- 이름을 뽑아오기 위한 select -->
+  	
+  	<select id="getMemberDetail" parameterType="MemberVO" resultType="MemberVO">
+  		SELECT * FROM MEMBER WHERE USERNAME = #{username}
+  	</select>
+  	
+  	<select id="getAdministratorName" parameterType="MemberVO" resultType="AdministratorVO">
+  		SELECT * FROM ADMINISTRATOR WHERE USERNAME = #{username}
+  	</select>
+  	
+  	<select id="getProfessorName" parameterType="MemberVO" resultType="ProfessorVO">
+  		SELECT * FROM PROFESSOR WHERE USERNAME = #{username}
+  	</select>
+  	
+  	<select id="getStudentName" parameterType="MemberVO" resultType="StudentVO">
+  		SELECT * FROM STUDENT WHERE USERNAME = #{username}
+  	</select>
+  	
   		<!-- insert -->
   	
   	<!-- 채팅방 만들기 -->
   	<!-- sender -->
   	<insert id="setSenderChatRoom" parameterType="ChatRoomVO">
   		INSERT INTO CHAT_ROOM
-  		VALUES (0, #{roomSender}, #{roomRecipient}, 1)
+  		VALUES (0, #{roomSender}, #{roomRecipient}, #{senderName}, #{recipientName}, 1)
   	</insert>
   	
   	<!-- recipient -->
   	<insert id="setRecipientChatRoom" parameterType="ChatRoomVO">
   		INSERT INTO CHAT_ROOM
-  		VALUES (0, #{roomRecipient}, #{roomSender}, 0)
+  		VALUES (0, #{roomRecipient}, #{roomSender}, #{recipientName}, #{senderName}, 0)
   	</insert>
   	
   	<!-- 메세지 입력 -->
@@ -85,7 +135,7 @@
   	
   	<!-- 채팅방 상태 변경 -->
   	<update id="setChatRoomUpdate" parameterType="ChatRoomVO">
-  		UPDATE CHAT_ROOM SET CHATSTATUS = #{chatStatus} WHERE CHATNUM = #{chatNum}
+  		UPDATE CHAT_ROOM SET CHATSTATUS = #{chatStatus}, ROOMRECIPIENT = #{roomRecipient} WHERE CHATNUM = #{chatNum}
   	</update>
   	
   	<!-- 내 채팅방 메세지 상태 변경 -->
@@ -105,6 +155,9 @@
   		DELETE FROM CHAT_ROOM WHERE CHATNUM = #{chatNum}
   	</delete>
   	
-  	
+  	<!-- 메세지 지우기 -->
+  	<delete id="setDeleteMessage" parameterType="ChatMessageVO">
+  		DELETE FROM CHAT_MESSAGE WHERE MSGNUM = #{msgNum}
+  	</delete>
   
   </mapper>

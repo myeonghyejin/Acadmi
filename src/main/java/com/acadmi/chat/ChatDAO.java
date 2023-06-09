@@ -4,6 +4,10 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.acadmi.administrator.AdministratorVO;
+import com.acadmi.member.MemberVO;
+import com.acadmi.professor.ProfessorVO;
+import com.acadmi.student.StudentVO;
 import com.acadmi.util.Pagination;
 
 @Mapper
@@ -16,6 +20,16 @@ public interface ChatDAO {
 	
 	//채팅방 메세지 출력
 	public ChatRoomVO getChatRoom(ChatRoomVO chatRoomVO) throws Exception;
+	
+	//이름 뽑아오기 위한 select
+	
+	public MemberVO getMemberDetail(MemberVO memberVO) throws Exception;
+	
+	public AdministratorVO getAdministratorName(MemberVO memberVO) throws Exception;
+	
+	public ProfessorVO getProfessorName(MemberVO memberVO) throws Exception;
+	
+	public StudentVO getStudentName(MemberVO memberVO) throws Exception;
 	
 		//insert
 	
@@ -43,5 +57,8 @@ public interface ChatDAO {
 	
 	//채팅방 나가기
 	public int setChatRoomDelete(ChatRoomVO chatRoomVO) throws Exception;
+	
+	//메세지 삭제
+	public int setDeleteMessage(ChatMessageVO chatMessageVO) throws Exception;
 	
 }

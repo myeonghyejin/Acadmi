@@ -9,6 +9,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.stereotype.Service;
 
+import com.acadmi.administrator.AdministratorVO;
+import com.acadmi.member.MemberVO;
+import com.acadmi.professor.ProfessorVO;
+import com.acadmi.student.StudentVO;
 import com.acadmi.util.Pagination;
 import com.acadmi.webSocket.ChatWebSocketHandler;
 
@@ -40,6 +44,36 @@ public class ChatService {
 		//처음 채팅할때
 		if(chatRoomVO == null) {
 			chatRoomVO = new ChatRoomVO();
+			MemberVO memberVO = new MemberVO();
+			
+			//sender의 이름 출력
+			memberVO.setUsername(sender);
+			memberVO = chatDAO.getMemberDetail(memberVO);
+			if(memberVO.getCategory()==0) {
+				AdministratorVO administratorVO = chatDAO.getAdministratorName(memberVO);
+				chatRoomVO.setSenderName(administratorVO.getName());
+				
+			} else if(memberVO.getCategory()==1) {
+				ProfessorVO professorVO = chatDAO.getProfessorName(memberVO);
+				chatRoomVO.setSenderName(professorVO.getName());
+			} else {
+				StudentVO studentVO = chatDAO.getStudentName(memberVO);
+				chatRoomVO.setSenderName(studentVO.getName());
+			}
+			
+			//recipient의 이름 출력
+			memberVO.setUsername(recipient);
+			memberVO = chatDAO.getMemberDetail(memberVO);
+			if(memberVO.getCategory()==0) {
+				AdministratorVO administratorVO = chatDAO.getAdministratorName(memberVO);
+				chatRoomVO.setRecipientName(administratorVO.getName());
+			} else if(memberVO.getCategory()==1) {
+				ProfessorVO professorVO = chatDAO.getProfessorName(memberVO);
+				chatRoomVO.setRecipientName(professorVO.getName());
+			} else {
+				StudentVO studentVO = chatDAO.getStudentName(memberVO);
+				chatRoomVO.setRecipientName(studentVO.getName());
+			}
 			chatRoomVO.setRoomSender(sender);
 			chatRoomVO.setRoomRecipient(recipient);
 			result = chatDAO.setSenderChatRoom(chatRoomVO);
@@ -69,6 +103,11 @@ public class ChatService {
 		return chatDAO.getChatRoom(chatRoomVO);
 	}
 	
+	//나간 상대 다시 초대
+	public int setInviteChat(ChatRoomVO chatRoomVO) throws Exception {
+		return chatDAO.setRecipientChatRoom(chatRoomVO);
+	}
+	
 	//메세지 저장
 	public int setSaveMessage(ChatMessageVO chatMessageVO) throws Exception {
 		return chatDAO.setSaveMessage(chatMessageVO);
@@ -88,6 +127,11 @@ public class ChatService {
 		chatRoomVO.setChatStatus(2);
 		result = chatDAO.setChatRoomUpdate(chatRoomVO);
 		return result;
+	}
+	
+	//메세지 삭제
+	public int setDeleteMessage(ChatMessageVO chatMessageVO) throws Exception {
+		return chatDAO.setDeleteMessage(chatMessageVO);
 	}
 	
 

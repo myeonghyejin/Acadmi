@@ -36,28 +36,39 @@
 									<c:forEach items="${list}" var="chatRoomVO">
 										<div class="contacts-list chatRoom">
 											<c:forEach items="${chatRoomVO.chatMessageVOs}" var="chatMessageVO" varStatus="i">
-												<c:if test="${chatMessageVO.msgStatus eq 0}">
-													<c:set var="count" value="${count + 1}"></c:set>
-												</c:if>
 												<c:if test="${i.first}">
 													<li><a href="./detail?roomSender=${chatRoomVO.roomSender}&roomRecipient=${chatRoomVO.roomRecipient}">
-														<img class="contacts-list-img" src="" alt="...">
-																<div class="contacts-list-info">
-																	<span class="contacts-list-name">
-																		${chatRoomVO.roomRecipient}
-																		<small class="contacts-list-date float-right">${chatMessageVO.msgDate}</small>
-																	</span>
-																	<span class="contacts-list-msg">
-																		${chatMessageVO.msgContents}
-																		<c:if test="${chatRoomVO.chatStatus eq 0}">
-																			<span class="right badge badge-info">${count}</span>
-																		</c:if>
-																		<small class="contacts-list-date float-right deleteButton" data-chat-num="${chatRoomVO.chatNum}"
-																		data-room-sender="${chatRoomVO.roomSender}" data-room-recipient="${chatRoomVO.roomRecipient}">
-																			<button class="btn btn-block btn-danger btn-xs"><i class="fa-regular fa-trash-can"></i></button>
-																		</small>
-																	</span>
-																</div>
+															<c:choose>
+																<c:when test="${empty chatRoomVO.memberFilesVO.fileName}">
+																	<img class="contacts-list-img" src="/images/profile.jpg" alt="User Avatar">
+																</c:when>
+																<c:otherwise>	
+																	<img class="contacts-list-img"  src="/file/member/${chatRoomVO.memberFilesVO.fileName}" alt="User Avatar">
+																</c:otherwise>
+															</c:choose>
+															<div class="contacts-list-info">
+																<span class="contacts-list-name">
+																	<c:choose>
+																	<c:when test="${chatRoomVO.chatStatus eq 2}">
+																		${chatRoomVO.recipientName}(${chatRoomVO.roomRecipient})님이 나감
+																	</c:when>
+																	<c:otherwise>
+																		${chatRoomVO.recipientName}(${chatRoomVO.roomRecipient})
+																	</c:otherwise>
+																</c:choose>
+																	<small class="contacts-list-date float-right">${chatMessageVO.msgDate}</small>
+																</span>
+																<span class="contacts-list-msg">
+																	${chatMessageVO.msgContents}
+																	<c:if test="${chatRoomVO.chatStatus eq 0}">
+																		<span class="right badge badge-info">!</span>
+																	</c:if>
+																	<small class="contacts-list-date float-right deleteButton" data-chat-num="${chatRoomVO.chatNum}"
+																	data-room-sender="${chatRoomVO.roomSender}" data-room-recipient="${chatRoomVO.roomRecipient}">
+																		<button class="btn btn-block btn-danger btn-xs"><i class="fa-regular fa-trash-can"></i></button>
+																	</small>
+																</span>
+															</div>
 													</a></li>
 												</c:if>
 											</c:forEach>
