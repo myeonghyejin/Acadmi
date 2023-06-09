@@ -9,8 +9,6 @@
 <title>답글 작성</title>
 <c:import url="../temp/style.jsp"></c:import>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-<!-- <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-<link rel="stylesheet" href="../../dist/css/adminlte.min.css"> -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 </head>
@@ -85,7 +83,7 @@
 								<textarea class="form-control " name="contents" id="replyContents"
 									placeholder="내용을 입력하세요"></textarea>
 							</div>
-							
+						
 							<div class="row" style="margin-top: 50px; margin-left: 1080px;">		
 								<button type="submit" class="submitButton btn btn-info" style="margin-right: 5px;">등록</button>
 								<button type="button" class="btn btn-danger" onclick="location.href='./list'">취소</button>
@@ -112,9 +110,5 @@
 	<script src="/js/filemanager.js"></script>
 	<script src="/js/board/qnaReply.js"></script>
 	<script src="/js/board/notice.js"></script>
-<!-- 	<script src="../../plugins/jquery/jquery.min.js"></script>
-	<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-	<script src="../../dist/js/adminlte.min.js"></script>
-	<script src="../../dist/js/demo.js"></script> -->
 </body>
 </html>

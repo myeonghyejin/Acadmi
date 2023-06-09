@@ -9,8 +9,6 @@
 <title>게시판 조회</title>
 <c:import url="../temp/style.jsp"></c:import>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-<!-- <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-<link rel="stylesheet" href="../../dist/css/adminlte.min.css" -->>
 </head>
 <body class="hold-transition sidebar-mini">
 	
@@ -156,13 +154,6 @@
 											</td>
 											<c:forEach items="${students}" var="student">
 												<c:forEach items="${professors}" var="professor">
-													<%-- <c:if test="${student.username eq dto.writer}">
-														<td>${student.name}</td>
-													</c:if>
-													<c:if test="${professor.username eq dto.writer}">
-														<td>${professor.name} 교수</td>
-													</c:if> --%>
-													
 													<c:choose>
 													    <c:when test="${student.username eq dto.writer}">
 													        <td>${student.name}</td>
@@ -191,13 +182,7 @@
 														<img class="fileIcon" width="30" height="30" src="/images/fileIcon.png" style="margin-left: 5px">
 													</c:if>
 												</c:forEach>
-											</td>
-											
-<%-- 											<c:forEach items="${professors}" var="professor">
-												<c:if test="${professor.username eq dto.writer}">
-													<td>${professor.name} 교수</td>
-												</c:if>
-											</c:forEach> --%>
+											</td>	
 											<td>${dto.regDate}</td>
 											<td>${dto.modifyDate}</td>
 											<td>${dto.hit}</td>
@@ -263,11 +248,11 @@
 						</table>
 						
 						<div class="col-12 float-right">
-							<%-- <c:if test="${board eq 'notice'}">
+							<c:if test="${board eq 'notice'}">
 								<sec:authorize access="hasRole('ROLE_ADMIN')">
 						    		<a class="float-right btn btn-primary" href="./add">작성</a>
 						  		 </sec:authorize>
-							</c:if> --%>
+							</c:if>
 							
 							<c:if test="${board eq 'notice'}">
 								<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
@@ -341,9 +326,5 @@
 		
 	<c:import url="../temp/footer.jsp"></c:import>
 	<script src="/js/board/notice.js"></script>
-<!-- 	<script src="../../plugins/jquery/jquery.min.js"></script>
-	<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-	<script src="../../dist/js/adminlte.min.js"></script>
-	<script src="../../dist/js/demo.js"></script> -->
 </body>
 </html>
