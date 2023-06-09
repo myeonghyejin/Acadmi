@@ -108,8 +108,7 @@
 				          </td>
 				        </tr>
 				</table>
-					
-						
+
 				<c:if test="${board eq 'qna' || board eq 'lectureQna'}">
 					<div class="row">
 						<div class="col-12">
