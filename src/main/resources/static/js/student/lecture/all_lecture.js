@@ -22,7 +22,7 @@ $("#allLectureList").on("click", "#mli", function(e) {
             headers: {
                 "Content-type": "application/x-www-form-urlencoded"
             },
-            body: "lectureNum=" + lectureNum + "semester=" + semester + "year=" + year + "&weekday=" + weekday + "&startTime=" + startTime + "&endTime=" + endTime + "&completionGrade=" + completionGrade
+            body: "lectureNum=" + lectureNum + "&semester=" + semester + "&year=" + year + "&weekday=" + weekday + "&startTime=" + startTime + "&endTime=" + endTime + "&completionGrade=" + completionGrade
         }).then((response) => {
             return response.text();
         }).then((res) => {

@@ -37,15 +37,9 @@ public class StudentLectureController {
 		pagination.setUsername(authentication.getName());
 		studentLectureVO.setUsername(authentication.getName());
 		
-		log.info("{} : studentLectureVO", studentLectureVO);
-		
 		List<LectureVO> ar = studentLectureService.getAllLectureList(pagination);
 		List<DepartmentVO> ar2 = studentLectureService.getDepartment();
 	    Long totalCredit = studentLectureService.getSumCredit(studentLectureVO);
-	    
-	    log.info("{} : username", studentLectureVO.getUsername());
-	    log.info("{} : credit", studentLectureVO.getCredit());
-	    log.info("{} : totalCredit", totalCredit);
 	    
 	    mv.addObject("credit", totalCredit);
 		mv.addObject("list", ar);
@@ -134,8 +128,11 @@ public class StudentLectureController {
 	    }
 
 	    //수강 신청 성공
-	    studentLectureService.addToSubscription(lectureVO);
 	    int result = studentLectureService.insertToStudentLecture(studentLectureVO, lectureVO, session);
+	    
+	    if(result == 1) {
+	    	studentLectureService.addToSubscription(lectureVO);;
+		}
 	    
 	    mv.addObject("result", result);
 	    mv.setViewName("common/ajaxResult");
@@ -153,8 +150,10 @@ public class StudentLectureController {
 		favoriteLectureVO.setUsername(authentication.getName());
 		
 		if(studentLectureService.getMyFavorite(favoriteLectureVO) == null) {
-			studentLectureService.addToFavorite(lectureVO);
 			result = studentLectureService.insertToFavoriteLecture(favoriteLectureVO, lectureVO, session);
+			if(result == 1) {
+				studentLectureService.addToFavorite(lectureVO);
+			}
 		}
 		
 		mv.addObject("result", result);
@@ -175,8 +174,10 @@ public class StudentLectureController {
 		studentLectureVO.setUsername(authentication.getName());
 		
 		if(studentLectureService.getMyLecture(studentLectureVO) != null) {
-			studentLectureService.deleteToSubscription(lectureVO);
 			result = studentLectureService.deleteToStudentLecture(studentLectureVO, lectureVO, session);
+			if(result == 1) {
+				studentLectureService.deleteToSubscription(lectureVO);
+			}
 		}
 		
 		mv.addObject("result", result);
@@ -196,8 +197,10 @@ public class StudentLectureController {
 		favoriteLectureVO.setUsername(authentication.getName());
 		
 		if(studentLectureService.getMyFavorite(favoriteLectureVO) != null) {
-			studentLectureService.deleteToFavorite(lectureVO);
 			result = studentLectureService.deleteToFavoriteLecture(favoriteLectureVO, lectureVO, session);
+			if(result == 1) {
+				studentLectureService.deleteToFavorite(lectureVO);
+			}
 		}
 		
 		mv.addObject("result", result);

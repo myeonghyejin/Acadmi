@@ -167,8 +167,8 @@
 											<c:otherwise>
 												<button class="btn btn-info btn-sm" id="mli" type="button"
 												data-mli-num="${lectureVO.lectureNum}"
-												data-semester="${lectureVO.semester}"
-												data-year="${lectureVO.year}"
+												data-semester="${lectureVO.periodVO.semester}"
+												data-year="${lectureVO.periodVO.year}"
 												data-weekday="${lectureVO.weekday}"
 												data-start-time="${lectureVO.startTime}"
 												data-end-time="${lectureVO.endTime}"
@@ -206,7 +206,7 @@
 				<div class="row mb-3">
 					<div class="col">
 						<div class="card">
-							<h6 class="my-3 mx-3">신청 학점 : ${credit}점&emsp;|&emsp;잔여 학점 : ${20 - credit}점&emsp;|&emsp;수강 가능한 총 학점 : 20점</h6>
+							<h6 class="my-3 mx-3">신청 학점 : ${not empty credit ? credit : 0}점&emsp;|&emsp;잔여 학점 : ${20 - credit}점&emsp;|&emsp;수강 가능한 총 학점 : 20점</h6>
 						</div>
 					</div>
 				</div>
