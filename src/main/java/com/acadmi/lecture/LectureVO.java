@@ -9,6 +9,7 @@ import com.acadmi.professor.ProfessorVO;
 import com.acadmi.student.StudentVO;
 import com.acadmi.student.lecture.FavoriteLectureVO;
 import com.acadmi.student.lecture.StudentLectureVO;
+import com.acadmi.syllabus.SyllabusVO;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -31,7 +32,7 @@ public class LectureVO {
 	private String weekday;
 	private Integer startTime;
 	private Integer endTime;
-	private Float completionGrade;
+	private Integer completionGrade;
 	private Integer status;
 	private Integer temporary;
 	private Integer favorite;
@@ -43,5 +44,6 @@ public class LectureVO {
 	private PeriodVO periodVO;
 	private LectureRoomVO lectureRoomVO;
 	private DepartmentVO departmentVO;
+	private SyllabusVO syllabusVO;
 
 }

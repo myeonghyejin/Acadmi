@@ -14,7 +14,7 @@
 		alert(message);
 	}
 	
-	location.href = '${URL}';
+	location.href = '${url}';
 	</script>
 </body>
 </html>

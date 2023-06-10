@@ -15,10 +15,10 @@
 	<div class="wrapper">
 
 		<!-- Header 적용 -->
-		<c:import url="./temp/header.jsp"></c:import>
+		<c:import url="./temp/professor_header.jsp"></c:import>
 		<!-- Header 끝 -->
 		<div class="content-wrapper">
-			<h1>contents</h1>
+			<c:import url="./temp/professor_index.jsp"></c:import>
 		</div>
 		<%-- <!-- Main Contents -->
 		<div class="container-fluid">
