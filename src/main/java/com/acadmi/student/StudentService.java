@@ -1,6 +1,8 @@
 package com.acadmi.student;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,11 +26,20 @@ public class StudentService {
 		return ar;
 	}
 	
-	public LectureVO getMaxYear(LectureVO lectureVO) throws Exception {
-		return studentDAO.getMaxYear(lectureVO);
+	public List<LectureVO> getMyCreditList(LectureVO lectureVO) throws Exception {
+		
+		List<LectureVO> ar = studentDAO.getMyCreditList(lectureVO);
+		
+		return ar;
 	}
 	
-	public LectureVO getMinYear(LectureVO lectureVO) throws Exception {
-		return studentDAO.getMinYear(lectureVO);
+	//입학년도~재학년도
+	public Map<String, Object> getYear(LectureVO lectureVO) throws Exception {
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("min", studentDAO.getMinYear(lectureVO));
+		map.put("max", studentDAO.getMaxYear(lectureVO));
+				
+		return map;
 	}
 } 

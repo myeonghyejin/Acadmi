@@ -41,13 +41,12 @@
 		               
 		               <!-- Main content -->
 		               <section class="content">
-		               
-		               	<form id="search"></form>
 		               		<div class="card search">
 		               			<div class="row content">
 		               				<label style="margin : 10px;">수강 년도</label>
-		               				<select  class="form-control select" name="year" style="width: 15%;" id="year" onchange="year()">
-		               					<option value="">전체</option>
+		               				<select  class="form-control select" name="year" style="width: 15%;" id="year" >
+		               				<option value="">전체</option>
+		               					
 		               				</select>
 		               				<label style="margin : 10px;">학기</label>
 		               				<select class="form-control select" name="semester"style="width: 15%;" id="semester">
@@ -57,7 +56,6 @@
 		               				</select>
 		               			</div>
 		               		</div>
-		               		
 		               		<!-- Default box -->
 		               		<div class="card">
 		               			<div class="card-body p-0">
@@ -77,7 +75,7 @@
 		               						<c:forEach items="${list}" var="lectureVO">
 		               							<tr>
 		               								<td>${lectureVO.lectureNum }</td>
-		               								<td>${lectureVO.lectureName}</td>
+		               								<td><a href="./lectureMain?lectureNum=${lectureVO.lectureNum}">${lectureVO.lectureName}</a></td>
 		               								<td>${lectureVO.professorVO.name}</td>
 		               								<td>${lectureVO.subscription}</td>
 		               								<td>
@@ -97,8 +95,54 @@
 			</div>
 		</div>
 	</div>
-<script type="text/javascript" src="../js/student/myLectureList.js">
+<script type="text/javascript">
+	/*입학년도 ~ 재학년도 */
+	let min = '${map["min"]}'
+	let max = '${map["max"]}'
+
 	
+	for(let i=min; i <= max; i ++) {
+		let option = "<option value='" + i + "'>" + i + "</option>";
+		  $("#year").append(option);
+	}
+
+	/* 검색 기능 */
+	$("#year").on("change", function() {
+		let year = $(this).val()
+		let semester = $("#semester").val()
+		
+		$.ajax({
+			url : "./myLectureList",
+			type : "GET",
+			data : {
+				year : year,
+				semester : semester
+			},
+			
+			success : function(response) {
+				location.href="./myLectureList?year=" + year + "&semester=" + semester
+			}
+		})
+	})
+	
+	$("#semester").on("change", function() {
+		let semester = $(this).val()
+		let year = $("#year").val()
+		
+		$.ajax({
+			url : "./myLectureList",
+			type : "GET",
+			data : {
+				year : year,
+				semester : semester
+			},
+			
+			success : function(response) {
+				location.href="./myLectureList?year=" + year + "&semester=" + semester
+			}
+		})
+	})
+
 </script>	
 </body>
 </html>

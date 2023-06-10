@@ -219,7 +219,7 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="#" class="nav-link">
+							<a href="/student/myCreditList" class="nav-link">
 								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>성적 조회</p>
 							</a>

@@ -1,5 +1,3 @@
-$("#year").val("<option value=''></option>")
-
-function year() {
-   
-}
+$("#year").on("change",function() {
+    
+})

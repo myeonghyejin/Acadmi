@@ -1,7 +1,10 @@
 package com.acadmi.student;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +29,7 @@ public class StudentController {
 	private StudentService studentService;
 	
 	@GetMapping("myLectureList")
-	public ModelAndView getMyLectureList(LectureVO lectureVO, HttpSession session) throws Exception {
-		log.error("studentVO :: {}", lectureVO.getUsername());
+	public ModelAndView getMyLectureList(HttpSession session, LectureVO lectureVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
 		Object obj = session.getAttribute("SPRING_SECURITY_CONTEXT");
@@ -35,8 +37,7 @@ public class StudentController {
 		Authentication authentication = contextImpl.getAuthentication();
 		
 		lectureVO.setUsername(authentication.getName()); 
-		LectureVO minYear = studentService.getMaxYear(lectureVO);
-		LectureVO maxYear = studentService.getMinYear(lectureVO);
+	
 		
 		log.error("username ::: {}", authentication.getName());
 		
@@ -44,11 +45,32 @@ public class StudentController {
 		
 		
 		mv.addObject("list", ar);
-		mv.addObject("minYear", minYear);
-		mv.addObject("maxYear",maxYear );
+		mv.addObject("map", studentService.getYear(lectureVO));
+		
 		mv.setViewName("student/myLectureList");
 		return mv;
 		
+	}
+	
+	
+	
+	@GetMapping("myCreditList")
+	public ModelAndView getMyCreditList(HttpSession session, LectureVO lectureVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		Object obj = session.getAttribute("SPRING_SECURITY_CONTEXT");
+		SecurityContextImpl contextImpl = (SecurityContextImpl)obj;
+		Authentication authentication = contextImpl.getAuthentication();
+		
+		lectureVO.setUsername(authentication.getName());
+		
+		List<LectureVO> ar = studentService.getMyCreditList(lectureVO);
+		
+		mv.addObject("list", ar);
+		mv.addObject("map", studentService.getYear(lectureVO));
+		mv.setViewName("student/myCreditList");
+		
+		return mv;
 	}
 	
 	
