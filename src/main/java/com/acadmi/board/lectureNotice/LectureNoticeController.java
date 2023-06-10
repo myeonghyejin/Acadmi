@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.acadmi.board.BoardVO;
+import com.acadmi.professor.ProfessorVO;
 import com.acadmi.util.FileVO;
 import com.acadmi.util.Pagination;
 
@@ -33,6 +34,9 @@ public class LectureNoticeController {
 		
 		List<BoardVO> ar = lectureNoticeService.getList(pagination);
 		
+		List<ProfessorVO> professors = lectureNoticeService.getProfessor();
+		
+		mv.addObject("professors", professors);
 		mv.addObject("list", ar);
 		mv.setViewName("board/list");
 		

@@ -119,4 +119,15 @@
   		VALUES (#{num}, #{title}, #{writer}, #{contents},  now(), #{ref}, #{step}, #{depth})
   	</insert>
   	
+  	<select id="getStudent" resultType="StudentVO">
+  		SELECT * FROM STUDENT
+  	</select>
+  	
+  	<select id="getProfessor" resultType="ProfessorVO">
+  		SELECT * FROM PROFESSOR
+  	</select>
+  	
+  	<select id="getAdministrator" resultType="AdministratorVO">
+  		SELECT * FROM ADMINISTRATOR
+  	</select>
   </mapper>

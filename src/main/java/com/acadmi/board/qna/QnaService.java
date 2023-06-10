@@ -9,6 +9,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.acadmi.board.BoardService;
 import com.acadmi.board.BoardVO;
+import com.acadmi.professor.ProfessorVO;
+import com.acadmi.student.StudentVO;
 import com.acadmi.util.FileManager;
 import com.acadmi.util.FileVO;
 import com.acadmi.util.Pagination;
@@ -120,5 +122,13 @@ public class QnaService implements BoardService {
 	
 	public Long getQnaList(QnaVO qnaVO) throws Exception {	
 		return qnaDAO.getQnaList(qnaVO);
+	}
+	
+	public List<StudentVO> getStudent() throws Exception {
+		return qnaDAO.getStudent();
+	}
+	
+	public List<ProfessorVO> getProfessor() throws Exception {
+		return qnaDAO.getProfessor();
 	}
 }
