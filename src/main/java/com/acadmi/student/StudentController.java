@@ -15,8 +15,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.acadmi.board.BoardVO;
+import com.acadmi.board.notice.NoticeService;
+import com.acadmi.board.notice.NoticeVO;
 import com.acadmi.lecture.LectureVO;
 import com.acadmi.student.lecture.StudentLectureVO;
+import com.acadmi.util.Pagination;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,6 +31,7 @@ public class StudentController {
 	
 	@Autowired
 	private StudentService studentService;
+
 	
 	@GetMapping("myLectureList")
 	public ModelAndView getMyLectureList(HttpSession session, LectureVO lectureVO) throws Exception {
@@ -42,7 +47,6 @@ public class StudentController {
 		log.error("username ::: {}", authentication.getName());
 		
 		List<LectureVO> ar =  studentService.getMyLectureList(lectureVO);
-		
 		
 		mv.addObject("list", ar);
 		mv.addObject("map", studentService.getYear(lectureVO));
@@ -74,5 +78,7 @@ public class StudentController {
 	}
 	
 	
+	
+
 	
 }

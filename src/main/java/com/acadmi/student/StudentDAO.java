@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.acadmi.board.BoardVO;
+import com.acadmi.board.notice.NoticeVO;
 import com.acadmi.lecture.LectureVO;
 import com.acadmi.student.lecture.StudentLectureVO;
 
@@ -17,4 +19,7 @@ public interface StudentDAO {
 	//입학년됴~재학년도
 	public Integer getMaxYear(LectureVO lectureVO) throws Exception;
 	public Integer getMinYear(LectureVO lectureVO) throws Exception;
+	
+	//메인페이지 공지사항
+	public List<BoardVO> getNoticeList() throws Exception;
 }

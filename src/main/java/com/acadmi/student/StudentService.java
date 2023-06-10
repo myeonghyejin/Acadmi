@@ -7,6 +7,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.acadmi.board.BoardVO;
+import com.acadmi.board.notice.NoticeVO;
 import com.acadmi.lecture.LectureVO;
 import com.acadmi.student.lecture.StudentLectureVO;
 
@@ -41,5 +43,9 @@ public class StudentService {
 		map.put("max", studentDAO.getMaxYear(lectureVO));
 				
 		return map;
+	}
+	
+	public List<BoardVO> getNoticeList() throws Exception {
+		return studentDAO.getNoticeList();
 	}
 } 

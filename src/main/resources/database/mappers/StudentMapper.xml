@@ -107,5 +107,26 @@
 		WHERE S.USERNAME = #{username}
 	</select>
 
+	<!--강의 메안페이지  -->
+<!-- 	<select id="getLectureDetail" parameterType="LectureVO" resultType="">
+		SELECT * FROM CLASS C
+			RIGHT OUTER JOIN
+				SYLLABUS S 
+			ON C.SYLLABUSNUM  = S.SYLLABUSNUM
+				LEFT OUTER JOIN 
+					LECTURE L 
+				ON S.LECTURENUM = L.LECTURENUM
+					INNER JOIN 
+						PROFESSOR P 
+					ON L.DEPTNUM = P.DEPTNUM
+		WHERE L.LECTURENUM = #{lectureNum}
+	</select> -->
+	
+	<!-- 메인페이지 공지사항 출력 -->
+	<select id="getNoticeList" resultType="BoardVO">
+		SELECT * FROM NOTICE
+		ORDER BY NUM DESC 
+		LIMIT 5
+	</select>
   	
   </mapper>
