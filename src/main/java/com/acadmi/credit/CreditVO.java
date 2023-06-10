@@ -14,10 +14,10 @@ public class CreditVO {
 	private Long creditNum;
 	private Long lectureNum;
 	private String username;
-	private Float semiGrade;
-	private Float finalGrade;
-	private Float reportGrade;
-	private Float attenance;
+	private Integer semiGrade;
+	private Integer finalGrade;
+	private Integer reportGrade;
+	private Integer attendance;
 	private Float Credit;
 
 }
