@@ -23,7 +23,7 @@
 				<!-- Contents -->
 				<div class="col">
 					<!-- header start -->
-					<div class="row" style="padding-top:10px">
+					<div class="row mt-3">
 						<div class="col-12">
 							<div class="card">
 								<h3 class="my-3 mx-3">성적 관리</h3>
@@ -58,6 +58,7 @@
 					                    			<th>이름</th>
 					                    			<th>학년</th>
 					                    			<th>총점</th>
+					                    			<th>성적</th>
 					                    		</tr>
 					                    	</thead>
 					                    	<tbody>
@@ -67,7 +68,14 @@
 					                    				<td>${attendee.departmentVO.deptName}</td>
 					                    				<td>${attendee.name}</td>
 					                    				<td>${attendee.grade}학년</td>
-					                    				<td>총점</td>
+					                    				<c:if test="${attendee.creditVO.credit==null}">
+						                    				<td style="color:gray;">점수 없음</td>
+						                    				<td style="color:gray;">성적 없음</td>
+					                    				</c:if>
+					                    				<c:if test="${attendee.creditVO.credit!=null}">
+						                    				<td>${attendee.creditVO.credit}</td>
+						                    				<td>${attendee.creditVO.credit}</td>
+					                    				</c:if>
 					                    			</tr>
 					                    		</c:forEach>
 					                    	</tbody>

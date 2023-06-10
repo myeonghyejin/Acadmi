@@ -58,7 +58,7 @@
 							                	</tr>
 							                	<tr>
 							                		<th style="background-color:#f8f9fa;color:#17a2b8;">교과 개요</th>
-							                		<td colspan = "3"><input type="text" name="curriculumOutline" class="form-control" id="curriculumOutline"></td>
+							                		<td colspan = "3"><input type="text" name="curriculumOutline" class="form-control" id="curriculumOutline"value=""></td>
 							                	</tr>
 							                	<tr>
 							                		<th style="background-color:#f8f9fa;color:#17a2b8;"rowspan="2">목표</th>
@@ -67,9 +67,9 @@
 							                		<th style="background-color:#f8f9fa;color:#17a2b8;">평가방법</th>
 							                	</tr>
 							                	<tr>
-							                		<td><input type="text" name="method" class="form-control" id="method"></td>
-							                		<td><input type="text" name="goal" class="form-control" id="gaol"></td>
-							                		<td><input type="text" name="evaluation" class="form-control" id="evaluation"></td>
+							                		<td><input type="text" name="method" class="form-control" id="method"value=""></td>
+							                		<td><input type="text" name="goal" class="form-control" id="gaol"value=""></td>
+							                		<td><input type="text" name="evaluation" class="form-control" id="evaluation"value=""></td>
 							                	</tr>
 											</tbody>
 										</table>
@@ -82,9 +82,9 @@
 							                		<th style="background-color:#f8f9fa;color:#17a2b8;">출판사</th>
 							                	</tr>
 							                	<tr>
-							                		<td><input type="text" name="bookName" class="form-control" id="bookName"></td>
-							                		<td><input type="text" name="bookAuthor" class="form-control" id="bookAuthor"></td>
-	                    							<td><input type="text" name="bookPublisher" class="form-control" id="bookPublisher"></td>
+							                		<td><input type="text" name="bookName" class="form-control" id="bookName"value=""></td>
+							                		<td><input type="text" name="bookAuthor" class="form-control" id="bookAuthor"value=""></td>
+	                    							<td><input type="text" name="bookPublisher" class="form-control" id="bookPublisher"value=""></td>
 							                	</tr>
 							                	<tr>
 							                		<th style="background-color:#f8f9fa;color:#17a2b8;">출판년도</th>
@@ -92,9 +92,9 @@
 							                		<th style="background-color:#f8f9fa;color:#17a2b8;">비고</th>
 							                	</tr>
 							                	<tr>
-							                		<td><input type="text" name="bookPublicationDate" class="form-control" id="bookPublicationDate"></td>
-							                		<td><input type="text" name="bookISBN" class="form-control" id="bookISBN"></td>
-	                    							<td><input type="text" name="bookNote" class="form-control" id="bookNote" ></td>
+							                		<td><input type="text" name="bookPublicationDate" class="form-control" id="bookPublicationDate"value=""></td>
+							                		<td><input type="text" name="bookISBN" class="form-control" id="bookISBN"value=""></td>
+	                    							<td><input type="text" name="bookNote" class="form-control" id="bookNote" value=""></td>
 							                	</tr>
 							                	
 											</tbody>

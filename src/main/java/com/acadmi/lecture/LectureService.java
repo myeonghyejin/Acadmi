@@ -54,6 +54,9 @@ public class LectureService {
 		return lectureDAO.setSyllabusUpdate(syllabusVO);
 	}
 	public int setClassUpdate(ClassVO classVO) throws Exception{
+		log.error("syllabusNum : {}",classVO.getSyllabusNum());
+		log.error("order : {}",classVO.getOrder());
+		log.error(classVO.getSubject());
 		return lectureDAO.setClassUpdate(classVO);
 	}
 	

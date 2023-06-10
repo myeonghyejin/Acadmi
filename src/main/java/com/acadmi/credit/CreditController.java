@@ -51,7 +51,7 @@ public class CreditController {
 		return mv;
 	}
 	@GetMapping("attendee")
-	public ModelAndView getLectureAttendee(LectureVO lectureVO, StudentVO studentVO) throws Exception{
+	public ModelAndView getLectureAttendee(LectureVO lectureVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		List<StudentVO> ar = creditService.getLectureAttendee(lectureVO);
 		mv.addObject("attendee",ar);
@@ -62,7 +62,7 @@ public class CreditController {
 	}
 	
 	@GetMapping("add")
-	public ModelAndView getLectureAttendee(LectureVO lectureVO, StudentVO studentVO, CreditVO creditVO) throws Exception{
+	public ModelAndView setCreditAdd(LectureVO lectureVO, StudentVO studentVO, CreditVO creditVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		List<StudentVO> ar = creditService.getLectureAttendee(lectureVO);
 		mv.addObject("attendee",ar);
@@ -71,6 +71,35 @@ public class CreditController {
 		mv.setViewName("credit/add");
 		return mv;
 	}
+	
+	  @PostMapping("add") 
+	  public ModelAndView setCreditAdd(LectureVO lectureVO,ModelAndView mv,@RequestParam Map<String, String> formData)throws Exception{
+		  int result;
+		  List<StudentVO> ar = creditService.getLectureAttendee(lectureVO);
+		  lectureVO = creditService.getLectureDetail(lectureVO);
+		  int i=1;
+		  for(StudentVO studentVO:ar) {
+			  CreditVO newCreditVO = new CreditVO();
+			  newCreditVO.setLectureNum(lectureVO.getLectureNum());
+			  newCreditVO.setUsername(studentVO.getUsername());
+			  newCreditVO.setSemiGrade(Integer.valueOf(formData.get("semiGrade" + i)));
+			  newCreditVO.setFinalGrade(Integer.valueOf(formData.get("finalGrade" + i)));
+			  newCreditVO.setReportGrade(Integer.valueOf(formData.get("reportGrade" + i)));
+			  newCreditVO.setAttendance(Integer.valueOf(formData.get("attendance" + i)));
+			  if(newCreditVO.getSemiGrade()!=null || newCreditVO.getFinalGrade()!=null || newCreditVO.getReportGrade()!=null || newCreditVO.getAttendance()!=null) {
+				  float sum = (newCreditVO.getSemiGrade()*30/100)+(newCreditVO.getFinalGrade()*30/100)+(newCreditVO.getReportGrade()*30/100)+(newCreditVO.getAttendance()*10/100);
+				  newCreditVO.setCredit(sum);
+			  }
+		      result = creditService.setCreditAdd(newCreditVO);
+		      i++;
+			}
+		  	lectureVO = creditService.getLectureDetail(lectureVO);
+			mv.addObject("result","등록성공");
+			mv.addObject("url","./attendee?lectureNum="+lectureVO.getLectureNum());
+			mv.setViewName("common/result");
+			return mv;
+	  }
+	 
 	
 
 }

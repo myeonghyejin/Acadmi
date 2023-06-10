@@ -19,20 +19,22 @@
   		<if test="year!=null">
   			AND YEAR>=DATE_FORMAT(now(),'%Y')
   		</if>
-
   	</trim>
-  	
   </sql>
+  
+  	<!-- 강의 목록 출력 및 상태 구분 -->
   	<select id="getLectureList" parameterType="LectureVO" resultType="LectureVO">
   		SELECT * FROM LECTURE <include refid="lectureCondition"></include>
   	</select>
+  	
+  	<!-- 강의 상세 출력 -->
   	<select id="getLectureDetail" parameterType="LectureVO" resultMap="LectureResult">
   		SELECT * FROM LECTURE L INNER JOIN DEPARTMENT D ON(L.DEPTNUM=D.DEPTNUM) WHERE LECTURENUM=#{lectureNum}
   	</select>
 
-	<!-- insert -->
+	<!-- 단과대학 목록 - 행정제외 -->
 	<select id="getCollegeList" parameterType="CollegeVO" resultType="CollegeVO">
-		SELECT * FROM COLLEGE
+		SELECT * FROM COLLEGE WHERE COLLEGENUM>1
 	</select>
 	<select id="getDepartmentList" parameterType="DepartmentVO" resultType="DepartmentVO">
 		SELECT * FROM DEPARTMENT
@@ -40,6 +42,8 @@
 	<select id="getSemesterList" parameterType="PeriodVO" resultType="PeriodVO">
 		SELECT DISTINCT(YEAR) FROM PERIOD
 	</select>
+	
+	<!-- 강의 insert -->
   	<insert id="setLectureAdd" parameterType="LectureVO" useGeneratedKeys="true" keyProperty="lectureNum">
   		INSERT INTO LECTURE (USERNAME,LECTURENAME,SEMESTER,CATEGORY,DEPTNUM,GRADE,
   		YEAR,WEEKDAY, STARTTIME, ENDTIME, PERSONAL, COMPLETIONGRADE,TEMPORARY)
@@ -110,7 +114,7 @@
   	</update>
   	<update id="setClassUpdate" parameterType="ClassVO">
   		UPDATE CLASS SET SUBJECT=#{subject},GOAL=#{goal},CAPABILITY=#{capability},NOTE=#{note} 
-  		WHERE `ORDER`=#{order} AND SYLLABUSNUM=#{syllabusNum}
+  		WHERE SYLLABUSNUM=#{syllabusNum} AND `ORDER`=#{order}
   	</update>
   	
   	<resultMap type="LectureVO" id="LectureResult">

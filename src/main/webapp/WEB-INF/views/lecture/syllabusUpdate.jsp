@@ -108,14 +108,16 @@
                     								<th>관련 역량</th>
                     								<th>비고</th>
 	                    						</tr>
-		                    					<c:forEach items="${classes}" var="classes">
+	                    						
+		                    					<c:forEach items="${classes}" var="classes" varStatus="status">
 		                    						<tr>
-		                    							<td><input type="hidden" name="order">${classes.order}차수</td>
-	                    								<td><input type="text" name="subject" class="form-control" id="subject" value="${classes.subject}"></td>
-	                    								<td><input type="text" name="goal" class="form-control" id="goal"value="${classes.goal}"></td>
-	                    								<td><input type="text" name="capability" class="form-control" id="capability"value="${classes.capability}"></td>
-	                    								<td><input type="text" name="note" class="form-control" id="bookNote"value="${classes.bookNote}"></td>
-	                    							</tr>
+		                    							<td><input type="hidden" name="syllabusNum" value="${lecture.syllabusVO.syllabusNum}"></td>
+													    <td><input type="hidden" name="order${status.count}" value="${status.count}">${classes.order}차수</td>
+													    <td><input type="text" name="subject${status.count}" class="form-control" id="subject${status.count}" value="${classes.subject}"></td>
+													    <td><input type="text" name="goal${status.count}" class="form-control" id="goal${status.count}" value="${classes.goal}"></td>
+													    <td><input type="text" name="capability${status.count}" class="form-control" id="capability${status.count}" value="${classes.capability}"></td>
+													    <td><input type="text" name="note${status.count}" class="form-control" id="note${status.count}" value="${classes.note}"></td>
+													  </tr>
 		                    					</c:forEach>
 	                    						
                     						</tbody>

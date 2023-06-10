@@ -81,11 +81,18 @@
                     					
 											</thead>
 								            <tbody>
-								            	<c:forEach items="${classes}" var="classes">
-			                    				<tr>
-			                    					<td><h5>${classes.order}주차 학습목표</h5><br>${classes.subject}</td>
-			                    				 </tr>
-			                    				 </c:forEach>			
+									            <c:if test="${not empty classes}">
+									            	<c:forEach items="${classes}" var="classes">
+				                    				<tr>
+				                    					<td><h5>${classes.order}주차 학습목표</h5><br>${classes.subject}</td>
+				                    				 </tr>
+				                    				 </c:forEach>	
+			                    				 </c:if>
+			                    				 <c:if test="${empty classes}">
+				                    				<tr>
+				                    					<td><h6 style="margin-top: 10px; color: gray;">현재 학습 목표가 없습니다</h6></td>
+				                    				 </tr>
+			                    				 </c:if>		
 			                    			</tbody>
                 						</table>
               						</div>

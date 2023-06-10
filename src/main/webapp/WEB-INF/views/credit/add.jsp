@@ -42,7 +42,7 @@
 					                	<h3 class="card-title" style="font-weight:normal;">학생 관리 | ${detail.lectureName}</h3>
 					                	<div class="card-tools">
 					                		<div class="input-group input-group-sm" style="width: 160px;">
-					                  			<button class="btn btn-info mx-3"><a href="./add?lectureNum=${detail.lectureNum}" style="color: white;">등록</a></button>
+					                  			<button class="btn btn-info mx-3" type="submit">등록</button>
 					                  			<button class="btn btn-danger"><a href="./attendee?lectureNum=${detail.lectureNum}" style="color: white;">취소</a></button>
 					                  		</div>
 					                	</div>
@@ -51,6 +51,7 @@
 					              	
 		                    		<!-- table-body start -->
               						<div class="card-body">
+              							<h6 style="color: gray;">각 점수는 100점 만점을 기준으로 환산됩니다.</h6>
                 						<table class="table table-bordered" style="text-align: center;">
 				                    		<thead style="background-color: #f8f9fa;">
 					                    		<tr>
@@ -65,19 +66,20 @@
 					                    		</tr>
 					                    	</thead>
 					                    	<tbody>
-					                    		<%-- <c:forEach items="${attendee}" var="attendee"> --%>
+					                    		<c:forEach items="${attendee}" var="attendee" varStatus="status">
 					                    			<tr>
-					                    				<td style="width:10%;">${attendee.username}</td>
+					                    				<input type="hidden" name="lectureNum" value="${detail.lectureNum}">
+					                    				<td style="width:10%;"><input type="hidden" name="username${status.count}" value="${attendee.username}">${attendee.username}</td>
 					                    				<td style="width:15%;">${attendee.departmentVO.deptName}</td>
 					                    				<td style="width:10%;">${attendee.name}</td>
 					                    				<td style="width:10%;">${attendee.grade}학년</td>
 					                    				
-					                    				<td><input type="text" name="semiGrade" id="semiGrade" placeholder="중간 점수" style="width:100px;text-align:center;"></td>
-					                    				<td><input type="text" name="finalGrade" id="finalGrade" placeholder="기말 점수" style="width:100px;text-align:center;"></td>
-					                    				<td><input type="text" name="reportGrade" id="reportGrade" placeholder="과제 점수" style="width:100px;text-align:center;"></td>
-					                    				<td><input type="text" name="attendance" id="attendance" placeholder="출석 점수" style="width:100px;text-align:center;"></td>
+					                    				<td><input type="text" name="semiGrade${status.count}" id="semiGrade${status.count}" placeholder="중간 점수" style="width:100px;text-align:center;"value=""></td>
+					                    				<td><input type="text" name="finalGrade${status.count}" id="finalGrade${status.count}" placeholder="기말 점수" style="width:100px;text-align:center;"value=""></td>
+					                    				<td><input type="text" name="reportGrade${status.count}" id="reportGrade${status.count}" placeholder="과제 점수" style="width:100px;text-align:center;"value=""></td>
+					                    				<td><input type="text" name="attendance${status.count}" id="attendance${status.count}" placeholder="출석 점수" style="width:100px;text-align:center;" value=""></td>
 					                    			</tr>
-					                    		<%-- </c:forEach> --%>
+					                    		</c:forEach>
 					                    	</tbody>
 		                    			</table>
 			                   		</div>

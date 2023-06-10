@@ -188,13 +188,14 @@ public class LectureController {
 	        newClassVO.setGoal(formData.get("goal" + i));
 	        newClassVO.setCapability(formData.get("capability" + i));
 	        newClassVO.setNote(formData.get("note" + i));
-
+	        log.error(newClassVO.getSubject());
 	        result = lectureService.setClassAdd(newClassVO);
 		}
 		lectureVO = lectureService.getLectureDetail(lectureVO);
-		mv.setViewName("common/result");
+		
 		mv.addObject("result","등록성공");
 		mv.addObject("url","./syllabusDetail?lectureName="+lectureVO.getLectureName());
+		mv.setViewName("common/result");
 		return mv;
 	}
 	
@@ -225,21 +226,21 @@ public class LectureController {
 	@PostMapping("syllabusUpdate")
 	public ModelAndView setSyllabusUpdate(LectureVO lectureVO,SyllabusVO syllabusVO,ClassVO classVO,ModelAndView mv,@RequestParam Map<String, String> formData) throws Exception{
 		int result = lectureService.setSyllabusUpdate(syllabusVO);
+		log.error(formData.get("subject2"));
 		lectureVO = lectureService.getLectureDetail(lectureVO);
-		classVO.setSyllabusNum(syllabusVO.getSyllabusNum());
 		for(int i=1;i<9;i++) {
 			ClassVO newClassVO = new ClassVO();
-			newClassVO.setSyllabusNum(classVO.getSyllabusNum());
+			newClassVO.setSyllabusNum(syllabusVO.getSyllabusNum());
 	        newClassVO.setOrder(i);
 	        newClassVO.setSubject(formData.get("subject" + i));
 	        newClassVO.setGoal(formData.get("goal" + i));
 	        newClassVO.setCapability(formData.get("capability" + i));
 	        newClassVO.setNote(formData.get("note" + i));
+	       
 
 	        result = lectureService.setClassUpdate(newClassVO);
 		}
 		mv.addObject("result","수정성공");
-		log.error(lectureVO.getLectureName());
 		String str = lectureVO.getLectureName();
 		mv.addObject("url","./syllabusDetail?lectureName="+str);
 		mv.setViewName("common/result");

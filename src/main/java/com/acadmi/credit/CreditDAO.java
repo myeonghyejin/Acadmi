@@ -12,5 +12,7 @@ public interface CreditDAO {
 
 	public List<LectureVO> getLectureList(LectureVO lectureVO) throws Exception;
 	public List<StudentVO> getLectureAttendee(LectureVO lectureVO) throws Exception;
+	public int getCreditExists(LectureVO lectureVO) throws Exception;
 	public LectureVO getLectureDetail(LectureVO lectureVO) throws Exception;
+	public int setCreditAdd(CreditVO creditVO) throws Exception;
 }

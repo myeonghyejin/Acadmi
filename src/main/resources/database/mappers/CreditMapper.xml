@@ -13,12 +13,22 @@
   		SELECT * FROM LECTURE L INNER JOIN DEPARTMENT D ON(L.DEPTNUM=D.DEPTNUM) WHERE LECTURENUM=#{lectureNum}
   	</select>
   	<select id="getLectureAttendee" parameterType="LectureVO" resultMap="StudentResult">
-  		SELECT S.*,M.EMAIL,D.DEPTNAME FROM `MEMBER` M INNER JOIN STUDENT S ON (M.USERNAME=S.USERNAME) 
-		INNER JOIN STUDENT_LECTURE SL ON (M.USERNAME=SL.USERNAME) INNER JOIN DEPARTMENT D ON(S.DEPTNUM=D.DEPTNUM) 
-		WHERE LECTURENUM=#{lectureNum}
+  		SELECT S.*,D.DEPTNAME,C.* FROM STUDENT S INNER JOIN STUDENT_LECTURE SL ON (S.USERNAME=SL.USERNAME) 
+  		INNER JOIN DEPARTMENT D ON(S.DEPTNUM=D.DEPTNUM) LEFT OUTER JOIN CREDIT C ON (SL.USERNAME=C.USERNAME)
+		WHERE SL.LECTURENUM=#{lectureNum}
   	</select>
+  	<select id="getStudentCredit" parameterType="LectureVO" resultType="Integer">
+  		SELECT COUNT(CREDITNUM) FROM CREDIT WHERE USERNAME=#{username} AND LECTURENUM=#{lectureNum}
+  	</select>
+  	<insert id="setCreditAdd" parameterType="CreditVO" useGeneratedKeys="true" keyProperty="creditNum">
+  		INSERT INTO CREDIT(LECTURENUM,USERNAME,SEMIGRADE,FINALGRADE,REPORTGRADE,ATTENDANCE,CREDIT) 
+  		VALUES(#{lectureNum},#{username},#{semiGrade},#{finalGrade},#{reportGrade},#{attendance},#{credit})
+  	</insert>
   	
   	<resultMap type="LectureVO" id="LectureResult">
+  	
+  	
+  	
   		<id column="LECTURENUM" property="lectureNum"/>
   		<result column="LECTURENAME" property="lectureName"/>
   		<result column="SEMESTER" property="semester"/>
@@ -80,6 +90,17 @@
   			<id column="DEPTNUM" property="deptNum"/>
   			<result column="DEPTNAME" property="deptName"/>
   		</association>
+  		<association property="creditVO" javaType="CreditVO">
+  			<id column="CREDITNUM" property="creditNum"/>
+  			<result column="LECTURENUM" property="lectureNum"/>
+  			<result column="USERNAME" property="username"/>
+  			<result column="SEMIGRADE" property="semiGrade"/>
+  			<result column="FINALGRADE" property="finalGrade"/>
+  			<result column="REPORTGRADE" property="reportGrade"/>
+  			<result column="ATTENDANCE" property="attendance"/>
+  			<result column="CREDIT" property="credit"/>
+  		</association>
+  		
   	</resultMap>
   	
   </mapper>

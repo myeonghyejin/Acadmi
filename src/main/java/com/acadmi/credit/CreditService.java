@@ -23,7 +23,13 @@ public class CreditService {
 	public List<StudentVO> getLectureAttendee(LectureVO lectureVO) throws Exception{
 		return (List<StudentVO>) creditDAO.getLectureAttendee(lectureVO);
 	}
+	public int getCreditExists(LectureVO lectureVO) throws Exception{
+		return creditDAO.getCreditExists(lectureVO);
+	}
 	public LectureVO getLectureDetail(LectureVO lectureVO) throws Exception{
 		return creditDAO.getLectureDetail(lectureVO);
+	}
+	public int setCreditAdd(CreditVO creditVO) throws Exception{
+		return creditDAO.setCreditAdd(creditVO);
 	}
 }

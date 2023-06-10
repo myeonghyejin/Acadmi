@@ -87,15 +87,18 @@
 										</table>
 									</div>
               						<!-- table-body end -->
-              						<div class="card-footer clearfix" style="background-color: white">
-					                <ul class="pagination pagination-sm">
-					                  <li class="page-item"><a class="page-link" href="#">«</a></li>
-					                  <li class="page-item"><a class="page-link" href="#">1</a></li>
-					                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-					                  <li class="page-item"><a class="page-link" href="#">3</a></li>
-					                  <li class="page-item"><a class="page-link" href="#">»</a></li>
-					                </ul>
+              						
+              						<!-- pagination start -->
+              						<div class="card-footer clearfix" style="background-color: white;">
+						                <ul class="pagination pagination-sm" style="margin-left: auto;margin-right: auto;width: 200px;">
+						                  <li class="page-item"><a class="page-link" href="#"style="color:#17a2b8;">«</a></li>
+						                  <li class="page-item"><a class="page-link" href="#"style="color:#17a2b8;">1</a></li>
+						                  <li class="page-item"><a class="page-link" href="#"style="color:#17a2b8;">2</a></li>
+						                  <li class="page-item"><a class="page-link" href="#"style="color:#17a2b8;">3</a></li>
+						                  <li class="page-item"><a class="page-link" href="#"style="color:#17a2b8;">»</a></li>
+						                </ul>
 					              </div>
+					              <!-- pagination end -->
             					</div>
 							</div> 
 						</div>

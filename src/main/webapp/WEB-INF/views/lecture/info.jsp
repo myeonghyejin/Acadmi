@@ -53,7 +53,7 @@
 							            	<th style="background-color:#f8f9fa;color:#17a2b8;">강의연도</th>
 							                <td colspan="2">${lecture.year}년</td>
 							                <th style="background-color:#f8f9fa;color:#17a2b8;">강의학기</th>
-							                <td colspan="2">${lecture.lectureNum}학기</td>
+							                <td colspan="2">${lecture.semester}학기</td>
 										</tr>
 							            <tr>
 							            	<th style="background-color:#f8f9fa;color:#17a2b8;">학부(과)</th>
