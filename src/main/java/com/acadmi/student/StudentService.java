@@ -21,6 +21,14 @@ public class StudentService {
 	@Autowired
 	private StudentDAO studentDAO;
 	
+	//현재 수강중인 강의
+	public List<LectureVO> getCurrentLectureList() throws Exception {
+		List<LectureVO> ar =  studentDAO.getCurrentLectureList();
+		log.error("current :: {}", ar.get(0).getLectureName());
+		return ar;
+	}
+	
+	//내 수강 리스트
 	public List<LectureVO> getMyLectureList(LectureVO lectureVO) throws Exception {
 		
 		List<LectureVO> ar =  studentDAO.getMyLectureList(lectureVO);
@@ -28,6 +36,7 @@ public class StudentService {
 		return ar;
 	}
 	
+	//내 성적 조회
 	public List<LectureVO> getMyCreditList(LectureVO lectureVO) throws Exception {
 		
 		List<LectureVO> ar = studentDAO.getMyCreditList(lectureVO);
@@ -45,7 +54,9 @@ public class StudentService {
 		return map;
 	}
 	
-	public List<BoardVO> getNoticeList() throws Exception {
-		return studentDAO.getNoticeList();
-	}
+	
+	  public List<BoardVO> getNoticeList() throws Exception { 
+		  return studentDAO.getNoticeList(); 
+	  }
+	 
 } 

@@ -88,19 +88,28 @@
 				
 					<!--Search -->
 					<form action="./administratorList" id="search-form">
+						<c:forEach items="${list}" var="departmentVO">
+							<c:forEach items="${departmentVO.administratorVOs}" var="administratorVO">
+								<c:set var="administratorName" value="${administratorVO.name}"></c:set>
+			   	 				<c:set var="administratorPhone" value="${administratorVO.phone}"></c:set>
+			   	 				<c:set var="administratorEmail" value="${administratorVO.email}"></c:set>
+			   	 				<c:set var="administratorStatus" value="${administratorVO.status}"></c:set>
+			   	 				<c:set var="administratoruserName" value="${administratorVO.username}"></c:set>
+							</c:forEach>
+						</c:forEach>
 						<input type="hidden" name="page" value="1">
 						<div class="card search">
 							<div class="row content" >
 								<label style="margin : 10px;">직원 번호</label>
 								<input type="text" class="form-control" name="username" placeholder="내용을 입력해주세요" style="width : 20%">
 								<label style="margin : 10px;">성명</label>
-								<input type="text" class="form-control" name="search" placeholder="내용을 입력해주세요" style="width : 20%">
+								<input type="text" class="form-control" name="search" placeholder="내용을 입력해주세요" style="width : 20%" value="${pagination.search}">
 								<label style="margin : 10px;">상태</label>
 								<select class="form-control select" name="status" style="width: 20%;">
 									<option value="">전체</option>
-									<option value="1">재직</option>
-									<option value="2">휴직</option>
-									<option value="3">퇴직</option>
+									<option value="1"${administratorStatus eq 1 ? 'selected' : '' }>재직</option>
+									<option value="2"${administratorStatus eq 2 ? 'selected' : '' } >휴직</option>
+									<option value="3"${administratorStatus eq 3 ? 'selected' : '' }>퇴직</option>
 								</select>
 								<button type="submit" class="btn btn-info" style="margin : 0 0 0 20px; width : 15%">검색</button>
 							</div>

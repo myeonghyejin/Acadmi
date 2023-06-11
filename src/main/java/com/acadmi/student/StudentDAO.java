@@ -12,6 +12,9 @@ import com.acadmi.student.lecture.StudentLectureVO;
 @Mapper
 public interface StudentDAO {
 	
+	//현재 수강중인 강의
+	public List<LectureVO> getCurrentLectureList() throws Exception;
+	
 	//내 수강 강좌
 	public List<LectureVO> getMyLectureList(LectureVO lectureVO) throws Exception;
 	public List<LectureVO> getMyCreditList(LectureVO lectureVO) throws Exception;
@@ -21,5 +24,5 @@ public interface StudentDAO {
 	public Integer getMinYear(LectureVO lectureVO) throws Exception;
 	
 	//메인페이지 공지사항
-	public List<BoardVO> getNoticeList() throws Exception;
+	 public List<BoardVO> getNoticeList() throws Exception; 
 }

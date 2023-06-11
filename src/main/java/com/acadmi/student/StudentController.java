@@ -31,8 +31,9 @@ public class StudentController {
 	
 	@Autowired
 	private StudentService studentService;
-
 	
+
+	//내 수강 리스트
 	@GetMapping("myLectureList")
 	public ModelAndView getMyLectureList(HttpSession session, LectureVO lectureVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
@@ -49,7 +50,9 @@ public class StudentController {
 		List<LectureVO> ar =  studentService.getMyLectureList(lectureVO);
 		
 		mv.addObject("list", ar);
+		
 		mv.addObject("map", studentService.getYear(lectureVO));
+		mv.addObject("obj", lectureVO);
 		
 		mv.setViewName("student/myLectureList");
 		return mv;
@@ -57,7 +60,7 @@ public class StudentController {
 	}
 	
 	
-	
+	//내 성적 조회
 	@GetMapping("myCreditList")
 	public ModelAndView getMyCreditList(HttpSession session, LectureVO lectureVO) throws Exception {
 		ModelAndView mv = new ModelAndView();

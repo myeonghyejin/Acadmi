@@ -47,13 +47,16 @@
 		               				<label style="margin : 10px;">수강 년도</label>
 		               				<select  class="form-control select" name="year" style="width: 15%;" id="year" onchange="year()">
 		               					<option value="">전체</option>
+		               					<c:forEach  begin="${map['min']}" end="${map['max']}" varStatus="i">
+		               						<option value="${i.index}" ${lectureVO.year eq i.index  ? 'selected' : ''}>${i.index}</option>
+		               					</c:forEach>
 		               					
 		               				</select>
 		               				<label style="margin : 10px;">학기</label>
 		               				<select class="form-control select" name="semester"style="width: 15%;" id="semester">
 		               					<option value="">전체</option>
-		               					<option value="1">1학기</option>
-		               					<option value="2">2학기</option>
+		               					<option value="1" ${lectureVO.semester eq 1 ? 'selected' : '' }>1학기</option>
+		               					<option value="2" ${lectureVO.semester eq 2 ? 'selected' : '' }>2학기</option>
 		               				</select>
 		               			</div>
 		               		</div>
@@ -99,14 +102,6 @@
 	</div>
 <script type="text/javascript">
 /*입학년도 ~ 재학년도 */
-let min = '${map["min"]}'
-let max = '${map["max"]}'
-
-
-for(let i=min; i <= max; i ++) {
-	let option = "<option value='" + i + "'>" + i + "</option>";
-	  $("#year").append(option);
-}
 
 /* 검색 기능 */
 $("#year").on("change", function() {

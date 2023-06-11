@@ -93,7 +93,7 @@
 								<label style="margin : 10px;">학번</label>
 								<input type="text" class="form-control" name="username" placeholder="내용을 입력해주세요" style="width : 20%">
 								<label style="margin : 10px;">성명</label>
-								<input type="text" class="form-control" name="search" placeholder="내용을 입력해주세요" style="width : 20%">
+								<input type="text" class="form-control" name="search" placeholder="내용을 입력해주세요" style="width : 20%" value="${pagination.search}">
 								<label style="margin : 10px;">학년</label>
 								<select class="form-control select" name="grade" style="width: 20%;">
 									<option value="">전체</option>
