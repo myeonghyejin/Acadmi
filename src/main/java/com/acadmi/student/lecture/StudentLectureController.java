@@ -1,5 +1,6 @@
 package com.acadmi.student.lecture;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -26,6 +27,30 @@ public class StudentLectureController {
 	
 	@Autowired
 	private StudentLectureService studentLectureService;
+	
+	//현재 연도 계산
+	private int calculateCurrentYear() {
+		LocalDate currentDate = LocalDate.now();
+		int year = currentDate.getYear();
+		return year;
+	}
+	
+	//현재 학기 계산
+	private int calculateCurrentSemester() {
+		LocalDate currentDate = LocalDate.now();
+		int month = currentDate.getMonthValue();
+		int semester;
+		
+		//1학기인지 2학기인지 판단
+	    if (month >= 2 && month <= 7) {
+	        semester = 1; //2월부터 7월까지는 1학기
+	    } else {
+	    	semester = 2; //8월부터 1월까지는 2학기
+	    }
+	    
+	    return semester;
+		
+	}
 	
 	/** SELECT **/
 	//수강 신청 & 장바구니 조회
@@ -83,7 +108,7 @@ public class StudentLectureController {
 	
 	//시간표 조회
 	@GetMapping("timetable")
-	public ModelAndView getTimetableList(StudentLectureVO studentLectureVO, HttpSession session, Pagination pagination, ModelAndView mv) throws Exception {
+	public ModelAndView getTimetableList(StudentLectureVO studentLectureVO, HttpSession session, ModelAndView mv) throws Exception {
 		Object obj = session.getAttribute("SPRING_SECURITY_CONTEXT");
 		SecurityContextImpl contextImpl = (SecurityContextImpl)obj;
 		Authentication authentication = contextImpl.getAuthentication();
@@ -93,8 +118,13 @@ public class StudentLectureController {
 		
 		String[] arr = {"월","화", "수", "목", "금"};
 		
+		int year = calculateCurrentYear();
+		int semester = calculateCurrentSemester();
+		
 		mv.addObject("list", ar);
 		mv.addObject("day", arr);
+		mv.addObject("year", year);
+        mv.addObject("semester", semester);
 		mv.setViewName("student/lecture/timetable");
 		
 		return mv;
