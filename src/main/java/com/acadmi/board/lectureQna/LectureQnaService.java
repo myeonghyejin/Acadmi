@@ -100,7 +100,7 @@ public class LectureQnaService implements BoardService {
 		return lectureQnaDAO.setBoardFileDelete(fileVO);
 	}
 	
-	public int setReplyAdd(LectureQnaVO lectureQnaVO) throws Exception {
+	public int setReplyAdd(LectureQnaVO lectureQnaVO, MultipartFile[] multipartFiles) throws Exception {
 		
 		LectureQnaVO parent = (LectureQnaVO)lectureQnaDAO.getDetail(lectureQnaVO);
 		
@@ -113,6 +113,20 @@ public class LectureQnaService implements BoardService {
 		int result = lectureQnaDAO.setStepUpdate(parent);
 				
 		result = lectureQnaDAO.setReplyAdd(lectureQnaVO);
+		
+		if(multipartFiles != null) {
+			for(MultipartFile multipartFile : multipartFiles) {
+				if(!multipartFile.isEmpty()) {
+					String fileName = fileManager.saveFile(path, multipartFile);
+					FileVO fileVO = new FileVO();
+					fileVO.setNum(lectureQnaVO.getNum());
+					fileVO.setFileName(fileName);
+					fileVO.setOriName(multipartFile.getOriginalFilename());
+					
+					result = lectureQnaDAO.setBoardFileAdd(fileVO);
+				}
+			}
+		}
 			
 		return result; 
 		

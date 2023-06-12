@@ -47,7 +47,7 @@
 			<div class="card">
 				<div class="card-body">
 				<div class="row">
-					<table class="table">
+					<table class="table" data-board-name="${board}">
 						<tr>
 						    <th width=20% class="text-center warning" style="background-color:#ffefb9;">번호</th>
 						    <td width=30% class="text-center">${boardVO.num}</td>
@@ -75,7 +75,7 @@
          
 				         <tr>
 					         <td colspan="4" class="text-left" valign="top" height="200">
-					         	<pre style="white-space: pre-wrap;border:none;background-color: white;">${boardVO.contents}</pre>
+					         	<pre style="white-space: pre-wrap;border:none;background-color: white; font-size: 23px;">${boardVO.contents}</pre>
 					         </td>   
 				         </tr>
 	
@@ -100,6 +100,7 @@
 									</c:if>
 								</c:if>
 							</c:if>
+							
 				            <c:if test="${userName eq boardVO.writer}">
 								<a href="./update?num=${boardVO.num}" id="update" class="btn btn-info float-right">수정</a>
 								<a id="delete" data-board-num="${boardVO.num}" data-board-name="${board}" class="btn btn-danger float-right" style="margin-right: 5px">삭제</a>
@@ -110,22 +111,19 @@
 				</table>
 
 				<c:if test="${board eq 'qna' || board eq 'lectureQna'}">
-					<div class="row">
-						<div class="col-12">
-							<div class="post" style="margin-top: 50px">
-								<div class="user-block">
-									<c:if test="${num eq 2}">
-										<div class="replyDetail" data-num-id="${boardVO.num}">
+					<div class="col-12">
+						<div class="post" style="margin-top: 50px;">
+							<div class="user-block">
+								<c:if test="${num eq 2}">
+									<div class="replyDetail" data-num-id="${boardVO.num}">
 													
-										</div>
-									</c:if>
-								</div>
-							</div> 
-						</div>
+									</div>
+								</c:if>
+							</div>
+						</div> 
 					</div>
 				</c:if>		
-	
-				   		
+		  		
 				   	</div>
 				</div>
 			</div>

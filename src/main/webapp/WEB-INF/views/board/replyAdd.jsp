@@ -47,7 +47,7 @@
 					<sec:authentication property="principal.username" var="userName" />
 					
 					<div class="row col-md-7 mx-auto">
-						<form id="contactForm" class="row g-3" action="./reply" method="post">
+						<form id="contactForm" class="row g-3" action="./reply" method="post" enctype="multipart/form-data">
 							<input type="hidden" name="num" value="${qnaVO.num}">
 							
 							<%-- 	<c:if test="${board eq 'lectureQna'}">
@@ -56,27 +56,29 @@
 									<input type="text" class="form-control" name="lectureNum" id="lectureNum">
 								</div>
 							</c:if> --%>
-						
-							<div class="col-md-12" style="margin-top: 30px;">
+
+							<div class="col-md-6" style="margin-top: 30px;">
+								<label for="writer" class="form-label strongFont2">작성자</label>
+								<input type="text" name="writer" class="form-control" id="writer" readonly value="${userName}">
+							</div>
+							
+							<div class="col-md-7" style="margin-top: 20px;">
 								<label for="title" class="form-label strongFont2">제목</label> 
 								<input type="text" class="form-control" name="title" id="title" placeholder="제목을 입력하세요">
 							</div>
 							
-							<div class="col-md-12" style="margin-top: 20px;">
-								<label for="writer" class="form-label strongFont2">작성자</label> 
-								<input type="text" name="writer" class="form-control" id="writer" readonly value="${userName}">
+							<div class="col-md-6">
+								<c:if test="${board eq 'lectureQna'}">
+									<div class="row mt-4">
+										  <div style="display: flex; align-items: center;">
+										    <label for="secret" class="form-label strongFont2" style="margin-bottom: 0; margin-left:10px">비밀글</label>
+										    <div style="margin-left: 10px;">
+										      <input type="checkbox" class="form-control" name="secret" id="secret" style="width: 20px; height: 20px; margin-bottom: 0;">
+										    </div>
+										 </div>
+									</div>
+								</c:if>
 							</div>
-							
-							<c:if test="${board eq 'lectureQna'}">
-								<div class="row mt-4">
-									  <div style="display: flex; align-items: center;">
-									    <label for="secret" class="form-label strongFont2" style="margin-bottom: 0; margin-left:15px">비밀글</label>
-									    <div style="margin-left: 10px;">
-									      <input type="checkbox" class="form-control" name="secret" id="secret" style="width: 20px; height: 20px; margin-bottom: 0;">
-									    </div>
-									 </div>
-								</div>
-							</c:if>
 							
 							<div class="col-md-12 mt-4">
 								<label for="contents" class="form-label strongFont2">내용</label>
@@ -84,6 +86,12 @@
 									placeholder="내용을 입력하세요"></textarea>
 							</div>
 						
+							<div class="col-md-11 mt-3">
+								<div id="fileList">
+									<button class="col-md-12 mt-3 btn btn-primary" id="fileAdd" type="button">파일추가</button>
+								</div> 
+							</div>
+							
 							<div class="row" style="margin-top: 50px; margin-left: 1080px;">		
 								<button type="button" class="submitButton btn btn-info" style="margin-right: 5px;">등록</button>
 								<button type="button" class="btn btn-danger" onclick="location.href='./list'">취소</button>
@@ -100,16 +108,16 @@
 
 	<c:import url="../temp/footer.jsp"></c:import>
 
+	<script src="/js/filemanager.js"></script>
+	<script src="/js/board/qnaReply.js"></script>
+	<script src="/js/board/notice.js"></script>
+	<script src="/js/board/boardCheck.js"></script>
+	
 	<script>
 		$("#replyContents").summernote({
 			height : 500,
 			width : 1187.48
 		});
 	</script>
-
-	<script src="/js/filemanager.js"></script>
-	<script src="/js/board/qnaReply.js"></script>
-	<script src="/js/board/notice.js"></script>
-	<script src="/js/board/boardCheck.js"></script>
 </body>
 </html>

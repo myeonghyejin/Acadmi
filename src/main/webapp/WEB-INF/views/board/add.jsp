@@ -68,18 +68,18 @@
 					<div class="row col-md-7 mx-auto">
 						<form id="contactForm" class="row g-3" action="./add" method="post" enctype="multipart/form-data">			
 						<%-- 	<c:if test="${board eq 'lectureNotice' || board eq 'lectureQna'}">
-								<div class="col-md-12 mt-3">
+								<div class="col-md-6 mt-3">
 									<label for="lectureNum" class="form-label strongFont2">강의번호</label> 
 									<input type="text" class="form-control" name="lectureNum" id="lectureNum">
 								</div>
 							</c:if> --%>
 									
-							<div class="col-md-4" style="margin-top: 20px;">
+							<div class="col-md-6" style="margin-top: 20px;">
 								<label for="writer" class="form-label strongFont2">작성자</label>
 								<input type="text" name="writer" class="form-control" id="writer" readonly value="${userName}">
 							</div>
 							
-							<div class="col-md-12 mt-3">
+							<div class="col-md-7 mt-3">
 								<label for="title" class="form-label strongFont2">제목</label> 
 								<input type="text" class="form-control" name="title" id="title" placeholder="제목을 입력하세요">
 							</div>
@@ -111,13 +111,13 @@
 								<textarea class="form-control" name="contents" id="contents" placeholder="내용을 입력하세요"></textarea>
 							</div>
 							
-							<div class="col-md-12 mt-3">
+							<div class="col-md-11 mt-3">
 								<div id="fileList">
 									<button class="col-md-12 mt-5 btn btn-primary" id="fileAdd" type="button">파일추가</button>
 								</div> 
 							</div> 
 
-							<div class="row" style="margin-top: 50px; margin-left: 1080px;">		
+							<div class="row" style="margin-top: 50px; margin-left: 1080px">		
 								<button type="button" class="submitButton btn btn-info" style="margin-right: 5px;">등록</button>
 								<button type="button" class="btn btn-danger" onclick="location.href='./list'">취소</button>
 							</div>

@@ -69,54 +69,59 @@
 						<form id="contactForm" class="row g-3" action="./update" method="post" enctype="multipart/form-data">
 							<input type="hidden" name="num" value="${dto.num}">
 							
-							<div class="col-md-4" style="margin-top: 20px;">
+							<div class="col-md-6" style="margin-top: 20px;">
 								<label for="writer" class="form-label strongFont2">작성자</label> 
 								<input type="text" name="writer" class="form-control" id="writer" readonly value="${userName}">
 							</div>
 							
-							<div class="col-md-12 mt-3">
+							<div class="col-md-7 mt-3">
 								<label for="title" class="form-label strongFont2">제목</label>
 								<input type="text" class="form-control" name="title" id="title" value="${dto.title}">
 							</div>
 							
 							<c:if test="${board eq 'notice'}">
-								<div class="row mt-3">
-								  <div style="display: flex; align-items: center;">
-								    <label for="important" class="form-label strongFont2" style="margin-bottom: 0; margin-left:15px">중요표시</label>
-								    <div style="margin-left: 10px;">
-								    	<c:if test="${dto.important == 0 || empty dto.important}">
-								      		<input type="checkbox" class="form-control" name="important" id="important" style="width: 20px; height: 20px; margin-bottom: 0;">
-								    	</c:if>
-								    	<c:if test="${dto.important == 1}">
-								    		<input type="checkbox" class="form-control" name="important" id="important" style="width: 20px; height: 20px; margin-bottom: 0;" checked>
-								    	</c:if>
-								    </div>
-								  </div>
+								<div class="col-md-6">
+									<div class="row mt-4">
+									  <div style="display: flex; align-items: center;">
+									    <label for="important" class="form-label strongFont2" style="margin-bottom: 0; margin-left:10px">중요표시</label>
+									    <div style="margin-left: 10px;">
+									    	<c:if test="${dto.important == 0 || empty dto.important}">
+									      		<input type="checkbox" class="form-control" name="important" id="important" style="width: 20px; height: 20px; margin-bottom: 0;">
+									    	</c:if>
+									    	<c:if test="${dto.important == 1}">
+									    		<input type="checkbox" class="form-control" name="important" id="important" style="width: 20px; height: 20px; margin-bottom: 0;" checked>
+									    	</c:if>
+									    </div>
+									  </div>
+									</div>
 								</div>
 							</c:if>
 							
 							<c:if test="${board eq 'lectureQna'}">
-								<div class="row mt-3">
-								  <div style="display: flex; align-items: center;">
-								    <label for="secret" class="form-label strongFont2" style="margin-bottom: 0; margin-left:15px">비밀글</label>
-								    <div style="margin-left: 10px;">
-									    <c:if test="${dto.secret == 0 || empty dto.secret}">
-									    	<input type="checkbox" class="form-control" name="secret" id="secret" style="width: 20px; height: 20px; margin-bottom: 0;">
-									    </c:if>
-									    <c:if test="${dto.secret == 1}">
-									    	<input type="checkbox" class="form-control" name="secret" id="secret" style="width: 20px; height: 20px; margin-bottom: 0;" checked>
-									    </c:if>
-								    </div>
-								  </div>
+								<div class="col-md-6">
+									<div class="row mt-4">
+										 <div style="display: flex; align-items: center;">
+										   <label for="secret" class="form-label strongFont2" style="margin-bottom: 0; margin-left:10px">비밀글</label>
+										   <div style="margin-left: 10px;">
+											   <c:if test="${dto.secret == 0 || empty dto.secret}">
+											    <input type="checkbox" class="form-control" name="secret" id="secret" style="width: 20px; height: 20px; margin-bottom: 0;">
+											   </c:if>
+											   <c:if test="${dto.secret == 1}">
+											    <input type="checkbox" class="form-control" name="secret" id="secret" style="width: 20px; height: 20px; margin-bottom: 0;" checked>
+											   </c:if>
+										   </div>
+										 </div>
+									</div>
 								</div>
 							</c:if>
-			
+
+							
 							<div class="col-md-12 mt-3">
 								<label for="contents" class="form-label strongFont2">내용</label>
 								<textarea class="form-control" name="contents" id="contents">${dto.contents}</textarea>
 							</div>
 							
-							<div class="col-md-12 mt-3">
+							<div class="col-md-11 mt-3">
 								<div id="fileList">
 									<button class="col-md-12 mt-5 btn btn-primary" id="fileAdd" type="button">파일추가</button>
 									<c:forEach items="${dto.fileVOs}" var="fileVO">

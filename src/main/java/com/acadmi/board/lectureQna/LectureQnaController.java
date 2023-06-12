@@ -164,10 +164,10 @@ public class LectureQnaController {
 	}
 	
 	@PostMapping(value = "reply")
-	public ModelAndView setReplyAdd(LectureQnaVO lectureQnaVO) throws Exception {
+	public ModelAndView setReplyAdd(LectureQnaVO lectureQnaVO, MultipartFile [] addfiles) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		int result = lectureQnaService.setReplyAdd(lectureQnaVO);
+		int result = lectureQnaService.setReplyAdd(lectureQnaVO, addfiles);
 		                             
 		mv.setViewName("redirect:./detail?num=" + lectureQnaVO.getNum());
 		

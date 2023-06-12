@@ -1,5 +1,11 @@
 let check = [false]
  
+$(document).ready(function() {
+    if ($("#title").val() != '') {
+        check[1] = true;
+    }
+});
+ 
 $("#title").on("blur", function(){
 	if($("#title").val() != ''){
        check[1] = true;
