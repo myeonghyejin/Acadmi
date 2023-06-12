@@ -1,6 +1,24 @@
 /**
- * 헤더에 있는 알림창의 숫자 변경을 위한 JS
+ * 헤더에 있는 알림창과 채팅창 숫자 변경을 위한 JS
  */
+
+function chat(){
+	$.ajax({
+		type : "GET",
+		url : "/chat/chatList",
+		success : function(result){
+			if(result != 0){
+				$('#chat').html('!')
+			}
+		},
+		error : function(){
+			console.log('error')
+		}
+	})
+}
+
+chat()
+
 function notification(){
 	$.ajax({
 		type : "GET",

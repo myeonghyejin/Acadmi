@@ -61,5 +61,14 @@ public class ChatController {
 	public int setDeleteMessage(ChatMessageVO chatMessageVO) throws Exception {
 		return chatService.setDeleteMessage(chatMessageVO);
 	}
+	
+	@GetMapping("chatList")
+	@ResponseBody
+	public int getChatList(HttpSession Session) throws Exception {
+		ChatRoomVO chatRoomVO = new ChatRoomVO();
+		List<ChatRoomVO> ar = chatService.getChatList(chatRoomVO, Session);
+		int result = ar.size();
+		return result;
+	}
 
 }

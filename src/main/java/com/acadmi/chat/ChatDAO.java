@@ -22,7 +22,6 @@ public interface ChatDAO {
 	public ChatRoomVO getChatRoom(ChatRoomVO chatRoomVO) throws Exception;
 	
 	//이름 뽑아오기 위한 select
-	
 	public MemberVO getMemberDetail(MemberVO memberVO) throws Exception;
 	
 	public AdministratorVO getAdministratorName(MemberVO memberVO) throws Exception;
@@ -30,6 +29,9 @@ public interface ChatDAO {
 	public ProfessorVO getProfessorName(MemberVO memberVO) throws Exception;
 	
 	public StudentVO getStudentName(MemberVO memberVO) throws Exception;
+	
+	//새 매세지 표시를 위한 select
+	public List<ChatRoomVO> getChatList(ChatRoomVO chatRoomVO) throws Exception;
 	
 		//insert
 	

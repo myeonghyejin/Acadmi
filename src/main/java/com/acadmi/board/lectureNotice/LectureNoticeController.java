@@ -12,6 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.acadmi.board.BoardVO;
+import com.acadmi.notification.NotificationService;
+import com.acadmi.notification.NotificationVO;
 import com.acadmi.professor.ProfessorVO;
 import com.acadmi.util.FileVO;
 import com.acadmi.util.Pagination;
@@ -22,6 +24,8 @@ public class LectureNoticeController {
 
 	@Autowired
 	private LectureNoticeService lectureNoticeService;
+	@Autowired
+	private NotificationService notificationService;
 	
 	@ModelAttribute("board")
 	public String getBoardName() {
@@ -58,18 +62,24 @@ public class LectureNoticeController {
 		
 		int result = lectureNoticeService.setInsert(lectureNoticeVO, addfiles);
 		
+		result = notificationService.setLectureNotice(lectureNoticeVO);
+		
 		mv.setViewName("redirect:./list");
 		
 		return mv;
 	}
 	
 	@GetMapping("detail")
-	public ModelAndView getDetail(LectureNoticeVO lectureNoticeVO) throws Exception {
+	public ModelAndView getDetail(LectureNoticeVO lectureNoticeVO, NotificationVO notificationVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
 		lectureNoticeVO = (LectureNoticeVO)lectureNoticeService.getDetail(lectureNoticeVO);
 		
 		int result = lectureNoticeService.setLectureNoticeHit(lectureNoticeVO);
+		
+		if(notificationVO.getNotificationNum() != null) {
+			result = notificationService.setDelete(notificationVO);
+		}
 		
 		mv.addObject("boardVO", lectureNoticeVO);
 		mv.setViewName("board/detail");
@@ -111,10 +121,12 @@ public class LectureNoticeController {
 	}
 	
 	@GetMapping("delete")
-	public ModelAndView setDelete(BoardVO boardVO) throws Exception {
+	public ModelAndView setDelete(BoardVO boardVO, NotificationVO notificationVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
 		int result = lectureNoticeService.setDelete(boardVO);
+		
+		result = notificationService.setBoardNotificationDelete(notificationVO);
 		
 		mv.setViewName("redirect:./list");
 		

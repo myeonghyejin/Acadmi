@@ -29,8 +29,6 @@ public class NotificationController {
 		ModelAndView mv = new ModelAndView();
 		//알림전체보기를 눌렀을때 기본적으로 notificationkind가 1로 들어가게 jsp에서 설정
 		List<NotificationVO> ar = notificationService.getKindList(notificationVO, session);
-		log.info("========== size : {}",ar.size());
-		
 		mv.addObject("list", ar);
 		mv.setViewName("notification/list");
 		return mv;
@@ -39,7 +37,6 @@ public class NotificationController {
 	@GetMapping("notificationList")
 	@ResponseBody
 	public int getNotificationList(HttpSession session) throws Exception {
-		log.info("check");
 		NotificationVO notificationVO = new NotificationVO();
 		List<NotificationVO> ar = notificationService.getnotificationist(notificationVO, session);
 		int result = ar.size();
@@ -61,7 +58,7 @@ public class NotificationController {
 		String msg = "실패하였습니다.";
 		if(notificationVO.getNotificationStatus()==2) {		
 			if(result>0) {
-				msg = "저장에 성공하였습니다.";
+				msg = "보관에 성공하였습니다.";
 			}
 		} else {
 			if(result>0) {

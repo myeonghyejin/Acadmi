@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.acadmi.college.CollegeVO;
 import com.acadmi.department.DepartmentVO;
+import com.acadmi.notification.NotificationService;
 import com.acadmi.period.PeriodVO;
 import com.acadmi.student.StudentVO;
 import com.acadmi.syllabus.ClassVO;
@@ -33,6 +34,8 @@ import lombok.extern.slf4j.Slf4j;
 public class LectureController {
 	@Autowired
 	private LectureService lectureService;
+	@Autowired
+	private NotificationService notificationService;
 	
 	@GetMapping("list")
 	public ModelAndView getLectureList(LectureVO lectureVO, HttpSession session) throws Exception{
@@ -75,10 +78,12 @@ public class LectureController {
 		lectureVO.setUsername(authentication.getName());
 		if(buttonType.equals("1")) {
 			int result = lectureService.setLectureAdd(lectureVO);
+			result = notificationService.setLecture(lectureVO);
 		} else if(buttonType.equals("0")){
 			int result = lectureService.setTemporaryAdd(lectureVO);
 		}
 		log.error(lectureVO.getLectureNum().toString());
+		
 		mv.setViewName("redirect:./list");
 		return mv;
 	}

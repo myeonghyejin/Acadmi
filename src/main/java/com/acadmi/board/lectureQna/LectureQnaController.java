@@ -14,6 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.acadmi.board.BoardVO;
+import com.acadmi.notification.NotificationService;
+import com.acadmi.notification.NotificationVO;
 import com.acadmi.professor.ProfessorVO;
 import com.acadmi.student.StudentVO;
 import com.acadmi.util.FileVO;
@@ -25,6 +27,9 @@ public class LectureQnaController {
 	
 	@Autowired
 	private LectureQnaService lectureQnaService;
+	
+	@Autowired
+	private NotificationService notificationService;
 	
 	@ModelAttribute("board")
 	public String getBoardName() {
@@ -50,12 +55,16 @@ public class LectureQnaController {
 	}
 	
 	@GetMapping(value = "detail")
-	public ModelAndView getDetail(LectureQnaVO lectureQnaVO, HttpSession session) throws Exception {
+	public ModelAndView getDetail(LectureQnaVO lectureQnaVO, NotificationVO notificationVO, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
 		Long num = lectureQnaService.getQnaList(lectureQnaVO);
 		
 		lectureQnaVO = (LectureQnaVO)lectureQnaService.getDetail(lectureQnaVO);
+		
+		if(notificationVO.getNotificationNum() != null) {
+			int result = notificationService.setDelete(notificationVO);
+		}
 		
 		session.setAttribute("qnaVO", lectureQnaVO);
 		
@@ -67,10 +76,14 @@ public class LectureQnaController {
 	}
 	
 	@GetMapping(value = "replyDetail")
-	public ModelAndView getReplyDetail(LectureQnaVO lectureQnaVO) throws Exception {
+	public ModelAndView getReplyDetail(LectureQnaVO lectureQnaVO, NotificationVO notificationVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
 		lectureQnaVO = (LectureQnaVO) lectureQnaService.getReplyDetail(lectureQnaVO);
+		
+		if(notificationVO.getNotificationNum() != null) {
+			int result = notificationService.setDelete(notificationVO);
+		}
 		
 		mv.addObject("reply", lectureQnaVO);
 		mv.setViewName("board/replyDetail");
@@ -92,6 +105,10 @@ public class LectureQnaController {
 		ModelAndView mv = new ModelAndView();
 		
 		int result = lectureQnaService.setInsert(lectureQnaVO, addfiles);
+		
+		if(lectureQnaVO.getSecret()==1) {			
+			result = notificationService.setLectureQna(lectureQnaVO);
+		}
 		
 		mv.setViewName("redirect:./list");
 		
@@ -133,10 +150,12 @@ public class LectureQnaController {
 	}
 	
 	@GetMapping("delete")
-	public ModelAndView setDelete(BoardVO boardVO) throws Exception {
+	public ModelAndView setDelete(BoardVO boardVO, NotificationVO notificationVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
 		int result = lectureQnaService.setDelete(boardVO);
+		
+		result = notificationService.setBoardNotificationDelete(notificationVO);
 		
 		mv.setViewName("redirect:./list");
 		
@@ -164,11 +183,13 @@ public class LectureQnaController {
 	}
 	
 	@PostMapping(value = "reply")
-	public ModelAndView setReplyAdd(LectureQnaVO lectureQnaVO) throws Exception {
+	public ModelAndView setReplyAdd(LectureQnaVO lectureQnaVO, NotificationVO notificationVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
 		int result = lectureQnaService.setReplyAdd(lectureQnaVO);
-		                             
+		
+		result = notificationService.setLectureQnaReply(lectureQnaVO);
+		
 		mv.setViewName("redirect:./detail?num=" + lectureQnaVO.getNum());
 		
 		return mv;
