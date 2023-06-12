@@ -1,9 +1,5 @@
 package com.acadmi.util;
 
-import java.util.List;
-
-import com.acadmi.lecture.LectureVO;
-
 import lombok.Getter;
 import lombok.Setter;
 

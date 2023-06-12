@@ -53,9 +53,9 @@
 								<option value="2" ${semester eq 2 ? 'selected' : ''}>2학기</option>
 							</select>
 						</div>
-							<button type="submit" class="btn btn-default">
-								<i class="fa fa-search"></i>
-							</button>
+						<button type="submit" class="btn btn-default">
+							<i class="fa fa-search"></i>
+						</button>
 					</div>
 				</form>
 				
@@ -66,14 +66,13 @@
 						<div class="card-tools">
 							
 							<div class="btn-group">
-								<button type="button" class="btn btn-info">
+								<button type="button" class="btn btn-info" id="pre">
 									<span aria-hidden="true">&laquo;</span>
 								</button>
-								<button type="button" class="btn btn-info">
+								<button type="button" class="btn btn-info" id="next">
 									<span aria-hidden="true">&raquo;</span>
 								</button>
 							</div>
-						
 						</div>
 					</div>
 				
@@ -103,14 +102,14 @@
 															<c:set var="hasLecture" value="false" />
 															<c:forEach items="${list}" var="lectureVO">
 																<c:if test="${studentLectureVO.year eq year && studentLectureVO.semester eq semester}">
-																<c:if test="${lectureVO.weekday eq day && lectureVO.startTime <= hour && lectureVO.endTime >= hour}">
-																	<td class="timetable-workout">${lectureVO.lectureName}<br>
-																		<small>${lectureVO.professorVO.username}</small><br>
-																	<small>${lectureVO.lectureRoomVO.lectureBuilding} ${lectureVO.lectureRoomVO.lectureRoom}</small>
-																	</td>
-																	<c:set var="hasLecture" value="true" />
-																	<c:set var="lectureExists" value="true" />
-																</c:if>
+																	<c:if test="${lectureVO.weekday eq day && lectureVO.startTime <= hour && lectureVO.endTime >= hour}">
+																		<td class="timetable-workout">${lectureVO.lectureName}<br>
+																			<small>${lectureVO.professorVO.username}</small><br>
+																		<small>${lectureVO.lectureRoomVO.lectureBuilding} ${lectureVO.lectureRoomVO.lectureRoom}</small>
+																		</td>
+																		<c:set var="hasLecture" value="true" />
+																		<c:set var="lectureExists" value="true" />
+																	</c:if>
 																</c:if>
 															</c:forEach>
 															<c:if test="${not hasLecture}">
@@ -148,6 +147,25 @@
 	$(function () {
 	    $('.select2').select2()
 	  });
+	
+    const year = ${year}
+	const semester = ${semester}
+	
+	$("#pre").on("click", function(){
+		if(semester == 2) {
+			location.href="./timetable?year="+year+"&semester=1";
+		} else {
+			location.href="./timetable?year="+(year-1)+"&semester=2";
+		}
+	})
+	
+	$("#next").on("click", function(){
+		if(semester == 2) {
+			location.href="timetable?year="+(year+1)+"&semester=1"
+		} else {
+			location.href="timetable?year="+year+"&semester=2"
+		}
+	})
 </script>
 </body>
 </html>

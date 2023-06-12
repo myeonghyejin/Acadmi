@@ -203,6 +203,33 @@
 				</div>
 				<!-- /.card -->
 				
+				<!-- Pagination -->
+				<div class="row g-3 justify-content-center">
+					<nav aria-label="Page navigation example">
+						<ul class="pagination">
+							<c:if test="${pagination.pre}">
+								<li class="page-item">
+									<a class="page-link" href="#" aria-label="Previous" data-all-page="1">
+										<span aria-hidden="true">&laquo;</span>
+									</a>
+								</li>
+							</c:if>
+							<c:forEach begin="${pagination.startNum}" end="${pagination.lastNum}" var="page">
+								<li class="page-item">
+									<a class="page-link" href="#" data-all-page="${page}">${page}</a>
+								</li>
+							</c:forEach>
+							<c:if test="${pagination.next}">
+								<li class="page-item">
+									<a class="page-link" href="#" aria-label="Next" data-all-page="${pagination.totalPage}">
+										<span aria-hidden="true">&raquo;</span>
+									</a>
+								</li>
+							</c:if>
+						</ul>
+					</nav>
+				</div>
+				
 				<div class="row mb-3">
 					<div class="col">
 						<div class="card">

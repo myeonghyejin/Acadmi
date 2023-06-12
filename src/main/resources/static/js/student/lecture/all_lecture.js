@@ -1,6 +1,6 @@
 //page
-$("#allLectureList").on("click",".page-button", function(e){
-    let page = $(this).attr("data-list-page");
+$("#allLectureList").on("click",".page-link", function(e){
+    let page = $(this).attr("data-all-page");
     getList(page);
     e.preventDefault();
 });
