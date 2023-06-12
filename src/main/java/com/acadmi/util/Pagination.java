@@ -3,6 +3,7 @@ package com.acadmi.util;
 import java.util.List;
 
 import com.acadmi.lecture.LectureVO;
+import com.acadmi.student.StudentVO;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +18,23 @@ public class Pagination {
 	private Integer grade;
 	private String username;
 	
+	//member 관련 검색
+	private String deptName;
+	private String collegeName;
+	private Long collegeNum;
+	
+	//강의실 검색
+	private String lectureBuilding;
+	private Integer lectureRoom;
+	
+	//강의 검색
+	private Integer year;
+	private Integer semester;
+	private String lectureName;
+	
+	private Long lectureNum;
+	
+
 	//강의실 배정 조회
 	private Integer status;
 	

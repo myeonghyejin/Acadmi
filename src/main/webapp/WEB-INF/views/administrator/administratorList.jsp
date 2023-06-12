@@ -18,6 +18,11 @@
    	 	justify-content: center;
 	
 	}
+	
+	.selected-page{
+		  background-color: #E2E2E2;
+		  color: white; /* 선택된 페이지의 텍스트 색상도 변경할 수 있습니다 */
+	}
 
 	#tableAdmin {
 		width : 90%; 
@@ -41,6 +46,14 @@
 	  	justify-content: center;
 	 	align-items: center;
 	 	margin : 10px 0 30px 0;
+	}
+	
+	.search {
+		padding : 10px;
+		
+	}
+	.content {
+		margin : 10px;
 	}
 </style>
 </head>
@@ -68,11 +81,41 @@
 	                     </div>
 	                  </div>
 	               </div>
-               <!-- header end -->
+              	 <!-- header end -->
 					
 					<!-- Main content -->
 				    <section class="content">
 				
+					<!--Search -->
+					<form action="./administratorList" id="search-form">
+						<c:forEach items="${list}" var="departmentVO">
+							<c:forEach items="${departmentVO.administratorVOs}" var="administratorVO">
+								<c:set var="administratorName" value="${administratorVO.name}"></c:set>
+			   	 				<c:set var="administratorPhone" value="${administratorVO.phone}"></c:set>
+			   	 				<c:set var="administratorEmail" value="${administratorVO.email}"></c:set>
+			   	 				<c:set var="administratorStatus" value="${administratorVO.status}"></c:set>
+			   	 				<c:set var="administratoruserName" value="${administratorVO.username}"></c:set>
+							</c:forEach>
+						</c:forEach>
+						<input type="hidden" name="page" value="1">
+						<div class="card search">
+							<div class="row content" >
+								<label style="margin : 10px;">직원 번호</label>
+								<input type="text" class="form-control" name="username" placeholder="내용을 입력해주세요" style="width : 20%">
+								<label style="margin : 10px;">성명</label>
+								<input type="text" class="form-control" name="search" placeholder="내용을 입력해주세요" style="width : 20%" value="${pagination.search}">
+								<label style="margin : 10px;">상태</label>
+								<select class="form-control select" name="status" style="width: 20%;">
+									<option value="">전체</option>
+									<option value="1"${administratorStatus eq 1 ? 'selected' : '' }>재직</option>
+									<option value="2"${administratorStatus eq 2 ? 'selected' : '' } >휴직</option>
+									<option value="3"${administratorStatus eq 3 ? 'selected' : '' }>퇴직</option>
+								</select>
+								<button type="submit" class="btn btn-info" style="margin : 0 0 0 20px; width : 15%">검색</button>
+							</div>
+						</div>
+					</form>
+					
 				      <!-- Default box -->
 				      <div class="card">
 				        <div class="card-header">
@@ -95,7 +138,7 @@
 				                          사진
 				                      </th>
 				                      <th style="width: 10%">
-				                      	  번호
+				                      	  직원번호
 				                      </th>
 				                      <th style="width: 10%" class="text-center">
 				                          성명
@@ -124,7 +167,7 @@
 					   	 				<c:set var="administratorEmail" value="${administratorVO.email}"></c:set>
 					   	 				<c:set var="administratorStatus" value="${administratorVO.status}"></c:set>
 					   	 				<c:set var="administratoruserName" value="${administratorVO.username}"></c:set>
-					   	 				<c:set var="memberFiles" value="${memberFilesVO.fileName}"></c:set>
+					   	 				<c:set var="memberFiles" value="${administratorVO.memberFilesVO.fileName}"></c:set>
 					   	 				<tr>
 						   	 				
 						   	 			<td>
@@ -132,8 +175,15 @@
 				     	 					<a href="../chat/detail?roomSender=${username}&roomRecipient=${administratorVO.username}"><i class="fa-regular fa-envelope fa-2xl" style="margin:30px 0 0 0;"></i></a>
 	     	 							</td>
 						   	 			<td>
-						   	 				<img alt="" src="https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927" width="60rem" height="60rem">
-						   	 				<%-- <img alt="" src="/file/${board}/${boardFileVO.fileName}" width="60rem" height="60rem"> --%>
+						   	 				<c:if test="${empty memberFiles}">
+						   	 					  <img class="profile-user-img img-fluid img-circle"
+											             src="/images/profile.jpg"
+											             alt="User profile picture">
+						   	 				</c:if>
+						   	 				<c:if test="${not empty memberFiles}">
+						   	 					<img class="img-circle elevation-2" src="/file/member/${memberFiles}" width="70rem" height="70rem">
+						   	 				</c:if>	
+						   	 				
 						   	 			</td>
 						   	 			<td><c:out value="${administratoruserName}"></c:out></td>
 						   	 			<td><c:out value="${administratorName}"></c:out></td>
@@ -198,5 +248,9 @@
 	
 	</div>
 </div>	
+<script type="text/javascript">
+ /* 페이지네이션 선택 색상 */ 
+
+</script>
 </body>
 </html>

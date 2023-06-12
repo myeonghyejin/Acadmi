@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;import org.springframework.boot.context.properties.ConfigurationPropertiesBinding;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -39,7 +40,6 @@ public class AdministratorController {
 
 	//회원 관리
 	//아이디
-
 	
 	//계정 관리
 	@GetMapping("studentAdd")
@@ -183,18 +183,26 @@ public class AdministratorController {
 		ModelAndView mv = new ModelAndView();
 		
 		List<StudentVO> ar =  administratorService.getStudentList(pagination);
+		List<CollegeVO> ar2 =  administratorService.getCollege();
+		List<DepartmentVO> ar3 =  administratorService.getDepartment();
 		mv.addObject("list", ar);
+		mv.addObject("college", ar2);
+		mv.addObject("department", ar3);
 		mv.setViewName("administrator/studentList");
 		
 		return mv;
 	}
 	
 	@GetMapping("professorList")
-	public ModelAndView getProfessorList(Pagination pagination) throws Exception {
+	public ModelAndView getProfessorList( Pagination pagination) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
 		List<ProfessorVO> ar = administratorService.getProfessorList(pagination);
+		List<CollegeVO> ar2 =  administratorService.getCollege();
+		List<DepartmentVO> ar3 =  administratorService.getDepartment();
 		mv.addObject("list", ar);
+		mv.addObject("college", ar2);
+		mv.addObject("department", ar3);
 		mv.setViewName("administrator/professorList");
 		
 		return mv;
@@ -220,7 +228,9 @@ public class AdministratorController {
 		ModelAndView mv = new ModelAndView();
 		
 		List<LectureRoomVO> ar = administratorService.getLectureRoomList(pagination);
+		List<LectureRoomVO> ar2 =  administratorService.getLectureBuilding();
 		mv.addObject("list", ar);
+		mv.addObject("list2", ar2);
 		mv.setViewName("administrator/lectureRoomList");
 		
 		return mv;
@@ -297,8 +307,10 @@ public class AdministratorController {
 		ModelAndView mv = new ModelAndView();
 		
 		List<DepartmentVO> ar = administratorService.getDepartmentList(pagination);
+		List<CollegeVO> ar2 =  administratorService.getCollege();
 		
 		mv.addObject("list", ar);
+		mv.addObject("college", ar2);
 		mv.setViewName("administrator/departmentList");
 		
 		return mv;
@@ -319,8 +331,8 @@ public class AdministratorController {
 		ModelAndView mv = new ModelAndView();
 		
 		List<CollegeVO> ar =  administratorService.getCollege();
-//		log.error("college:::: {}",ar.get(0).getCollegeNum());
 		mv.addObject("list", ar);
+		
 		mv.setViewName("administrator/departmentAdd");
 		
 		return mv;
@@ -400,17 +412,58 @@ public class AdministratorController {
 		ModelAndView mv = new ModelAndView();
 		
 		List<LectureVO> ar = administratorService.getLectureList(pagination);
+		List<DepartmentVO> ar2 =  administratorService.getDepartment();
+		List<String> ar3 =  administratorService.getCurrentYear();
+		
 		
 		mv.addObject("list", ar);
+		mv.addObject("department", ar2);
+		mv.addObject("year", ar3);
 		mv.setViewName("administrator/lectureList");
 		
 		return mv;
 	}
 
 	//강의실 배정
-//	public ModelAndView getLectureRoomAssignment(Pagination pagination) throws Exception {
-//		ModelAndView mv = new ModelAndView();
-//		
-//	}
+	@GetMapping("lectureRoomAssignment")
+	public ModelAndView getLectureRoomAssignment(Pagination pagination) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		List<LectureRoomVO> ar = administratorService.getLectureRoomAssignment(pagination);
+		
+		
+		mv.addObject("list", ar);
+		mv.setViewName("administrator/lectureRoomAssignment");
+		
+		return mv;
+	}
+	
+	@PostMapping("lectureRoomAssignment")
+	public ModelAndView setLectureRoomAssignment(@Valid LectureVO lectureVO, BindingResult bindingResult) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		int result =  administratorService.setLectureRoomAssignmentUpdate(lectureVO);
+		
+		if(bindingResult.hasErrors()) {
+			log.warn("검증에 실패");
+			mv.setViewName("administrator/lectureRoomAssignment");
+			return mv;
+		}
+		
+		String message= "배정 실패";
+		
+		if(result > 0) {
+			message = "배정되었습니다";
+			
+		}
+		
+		mv.addObject("result", message);
+		mv.setViewName("administrator/result");
+		
+		mv.addObject("url", "./lectureRoomAssignment");
+		return mv;
+		
+		
+	}
 
 }
