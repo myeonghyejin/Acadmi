@@ -66,7 +66,7 @@
 					<sec:authentication property="principal.username" var="userName" />
 					
 					<div class="row col-md-7 mx-auto">
-						<form class="row g-3" action="./add" method="post" enctype="multipart/form-data">			
+						<form id="contactForm" class="row g-3" action="./add" method="post" enctype="multipart/form-data">			
 						<%-- 	<c:if test="${board eq 'lectureNotice' || board eq 'lectureQna'}">
 								<div class="col-md-12 mt-3">
 									<label for="lectureNum" class="form-label strongFont2">강의번호</label> 
@@ -118,7 +118,7 @@
 							</div> 
 
 							<div class="row" style="margin-top: 50px; margin-left: 1080px;">		
-								<button type="submit" class="submitButton btn btn-info" style="margin-right: 5px;">등록</button>
+								<button type="button" class="submitButton btn btn-info" style="margin-right: 5px;">등록</button>
 								<button type="button" class="btn btn-danger" onclick="location.href='./list'">취소</button>
 							</div>
 						</form>
@@ -135,6 +135,7 @@
 
 	<script src="/js/filemanager.js"></script>
 	<script src="/js/board/notice.js"></script>
+	<script src="/js/board/boardCheck.js"></script>
 
 	<script>
 		$("#contents").summernote({

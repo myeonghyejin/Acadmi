@@ -93,7 +93,7 @@
 				  <div class="invoice p-3 mb-3">
 					<div class="row">
 					  <div class="col-12 table-responsive">
-						<table class="table table-striped">
+						<table class="table table-hover text-nowrap">
 							<thead class="table-light">
 								<tr>
 									<th>No</th>

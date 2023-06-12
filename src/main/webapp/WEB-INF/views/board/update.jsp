@@ -66,16 +66,16 @@
 					<sec:authentication property="principal.username" var="userName" />
 		
 					<div class="row col-md-7 mx-auto">
-						<form class="row g-3" action="./update" method="post" enctype="multipart/form-data">
+						<form id="contactForm" class="row g-3" action="./update" method="post" enctype="multipart/form-data">
 							<input type="hidden" name="num" value="${dto.num}">
 							
 							<div class="col-md-4" style="margin-top: 20px;">
 								<label for="writer" class="form-label strongFont2">작성자</label> 
 								<input type="text" name="writer" class="form-control" id="writer" readonly value="${userName}">
 							</div>
-			
+							
 							<div class="col-md-12 mt-3">
-								<label for="title" class="form-label strongFont2">제목</label> 
+								<label for="title" class="form-label strongFont2">제목</label>
 								<input type="text" class="form-control" name="title" id="title" value="${dto.title}">
 							</div>
 							
@@ -131,7 +131,7 @@
 							</div>
 
 							<div class="row" style="margin-top: 50px; margin-left: 1080px;">	
-								<button type="submit" class="submitButton btn btn-info" style="margin-right: 5px;">수정</button>
+								<button type="button" class="submitButton btn btn-info" style="margin-right: 5px;">수정</button>
 								<a href="./detail?num=${dto.num}" class="btn btn-danger">취소</a>
 							</div>
 						</form>
@@ -148,7 +148,7 @@
 	
 	<script src="/js/filemanager.js"></script>
 	<script src="/js/board/notice.js"></script>
-	
+	<script src="/js/board/boardCheck.js"></script>
 	<script>
 		setCount(${dto.fileVOs.size()});
 	

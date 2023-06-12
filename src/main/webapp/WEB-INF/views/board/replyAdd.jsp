@@ -47,7 +47,7 @@
 					<sec:authentication property="principal.username" var="userName" />
 					
 					<div class="row col-md-7 mx-auto">
-						<form class="row g-3" action="./reply" method="post">
+						<form id="contactForm" class="row g-3" action="./reply" method="post">
 							<input type="hidden" name="num" value="${qnaVO.num}">
 							
 							<%-- 	<c:if test="${board eq 'lectureQna'}">
@@ -85,7 +85,7 @@
 							</div>
 						
 							<div class="row" style="margin-top: 50px; margin-left: 1080px;">		
-								<button type="submit" class="submitButton btn btn-info" style="margin-right: 5px;">등록</button>
+								<button type="button" class="submitButton btn btn-info" style="margin-right: 5px;">등록</button>
 								<button type="button" class="btn btn-danger" onclick="location.href='./list'">취소</button>
 							</div>
 						</form>
@@ -110,5 +110,6 @@
 	<script src="/js/filemanager.js"></script>
 	<script src="/js/board/qnaReply.js"></script>
 	<script src="/js/board/notice.js"></script>
+	<script src="/js/board/boardCheck.js"></script>
 </body>
 </html>
