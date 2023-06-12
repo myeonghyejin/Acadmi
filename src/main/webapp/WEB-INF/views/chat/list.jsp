@@ -31,8 +31,28 @@
 
 							</div>
 							<div class="card-body">
-
 								<div class="direct-chat-contacts-light">
+								<form style="width: 800px; margin-left: auto;" action="./list" method="get" id="searchForm">
+										<div class="row" style="justify-content: flex-end;">
+											<input type="hidden" name="page" value="1" id="page">
+												<select class="select2" name="kind" id="kind"  style="width: 100px;">
+													<option value="title" ${pagination.kind eq 'title' ? 'selected' :''}>제목</option>
+													<option value="contents" ${pagination.kind eq 'contents' ?'selected':''}>내용
+													</option>
+													<option value="writer" ${pagination.kind eq 'writer' ? 'selected' :''}>작성자
+													</option>
+												</select>
+											<div class="form-group">
+											<div class="input-group input-group-lg">
+											<input type="text" class="form-control form-control-lg" value="${pagination.search}" name="search" id="search" placeholder="검색어를 입력하세요"  style="height: 40px;">
+											<div class="input-group-append">
+											<button type="submit" class="btn btn-lg btn-default"  style="height: 40px;"><i class="fa fa-search"></i></button>
+											</div>
+											</div>
+											</div>
+										</div>
+										
+								</form>
 									<c:forEach items="${list}" var="chatRoomVO">
 										<div class="contacts-list chatRoom">
 											<c:forEach items="${chatRoomVO.chatMessageVOs}" var="chatMessageVO" varStatus="i">
@@ -87,5 +107,10 @@
 	</div>
 	<!-- ./wrapper -->
 	<script src="../js/chat/chatList.js"></script>
+	<script>
+    $(function () {
+      $('.select2').select2()
+    });
+</script>
 </body>
 </html>
