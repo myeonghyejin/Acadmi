@@ -6,6 +6,15 @@
   
   <mapper namespace="com.acadmi.chat.ChatDAO">
   	
+  	<sql id="search">
+  		<if test="kind == 'roomRecipient'">
+  			AND ROOMRECIPIENT LIKE CONCAT('%', #{search}, '%')
+  		</if>
+  		<if test="kind == 'recipientName'">
+  			AND RECIPIENTNAME LIKE CONCAT('%', #{search}, '%')
+  		</if>
+  	</sql>
+  	
   		<!-- select -->
   		
   	<!-- 채팅방 목록 list -->
@@ -18,6 +27,7 @@
   				 LEFT JOIN CHATFILES CF
   				 ON(CM.MSGNUM = CF.MSGNUM)
   		WHERE CR.ROOMSENDER = #{username}
+  		<include refid="search"></include>
   		ORDER BY CHATSTATUS ASC ,CM.MSGDATE DESC
   	</select>
   	
@@ -90,8 +100,6 @@
   		</collection>
   	</resultMap>
   	
-  	
-  	
   	<!-- 이름을 뽑아오기 위한 select -->
   	
   	<select id="getMemberDetail" parameterType="MemberVO" resultType="MemberVO">
@@ -108,6 +116,12 @@
   	
   	<select id="getStudentName" parameterType="MemberVO" resultType="StudentVO">
   		SELECT * FROM STUDENT WHERE USERNAME = #{username}
+  	</select>
+  	
+  	<!-- 새로온 메세지 표시를 위한 select -->
+  	<select id="getChatList" parameterType="ChatRoomVO" resultType="ChatRoomVO">
+  		SELECT * FROM CHAT_ROOM
+  		WHERE ROOMSENDER = #{roomSender} AND CHATSTATUS = 0
   	</select>
   	
   		<!-- insert -->

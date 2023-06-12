@@ -43,6 +43,9 @@
 							<div class="direct-chat-messages" id="messageList">
 								<!-- Message. Default to the left -->
 								<c:forEach items="${chatRoom.chatMessageVOs}" var="chatMessageVO">
+									<c:if test="${chatMessageVO.msgStatus eq 2}">
+										<div>${chatMessageVO.msgContents}</div>
+									</c:if>
 									<c:if test="${chatMessageVO.msgSender eq param.roomRecipient}">
 										<div class="direct-chat-msg">
 											<div class="direct-chat-infos clearfix">

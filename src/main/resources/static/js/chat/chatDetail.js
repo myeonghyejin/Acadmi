@@ -75,6 +75,7 @@ $('#addButton').on('click', function(){
 			success : function(result){
 				if(result>=1){
 					alert('초대에 성공하였습니다.')
+					location.href='./detail?roomSender='+roomSender+'&roomRecipient='+roomRecipient
 				} else {
 					alert('실패했습니다.')
 				}
