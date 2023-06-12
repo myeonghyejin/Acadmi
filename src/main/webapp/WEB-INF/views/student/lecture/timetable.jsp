@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.acadmi.util.DateUtils" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,11 +33,42 @@
 					</div>
 				</div>
 				<!-- header end -->
-
+				
+				<!-- Search -->
+				<%
+				    int currentYear = DateUtils.calculateCurrentYear();
+				    int currentSemester = DateUtils.calculateCurrentSemester();
+				%>
+						
+				<form action="./timetable">
+					<div class="row mx-3 mt-2 mb-4">
+						<div class="col-3">
+							<label>수강 연도</label>
+							<select class="select2" style="width: 100%;" name="year">
+								<option value="<%= currentYear - 2 %>"><%= currentYear - 2 %></option>
+								<option value="<%= currentYear - 1 %>"><%= currentYear - 1 %></option>
+								<option value="<%= currentYear %>" selected><%= currentYear %></option>
+								<option value="<%= currentYear + 1 %>"><%= currentYear + 1 %></option>
+								<option value="<%= currentYear + 2 %>"><%= currentYear + 2 %></option>
+							</select>
+						</div>
+						<div class="col-3">
+							<label>수강 학기</label>
+							<select class="select2" style="width: 100%;" name="semester">
+								<option value="1" <% if (currentSemester == 1); out.print("selected"); %>>1학기</option>
+								<option value="2" <% if (currentSemester == 2); out.print("selected"); %>>2학기</option>
+							</select>
+						</div>
+							<button type="submit" class="btn btn-default">
+								<i class="fa fa-search"></i>
+							</button>
+					</div>
+				</form>
+				
 				<!-- Content -->
 				<div class="card">
 					<div class="card-header">
-						<h3 class="card-title" style="line-height: 200%;">년 학</h3>
+						<h3 class="card-title" style="line-height: 200%;"><%= currentYear %>년 <% if (currentSemester == 1) out.print("1"); %><% if (currentSemester == 2) out.print("2"); %>학기</h3>
 						<div class="card-tools">
 							
 							<div class="btn-group">
@@ -118,6 +149,9 @@
 	<c:import url="../../temp/footer.jsp"></c:import>
 	<!-- Footer 끝 -->
 <script>
+	$(function () {
+	    $('.select2').select2()
+	  });
 </script>
 </body>
 </html>

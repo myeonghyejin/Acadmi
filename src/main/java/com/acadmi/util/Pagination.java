@@ -12,10 +12,12 @@ import lombok.Setter;
 public class Pagination {
 	
 	//강의 관련 검색
+	private String username;
+	private Integer semester;
 	private String category;
 	private Integer department;
 	private Integer grade;
-	private String username;
+	private Integer year;
 	
 	//강의실 배정 조회
 	private Integer status;

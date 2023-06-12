@@ -126,7 +126,7 @@ public class StudentLectureController {
 	        mv.setViewName("common/ajaxResult");
 	        return mv;
 	    }
-
+	    
 	    //수강 신청 성공
 	    int result = studentLectureService.insertToStudentLecture(studentLectureVO, lectureVO, session);
 	    

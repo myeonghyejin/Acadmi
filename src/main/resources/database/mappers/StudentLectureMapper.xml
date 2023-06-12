@@ -26,6 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- ResultMap -->
 	<resultMap type="LectureVO" id="allLectureList">
 		<id column="LECTURENUM" property="lectureNum"/>
+		<result column="USERNAME" property="username"/>
 		<result column="LECTURENAME" property="lectureName"/>
 		<result column="CATEGORY" property="category"/>
 		<result column="GRADE" property="grade"/>
@@ -240,7 +241,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- INSERT -->
 	<insert id="insertToStudentLecture" parameterType="StudentLectureVO">
 		INSERT INTO STUDENT_LECTURE (LECTURENUM, USERNAME, YEAR, SEMESTER, CREDIT)
-		VALUES (#{lectureNum}, #{username}, #{lectureVO.periodVO.year}, #{lectureVO.periodVO.semester}, #{lectureVO.completionGrade})
+		VALUES (#{lectureNum}, #{username}, #{year}, #{semester}, #{lectureVO.completionGrade})
 	</insert>
 	
 	<insert id="insertToFavoriteLecture" parameterType="FavoriteLectureVO" useGeneratedKeys="true" keyProperty="favoriteNum">

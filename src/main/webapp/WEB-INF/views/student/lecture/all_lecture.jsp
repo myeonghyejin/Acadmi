@@ -42,59 +42,59 @@
 						</div>
 					
 						<!-- Search -->
-						<form action="./all_lecture" id="search-form">
-						<input type="hidden" name="page" value="1">
-						<div class="row justify-content-center mx-auto mb-3">
-							<div class="col-md-6">
-								<div class="row">
-									<div class="col-4">
-										<div class="form-group">
-											<label>구분</label>
-											<select class="select2" multiple="multiple" style="width: 100%;" name="category">
-												<option value="">전체</option>
-												<option value="전공 필수">전공 필수</option>
-												<option value="전공 선택">전공 선택</option>
-												<option value="교양 필수">교양 필수</option>
-												<option value="교양 선택">교양 선택</option>
-											</select>
+						<form action="./all_lecture">
+							<input type="hidden" name="page" value="1">
+							<div class="row justify-content-center mx-auto mb-3">
+								<div class="col-md-6">
+									<div class="row">
+										<div class="col-4">
+											<div class="form-group">
+												<label>구분</label>
+												<select class="select2" multiple="multiple" style="width: 100%;" name="category">
+													<option value="">전체</option>
+													<option value="전공 필수">전공 필수</option>
+													<option value="전공 선택">전공 선택</option>
+													<option value="교양 필수">교양 필수</option>
+													<option value="교양 선택">교양 선택</option>
+												</select>
+											</div>
+										</div>
+										<div class="col-4">
+											<div class="form-group">
+												<label>학년</label>
+												<select class="select2" multiple="multiple" style="width: 100%;" name="grade">
+													<option value="">전체</option>
+													<option value="1">1학년</option>
+													<option value="2">2학년</option>
+													<option value="3">3학년</option>
+													<option value="4">4학년</option>
+												</select>
+											</div>
+										</div>
+										<div class="col-4">
+											<div class="form-group">
+												<label>학과</label>
+												<select class="select2" style="width: 100%;" name="department">
+													<option value="" selected>전체</option>
+													<c:forEach items="${department}" var="departmentVO" begin="2">
+														<option value="${departmentVO.deptNum}">${departmentVO.deptName}</option>
+													</c:forEach>
+												</select>
+											</div>
 										</div>
 									</div>
-									<div class="col-4">
-										<div class="form-group">
-											<label>학년</label>
-											<select class="select2" multiple="multiple" style="width: 100%;" name="grade">
-												<option value="">전체</option>
-												<option value="1">1학년</option>
-												<option value="2">2학년</option>
-												<option value="3">3학년</option>
-												<option value="4">4학년</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-4">
-										<div class="form-group">
-											<label>학과</label>
-											<select class="select2" style="width: 100%;" name="department">
-												<option value="" selected>전체</option>
-												<c:forEach items="${department}" var="departmentVO" begin="2">
-													<option value="${departmentVO.deptNum}">${departmentVO.deptName}</option>
-												</c:forEach>
-											</select>
-										</div>
-									</div>
-								</div>
-								<div class="form-group">
-									<div class="input-group input-group-lg">
-										<input type="text" class="form-control form-control-lg" placeholder="강의 이름을 입력하세요." name="search" value="${pagination.search}">
-										<div class="input-group-append">
-											<button type="submit" class="btn btn-lg btn-default" id="submit">
-												<i class="fa fa-search"></i>
-											</button>
+									<div class="form-group">
+										<div class="input-group input-group-lg">
+											<input type="text" class="form-control form-control-lg" placeholder="강의 이름을 입력하세요." name="search" value="${pagination.search}">
+											<div class="input-group-append">
+												<button type="submit" class="btn btn-lg btn-default" id="submit">
+													<i class="fa fa-search"></i>
+												</button>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
 						</form>
 						
 					</div>

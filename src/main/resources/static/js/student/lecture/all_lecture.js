@@ -16,6 +16,9 @@ $("#allLectureList").on("click", "#mli", function(e) {
         const startTime = $(this).attr("data-start-time");
         const endTime = $(this).attr("data-end-time");
         const completionGrade = $(this).attr("data-completion-grade");
+        
+        console.log($(this).attr("data-year"));
+		console.log($(this).attr("data-semester"));
 
         fetch("./my_lecture/insert", {
             method: 'POST',
