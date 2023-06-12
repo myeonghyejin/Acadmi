@@ -27,20 +27,20 @@
 <div class="wrapper">
 	<!-- Header 적용 -->
 		<c:import url="../temp/administrator.jsp"></c:import>
-		<!-- Header 끝 -->
+	<!-- Header 끝 -->
 <div class="content-wrapper">
 			
 	<div class="container-fluid">
 		<div class="row">
 			<!-- 2레벨 Sidebar 적용 -->
 				
-					<c:import url="../temp/sidebar/administrator_join.jsp"></c:import>
+			<c:import url="../temp/sidebar/administrator_join.jsp"></c:import>
 				
-				<!-- 2레벨 Sidebar 끝 -->
+			<!-- 2레벨 Sidebar 끝 -->
 				
 			<div class="col">
-					<h3>교수 계정 생성</h3>
-			 <section class="content">
+			<h3>교수 계정 생성</h3>
+	<section class="content">
 
       <!-- Default box -->
       <div class="card">
@@ -67,7 +67,9 @@
                   <select class="form-control select2" style="width: 100%;" name="collegeNum" id="college" onchange="updateDepartmentOptions()">
                   	<option value="단과대">전체</option>
 					<c:forEach items="${college}" var="collegeVO">
-						<option value="${collegeVO.collegeNum}">${collegeVO.collegeName}</option>
+						<c:if test="${collegeVO.collegeNum != 1 && collegeVO.collegeNum != 2}">
+							<option value="${collegeVO.collegeNum}">${collegeVO.collegeName}</option>
+						</c:if>
 					</c:forEach>
                   </select>
 	           </div>
@@ -113,10 +115,11 @@
 	            
 	             <div class="form-group">
 	              <label for="detailAddress">상세주소</label>
-	              <input type="text" id="detailAddress"  class="form-control" name="address"/>
+	              <input type="text" id="detailAddress"  class="form-control" name="addressDetail"/>
 	            </div>
 	            <input type="hidden" name="category" value="1">
 	            <button type="button" class="btn btn-info" id="professorBtn">교수가입</button> 
+	            <button type="button" class="btn btn-danger" id="backBtn">취소</button>
 	          </form>
           </div>
         </div>
@@ -165,7 +168,9 @@
 			}
 			if($("#college").val() == "단과대") {
 				<c:forEach items="${department}" var="departmentVO">
-					$("#dept").append("<option value='${departmentVO.deptNum}'>${departmentVO.deptName}</option>")
+					<c:if test="${departmentVO.deptNum != 1 && departmentVO.deptNum != 2}">
+						$("#dept").append("<option value='${departmentVO.deptNum}'>${departmentVO.deptName}</option>")
+					</c:if>
 				</c:forEach>
 			}
 			

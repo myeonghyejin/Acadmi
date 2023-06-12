@@ -21,3 +21,4 @@ public class ProfessorVO extends MemberVO{
 	private String addressDetail;
 	private Integer status;
 }
+	

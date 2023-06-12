@@ -17,6 +17,16 @@
    	 	justify-content: center;
 	
 	}
+	
+	.content {
+		margin: 30px;
+	}
+	
+	.selected-page{
+		  background-color: #E2E2E2;
+		  color: white; /* 선택된 페이지의 텍스트 색상도 변경할 수 있습니다 */
+	}
+	
 	#table2 {
 		width : 90%; 
 	}
@@ -30,6 +40,7 @@
 	#add2 {
 		float : right;
 		clear : both;
+		width : 10%;
 		
 	} 
 	.card-title {
@@ -64,6 +75,32 @@
                <!-- header end -->
 					<!-- Main content -->
 				    <section class="content">
+				    
+				      
+				    <form action="./departmentList" id="search-form">
+						<input type="hidden" name="page" value="1">
+						<div class="card search">
+							<div class="row content" >
+								<label style="margin : 10px;">단과대학</label>
+								<select class="form-control select" name="collegeNum" style="width: 20%;">
+									<option value="">전체</option>
+									<c:forEach items="${college}" var="collegeVO">
+										<option value="${collegeVO.collegeNum}">${collegeVO.collegeName}</option>
+									</c:forEach>
+								</select>
+								<label style="margin : 10px;">학과</label>
+								<input type="text" class="form-control" name="deptName" placeholder="내용을 입력해주세요" style="width : 20%">
+								<label style="margin : 10px;">상태</label>
+								<select class="form-control select" name="status" style="width: 20%;">
+									<option value="">전체</option>
+									<option value="1">사용가능</option>
+									<option value="0">사용불가</option>
+									
+								</select>
+								<button type="submit" class="btn btn-info" style="margin : 0 0 0 20px; width : 15%">검색</button>
+							</div>
+						</div>
+					</form>
 				
 				      <!-- Default box -->
 				      <div class="card">
@@ -90,7 +127,7 @@
 				                          학과
 				                      </th>
 				                      <th style="width : 15%">
-				                          사용어부
+				                          사용여부
 				                      </th>
 				                      <th style="width: 10%">
 				                 
@@ -112,8 +149,8 @@
 												<td><c:out value="${deptName}"></c:out></td>
 												<td>
 													<select name="status" class="status">
-														<option value="1" selected>활성화</option>
-														<option value="0">비활성화</option>
+														<option value="1" selected>사용가능</option>
+														<option value="0">사용불가</option>
 													</select>
 												</td>
 											</c:if>
@@ -144,7 +181,7 @@
 				        <!-- /.card-body -->
 				      </div>
 				      <!-- /.card -->
-				     <a href="./departmentAdd"><button type="button" id="add" class="btn btn-info">작성</button></a>
+				     <a href="./departmentAdd"><button type="button" id="add2" class="btn btn-info">작성</button></a>
 				    </section>
 				
 				    	<div class="row" style="margin: 20px auto;" id="pagination">
@@ -184,5 +221,9 @@
 
 	
 <script type="text/javascript" src="../js/administrator/departmentList.js"></script>	
+<script type="text/javascript">
+/* 페이지네이션 선택 색상 */
+
+</script>
 </body>
 </html>
