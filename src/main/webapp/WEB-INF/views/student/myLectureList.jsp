@@ -79,7 +79,7 @@
 		               						<c:forEach items="${list}" var="lectureVO">
 		               							<tr>
 		               								<td>${lectureVO.lectureNum }</td>
-		               								<td><a href="./lectureMain?lectureNum=${lectureVO.lectureNum}">${lectureVO.lectureName}</a></td>
+		               								<td><a href="./lecture/main?lectureNum=${lectureVO.lectureNum}">${lectureVO.lectureName}</a></td>
 		               								<td>${lectureVO.professorVO.name}</td>
 		               								<td>${lectureVO.subscription}</td>
 		               								<td>

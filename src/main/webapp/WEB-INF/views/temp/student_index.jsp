@@ -5,6 +5,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <style>
+	
 	.lecture {
 		margin : 40px 0 0 40px;
 		color : #17a2b8;
@@ -18,6 +19,7 @@
 
 	.main2 {
 		margin-top : auto;
+		
 		
 	}
 	
@@ -51,7 +53,7 @@
 	}
 	
 	.btn {
-		margin : 30px 0 0 300px;
+		margin : 20px 0 0 250px;
 		width : 100px;
 		height : 40px;
 	}
@@ -61,7 +63,7 @@
 	}
 	
 	.nav-item {
-		margin : 15px 0 0 10px;
+		margin : 5px 0 0 10px;
 	} 
 </style>
 	
@@ -121,14 +123,13 @@
 		             	 <div class="card-body">
 			                <div class="tab-content">
 			                  <div class="tab-pane active" id="tab_1">
-			                    A wonderful serenity has taken possession of my entire soul,
-			                    like these sweet mornings of spring which I enjoy with my whole heart.
-			                    I am alone, and feel the charm of existence in this spot,
-			                    which was created for the bliss of souls like mine. I am so happy,
-			                    my dear friend, so absorbed in the exquisite sense of mere tranquil existence,
-			                    that I neglect my talents. I should be incapable of drawing a single stroke
-			                    at the present moment; and yet I feel that I never was a greater artist than now.
-			                  </div>
+			                   	<c:forEach items="${notice}" var="noticeVO">
+			                   		<ul class="list">
+			                   			<li class="list-item">${noticeVO.title }</li>
+			                   			<li class="list-item2">${noticeVO.regDate }</li>
+			                   		</ul>
+			                   	</c:forEach>
+			                  </div> 
 			                  <!-- /.tab-pane -->
 			                  <div class="tab-pane" id="tab_2">
 			                    The European languages are members of the same family. Their separate existence is a myth.
@@ -139,16 +140,7 @@
 			                    words. If several languages coalesce, the grammar of the resulting language is more simple
 			                    and regular than that of the individual languages.
 			                  </div>
-			                  <!-- /.tab-pane -->
-			                  <div class="tab-pane" id="tab_3">
-			                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-			                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-			                    when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-			                    It has survived not only five centuries, but also the leap into electronic typesetting,
-			                    remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
-			                    sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
-			                    like Aldus PageMaker including versions of Lorem Ipsum.
-			                  </div>
+			                 
 			                  <!-- /.tab-pane -->
 			                </div>
                 <!-- /.tab-content -->

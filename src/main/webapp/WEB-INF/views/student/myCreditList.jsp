@@ -71,7 +71,7 @@
 		               							<th style="width : 10%">강의번호</th>
 		               							<th style="width : 30%">강좌명</th>
 		               							<th style="width : 10%">담당교수</th>
-		               							<th style="width : 10%">점수</th>
+		               							<th style="width : 10%">학점</th>
 		               							<th style="width : 10%">구분</th>
 		               							
 		               						</tr>

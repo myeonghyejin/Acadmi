@@ -20,6 +20,7 @@ import com.acadmi.board.notice.NoticeService;
 import com.acadmi.board.notice.NoticeVO;
 import com.acadmi.lecture.LectureVO;
 import com.acadmi.student.lecture.StudentLectureVO;
+import com.acadmi.syllabus.ClassVO;
 import com.acadmi.util.Pagination;
 
 import lombok.extern.slf4j.Slf4j;
@@ -80,7 +81,36 @@ public class StudentController {
 		return mv;
 	}
 	
+	//강의 메인페이지
+	@GetMapping("lecture/main")
+	public ModelAndView getLectureProfessor(LectureVO lectureVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+
+		
+		lectureVO =  studentService.getLectureProfessor(lectureVO);
+		List<ClassVO>  ar = studentService.getSyllabusClass(lectureVO);
+		mv.addObject("lecture", lectureVO);
+		mv.addObject("classes",ar);
+		mv.setViewName("student/lecture/main");
+		
+		return mv;
+		
+	}
 	
+	//강의 참여자 목록
+	@GetMapping("lecture/attendee")
+	public ModelAndView getAttendeeList(Pagination pagination) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		List<LectureVO> ar = studentService.getAttendeeList(pagination);
+		
+		mv.addObject("list", ar);
+		mv.setViewName("student/lecture/attendee");
+		
+		return mv;
+		
+		
+	}
 	
 
 	

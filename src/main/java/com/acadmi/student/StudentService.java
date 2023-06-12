@@ -11,6 +11,8 @@ import com.acadmi.board.BoardVO;
 import com.acadmi.board.notice.NoticeVO;
 import com.acadmi.lecture.LectureVO;
 import com.acadmi.student.lecture.StudentLectureVO;
+import com.acadmi.syllabus.ClassVO;
+import com.acadmi.util.Pagination;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -55,8 +57,21 @@ public class StudentService {
 	}
 	
 	
-	  public List<BoardVO> getNoticeList() throws Exception { 
+	public List<BoardVO> getNoticeList() throws Exception { 
 		  return studentDAO.getNoticeList(); 
-	  }
-	 
+	}
+	
+	//강의 메인페이지
+	public LectureVO getLectureProfessor(LectureVO lectureVO) throws Exception {
+		return studentDAO.getLectureProfessor(lectureVO);
+	}
+	
+	public List<ClassVO> getSyllabusClass(LectureVO lectureVO) throws Exception {
+		return studentDAO.getSyllabusClass(lectureVO);
+	}
+	
+	//강의 참여자 목록
+	public List<LectureVO> getAttendeeList(Pagination pagination) throws Exception {
+		return studentDAO.getAttendeeList(pagination);
+	}
 } 

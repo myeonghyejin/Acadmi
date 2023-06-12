@@ -31,16 +31,14 @@
 
  	<!--내 수강 강좌 -->
  	<select id="getMyLectureList" parameterType="lectureVO" resultMap="MyLectureList">
- 		SELECT L.*,SL.*,P.*,S.* FROM LECTURE L
-			LEFT OUTER JOIN 
+		SELECT * FROM LECTURE L 
+			INNER JOIN 
 				STUDENT_LECTURE SL 
-			ON L.LECTURENUM = SL.LECTURENUM
+			USING(LECTURENUM)
 				INNER JOIN 
-					STUDENT S 
-				ON S.USERNAME = SL.USERNAME
-					INNER JOIN 
-						PROFESSOR P
-		WHERE S.USERNAME = #{username}
+					PROFESSOR P 
+				ON L.USERNAME = P.USERNAME 
+		WHERE SL.USERNAME=#{username}
 		<if test="year !=null and !year.equals('')">
 			AND L.YEAR = #{year}
 		</if>
@@ -131,22 +129,49 @@
 	</select>
 	
 	<!--강의 메안페이지  -->
-<!-- 	<select id="getLectureDetail" parameterType="LectureVO" resultType="">
-		SELECT * FROM CLASS C
-			RIGHT OUTER JOIN
-				SYLLABUS S 
-			ON C.SYLLABUSNUM  = S.SYLLABUSNUM
-				LEFT OUTER JOIN 
+	<select id="getLectureProfessor" parameterType="LectureVO" resultMap="LectureResult">
+		SELECT * FROM MEMBER M
+			INNER JOIN 
+				PROFESSOR P 
+			ON M.USERNAME = P.USERNAME 
+				INNER JOIN 
 					LECTURE L 
-				ON S.LECTURENUM = L.LECTURENUM
-					INNER JOIN 
-						PROFESSOR P 
-					ON L.DEPTNUM = P.DEPTNUM
-		WHERE L.LECTURENUM = #{lectureNum}
-	</select> -->
+				ON P.USERNAME = L.USERNAME
+		WHERE LECTURENUM=#{lectureNum}
+	</select>
+	<resultMap type="lectureVO" id="LectureResult">
+		<id column="LECTURENUM" property="lectureNum"/>
+		<result column="LECTURENAME" property="lectureName"/>
+		<association property="professorVO" javaType="ProfessorVO">
+			<id column="USERNAME" property="username"/>
+			<result column="NAME" property="name"/>
+			<result column="PHONE" property="phone"/>
+			<result column="PROFESSORROOM" property="professorRoom"/>
+			<result column="EMAIL" property="email"/>
+		</association>
+	</resultMap>
 	
-	<!--강의 참여자 목록  -->
-<!-- 	<select id="getAttendeeList" parameterType="LectureVO" resultMap="AttendeeList">
+	<!-- 메인페이지 공지사항 출력 -->
+	<select id="getNoticeList" resultType="BoardVO">
+		SELECT * FROM NOTICE
+		ORDER BY NUM DESC 
+		LIMIT 5
+	</select>
+
+	<!--강의 계획서  -->
+	<select id="getSyllabusClass" parameterType="LectureVO" resultType= "ClassVO">
+		 SELECT C.* FROM SYLLABUS S 
+		 	INNER JOIN 
+		 		CLASS C 
+		 	ON(S.SYLLABUSNUM=C.SYLLABUSNUM) 
+  		 		INNER JOIN 
+  		 			LECTURE L 
+  		 		ON(S.LECTURENUM=L.LECTURENUM) 
+  		 WHERE LECTURENAME=#{lectureName}
+	</select>
+	
+	<!-- 강의 참여자 목록  -->
+	<select id="getAttendeeList" parameterType="Pagination" resultMap="AttendeeList">
 		SELECT S.*,D.DEPTNAME, C.COLLEGENAME,MF.*  FROM `MEMBER` M 
 			LEFT OUTER JOIN 
 				MEMBERFILES MF 
@@ -164,16 +189,28 @@
 									COLLEGE C 
 								ON D.COLLEGENUM = C.COLLEGENUM
 					WHERE LECTURENUM = #{lectureNum}
+					AND LIMIT #{startRow},#{perPage}			
 	</select>
-	<resultMap type="" id="AttendeeList">
-		
-	</resultMap> -->
+	<resultMap type="LectureVO" id="AttendeeList">
+		<id column="LECTURENUM" property="lectureNum"/>
+			<association property="collegeVO" javaType="CollegeVO">
+				<id column="COLLEGENUM" property="collegeNum"/>
+				<result column="COLLEGENAME" property="collegeName"/>
+			</association>
+			<association property="studentVO" javaType="StudentVO">
+				<id column="USERNAME" property="username"/>
+				<result column="NAME" property="name"/>
+				<association property="memberFilesVO" javaType="MemberFilesVO">
+					<id column="FILENUM" property="fileNum"/>
+					<result column="FILENAME" property="fileName"/>
+				</association>
+			</association>
+			<association property="departmentVO" javaType="DepartmentVO">
+				<id column="DEPTNUM" property="deptNum"/>
+				<result column="DEPTNAME" property="deptName"/>
+			</association>
+	</resultMap>
 	
-	<!-- 메인페이지 공지사항 출력 -->
-	<select id="getNoticeList" resultType="BoardVO">
-		SELECT * FROM NOTICE
-		ORDER BY NUM DESC 
-		LIMIT 5
-	</select>
+
   	
   </mapper>
