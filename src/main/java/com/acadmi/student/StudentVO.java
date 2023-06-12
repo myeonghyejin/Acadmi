@@ -2,6 +2,8 @@ package com.acadmi.student;
 
 import java.sql.Date;
 
+import com.acadmi.credit.CreditVO;
+import com.acadmi.department.DepartmentVO;
 import com.acadmi.member.MemberVO;
 
 import lombok.Getter;
@@ -19,4 +21,7 @@ public class StudentVO extends MemberVO{
 	private String address;
 	private String addressDetail;
 	private Integer status;
+	
+	private DepartmentVO departmentVO;
+	private CreditVO creditVO;
 }
