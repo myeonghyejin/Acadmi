@@ -100,3 +100,15 @@ $("#adminBtn").click(function() {
         alert("모든 사항을 입력하세요")
     }
 })
+
+
+//취소 
+$("#backBtn").click(function() {
+    let back = confirm("정말 취소하시겠습니까?")
+
+    if(back == true) {
+        location.href="/"
+    }else {
+        return;
+    }
+})

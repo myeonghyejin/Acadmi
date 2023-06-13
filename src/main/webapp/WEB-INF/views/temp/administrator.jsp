@@ -1,15 +1,12 @@
+<%@page import="com.acadmi.department.DepartmentVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <!-- Preloader -->
 <div class="preloader flex-column justify-content-center align-items-center">
-	<img class="animation__shake" src="/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+	<img class="animation__shake" src="/img/AdminLTELogoW.png" alt="AdminLTELogo" height="60" width="60">
 </div>
 
 <!-- Navbar -->
@@ -20,37 +17,66 @@
 			<a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
 		</li>		
 	</ul>
+	
+	
 
 	<!-- Right navbar links -->
 	<ul class="navbar-nav ml-auto">
-
-		<!-- 알림 -->
+	<!-- 알림 -->
 		<li class="nav-item dropdown">
 			<a class="nav-link" data-toggle="dropdown" href="#">
 				<i class="far fa-bell"></i>
-				<span class="badge badge-warning navbar-badge">15</span>
+				<span class="badge badge-warning navbar-badge" id="notification"></span>
 			</a>
 			<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-				<span class="dropdown-item dropdown-header">15 Notifications</span>
+				<span class="dropdown-item dropdown-header" id="allNotification"></span>
 					<div class="dropdown-divider"></div>
-						<a href="#" class="dropdown-item">
-							<i class="fas fa-envelope mr-2"></i> 4 new messages
-							<span class="float-right text-muted text-sm">3 mins</span>
+						<a href="/notification/list?notificationKind=1" class="dropdown-item">
+							<i class="fas fa-envelope mr-2"></i> 
+							<span id="noticeNotification"></span>
+						</a>
+					<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
+					<div class="dropdown-divider"></div>
+						<a href="/notification/list?notificationKind=2" class="dropdown-item">
+							<i class="fas fa-users mr-2"></i>
+							<span id="qnaNotification"></span>
 						</a>
 					<div class="dropdown-divider"></div>
-						<a href="#" class="dropdown-item">
-							<i class="fas fa-users mr-2"></i> 8 friend requests
-							<span class="float-right text-muted text-sm">12 hours</span>
+						<a href="/notification/list?notificationKind=7" class="dropdown-item">
+							<i class="fas fa-file mr-2"></i>
+							<span id="lectureNotification"></span>
 						</a>
-					<div class="dropdown-divider"></div>
-						<a href="#" class="dropdown-item">
-							<i class="fas fa-file mr-2"></i> 3 new reports
-							<span class="float-right text-muted text-sm">2 days</span>
+					</sec:authorize>
+					<sec:authorize access="hasRole('ROLE_PROFESSOR')">
+						<a href="/notification/list?notificationKind=3" class="dropdown-item">
+							<i class="fas fa-users mr-2"></i>
+							<span id="qnaReplyNotification"></span>
 						</a>
+						<a href="/notification/list?notificationKind=5" class="dropdown-item">
+							<i class="fas fa-users mr-2"></i>
+							<span id="lectureQnaNotification"></span>
+						</a>
+					</sec:authorize>
+					<sec:authorize access="hasRole('ROLE_STUDENT')">
+						<a href="/notification/list?notificationKind=4" class="dropdown-item">
+							<i class="fas fa-users mr-2"></i>
+							<span id="lectureNoticeNotification"></span>
+						</a>
+						<a href="/notification/list?notificationKind=3" class="dropdown-item">
+							<i class="fas fa-users mr-2"></i>
+							<span id="qnaReplyNotification"></span>
+						</a>
+						<a href="/notification/list?notificationKind=6" class="dropdown-item">
+							<i class="fas fa-users mr-2"></i>
+							<span id="lectureQnaReplyNotification"></span>
+						</a>
+					</sec:authorize>
 					<div class="dropdown-divider"></div>
-				<a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+				<a href="/notification/list?notificationKind=1" class="dropdown-item dropdown-footer">알림 전체보기</a>
 			</div>
 		</li>
+	
+		
 
 		<!-- 채팅 -->
 		<li class="nav-item dropdown">
@@ -141,12 +167,39 @@
 		<!-- Sidebar user panel (optional) -->
 		<div class="user-panel mt-3 pb-3 mb-3 d-flex">
 			<div class="image">
-				<img src="/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+				<sec:authorize access="hasRole('STUDENT')">
+                <sec:authentication property="principal" var="user"/>
+					<img src="/images/profile.jpg" class="img-circle elevation-2" alt="User Image" >
+				</sec:authorize>
+				
+				<sec:authorize access="hasRole('PROFESSOR')">
+                <sec:authentication property="Principal" var="user"/>
+					<img src="/images/profile.jpg" class="img-circle elevation-2" alt="User Image">
+				</sec:authorize>
+				
+				<sec:authorize access="hasRole('ADMINISTRATOR')">
+                <sec:authentication property="Principal" var="user"/>
+					<img src="/images/profile.jpg" class="img-circle elevation-2" alt="User Image">
+				</sec:authorize>
 			</div>
 			<div class="info">
-				<a href="#" class="d-block">Alexander Pierce</a>
+				<sec:authorize access="hasRole('STUDENT')">
+                <sec:authentication property="Principal" var="user"/>
+                    <a href="/member/studentPage?username=${user.username}">${user.username}</a>
+                </sec:authorize>
+                
+				<sec:authorize access="hasRole('PROFESSOR')">
+				<sec:authentication property="Principal" var="user"/>
+					<a href="/member/professorPage?username=${user.username}">${user.username}</a>
+				</sec:authorize>
+				
+				<sec:authorize access="hasRole('ADMINISTRATOR')">
+				<sec:authentication property="Principal" var="user"/>
+					<a href="/member/administratorPage?username=${user.username}">${user.username}</a>
+				</sec:authorize>
 			</div>
 		</div>
+		
 
 		<!-- Sidebar Menu -->
 		<nav class="mt-2">
@@ -170,7 +223,7 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="#" class="nav-link">
+							<a href="/qna/list" class="nav-link">
 								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>질의 응답</p>
 							</a>
@@ -189,7 +242,7 @@
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
-							<a href="#" class="nav-link">
+							<a href="/administrator/lectureList" class="nav-link">
 								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>강의 목록</p>
 							</a>
@@ -208,13 +261,13 @@
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
-							<a href="#" class="nav-link">
+							<a href="/administrator/studentAdd" class="nav-link">
 								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>계정 관리</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="#" class="nav-link">
+							<a href="/administrator/studentList" class="nav-link">
 								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>회원 조회</p>
 							</a>
@@ -227,15 +280,15 @@
 					<a href="#" class="nav-link">
 						<i class="nav-icon fas fa-comment-dots"></i>
 						<p>
-							기관 관리
+							기간 관리
 							<i class="fas fa-angle-left right"></i>
 						</p>
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
-							<a href="#" class="nav-link">
+							<a href="/administrator/periodAdd" class="nav-link">
 								<i class="fa-solid fa-circle fa-2xs"></i>
-								<p>기관 관리</p>
+								<p>기간 관리</p>
 							</a>
 						</li>
 					</ul>
@@ -253,7 +306,7 @@
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
-							<a href="#" class="nav-link">
+							<a href="/administrator/lectureRoomList" class="nav-link">
 								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>강의실 목록</p>
 							</a>
@@ -272,14 +325,9 @@
 						</p>
 					</a>
 					<ul class="nav nav-treeview">
+						
 						<li class="nav-item">
-							<a href="/notice/list" class="nav-link">
-								<i class="fa-solid fa-circle fa-2xs"></i>
-								<p>단과대 관리</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="#" class="nav-link">
+							<a href="/administrator/departmentList" class="nav-link">
 								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>학과 관리</p>
 							</a>
@@ -299,5 +347,3 @@
 	margin: 0 8px;
 }
 </style>
-</body>
-</html>

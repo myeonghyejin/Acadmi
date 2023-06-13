@@ -2,6 +2,215 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
   <mapper namespace="com.acadmi.student.StudentDAO">
+  
+  	<!-- 메인페이지 현재수강중인 강의 출력 -->
+  	<select id="getCurrentLectureList" resultMap="CurrentLectureList">
+  		SELECT sl.*, l.*, p.NAME  
+			FROM LECTURE l  
+				JOIN STUDENT_LECTURE sl 
+			ON (sl.LECTURENUM = l.LECTURENUM)
+					JOIN PROFESSOR p 
+				ON (l.USERNAME = p.USERNAME)
+		WHERE l.`YEAR` = DATE_FORMAT(NOW(), '%Y') 
+			AND (
+			  (l.SEMESTER = 1 AND DATE_FORMAT(NOW(), '%m') BETWEEN 3 AND 6)
+			  OR (l.SEMESTER = 2 AND DATE_FORMAT(NOW(), '%m') BETWEEN 9 AND 12)
+			)
+  	</select>
+  	<resultMap type="LectureVO" id="CurrentLectureList">
+  		<id property="lectureNum" column="LECTURENUM" />
+  		<result column="LECTURENAME" property="lectureName"/>
+  		<association property="professorVO" javaType="ProfessorVO">
+  			<result column="NAME" property="name"/>
+  		</association>
+  	</resultMap>
+
+
+ 	<!--내 수강 강좌 -->
+ 	<select id="getMyLectureList" parameterType="lectureVO" resultMap="MyLectureList">
+		SELECT * FROM LECTURE L 
+			INNER JOIN 
+				STUDENT_LECTURE SL 
+			USING(LECTURENUM)
+				INNER JOIN 
+					PROFESSOR P 
+				ON L.USERNAME = P.USERNAME 
+		WHERE SL.USERNAME=#{username}
+		<if test="year !=null and !year.equals('')">
+			AND L.YEAR = #{year}
+		</if>
+		<if test="semester !=null and !semester.equals('')">
+			AND L.SEMESTER=#{semester}
+		</if>
+ 	</select>
+ 	<resultMap type="LectureVO" id="MyLectureList">
+ 		<id column="LECTURENUM" property="lectureNum"/>
+ 		<result column="USERNAME" property="username"/>
+ 		<result column="LECTURENAME" property="lectureName"/>
+ 		<result column="YEAR" property="year"/>
+ 		<result column="SEMESTER" property="semester"/>
+ 		<result column="CATEGORY" property="category"/>
+ 		<result column="SUBSCRIPTION" property="subscription"/>
+ 		<association property="studentLectureVO" javaType="StudentLectureVO">
+ 			<result column="USERNAME" property="username"/>
+ 		</association>
+ 		<association property="studentVO" javaType="StudentVO">
+ 			<result column="USERNAME" property="username"/>
+ 		</association>
+ 		<association property="professorVO" javaType="ProfessorVO">
+ 			<result column="NAME" property="name"/>
+ 		</association>
+
+ 	</resultMap>
+ 	
+ 	<!--내 성적 조회  -->
+ 	<select id="getMyCreditList" parameterType="lectureVO" resultMap="myCreditList">
+	 	SELECT L.*,SL.*,C.*,P.* FROM LECTURE L
+			RIGHT OUTER JOIN 
+				STUDENT_LECTURE SL 
+			ON L.LECTURENUM = SL.LECTURENUM
+					RIGHT OUTER JOIN 
+						CREDIT C
+					ON SL.LECTURENUM = C.LECTURENUM 
+						INNER JOIN 
+							PROFESSOR P
+		WHERE SL.USERNAME=#{username}
+		<if test="year !=null and !year.equals('')">
+			AND L.YEAR = #{year}
+		</if>
+		<if test="semester !=null and !semester.equals('')">
+			AND L.SEMESTER=#{semester}
+		</if>
+ 	</select>
+ 	
+ 	
+ 	
+ 	<resultMap type="LectureVO" id="myCreditList">
+ 		<id column="LECTURENUM" property="lectureNum"/>
+ 		<result column="LECTURENAME" property="lectureName"/>
+ 		<result column="CATEGORY" property="category"/>
+ 		<result column="YEAR" property="year"/>
+ 		<result column="SEMESTER" property="semester"/>
+ 		
+ 		<association property="studentLectureVO" javaType="StudentLectureVO">
+ 			<association property="creditVO" javaType="CreditVO">
+ 				<result column="CREDIT" property="credit"/>
+ 			</association>
+ 		</association>
+ 		<association property="professorVO" javaType="ProfessorVO">
+ 			<id column="USERNAME" property="username"/>
+ 			<result column="NAME" property="name"/>
+ 		</association>
+ 		
+ 	</resultMap>
+ 	
+ 	<!-- 입학년도 ~ 재학년도-->
+	<select id="getMaxYear" parameterType="LectureVO" resultType="Integer">
+		SELECT MAX(L.YEAR) AS YEAR  FROM LECTURE L
+			LEFT OUTER JOIN
+				STUDENT_LECTURE SL 
+			ON L.LECTURENUM=SL.LECTURENUM
+				INNER JOIN 
+					STUDENT S 
+		WHERE S.USERNAME = #{username}
+	</select>
+	
+	<select id="getMinYear" parameterType="lectureVO" resultType="Integer">
+		SELECT MIN(L.YEAR) AS YEAR  FROM LECTURE L
+			LEFT OUTER JOIN
+				STUDENT_LECTURE SL 
+			USING(LECTURENUM)
+				INNER JOIN 
+					STUDENT S 
+		WHERE S.USERNAME = #{username}
+	</select>
+	
+	<!--강의 메안페이지  -->
+	<select id="getLectureProfessor" parameterType="LectureVO" resultMap="LectureResult">
+		SELECT * FROM MEMBER M
+			INNER JOIN 
+				PROFESSOR P 
+			ON M.USERNAME = P.USERNAME 
+				INNER JOIN 
+					LECTURE L 
+				ON P.USERNAME = L.USERNAME
+		WHERE LECTURENUM=#{lectureNum}
+	</select>
+	<resultMap type="lectureVO" id="LectureResult">
+		<id column="LECTURENUM" property="lectureNum"/>
+		<result column="LECTURENAME" property="lectureName"/>
+		<association property="professorVO" javaType="ProfessorVO">
+			<id column="USERNAME" property="username"/>
+			<result column="NAME" property="name"/>
+			<result column="PHONE" property="phone"/>
+			<result column="PROFESSORROOM" property="professorRoom"/>
+			<result column="EMAIL" property="email"/>
+		</association>
+	</resultMap>
+	
+	<!-- 메인페이지 공지사항 출력 -->
+	<select id="getNoticeList" resultType="BoardVO">
+		SELECT * FROM NOTICE
+		ORDER BY NUM DESC 
+		LIMIT 5
+	</select>
+
+	<!--강의 계획서  -->
+	<select id="getSyllabusClass" parameterType="LectureVO" resultType= "ClassVO">
+		 SELECT C.* FROM SYLLABUS S 
+		 	INNER JOIN 
+		 		CLASS C 
+		 	ON(S.SYLLABUSNUM=C.SYLLABUSNUM) 
+  		 		INNER JOIN 
+  		 			LECTURE L 
+  		 		ON(S.LECTURENUM=L.LECTURENUM) 
+  		 WHERE LECTURENAME=#{lectureName}
+	</select>
+	
+	<!-- 강의 참여자 목록  -->
+	<select id="getAttendeeList" parameterType="Pagination" resultMap="AttendeeList">
+		SELECT S.*,D.DEPTNAME, C.COLLEGENAME,MF.*  FROM `MEMBER` M 
+			LEFT OUTER JOIN 
+				MEMBERFILES MF 
+			ON M.USERNAME = MF.USERNAME 
+					INNER JOIN 
+						STUDENT S 
+					ON (MF.USERNAME=S.USERNAME) 
+						INNER JOIN 
+							STUDENT_LECTURE SL 
+						ON (M.USERNAME=SL.USERNAME) 
+								INNER JOIN 
+									DEPARTMENT D 
+								ON(S.DEPTNUM=D.DEPTNUM) 
+								INNER JOIN 
+									COLLEGE C 
+								ON D.COLLEGENUM = C.COLLEGENUM
+					WHERE LECTURENUM = #{lectureNum}
+					AND LIMIT #{startRow},#{perPage}			
+	</select>
+	<resultMap type="LectureVO" id="AttendeeList">
+		<id column="LECTURENUM" property="lectureNum"/>
+			<association property="collegeVO" javaType="CollegeVO">
+				<id column="COLLEGENUM" property="collegeNum"/>
+				<result column="COLLEGENAME" property="collegeName"/>
+			</association>
+			<association property="studentVO" javaType="StudentVO">
+				<id column="USERNAME" property="username"/>
+				<result column="NAME" property="name"/>
+				<association property="memberFilesVO" javaType="MemberFilesVO">
+					<id column="FILENUM" property="fileNum"/>
+					<result column="FILENAME" property="fileName"/>
+				</association>
+			</association>
+			<association property="departmentVO" javaType="DepartmentVO">
+				<id column="DEPTNUM" property="deptNum"/>
+				<result column="DEPTNAME" property="deptName"/>
+			</association>
+	</resultMap>
+	
+
   	
   </mapper>

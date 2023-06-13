@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.acadmi.college.CollegeVO;
 import com.acadmi.department.DepartmentVO;
@@ -87,4 +88,5 @@ public interface AdministratorDAO {
 	
 	//강의실 배정 
 	public List<LectureRoomVO> getLectureRoomAssignment(Pagination pagination) throws Exception;
+	public int setLectureRoomAssignmentUpdate(LectureVO lectureVO) throws Exception;
 }
