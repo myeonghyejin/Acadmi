@@ -3,6 +3,7 @@ $("#table1").on("click", '[data-lecture]',function() {
     console.log("test")
     let lectureBuilding = $(this).attr('data-lectureBuilding')
     let lectureRoom = $(this).attr('data-lectureRoom')
+    let lectureNum = $(this).attr('data-lectureNum')
 
     $.ajax ({
         uri : './lectureRoomAssignment',

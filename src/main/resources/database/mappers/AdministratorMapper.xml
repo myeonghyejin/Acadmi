@@ -168,7 +168,7 @@
   		SELECT COUNT(USERNAME) FROM ADMINISTRATOR
   	</select>
   
-  	<select id="getStudentList" parameterType="Pagination" resultMap="StudentList">
+  	<select id="getStudentList"  parameterType="Pagination" resultMap="StudentList">
   		SELECT * FROM MEMBER M
 		LEFT OUTER JOIN
 			MEMBERFILES MF
@@ -206,7 +206,7 @@
   		</collection>
   	</resultMap>
   	
-  	<select id="getProfessorList" resultMap="ProfessorList">
+  	<select id="getProfessorList" resultMap="ProfessorList" parameterType="Pagination">
   		SELECT * FROM MEMBER M
 		LEFT OUTER JOIN
 			MEMBERFILES MF 
@@ -246,7 +246,7 @@
   		</collection>
   	</resultMap>
   
-  <select id="getAdministratorList" resultMap="AdminIstratorList">
+  <select id="getAdministratorList" resultMap="AdminIstratorList" parameterType="Pagination">
   	SELECT * FROM MEMBER M
 		LEFT OUTER JOIN
 			MEMBERFILES MF 
@@ -353,8 +353,8 @@
   
   <!--기간 설정  -->
   <insert id="setPeriodAdd" parameterType="PeriodVO">
-  INSERT INTO PERIOD (YEAR,SEMESTER,APPLICATIONSTART,APPLICATIONEND,FAVORITESTAR,FAVORITEEND,DEADLINE) 
-  VALUES (#{year},#{semester},STR_TO_DATE(#{applicationStart},'%Y-%m-%dT%H:%i'), STR_TO_DATE(#{applicationEnd},'%Y-%m-%dT%H:%i'),STR_TO_DATE(#{favoriteStart},'%Y-%m-%dT%H:%i'),STR_TO_DATE(#{favoriteEnd},'%Y-%m-%dT%H:%i'),STR_TO_DATE(#{deadline},'%Y-%m-%dT%H:%i'))	
+  INSERT INTO PERIOD (YEAR,SEMESTER,APPLICATIONSTART,APPLICATIONEND,FAVORITESTART,FAVORITEEND,DEADLINE) 
+  VALUES (#{year},#{semester},CONCAT(#{applicationStart},':18:00:00'), CONCAT(#{applicationEnd},':23:59:59'),CONCAT(#{favoriteStart},':18:00:00'),CONCAT(#{favoriteEnd},':23:59:59'),CONCAT(#{deadline},':23:59:59') )
   </insert>
   
   <select id="getCurrentYear" resultType="java.lang.String">
@@ -373,13 +373,13 @@
   
   <!--강의 목록 조회  -->
   <select id="getLectureList" resultMap="LectureList" parameterType="Pagination">
-  SELECT D.*,L.*, P.*FROM PROFESSOR P
+  SELECT D.DEPTNAME,L.*,P.NAME, P.PROFESSORROOM, L.STATUS FROM PROFESSOR P
 	INNER JOIN 
 		DEPARTMENT D 
-	USING(DEPTNUM)
+	ON P.DEPTNUM = D.DEPTNUM
 		INNER JOIN
 			LECTURE L
-		USING(DEPTNUM)
+		ON D.DEPTNUM = L.DEPTNUM
 	WHERE TEMPORARY = 1	
 	<if test="deptName != null and !deptName.equals('')">
    		AND DEPTNAME = #{deptName}
@@ -391,7 +391,7 @@
 	    AND SEMESTER = #{semester}
 	</if>
 	<if test="status != null and !status.equals('')">
-	    AND STATUS = #{status}
+	    AND L.STATUS = #{status}
 	</if>
 	<if test="search != null and !search.equals('')">
 		AND LECTURENAME LIKE CONCAT('%', #{search}, '%')
@@ -430,14 +430,36 @@
   
   <!--강의실 배정  -->
   <select id="getLectureRoomAssignment" resultType="LectureRoomVO" parameterType="Pagination">
-  	SELECT * FROM LECTURE_ROOM 
+	SELECT * FROM LECTURE_ROOM 
 	WHERE STATUS=1
-	<include refid="lectureRoomSearch"></include>
+	LIMIT #{startRow}, #{perPage}
   </select>
-	
+  
+  <select id="getTotalCountAssiginment" resultType="Long">
+  	SELECT COUNT(LECTUREROOM) FROM LECTURE_ROOM
+	WHERE STATUS =1
+  </select>
+  
+  
+<!-- 	<resultMap type="LectureRoomVO" id="LectureRoomAssignment">
+  		<id column="LECTUREBUILDING" property="lectureBuilding"/>
+  		<id column="LECTUREROOM" property="lectureRoom"/>
+  		<result column="PERSONAL" property="personal"/>
+  		<result column="STATUS" property="status"/>
+		<collection property="timeTableVOs" javaType="List" ofType="TimeTableVO">
+			<id column="WEEKDAY" property="weekday"/>
+			<id column="TIME" property="time"/>
+		</collection>
+  </resultMap> -->
+  
+  <select id="getLectureNum" resultType="LectureVO" parameterType="LectureVO">
+  	SELECT LECTURENUM FROM LECTURE 
+	WHERE LECTURENUM = #{lectureNum}
+  </select>
+
   <update id="setLectureRoomAssignmentUpdate" parameterType="LectureVO">
   	UPDATE LECTURE 
-	SET LECTUREBUILDING= #{lectureBuilding}, LECTUREROOM = #{lectureRoom}
+	SET LECTUREBUILDING= #{lectureBuilding}, LECTUREROOM = #{lectureRoom}, STATUS=1
 	WHERE LECTURENUM = #{lectureNum}
   </update>
   

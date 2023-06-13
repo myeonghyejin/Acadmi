@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.acadmi.board.BoardVO;
 import com.acadmi.board.notice.NoticeVO;
 import com.acadmi.lecture.LectureVO;
+import com.acadmi.period.PeriodVO;
 import com.acadmi.student.lecture.StudentLectureVO;
 import com.acadmi.syllabus.ClassVO;
 import com.acadmi.util.Pagination;
@@ -72,6 +73,25 @@ public class StudentService {
 	
 	//강의 참여자 목록
 	public List<LectureVO> getAttendeeList(Pagination pagination) throws Exception {
+		Long totalCount = studentDAO.getTotalCountStudent(pagination);
+		
+		pagination.makeNum(totalCount);
+		pagination.makeStartRow();
+		
 		return studentDAO.getAttendeeList(pagination);
 	}
-} 
+	
+	//강의 계획서 열람
+	public LectureVO getSyllabusDetail(LectureVO lectureVO) throws Exception {
+		return studentDAO.getSyllabusDetail(lectureVO);
+	}
+	
+	//수강신청,장바구니 막기
+    public PeriodVO getApplication() throws Exception {
+    	return studentDAO.getApplication();
+    }
+    public PeriodVO getFavoirte() throws Exception {
+    	return studentDAO.getFavorite();
+    }
+    
+ } 
