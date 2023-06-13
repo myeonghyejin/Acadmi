@@ -15,6 +15,8 @@ public class Pagination {
 	private Integer grade;
 	private Integer year;
 	
+	private Integer deptNum;
+	
 	//강의실 배정 조회
 	private Integer status;
 	

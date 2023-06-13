@@ -77,7 +77,7 @@
 												<select class="select2" style="width: 100%;" name="department">
 													<option value="" selected>전체</option>
 													<c:forEach items="${department}" var="departmentVO" begin="2">
-														<option value="${departmentVO.deptNum}">${departmentVO.deptName}</option>
+														<option value="${departmentVO.deptNum}" ${param.department == departmentVO.deptNum ? 'selected' : ''}>${departmentVO.deptName}</option>
 													</c:forEach>
 												</select>
 											</div>

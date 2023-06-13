@@ -29,6 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="USERNAME" property="username"/>
 		<result column="LECTURENAME" property="lectureName"/>
 		<result column="CATEGORY" property="category"/>
+		<result column="DEPTNUM" property="deptNum"/>
 		<result column="GRADE" property="grade"/>
 		<result column="SUBSCRIPTION" property="subscription"/>
 		<result column="PERSONAL" property="personal"/>
@@ -219,7 +220,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="getDepartment" parameterType="DepartmentVO" resultType="DepartmentVO">
-		SELECT *
+		SELECT DEPTNUM, DEPTNAME
 		FROM DEPARTMENT
 	</select>
 	
