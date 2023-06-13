@@ -1,5 +1,7 @@
 package com.acadmi.lecture.room;
 
+import java.util.List;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,4 +14,6 @@ public class LectureRoomVO {
 	private Integer lectureRoom;
 	private Integer personal;
 	private Integer status;
+	
+	private List<TimeTableVO> timeTableVOs;
 }

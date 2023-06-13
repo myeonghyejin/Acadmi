@@ -426,13 +426,14 @@ public class AdministratorController {
 
 	//강의실 배정
 	@GetMapping("lectureRoomAssignment")
-	public ModelAndView getLectureRoomAssignment(Pagination pagination) throws Exception {
+	public ModelAndView getLectureRoomAssignment(Pagination pagination, LectureVO lectureVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
 		List<LectureRoomVO> ar = administratorService.getLectureRoomAssignment(pagination);
-		
+		lectureVO = administratorService.getLectureNum(lectureVO);
 		
 		mv.addObject("list", ar);
+		mv.addObject("lectureNum", lectureVO);
 		mv.setViewName("administrator/lectureRoomAssignment");
 		
 		return mv;

@@ -23,9 +23,12 @@
 				<c:import url="./temp/professor_index.jsp"></c:import>
 			</div>
 		</sec:authorize>
+		
 		<sec:authorize access="hasRole('ROLE_STUDENT')">
 			<c:import url="./temp/header.jsp"></c:import>
+			<div class="content-wrapper">
 				<c:import url="./temp/student_index.jsp"></c:import>
+			</div>	
 			
 		</sec:authorize>
 		<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
@@ -33,28 +36,11 @@
 				행정페이지
 		</sec:authorize>
 		
-		
-		<%-- <!-- Main Contents -->
-		<div class="container-fluid">
-			<div class="row">
-				<!-- 2레벨 Sidebar 적용 -->
-				<div class="content-wrapper">
-					<c:import url="./temp/sidebar/student_lecture.jsp"></c:import>
-				</div>
-				<!-- 2레벨 Sidebar 끝 -->
-				
-				<!-- Contents -->
-				<div class="col">
-					<h1>Contents</h1>
-				</div>
-			</div>
-		</div> --%>
 
 		<!-- Footer 적용 -->
 		<c:import url="./temp/footer.jsp"></c:import>
 		<!-- Footer 끝 -->
-
-	</div>
+</div>
 <!-- ./wrapper -->
 </body>
 </html>

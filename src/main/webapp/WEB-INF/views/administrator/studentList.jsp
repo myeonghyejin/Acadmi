@@ -24,7 +24,7 @@
 	
 	.selected-page{
 		  background-color: #E2E2E2;
-		  color: white; /* 선택된 페이지의 텍스트 색상도 변경할 수 있습니다 */
+		  color: white; 
 	}
 	
 	.content {

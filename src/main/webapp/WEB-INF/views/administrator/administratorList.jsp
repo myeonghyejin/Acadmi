@@ -21,7 +21,7 @@
 	
 	.selected-page{
 		  background-color: #E2E2E2;
-		  color: white; /* 선택된 페이지의 텍스트 색상도 변경할 수 있습니다 */
+		  color: white; 
 	}
 
 	#tableAdmin {
@@ -48,13 +48,6 @@
 	 	margin : 10px 0 30px 0;
 	}
 	
-	.search {
-		padding : 10px;
-		
-	}
-	.content {
-		margin : 10px;
-	}
 </style>
 </head>
 

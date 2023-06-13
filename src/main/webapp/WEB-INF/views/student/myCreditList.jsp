@@ -68,7 +68,7 @@
 		               				 <sec:authentication property="principal" var="user"/>
 		               					<thead>
 		               						<tr>
-		               							<th style="width : 10%">강의번호</th>
+		               							<th style="width : 10%"></th>
 		               							<th style="width : 30%">강좌명</th>
 		               							<th style="width : 10%">담당교수</th>
 		               							<th style="width : 10%">학점</th>
@@ -77,9 +77,9 @@
 		               						</tr>
 		               					</thead>
 		               					<tbody>
-		               						<c:forEach items="${list}" var="lectureVO">
+		               						<c:forEach items="${list}" var="lectureVO" varStatus="status">
 		               							<tr>
-		               								<td>${lectureVO.lectureNum }</td>
+		               								<td>${status.index+1 }</td>
 		               								<td>${lectureVO.lectureName}</td>
 		               								<td>${lectureVO.professorVO.name}</td>
 		               								<td>${lectureVO.studentLectureVO.creditVO.credit}</td>
