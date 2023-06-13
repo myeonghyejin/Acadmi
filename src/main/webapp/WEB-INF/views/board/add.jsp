@@ -66,14 +66,16 @@
 					<sec:authentication property="principal.username" var="userName" />
 					
 					<div class="row col-md-7 mx-auto">
-						<form id="contactForm" class="row g-3" action="./add" method="post" enctype="multipart/form-data">			
-						<%-- 	<c:if test="${board eq 'lectureNotice' || board eq 'lectureQna'}">
+						<form id="contactForm" class="row g-3" action="./add" method="post" enctype="multipart/form-data">
+							
+							<!-- 강의 번호 자동 입력 후 등록 -->	
+							<c:if test="${board eq 'lectureNotice' || board eq 'lectureQna'}">
 								<div class="col-md-6 mt-3">
 									<label for="lectureNum" class="form-label strongFont2">강의번호</label> 
 									<input type="text" class="form-control" name="lectureNum" id="lectureNum">
 								</div>
-							</c:if> --%>
-									
+							</c:if>
+							
 							<div class="col-md-6" style="margin-top: 20px;">
 								<label for="writer" class="form-label strongFont2">작성자</label>
 								<input type="text" name="writer" class="form-control" id="writer" readonly value="${userName}">
@@ -119,7 +121,7 @@
 
 							<div class="row" style="margin-top: 50px; margin-left: 1080px">		
 								<button type="button" class="submitButton btn btn-info" style="margin-right: 5px;">등록</button>
-								<button type="button" class="btn btn-danger" onclick="location.href='./list'">취소</button>
+								<button type="button" class="btn btn-danger" onclick="window.history.back();">취소</button>
 							</div>
 						</form>
 					</div>

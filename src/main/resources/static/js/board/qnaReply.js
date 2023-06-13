@@ -36,6 +36,7 @@ $("#delete").on("click", function(){
 	let result = confirm('정말 삭제하시겠습니까?');
 	let num = $(this).attr("data-board-num");
 	let name = $(this).attr("data-board-name");
+	let lectureNum = $(this).attr("data-board-lectureNum");
 	
 	if(result){
 		if(name == 'qna'){
@@ -71,7 +72,7 @@ $("#delete").on("click", function(){
 		        },
 		        success: function() {
 		            alert("삭제되었습니다.");
-		            location.assign("./list");
+		            location.assign("./list?lectureNum=" + lectureNum);
 		        },
 		    });
 		} else if(name == 'lectureQna'){
@@ -83,7 +84,7 @@ $("#delete").on("click", function(){
 		        },
 		        success: function() {
 		            alert("삭제되었습니다.");
-		            location.assign("./list");
+		            location.assign("./list?lectureNum=" + lectureNum);
 		        },
 		    });
 		} else {
@@ -97,6 +98,7 @@ $(document).on("click", "#replyDelete", function() {
 	let result = confirm('정말 삭제하시겠습니까?');
 	let num = $("#replyDelete").attr("data-board-num");
 	let name = $(".table").attr("data-board-name");
+	let lectureNum = $("#replyDelete").attr("data-board-lectureNum");
 	
 	if(result){
 		if(name == 'qna'){
@@ -120,7 +122,7 @@ $(document).on("click", "#replyDelete", function() {
 			    },
 			    success: function() {
 			        alert("삭제되었습니다.");
-			        location.assign("./list");
+			        location.assign("./list?lectureNum=" + lectureNum);
 			    },
 			});
 		} else {

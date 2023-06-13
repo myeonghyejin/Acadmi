@@ -49,22 +49,22 @@
 				<div class="row">
 					<table class="table" data-board-name="${board}">
 						<tr>
-						    <th width=20% class="text-center warning" style="background-color:#ffefb9;">번호</th>
+						    <th width=20% class="text-center warning" style="background-color:#eeeee4;">번호</th>
 						    <td width=30% class="text-center">${boardVO.num}</td>
-						    <th width=20% class="text-center warning" style="background-color:#ffefb9; border-bottom: 1px solid #d6d6cd;">작성일</th>
+						    <th width=20% class="text-center warning" style="background-color:#eeeee4; border-bottom: 1px solid #d6d6cd;">작성일</th>
 					        <td width=30% class="text-center" style="border-bottom: 1px solid #d6d6cd;">${boardVO.regDate}</td>
 					    </tr>     
 						 <tr>
-					         <th width=20% class="text-center warning" style="background-color:#ffefb9;">작성자</th>
+					         <th width=20% class="text-center warning" style="background-color:#eeeee4;">작성자</th>
 						   	 <td width=30% class="text-center">${boardVO.writer}</td>
 				         </tr>
 						 <tr>
-					         <th width=20% class="text-center warning" style="background-color:#ffefb9;">제목</th>
+					         <th width=20% class="text-center warning" style="background-color:#eeeee4;">제목</th>
 					         <td colspan="3">${boardVO.title}</td>
 				         </tr>
 				         
 				         <tr>
-					         <th width=20% class="text-center warning" style="background-color:#ffefb9;">첨부파일</th>
+					         <th width=20% class="text-center warning" style="background-color:#eeeee4;">첨부파일</th>
 					         <td colspan="3">
 					         	<c:forEach items="${boardVO.fileVOs}" var="fileVO">
 									<img class="fileIcon" width="30" height="30" src="/images/fileIcon.png" style="margin-right: 5px">
@@ -103,9 +103,14 @@
 							
 				            <c:if test="${userName eq boardVO.writer}">
 								<a href="./update?num=${boardVO.num}" id="update" class="btn btn-info float-right">수정</a>
-								<a id="delete" data-board-num="${boardVO.num}" data-board-name="${board}" class="btn btn-danger float-right" style="margin-right: 5px">삭제</a>
+								<a id="delete" data-board-num="${boardVO.num}" data-board-name="${board}" data-board-lectureNum="${boardVO.lectureNum}" class="btn btn-danger float-right" style="margin-right: 5px">삭제</a>
 							</c:if>
-				            <a href="./list" class="btn btn-light float-left">목록</a>
+							<c:if test="${board eq 'qna' || board eq 'notice'}">
+				            	<a href="./list" class="btn btn-light float-left">목록</a>
+				            </c:if>
+				            <c:if test="${board eq 'lectureQna' || board eq 'lectureNotice'}">
+				            	<a href="./list?lectureNum=${boardVO.lectureNum}" class="btn btn-light float-left">목록</a>
+				            </c:if>
 				          </td>
 				        </tr>
 				</table>

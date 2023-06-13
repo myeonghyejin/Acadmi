@@ -35,7 +35,7 @@
 			<c:if test="${userName eq reply.writer}">
 				<a href="./update?num=${reply.num}" id="update" class="btn btn-info" style="margin-right: 5px;">수정</a>
 				<%-- <a href="./delete?num=${reply.num}" id="delete" class="btn btn-danger">삭제</a>   --%> 
-				<a id="replyDelete" data-board-num="${reply.num}" class="btn btn-danger">삭제</a>                                    
+				<a id="replyDelete" data-board-num="${reply.num}" data-board-lectureNum="${reply.lectureNum}" class="btn btn-danger">삭제</a>                                    
 			</c:if>
 		</div>	
 	</div>
