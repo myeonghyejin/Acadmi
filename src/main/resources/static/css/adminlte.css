@@ -28766,6 +28766,7 @@ html.maximized-card {
 }
 
 .card-header > .card-tools {
+  float: right;
   margin-right: -0.625rem;
 }
 
@@ -28781,7 +28782,7 @@ html.maximized-card {
 }
 
 .card-title {
-  text-align: center;
+  float: left;
   font-size: 1.1rem;
   font-weight: 400;
   margin: 0;

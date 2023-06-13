@@ -44,7 +44,7 @@
 						<!-- Search -->
 						<form action="./all_lecture">
 							<input type="hidden" name="page" value="1">
-							<div class="row justify-content-center mx-auto mb-3">
+							<div class="row justify-content-center mx-auto my-3">
 								<div class="col-md-6">
 									<div class="row">
 										<div class="col-4">
@@ -52,10 +52,10 @@
 												<label>구분</label>
 												<select class="select2" multiple="multiple" style="width: 100%;" name="category">
 													<option value="">전체</option>
-													<option value="전공 필수">전공 필수</option>
-													<option value="전공 선택">전공 선택</option>
-													<option value="교양 필수">교양 필수</option>
-													<option value="교양 선택">교양 선택</option>
+													<option value="전공 필수" ${param.category == '전공 필수' ? 'selected' : ''}>전공 필수</option>
+													<option value="전공 선택" ${param.category == '전공 선택' ? 'selected' : ''}>전공 선택</option>
+													<option value="교양 필수" ${param.category == '교양 필수' ? 'selected' : ''}>교양 필수</option>
+													<option value="교양 선택" ${param.category == '교양 선택' ? 'selected' : ''}>교양 선택</option>
 												</select>
 											</div>
 										</div>
@@ -64,10 +64,10 @@
 												<label>학년</label>
 												<select class="select2" multiple="multiple" style="width: 100%;" name="grade">
 													<option value="">전체</option>
-													<option value="1">1학년</option>
-													<option value="2">2학년</option>
-													<option value="3">3학년</option>
-													<option value="4">4학년</option>
+													<option value="1" ${param.grade == 1 ? 'selected' : ''}>1학년</option>
+													<option value="2" ${param.grade == 2 ? 'selected' : ''}>2학년</option>
+													<option value="3" ${param.grade == 3 ? 'selected' : ''}>3학년</option>
+													<option value="4" ${param.grade == 4 ? 'selected' : ''}>4학년</option>
 												</select>
 											</div>
 										</div>

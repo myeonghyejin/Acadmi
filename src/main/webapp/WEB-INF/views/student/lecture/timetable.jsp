@@ -33,7 +33,7 @@
 				</div>
 				<!-- header end -->
 				
-				<!-- Search -->					
+				<!-- Search -->			
 				<form action="./timetable" method="get">
 					<div class="row justify-content-center mx-auto mt-2 mb-4">
 						<div class="col-3">
@@ -63,6 +63,11 @@
 				<div class="card">
 					<div class="card-header">
 						<h3 class="card-title" style="line-height: 200%;">${year}년 ${semester eq 1 ? '1' : '2'}학기</h3>
+						<div class="card-tools">
+							<button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+								<i class="fas fa-minus"></i>
+							</button>		
+						</div>
 					</div>
 				
 					<div class="card-body p-0">
@@ -163,9 +168,20 @@
         }
     }
 
+	//#17a2b8의 hue 값 (192)를 기준으로 랜덤한 hue 값을 생성하는 함수
+    function generateSimilarHue() {
+      const baseHue = 192;
+      const hueRange = 40; //hue 값을 조절할 범위
+
+      const minHue = (baseHue - hueRange + 360) % 360; //기준 hue 값에서 범위를 뺀 최소 hue 값
+      const randomHue = Math.floor(Math.random() * (hueRange * 2 + 1)) + minHue; //범위 내에서 랜덤한 hue 값
+
+      return randomHue % 360; //hue 값이 360을 초과하면 360으로 나눈 나머지 값을 반환
+    }
+    
     //색상 생성을 위한 함수
     function generateRandomColor() {
-        let hue = Math.floor(Math.random() * 360); //0~359 사이의 임의의 Hue 값을 생성
+        let hue = generateSimilarHue();
         let saturation = 50; //채도는 일정한 값으로 설정
         let lightness = 50; //명도는 일정한 값으로 설정
 
