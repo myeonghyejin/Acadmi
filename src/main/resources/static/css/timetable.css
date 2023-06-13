@@ -4,7 +4,7 @@ p:last-child { margin: 0px; }
 
 
 .timetable { }
-.timetable-workout { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; background-color: #17a2b8; font-weight: 700; }
+.timetable-workout { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; background-color: rgb(23, 162, 184); font-weight: 700; }
 .timetable-workout,.timetable.table>tbody>tr>td { color: #fff;  }
 .timetable,.table>tbody>tr>th { font-size: 14px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; text-align: center; vertical-align: middle }
 .timetable,.table>thead>tr>th { font-size: 14px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; text-align: center; }

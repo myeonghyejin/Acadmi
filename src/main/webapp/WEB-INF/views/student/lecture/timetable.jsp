@@ -91,7 +91,7 @@
 															<c:set var="hasLecture" value="false" />
 															<c:forEach items="${list}" var="lectureVO">
 																<c:if test="${lectureVO.weekday eq day && lectureVO.startTime <= hour && lectureVO.endTime >= hour}">
-																	<td class="timetable-workout">${lectureVO.lectureName}<br>
+																	<td class="timetable-workout" data-lecture-num="${lectureVO.lectureNum}">${lectureVO.lectureName}<br>
 																		<small>${lectureVO.professorVO.username}</small><br>
 																	<small>${lectureVO.lectureRoomVO.lectureBuilding} ${lectureVO.lectureRoomVO.lectureRoom}</small>
 																	</td>
@@ -135,24 +135,47 @@
 	    $('.select2').select2()
 	  });
 	
-    const year = ${year}
-	const semester = ${semester}
-	
-	$("#pre").on("click", function(){
-		if(semester == 2) {
-			location.href="./timetable?year="+year+"&semester=1";
-		} else {
-			location.href="./timetable?year="+(year-1)+"&semester=2";
-		}
-	})
-	
-	$("#next").on("click", function(){
-		if(semester == 2) {
-			location.href="timetable?year="+(year+1)+"&semester=1"
-		} else {
-			location.href="timetable?year="+year+"&semester=2"
-		}
-	})
+    //강의 식별자에 따라 랜덤 색상을 할당하는 함수
+    function assignRandomColorToLectures() {
+        let blocks = document.getElementsByClassName("timetable-workout");
+
+        //강의 식별자를 저장할 배열
+        let ids = [];
+
+        //강의 식별자 수집
+        for (let i = 0; i < blocks.length; i++) {
+            let num = blocks[i].getAttribute("data-lecture-num");
+            ids.push(num);
+        }
+
+        //중복 제거를 위해 Set으로 변환 후 다시 배열로 변환
+        let unique = [...new Set(ids)];
+
+        //각 강의 식별자에 랜덤 색상 할당
+        for (let j = 0; j < unique.length; j++) {
+            let num = unique[j];
+            let color = generateRandomColor();
+            let elements = document.querySelectorAll("[data-lecture-num='" + num + "']");
+
+            for (let k = 0; k < elements.length; k++) {
+                elements[k].style.backgroundColor = color;
+            }
+        }
+    }
+
+    //색상 생성을 위한 함수
+    function generateRandomColor() {
+        let hue = Math.floor(Math.random() * 360); //0~359 사이의 임의의 Hue 값을 생성
+        let saturation = 50; //채도는 일정한 값으로 설정
+        let lightness = 50; //명도는 일정한 값으로 설정
+
+        return "hsl(" + hue + ", " + saturation + "%, " + lightness + "%)";
+    }
+
+    //페이지 로드 시에 색상 할당
+    window.onload = function() {
+        assignRandomColorToLectures();
+    };
 </script>
 </body>
 </html>
