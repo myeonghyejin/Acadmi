@@ -47,9 +47,7 @@ public class StudentLectureController {
 	    } else {
 	    	semester = 2; //8월부터 1월까지는 2학기
 	    }
-	    
 	    return semester;
-		
 	}
 	
 	/** SELECT **/
@@ -118,13 +116,10 @@ public class StudentLectureController {
 		
 		String[] arr = {"월","화", "수", "목", "금"};
 		
-		int year = calculateCurrentYear();
-		int semester = calculateCurrentSemester();
-		
 		mv.addObject("list", ar);
 		mv.addObject("day", arr);
-		mv.addObject("year", year);
-        mv.addObject("semester", semester);
+		mv.addObject("year", calculateCurrentYear());
+		mv.addObject("semester", calculateCurrentSemester());
 		mv.setViewName("student/lecture/timetable");
 		
 		return mv;

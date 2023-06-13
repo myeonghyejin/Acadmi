@@ -256,7 +256,7 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="/student/lecture/timetable" class="nav-link">
+							<a href="#" class="nav-link" onclick="handleTimetableClick()">
 								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>시간표 조회</p>
 							</a>
@@ -295,7 +295,27 @@
     </div>
     <!-- /.sidebar -->
 </aside>
+<script>
+    // 현재 연도와 현재 학기를 계산하는 함수
+    function calculateCurrentYear() {
+        var currentDate = new Date();
+        return currentDate.getFullYear();
+    }
 
+    function calculateCurrentSemester() {
+        var currentDate = new Date();
+        var month = currentDate.getMonth() + 1;
+        return (month >= 2 && month <= 7) ? 1 : 2;
+    }
+
+    // 시간표 조회 버튼 클릭 시 URL에 현재 연도와 현재 학기 값을 추가하는 함수
+    function handleTimetableClick() {
+        var year = calculateCurrentYear();
+        var semester = calculateCurrentSemester();
+        var url = "/student/lecture/timetable?year=" + year + "&semester=" + semester;
+        window.location.href = url;
+    }
+</script>
 <style>
 .fa-circle {
 	margin: 0 8px;

@@ -125,7 +125,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="getMyLectureList" parameterType="StudentLectureVO" resultMap="allLectureList">
-		SELECT L.*, D.DEPTNAME
+		SELECT L.*, D.DEPTNAME, SL.*
 		FROM STUDENT_LECTURE SL
 			LEFT OUTER JOIN
 			LECTURE L
@@ -137,7 +137,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					STUDENT S
 					ON S.USERNAME = SL.USERNAME
 		WHERE S.USERNAME = #{username}
-		ORDER BY LECTURENUM DESC
+			AND SL.YEAR = #{year}
+			AND SL.SEMESTER = #{semester}
+		ORDER BY L.LECTURENUM DESC
 	</select>
 	
 	<select id="getMyFavoriteList" parameterType="FavoriteLectureVO" resultMap="allLectureList">

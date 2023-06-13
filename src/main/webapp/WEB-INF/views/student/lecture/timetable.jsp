@@ -35,7 +35,7 @@
 				
 				<!-- Search -->					
 				<form action="./timetable" method="get">
-					<div class="row mx-3 mt-2 mb-4">
+					<div class="row justify-content-center mx-auto mt-2 mb-4">
 						<div class="col-3">
 							<label>수강 연도</label>
 							<select class="select2" style="width: 100%;" name="year">
@@ -53,7 +53,7 @@
 								<option value="2" ${semester eq 2 ? 'selected' : ''}>2학기</option>
 							</select>
 						</div>
-						<button type="submit" class="btn btn-default">
+						<button type="submit" class="btn btn-default" style="height: 50%; margin-top: auto; margin-left: 7px;">
 							<i class="fa fa-search"></i>
 						</button>
 					</div>
@@ -63,17 +63,6 @@
 				<div class="card">
 					<div class="card-header">
 						<h3 class="card-title" style="line-height: 200%;">${year}년 ${semester eq 1 ? '1' : '2'}학기</h3>
-						<div class="card-tools">
-							
-							<div class="btn-group">
-								<button type="button" class="btn btn-info" id="pre">
-									<span aria-hidden="true">&laquo;</span>
-								</button>
-								<button type="button" class="btn btn-info" id="next">
-									<span aria-hidden="true">&raquo;</span>
-								</button>
-							</div>
-						</div>
 					</div>
 				
 					<div class="card-body p-0">
@@ -96,20 +85,18 @@
 											<tbody>
 												<c:forEach begin="1" end="10" var="hour">
 													<tr>
-														<th scope="row">${hour + 8}:00</th>
+														<th scope="row" style="height: 80px;">${hour + 8}:00</th>
 															<c:set var="lectureExists" value="false" />
 														<c:forEach items="${day}" var="day">
 															<c:set var="hasLecture" value="false" />
 															<c:forEach items="${list}" var="lectureVO">
-																<c:if test="${studentLectureVO.year eq year && studentLectureVO.semester eq semester}">
-																	<c:if test="${lectureVO.weekday eq day && lectureVO.startTime <= hour && lectureVO.endTime >= hour}">
-																		<td class="timetable-workout">${lectureVO.lectureName}<br>
-																			<small>${lectureVO.professorVO.username}</small><br>
-																		<small>${lectureVO.lectureRoomVO.lectureBuilding} ${lectureVO.lectureRoomVO.lectureRoom}</small>
-																		</td>
-																		<c:set var="hasLecture" value="true" />
-																		<c:set var="lectureExists" value="true" />
-																	</c:if>
+																<c:if test="${lectureVO.weekday eq day && lectureVO.startTime <= hour && lectureVO.endTime >= hour}">
+																	<td class="timetable-workout">${lectureVO.lectureName}<br>
+																		<small>${lectureVO.professorVO.username}</small><br>
+																	<small>${lectureVO.lectureRoomVO.lectureBuilding} ${lectureVO.lectureRoomVO.lectureRoom}</small>
+																	</td>
+																	<c:set var="hasLecture" value="true" />
+																	<c:set var="lectureExists" value="true" />
 																</c:if>
 															</c:forEach>
 															<c:if test="${not hasLecture}">

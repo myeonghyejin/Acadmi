@@ -3,6 +3,7 @@ package com.acadmi.student.lecture;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.acadmi.department.DepartmentVO;
 import com.acadmi.lecture.LectureVO;
@@ -47,7 +48,6 @@ public interface StudentLectureDAO {
 	
 	//학과 조회
 	public List<DepartmentVO> getDepartment() throws Exception;
-	
 	
 	/** INSERT **/
 	//수강 신청
