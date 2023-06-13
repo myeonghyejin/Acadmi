@@ -1,3 +1,4 @@
-$("#year").onchange(function() {
+$("#applicationEnd").onchange(() {
+
+}
 	
-})

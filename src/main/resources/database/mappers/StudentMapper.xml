@@ -31,13 +31,13 @@
 
  	<!--내 수강 강좌 -->
  	<select id="getMyLectureList" parameterType="lectureVO" resultMap="MyLectureList">
-		SELECT * FROM LECTURE L 
+		SELECT *  FROM LECTURE L 
 			INNER JOIN 
 				STUDENT_LECTURE SL 
 			USING(LECTURENUM)
 				INNER JOIN 
 					PROFESSOR P 
-				ON L.USERNAME = P.USERNAME 
+				ON L.USERNAME = P.USERNAME
 		WHERE SL.USERNAME=#{username}
 		<if test="year !=null and !year.equals('')">
 			AND L.YEAR = #{year}
@@ -68,15 +68,16 @@
  	
  	<!--내 성적 조회  -->
  	<select id="getMyCreditList" parameterType="lectureVO" resultMap="myCreditList">
-	 	SELECT L.*,SL.*,C.*,P.* FROM LECTURE L
-			RIGHT OUTER JOIN 
+		SELECT *FROM LECTURE L
+			INNER JOIN
 				STUDENT_LECTURE SL 
 			ON L.LECTURENUM = SL.LECTURENUM
-					RIGHT OUTER JOIN 
-						CREDIT C
-					ON SL.LECTURENUM = C.LECTURENUM 
+				INNER JOIN 
+					CREDIT C 
+				ON SL.LECTURENUM = C.LECTURENUM 
 						INNER JOIN 
 							PROFESSOR P
+						ON L.USERNAME = P.USERNAME 
 		WHERE SL.USERNAME=#{username}
 		<if test="year !=null and !year.equals('')">
 			AND L.YEAR = #{year}
@@ -151,6 +152,17 @@
 		</association>
 	</resultMap>
 	
+	<select id="getSyllabusClass" parameterType="LectureVO" resultType="ClassVO">
+		 SELECT C.* FROM SYLLABUS S 
+		 	INNER JOIN 
+		 		CLASS C 
+		 	ON(S.SYLLABUSNUM=C.SYLLABUSNUM) 
+  				 INNER JOIN 
+  				 	LECTURE L 
+  				 ON(S.LECTURENUM=L.LECTURENUM) 
+  			WHERE L.LECTURENUM=#{lectureNum}	
+	</select>
+	
 	<!-- 메인페이지 공지사항 출력 -->
 	<select id="getNoticeList" resultType="BoardVO">
 		SELECT * FROM NOTICE
@@ -158,19 +170,60 @@
 		LIMIT 5
 	</select>
 
-	<!--강의 계획서  -->
-	<select id="getSyllabusClass" parameterType="LectureVO" resultType= "ClassVO">
-		 SELECT C.* FROM SYLLABUS S 
-		 	INNER JOIN 
-		 		CLASS C 
-		 	ON(S.SYLLABUSNUM=C.SYLLABUSNUM) 
-  		 		INNER JOIN 
-  		 			LECTURE L 
-  		 		ON(S.LECTURENUM=L.LECTURENUM) 
-  		 WHERE LECTURENAME=#{lectureName}
+	<!--강의 계획서 열람  -->
+	<select id="getSyllabusDetail" parameterType="LectureVO" resultMap="SyllabusDetail">
+		SELECT * FROM SYLLABUS S 
+			INNER JOIN 
+				LECTURE L 
+			ON(S.LECTURENUM=L.LECTURENUM) 
+  				INNER JOIN 
+  					PROFESSOR P 
+  				ON(L.USERNAME=P.USERNAME)INNER JOIN MEMBER M ON(M.USERNAME=P.USERNAME)
+  					INNER JOIN 
+  						DEPARTMENT D 
+  				ON(L.DEPTNUM=D.DEPTNUM) 
+  		WHERE L.LECTURENUM =#{lectureNum}
 	</select>
+	<resultMap type="LectureVO" id="SyllabusDetail">
+		<id column="LECTURENUM" property="lectureNum"/>
+		<result column="LECTURENAME" property="lectureName"/>
+		<result column="YEAR" property="year"/>
+		<result column="STARTTIME" property="startTime"/>
+		<result column="ENDTIME" property="endTime"/>
+		<result column="GRADE" property="grade"/>
+		<result column="COMPLETIONGRADE" property="completionGrade"/>
+		<result column="LECTUREBUILDING" property="lectureBuilding"/>
+		<result column="LECTUREROOM" property="lectureRoom"/>
+		<result column="CATEGORY" property="category"/>
+		<association property="syllabusVO" javaType="SyllabusVO">
+			<id column="SYLLABUSNUM" property="syllabusNum"/>
+			<result column="CURRICULUMOUTLINE" property="curriculumOutline"/>
+			<result column="GOAL" property="goal"/>
+			<result column="EVALUATION" property="evaluation"/>
+			<result column="METHOD" property="method"/>
+			<result column="BOOKNAME" property="bookName"/>
+			<result column="BOOKAUTHOR" property="bookAuthor"/>
+			<result column="BOOKPUBLISHER" property="bookPublisher"/>
+			<result column="BOOKPUBLICATIONDATE" property="bookPublicationDate"/>
+			<result column="BOOKISBN" property="bookISBN"/>
+			<result column="BOOKNOTE" property="bookNote"/>
+			<collection property="classVOs" javaType="List" ofType="ClassVO">
+				<id column="ORDER" property="order"/>
+				<result column="SUBJECT" property="subject"/>
+				<result column="GOAL" property="goal"/>
+				<result column="CAPABILITY" property="capability"/>
+				<result column="NOTE" property="note"/>
+			</collection>
+		</association>
+		<association property="departmentVO" javaType="DepartmentVO">
+			<result column="DEPTNAME" property="deptName"/>
+		</association>
+	</resultMap>
 	
 	<!-- 강의 참여자 목록  -->
+	<select id="getTotalCountStudent" resultType="Long">
+		SELECT COUNT(USERNAME) FROM STUDENT
+	</select>
 	<select id="getAttendeeList" parameterType="Pagination" resultMap="AttendeeList">
 		SELECT S.*,D.DEPTNAME, C.COLLEGENAME,MF.*  FROM `MEMBER` M 
 			LEFT OUTER JOIN 
@@ -187,12 +240,19 @@
 								ON(S.DEPTNUM=D.DEPTNUM) 
 								INNER JOIN 
 									COLLEGE C 
-								ON D.COLLEGENUM = C.COLLEGENUM
-					WHERE LECTURENUM = #{lectureNum}
-					AND LIMIT #{startRow},#{perPage}			
+								ON D.COLLEGENUM = C.COLLEGENUM	
+					WHERE LECTURENUM=#{lectureNum}
+					<if test="search != null and !search.equals('')">
+						AND S.USERNAME LIKE CONCAT('%',#{search},'%' )
+					</if>
+					<if test="name !=null and !name.equals('')">
+						AND S.NAME LIKE CONCAT('%',#{name}, '%')
+					</if>
+				LIMIT #{startRow},#{perPage}
 	</select>
 	<resultMap type="LectureVO" id="AttendeeList">
 		<id column="LECTURENUM" property="lectureNum"/>
+		<result column="LECTURENAME" property="lectureName"/>
 			<association property="collegeVO" javaType="CollegeVO">
 				<id column="COLLEGENUM" property="collegeNum"/>
 				<result column="COLLEGENAME" property="collegeName"/>
@@ -211,6 +271,15 @@
 			</association>
 	</resultMap>
 	
+	<!--수강 신청,장바구니 기간 막기 -->
+	<select id="getApplication" resultType="PeriodVO">
+		SELECT * FROM PERIOD P
+		WHERE P.APPLICATIONSTART &lt;= NOW() AND P.APPLICATIONEND &gt;= NOW()
+	</select>
+	<select id="getFavorite" resultType="PeriodVO">
+		SELECT * FROM PERIOD P
+		WHERE P.FAVORITESTART &lt;= NOW() AND P.FAVORITEEND  &gt;= NOW();
+	</select>
 
   	
   </mapper>

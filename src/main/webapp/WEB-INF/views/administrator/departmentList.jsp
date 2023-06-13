@@ -22,9 +22,8 @@
 		margin: 30px;
 	}
 	
-	.selected-page{
-		  background-color: #E2E2E2;
-		  color: white; /* 선택된 페이지의 텍스트 색상도 변경할 수 있습니다 */
+	.col {
+		background-color : white;
 	}
 	
 	#table2 {
@@ -65,7 +64,7 @@
 			<div class="row">
 				<div class="col">
 					<!-- header start -->
-	               <div class="row" style="padding-top:10px">
+	               <div class="row" style="padding-top:10px; margin-left: 10px;">
 	                  <div class="col-12">
 	                     <div class="card">
 	                        <h3 class="my-3 mx-3">학과 조회</h3>
@@ -160,8 +159,8 @@
 												<td style="color: #E2E2E2;"><c:out value="${deptName}"></c:out></td>
 												<td>
 													<select name="status" class="status">
-														<option value="1">활성화</option>
-														<option value="0" selected>비활성화</option>
+														<option value="1">사용가능</option>
+														<option value="0" selected>사용불가</option>
 													</select>
 												</td>
 											</c:if>

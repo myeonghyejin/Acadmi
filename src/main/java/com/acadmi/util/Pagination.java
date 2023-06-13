@@ -32,7 +32,9 @@ public class Pagination {
 	private Integer semester;
 	private String lectureName;
 	
+	//참여자
 	private Long lectureNum;
+	private String name;
 	
 
 	//강의실 배정 조회

@@ -68,6 +68,21 @@
 											</div>
 										</div>
 										<div class="card">
+										
+										<div class="card-body p-0">
+										 	<div class="col">
+										 		<label style="font-size : 23px;">장바구니 기간설정</label>
+										 	</div>
+											 	<div class="wrapper">
+												  <div class="form-group">
+												    <label>장바구니 시작일</label>
+												    <input type="date"  class="form-control datetime"  name="favoriteStart" style="width: 500px; display: inline-block;" />
+												    ~
+												    <label style="margin-left: 20px;">장바구니 종료일</label>
+												    <input type="date" class="form-control datetime" id="favoriteEnd" onchange="updateApplicationEnd()" name="favoriteEnd" style="width: 500px; display: inline-block;"  />
+												  </div>
+												</div>	
+										</div>
 										 <div class="card-body p-0">
 										 	<div class="col">
 										 		<label style="font-size : 23px;">수강신청 기간설정</label>
@@ -77,27 +92,14 @@
 												  	
 												    <label>수강신청 시작일</label>
 												   
-												    <input type="datetime-local"  class="form-control datetime" name="applicationStart" style="width: 500px; display: inline-block;" />
+												    <input type="date"  class="form-control datetime" name="applicationStart" style="width: 500px; display: inline-block;" />
 												    ~
 												    <label style="margin-left: 20px;">수강신청 종료일</label>
-												    <input type="datetime-local" class="form-control datetime" name="applicationEnd" style="width: 500px; display: inline-block;" />
+												    <input type="date" class="form-control datetime" id="applicationEnd"  name="applicationEnd" style="width: 500px; display: inline-block;" disabled="disabled" />
 												  </div>
 												</div>	
 										</div>
-										<div class="card-body p-0">
-										 	<div class="col">
-										 		<label style="font-size : 23px;">장바구니 기간설정</label>
-										 	</div>
-											 	<div class="wrapper">
-												  <div class="form-group">
-												    <label>장바구니 시작일</label>
-												    <input type="datetime-local"  class="form-control datetime" name="favoriteStart" style="width: 500px; display: inline-block;" />
-												    ~
-												    <label style="margin-left: 20px;">장바구니 종료일</label>
-												    <input type="datetime-local" class="form-control datetime" name="favoriteEnd" style="width: 500px; display: inline-block;" />
-												  </div>
-												</div>	
-										</div>
+										
 										
 										<div class="card-body p-0">
 										 	<div class="col">
@@ -106,7 +108,7 @@
 											 	<div class="wrapper">
 												  <div class="form-group">
 												    <label>강의 마감일</label>
-												    <input type="datetime-local"  class="form-control datetime" name="deadline" style="width: 500px; display: inline-block;" />
+												    <input type="date"  class="form-control datetime" name="deadline" style="width: 500px; display: inline-block;" />
 									
 												  </div>
 												</div>	
@@ -126,23 +128,14 @@
 	</div>
 	
 <script type="text/javascript">
-	window.addEventListener('DOMContentLoaded', function() {
-		  let datetime = document.getElementsByClassName('datetime');
-		  
-		  for (let i = 0; i < datetime.length; i++) {
-		    let datetimeField = datetime[i];
-		    datetimeField.addEventListener('focus', function() {
-		      this.type = 'datetime-local';
-		    });
+
+function updateApplicationEnd() {
+	let favoriteEnd= $("#favoriteEnd").val()
 	
-		    datetimeField.addEventListener('blur', function() {
-		      this.type = 'text';
-		    });
-		  }
-		});
-	 
+	/* console.log(applicationEnd) */
 	
-	
+	$("#applicationEnd").val(favoriteEnd);
+}	
 </script>
 </body>
 </html>

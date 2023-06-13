@@ -19,6 +19,7 @@
   		
   		<typeAlias type="com.acadmi.lecture.LectureVO" alias="LectureVO"/>
   		<typeAlias type="com.acadmi.lecture.room.LectureRoomVO" alias="LectureRoomVO"/>
+  		<typeAlias type="com.acadmi.lecture.room.TimeTableVO" alias="TimeTableVO"/>
   		
   		<typeAlias type="com.acadmi.student.StudentVO" alias="StudentVO"/>
   		<typeAlias type="com.acadmi.student.lecture.StudentLectureVO" alias="StudentLectureVO"/>

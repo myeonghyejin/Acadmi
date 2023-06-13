@@ -462,17 +462,20 @@ public class AdministratorService{
 	
 	//강의실 배정
 	public List<LectureRoomVO> getLectureRoomAssignment(Pagination pagination) throws Exception {
-		Long totalCount = administratorDAO.getTotalCountLectureRoom(pagination);
+		Long totalCount = administratorDAO.getTotalCountAssiginment(pagination);
 		
 		pagination.makeNum(totalCount);
-		pagination.getStartRow();
-		
+		pagination.makeStartRow();
 		
 		return administratorDAO.getLectureRoomAssignment(pagination);
 	}
  	
 	public int setLectureRoomAssignmentUpdate(LectureVO lectureVO) throws Exception {
 		return administratorDAO.setLectureRoomAssignmentUpdate(lectureVO);
+	}
+	
+	public LectureVO getLectureNum(LectureVO lectureVO) throws Exception {
+		return administratorDAO.getLectureNum(lectureVO);
 	}
 
 }

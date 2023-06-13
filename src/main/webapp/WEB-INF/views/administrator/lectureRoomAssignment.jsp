@@ -36,6 +36,14 @@
 	 	align-items: center;
 	 	margin : 10px 0 30px 0;
 	}
+	
+	.content {
+		margin: 30px;
+	}
+	
+	.content2 {
+		margin : 10px 0 30px 30px;
+	}
 </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -46,7 +54,7 @@
 	<div class="content-wrapper">
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col">
+				<div class="col" style="background-color : white;">
 						<!-- header start -->
 	               <div class="row" style="padding-top:10px">
 	                  <div class="col-12">
@@ -57,47 +65,16 @@
 	               </div>
                <!-- header end -->
                <section class="content">
-               
                    <!--Search -->
 					<form action="./lectureRoomAssignment" id="search-form">
 						<input type="hidden" name="page" value="1">
 						<div class="card search">
 							<div class="row content" >
-								<label style="margin : 10px;">학과</label>
-								<select  class="form-control select" style="width: 15%;" name="deptName" id="dept">
-									<option value="">전체</option>
-									<c:forEach items="${department}" var="departmentVO">
-										<c:if test="${departmentVO.deptNum !=1 && departmentVO.deptNum !=2 }">
-											<option value="${departmentVO.deptName}">${departmentVO.deptName}</option>
-										</c:if>
-									</c:forEach>
-								</select>
-								<label style="margin : 10px;">학년도</label>
-								<select class="form-control select2" name="year" style="width: 20%;">
-									<option value="">전체</option>
-										<c:forEach items="${year}" var="year">
-											<option value="${year}">${year}</option>
-										</c:forEach>
-										
-								</select>
-								<label style="margin : 10px;">학기</label>
-								<select class="form-control select3" name="semester" style="width: 20%;">
-									<option value=''>전체</option>
-									<option value="1">1학기</option>
-									<option value="2">2학기</option>
-								</select>
+					
 								
 							</div>
 							<div class="row content2">
-								<label style="margin : 10px;">상태</label>
-								<select class="form-control select4" name="status" style="width: 20%;">
-									<option value="">전체</option>
-									<option value="0">폐강</option>
-									<option value="1">개강</option>
-									
-								</select>
-								<label style="margin : 10px;">강의이름</label>
-								<input type="text" class="form-control" name="lectureName" placeholder="강의를 입력해주세요" style="width : 20%">
+								
 								
 									<button type="submit" class="btn btn-info" style="margin : 0 0 0 20px; width : 15%">검색</button>
 							</div>
@@ -144,7 +121,7 @@
 											
 											<td>
 												<button type="button" class="btn btn-info" id="assignment" data-lecture="${lectureRoomVO.lectureBuilding}${lectureRoomVO.lectureRoom}"
-													data-lectureBuilding="${lectureRoomVO.lectureBuilding}" data-lectureRoom="${lectureRoomVO.lectureRoom }"
+													data-lectureBuilding="${lectureRoomVO.lectureBuilding}" data-lectureRoom="${lectureRoomVO.lectureRoom }" data-lectureNum="${lecture.lectureNum}"
 													>
 													배정
 												</button> 
