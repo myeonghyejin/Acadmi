@@ -45,7 +45,7 @@
 								<div class="row">
               						<div class="col-6">
                 						<label>강의 연도</label>
-										<select class="form-control" id="year" name="year">
+										<select class="form-control" id="year" name="year" onchange="updateSemester()">
 		                    				<option name="year" id="year" value="">연도 선택</option>
 		                    				<c:forEach items="${period}" var="period">
 		                    					<option for="year" value="${period.year}">${period.year}</option>
@@ -157,7 +157,7 @@
 								<div style="width:auto; float: right; margin-top: 25px">
 					            	<button class="btn btn-primary" type="submit" name="buttonType" value="0">임시등록</button>
 					                <button class="btn btn-info" type="submit" name="buttonType" value="1">등록</button>
-					                <a class="btn btn-danger" href="./list" style="color: white;">뒤로가기</a>
+					                <a class="btn btn-danger" href="./list" style="color: white;">취소</a>
 				                </div>
 							</div>
 						</div>
@@ -199,6 +199,7 @@
 			}
 	       console.log(department)
 	    }
+		
 	  
 	  /*function updateEndTime() {
 			let startNum = new Array()

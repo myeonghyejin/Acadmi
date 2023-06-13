@@ -6,29 +6,39 @@
   
   <mapper namespace="com.acadmi.credit.CreditDAO">
   
+  	<!-- 강의 목록 -->
 	<select id="getLectureList" parameterType="LectureVO" resultType="LectureVO">
-  		SELECT * FROM LECTURE WHERE USERNAME=#{username} AND TEMPORARY=1
+  		SELECT * FROM LECTURE WHERE USERNAME=#{username} AND TEMPORARY=1 AND YEAR=DATE_FORMAT(now(),'%Y') AND 
+  			SEMESTER = CASE
+    		WHEN MONTH(NOW()) BETWEEN 3 AND 8 THEN 1
+    		ELSE 2
+			END
   	</select>
+  	
+  	<!-- 강의 정보 -->
   	<select id="getLectureDetail" parameterType="LectureVO" resultMap="LectureResult">
   		SELECT * FROM LECTURE L INNER JOIN DEPARTMENT D ON(L.DEPTNUM=D.DEPTNUM) WHERE LECTURENUM=#{lectureNum}
   	</select>
+  	
+  	<!-- 학생 목록 -->
   	<select id="getLectureAttendee" parameterType="LectureVO" resultMap="StudentResult">
   		SELECT S.*,D.DEPTNAME,C.* FROM STUDENT S INNER JOIN STUDENT_LECTURE SL ON (S.USERNAME=SL.USERNAME) 
-  		INNER JOIN DEPARTMENT D ON(S.DEPTNUM=D.DEPTNUM) LEFT OUTER JOIN CREDIT C ON (SL.USERNAME=C.USERNAME)
+  		INNER JOIN DEPARTMENT D ON(S.DEPTNUM=D.DEPTNUM) LEFT OUTER JOIN CREDIT C ON (SL.USERNAME =C.USERNAME)
 		WHERE SL.LECTURENUM=#{lectureNum}
   	</select>
+  	
+  	<!-- 학생 성적 -->
   	<select id="getStudentCredit" parameterType="LectureVO" resultType="Integer">
   		SELECT COUNT(CREDITNUM) FROM CREDIT WHERE USERNAME=#{username} AND LECTURENUM=#{lectureNum}
   	</select>
+  	
+  	<!-- 성적 등록 -->
   	<insert id="setCreditAdd" parameterType="CreditVO" useGeneratedKeys="true" keyProperty="creditNum">
   		INSERT INTO CREDIT(LECTURENUM,USERNAME,SEMIGRADE,FINALGRADE,REPORTGRADE,ATTENDANCE,CREDIT) 
   		VALUES(#{lectureNum},#{username},#{semiGrade},#{finalGrade},#{reportGrade},#{attendance},#{credit})
   	</insert>
   	
   	<resultMap type="LectureVO" id="LectureResult">
-  	
-  	
-  	
   		<id column="LECTURENUM" property="lectureNum"/>
   		<result column="LECTURENAME" property="lectureName"/>
   		<result column="SEMESTER" property="semester"/>

@@ -43,10 +43,11 @@
 					                	<!-- <h3 class="card-title" style="font-weight:normal;">강의 목록</h3> -->
 					                	<div class="card-tools">
 					                		<div class="input-group input-group-sm" style="width: 230px;">
+					                		<input type="hidden" value="${list[0].temporary}">
 					                  			<select class="form-control mx-3" style="height: auto;" id="temporary" name="temporary" onchange="this.form.submit()">
 					                    			<option name="temporary" id="temporary" for="temporary"  value=" ">강의 조회</option>
 													<option for="temporary" value=" " >전체</option>
-													<option for="temporary" value="1">등록</option>
+													<option for="temporary" value="1" >등록</option>
 													<option for="temporary" value="0">미등록</option>
 												</select>
 					                    		<a class="btn btn-info" href="./add">강의 등록</a></button>
@@ -76,7 +77,11 @@
 						                    			<td>${LectureVO.lectureNum}</td>
 						                    			<td>${LectureVO.year}</td>
 					 									<td>${LectureVO.semester}학기</td>
-					 									<td>${LectureVO.grade}</td>
+					 									<td>
+						 									<c:if test="${LectureVO.grade !=null}">
+						 										${LectureVO.grade}학년
+						 									</c:if>
+					 									</td>
 					 									<c:if test="${LectureVO.temporary eq 0}">
 					 										<td>${LectureVO.lectureName}</td>
 					 									</c:if>

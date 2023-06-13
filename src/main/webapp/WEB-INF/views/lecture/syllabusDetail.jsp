@@ -151,7 +151,7 @@
               						<!-- table-body end -->
 								</div>
 								<div style="width:auto; float: right; margin-top: 25px;margin-right: 10px">
-					                <a class="btn btn-info" href="./syllabusUpdate?lectureName=${lecture.lectureName}" style="color: white;">수정</a>
+					                <a class="btn btn-info" href="./syllabusUpdate?lectureNum=${lecture.lectureNum}" style="color: white;">수정</a>
 				                </div>
 							</div>
 						</div>

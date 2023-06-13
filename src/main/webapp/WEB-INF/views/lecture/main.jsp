@@ -43,7 +43,7 @@
 							                		<td>${lecture.professorVO.name}</td>
 							                		<td>${lecture.professorVO.phone}</td>
 							                		<td>${lecture.professorVO.professorRoom}</td>
-							                		<td>wldnjsqkek29@naver.com</td>
+							                		<td>${lecture.professorVO.email}</td>
 							                	</tr>
 							                	
 											</tbody>

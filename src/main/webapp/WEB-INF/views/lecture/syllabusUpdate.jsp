@@ -100,6 +100,7 @@
 											</tbody>
 										</table>
 										<table class="table table-bordered" style="text-align: center;margin-top: 20px">
+										<input type="hidden" name="syllabusNum" value="${lecture.syllabusVO.syllabusNum}">
                     						<tbody>
 	                    						<tr style="background-color:#17a2b8; color:white;">
 	                    							<th>차수</th>
@@ -111,7 +112,6 @@
 	                    						
 		                    					<c:forEach items="${classes}" var="classes" varStatus="status">
 		                    						<tr>
-		                    							<td><input type="hidden" name="syllabusNum" value="${lecture.syllabusVO.syllabusNum}"></td>
 													    <td><input type="hidden" name="order${status.count}" value="${status.count}">${classes.order}차수</td>
 													    <td><input type="text" name="subject${status.count}" class="form-control" id="subject${status.count}" value="${classes.subject}"></td>
 													    <td><input type="text" name="goal${status.count}" class="form-control" id="goal${status.count}" value="${classes.goal}"></td>
