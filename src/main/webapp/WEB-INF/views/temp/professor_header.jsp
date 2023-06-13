@@ -76,7 +76,7 @@
 		</li>
 
 		<!-- 채팅 -->
-		<li class="nav-item">
+		<li class="nav-item dropdown">
 			<a class="nav-link" href="/chat/list">
 				<i class="far fa-comments"></i>
 				<span class="badge badge-danger navbar-badge" id="chat"></span>

@@ -107,12 +107,18 @@
 						<!-- /.card-body -->
 						<div class="card-footer">
 							<form>
-								<input type="hidden" id="chatNum" name="chatNum" value="${chatRoom.chatNum}">
-								<div class="input-group">
-									<input id="message" type="text" name="message" placeholder="Type Message ..." class="form-control">
-									<span class="input-group-append">
-										<button type="button" class="btn btn-info" id="chatSend">Send</button>
-									</span>
+								<div class="form-group" id="formSend">
+									<input type="hidden" id="chatNum" name="chatNum" value="${chatRoom.chatNum}">
+	                      
+									<div class="input-group">
+										<input id="message" type="text" name="message" placeholder="Type Message ..." class="form-control">
+										<span class="input-group-append">
+										<button type="button" class="btn" id="fileButton"><i class="fa-regular fa-file"></i></button>
+										</span>
+										<span class="input-group-append">
+											<button type="button" class="btn btn-info" id="chatSend">Send</button>
+										</span>
+									</div>
 								</div>
 							</form>
 						</div>
@@ -128,5 +134,6 @@
 	</div>
 	<!-- ./wrapper -->
 	<script src="../js/chat/chatDetail.js"></script>
+	<script src="../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 </body>
 </html>

@@ -1,9 +1,51 @@
 /**
  * chat/detail에서 웹소켓 연결 및 자바스크립트 처리
  */
-
-
 let websocket = new WebSocket("ws://localhost/chat")
+
+let count = 0;
+let max = 1;
+let idx = 0;
+
+function setCount(c){
+	count = c;
+}
+
+function setMax(m){
+	max = m;
+}
+
+$('#formSend').on('click','#deleteFile',function(){
+	$(this).parent().parent().remove()
+	count--
+})
+
+$('#fileButton').click(function(){
+	/*<div class="input-group">
+		<div class="custom-file">
+			<input type="file" class="custom-file-input" id="exampleInputFile">
+			<label class="custom-file-label" for="exampleInputFile">Choose file</label>
+		</div>
+		<div class="input-group-append">
+			<span class="btn btn-danger">X</span>
+		</div>
+	</div>*/
+	if(count >= max){
+		alert('점부파일은 최대 ' + max + '개 까지만 가능')
+		return
+	}
+	count++
+	let child = '<div class="input-group"><div class="custom-file">'
+	child = child + '<input type="file" class="custom-file-input" id="exampleInputFile">'
+	child = child + '<label class="custom-file-label" for="exampleInputFile">Choose file</label></div>'
+	child = child + '<div class="input-group-append"><span class="btn btn-danger" id="deleteFile">X</span></div>'
+	$(function () {
+	  bsCustomFileInput.init();
+	});
+	$('#formSend').prepend(child)
+})
+
+
 
 $('#deleteButton').hide();
 $('#addButton').hide()
