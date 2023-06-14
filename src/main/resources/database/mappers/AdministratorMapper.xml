@@ -390,9 +390,11 @@
 	<if test="semester != null and !semester.equals('')">
 	    AND SEMESTER = #{semester}
 	</if>
-	<if test="status != null and !status.equals('')">
+	<if test="status !=null and !status.equals('')">
 	    AND L.STATUS = #{status}
 	</if>
+
+	
 	<if test="search != null and !search.equals('')">
 		AND LECTURENAME LIKE CONCAT('%', #{search}, '%')
 	</if>
@@ -427,35 +429,44 @@
   <select id="getTotalCountLecture" resultType="Long">
   	SELECT COUNT(LECTURENUM) FROM LECTURE
   </select>
+
   
   <!--강의실 배정  -->
-  <select id="getLectureRoomAssignment" resultType="LectureRoomVO" parameterType="Pagination">
+  <select id="getLectureRoomAssignment" resultMap="LectureRoomAssignment" parameterType="Map">
 	SELECT * FROM LECTURE_ROOM 
-	WHERE STATUS=1
-	LIMIT #{startRow}, #{perPage}
+	WHERE PERSONAL &gt;= #{personal}
+	AND STATUS=1
+	AND (LECTUREROOM, LECTUREBUILDING ) NOT IN 
+		( 
+			SELECT LECTUREROOM , LECTUREBUILDING 
+			FROM TIMETABLE 
+				WHERE WEEKDAY = #{weekday}
+				AND TIME BETWEEN #{startTime} AND #{lastTime} 
+		)
+	LIMIT #{startRow}, #{perPage}	
   </select>
+  <resultMap type="LectureRoomVO" id="LectureRoomAssignment">
+  	<id column="LECTUREBUILDING" property="lectureBuilding"/>
+  	<id column="LECTUREROOM" property="lectureRoom"/>
+  	<result column="PERSONAL" property="personal"/>
+  	<result column="STATUS" property="status"/>
+  		<collection property="timeTableVOs" javaType="List" ofType="TimeTableVO">
+  			<id column="WEEKDAY" property="weekday"/>
+  			<id column="TIME" property="time"/>
+  		</collection>
+  </resultMap>
   
   <select id="getTotalCountAssiginment" resultType="Long">
   	SELECT COUNT(LECTUREROOM) FROM LECTURE_ROOM
 	WHERE STATUS =1
   </select>
   
-  
-<!-- 	<resultMap type="LectureRoomVO" id="LectureRoomAssignment">
-  		<id column="LECTUREBUILDING" property="lectureBuilding"/>
-  		<id column="LECTUREROOM" property="lectureRoom"/>
-  		<result column="PERSONAL" property="personal"/>
-  		<result column="STATUS" property="status"/>
-		<collection property="timeTableVOs" javaType="List" ofType="TimeTableVO">
-			<id column="WEEKDAY" property="weekday"/>
-			<id column="TIME" property="time"/>
-		</collection>
-  </resultMap> -->
-  
   <select id="getLectureNum" resultType="LectureVO" parameterType="LectureVO">
   	SELECT LECTURENUM FROM LECTURE 
 	WHERE LECTURENUM = #{lectureNum}
   </select>
+  
+
 
   <update id="setLectureRoomAssignmentUpdate" parameterType="LectureVO">
   	UPDATE LECTURE 

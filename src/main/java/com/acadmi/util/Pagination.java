@@ -39,6 +39,8 @@ public class Pagination {
 
 	//강의실 배정 조회
 	private Integer status;
+	private Integer startTime;
+	private Integer lastTime;
 	
 	private Long page;
 	private Long perPage;

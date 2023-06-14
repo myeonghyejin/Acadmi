@@ -93,7 +93,7 @@
 									
 								</select>
 								<label style="margin : 10px;">강의</label>
-								<input type="text" class="form-control" name="lectureName" placeholder="강의를 입력해주세요" style="width : 20%">
+								<input type="text" class="form-control" name="search" placeholder="강의를 입력해주세요" style="width : 20%">
 								
 									<button type="submit" class="btn btn-info" style="margin : 0 0 0 20px; width : 15%">검색</button>
 							</div>
@@ -208,7 +208,7 @@
 										</a>
 									</li>
 									<li class="page-item ${pagination.pre eq false ? 'disabled' : ''}">
-										<a class="page-link" href="./lectureList?"page=${pagination.startNum-1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="${pagination.startNum-1}">
+										<a class="page-link" href="./lectureList?page=${pagination.startNum-1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="${pagination.startNum-1}">
 											<span aria-hidden="true">&lsaquo;</span>
 										</a>
 									</li>
@@ -254,7 +254,6 @@
 	  });
 	}
 	
-	/* 페이지네이션 선택 색상 */
 
 </script>
 </body>

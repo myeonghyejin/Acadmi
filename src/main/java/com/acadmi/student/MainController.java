@@ -25,7 +25,6 @@ import lombok.extern.slf4j.Slf4j;
 	  
 		  List<BoardVO> ar = studentService.getNoticeList();
 		  List<LectureVO> ar2 = studentService.getCurrentLectureList();
-		  log.error("current ::: {}", ar2.get(0).getLectureName());
 		  
 		  mv.addObject("notice", ar); 
 		  mv.addObject("currentLecture", ar2);

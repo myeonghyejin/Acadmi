@@ -10,27 +10,21 @@
 	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
 	rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-<style type="text/css">
-	
-</style>
+
 <title>Insert title here</title>
 <style type="text/css">
-	.card-body {
-		margin : 0 30px 20px 0;
-	}
-	.card {
-		margin : 30px 30px 0 30px;
-	}
 	.col {
-		margin : 40px 30px 0 30px ;
+		margin : 30px 0 0 0;
 	}
-	.wrapper {
-		margin : 20px 20px 20px 20px;
+	
+	.row {
+		margin : 10px 0 0 0;
 	}
 	
 	button {
 		margin : 20px 0 0 0;
 	}
+
 </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -67,35 +61,35 @@
 												</select>
 											</div>
 										</div>
-										<div class="card">
+										<div class="card" >
 										
 										<div class="card-body p-0">
-										 	<div class="col">
-										 		<label style="font-size : 23px;">장바구니 기간설정</label>
+										 	<div class="col ">
+										 		<label style="font-size : 20px;">장바구니 기간설정</label>
 										 	</div>
 											 	<div class="wrapper">
 												  <div class="form-group">
 												    <label>장바구니 시작일</label>
-												    <input type="date"  class="form-control datetime"  name="favoriteStart" style="width: 500px; display: inline-block;" />
+												    <input type="date"  class="form-control"  name="favoriteStart" style="width: 200px; display: inline-block;  margin-right : 40px;" />
 												    ~
 												    <label style="margin-left: 20px;">장바구니 종료일</label>
-												    <input type="date" class="form-control datetime" id="favoriteEnd" onchange="updateApplicationEnd()" name="favoriteEnd" style="width: 500px; display: inline-block;"  />
+												    <input type="date" class="form-control" id="favoriteEnd" onchange="updateApplicationEnd()" name="favoriteEnd" style="width: 200px; display: inline-block; "  />
 												  </div>
 												</div>	
 										</div>
 										 <div class="card-body p-0">
 										 	<div class="col">
-										 		<label style="font-size : 23px;">수강신청 기간설정</label>
+										 		<label style="font-size : 20px;">수강신청 기간설정</label>
 										 	</div>
 											 	<div class="wrapper">
 												  <div class="form-group">
 												  	
 												    <label>수강신청 시작일</label>
 												   
-												    <input type="date"  class="form-control datetime" name="applicationStart" style="width: 500px; display: inline-block;" />
+												    <input type="date"  class="form-control" name="applicationStart" style="width: 200px; display: inline-block; margin-right : 40px;" />
 												    ~
 												    <label style="margin-left: 20px;">수강신청 종료일</label>
-												    <input type="date" class="form-control datetime" id="applicationEnd"  name="applicationEnd" style="width: 500px; display: inline-block;" disabled="disabled" />
+												    <input type="date" class="form-control" id="applicationEnd"  name="applicationEnd" style="width: 200px; display: inline-block;" disabled="disabled" />
 												  </div>
 												</div>	
 										</div>
@@ -103,12 +97,12 @@
 										
 										<div class="card-body p-0">
 										 	<div class="col">
-										 		<label style="font-size : 23px;">강의마감일 기간설정</label>
+										 		<label style="font-size : 20px;">강의마감일 기간설정</label>
 										 	</div>
 											 	<div class="wrapper">
 												  <div class="form-group">
 												    <label>강의 마감일</label>
-												    <input type="date"  class="form-control datetime" name="deadline" style="width: 500px; display: inline-block;" />
+												    <input type="date"  class="form-control datetime" name="deadline" style="width: 200px; display: inline-block;" />
 									
 												  </div>
 												</div>	

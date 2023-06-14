@@ -19,9 +19,7 @@
 		margin : 30px 0 20px 0;
 		width : 80%;
 	}
-	.grade {
-		margin : 10px 0 0 5px;
-	}
+
 </style>
 </head>
 

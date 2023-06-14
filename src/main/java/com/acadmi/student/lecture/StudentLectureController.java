@@ -1,5 +1,6 @@
 package com.acadmi.student.lecture;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -39,6 +40,20 @@ public class StudentLectureController {
 		SecurityContextImpl contextImpl = (SecurityContextImpl)obj;
 		Authentication authentication = contextImpl.getAuthentication();
 		pagination.setUsername(authentication.getName());
+		
+		PeriodVO periodVO =  studentService.getFavoirte();
+		PeriodVO periodVO2 = studentService.getApplication();
+				
+			if(periodVO == null || periodVO.toString().isEmpty()) {
+				String message = "장바구니 기간이 아닙니다";
+				
+				mv.addObject("result", message);
+				mv.setViewName("common/result");
+				
+				mv.addObject("url", "/");
+				
+				return mv;
+			}
 				
 		List<LectureVO> ar = studentLectureService.getAllLectureList(pagination);
 		
