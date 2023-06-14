@@ -116,6 +116,7 @@ public class StudentLectureService {
 	
 	//장바구니 빼기
 	public int deleteToFavoriteLecture(FavoriteLectureVO favoriteLectureVO, LectureVO lectureVO, HttpSession session) throws Exception {
+		log.info("Deleting favorite for lecture: {}", lectureVO.getLectureNum());
 		return studentLectureDAO.deleteToFavoriteLecture(favoriteLectureVO);
 	}
 	

@@ -1,5 +1,7 @@
 package com.acadmi.student.lecture;
 
+import com.acadmi.lecture.LectureVO;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,5 +14,7 @@ public class FavoriteLectureVO {
 	private String username;
 	private Integer year;
 	private Integer semester;
+	
+	private LectureVO lectureVO;
 	
 }

@@ -105,6 +105,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<id column="USERNAME" property="username"/>
 		</collection>
 	</resultMap>
+	
+	<resultMap id="favoriteResultMap" type="FavoriteLectureVO">
+    	<association property="lectureVO" resultMap="lectureResultMap"/>
+	</resultMap>
+
+	<resultMap id="lectureResultMap" type="LectureVO">
+   	 <result column="LECTURENUM" property="lectureNum"/>
+	</resultMap>
 
 	<!-- SELECT -->
 	<select id="getAllLectureList" parameterType="Pagination" resultMap="allLectureList">
@@ -179,9 +187,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND LECTURENUM = #{lectureNum}
 	</select>
 	
-	<select id="getMyFavorite" parameterType="FavoriteLectureVO" resultType="FavoriteLectureVO">
+	<select id="getMyFavorite" parameterType="FavoriteLectureVO" resultMap="favoriteResultMap">
 		SELECT *
-		FROM FAVORITE_LECTURE
+		FROM FAVORITE_LECTURE FL
+			INNER JOIN
+			LECTURE L
+			ON L.LECTURENUM = FL.LECTURENUM
 		WHERE FAVORITENUM = #{favoriteNum}
 	</select>
 

@@ -223,10 +223,13 @@ public class StudentLectureController {
 		Authentication authentication = contextImpl.getAuthentication();
 		favoriteLectureVO.setUsername(authentication.getName());
 		
-		if(studentLectureService.getMyFavorite(favoriteLectureVO) != null) {
+		FavoriteLectureVO getMyFavorite = studentLectureService.getMyFavorite(favoriteLectureVO);
+		
+		if(getMyFavorite != null) {
 			result = studentLectureService.deleteToFavoriteLecture(favoriteLectureVO, lectureVO, session);
+			log.info("{}", result);
 			if(result == 1) {
-				studentLectureService.deleteToFavorite(lectureVO);
+				studentLectureService.deleteToFavorite(getMyFavorite.getLectureVO());
 			}
 		}
 		
