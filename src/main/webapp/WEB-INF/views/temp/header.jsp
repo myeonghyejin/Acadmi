@@ -187,25 +187,25 @@
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
-							<a href="/student/lecture/all_lecture" class="nav-link">
+							<a href="#" class="nav-link" onclick="handleAllLectureClick()">
 								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>수강 신청 & 장바구니</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="/student/lecture/my_lecture" class="nav-link">
+							<a href="#" class="nav-link" onclick="handleMyLectureClick()">
 								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>내 수강 신청</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="/student/lecture/my_favorite" class="nav-link">
+							<a href="#" class="nav-link" onclick="handleMyFavoriteClick()">
 								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>내 장바구니</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="/student/lecture/timetable" class="nav-link">
+							<a href="#" class="nav-link" onclick="handleTimetableClick()">
 								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>시간표 조회</p>
 							</a>
@@ -244,7 +244,51 @@
     </div>
     <!-- /.sidebar -->
 </aside>
+<script>
+    //현재 연도와 현재 학기를 계산하는 함수
+    function calculateCurrentYear() {
+        let currentDate = new Date();
+        return currentDate.getFullYear();
+    }
 
+    function calculateCurrentSemester() {
+        let currentDate = new Date();
+        let month = currentDate.getMonth() + 1;
+        return (month >= 2 && month <= 7) ? 1 : 2;
+    }
+	
+    //수강 신청 & 장바구니 메뉴 클릭 시 URL에 현재 연도와 현재 학기 값을 추가하는 함수
+    function handleAllLectureClick() {
+        let year = calculateCurrentYear();
+        let semester = calculateCurrentSemester();
+        let url = "/student/lecture/all_lecture?year=" + year + "&semester=" + semester;
+        window.location.href = url;
+    }
+    
+    //내 수강 신청 메뉴 클릭 시 URL에 현재 연도와 현재 학기 값을 추가하는 함수
+    function handleMyLectureClick() {
+        let year = calculateCurrentYear();
+        let semester = calculateCurrentSemester();
+        let url = "/student/lecture/my_lecture?year=" + year + "&semester=" + semester;
+        window.location.href = url;
+    }
+    
+    //내 장바구니 메뉴 클릭 시 URL에 현재 연도와 현재 학기 값을 추가하는 함수
+    function handleMyFavoriteClick() {
+        let year = calculateCurrentYear();
+        let semester = calculateCurrentSemester();
+        let url = "/student/lecture/my_favorite?year=" + year + "&semester=" + semester;
+        window.location.href = url;
+    }
+    
+    //시간표 조회 메뉴 클릭 시 URL에 현재 연도와 현재 학기 값을 추가하는 함수
+    function handleTimetableClick() {
+        let year = calculateCurrentYear();
+        let semester = calculateCurrentSemester();
+        let url = "/student/lecture/timetable?year=" + year + "&semester=" + semester;
+        window.location.href = url;
+    }
+</script>
 <style>
 .fa-circle {
 	margin: 0 8px;
