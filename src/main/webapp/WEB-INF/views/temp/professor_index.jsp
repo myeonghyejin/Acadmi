@@ -2,7 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div id="mainLecture">
+<!-- 진행중인 강의 목록 -->
+<div id="homeLecture">
 
 </div>
-<script src="/js/mainLecture.js"></script>
+
+<!-- 공지사항 목록 -->
+<div id="homeNotice">
+
+</div>
+
+<script src="/js/professor/home.js"></script>

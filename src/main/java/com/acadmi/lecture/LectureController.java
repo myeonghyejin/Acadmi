@@ -34,20 +34,30 @@ public class LectureController {
 	@Autowired
 	private LectureService lectureService;
 	
-	//메인 강의 목록
-	@GetMapping("mainLecture")
-	public ModelAndView getMainLectureList(LectureVO lectureVO, HttpSession session) throws Exception{
+	//홈 강의 목록
+	@GetMapping("homeLecture")
+	public ModelAndView getHomeLectureList(LectureVO lectureVO, HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		Object obj = session.getAttribute("SPRING_SECURITY_CONTEXT");
 		SecurityContextImpl contextImpl = (SecurityContextImpl) obj; 
 		Authentication authentication = contextImpl.getAuthentication();
 		lectureVO.setUsername(authentication.getName());
-		
-		List<LectureVO> ar = lectureService.getMainLectureList(lectureVO);
+		List<LectureVO> ar = lectureService.getHomeLectureList(lectureVO);
 		mv.addObject("list",ar);
-		mv.setViewName("common/mainLecture");
+		mv.setViewName("professor/homeLecture");
 		return mv;
 	}
+	//홈 공지사항 목록
+		@GetMapping("homeNotice")
+		public ModelAndView getHomeNoticeList(LectureVO lectureVO, HttpSession session) throws Exception{
+			ModelAndView mv = new ModelAndView();
+			Object obj = session.getAttribute("SPRING_SECURITY_CONTEXT");
+			SecurityContextImpl contextImpl = (SecurityContextImpl) obj; 
+			Authentication authentication = contextImpl.getAuthentication();
+			
+			mv.setViewName("professor/homeNotice");
+			return mv;
+		}
 	
 	//강의 목록
 	@GetMapping("list")
@@ -102,8 +112,10 @@ public class LectureController {
 		List<DepartmentVO> department = lectureService.getDepartmentList(departmentVO);
 		List<CollegeVO> college = lectureService.getCollegeList(collegeVO);
 		List<PeriodVO> period = lectureService.getSemesterList(periodVO);
+		collegeVO = lectureService.getCollege(lectureVO);
 		mv.addObject("period",period);
 		mv.addObject("college", college);
+		mv.addObject("result", collegeVO);
 		mv.addObject("department",department);
 		lectureVO = lectureService.getLectureDetail(lectureVO);
 		mv.addObject("update",lectureVO);
@@ -129,13 +141,7 @@ public class LectureController {
 	public ModelAndView setLectureDelete(LectureVO lectureVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		int result = lectureService.setLectureDelete(lectureVO);
-		String message = "";
-		if(result>0) {
-			message = "강의가 삭제되었습니다.";
-		}else {
-			message = "강의가 삭제되지 않았습니다. 다시 시도해주세요.";
-		}
-		mv.addObject("result", message);
+		mv.addObject("result", "강의가 삭제되었습니다.");
 		mv.addObject("url", "./list");
 		mv.setViewName("common/result");
 		return mv;
@@ -226,9 +232,8 @@ public class LectureController {
 	        result = lectureService.setClassAdd(newClassVO);
 		}
 		lectureVO = lectureService.getLectureDetail(lectureVO);
-		
 		mv.addObject("result","강의계획서가 등록되었습니다.");
-		mv.addObject("url","./syllabusDetail?lectureName="+lectureVO.getLectureName());
+		mv.addObject("url","./syllabusDetail?lectureNum="+lectureVO.getLectureNum());
 		mv.setViewName("common/result");
 		return mv;
 	}

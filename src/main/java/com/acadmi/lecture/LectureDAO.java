@@ -14,8 +14,8 @@ import com.acadmi.syllabus.SyllabusVO;
 @Mapper
 public interface LectureDAO {
 
-	//메인 강의 목록
-	public List<LectureVO> getMainLectureList(LectureVO lectureVO) throws Exception;
+	//홈 강의 목록
+	public List<LectureVO> getHomeLectureList(LectureVO lectureVO) throws Exception;
 	//강의 목록
 	public List<LectureVO> getLectureList(LectureVO lectureVO) throws Exception;
 	//단과대학 목록
@@ -27,6 +27,8 @@ public interface LectureDAO {
 	
 	//강의 정보
 	public LectureVO getLectureDetail(LectureVO lectureVO) throws Exception;
+	//단과대학 정보
+	public CollegeVO getCollege(LectureVO lectureVO) throws Exception;
 	//교수 정보
 	public LectureVO getLectureProfessor(LectureVO lectureVO) throws Exception;
 	//참여자 정보

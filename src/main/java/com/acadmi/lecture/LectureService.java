@@ -21,9 +21,9 @@ public class LectureService {
 	@Autowired
 	private LectureDAO lectureDAO;
 	
-	//메인 강의 목록
-	public List<LectureVO> getMainLectureList(LectureVO lectureVO) throws Exception{
-		return lectureDAO.getMainLectureList(lectureVO);
+	//홈 강의 목록
+	public List<LectureVO> getHomeLectureList(LectureVO lectureVO) throws Exception{
+		return lectureDAO.getHomeLectureList(lectureVO);
 	}
 	//강의 목록
 	public List<LectureVO> getLectureList(LectureVO lectureVO) throws Exception{
@@ -45,6 +45,10 @@ public class LectureService {
 	//강의 정보
 	public LectureVO getLectureDetail(LectureVO lectureVO) throws Exception{
 		return lectureDAO.getLectureDetail(lectureVO);
+	}
+	//학과 목록
+	public CollegeVO getCollege(LectureVO lectureVO) throws Exception{
+		return lectureDAO.getCollege(lectureVO);
 	}
 	//교수 정보
 	public LectureVO getLectureProfessor(LectureVO lectureVO) throws Exception{

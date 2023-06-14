@@ -58,7 +58,7 @@
 							                	
 							                	</tr>
 							                	<tr>
-							                		<th style="background-color:#f8f9fa;color:#17a2b8;">강의번호</th>
+							                		<th style="background-color:#f8f9fa;color:#17a2b8;">강의 번호</th>
 							                		<td>${lecture.lectureNum}</td>
 							                		<th style="background-color:#f8f9fa;color:#17a2b8;">학부(과)</th>
 							                		<td>${lecture.departmentVO.deptName}</td>
@@ -67,9 +67,9 @@
 							                		
 							                	</tr>
 							                	<tr>
-							                		<th style="background-color:#f8f9fa;color:#17a2b8;">수업시간</th>
+							                		<th style="background-color:#f8f9fa;color:#17a2b8;">수업 시간</th>
 							                		<td>${lecture.weekday}${lecture.startTime}-${lecture.endTime}</td>
-							                		<th style="background-color:#f8f9fa;color:#17a2b8;">수업장소</th>
+							                		<th style="background-color:#f8f9fa;color:#17a2b8;">수업 장소</th>
 							                		<td>${lecture.lectureBuilding}${lecture.lectureRoom}</td>
 							                		<th style="background-color:#f8f9fa;color:#17a2b8;">학점</th>
 							                		<td>${lecture.completionGrade}학점</td>
@@ -80,14 +80,14 @@
 										<table class="table table-bordered" style="text-align: center;margin-top: 20px">
 							                <tbody>
 							                	<tr>
-							                		<th style="background-color:#f8f9fa;color:#17a2b8;">교과개요</th>
+							                		<th style="background-color:#f8f9fa;color:#17a2b8;">교과 개요</th>
 							                		<td colspan="3">${lecture.syllabusVO.curriculumOutline}</td>
 							                	</tr>
 							                	<tr>
 							                		<th style="background-color:#f8f9fa;color:#17a2b8;vertical-align:middle;" rowspan="2">목표</th>
-							                		<th style="background-color:#f8f9fa;color:#17a2b8;">수업방식</th>
+							                		<th style="background-color:#f8f9fa;color:#17a2b8;">수업 방식</th>
 							                		<th style="background-color:#f8f9fa;color:#17a2b8;">목표</th>
-							                		<th style="background-color:#f8f9fa;color:#17a2b8;">평가방법</th>
+							                		<th style="background-color:#f8f9fa;color:#17a2b8;">평가 방법</th>
 							                	</tr>
 							                	<tr>
 							                		<td>${lecture.syllabusVO.method}</td>
@@ -130,7 +130,7 @@
 	                    						<tr style="background-color:#f8f9fa;color:#17a2b8;">
 	                    							<th>차수</th>
                     								<th>수업 주제</th>
-                    								<th>주차별 수업목표</th>
+                    								<th>주차별 수업 목표</th>
                     								<th>관련 역량</th>
                     								<th>비고</th>
 	                    						</tr>

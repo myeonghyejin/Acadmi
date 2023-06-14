@@ -23,8 +23,8 @@
   	</trim>
   </sql>
  
- 	<!--  메인페이지 강의 목록 -->
- 	<select id="getMainLectureList" parameterType="LectureVO" resultType="LectureVO">
+ 	<!--  홈페이지 강의 목록 -->
+ 	<select id="getHomeLectureList" parameterType="LectureVO" resultType="LectureVO">
  		SELECT * FROM LECTURE WHERE YEAR=DATE_FORMAT(now(),'%Y') AND USERNAME=#{username} AND TEMPORARY=1 AND
  		SEMESTER = CASE
     	WHEN MONTH(NOW()) BETWEEN 3 AND 8 THEN 1
@@ -87,6 +87,11 @@
  	<delete id="setLectureDelete" parameterType="LectureVO">
  		DELETE FROM LECTURE WHERE LECTURENUM=#{lectureNum}
  	</delete>
+ 	
+ 	<!-- 단과대학 정보 -->
+	<select id="getCollege" parameterType="lectureVO" resultType="CollegeVO">
+		SELECT C.* FROM COLLEGE C INNER JOIN DEPARTMENT D ON (C.COLLEGENUM=C.COLLEGENUM) WHERE DEPTNUM=#{deptNum}
+	</select>
  	
  	<!-- 교수 정보 -->
  	<select id="getLectureProfessor" parameterType="LectureVO" resultMap="LectureResult">

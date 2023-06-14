@@ -61,7 +61,6 @@
                 						<table class="table table-hover text-nowrap" style="text-align: center;">
                   							<thead>
                     							<tr>
-													<th >강의번호</th>
 										            <th>강의년도</th>
 										            <th>학기</th>
 										            <th>학년</th>
@@ -74,28 +73,27 @@
 								            <tbody>
 			                    				<c:forEach items="${list}" var="LectureVO">
 			                    					<tr>
-						                    			<td>${LectureVO.lectureNum}</td>
-						                    			<td>${LectureVO.year}</td>
-					 									<td>${LectureVO.semester}학기</td>
-					 									<td>
+						                    			<td style="vertical-align:middle;">${LectureVO.year}</td>
+					 									<td style="vertical-align:middle;">${LectureVO.semester}학기</td>
+					 									<td style="vertical-align:middle;">
 						 									<c:if test="${LectureVO.grade !=null}">
 						 										${LectureVO.grade}학년
 						 									</c:if>
 					 									</td>
 					 									<c:if test="${LectureVO.temporary eq 0}">
-					 										<td>${LectureVO.lectureName}</td>
+					 										<td style="vertical-align:middle;">${LectureVO.lectureName}</td>
 					 									</c:if>
 					 									<c:if test="${LectureVO.temporary eq 1}">
-					 										<td><a href="./main?lectureNum=${LectureVO.lectureNum}" style="color: black;">${LectureVO.lectureName}</a></td>
+					 										<td style="vertical-align:middle;"><a href="./main?lectureNum=${LectureVO.lectureNum}" style="color: black;">${LectureVO.lectureName}</a></td>
 					 									</c:if>
 					 											
-					 									<td>${LectureVO.category}</td>
-					 									<td>
+					 									<td style="vertical-align:middle;">${LectureVO.category}</td>
+					 									<td style="vertical-align:middle;">
 					 										<c:if test="${LectureVO.temporary eq 1}">등록</c:if> 
 					 										<c:if test="${LectureVO.temporary eq 0}">미등록</c:if> 
 					 									</td>
 					 									<c:if test="${LectureVO.temporary eq 0}">
-						 									<td>
+						 									<td style="width: 100px;">
 						 										<a class="btn btn-primary" href="./update?lectureNum=${LectureVO.lectureNum}" style="color: white;">
 						 										<i class="fas fa-pencil-alt"></i>수정</a>
 						 										<a class="btn btn-danger" href="./delete?lectureNum=${LectureVO.lectureNum}" style="color: white;">
