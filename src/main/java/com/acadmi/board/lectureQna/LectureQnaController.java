@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -88,12 +89,12 @@ public class LectureQnaController {
 	}
 	
 	@PostMapping(value = "add")
-	public ModelAndView setInsert(LectureQnaVO lectureQnaVO, MultipartFile [] addfiles) throws Exception {
+	public ModelAndView setInsert(@RequestParam("lectureNum") Long lectureNum, LectureQnaVO lectureQnaVO, MultipartFile [] addfiles) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
 		int result = lectureQnaService.setInsert(lectureQnaVO, addfiles);
 		
-		mv.setViewName("redirect:./list");
+		mv.setViewName("redirect:./list?lectureNum=" + lectureNum);
 		
 		return mv;
 	}
@@ -127,7 +128,9 @@ public class LectureQnaController {
 		
 		int result = lectureQnaService.setUpdate(lectureQnaVO, addfiles);
 		
-		mv.setViewName("redirect:./list");
+		lectureQnaVO = (LectureQnaVO)lectureQnaService.getDetail(lectureQnaVO);
+		
+		mv.setViewName("redirect:./list?lectureNum=" + lectureQnaVO.getLectureNum());
 		
 		return mv;
 	}
@@ -164,10 +167,10 @@ public class LectureQnaController {
 	}
 	
 	@PostMapping(value = "reply")
-	public ModelAndView setReplyAdd(LectureQnaVO lectureQnaVO) throws Exception {
+	public ModelAndView setReplyAdd(LectureQnaVO lectureQnaVO, MultipartFile [] addfiles) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		int result = lectureQnaService.setReplyAdd(lectureQnaVO);
+		int result = lectureQnaService.setReplyAdd(lectureQnaVO, addfiles);
 		                             
 		mv.setViewName("redirect:./detail?num=" + lectureQnaVO.getNum());
 		

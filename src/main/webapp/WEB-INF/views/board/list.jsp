@@ -1,3 +1,4 @@
+<%@page import="com.acadmi.board.lectureNotice.LectureNoticeVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
@@ -69,31 +70,50 @@
 						강의 질의응답 게시판은 해당 강의 안에서 학생들이 교수에게 질문을 하고, 교수가 그에 대한 답변을 제공하는 게시판입니다.
 					</c:if>
 				  </div>
-
-				  <form class="row g-3 " action="./list" method="get" id="searchForm">
-					<div class="col-auto ml-auto">
-						<div class="input-group mb-4">
-							<input type="hidden" name="page" value="1" id="page">
-							<div class="col-auto">
-								<label for="kind" class="visually-hidden"></label>
-								<select class="form-select" name="kind" id="kind" aria-label="Default select example" style="width: 100px; height: 40px;">
-									<option value="title" ${pagination.kind eq 'title' ? 'selected' :''}>제목</option>
-									<option value="contents" ${pagination.kind eq 'contents' ?'selected':''}>내용
-									</option>
-									<option value="writer" ${pagination.kind eq 'writer' ? 'selected' :''}>작성자
-									</option>
-								</select>
+				
+				<c:if test="${board eq 'qna' || board eq 'notice'}">
+				  	<form class="row g-3 " action="./list" method="get" id="searchForm">
+						<div class="col-auto ml-auto">
+							<div class="input-group mb-4">
+								<input type="hidden" name="page" value="1" id="page">
+								<div class="col-auto">
+									<label for="kind" class="visually-hidden"></label>
+									<select class="form-select" name="kind" id="kind" aria-label="Default select example" style="width: 100px; height: 40px;">
+										<option value="title" ${pagination.kind eq 'title' ? 'selected' :''}>제목</option>
+										<option value="contents" ${pagination.kind eq 'contents' ?'selected':''}>내용</option>
+									</select>
+								</div>
+								<input type="text" class="form-control" value="${pagination.search}" name="search" id="search" placeholder="검색어를 입력하세요" style="width: 300px; height: 40px;">
+								<button type="submit" class="align-items-start btn btn-secondary" style="width: 100px; height: 40px; margin-left: 10px">검색</button>
 							</div>
-							<input type="text" class="form-control" value="${pagination.search}" name="search" id="search" placeholder="검색어를 입력하세요" style="width: 300px; height: 40px;">
-							<button type="submit" class="align-items-start btn btn-secondary" style="width: 100px; height: 40px; margin-left: 10px">검색</button>
 						</div>
-					</div>
-				</form>
-
+					</form>
+				</c:if>
+				
+				<c:if test="${board eq 'lectureQna' || board eq 'lectureNotice'}">
+					<form class="row g-3 " action="./list" method="get" id="searchForm">
+						<div class="col-auto ml-auto">
+							<div class="input-group mb-4">
+								<input type="hidden" name="page" value="1" id="page">
+								<div class="col-auto">
+									<label for="kind" class="visually-hidden"></label>
+									<select class="form-select" name="kind" id="kind" aria-label="Default select example" style="width: 100px; height: 40px;">
+										<option value="title" ${pagination.kind eq 'title' ? 'selected' :''}>제목</option>
+										<option value="contents" ${pagination.kind eq 'contents' ?'selected':''}>내용</option>
+										<%-- <option value="writer" ${pagination.kind eq 'writer' ? 'selected' :''}>작성자</option> --%>
+									</select>
+								</div>
+								<input type="text" class="form-control" value="${pagination.search}" name="search" id="search" placeholder="검색어를 입력하세요" style="width: 300px; height: 40px;">
+								<button type="submit" class="align-items-start btn btn-secondary lectureSearch" style="width: 100px; height: 40px; margin-left: 10px">검색</button>
+							</div>
+						</div>
+					</form>
+				</c:if>
+				
 				  <div class="invoice p-3 mb-3">
 					<div class="row">
 					  <div class="col-12 table-responsive">
-						<table class="table table-striped">
+						<table class="table table-hover text-nowrap" data-board-name="${board}">
 							<thead class="table-light">
 								<tr>
 									<th>No</th>
@@ -129,7 +149,6 @@
 													</c:if>
 												</c:forEach>
 											</td>
-											<%-- <td>${dto.writer}</td> --%>
 											<td>${dto.regDate}</td>
 											<td>${dto.modifyDate}</td>
 											<td>${dto.hit}</td>
@@ -171,10 +190,10 @@
 											<td>${dto.regDate}</td>
 										</tr>
 									</c:if>	
-									
+																	
 									<c:if test="${board eq 'lectureNotice'}">
 										<tr class="check-item">
-											<td class="noticeNum" data-num-id="${dto.num}">${dto.num}</td>
+											<td class="noticeNum" data-num-id="${dto.num}" data-lectureNum-id="${dto.lectureNum}">${dto.num}</td>
 											<td class="d-flex align-items-center">								
 												<a class="title" href="./detail?num=${dto.num}">${dto.title}</a>
 												<c:forEach items="${dto.fileVOs}" var="fileVO">
@@ -189,9 +208,9 @@
 										</tr>
 									</c:if>
 									
-									<c:if test="${board eq 'lectureQna'}">
+									<c:if test="${board eq 'lectureQna'}">										
 										<tr class="check-item">
-											<td class="qnaNum" data-num-id="${dto.num}">${dto.num}</td>
+											<td class="qnaNum" data-num-id="${dto.num}" data-lectureNum-id="${dto.lectureNum}">${dto.num}</td>
 											<td class="d-flex align-items-center">
 												<c:catch>
 													<c:forEach begin="1" end="${dto.depth}">
@@ -286,6 +305,7 @@
 						</div>
 					  </div>
 
+					<c:if test="${board eq 'qna' || board eq 'notice'}">
 					  	<div class="row" style="margin: 20px auto;">
 							<nav aria-label="Page navigation example">
 								<ul class="pagination d-flex justify-content-center">
@@ -315,6 +335,40 @@
 								</ul>
 							</nav>
 						</div>
+					</c:if>
+						
+					<c:if test="${board eq 'lectureQna' || board eq 'lectureNotice'}">	
+						<div class="row" style="margin: 20px auto;">
+							<nav aria-label="Page navigation example">
+								<ul class="pagination d-flex justify-content-center">
+									<li class="page-item ${pagination.pre ? 'disabled' : '' }">
+										<a class="page-link" href="./list?lectureNum=${pagination.lectureNum}&page=1&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="1">
+											<span aria-hidden="true">&laquo;</span>
+										</a>
+									</li>
+									<li class="page-item ${pagination.pre ? 'disabled' : ''}">
+										<a class="page-link" href="./list?lectureNum=${pagination.lectureNum}&page=${pagination.startNum-1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="${pagination.startNum-1}">
+											<span aria-hidden="true">&lsaquo;</span>
+										</a>
+									</li>
+									<c:forEach begin="${pagination.startNum}" end="${pagination.lastNum}" var="i">
+										<li class="page-item"><a class="page-link" href="./list?lectureNum=${pagination.lectureNum}&page=${i}&kind=${pagination.kind}&search=${pagination.search}" data-board-page="${i}">${i}</a></li>
+									</c:forEach>
+									<li class="page-item ${pagination.next eq false ? 'disabled' : ''}">
+										<a class="page-link" href="./list?lectureNum=${pagination.lectureNum}&page=${pagination.lastNum+1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next" data-board-page="${pagination.lastNum+1}">
+											<span aria-hidden="true">&rsaquo;</span>
+										</a>
+									</li>
+									<li class="page-item ${pagination.next eq false ? 'disabled' : ''}">
+										<a class="page-link lectureNums" href="./list?lectureNum=${pagination.lectureNum}&page=${pagination.totalPage}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next" data-board-page="${pagination.totalPage}" data-lectureNum-id="${pagination.lectureNum}">
+											<span aria-hidden="true">&raquo;</span>
+										</a>
+									</li>
+								</ul>
+							</nav>
+						</div>
+					</c:if>
+						
 					</div>         
 				  </div>
 				</div>
@@ -326,5 +380,38 @@
 		
 	<c:import url="../temp/footer.jsp"></c:import>
 	<script src="/js/board/notice.js"></script>
+	
+	<script>
+	  $(document).ready(function() {
+	
+	    $('.lectureSearch').on('click', function(event) {
+	      event.preventDefault();
+	      
+	      let boardName = $(".table").attr("data-board-name");
+	      
+	      if(boardName == 'lectureNotice'){
+	    	  let lectureNum = $(".lectureNums").attr("data-lectureNum-id");
+	    	  let page = $(".page-link").attr("data-board-page");
+		      let kind = $('#kind').val();
+		      let search = $('#search').val();
+		      
+		      let newUrl = './list?lectureNum=' + lectureNum + "&page=" + page + "&kind=" + kind + "&search=" + search;
+		      
+		      window.location.href = newUrl;    	 
+	      } else if (boardName == 'lectureQna') {
+	    	  let lectureNum = $(".lectureNums").attr("data-lectureNum-id");
+	    	  let page = $(".page-link").attr("data-board-page");
+		      let kind = $('#kind').val();
+		      let search = $('#search').val();
+		          
+		      let newUrl = './list?lectureNum=' + lectureNum + "&page=" + page + "&kind=" + kind + "&search=" + search;
+		      
+		      window.location.href = newUrl; 
+	      } else {
+	    	  console.log("게시판 없음")
+	      }  
+	    });
+	  });
+	</script>
 </body>
 </html>

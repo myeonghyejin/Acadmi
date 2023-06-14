@@ -40,6 +40,9 @@ public class Pagination {
 	//강의실 배정 조회
 	private Integer status;
 	
+	//강의 번호
+	private Integer lectureNum;
+	
 	private Long page;
 	private Long perPage;
 	private Long totalPage;

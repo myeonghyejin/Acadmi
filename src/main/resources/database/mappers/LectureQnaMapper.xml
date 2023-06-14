@@ -5,19 +5,18 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.acadmi.board.lectureQna.LectureQnaDAO">
-  
+  	
   	<sql id="search">
-  		<where>
-  			<if test="kind == 'title'">
+  		  <trim prefix="where" suffixOverrides="and">
+			LECTURENUM = #{lectureNum} AND
+			
+			<if test="kind == 'title'">
   				TITLE LIKE CONCAT('%', #{search}, '%')
-  			</if>
-  			<if test="kind == 'content'">
-  				CONTENTS LIKE CONCAT('%', #{search}, '%')
-  			</if>
-  			<if test="kind == 'writer'">
-  				WRITER LIKE CONCAT('%', #{search}, '%')
-  			</if>
-  		</where>
+	  		</if>
+	  		<if test="kind == 'contents'">
+	  			CONTENTS LIKE CONCAT('%', #{search}, '%')
+	  		</if>
+		</trim>
   	</sql>
   	
   	<select id="getTotalCount" resultType="Long" parameterType="Pagination">
