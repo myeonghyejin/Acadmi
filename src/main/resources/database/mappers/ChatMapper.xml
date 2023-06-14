@@ -100,6 +100,10 @@
   		</collection>
   	</resultMap>
   	
+  	<select id="getMsgNum" parameterType="Long" resultType="Long">
+  		SELECT MSGNUM FROM CHAT_MESSAGE WHERE CHATNUM = #{chatNum} ORDER BY MSGNUM DESC LIMIT 1
+  	</select>
+  	
   	<!-- 이름을 뽑아오기 위한 select -->
   	
   	<select id="getMemberDetail" parameterType="MemberVO" resultType="MemberVO">
@@ -143,6 +147,12 @@
   	<insert id="setSaveMessage" parameterType="ChatMessageVO">
   		INSERT INTO CHAT_MESSAGE
   		VALUES (0, #{msgSender}, #{msgRecipient}, #{msgContents}, now(), #{msgStatus}, #{chatNum})
+  	</insert>
+  	
+  	<!-- 파일 저장 -->
+  	<insert id="setChatFileAdd" parameterType="ChatFilesVO">
+  		INSERT INTO CHATFILES
+  		VALUES (0, #{msgNum}, #{fileName}, #{oriName})
   	</insert>
   	
   		<!-- update -->

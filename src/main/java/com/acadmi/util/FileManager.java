@@ -79,5 +79,26 @@ public class FileManager extends AbstractView {
 		return fileName;
 		
 	}
+	
+	public String saveFile(String path, byte[] payLoad, String oriName) throws Exception {
+		//1. 파일 객체 생성
+		File file = new File(path);
+		
+		if(!file.exists()) {
+			file.mkdirs();
+		}
+		
+		//2. 저장할 파일명 생성
+		String fileName = UUID.randomUUID().toString();
+		fileName = fileName+"_"+oriName;
+		
+		//3. 경로명과 파일명의 정보를 가진 File 객체 생성
+		file = new File(file, fileName);
+		
+		//4. 파일 저장
+		FileCopyUtils.copy(payLoad, file);
+		
+		return fileName;
+	}
 
 }

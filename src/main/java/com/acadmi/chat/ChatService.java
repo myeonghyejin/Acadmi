@@ -173,7 +173,9 @@ public class ChatService {
 	
 	//메세지 저장
 	public int setSaveMessage(ChatMessageVO chatMessageVO) throws Exception {
-		return chatDAO.setSaveMessage(chatMessageVO);
+		int result = chatDAO.setSaveMessage(chatMessageVO);
+		
+		return result;
 	}
 	
 	//채팅방 나가기

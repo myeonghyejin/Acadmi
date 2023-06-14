@@ -74,12 +74,14 @@ public class NoticeController {
 		ModelAndView mv = new ModelAndView();
 		
 		int result = noticeService.setInsert(noticeVO, addfiles);
-		
+		mv.setViewName("redirect:./list");
 		if(noticeVO.getImportant()==1) {
 			result = notificationService.setIptNotice(noticeVO);
+		} else {
+			return mv;
 		}
 		
-		mv.setViewName("redirect:./list");
+		
 		
 		return mv;
 	}

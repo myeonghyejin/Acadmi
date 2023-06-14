@@ -15,29 +15,22 @@ function setMax(m){
 	max = m;
 }
 
+//파일 전송 취소
 $('#formSend').on('click','#deleteFile',function(){
 	$(this).parent().parent().remove()
 	count--
 })
 
+//파일 전송
 $('#fileButton').click(function(){
-	/*<div class="input-group">
-		<div class="custom-file">
-			<input type="file" class="custom-file-input" id="exampleInputFile">
-			<label class="custom-file-label" for="exampleInputFile">Choose file</label>
-		</div>
-		<div class="input-group-append">
-			<span class="btn btn-danger">X</span>
-		</div>
-	</div>*/
 	if(count >= max){
 		alert('점부파일은 최대 ' + max + '개 까지만 가능')
 		return
 	}
 	count++
-	let child = '<div class="input-group"><div class="custom-file">'
-	child = child + '<input type="file" class="custom-file-input" id="exampleInputFile">'
-	child = child + '<label class="custom-file-label" for="exampleInputFile">Choose file</label></div>'
+	let child = '<div class="input-group" id="fileSend"><div class="custom-file">'
+	child = child + '<input type="file" class="custom-file-input" id="fileInput">'
+	child = child + '<label class="custom-file-label" for="fileInput">Choose file</label></div>'
 	child = child + '<div class="input-group-append"><span class="btn btn-danger" id="deleteFile">X</span></div>'
 	$(function () {
 	  bsCustomFileInput.init();
@@ -195,24 +188,86 @@ $('#chatSend').click(function(event){
 	let msgRecipient = getUrlParameter('roomRecipient')
 	let chatNum = $('#chatNum').val();
 	let date = new Date().toLocaleTimeString();
-	console.log(chatNum)
-	let message = {
-		msgContents : msgContents,
-		msgRecipient : msgRecipient,
-		msgSender : msgSender,
-		chatNum : chatNum
+	
+	let fileInput = $('#fileInput')
+	if(fileInput.length != 0 && fileInput[0].files.length > 0) {
+		let file = fileInput[0].files[0]
+		let fileName=file.name
+		let reader = new FileReader()
+		reader.onload = function(){
+			let child
+			if(msgContents != ''){
+				child = '<div class="direct-chat-msg right">'
+				child = child + '<div class="direct-chat-infos clearfix">'
+				child = child + '<span class="direct-chat-name float-right">'+msgSender+'</span>'
+				child = child + '<span class="direct-chat-timestamp float-left">'+date+'</span></div>'
+				child = child + '<img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image">'
+				child = child + '<div class="direct-chat-text text-right">'+msgContents+'</div></div>'
+				$('#messageList').append(child)
+				let message = {
+					type : 'text',
+					msgContents : msgContents,
+					msgRecipient : msgRecipient,
+					msgSender : msgSender,
+					chatNum : chatNum
+				}
+				
+				sendMessage(JSON.stringify(message))
+			}
+			child = '<div class="direct-chat-msg right">'
+			child = child + '<div class="direct-chat-infos clearfix">'
+			child = child + '<span class="direct-chat-name float-right">'+msgSender+'</span>'
+			child = child + '<span class="direct-chat-timestamp float-left">'+date+'</span></div>'
+			child = child + '<img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image">'
+			child = child + '<div class="direct-chat-text text-right"><a href="#">'+fileName+'</a></div></div>'
+			msgContents=fileName
+			$('#messageList').append(child)
+			let message = {
+				type : 'file',
+				file : file,
+				fileName : fileName,
+				msgContents : msgContents,
+				msgRecipient : msgRecipient,
+				msgSender : msgSender,
+				chatNum : chatNum
+			}
+			
+			sendMessage(JSON.stringify(message))
+			let arrayBuffer=this.result
+			console.log(arrayBuffer)
+			sendMessage(arrayBuffer)
+			scrollToBottom()
+			$('#message').val('')
+		}
+		reader.readAsArrayBuffer(file)
+		$('#fileSend').remove()
+		count--
+	} else {
+		
+		let message = {
+			type : 'text',
+			msgContents : msgContents,
+			msgRecipient : msgRecipient,
+			msgSender : msgSender,
+			chatNum : chatNum
+		}
+		
+		let child = '<div class="direct-chat-msg right">'
+		child = child + '<div class="direct-chat-infos clearfix">'
+		child = child + '<span class="direct-chat-name float-right">'+msgSender+'</span>'
+		child = child + '<span class="direct-chat-timestamp float-left">'+date+'</span></div>'
+		child = child + '<img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image">'
+		child = child + '<div class="direct-chat-text text-right">'+msgContents+'</div></div>'
+		$('#messageList').append(child)
+		sendMessage(JSON.stringify(message))
+		scrollToBottom()
+		$('#message').val('')
+		$('#fileSend').remove()
+		if(count=1){
+			count--
+		}
 	}
 	
-	let child = '<div class="direct-chat-msg right">'
-	child = child + '<div class="direct-chat-infos clearfix">'
-	child = child + '<span class="direct-chat-name float-right">'+msgSender+'</span>'
-	child = child + '<span class="direct-chat-timestamp float-left">'+date+'</span></div>'
-	child = child + '<img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image">'
-	child = child + '<div class="direct-chat-text text-right">'+msgContents+'</div></div>'
-	$('#messageList').append(child)
-	sendMessage(JSON.stringify(message))
-	scrollToBottom()
-	$('#message').val('')
 })
 
 //enter키 눌렀을때

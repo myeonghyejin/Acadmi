@@ -5,12 +5,14 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import com.acadmi.member.MemberFilesVO;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ChatMessageVO {
 	
 	private Long msgNum;
