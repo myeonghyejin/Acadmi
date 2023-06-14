@@ -188,7 +188,10 @@ $('#chatSend').click(function(event){
 	let msgRecipient = getUrlParameter('roomRecipient')
 	let chatNum = $('#chatNum').val();
 	let date = new Date().toLocaleTimeString();
-	
+	let profile = $('#profile').data('file-name')
+	if(profile == ''){
+		console.log('check')
+	}
 	let fileInput = $('#fileInput')
 	if(fileInput.length != 0 && fileInput[0].files.length > 0) {
 		let file = fileInput[0].files[0]
@@ -201,6 +204,15 @@ $('#chatSend').click(function(event){
 				child = child + '<div class="direct-chat-infos clearfix">'
 				child = child + '<span class="direct-chat-name float-right">'+msgSender+'</span>'
 				child = child + '<span class="direct-chat-timestamp float-left">'+date+'</span></div>'
+				/*<c:choose>
+					<c:when test="${empty chatMessageVO.memberFilesVO.fileName}">
+						<img class="direct-chat-img" src="/images/profile.jpg" alt="message user image">
+					</c:when>
+					<c:otherwise>
+						<img class="direct-chat-img"  src="/file/member/${chatMessageVO.memberFilesVO.fileName}" alt="message user image">
+					</c:otherwise>
+				</c:choose>*/
+				
 				child = child + '<img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image">'
 				child = child + '<div class="direct-chat-text text-right">'+msgContents+'</div></div>'
 				$('#messageList').append(child)
