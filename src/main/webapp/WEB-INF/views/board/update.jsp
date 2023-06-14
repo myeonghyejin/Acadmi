@@ -114,9 +114,8 @@
 									</div>
 								</div>
 							</c:if>
-
 							
-							<div class="col-md-12 mt-3">
+							<div class="col-md-12 mt-4">
 								<label for="contents" class="form-label strongFont2">내용</label>
 								<textarea class="form-control" name="contents" id="contents">${dto.contents}</textarea>
 							</div>

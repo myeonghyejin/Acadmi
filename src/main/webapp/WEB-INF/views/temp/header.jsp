@@ -286,20 +286,6 @@
 								<p>질의응답</p>
 							</a>
 						</li>
-						
-						<!-- 테스트 후 삭제 -->
-						<li class="nav-item">
-							<a href="/lectureQna/list?lectureNum=1" class="nav-link">
-								<i class="fa-solid fa-circle fa-2xs"></i>
-								<p>강의질의응답1</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="/lectureQna/list?lectureNum=2" class="nav-link">
-								<i class="fa-solid fa-circle fa-2xs"></i>
-								<p>강의질의응답2</p>
-							</a>
-						</li>
 					</ul>
 				</li>
 				

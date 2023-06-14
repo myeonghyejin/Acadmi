@@ -103,7 +103,12 @@
 							
 				            <c:if test="${userName eq boardVO.writer}">
 								<a href="./update?num=${boardVO.num}" id="update" class="btn btn-info float-right">수정</a>
-								<a id="delete" data-board-num="${boardVO.num}" data-board-name="${board}" data-board-lectureNum="${boardVO.lectureNum}" class="btn btn-danger float-right" style="margin-right: 5px">삭제</a>
+								<c:if test="${board eq 'qna' || board eq 'notice'}">
+									<a id="delete" data-board-num="${boardVO.num}" data-board-name="${board}" class="btn btn-danger float-right" style="margin-right: 5px">삭제</a>
+								</c:if>
+								<c:if test="${board eq 'lectureQna' || board eq 'lectureNotice'}">
+									<a id="delete" data-board-num="${boardVO.num}" data-board-name="${board}" data-board-lectureNum="${boardVO.lectureNum}" class="btn btn-danger float-right" style="margin-right: 5px">삭제</a>
+								</c:if>
 							</c:if>
 							<c:if test="${board eq 'qna' || board eq 'notice'}">
 				            	<a href="./list" class="btn btn-light float-left">목록</a>

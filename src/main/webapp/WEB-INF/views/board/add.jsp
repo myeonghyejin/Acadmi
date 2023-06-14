@@ -68,12 +68,8 @@
 					<div class="row col-md-7 mx-auto">
 						<form id="contactForm" class="row g-3" action="./add" method="post" enctype="multipart/form-data">
 							
-							<!-- 강의 번호 자동 입력 후 등록 -->	
 							<c:if test="${board eq 'lectureNotice' || board eq 'lectureQna'}">
-								<div class="col-md-6 mt-3">
-									<label for="lectureNum" class="form-label strongFont2">강의번호</label> 
-									<input type="text" class="form-control" name="lectureNum" id="lectureNum">
-								</div>
+								<input type="hidden" class="form-control" name="lectureNum" id="lectureNum" value="${lectureVO.lectureNum}">
 							</c:if>
 							
 							<div class="col-md-6" style="margin-top: 20px;">
@@ -87,9 +83,9 @@
 							</div>
 							
 							<c:if test="${board eq 'notice'}">
-								<div class="row mt-3">
+								<div class="col-md-6 mt-4">
 								  <div style="display: flex; align-items: center;">
-								    <label for="important" class="form-label strongFont2" style="margin-bottom: 0; margin-left:15px">중요표시</label>
+								    <label for="important" class="form-label strongFont2" style="margin-bottom: 0; margin-left:5px">중요표시</label>
 								    <div style="margin-left: 10px;">
 								      <input type="checkbox" class="form-control" name="important" id="important" style="width: 20px; height: 20px; margin-bottom: 0;">
 								    </div>
@@ -98,9 +94,9 @@
 							</c:if>
 							
 							<c:if test="${board eq 'lectureQna'}">
-								<div class="row mt-3">
+								<div class="col-md-6 mt-4">
 								  <div style="display: flex; align-items: center;">
-								    <label for="secret" class="form-label strongFont2" style="margin-bottom: 0; margin-left:15px">비밀글</label>
+								    <label for="secret" class="form-label strongFont2" style="margin-bottom: 0; margin-left:5px">비밀글</label>
 								    <div style="margin-left: 10px;">
 								      <input type="checkbox" class="form-control" name="secret" id="secret" style="width: 20px; height: 20px; margin-bottom: 0;">
 								    </div>
@@ -108,7 +104,7 @@
 								</div>
 							</c:if>
 							
-							<div class="col-md-12 mt-3">
+							<div class="col-md-12 mt-4">
 								<label for="contents" class="form-label strongFont2">내용</label>
 								<textarea class="form-control" name="contents" id="contents" placeholder="내용을 입력하세요"></textarea>
 							</div>

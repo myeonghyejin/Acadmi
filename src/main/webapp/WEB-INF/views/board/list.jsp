@@ -81,7 +81,6 @@
 									<select class="form-select" name="kind" id="kind" aria-label="Default select example" style="width: 100px; height: 40px;">
 										<option value="title" ${pagination.kind eq 'title' ? 'selected' :''}>제목</option>
 										<option value="contents" ${pagination.kind eq 'contents' ?'selected':''}>내용</option>
-										<option value="writer" ${pagination.kind eq 'writer' ? 'selected' :''}>작성자</option>
 									</select>
 								</div>
 								<input type="text" class="form-control" value="${pagination.search}" name="search" id="search" placeholder="검색어를 입력하세요" style="width: 300px; height: 40px;">
@@ -101,7 +100,7 @@
 									<select class="form-select" name="kind" id="kind" aria-label="Default select example" style="width: 100px; height: 40px;">
 										<option value="title" ${pagination.kind eq 'title' ? 'selected' :''}>제목</option>
 										<option value="contents" ${pagination.kind eq 'contents' ?'selected':''}>내용</option>
-										<option value="writer" ${pagination.kind eq 'writer' ? 'selected' :''}>작성자</option>
+										<%-- <option value="writer" ${pagination.kind eq 'writer' ? 'selected' :''}>작성자</option> --%>
 									</select>
 								</div>
 								<input type="text" class="form-control" value="${pagination.search}" name="search" id="search" placeholder="검색어를 입력하세요" style="width: 300px; height: 40px;">
@@ -150,7 +149,6 @@
 													</c:if>
 												</c:forEach>
 											</td>
-											<%-- <td>${dto.writer}</td> --%>
 											<td>${dto.regDate}</td>
 											<td>${dto.modifyDate}</td>
 											<td>${dto.hit}</td>
@@ -192,7 +190,7 @@
 											<td>${dto.regDate}</td>
 										</tr>
 									</c:if>	
-									
+																	
 									<c:if test="${board eq 'lectureNotice'}">
 										<tr class="check-item">
 											<td class="noticeNum" data-num-id="${dto.num}" data-lectureNum-id="${dto.lectureNum}">${dto.num}</td>
@@ -210,9 +208,9 @@
 										</tr>
 									</c:if>
 									
-									<c:if test="${board eq 'lectureQna'}">
+									<c:if test="${board eq 'lectureQna'}">										
 										<tr class="check-item">
-											<td class="qnaNum" data-num-id="${dto.num}">${dto.num}</td>
+											<td class="qnaNum" data-num-id="${dto.num}" data-lectureNum-id="${dto.lectureNum}">${dto.num}</td>
 											<td class="d-flex align-items-center">
 												<c:catch>
 													<c:forEach begin="1" end="${dto.depth}">
@@ -344,12 +342,12 @@
 							<nav aria-label="Page navigation example">
 								<ul class="pagination d-flex justify-content-center">
 									<li class="page-item ${pagination.pre ? 'disabled' : '' }">
-										<a class="page-link" href="./list?lectureNum=${lectureNoticeVO.lectureNum}&page=1&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="1">
+										<a class="page-link" href="./list?lectureNum=${pagination.lectureNum}&page=1&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="1">
 											<span aria-hidden="true">&laquo;</span>
 										</a>
 									</li>
 									<li class="page-item ${pagination.pre ? 'disabled' : ''}">
-										<a class="page-link" href="./list?lectureNum=${lectureNoticeVO.lectureNum}&page=${pagination.startNum-1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="${pagination.startNum-1}">
+										<a class="page-link" href="./list?lectureNum=${pagination.lectureNum}&page=${pagination.startNum-1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="${pagination.startNum-1}">
 											<span aria-hidden="true">&lsaquo;</span>
 										</a>
 									</li>
@@ -357,12 +355,12 @@
 										<li class="page-item"><a class="page-link" href="./list?lectureNum=${pagination.lectureNum}&page=${i}&kind=${pagination.kind}&search=${pagination.search}" data-board-page="${i}">${i}</a></li>
 									</c:forEach>
 									<li class="page-item ${pagination.next eq false ? 'disabled' : ''}">
-										<a class="page-link" href="./list?lectureNum=${lectureNoticeVO.lectureNum}&page=${pagination.lastNum+1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next" data-board-page="${pagination.lastNum+1}">
+										<a class="page-link" href="./list?lectureNum=${pagination.lectureNum}&page=${pagination.lastNum+1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next" data-board-page="${pagination.lastNum+1}">
 											<span aria-hidden="true">&rsaquo;</span>
 										</a>
 									</li>
 									<li class="page-item ${pagination.next eq false ? 'disabled' : ''}">
-										<a class="page-link" href="./list?lectureNum=${lectureNoticeVO.lectureNum}&page=${pagination.totalPage}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next" data-board-page="${pagination.totalPage}">
+										<a class="page-link lectureNums" href="./list?lectureNum=${pagination.lectureNum}&page=${pagination.totalPage}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next" data-board-page="${pagination.totalPage}" data-lectureNum-id="${pagination.lectureNum}">
 											<span aria-hidden="true">&raquo;</span>
 										</a>
 									</li>
@@ -389,21 +387,29 @@
 	    $('.lectureSearch').on('click', function(event) {
 	      event.preventDefault();
 	      
+	      let boardName = $(".table").attr("data-board-name");
 	      
-	      if(){
-	    	  
-	      }
-	      let lectureNum = $(".noticeNum").attr("data-lectureNum-id");
-	      
-	      
-	      
-	      let page = $(".page-link").attr("data-board-page");
-	      let kind = $('#kind').val();
-	      let search = $('#search').val();
-	      
-	      let newUrl = './list?lectureNum=' + lectureNum + "&page=" + page + "&kind=" + kind + "&search=" + search;
-	      
-	      window.location.href = newUrl;
+	      if(boardName == 'lectureNotice'){
+	    	  let lectureNum = $(".lectureNums").attr("data-lectureNum-id");
+	    	  let page = $(".page-link").attr("data-board-page");
+		      let kind = $('#kind').val();
+		      let search = $('#search').val();
+		      
+		      let newUrl = './list?lectureNum=' + lectureNum + "&page=" + page + "&kind=" + kind + "&search=" + search;
+		      
+		      window.location.href = newUrl;    	 
+	      } else if (boardName == 'lectureQna') {
+	    	  let lectureNum = $(".lectureNums").attr("data-lectureNum-id");
+	    	  let page = $(".page-link").attr("data-board-page");
+		      let kind = $('#kind').val();
+		      let search = $('#search').val();
+		          
+		      let newUrl = './list?lectureNum=' + lectureNum + "&page=" + page + "&kind=" + kind + "&search=" + search;
+		      
+		      window.location.href = newUrl; 
+	      } else {
+	    	  console.log("게시판 없음")
+	      }  
 	    });
 	  });
 	</script>
