@@ -43,10 +43,23 @@
 					
 						<!-- Search -->
 						<form action="./all_lecture">
+							<input type="hidden" name="year" value="${year}">
+							<input type="hidden" name="semester" value="${semester}">
 							<input type="hidden" name="page" value="1">
 							<div class="row justify-content-center mx-auto my-3">
 								<div class="col-md-6">
 									<div class="row">
+										<div class="col-4">
+											<div class="form-group">
+												<label>학과</label>
+												<select class="select2" style="width: 100%;" name="department">
+													<option value="" selected>전체</option>
+													<c:forEach items="${department}" var="departmentVO" begin="2">
+														<option value="${departmentVO.deptNum}" ${param.department == departmentVO.deptNum ? 'selected' : ''}>${departmentVO.deptName}</option>
+													</c:forEach>
+												</select>
+											</div>
+										</div>
 										<div class="col-4">
 											<div class="form-group">
 												<label>구분</label>
@@ -68,17 +81,6 @@
 													<option value="2" ${param.grade == 2 ? 'selected' : ''}>2학년</option>
 													<option value="3" ${param.grade == 3 ? 'selected' : ''}>3학년</option>
 													<option value="4" ${param.grade == 4 ? 'selected' : ''}>4학년</option>
-												</select>
-											</div>
-										</div>
-										<div class="col-4">
-											<div class="form-group">
-												<label>학과</label>
-												<select class="select2" style="width: 100%;" name="department">
-													<option value="" selected>전체</option>
-													<c:forEach items="${department}" var="departmentVO" begin="2">
-														<option value="${departmentVO.deptNum}" ${param.department == departmentVO.deptNum ? 'selected' : ''}>${departmentVO.deptName}</option>
-													</c:forEach>
 												</select>
 											</div>
 										</div>
@@ -167,8 +169,8 @@
 											<c:otherwise>
 												<button class="btn btn-info btn-sm" id="mli" type="button"
 												data-mli-num="${lectureVO.lectureNum}"
-												data-semester="${lectureVO.periodVO.semester}"
 												data-year="${lectureVO.periodVO.year}"
+												data-semester="${lectureVO.periodVO.semester}"
 												data-weekday="${lectureVO.weekday}"
 												data-start-time="${lectureVO.startTime}"
 												data-end-time="${lectureVO.endTime}"
@@ -186,7 +188,10 @@
 												</button>
 											</c:when>
 											<c:otherwise>
-												<button class="btn btn-primary btn-sm" id="mfi" type="button" data-mfi-num="${lectureVO.lectureNum}">
+												<button class="btn btn-primary btn-sm" id="mfi" type="button"
+												data-mfi-num="${lectureVO.lectureNum}"
+												data-year="${lectureVO.periodVO.year}"
+												data-semester="${lectureVO.periodVO.semester}">
 													<i class="fa-regular fa-heart"></i>
 													담기
 												</button>

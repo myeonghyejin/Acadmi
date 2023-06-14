@@ -3,8 +3,8 @@ $("#allLectureList").on("click", "#mli", function(e) {
     let check = window.confirm("신청하시겠습니까?");
     if (check) {
         const lectureNum = $(this).attr("data-mli-num");
-        const semester = $(this).attr("data-semester");
         const year = $(this).attr("data-year");
+        const semester = $(this).attr("data-semester");
         const weekday = $(this).attr("data-weekday");
         const startTime = $(this).attr("data-start-time");
         const endTime = $(this).attr("data-end-time");
@@ -15,7 +15,7 @@ $("#allLectureList").on("click", "#mli", function(e) {
             headers: {
                 "Content-type": "application/x-www-form-urlencoded"
             },
-            body: "lectureNum=" + lectureNum + "&semester=" + semester + "&year=" + year + "&weekday=" + weekday + "&startTime=" + startTime + "&endTime=" + endTime + "&completionGrade=" + completionGrade
+            body: "lectureNum=" + lectureNum + "&year=" + year + "&semester=" + semester + "&weekday=" + weekday + "&startTime=" + startTime + "&endTime=" + endTime + "&completionGrade=" + completionGrade
         }).then((response) => {
             return response.text();
         }).then((res) => {
@@ -38,12 +38,14 @@ $("#allLectureList").on("click", "#mli", function(e) {
 $("#myFavoriteList").on("click","#mfd",function(e){
 	let check = window.confirm("빼시겠습니까?");
     if(check) {
+		const favoriteNum = $(this).attr("data-mfd-num");
+		
 	    fetch("./my_favorite/delete", {
 	        method:'POST',
 	        headers:{
 	           "Content-type":"application/x-www-form-urlencoded"
 	       },
-	       body:"favoriteNum="+$(this).attr("data-mfd-num")
+	       body: "favoriteNum=" + favoriteNum
 	       }).then((response)=>{return response.text()})
 	         .then((res)=>{
 	           if(res.trim()!=0){

@@ -17,9 +17,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				AND GRADE = #{grade}
 			</if>
  			<if test="department != null and !department.equals('')">
-				AND DEPTNUM = #{deptNum}
+				AND L.DEPTNUM = #{department}
 			</if>
 			AND LECTURENUM NOT IN (SELECT LECTURENUM FROM STUDENT_LECTURE WHERE USERNAME = #{username})
+			AND YEAR = #{year}
+			AND SEMESTER = #{semester}
 		</trim>
 	</sql>	
 
@@ -108,18 +110,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getAllLectureList" parameterType="Pagination" resultMap="allLectureList">
 		SELECT L.*, D.DEPTNAME
 		FROM LECTURE L
-			LEFT OUTER JOIN
-			PROFESSOR PR
-			ON PR.USERNAME = L.USERNAME
-				INNER JOIN
-				PERIOD PE
-				ON PE.SEMESTER = L.SEMESTER AND PE.YEAR = L.YEAR
-					INNER JOIN
-					LECTURE_ROOM LR
-					ON LR.LECTUREBUILDING = L.LECTUREBUILDING AND LR.LECTUREROOM = L.LECTUREROOM		
-						INNER JOIN
-						DEPARTMENT D
-						ON D.DEPTNUM = L.DEPTNUM
+			LEFT JOIN	
+			DEPARTMENT D
+			ON D.DEPTNUM = L.DEPTNUM
 		<include refid="search"></include>
 		ORDER BY LECTURENUM DESC
 		LIMIT #{startRow}, #{perPage}
@@ -144,7 +137,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="getMyFavoriteList" parameterType="FavoriteLectureVO" resultMap="allLectureList">
-		SELECT FL.FAVORITENUM, L.*, D.DEPTNAME
+		SELECT FL.*, L.*, D.DEPTNAME
 		FROM FAVORITE_LECTURE FL
 			LEFT OUTER JOIN
 			LECTURE L
@@ -156,12 +149,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					STUDENT S
 					ON S.USERNAME = FL.USERNAME
 		WHERE FL.LECTURENUM NOT IN (SELECT LECTURENUM FROM STUDENT_LECTURE WHERE USERNAME = #{username})
+			AND FL.YEAR = #{year}
+			AND FL.SEMESTER = #{semester}
 		ORDER BY FAVORITENUM DESC
 	</select>
 	
 	<select id="getAllLectureCount" parameterType="Pagination" resultType="Long">
 		SELECT COUNT(LECTURENUM)
-		FROM LECTURE
+		FROM LECTURE L
 		<include refid="search"></include>
 	</select>
 	
@@ -248,8 +243,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<insert id="insertToFavoriteLecture" parameterType="FavoriteLectureVO" useGeneratedKeys="true" keyProperty="favoriteNum">
-		INSERT INTO FAVORITE_LECTURE (FAVORITENUM, LECTURENUM, USERNAME)
-		VALUES (#{favoriteNum}, #{lectureNum}, #{username})
+		INSERT INTO FAVORITE_LECTURE (FAVORITENUM, LECTURENUM, USERNAME, YEAR, SEMESTER)
+		VALUES (#{favoriteNum}, #{lectureNum}, #{username}, #{year}, #{semester})
 	</insert>
 	
 	<!-- UPDATE -->

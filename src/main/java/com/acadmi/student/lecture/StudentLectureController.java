@@ -67,6 +67,8 @@ public class StudentLectureController {
 	    mv.addObject("credit", totalCredit);
 		mv.addObject("list", ar);
 		mv.addObject("department", ar2);
+		mv.addObject("year", calculateCurrentYear());
+		mv.addObject("semester", calculateCurrentSemester());
 		mv.setViewName("student/lecture/all_lecture");
 
 		return mv;

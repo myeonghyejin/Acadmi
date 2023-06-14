@@ -10,22 +10,19 @@ $("#allLectureList").on("click", "#mli", function(e) {
     let check = window.confirm("신청하시겠습니까?");
     if (check) {
         const lectureNum = $(this).attr("data-mli-num");
-        const semester = $(this).attr("data-semester");
         const year = $(this).attr("data-year");
+        const semester = $(this).attr("data-semester");
         const weekday = $(this).attr("data-weekday");
         const startTime = $(this).attr("data-start-time");
         const endTime = $(this).attr("data-end-time");
         const completionGrade = $(this).attr("data-completion-grade");
-        
-        console.log($(this).attr("data-year"));
-		console.log($(this).attr("data-semester"));
 
         fetch("./my_lecture/insert", {
             method: 'POST',
             headers: {
                 "Content-type": "application/x-www-form-urlencoded"
             },
-            body: "lectureNum=" + lectureNum + "&semester=" + semester + "&year=" + year + "&weekday=" + weekday + "&startTime=" + startTime + "&endTime=" + endTime + "&completionGrade=" + completionGrade
+            body: "lectureNum=" + lectureNum + "&year=" + year + "&semester=" + semester + "&weekday=" + weekday + "&startTime=" + startTime + "&endTime=" + endTime + "&completionGrade=" + completionGrade
         }).then((response) => {
             return response.text();
         }).then((res) => {
@@ -48,12 +45,16 @@ $("#allLectureList").on("click", "#mli", function(e) {
 $("#allLectureList").on("click","#mfi",function(e){
 	let check = window.confirm("담겠습니까?");
     if(check) {
+		const lectureNum = $(this).attr("data-mfi-num");
+        const year = $(this).attr("data-year");
+		const semester = $(this).attr("data-semester");
+        
 	    fetch("./my_favorite/insert", {
 	        method:'POST',
 	        headers:{
 	           "Content-type":"application/x-www-form-urlencoded"
 	       },
-	       body:"lectureNum="+$(this).attr("data-mfi-num")
+	       body: "lectureNum=" + lectureNum + "&year=" + year + "&semester=" + semester
 	       }).then((response)=>{return response.text()})
 	         .then((res)=>{
 	           if(res.trim()!=0){
