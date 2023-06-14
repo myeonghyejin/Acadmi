@@ -78,7 +78,7 @@
 								<input type="hidden" name="page" value="1" id="page">
 								<div class="col-auto">
 									<label for="kind" class="visually-hidden"></label>
-									<select class="form-select" name="kind" id="kind" aria-label="Default select example" style="width: 100px; height: 40px;">
+									<select class="form-select select2" name="kind" id="kind" aria-label="Default select example" style="width: 100px; height: 40px;">
 										<option value="title" ${pagination.kind eq 'title' ? 'selected' :''}>제목</option>
 										<option value="contents" ${pagination.kind eq 'contents' ?'selected':''}>내용</option>
 									</select>
@@ -97,10 +97,9 @@
 								<input type="hidden" name="page" value="1" id="page">
 								<div class="col-auto">
 									<label for="kind" class="visually-hidden"></label>
-									<select class="form-select" name="kind" id="kind" aria-label="Default select example" style="width: 100px; height: 40px;">
+									<select class="form-select select2" name="kind" id="kind" aria-label="Default select example" style="width: 100px; height: 40px;">
 										<option value="title" ${pagination.kind eq 'title' ? 'selected' :''}>제목</option>
 										<option value="contents" ${pagination.kind eq 'contents' ?'selected':''}>내용</option>
-										<%-- <option value="writer" ${pagination.kind eq 'writer' ? 'selected' :''}>작성자</option> --%>
 									</select>
 								</div>
 								<input type="text" class="form-control" value="${pagination.search}" name="search" id="search" placeholder="검색어를 입력하세요" style="width: 300px; height: 40px;">
@@ -257,11 +256,9 @@
 													</c:if>
 												</c:forEach>		
 											</c:forEach>
-											
 											<td>${dto.regDate}</td>
 										</tr>
 									</c:if>	
-									
 								</c:forEach>
 							</tbody>
 						</table>
@@ -335,7 +332,7 @@
 								</ul>
 							</nav>
 						</div>
-					</c:if>
+					</c:if>	
 						
 					<c:if test="${board eq 'lectureQna' || board eq 'lectureNotice'}">	
 						<div class="row" style="margin: 20px auto;">
@@ -366,9 +363,8 @@
 									</li>
 								</ul>
 							</nav>
-						</div>
-					</c:if>
-						
+						</div>				
+					</c:if>		
 					</div>         
 				  </div>
 				</div>
@@ -412,6 +408,10 @@
 	      }  
 	    });
 	  });
+	  
+	  $(function () {
+	      $('.select2').select2()
+	    });
 	</script>
 </body>
 </html>

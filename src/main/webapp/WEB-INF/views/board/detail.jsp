@@ -27,21 +27,24 @@
 	<div class="wrapper">
 		<div class="content-wrapper">
 		<section class="content">
-			<div class="card" style="padding-top: 50px">
-				<div class="card-body">
-				<div class="row" style="margin-bottom: 50px; display: flex; justify-content: center; align-items: center;">
+			<div class="callout callout-info" style="margin-top: 50px; border-top: 1px solid #cecece;">
+				<h5 style="margin-bottom: 20px;">
 					<c:if test="${board eq 'notice'}">
-						<h3 style="font-size: 50px">학사 공지</h3>
+						<h3 style="font-size: 30px">학사 공지</h3>
 					</c:if>
 
 					<c:if test="${board eq 'lectureNotice'}">
-						<h3 style="font-size: 50px">강의 공지</h3>
+						<h3 style="font-size: 30px">강의 공지</h3>
 					</c:if>
 					
 					<c:if test="${board eq 'qna' || board eq 'lectureQna'}">
-						<h3 style="font-size: 50px">질의응답 Q&A</h3>
+						<h3 style="font-size: 30px">질의응답 Q&A</h3>
 					</c:if>
-				</div>
+				</h5>
+			</div>
+		
+			<div class="card" style="padding-top: 50px; margin-top: 40px;">
+				<div class="card-body">
 				<div class="row">
 					<table class="table" data-board-name="${board}">
 						<tr>
