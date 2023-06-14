@@ -126,4 +126,12 @@
   		VALUES (#{num}, #{lectureNum}, #{title}, #{writer}, #{contents},  now(), #{secret}, #{ref}, #{step}, #{depth})
   	</insert>
   	
+  	<select id="getStudent" resultType="StudentVO">
+  		SELECT * FROM STUDENT
+  	</select>
+  	
+  	<select id="getProfessor" resultType="ProfessorVO">
+  		SELECT * FROM PROFESSOR
+  	</select>
+  	
   </mapper>

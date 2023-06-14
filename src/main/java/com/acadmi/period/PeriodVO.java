@@ -17,11 +17,11 @@ public class PeriodVO {
 	
 	private Integer year;
 	private Integer semester;
-	private String applicationStart;
-	private String applicationEnd;
-	private String favoriteStart;
-	private String favoriteEnd;
-	private String deadline;
+	private Date applicationStart;
+	private Date applicationEnd;
+	private Date favoriteStart;
+	private Date favoriteEnd;
+	private Date deadline;
 	
 }
 

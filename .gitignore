@@ -36,3 +36,4 @@ build/
 application-dev.properties
 AdminLTE-3.2.0
 UI
+src/main/java/com/acadmi/home/HomeController.java

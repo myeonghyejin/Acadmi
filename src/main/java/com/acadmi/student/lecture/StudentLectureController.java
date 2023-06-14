@@ -15,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.acadmi.department.DepartmentVO;
 import com.acadmi.lecture.LectureVO;
+import com.acadmi.period.PeriodVO;
+import com.acadmi.student.StudentService;
 import com.acadmi.util.Pagination;
 
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +29,9 @@ public class StudentLectureController {
 	@Autowired
 	private StudentLectureService studentLectureService;
 	
+	@Autowired
+	private StudentService studentService;
+	
 	/** SELECT **/
 	//수강 신청 & 장바구니 조회
 	@GetMapping("all_lecture")
@@ -35,7 +40,7 @@ public class StudentLectureController {
 		SecurityContextImpl contextImpl = (SecurityContextImpl)obj;
 		Authentication authentication = contextImpl.getAuthentication();
 		pagination.setUsername(authentication.getName());
-		
+				
 		List<LectureVO> ar = studentLectureService.getAllLectureList(pagination);
 		List<DepartmentVO> ar2 = studentLectureService.getDepartment();
 		

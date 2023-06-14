@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Schema 추가 -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.acadmi.credit.CreditDAO">
+  
+	<select id="getLectureList" parameterType="LectureVO" resultType="LectureVO">
+  		SELECT * FROM LECTURE WHERE USERNAME=#{username} AND TEMPORARY=1
+  	</select>
+  	<select id="getLectureDetail" parameterType="LectureVO" resultMap="LectureResult">
+  		SELECT * FROM LECTURE L INNER JOIN DEPARTMENT D ON(L.DEPTNUM=D.DEPTNUM) WHERE LECTURENUM=#{lectureNum}
+  	</select>
+  	<select id="getLectureAttendee" parameterType="LectureVO" resultMap="StudentResult">
+  		SELECT S.*,D.DEPTNAME,C.* FROM STUDENT S INNER JOIN STUDENT_LECTURE SL ON (S.USERNAME=SL.USERNAME) 
+  		INNER JOIN DEPARTMENT D ON(S.DEPTNUM=D.DEPTNUM) LEFT OUTER JOIN CREDIT C ON (SL.USERNAME=C.USERNAME)
+		WHERE SL.LECTURENUM=#{lectureNum}
+  	</select>
+  	<select id="getStudentCredit" parameterType="LectureVO" resultType="Integer">
+  		SELECT COUNT(CREDITNUM) FROM CREDIT WHERE USERNAME=#{username} AND LECTURENUM=#{lectureNum}
+  	</select>
+  	<insert id="setCreditAdd" parameterType="CreditVO" useGeneratedKeys="true" keyProperty="creditNum">
+  		INSERT INTO CREDIT(LECTURENUM,USERNAME,SEMIGRADE,FINALGRADE,REPORTGRADE,ATTENDANCE,CREDIT) 
+  		VALUES(#{lectureNum},#{username},#{semiGrade},#{finalGrade},#{reportGrade},#{attendance},#{credit})
+  	</insert>
+  	
+  	<resultMap type="LectureVO" id="LectureResult">
+  	
+  	
+  	
+  		<id column="LECTURENUM" property="lectureNum"/>
+  		<result column="LECTURENAME" property="lectureName"/>
+  		<result column="SEMESTER" property="semester"/>
+  		<result column="CATEGORY" property="category"/>
+  		<result column="LECTUREBUILDING" property="lectureBuilding"/>
+  		<result column="LECTUREROOM" property="lectureRoom"/>
+  		<result column="DEPTNUM" property="deptNum"/>
+  		<result column="GRADE" property="grade"/>
+  		<result column="SUBSCRIPTION" property="subscription"/>
+  		<result column="PERSONAL" property="personal"/>
+  		<result column="YEAR" property="year"/>
+  		<result column="WEEKDAY" property="weekday"/>
+  		<result column="STARTTIME" property="startTime"/>
+  		<result column="ENDTIME" property="endTime"/>
+  		<result column="COMPLETIONGRADE" property="completionGrade"/>
+  		<result column="STATUS" property="status"/>
+  		<result column="TEMPORARY" property="temporary"/>
+  		<result column="USERNAME" property="username"/>
+  		<association property="syllabusVO" javaType="SyllabusVO">
+  			<id column="SYLLABUSNUM" property="syllabusNum"/>
+  			<result column="LECTURENUM" property="lectureNum"/>
+  			<result column="CURRICULUMOUTLINE" property="curriculumOutline"/>
+  			<result column="GOAL" property="goal"/>
+  			<result column="EVALUATION" property="evaluation"/>
+  			<result column="METHOD" property="method"/>
+  			<result column="BOOKNAME" property="bookName"/>
+  			<result column="BOOKAUTHOR" property="bookAuthor"/>
+  			<result column="BOOKPUBLISHER" property="bookPublisher"/>
+  			<result column="BOOKPUBLICATIONDATE" property="bookPublicationDate"/>
+  			<result column="BOOKISBN" property="bookISBN"/>
+  			<result column="BOOKNOTE" property="bookNote"/>
+  		</association>
+  		<collection property="professorVO" javaType="ProfessorVO">
+  			<id column="USERNAME" property="username"/>
+  			<result column="DEPTNUM" property="deptNum"/>
+  			<result column="NAME" property="name"/>
+  			<result column="PROFESSORROOM" property="professorRoom"/>
+  			<result column="PHONE" property="phone"/>
+  			<result column="BIRTH" property="birth"/>
+  			<result column="ADDRESS" property="address"/>
+  			<result column="STATUS" property="status"/>
+  			<result column="EMAIL" property="email"/>
+  		</collection>
+  		<collection property="departmentVO" javaType="DepartmentVO">
+  			<id column="DEPTNUM" property="deptNum"/>
+  			<result column="DEPTNAME" property="deptName"/>
+  		</collection>
+  	</resultMap>
+  	<resultMap type="StudentVO" id="StudentResult">
+  		<id column="USERNAME" property="username"/>
+  		<result column="DEPTNUM" property="deptNum" />
+  		<result column="GRADE" property="grade" />
+  		<result column="NAME" property="name" />
+  		<result column="PHONE" property="phone" />
+  		<result column="BIRTH" property="birth" />
+  		<result column="ADDRESS" property="address" />
+  		<result column="STATUS" property="status" />
+  		<association property="departmentVO" javaType="DepartmentVO">
+  			<id column="DEPTNUM" property="deptNum"/>
+  			<result column="DEPTNAME" property="deptName"/>
+  		</association>
+  		<association property="creditVO" javaType="CreditVO">
+  			<id column="CREDITNUM" property="creditNum"/>
+  			<result column="LECTURENUM" property="lectureNum"/>
+  			<result column="USERNAME" property="username"/>
+  			<result column="SEMIGRADE" property="semiGrade"/>
+  			<result column="FINALGRADE" property="finalGrade"/>
+  			<result column="REPORTGRADE" property="reportGrade"/>
+  			<result column="ATTENDANCE" property="attendance"/>
+  			<result column="CREDIT" property="credit"/>
+  		</association>
+  		
+  	</resultMap>
+  	
+  </mapper>

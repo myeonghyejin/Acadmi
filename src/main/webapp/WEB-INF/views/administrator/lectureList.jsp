@@ -5,18 +5,33 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 <c:import url="../temp/style.jsp"></c:import>
 <link
 	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
 	rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <style type="text/css">
+	#pagination {
+		 display: flex;
+   	 	justify-content: center;
 	
+	}
+	
+	.contentContainer {
+		margin : 20px;
+	}
+	
+	.content {
+		margin: 30px;
+	}
+	
+	.content2 {
+		margin : 10px 0 30px 30px;
+	}
 </style>
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">>
+<body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
 <c:import url="../temp/administrator.jsp"></c:import>
@@ -38,6 +53,53 @@
 					
 					<!-- Main content -->
 				    <section class="content">
+				    
+				      <!--Search -->
+					<form action="./lectureList" id="search-form">
+						<input type="hidden" name="page" value="1">
+						<div class="card search">
+							<div class="row content" >
+								<label style="margin : 10px;">학과</label>
+								<select  class="form-control select" style="width: 15%;" name="deptName" id="dept">
+									<option value="">전체</option>
+									<c:forEach items="${department}" var="departmentVO">
+										<c:if test="${departmentVO.deptNum !=1 && departmentVO.deptNum !=2 }">
+											<option value="${departmentVO.deptName}">${departmentVO.deptName}</option>
+										</c:if>
+									</c:forEach>
+								</select>
+								<label style="margin : 10px;">학년도</label>
+								<select class="form-control select2" name="year" style="width: 20%;">
+									<option value="">전체</option>
+										<c:forEach items="${year}" var="year">
+											<option value="${year}">${year}</option>
+										</c:forEach>
+										
+								</select>
+								<label style="margin : 10px;">학기</label>
+								<select class="form-control select3" name="semester" style="width: 20%;">
+									<option value=''>전체</option>
+									<option value="1">1학기</option>
+									<option value="2">2학기</option>
+								</select>
+								
+							</div>
+							<div class="row content2">
+								<label style="margin : 10px;">상태</label>
+								<select class="form-control select4" name="status" style="width: 20%;">
+									<option value="">전체</option>
+									<option value="0">폐강</option>
+									<option value="1">개강</option>
+									
+								</select>
+								<label style="margin : 10px;">강의</label>
+								<input type="text" class="form-control" name="lectureName" placeholder="강의를 입력해주세요" style="width : 20%">
+								
+									<button type="submit" class="btn btn-info" style="margin : 0 0 0 20px; width : 15%">검색</button>
+							</div>
+						</div>
+					</form>
+				    
 				
 				      <!-- Default box -->
 				      <div class="card">
@@ -82,18 +144,27 @@
 				                  <c:forEach items="${list}" var="lectureVO">
 					   	 		<tr class="container">
 					   	 			<td>
-						   	 				<button class="toggleButton">+</button>
+						   	 				<button class="toggleButton" style="background-color : white; border : none; outline : none; ">+</button>
 						   	 				<div class="toggleContent" style="display:none">
 						   	 					<div class="contentContainer">
 							   	 					  <table class="table table-hover text-nowrap" style="text-align: center;" id="table1">
 								                        <tr>
-								                            <th>강의번호:</th>
-								                            <th>강의이름:</th>
-								                           
+								                            <th>학년도</th>
+								                            <th>학과</th>
+								                           	<th>학기</th>
+								                           	<th>담당교수</th>
+								                           	<th>강의실</th>
+								                           	<th></th>
 								                        </tr>
 								                        <tr>
-								                        	<td>${lectureVO.lectureNum }</td>
-								                        	<td>${lectureVO.lectureNum }</td>
+								                        	<td>${lectureVO.year}</td>
+								                        	<td>${lectureVO.departmentVO.deptName}</td>
+								                        	<td>${lectureVO.semester }</td>
+								                        	<td>${lectureVO.professorVO.name}</td>
+								                        	<td>${lectureVO.lectureBuilding} ${lectureVO.lectureRoom}</td>
+								                        	<c:if test="${lectureVO.lectureBuilding eq  null}">
+								                        		<td><a href="./lectureRoomAssignment?lectureNum=${lectureVO.lectureNum}"><button class="btn btn-info">강의실 배정</button></a></td>
+								                        	</c:if>
 								                        </tr>
 								                       
 								                    </table>
@@ -108,10 +179,13 @@
 					   	 			<td>${lectureVO.endTime}교시</td>
 					   	 			<td>${lectureVO.personal}</td>
 					   	 			<c:if test="${lectureVO.status eq 1}">
-					   	 				<td>개강</td>
+					   	 				<td>개강</td>	
 					   	 			</c:if>
 					   	 			<c:if test="${lectureVO.status eq 0}">
 					   	 				<td>폐강</td>
+					   	 			</c:if>
+					   	 			<c:if test="${lectureVO.status eq null }">
+					   	 				<td>상태 없음</td>
 					   	 			</c:if>
 					   	 			
 					   	 		</tr>	
@@ -125,15 +199,35 @@
 				      <!-- /.card -->
 				
 				    </section>
-				    <c:if test="${pagination.pre}">
-							<a href="./administratorList?page=${pagination.startNum-1}">이전</a>
-					</c:if>
-					<c:forEach begin="${pagination.startNum}" end="${pagination.lastNum}" var="i">
-				   	 	<a href="./administratorList?page=${i}">${i}</a>
-				   	 </c:forEach>		
-				   	<c:if test="${pagination.next}">
-						<a href="./administratorList?page=${pagination.lastNum+1}">다음</a>
-					</c:if> 
+				    <div class="row" style="margin: 20px auto;" id="pagination">
+							<nav aria-label="Page navigation example">
+								<ul class="pagination d-flex justify-content-center">
+									<li class="page-item ${pagination.page eq 1? 'disabled' : '' }">
+										<a class="page-link" href="./lectureList?page=1&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="1">
+											<span aria-hidden="true">&laquo;</span>
+										</a>
+									</li>
+									<li class="page-item ${pagination.pre eq false ? 'disabled' : ''}">
+										<a class="page-link" href="./lectureList?"page=${pagination.startNum-1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="${pagination.startNum-1}">
+											<span aria-hidden="true">&lsaquo;</span>
+										</a>
+									</li>
+									<c:forEach begin="${pagination.startNum}" end="${pagination.lastNum}" var="i">
+										<li class="page-item"><a class="page-link" href="./lectureList?page=${i}&kind=${pagination.kind}&search=${pagination.search}" data-board-page="${i}">${i}</a></li>
+									</c:forEach>
+									<li class="page-item ${pagination.next eq false ? 'disabled' : ''}">
+										<a class="page-link" href="./lectureList?page=${pagination.lastNum+1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next" data-board-page="${pagination.lastNum+1}">
+											<span aria-hidden="true">&rsaquo;</span>
+										</a>
+									</li>
+									<li class="page-item ${pagination.next eq totalPage ? 'disabled' : ''}">
+										<a class="page-link" href="./lecturetList?page=${pagination.totalPage}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next" data-board-page="${pagination.totalPage}">
+											<span aria-hidden="true">&raquo;</span>
+										</a>
+									</li>
+								</ul>
+							</nav>
+					</div>
 				</div>
 				
 			</div>
@@ -142,6 +236,7 @@
 	</div>
 </div>	
 <script type="text/javascript">
+	/* 토글 */
 	let toggleButtons = document.getElementsByClassName("toggleButton");
 	let toggleContents = document.getElementsByClassName("toggleContent");
 	
@@ -149,7 +244,7 @@
 	  let toggleButton = toggleButtons[i];
 	
 	  toggleButton.addEventListener('click', function() {
-	    let toggleContent = toggleContents[i]; // 수정: j 대신 i를 사용해야 함
+	    let toggleContent = toggleContents[i]; 
 	
 	    if (toggleContent.style.display === 'none') {
 	      toggleContent.style.display = 'block';
@@ -158,8 +253,9 @@
 	    }
 	  });
 	}
-		
-		
+	
+	/* 페이지네이션 선택 색상 */
+
 </script>
 </body>
 </html>
