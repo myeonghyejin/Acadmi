@@ -133,7 +133,6 @@
 		    return decodeURIComponent(results[2].replace(/\+/g, ' '));
 		  }
 
-		  // 파라미터 값을 가져와서 input 태그의 value에 설정하는 예시
 		  let lectureNum = getParameterByName('lectureNum');
 		  let lectureNumInput = document.getElementById('lectureNum');
 		  lectureNumInput.value = lectureNum;
