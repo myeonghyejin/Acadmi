@@ -17,17 +17,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				AND GRADE = #{grade}
 			</if>
  			<if test="department != null and !department.equals('')">
-				AND DEPTNUM = #{deptNum}
+				AND L.DEPTNUM = #{department}
 			</if>
 			AND LECTURENUM NOT IN (SELECT LECTURENUM FROM STUDENT_LECTURE WHERE USERNAME = #{username})
+			AND YEAR = #{year}
+			AND SEMESTER = #{semester}
 		</trim>
 	</sql>	
 
 	<!-- ResultMap -->
 	<resultMap type="LectureVO" id="allLectureList">
 		<id column="LECTURENUM" property="lectureNum"/>
+		<result column="USERNAME" property="username"/>
 		<result column="LECTURENAME" property="lectureName"/>
 		<result column="CATEGORY" property="category"/>
+		<result column="DEPTNUM" property="deptNum"/>
 		<result column="GRADE" property="grade"/>
 		<result column="SUBSCRIPTION" property="subscription"/>
 		<result column="PERSONAL" property="personal"/>
@@ -69,6 +73,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<result column="DEPTNAME" property="deptName"/>
 			<result column="STATUS" property="status"/>
 		</association>
+		<association property="studentLectureVO" javaType="StudentLectureVO">
+			<id column="LECTURENUM" property="lectureNum"/>
+			<id column="USERNAME" property="username"/>
+			<result column="YEAR" property="year"/>
+			<result column="SEMESTER" property="semester"/>
+			<result column="CREDIT" property="credit"/>
+		</association>
 		<association property="favoriteLectureVO" javaType="FavoriteLectureVO">
 			<id column="FAVORITENUM" property="favoriteNum"/>
 		</association>
@@ -83,30 +94,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<result column="STATUS" property="status"/>
 		</association>
 	</resultMap>
+	
+	<resultMap type="LectureVO" id="duplicateTime">
+		<id column="LECTURENUM" property="lectureNum"/>
+		<result column="WEEKDAY" property="weekday"/>
+		<result column="STARTTIME" property="startTime"/>
+		<result column="ENDTIME" property="endTime"/>
+		<collection property="studentLectureVOs" javaType="List" ofType="StudentLectureVO">
+			<id column="LECTURENUM" property="lectureNum"/>
+			<id column="USERNAME" property="username"/>
+		</collection>
+	</resultMap>
+	
+	<resultMap id="favoriteResultMap" type="FavoriteLectureVO">
+    	<association property="lectureVO" resultMap="lectureResultMap"/>
+	</resultMap>
+
+	<resultMap id="lectureResultMap" type="LectureVO">
+   	 <result column="LECTURENUM" property="lectureNum"/>
+	</resultMap>
 
 	<!-- SELECT -->
 	<select id="getAllLectureList" parameterType="Pagination" resultMap="allLectureList">
 		SELECT L.*, D.DEPTNAME
 		FROM LECTURE L
-			LEFT OUTER JOIN
-			PROFESSOR PR
-			ON PR.USERNAME = L.USERNAME
-				INNER JOIN
-				PERIOD PE
-				ON PE.SEMESTER = L.SEMESTER AND PE.YEAR = L.YEAR
-					INNER JOIN
-					LECTURE_ROOM LR
-					ON LR.LECTUREBUILDING = L.LECTUREBUILDING AND LR.LECTUREROOM = L.LECTUREROOM		
-						INNER JOIN
-						DEPARTMENT D
-						ON D.DEPTNUM = L.DEPTNUM
+			LEFT JOIN	
+			DEPARTMENT D
+			ON D.DEPTNUM = L.DEPTNUM
 		<include refid="search"></include>
 		ORDER BY LECTURENUM DESC
 		LIMIT #{startRow}, #{perPage}
 	</select>
 	
 	<select id="getMyLectureList" parameterType="StudentLectureVO" resultMap="allLectureList">
-		SELECT L.*, D.DEPTNAME
+		SELECT L.*, D.DEPTNAME, SL.*
 		FROM STUDENT_LECTURE SL
 			LEFT OUTER JOIN
 			LECTURE L
@@ -118,11 +139,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					STUDENT S
 					ON S.USERNAME = SL.USERNAME
 		WHERE S.USERNAME = #{username}
-		ORDER BY LECTURENUM DESC
+			AND SL.YEAR = #{year}
+			AND SL.SEMESTER = #{semester}
+		ORDER BY L.LECTURENUM DESC
 	</select>
 	
 	<select id="getMyFavoriteList" parameterType="FavoriteLectureVO" resultMap="allLectureList">
-		SELECT FL.FAVORITENUM, L.*, D.DEPTNAME
+		SELECT FL.*, L.*, D.DEPTNAME
 		FROM FAVORITE_LECTURE FL
 			LEFT OUTER JOIN
 			LECTURE L
@@ -134,12 +157,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					STUDENT S
 					ON S.USERNAME = FL.USERNAME
 		WHERE FL.LECTURENUM NOT IN (SELECT LECTURENUM FROM STUDENT_LECTURE WHERE USERNAME = #{username})
+			AND FL.YEAR = #{year}
+			AND FL.SEMESTER = #{semester}
 		ORDER BY FAVORITENUM DESC
 	</select>
 	
 	<select id="getAllLectureCount" parameterType="Pagination" resultType="Long">
 		SELECT COUNT(LECTURENUM)
-		FROM LECTURE
+		FROM LECTURE L
 		<include refid="search"></include>
 	</select>
 	
@@ -162,27 +187,75 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND LECTURENUM = #{lectureNum}
 	</select>
 	
-	<select id="getMyFavoriteLectures" parameterType="String" resultType="Long">
-		SELECT FAVORITENUM
-		FROM FAVORITE_LECTURE
-		WHERE USERNAME = #{username}
+	<select id="getMyFavorite" parameterType="FavoriteLectureVO" resultMap="favoriteResultMap">
+		SELECT *
+		FROM FAVORITE_LECTURE FL
+			INNER JOIN
+			LECTURE L
+			ON L.LECTURENUM = FL.LECTURENUM
+		WHERE FAVORITENUM = #{favoriteNum}
+	</select>
+
+	<select id="getSumCredit" parameterType="StudentLectureVO" resultType="Long">
+		SELECT SUM(CREDIT)
+		FROM STUDENT_LECTURE
+		WHERE USERNAME = #{username};
+	</select>
+
+	<select id="getCalculateCredit" parameterType="StudentLectureVO" resultType="Long">
+		SELECT COALESCE(SUM(L.COMPLETIONGRADE), 0)
+		FROM LECTURE L
+			INNER JOIN
+			STUDENT_LECTURE SL
+			ON SL.LECTURENUM = L.LECTURENUM
+		WHERE SL.USERNAME = #{username}
+			AND SL.LECTURENUM != #{lectureNum}
 	</select>
 	
-	<select id="getMyFavorite" parameterType="FavoriteLectureVO" resultType="FavoriteLectureVO">
+	<select id="getDuplicateTime" parameterType="LectureVO" resultMap="duplicateTime">
+		<![CDATA[
 		SELECT *
-		FROM FAVORITE_LECTURE
-		WHERE FAVORITENUM = #{favoriteNum}
+		FROM LECTURE L
+			LEFT OUTER JOIN STUDENT_LECTURE SL ON (SL.LECTURENUM = L.LECTURENUM)
+		WHERE SL.USERNAME = #{studentLectureVO.username}
+			AND (
+			    (WEEKDAY = #{lectureVO.weekday} AND STARTTIME <= #{lectureVO.startTime} AND ENDTIME >= #{lectureVO.startTime})
+			    OR
+			    (WEEKDAY = #{lectureVO.weekday} AND STARTTIME <= #{lectureVO.endTime} AND ENDTIME >= #{lectureVO.endTime})
+			)]]>
+	</select>
+	
+	<select id="getDepartment" parameterType="DepartmentVO" resultType="DepartmentVO">
+		SELECT DEPTNUM, DEPTNAME
+		FROM DEPARTMENT
+	</select>
+	
+	<select id="getTimetable" parameterType="StudentLectureVO" resultMap="allLectureList">
+		SELECT L.*, D.DEPTNAME
+		FROM STUDENT_LECTURE SL
+			LEFT OUTER JOIN
+			LECTURE L
+			USING (LECTURENUM)
+				INNER JOIN
+				DEPARTMENT D
+				ON D.DEPTNUM = L.DEPTNUM
+					INNER JOIN
+					STUDENT S
+					ON S.USERNAME = SL.USERNAME
+		WHERE S.USERNAME = #{username}
+			AND SL.YEAR = #{year} AND SL.SEMESTER = #{semester}
+		ORDER BY LECTURENUM DESC
 	</select>
 	
 	<!-- INSERT -->
 	<insert id="insertToStudentLecture" parameterType="StudentLectureVO">
-		INSERT INTO STUDENT_LECTURE (LECTURENUM, USERNAME, RETAKE)
-		VALUES (#{lectureNum}, #{username}, #{retake})
+		INSERT INTO STUDENT_LECTURE (LECTURENUM, USERNAME, YEAR, SEMESTER, CREDIT)
+		VALUES (#{lectureNum}, #{username}, #{year}, #{semester}, #{lectureVO.completionGrade})
 	</insert>
 	
 	<insert id="insertToFavoriteLecture" parameterType="FavoriteLectureVO" useGeneratedKeys="true" keyProperty="favoriteNum">
-		INSERT INTO FAVORITE_LECTURE (FAVORITENUM, LECTURENUM, USERNAME)
-		VALUES (#{favoriteNum}, #{lectureNum}, #{username})
+		INSERT INTO FAVORITE_LECTURE (FAVORITENUM, LECTURENUM, USERNAME, YEAR, SEMESTER)
+		VALUES (#{favoriteNum}, #{lectureNum}, #{username}, #{year}, #{semester})
 	</insert>
 	
 	<!-- UPDATE -->
@@ -215,7 +288,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		DELETE
 		FROM STUDENT_LECTURE
 		WHERE USERNAME = #{username}
-		AND LECTURENUM = #{lectureNum}
+			AND LECTURENUM = #{lectureNum}
 	</delete>
 	
 	<delete id="deleteToFavoriteLecture" parameterType="FavoriteLectureVO">
