@@ -13,48 +13,48 @@
 </head>
 <body class="hold-transition sidebar-mini">
 	
-	<c:import url="../temp/header.jsp"></c:import>
-
+	<sec:authorize access="hasRole('ROLE_PROFESSOR')">
+		<c:import url="../temp/professor_header.jsp"></c:import>
+	</sec:authorize>
+	
+	<sec:authorize access="hasRole('ROLE_STUDENT')">
+		<c:import url="../temp/header.jsp"></c:import>
+	</sec:authorize>		
+	
 	<div class="wrapper">
 		<div class="content-wrapper">
-		  <section class="content-header">
-			<div class="container-fluid">
-			  <div class="row mb-2">
-				<div class="col-sm-6">
-					<c:if test="${board eq 'notice'}">
-						<h1>공지사항</h1>
-					</c:if>
-					<c:if test="${board eq 'qna'}">
-						<h1>질의응답</h1>
-					</c:if>
-					<c:if test="${board eq 'lectureNotice'}">
-						<h1>강의공지사항</h1>
-					</c:if>
-					<c:if test="${board eq 'lectureQna'}">
-						<h1>강의질의응답</h1>
-					</c:if>
-				</div>
-			  </div>
-			</div>
-		  </section>
-	  
 		  <section class="content">
-			<div class="container-fluid">
-			  <div class="row">
-				<div class="col-12">
+			<div class="container-fluid" style="display: flex;">
+			
+			<c:if test="${board eq 'lectureNotice' || board eq 'lectureQna'}">
+				<sec:authorize access="hasRole('ROLE_PROFESSOR')">
+					<div class="row">
+						<c:import url="../temp/sidebar/professor_lecture.jsp"></c:import>
+					</div>
+				</sec:authorize>
+				
+				<sec:authorize access="hasRole('ROLE_STUDENT')">
+					<div class="row">
+						<c:import url="../temp/sidebar/student_lecture_main.jsp"></c:import>
+					</div>
+				</sec:authorize>
+			</c:if>
+			
+			  <div class="row" style="width: 3000px">
+				<div class="col-12 mt-5">
 				  <div class="callout callout-info">
 					<h5 style="margin-bottom: 20px;"><i class="fas fa-info" style="margin-right: 10px;"></i>
 						<c:if test="${board eq 'notice'}">
-							공지사항 목록
+							공지사항
 						</c:if>
 						<c:if test="${board eq 'qna'}">
-							질의응답 목록
+							질의응답
 						</c:if>
 						<c:if test="${board eq 'lectureNotice'}">
-							강의공지사항 목록
+							강의공지사항
 						</c:if>
 						<c:if test="${board eq 'lectureQna'}">
-							강의질의응답 목록
+							강의질의응답
 						</c:if>
 					</h5>
 					<c:if test="${board eq 'notice'}">
@@ -293,13 +293,13 @@
 							
 							<c:if test="${board eq 'lectureNotice'}">
 								<sec:authorize access="hasRole('ROLE_PROFESSOR')">
-						    		<a class="float-right btn btn-primary" href="./add">작성</a>
+						    		<a class="float-right btn btn-primary" href="./add?lectureNum=${pagination.lectureNum}">작성</a>
 						  		</sec:authorize>
 							</c:if>
 							
 							<c:if test="${board eq 'lectureQna'}">
 								<sec:authorize access="hasRole('ROLE_STUDENT')">
-						    		<a class="float-right btn btn-primary" href="./add">작성</a>
+						    		<a class="float-right btn btn-primary" href="./add?lectureNum=${pagination.lectureNum}">작성</a>
 						  		</sec:authorize>
 							</c:if>
 						</div>

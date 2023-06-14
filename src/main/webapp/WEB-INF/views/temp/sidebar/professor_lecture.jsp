@@ -33,8 +33,8 @@
 		과목 게시판
 	</button>
 	<div id="submenu_2" class="sidebar-dropdown-content">
-		<a href="#">강의 공지사항</a>
-		<a href="#">강의 질의응답</a>
+		<a href="/lectureNotice/list?lectureNum=${lecture.lectureNum}">강의 공지사항</a>
+		<a href="/lectureQna/list?lectureNum=${lecture.lectureNum}">강의 질의응답</a>
 	</div>
 	
 	<!-- Submenu_3 -->

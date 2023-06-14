@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.acadmi.board.BoardVO;
+import com.acadmi.lecture.LectureVO;
 import com.acadmi.professor.ProfessorVO;
 import com.acadmi.util.FileVO;
 import com.acadmi.util.Pagination;
@@ -34,7 +35,7 @@ public class LectureNoticeController {
 	}
 	
 	@GetMapping("list")
-	public ModelAndView getList(Pagination pagination) throws Exception {
+	public ModelAndView getList(Pagination pagination, LectureVO lectureVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		List<LectureNoticeVO> list = new ArrayList<>();
 		
@@ -42,6 +43,10 @@ public class LectureNoticeController {
 		
 		List<ProfessorVO> professors = lectureNoticeService.getProfessor();
 		
+		lectureVO.setLectureNum(pagination.getLectureNum());		
+		lectureVO = lectureNoticeService.getLecture(lectureVO);
+		
+		mv.addObject("lecture", lectureVO);
 		mv.addObject("professors", professors);
 		mv.addObject("list", ar);
 		mv.setViewName("board/list");

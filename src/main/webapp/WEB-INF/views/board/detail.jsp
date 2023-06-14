@@ -16,55 +16,51 @@
 					
 	<sec:authentication property="principal.category" var="category" />
 
-	<c:import url="../temp/header.jsp"></c:import>
-
+	<sec:authorize access="hasRole('ROLE_PROFESSOR')">
+		<c:import url="../temp/professor_header.jsp"></c:import>
+	</sec:authorize>
+	
+	<sec:authorize access="hasRole('ROLE_STUDENT')">
+		<c:import url="../temp/header.jsp"></c:import>
+	</sec:authorize>
+	
 	<div class="wrapper">
 		<div class="content-wrapper">
-		  <section class="content-header">
-			<div class="container-fluid">
-			  <div class="row mb-2">
-				<div class="col-sm-6">
-					<h1>
-						<c:if test="${board eq 'notice'}">
-							공지사항
-						</c:if>
-						<c:if test="${board eq 'qna'}">
-							질의응답
-						</c:if>
-						<c:if test="${board eq 'lectureNotice'}">
-							강의공지사항
-						</c:if>
-						<c:if test="${board eq 'lectureQna'}">
-							강의질의응답
-						</c:if>
-					</h1>
-				</div>
-			  </div>
-			</div>
-		  </section>
-	   
 		<section class="content">
-			<div class="card">
+			<div class="card" style="padding-top: 50px">
 				<div class="card-body">
+				<div class="row" style="margin-bottom: 50px; display: flex; justify-content: center; align-items: center;">
+					<c:if test="${board eq 'notice'}">
+						<h3 style="font-size: 50px">학사 공지</h3>
+					</c:if>
+
+					<c:if test="${board eq 'lectureNotice'}">
+						<h3 style="font-size: 50px">강의 공지</h3>
+					</c:if>
+					
+					<c:if test="${board eq 'qna' || board eq 'lectureQna'}">
+						<h3 style="font-size: 50px">질의응답 Q&A</h3>
+					</c:if>
+				</div>
 				<div class="row">
 					<table class="table" data-board-name="${board}">
 						<tr>
-						    <th width=20% class="text-center warning" style="background-color:#eeeee4;">번호</th>
+						    <th width=20% class="text-center warning" style="background-color:#cecece">번호</th>
 						    <td width=30% class="text-center">${boardVO.num}</td>
-						    <th width=20% class="text-center warning" style="background-color:#eeeee4; border-bottom: 1px solid #d6d6cd;">작성일</th>
+						    <th width=20% class="text-center warning" style="background-color:#cecece; border-bottom: 1px solid #d6d6cd;">작성일</th>
 					        <td width=30% class="text-center" style="border-bottom: 1px solid #d6d6cd;">${boardVO.regDate}</td>
 					    </tr>     
 						 <tr>
-					         <th width=20% class="text-center warning" style="background-color:#eeeee4;">작성자</th>
+					         <th width=20% class="text-center warning" style="background-color:#cecece">작성자</th>
 						   	 <td width=30% class="text-center">${boardVO.writer}</td>
 				         </tr>
 						 <tr>
-					         <th width=20% class="text-center warning" style="background-color:#eeeee4;">제목</th>
+					         <th width=20% class="text-center warning" style="background-color:#cecece">제목</th>
 					         <td colspan="3">${boardVO.title}</td>
 				         </tr>
 				         
 				         <tr>
-					         <th width=20% class="text-center warning" style="background-color:#eeeee4;">첨부파일</th>
+					         <th width=20% class="text-center warning" style="background-color:#cecece">첨부파일</th>
 					         <td colspan="3">
 					         	<c:forEach items="${boardVO.fileVOs}" var="fileVO">
 									<img class="fileIcon" width="30" height="30" src="/images/fileIcon.png" style="margin-right: 5px">
@@ -95,7 +91,7 @@
 								<c:if test="${num ne 2}">
 									<c:if test="${boardVO.step ne 1}">
 										<c:if test="${category == 1}">
-											<a href="./reply?num=${boardVO.num}" class="btn btn-primary" style="margin-right: 5px">답글</a>
+											<a href="./reply?num=${boardVO.num}&lectureNum=${boardVO.lectureNum}" class="btn btn-primary" style="margin-right: 5px">답글</a>
 										</c:if>
 									</c:if>
 								</c:if>

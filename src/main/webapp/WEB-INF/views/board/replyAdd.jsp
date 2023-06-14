@@ -14,30 +14,19 @@
 </head>
 <body class="hold-transition sidebar-mini">
 
-	<c:import url="../temp/header.jsp"></c:import>
+	<sec:authorize access="hasRole('ROLE_PROFESSOR')">
+		<c:import url="../temp/professor_header.jsp"></c:import>
+	</sec:authorize>
+	
+	<sec:authorize access="hasRole('ROLE_STUDENT')">
+		<c:import url="../temp/header.jsp"></c:import>
+	</sec:authorize>
 
 	<div class="wrapper">
 		<div class="content-wrapper">
-		  <section class="content-header">
-			<div class="container-fluid">
-			  <div class="row mb-2">
-				<div class="col-sm-6">
-				<h1>
-					<c:if test="${board eq 'qna'}">
-						질의응답
-					</c:if>
-					<c:if test="${board eq 'lectureQna'}">
-						강의질의응답
-					</c:if>
-				  </h1>
-				</div>
-			  </div>
-			</div>
-		  </section>
-	  
 		  <section class="content">
 			<div class="row">
-			  <div class="col-md-12">
+			  <div class="col-md-12 mt-5">
 				<div class="card card-secondary">
 				  <div class="card-header">
 					<h3 class="card-title">답글 등록</h3>
@@ -51,7 +40,7 @@
 							<input type="hidden" name="num" value="${qnaVO.num}">
 							
 							<c:if test="${board eq 'lectureQna'}">
-								<input type="hidden" class="form-control" name="lectureNum" id="lectureNum" value="${lectureVO.lectureNum}">
+								<input type="hidden" class="form-control" name="lectureNum" id="lectureNum" value="">
 							</c:if>
 
 							<div class="col-md-6" style="margin-top: 30px;">
@@ -115,6 +104,20 @@
 			height : 500,
 			width : 1187.48
 		});
+		
+		function getParameterByName(name) {
+		    name = name.replace(/[\[\]]/g, '\\$&');
+		    let regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+		        results = regex.exec(window.location.href);
+		    if (!results) return null;
+		    if (!results[2]) return '';
+		    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+		  }
+
+		  // 파라미터 값을 가져와서 input 태그의 value에 설정하는 예시
+		  let lectureNum = getParameterByName('lectureNum');
+		  let lectureNumInput = document.getElementById('lectureNum');
+		  lectureNumInput.value = lectureNum;
 	</script>
 </body>
 </html>

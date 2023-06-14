@@ -14,36 +14,19 @@
 </head>
 <body class="hold-transition sidebar-mini">
 
-	<c:import url="../temp/header.jsp"></c:import>
+	<sec:authorize access="hasRole('ROLE_PROFESSOR')">
+		<c:import url="../temp/professor_header.jsp"></c:import>
+	</sec:authorize>
+	
+	<sec:authorize access="hasRole('ROLE_STUDENT')">
+		<c:import url="../temp/header.jsp"></c:import>
+	</sec:authorize>
 
 	<div class="wrapper">
 		<div class="content-wrapper">
-		  <section class="content-header">
-			<div class="container-fluid">
-			  <div class="row mb-2">
-				<div class="col-sm-6">
-				  <h1>
-					<c:if test="${board eq 'notice'}">
-						공지사항
-					</c:if>
-					<c:if test="${board eq 'qna'}">
-						질의응답
-					</c:if>
-					<c:if test="${board eq 'lectureNotice'}">
-						강의공지사항
-					</c:if>
-					<c:if test="${board eq 'lectureQna'}">
-						강의질의응답
-					</c:if>
-				  </h1>
-				</div>
-			  </div>
-			</div>
-		  </section>
-	  
 		  <section class="content">
 			<div class="row">
-			  <div class="col-md-12">
+			  <div class="col-md-12 mt-5">
 				<div class="card card-secondary">
 				  <div class="card-header">
 					<h3 class="card-title">

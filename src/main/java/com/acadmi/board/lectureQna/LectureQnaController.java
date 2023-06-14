@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.acadmi.board.BoardVO;
+import com.acadmi.lecture.LectureVO;
 import com.acadmi.professor.ProfessorVO;
 import com.acadmi.student.StudentVO;
 import com.acadmi.util.FileVO;
@@ -33,7 +34,7 @@ public class LectureQnaController {
 	}
 	
 	@GetMapping(value = "list")
-	public ModelAndView getList(Pagination pagination) throws Exception {
+	public ModelAndView getList(Pagination pagination, LectureVO lectureVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
 		List<BoardVO> ar = lectureQnaService.getList(pagination);
@@ -42,6 +43,10 @@ public class LectureQnaController {
 		
 		List<ProfessorVO> professors = lectureQnaService.getProfessor();
 		
+		lectureVO.setLectureNum(pagination.getLectureNum());		
+		lectureVO = lectureQnaService.getLecture(lectureVO);
+		
+		mv.addObject("lecture", lectureVO);
 		mv.addObject("students", students);
 		mv.addObject("professors", professors);
 		mv.addObject("list", ar);

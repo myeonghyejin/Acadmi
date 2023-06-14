@@ -94,11 +94,6 @@
   		DELETE FROM LECTURE_QNA WHERE NUM = #{num}
   	</delete>
   	
-  	<!-- <update id="setDelete" parameterType="LectureQnaVO">
-  		UPDATE LECTURE_QNA SET TITLE = '삭제된 글입니다.'
-  		WHERE NUM = ${num}
-  	</update> -->
-  	
   	<insert id="setBoardFileAdd" parameterType="FileVO">
   		INSERT INTO LECTURE_QNAFILES (NUM, FILENAME, ORINAME)
   		VALUES(#{num}, #{fileName}, #{oriName})
@@ -131,6 +126,11 @@
   	
   	<select id="getProfessor" resultType="ProfessorVO">
   		SELECT * FROM PROFESSOR
+  	</select>
+  	
+  	<select id="getLecture" resultType="LectureVO" parameterType="LectureVO">
+  		SELECT * FROM LECTURE
+  		WHERE LECTURENUM = #{lectureNum}
   	</select>
   	
   </mapper>

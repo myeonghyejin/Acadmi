@@ -11,7 +11,7 @@
 			<h3 style="color: red; margin-left: 5px;">1</h3>
 			<h3 style="margin-left: 5px; color: black;">개</h3>
 		</div>
-	
+		
 		<div class="strongFont3">
 			<span class="mr-4 fontlight" style="font-size: 1.5em;">${reply.writer}</span>
 			<span class="mr-4 fontlight" style="margin-left: 100px; font-size: 1.5em;">${reply.regDate}</span>
