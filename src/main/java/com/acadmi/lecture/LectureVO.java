@@ -2,6 +2,7 @@ package com.acadmi.lecture;
 
 import java.util.List;
 
+import com.acadmi.college.CollegeVO;
 import com.acadmi.department.DepartmentVO;
 import com.acadmi.lecture.room.LectureRoomVO;
 import com.acadmi.period.PeriodVO;
@@ -9,6 +10,7 @@ import com.acadmi.professor.ProfessorVO;
 import com.acadmi.student.StudentVO;
 import com.acadmi.student.lecture.FavoriteLectureVO;
 import com.acadmi.student.lecture.StudentLectureVO;
+import com.acadmi.syllabus.SyllabusVO;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -44,5 +46,7 @@ public class LectureVO {
 	private PeriodVO periodVO;
 	private LectureRoomVO lectureRoomVO;
 	private DepartmentVO departmentVO;
+	private CollegeVO collegeVO;
+	private SyllabusVO syllabusVO;
 
 }

@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;import org.springframework.jdbc.support.lob.AbstractLobHandler;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -452,18 +453,29 @@ public class AdministratorService{
 		pagination.makeNum(totalCount);
 		pagination.makeStartRow();
 		
-		return administratorDAO.getLectureList(pagination);
+		List<LectureVO> ar =  administratorDAO.getLectureList(pagination);
+		
+		log.error("service status :: {}", ar.get(0).getStatus());
+		
+		return ar;
 	}
 	
 	//강의실 배정
 	public List<LectureRoomVO> getLectureRoomAssignment(Pagination pagination) throws Exception {
-		Long totalCount = administratorDAO.getTotalCountLectureRoom(pagination);
+		Long totalCount = administratorDAO.getTotalCountAssiginment(pagination);
 		
 		pagination.makeNum(totalCount);
-		pagination.getStartRow();
+		pagination.makeStartRow();
 		
 		return administratorDAO.getLectureRoomAssignment(pagination);
 	}
  	
+	public int setLectureRoomAssignmentUpdate(LectureVO lectureVO) throws Exception {
+		return administratorDAO.setLectureRoomAssignmentUpdate(lectureVO);
+	}
+	
+	public LectureVO getLectureNum(LectureVO lectureVO) throws Exception {
+		return administratorDAO.getLectureNum(lectureVO);
+	}
 
 }

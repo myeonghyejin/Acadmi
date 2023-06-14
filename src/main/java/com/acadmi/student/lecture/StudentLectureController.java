@@ -59,7 +59,7 @@ public class StudentLectureController {
 		Authentication authentication = contextImpl.getAuthentication();
 		pagination.setUsername(authentication.getName());
 		studentLectureVO.setUsername(authentication.getName());
-		
+
 		List<LectureVO> ar = studentLectureService.getAllLectureList(pagination);
 		List<DepartmentVO> ar2 = studentLectureService.getDepartment();
 	    Long totalCredit = studentLectureService.getSumCredit(studentLectureVO);

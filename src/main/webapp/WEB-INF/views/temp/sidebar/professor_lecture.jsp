@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <link rel="stylesheet" href="/css/sidebar.css">
 
 <div class="sidebar-dropdown">
 
 	<!-- Menu -->
-	<h4>수강</h4>
+	<h3 style="margin-top: 20px; text-align: center;"><a href="/lecture/main?lectureNum=${lecture.lectureNum}">${lecture.lectureName}</a></h3>
 	
 	<!-- 더 많은 개수의 submenu가 필요할 경우
 	필요한 수 만큼 복사하고 div 태그의 아이디 'submenu_숫자' 형식으로 수정하여 사용하면 됨 -->
@@ -16,9 +17,14 @@
 		강의 정보
 	</button>
 	<div id="submenu_1" class="sidebar-dropdown-content">
-		<a href="./info?lectureNum=2">강의 상세</a>
-		<a href="./syllabus">강의 계획서</a>
-		<a href="./attendee?lectureNum=2">참여자 목록</a>
+		<a href="/lecture/info?lectureNum=${lecture.lectureNum}">강의 상세</a>
+		<c:if test="${exists==1}">
+			<a href="/lecture/syllabusDetail?lectureName=${lecture.lectureName}">강의 계획서</a>
+		</c:if>
+		<c:if test="${exists==0}">
+			<a href="/lecture/syllabusAdd?lectureNum=${lecture.lectureNum}">강의 계획서</a>
+		</c:if>
+		<a href="/lecture/attendee?lectureNum=${lecture.lectureNum}">참여자 목록</a>
 	</div>
 	
 	<!-- Submenu_2 -->

@@ -1,6 +1,7 @@
 package com.acadmi.student.lecture;
 
 import com.acadmi.lecture.LectureVO;
+import com.acadmi.credit.CreditVO;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,5 +17,6 @@ public class StudentLectureVO {
 	private Integer credit;
 	
 	private LectureVO lectureVO;
+	private CreditVO creditVO;
 
 }

@@ -93,4 +93,8 @@
 		WHERE NUM = #{num}
    	</update>
    	
+   	<select id="getProfessor" resultType="ProfessorVO">
+  		SELECT * FROM PROFESSOR
+  	</select>
+   	
   </mapper>

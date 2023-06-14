@@ -4357,11 +4357,11 @@ input[type="button"].btn-block {
   border-radius: 0.25rem;
 }
 
-.nav-pills .nav-link.active,
+ .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #007bff;
-}
+    color : #17a2b8;
+ 	/*  background-color: #007bff; */
+ }
 
 .nav-fill > .nav-link,
 .nav-fill .nav-item {
@@ -4909,7 +4909,7 @@ input[type="button"].btn-block {
   border-bottom: 0;
 }
 
-.card-header-pills {
+.card-header- {
   margin-right: -0.625rem;
   margin-left: -0.625rem;
 }
@@ -7064,7 +7064,7 @@ button.bg-dark:focus {
 
 .d-flex {
   display: -ms-flexbox !important;
-  display: flex !important;
+  /* display: flex !important; */
 }
 
 .d-inline-flex {
