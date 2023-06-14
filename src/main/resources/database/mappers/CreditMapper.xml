@@ -8,7 +8,8 @@
   
   	<!-- 강의 목록 -->
 	<select id="getLectureList" parameterType="LectureVO" resultType="LectureVO">
-  		SELECT * FROM LECTURE WHERE USERNAME=#{username} AND TEMPORARY=1 AND YEAR=DATE_FORMAT(now(),'%Y') AND 
+  		SELECT * FROM LECTURE WHERE USERNAME=#{username} AND TEMPORARY=1 AND STATUS=1 
+  			AND YEAR=DATE_FORMAT(now(),'%Y') AND 
   			SEMESTER = CASE
     		WHEN MONTH(NOW()) BETWEEN 3 AND 8 THEN 1
     		ELSE 2
@@ -20,14 +21,16 @@
   		SELECT * FROM LECTURE L INNER JOIN DEPARTMENT D ON(L.DEPTNUM=D.DEPTNUM) WHERE LECTURENUM=#{lectureNum}
   	</select>
   	
-  	<!-- 학생 목록 -->
+  	<!-- 학생 목록 및 성적 정보 -->
   	<select id="getLectureAttendee" parameterType="LectureVO" resultMap="StudentResult">
-  		SELECT S.*,D.DEPTNAME,C.* FROM STUDENT S INNER JOIN STUDENT_LECTURE SL ON (S.USERNAME=SL.USERNAME) 
-  		INNER JOIN DEPARTMENT D ON(S.DEPTNUM=D.DEPTNUM) LEFT OUTER JOIN CREDIT C ON (SL.USERNAME =C.USERNAME)
-		WHERE SL.LECTURENUM=#{lectureNum}
+  		SELECT S.*,D.DEPTNAME,C.*,DENSE_RANK() OVER (ORDER BY C.CREDIT DESC) AS RANK FROM STUDENT S 
+  		INNER JOIN STUDENT_LECTURE SL ON(S.USERNAME=SL.USERNAME) 
+  		INNER JOIN DEPARTMENT D ON(S.DEPTNUM=D.DEPTNUM) 
+  		LEFT OUTER JOIN CREDIT C ON(SL.LECTURENUM  =C.LECTURENUM AND SL.USERNAME=C.USERNAME)
+		WHERE SL.LECTURENUM=#{lectureNum} ORDER BY CREDIT DESC
   	</select>
   	
-  	<!-- 학생 성적 -->
+  	<!-- 학생 성적 유무 -->
   	<select id="getStudentCredit" parameterType="LectureVO" resultType="Integer">
   		SELECT COUNT(CREDITNUM) FROM CREDIT WHERE USERNAME=#{username} AND LECTURENUM=#{lectureNum}
   	</select>
@@ -37,6 +40,11 @@
   		INSERT INTO CREDIT(LECTURENUM,USERNAME,SEMIGRADE,FINALGRADE,REPORTGRADE,ATTENDANCE,CREDIT) 
   		VALUES(#{lectureNum},#{username},#{semiGrade},#{finalGrade},#{reportGrade},#{attendance},#{credit})
   	</insert>
+  	<!-- 성적 수정 -->
+  	<update id="setCreditUpdate" parameterType="CreditVO" >
+  		UPDATE CREDIT SET SEMIGRADE=#{semiGrade}, FINALGRADE=#{finalGrade},REPORTGRADE=#{reportGrade},
+  		ATTENDANCE=#{attendance},CREDIT=#{credit} WHERE CREDITNUM=#{creditNum}
+  	</update>
   	
   	<resultMap type="LectureVO" id="LectureResult">
   		<id column="LECTURENUM" property="lectureNum"/>
@@ -96,6 +104,7 @@
   		<result column="BIRTH" property="birth" />
   		<result column="ADDRESS" property="address" />
   		<result column="STATUS" property="status" />
+  		<result column="RANK" property="rank"/>
   		<association property="departmentVO" javaType="DepartmentVO">
   			<id column="DEPTNUM" property="deptNum"/>
   			<result column="DEPTNAME" property="deptName"/>

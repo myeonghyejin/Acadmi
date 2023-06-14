@@ -19,5 +19,6 @@ public class CreditVO {
 	private Integer reportGrade;
 	private Integer attendance;
 	private Float Credit;
+	
 
 }
