@@ -19,6 +19,7 @@ import com.acadmi.board.BoardVO;
 import com.acadmi.board.notice.NoticeService;
 import com.acadmi.board.notice.NoticeVO;
 import com.acadmi.lecture.LectureVO;
+import com.acadmi.period.PeriodVO;
 import com.acadmi.student.lecture.StudentLectureVO;
 import com.acadmi.syllabus.ClassVO;
 import com.acadmi.util.Pagination;
@@ -85,10 +86,8 @@ public class StudentController {
 	@GetMapping("lecture/main")
 	public ModelAndView getLectureProfessor(LectureVO lectureVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
-
-		
 		lectureVO =  studentService.getLectureProfessor(lectureVO);
-		List<ClassVO>  ar = studentService.getSyllabusClass(lectureVO);
+		List<ClassVO> ar = studentService.getSyllabusClass(lectureVO); 
 		mv.addObject("lecture", lectureVO);
 		mv.addObject("classes",ar);
 		mv.setViewName("student/lecture/main");
@@ -99,12 +98,13 @@ public class StudentController {
 	
 	//강의 참여자 목록
 	@GetMapping("lecture/attendee")
-	public ModelAndView getAttendeeList(Pagination pagination) throws Exception {
+	public ModelAndView getAttendeeList(Pagination pagination, LectureVO lectureVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
 		List<LectureVO> ar = studentService.getAttendeeList(pagination);
-		
+		lectureVO = studentService.getLectureProfessor(lectureVO);
 		mv.addObject("list", ar);
+		mv.addObject("lecture", lectureVO);
 		mv.setViewName("student/lecture/attendee");
 		
 		return mv;
@@ -112,6 +112,21 @@ public class StudentController {
 		
 	}
 	
+	//강의 계획서 열람
+	@GetMapping("lecture/syllabusDetail")
+	public ModelAndView getSyllabusDetail(LectureVO lectureVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		lectureVO =  studentService.getSyllabusDetail(lectureVO);
+		List<ClassVO> ar = studentService.getSyllabusClass(lectureVO);
+		
+		mv.addObject("lecture", lectureVO);
+		mv.addObject("classes", ar);
+		mv.setViewName("student/lecture/syllabusDetail");
+		
+		return mv;
+	}
+
 
 	
 }

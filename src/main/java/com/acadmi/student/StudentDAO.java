@@ -1,5 +1,6 @@
 package com.acadmi.student;
 
+import java.time.Period;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -7,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.acadmi.board.BoardVO;
 import com.acadmi.board.notice.NoticeVO;
 import com.acadmi.lecture.LectureVO;
+import com.acadmi.period.PeriodVO;
 import com.acadmi.student.lecture.StudentLectureVO;
 import com.acadmi.syllabus.ClassVO;
 import com.acadmi.util.Pagination;
@@ -34,4 +36,12 @@ public interface StudentDAO {
 	 
 	//강의 참여자 목록
 	public List<LectureVO> getAttendeeList(Pagination pagination) throws Exception; 
+	public Long getTotalCountStudent(Pagination pagination) throws Exception;
+	
+	//강의 계획서 열람
+	public LectureVO getSyllabusDetail(LectureVO lectureVO) throws Exception;
+	
+	//수강신청,장바구니 막기
+	public PeriodVO getApplication() throws Exception;
+	public PeriodVO getFavorite() throws Exception;
 }

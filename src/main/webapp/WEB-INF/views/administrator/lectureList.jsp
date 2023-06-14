@@ -5,7 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 <c:import url="../temp/style.jsp"></c:import>
 <link
 	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
@@ -32,7 +31,7 @@
 </style>
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">>
+<body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
 <c:import url="../temp/administrator.jsp"></c:import>
@@ -184,6 +183,9 @@
 					   	 			</c:if>
 					   	 			<c:if test="${lectureVO.status eq 0}">
 					   	 				<td>폐강</td>
+					   	 			</c:if>
+					   	 			<c:if test="${lectureVO.status eq null }">
+					   	 				<td>상태 없음</td>
 					   	 			</c:if>
 					   	 			
 					   	 		</tr>	

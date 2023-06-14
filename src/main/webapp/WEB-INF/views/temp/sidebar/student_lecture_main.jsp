@@ -6,7 +6,7 @@
 <div class="sidebar-dropdown">
 
 	<!-- Menu -->
-		<h3 style="margin-top: 20px; text-align: center;"><a href="/student/lectureMain?lectureNum=${lecture.lectureNum}">${lecture.lectureName}</a></h3>
+		<h3 style="margin-top: 20px; text-align: center;"><a href="/student/lecture/main?lectureNum=${lecture.lectureNum}">${lecture.lectureName}</a></h3>
 	
 	<!-- Submenu_1 -->
 	<button onclick="myFunction_1()" class="sidebar-menu">
@@ -14,9 +14,9 @@
 		강의 정보
 	</button>
 		<div id="submenu_1" class="sidebar-dropdown-content">
-			<a href="">강의계획서 열람 </a>
-			<a href="">참여자 목록</a>
-	</div>
+			<a href="/student/lecture/syllabusDetail?lectureNum=${lecture.lectureNum}">강의계획서 열람 </a>
+			<a href="/student/lecture/attendee?lectureNum=${lecture.lectureNum}">참여자 목록</a>
+		</div>
 	
 	<!-- Submenu_2 -->
 	<button onclick="myFunction_2()" class="sidebar-menu">
@@ -24,8 +24,8 @@
 		과목 게시판
 	</button>
 	<div id="submenu_2" class="sidebar-dropdown-content">
-		<a href="#">공지사항 게시글</a>
-		<a href="#">질의응답 게시글</a>
+		<a href="/lectureNotice/list?lectureNum=${lecture.lectureNum}">공지사항 게시글</a>
+		<a href="/lectureQna/list?lectureNum=${lecture.lectureNum}">질의응답 게시글</a>
 	</div>	
 </div>
 <script type="text/javascript">
