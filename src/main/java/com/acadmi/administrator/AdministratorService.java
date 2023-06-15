@@ -21,6 +21,7 @@ import com.acadmi.college.CollegeVO;
 import com.acadmi.department.DepartmentVO;
 import com.acadmi.lecture.LectureVO;
 import com.acadmi.lecture.room.LectureRoomVO;
+import com.acadmi.lecture.room.TimeTableVO;
 import com.acadmi.member.MemberSeqVO;
 import com.acadmi.member.MemberVO;
 import com.acadmi.period.PeriodVO;
@@ -455,17 +456,20 @@ public class AdministratorService{
 		
 		List<LectureVO> ar =  administratorDAO.getLectureList(pagination);
 		
-		log.error("service status :: {}", ar.get(0).getStatus());
 		
 		return ar;
 	}
 	
 	//강의실 배정
 	public List<LectureRoomVO> getLectureRoomAssignment(Pagination pagination) throws Exception {
+		
+		
 		Long totalCount = administratorDAO.getTotalCountAssiginment(pagination);
 		
 		pagination.makeNum(totalCount);
 		pagination.makeStartRow();
+		
+		
 		
 		return administratorDAO.getLectureRoomAssignment(pagination);
 	}
@@ -477,5 +481,13 @@ public class AdministratorService{
 	public LectureVO getLectureNum(LectureVO lectureVO) throws Exception {
 		return administratorDAO.getLectureNum(lectureVO);
 	}
+	
+	public List<LectureRoomVO> getLectureRoom() throws Exception {
+		return administratorDAO.getLectureRoom();
 
+	}
+	
+	public List<TimeTableVO> getTimeTable() throws Exception {
+		return administratorDAO.getTimeTable();
+	}
 }

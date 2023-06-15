@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +16,17 @@
 	<div class="wrapper">
 
 		<!-- Header 적용 -->
-		<c:import url="../temp/professor_header.jsp"></c:import>
+		<sec:authorize access="hasRole('ROLE_PROFESSOR')">
+			<c:import url="../temp/professor_header.jsp"></c:import>
+		</sec:authorize>
+		
+		<sec:authorize access="hasRole('ROLE_STUDENT')">
+			<c:import url="../temp/student_header.jsp"></c:import>
+		</sec:authorize>
+		
+		<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
+			<c:import url="../temp/administrator_header.jsp"></c:import>
+		</sec:authorize>
 		<!-- Header 끝 -->
 
 		<!-- Main Contents -->
@@ -43,7 +54,7 @@
 							                		<td>${lecture.professorVO.name}</td>
 							                		<td>${lecture.professorVO.phone}</td>
 							                		<td>${lecture.professorVO.professorRoom}</td>
-							                		<td>wldnjsqkek29@naver.com</td>
+							                		<td>${lecture.professorVO.email}</td>
 							                	</tr>
 							                	
 											</tbody>
@@ -51,7 +62,7 @@
 	                	<div class="card">
 							<!-- table-header start -->
 							<div class="card-header"style="background-color:#f8f9fa;">
-					        	<h3 class="card-title" style="font-weight:normal;">강의 개요</h3>
+					        	<h3 class="card-title" style="font-weight:normal; color:#17a2b8">강의 개요</h3>
 					        </div>
               				<div class="card-body">
               					<div row>
@@ -84,7 +95,7 @@
 									            <c:if test="${not empty classes}">
 									            	<c:forEach items="${classes}" var="classes">
 				                    				<tr>
-				                    					<td><h5>${classes.order}주차 학습목표</h5><br>${classes.subject}</td>
+				                    					<td style="color:gray;"><h5 style="color:black;"">${classes.order}주차 학습목표</h5>${classes.subject}</td>
 				                    				 </tr>
 				                    				 </c:forEach>	
 			                    				 </c:if>

@@ -2,7 +2,7 @@ let button = $('[data-lecture]')
 
 $('#table1').on("click",'[data-lecture]',function() {
 
-    let status = $(this).parents('.find').find('.status').val();
+    let status = $(this).parents('.find').find('.select2').val();
      console.log(status)
      
     let lectureBuilding = $(this).attr('data-lectureBuilding')

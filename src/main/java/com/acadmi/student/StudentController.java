@@ -47,8 +47,6 @@ public class StudentController {
 		lectureVO.setUsername(authentication.getName()); 
 	
 		
-		log.error("username ::: {}", authentication.getName());
-		
 		List<LectureVO> ar =  studentService.getMyLectureList(lectureVO);
 		
 		mv.addObject("list", ar);

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,9 +20,7 @@
 		margin : 30px 0 20px 0;
 		width : 80%;
 	}
-	.grade {
-		margin : 10px 0 0 5px;
-	}
+
 </style>
 </head>
 
@@ -29,7 +28,17 @@
 
 <div class="wrapper">
 	<!-- Header 적용 -->
-		<c:import url="../temp/administrator.jsp"></c:import>
+		<sec:authorize access="hasRole('ROLE_PROFESSOR')">
+			<c:import url="../temp/professor_header.jsp"></c:import>
+		</sec:authorize>
+		
+		<sec:authorize access="hasRole('ROLE_STUDENT')">
+			<c:import url="../temp/student_header.jsp"></c:import>
+		</sec:authorize>
+		
+		<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
+			<c:import url="../temp/administrator_header.jsp"></c:import>
+		</sec:authorize>
 		<!-- Header 끝 -->
 <div class="content-wrapper">
 			
@@ -67,7 +76,7 @@
 	            <div id="emailResult"></div>
 	           <div class="form-group">
 	           	  <label>단과대</label>
-                  <select class="form-control select2" style="width: 100%;" name="collegeNum" id="college" onchange="updateDepartmentOptions()">
+                  <select class="form-control select" style="width: 100%;" name="collegeNum" id="college" onchange="updateDepartmentOptions()">
                   	<option value="단과대">전체</option>
 					<c:forEach items="${college}" var="collegeVO">
 						<c:if test="${collegeVO.collegeNum != 1 && collegeVO.collegeNum != 2}">
@@ -78,14 +87,14 @@
 	           </div>
 	           <div class="form-group">
 	           	  <label>학과</label>
-                  	<select  class="form-control select2" style="width: 100%;" name="deptNum" id="dept">
+                  	<select  class="form-control select" style="width: 100%;" name="deptNum" id="dept">
                   		<option value="">전체</option>
 					</select>
 	           </div>
 	           <div id="deptResult"></div>
 	           <div class="form-group">
 	           	  <label>학년</label>
-                  	<select  class="form-control select2" style="width: 100%;" name="grade" id="grade">
+                  	<select  class="form-control select" style="width: 100%;" name="grade" id="grade">
                   		<option value="1">신입생</option>
                   		<option value="3">편입생</option>
 					</select>
@@ -122,8 +131,10 @@
 	              <input type="text" id="detailAddress"  class="form-control" name="address"/>
 	            </div>
 	            <input type="hidden" name="category" value="2">
-	            <button type="button" class="btn btn-info" id="studentBtn">학생가입</button> 
-	            <button type="button" class="btn btn-danger" id="backBtn">취소</button>
+	            <div style="width:auto; float: right;">
+		            <button type="button" class="btn btn-info" id="studentBtn">학생가입</button> 
+		            <button type="button" class="btn btn-danger" id="backBtn">취소</button>
+	            </div>
 	          </form>
           </div>
         </div>
@@ -183,6 +194,10 @@
 	}
 	console.log(department)
 }
+
+$(function () {
+      $('.select2').select2()
+});
 
 
 </script>	

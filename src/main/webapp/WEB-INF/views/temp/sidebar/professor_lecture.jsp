@@ -19,7 +19,7 @@
 	<div id="submenu_1" class="sidebar-dropdown-content">
 		<a href="/lecture/info?lectureNum=${lecture.lectureNum}">강의 상세</a>
 		<c:if test="${exists==1}">
-			<a href="/lecture/syllabusDetail?lectureName=${lecture.lectureName}">강의 계획서</a>
+			<a href="/lecture/syllabusDetail?lectureNum=${lecture.lectureNum}">강의 계획서</a>
 		</c:if>
 		<c:if test="${exists==0}">
 			<a href="/lecture/syllabusAdd?lectureNum=${lecture.lectureNum}">강의 계획서</a>

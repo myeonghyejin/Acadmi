@@ -51,7 +51,17 @@
 </head>
 <body class="hold-transition sidebar-mini layout-fixed" >
 	<div class="wrapper">
-		<c:import url="../../temp/header.jsp"></c:import>
+		<sec:authorize access="hasRole('ROLE_PROFESSOR')">
+			<c:import url="../../temp/professor_header.jsp"></c:import>
+		</sec:authorize>
+		
+		<sec:authorize access="hasRole('ROLE_STUDENT')">
+			<c:import url="../../temp/student_header.jsp"></c:import>
+		</sec:authorize>
+		
+		<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
+			<c:import url="../../temp/administrator_header.jsp"></c:import>
+		</sec:authorize>
 			<div class="container-fluid">
 				<div class="row">
 					<div class="content-wrapper">
@@ -159,29 +169,29 @@
 					      <!-- /.card -->
 		              	 </section>
 		              	 
-		              	 <div class="row" style="margin: 20px auto;" id="pagination">
+		              	 <div class="row g-3 justify-content-center" style="margin: 20px auto;" id="pagination">
 							<nav aria-label="Page navigation example">
-								<ul class="pagination d-flex justify-content-center">
+								<ul class="pagination pagination-sm mx-auto" style="width: 200px;">
 									<li class="page-item ${pagination.page eq 1? 'disabled' : '' }">
-										<a class="page-link" href="./attendee?lectureNum=${pagination.lectureNum}&page=1&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="1">
+										<a class="page-link" href="./attendee?lectureNum=${pagination.lectureNum}&page=1&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="1" style="color:#17a2b8;">
 											<span aria-hidden="true">&laquo;</span>
 										</a>
 									</li>
 									<li class="page-item ${pagination.pre eq false ? 'disabled' : ''}">
-										<a class="page-link" href="./attendee?lectureNum=${pagination.lectureNum}&page=${pagination.startNum-1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="${pagination.startNum-1}">
+										<a class="page-link" href="./attendee?lectureNum=${pagination.lectureNum}&page=${pagination.startNum-1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="${pagination.startNum-1}" style="color:#17a2b8;">
 											<span aria-hidden="true">&lsaquo;</span>
 										</a>
 									</li>
 									<c:forEach begin="${pagination.startNum}" end="${pagination.lastNum}" var="i">
-										<li class="page-item"><a class="page-link" href="./attendee?lectureNum=${pagination.lectureNum}&page=${i}&kind=${pagination.kind}&search=${pagination.search}" data-board-page="${i}">${i}</a></li>
+										<li class="page-item"><a class="page-link" href="./attendee?lectureNum=${pagination.lectureNum}&page=${i}&kind=${pagination.kind}&search=${pagination.search}" data-board-page="${i}" style="color:#17a2b8;">${i}</a></li>
 									</c:forEach>
 									<li class="page-item ${pagination.next eq false ? 'disabled' : ''}">
-										<a class="page-link" href="./attendee?lectureNum=${pagination.lectureNum}&page=${pagination.lastNum+1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next" data-board-page="${pagination.lastNum+1}">
+										<a class="page-link" href="./attendee?lectureNum=${pagination.lectureNum}&page=${pagination.lastNum+1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next" data-board-page="${pagination.lastNum+1}" style="color:#17a2b8;">
 											<span aria-hidden="true">&rsaquo;</span>
 										</a>
 									</li>
 									<li class="page-item ${pagination.next eq totalPage ? 'disabled' : ''}">
-										<a class="page-link" href="./attendee?lectureNum=${pagination.lectureNum}&page=${pagination.totalPage}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next" data-board-page="${pagination.totalPage}">
+										<a class="page-link" href="./attendee?lectureNum=${pagination.lectureNum}&page=${pagination.totalPage}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next" data-board-page="${pagination.totalPage}" style="color:#17a2b8;">
 											<span aria-hidden="true">&raquo;</span>
 										</a>
 									</li>
@@ -192,5 +202,6 @@
 				</div>
 			</div>
 	</div>
+<c:import url="../../temp/footer.jsp"></c:import>		
 </body>
 </html>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
@@ -16,7 +17,17 @@
 	<div class="wrapper">
 
 		<!-- Header 적용 -->
-		<c:import url="../temp/professor_header.jsp"></c:import>
+		<sec:authorize access="hasRole('ROLE_PROFESSOR')">
+			<c:import url="../temp/professor_header.jsp"></c:import>
+		</sec:authorize>
+		
+		<sec:authorize access="hasRole('ROLE_STUDENT')">
+			<c:import url="../temp/student_header.jsp"></c:import>
+		</sec:authorize>
+		
+		<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
+			<c:import url="../temp/administrator_header.jsp"></c:import>
+		</sec:authorize>
 		<!-- Header 끝 -->
 
 		<!-- Main Contents -->
@@ -62,9 +73,9 @@
 							                	</tr>
 							                	<tr>
 							                		<th style="background-color:#f8f9fa;color:#17a2b8;"rowspan="2">목표</th>
-							                		<th style="background-color:#f8f9fa;color:#17a2b8;">수업방식</th>
+							                		<th style="background-color:#f8f9fa;color:#17a2b8;">수업 방식</th>
 							                		<th style="background-color:#f8f9fa;color:#17a2b8;">목표</th>
-							                		<th style="background-color:#f8f9fa;color:#17a2b8;">평가방법</th>
+							                		<th style="background-color:#f8f9fa;color:#17a2b8;">평가 방법</th>
 							                	</tr>
 							                	<tr>
 							                		<td><input type="text" name="method" class="form-control" id="method"value=""></td>
@@ -104,7 +115,7 @@
 	                    						<tr style="background-color:#17a2b8; color:white;">
 	                    							<th>차수</th>
                     								<th>수업 주제</th>
-                    								<th>주차별 수업목표</th>
+                    								<th>주차별 수업 목표</th>
                     								<th>관련 역량</th>
                     								<th>비고</th>
 	                    						</tr>

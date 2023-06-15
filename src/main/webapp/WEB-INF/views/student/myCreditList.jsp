@@ -24,7 +24,17 @@
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 	<div class="wrapper">
-		<c:import url="../temp/header.jsp"></c:import>
+		<sec:authorize access="hasRole('ROLE_PROFESSOR')">
+			<c:import url="../temp/professor_header.jsp"></c:import>
+		</sec:authorize>
+		
+		<sec:authorize access="hasRole('ROLE_STUDENT')">
+			<c:import url="../temp/student_header.jsp"></c:import>
+		</sec:authorize>
+		
+		<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
+			<c:import url="../temp/administrator_header.jsp"></c:import>
+		</sec:authorize>
 		<div class="content-wrapper">
 			<div class="container-fluid">
 				<div class="row">
@@ -45,7 +55,7 @@
 		               		<div class="card search">
 		               			<div class="row content">
 		               				<label style="margin : 10px;">수강 년도</label>
-		               				<select  class="form-control select" name="year" style="width: 15%;" id="year" onchange="year()">
+		               				<select  class="select2" name="year" style="width: 15%;" id="year" onchange="year()">
 		               					<option value="">전체</option>
 		               					<c:forEach  begin="${map['min']}" end="${map['max']}" varStatus="i">
 		               						<option value="${i.index}" ${lectureVO.year eq i.index  ? 'selected' : ''}>${i.index}</option>
@@ -53,7 +63,7 @@
 		               					
 		               				</select>
 		               				<label style="margin : 10px;">학기</label>
-		               				<select class="form-control select" name="semester"style="width: 15%;" id="semester">
+		               				<select class="select2" name="semester"style="width: 15%;" id="semester">
 		               					<option value="">전체</option>
 		               					<option value="1" ${lectureVO.semester eq 1 ? 'selected' : '' }>1학기</option>
 		               					<option value="2" ${lectureVO.semester eq 2 ? 'selected' : '' }>2학기</option>
@@ -100,6 +110,7 @@
 			</div>
 		</div>
 	</div>
+<c:import url="../temp/footer.jsp"></c:import>			
 <script type="text/javascript">
 /*입학년도 ~ 재학년도 */
 
@@ -139,6 +150,10 @@ $("#semester").on("change", function() {
 		}
 	})
 })
+
+$(function () {
+     $('.select2').select2()
+ });
 </script>	
 </body>
 </html>

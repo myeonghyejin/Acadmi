@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,11 +16,21 @@
 	<div class="wrapper">
 
 		<!-- Header 적용 -->
-		<c:import url="../temp/professor_header.jsp"></c:import>
+		<sec:authorize access="hasRole('ROLE_PROFESSOR')">
+			<c:import url="../temp/professor_header.jsp"></c:import>
+		</sec:authorize>
+		
+		<sec:authorize access="hasRole('ROLE_STUDENT')">
+			<c:import url="../temp/student_header.jsp"></c:import>
+		</sec:authorize>
+		
+		<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
+			<c:import url="../temp/administrator_header.jsp"></c:import>
+		</sec:authorize>
 		<!-- Header 끝 -->
 
 		<!-- Main Contents -->
-		<div class="container-fluid">
+		<!-- <div class="container-fluid"> -->
 			<div class="content-wrapper">
 				<!-- Contents -->
 				<div class="col">
@@ -43,13 +54,14 @@
 					                	<!-- <h3 class="card-title" style="font-weight:normal;">강의 목록</h3> -->
 					                	<div class="card-tools">
 					                		<div class="input-group input-group-sm" style="width: 230px;">
+					                		<input type="hidden" value="${list[0].temporary}">
 					                  			<select class="form-control mx-3" style="height: auto;" id="temporary" name="temporary" onchange="this.form.submit()">
 					                    			<option name="temporary" id="temporary" for="temporary"  value=" ">강의 조회</option>
 													<option for="temporary" value=" " >전체</option>
-													<option for="temporary" value="1">등록</option>
+													<option for="temporary" value="1" >등록</option>
 													<option for="temporary" value="0">미등록</option>
 												</select>
-					                    		<a class="btn btn-info" href="./add">강의 등록</a></button>
+					                    		<a class="btn btn-info" href="./add">강의 등록</a>
 					                  		</div>
 					                	</div>
 					              	</div>
@@ -60,7 +72,6 @@
                 						<table class="table table-hover text-nowrap" style="text-align: center;">
                   							<thead>
                     							<tr>
-													<th >강의번호</th>
 										            <th>강의년도</th>
 										            <th>학기</th>
 										            <th>학년</th>
@@ -73,24 +84,27 @@
 								            <tbody>
 			                    				<c:forEach items="${list}" var="LectureVO">
 			                    					<tr>
-						                    			<td>${LectureVO.lectureNum}</td>
-						                    			<td>${LectureVO.year}</td>
-					 									<td>${LectureVO.semester}학기</td>
-					 									<td>${LectureVO.grade}</td>
+						                    			<td style="vertical-align:middle;">${LectureVO.year}</td>
+					 									<td style="vertical-align:middle;">${LectureVO.semester}학기</td>
+					 									<td style="vertical-align:middle;">
+						 									<c:if test="${LectureVO.grade !=null}">
+						 										${LectureVO.grade}학년
+						 									</c:if>
+					 									</td>
 					 									<c:if test="${LectureVO.temporary eq 0}">
-					 										<td>${LectureVO.lectureName}</td>
+					 										<td style="vertical-align:middle;">${LectureVO.lectureName}</td>
 					 									</c:if>
 					 									<c:if test="${LectureVO.temporary eq 1}">
-					 										<td><a href="./main?lectureNum=${LectureVO.lectureNum}" style="color: black;">${LectureVO.lectureName}</a></td>
+					 										<td style="vertical-align:middle;"><a href="./main?lectureNum=${LectureVO.lectureNum}" style="color: black;">${LectureVO.lectureName}</a></td>
 					 									</c:if>
 					 											
-					 									<td>${LectureVO.category}</td>
-					 									<td>
+					 									<td style="vertical-align:middle;">${LectureVO.category}</td>
+					 									<td style="vertical-align:middle;">
 					 										<c:if test="${LectureVO.temporary eq 1}">등록</c:if> 
 					 										<c:if test="${LectureVO.temporary eq 0}">미등록</c:if> 
 					 									</td>
 					 									<c:if test="${LectureVO.temporary eq 0}">
-						 									<td>
+						 									<td style="width: 100px;">
 						 										<a class="btn btn-primary" href="./update?lectureNum=${LectureVO.lectureNum}" style="color: white;">
 						 										<i class="fas fa-pencil-alt"></i>수정</a>
 						 										<a class="btn btn-danger" href="./delete?lectureNum=${LectureVO.lectureNum}" style="color: white;">
@@ -114,7 +128,7 @@
 					<!-- form end -->
 				</div>
 			</div>
-		</div>
+		<!-- </div> -->
 
 		<!-- Footer 적용 -->
 		<c:import url="../temp/footer.jsp"></c:import>

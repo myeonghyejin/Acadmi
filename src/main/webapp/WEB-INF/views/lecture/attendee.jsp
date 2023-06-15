@@ -17,7 +17,17 @@
 	<div class="wrapper">
 
 		<!-- Header 적용 -->
-		<c:import url="../temp/professor_header.jsp"></c:import>
+		<sec:authorize access="hasRole('ROLE_PROFESSOR')">
+			<c:import url="../temp/professor_header.jsp"></c:import>
+		</sec:authorize>
+		
+		<sec:authorize access="hasRole('ROLE_STUDENT')">
+			<c:import url="../temp/student_header.jsp"></c:import>
+		</sec:authorize>
+		
+		<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
+			<c:import url="../temp/administrator_header.jsp"></c:import>
+		</sec:authorize>
 		<!-- Header 끝 -->
 
 		<!-- Main Contents -->
@@ -41,19 +51,28 @@
 					</div>
 					<!-- header end -->
 					<form action="./attendee" method="get">
+					<input type="hidden" name="lectureNum" value="${lecture.lectureNum}">
 		            	<div class="row">
 							<div class="col-12">
 								<div class="card">
 									<!-- table-header start -->
 									<div class="card-header">
-					                	<div class="input-group input-group-sm" style="width: 300px;float:right;">
-						                	<input type="text" class="form-control" placeholder="Search Mail">
+					                	<div class="input-group" style="width:40%;float:right;">
+						                  	<div class="input-group-prepend">
+						                    	<select class="select2" id="kind" name="kind" style="width: 120px;border-color:#17a2b8">
+									                <option value="">전체</option>
+													<option value="userName" >학번</option>
+													<option value="name">이름</option>
+												</select>
+						                  	</div>
+						                  	<input type="text" class="form-control" name="search" id="search">
 						                  	<div class="input-group-append">
-						                    	<div class="btn btn-info">
-						                      		<i class="fas fa-search"></i>
+						                    	<div class="input-group-text">
+						                    	<button type="submit"></button>
+						                    		<i class="fas fa-search"></i>
 						                    	</div>
 						                  	</div>
-						            	</div>
+						                </div>
 					              	</div>
 					              	<!-- table-header end -->
               
@@ -63,11 +82,10 @@
                   							<thead style="background-color: #f8f9fa;">
                     							<tr>
                     								<th></th>
+							                    	<th>사진</th>
 							                    	<th>학번</th>
 							                    	<th>이름</th>
 							                    	<th>학과</th>
-							                    	<th>이메일</th>
-							                    	<th>전화번호</th>
 							                    </tr>
 											</thead>
 							                <tbody>
@@ -76,11 +94,19 @@
 							                    		<td><sec:authentication property="principal.username" var="username"/>
 							                    		<a href="../chat/detail?sender=${username}&recipient=${attendee.username}">
 							                    		<i class="fa-regular fa-envelope fa-2xl"></i></a></td>
+							                    		<td>
+					     	 								<c:if test="${empty memberFiles}">
+										   	 					  <img class="profile-user-img img-fluid img-circle"
+															             src="/images/profile.jpg"
+															             alt="User profile picture" >
+										   	 				</c:if>
+										   	 				<c:if test="${not empty memberFiles}">
+										   	 					<img class="img-circle elevation-2" src="/file/member/${memberFiles}" width="70rem" height="70rem">
+										   	 				</c:if>	
+					     	 							</td>
 							                    		<td>${attendee.username}</td>
 							                    		<td>${attendee.name}</td>
 						 								<td>${attendee.departmentVO.deptName}</td>
-						 								<td>${attendee.email}</td>
-						 								<td>${attendee.phone}</td>
 							                    	</tr>
 												</c:forEach>
 											</tbody>
@@ -89,15 +115,29 @@
               						<!-- table-body end -->
               						
               						<!-- pagination start -->
-              						<div class="card-footer clearfix" style="background-color: white;">
-						                <ul class="pagination pagination-sm" style="margin-left: auto;margin-right: auto;width: 200px;">
-						                  <li class="page-item"><a class="page-link" href="#"style="color:#17a2b8;">«</a></li>
-						                  <li class="page-item"><a class="page-link" href="#"style="color:#17a2b8;">1</a></li>
-						                  <li class="page-item"><a class="page-link" href="#"style="color:#17a2b8;">2</a></li>
-						                  <li class="page-item"><a class="page-link" href="#"style="color:#17a2b8;">3</a></li>
-						                  <li class="page-item"><a class="page-link" href="#"style="color:#17a2b8;">»</a></li>
-						                </ul>
-					              </div>
+              						<div class="row g-3 justify-content-center">
+										<ul class="pagination pagination-sm mx-auto" style="width: 200px;">
+											<c:if test="${pagination.pre}">
+												<li class="page-item">
+													<a class="page-link" href="#" aria-label="Previous" data-all-page="1" style="color:#17a2b8;">
+														<span aria-hidden="true">&laquo;</span>
+													</a>
+												</li>
+											</c:if>
+											<c:forEach begin="${pagination.startNum}" end="${pagination.lastNum}" var="page">
+												<li class="page-item">
+													<a class="page-link" href="#" data-all-page="${page}" style="color:#17a2b8;">${page}</a>
+												</li>
+											</c:forEach>
+											<c:if test="${pagination.next}">
+												<li class="page-item">
+													<a class="page-link" href="#" aria-label="Next" data-all-page="${pagination.totalPage}" style="color:#17a2b8;">
+														<span aria-hidden="true">&raquo;</span>
+													</a>
+												</li>
+											</c:if>
+										</ul>
+									</div>
 					              <!-- pagination end -->
             					</div>
 							</div> 
@@ -110,6 +150,12 @@
 		<!-- Footer 적용 -->
 		<c:import url="../temp/footer.jsp"></c:import>
 		<!-- Footer 끝 -->
+		
+		<script>
+		    $(function () {
+		      $('.select2').select2()
+		    });
+		</script>
 
 	</div>
 <!-- ./wrapper -->
