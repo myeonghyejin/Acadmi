@@ -79,7 +79,7 @@
 																<img class="contacts-list-img"  src="/file/member/${chatRoomVO.memberFilesVO.fileName}" alt="User Avatar">
 															</c:otherwise>
 														</c:choose>
-														<span class="contacts-list-info">
+														<div class="contacts-list-info">
 															<span class="contacts-list-name">
 																<c:choose>
 																	<c:when test="${chatRoomVO.chatStatus eq 2}">
@@ -101,7 +101,7 @@
 																	<button class="btn btn-block btn-danger btn-xs"><i class="fa-solid fa-door-open"></i></button>
 																</small>
 															</span>
-														</span>
+														</div>
 													</a>
 												</li>
 											</c:if>
