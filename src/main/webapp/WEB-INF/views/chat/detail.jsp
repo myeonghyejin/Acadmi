@@ -55,15 +55,22 @@
 											<!-- /.direct-chat-infos -->
 											<c:choose>
 												<c:when test="${empty chatMessageVO.memberFilesVO.fileName}">
-													<img class="direct-chat-img" src="/images/profile.jpg" alt="User profile picture">
+													<img id="recipientProfile" data-file-name="${chatMessageVO.memberFilesVO.fileName}" class="direct-chat-img" src="/images/profile.jpg" alt="User profile picture">
 												</c:when>
 												<c:otherwise>
-													<img class="direct-chat-img"  src="/file/member/${chatMessageVO.memberFilesVO.fileName}" alt="message user image">
+													<img id="recipientProfile" data-file-name="${chatMessageVO.memberFilesVO.fileName}" class="direct-chat-img"  src="/file/member/${chatMessageVO.memberFilesVO.fileName}" alt="message user image">
 												</c:otherwise>
 											</c:choose>
 											<!-- /.direct-chat-img -->
 											<div class="direct-chat-text">
-											${chatMessageVO.msgContents}
+											<c:choose>
+												<c:when test="${empty chatMessageVO.chatFilesVO.chatFileNum}">
+													${chatMessageVO.msgContents}
+												</c:when>
+												<c:otherwise>
+													<a href="./fileDown?chatFileNum=${chatMessageVO.chatFilesVO.chatFileNum}">${chatMessageVO.msgContents}</a>
+												</c:otherwise>
+											</c:choose>
 											<small class="contacts-list-date float-right">
 												<button class="btn btn-block btn-danger btn-xs deleteMessage" data-msg-num="${chatMessageVO.msgNum}"><i class="fa-regular fa-trash-can"></i></button>
 											</small>
@@ -80,15 +87,22 @@
 										<!-- /.direct-chat-infos -->
 											<c:choose>
 												<c:when test="${empty chatMessageVO.memberFilesVO.fileName}">
-													<img id="profile" data-file-name="${chatMessageVO.memberFilesVO.fileName}" class="direct-chat-img" src="/images/profile.jpg" alt="message user image">
+													<img id="senderProfile" data-file-name="${chatMessageVO.memberFilesVO.fileName}" class="direct-chat-img" src="/images/profile.jpg" alt="message user image">
 												</c:when>
 												<c:otherwise>
-													<img id="profile" data-file-name="${chatMessageVO.memberFilesVO.fileName}" class="direct-chat-img"  src="/file/member/${chatMessageVO.memberFilesVO.fileName}" alt="message user image">
+													<img id="senderProfile" data-file-name="${chatMessageVO.memberFilesVO.fileName}" class="direct-chat-img"  src="/file/member/${chatMessageVO.memberFilesVO.fileName}" alt="message user image">
 												</c:otherwise>
 											</c:choose>
 										<!-- /.direct-chat-img -->
 											<div class="direct-chat-text text-right">
-												${chatMessageVO.msgContents}
+												<c:choose>
+													<c:when test="${empty chatMessageVO.chatFilesVO.chatFileNum}">
+														${chatMessageVO.msgContents}
+													</c:when>
+													<c:otherwise>
+														<a href="./fileDown?chatFileNum=${chatMessageVO.chatFilesVO.chatFileNum}">${chatMessageVO.msgContents}</a>
+													</c:otherwise>
+												</c:choose>
 												<small class="contacts-list-date float-left">
 													<button class="btn btn-block btn-danger btn-xs deleteMessage" data-msg-num="${chatMessageVO.msgNum}"><i class="fa-regular fa-trash-can"></i></button>
 												</small>

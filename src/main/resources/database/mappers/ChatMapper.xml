@@ -51,11 +51,11 @@
   			<result column="MSGCONTENTS" property="msgContents"/>
   			<result column="MSGDATE" property="msgDate"/>
   			<result column="MSGSTATUS" property="msgStatus"/>
-  			<collection property="chatFilesVOs" javaType="List" ofType="ChatFilesVO">
-  				<id column="FILENUM" property="fileNum"/>
+  			<association property="chatFilesVO" javaType="ChatFilesVO">
+  				<id column="CHATFILENUM" property="chatFileNum"/>
   				<result column="FILENAME" property="fileName"/>
   				<result column="ORINAME" property="oriName"/>
-  			</collection>
+  			</association>
   		</collection>
   	</resultMap>
   	
@@ -92,16 +92,22 @@
 	  			<result column="FILENAME" property="fileName"/>
 	  			<result column="ORINAME" property="oriName"/>
 	  		</association>
-	  		<collection property="chatFilesVOs" javaType="List" ofType="ChatFilesVO">
-  				<id column="FILENUM" property="fileNum"/>
+	  		<association property="chatFilesVO" javaType="ChatFilesVO">
+  				<id column="CHATFILENUM" property="chatFileNum"/>
   				<result column="FILENAME" property="fileName"/>
   				<result column="ORINAME" property="oriName"/>
-  			</collection>
+  			</association>
   		</collection>
   	</resultMap>
   	
+  	<!-- msgNum 출력 -->
   	<select id="getMsgNum" parameterType="Long" resultType="Long">
   		SELECT MSGNUM FROM CHAT_MESSAGE WHERE CHATNUM = #{chatNum} ORDER BY MSGNUM DESC LIMIT 1
+  	</select>
+  	
+  	<!-- file정보 출력 -->
+  	<select id="getFileDetail" parameterType="ChatFilesVO" resultType="ChatFilesVO">
+  		SELECT * FROM CHATFILES WHERE CHATFILENUM = #{chatFileNum}
   	</select>
   	
   	<!-- 이름을 뽑아오기 위한 select -->
@@ -144,7 +150,7 @@
   	</insert>
   	
   	<!-- 메세지 입력 -->
-  	<insert id="setSaveMessage" parameterType="ChatMessageVO">
+  	<insert id="setSaveMessage" parameterType="ChatMessageVO" useGeneratedKeys="true" keyProperty="msgNum">
   		INSERT INTO CHAT_MESSAGE
   		VALUES (0, #{msgSender}, #{msgRecipient}, #{msgContents}, now(), #{msgStatus}, #{chatNum})
   	</insert>

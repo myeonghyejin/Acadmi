@@ -16,7 +16,12 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.AbstractView;
 
+import com.acadmi.chat.ChatFilesVO;
+
+import lombok.extern.slf4j.Slf4j;
+
 @Component
+@Slf4j
 public class FileManager extends AbstractView {
 	
 	@Value("${app.upload}")
@@ -25,7 +30,37 @@ public class FileManager extends AbstractView {
 	@Override
 	protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		ChatFilesVO chatFilesVO = (ChatFilesVO)model.get("chatFilesVO");
+		if(chatFilesVO != null) {
+			File file = new File(path+"chat",chatFilesVO.getFileName());
+			//한글 처리
+			response.setCharacterEncoding("UTF-8");
+			
+			//총 파일 크기
+			response.setContentLengthLong(file.length());
+			
+			//다운로드시 파일의 이름을 인코딩
+			String oriName = URLEncoder.encode(chatFilesVO.getOriName(), "UTF-8");
+			
+			//header 설정
+			response.setHeader("Content-Disposition", "attachment;filename=\""+oriName+"\"");
+			response.setHeader("Content-Transfer-Encoding", "binary");
+			
+			//HDD에서 파일을 읽고
+			FileInputStream fi = new FileInputStream(file);
+			//Client로 전송 준비
+			OutputStream os = response.getOutputStream();
+			
+			//전송
+			FileCopyUtils.copy(fi, os);
+			
+			//자원 해제
+			os.close();
+			fi.close();
+			return;
+		}
 		FileVO fileVO = (FileVO)model.get("fileVO");
+		
 		String board = (String)model.get("board");
 		
 		File file = new File(path+board, fileVO.getFileName());

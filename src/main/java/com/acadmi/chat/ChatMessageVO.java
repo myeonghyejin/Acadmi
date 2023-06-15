@@ -22,7 +22,7 @@ public class ChatMessageVO {
 	private LocalDateTime msgDate;
 	private Integer msgStatus;
 	private Long chatNum;
-	private List<ChatFilesVO> chatFilesVOs;
+	private ChatFilesVO chatFilesVO;
 	private MemberFilesVO memberFilesVO;
 
 }

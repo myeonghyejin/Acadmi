@@ -33,11 +33,12 @@ public interface ChatDAO {
 	//새 매세지 표시를 위한 select
 	public List<ChatRoomVO> getChatList(ChatRoomVO chatRoomVO) throws Exception;
 	
-	//파일 저장
-	public int setChatFileAdd(ChatFilesVO chatFilesVO) throws Exception;
 	
 	//msgNum을 뽑아오는 쿼리
 	public Long getMsgNum(Long chatNum) throws Exception;
+
+	//file 정보 출력
+	public ChatFilesVO getFileDetail(ChatFilesVO chatFilesVO) throws Exception;
 	
 		//insert
 	
@@ -50,6 +51,9 @@ public interface ChatDAO {
 	//메세지 입력
 	public int setSaveMessage(ChatMessageVO chatMessageVO) throws Exception;
 	
+	//파일 저장
+	public int setChatFileAdd(ChatFilesVO chatFilesVO) throws Exception;
+
 		//update
 	
 	//채팅방 상태 변경

@@ -161,9 +161,11 @@ websocket.onmessage = function(event){
 	let msgSender = getUrlParameter('roomRecipient')
 	let msgRecipient = getUrlParameter('roomSender')
 	let chatNum = $('#chatNum').val();
-	console.log(chatNum)
 	let date = new Date().toLocaleTimeString();
+	let recipientProfile = $('#recipientProfile').data('file-name')
+	console.log(recipientProfile)
 	let message = {
+		type : 'text',
 		msgContents : msgContents,
 		msgRecipient : msgRecipient,
 		msgSender : msgSender,
@@ -172,7 +174,11 @@ websocket.onmessage = function(event){
 	let child = '<div class="direct-chat-msg">'
 	child = child + '<span class="direct-chat-name float-left">'+msgSender+'</span>'
 	child = child + '<span class="direct-chat-timestamp float-right">'+date+'</span></div>'
-	child = child + '<img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="...">'
+	if(recipientProfile == ''){
+		child = child +'<img class="direct-chat-img" src="/images/profile.jpg" alt="message user image">'
+	} else {
+		child = child + '<img class="direct-chat-img"  src="/file/member/'+recipientProfile+'" alt="message user image">'
+	}
 	child = child + '<div class="direct-chat-text">'+msgContents+'</div></div>'
 	$('#messageList').append(child)
 	sendMessage(JSON.stringify(message))
@@ -188,10 +194,8 @@ $('#chatSend').click(function(event){
 	let msgRecipient = getUrlParameter('roomRecipient')
 	let chatNum = $('#chatNum').val();
 	let date = new Date().toLocaleTimeString();
-	let profile = $('#profile').data('file-name')
-	if(profile == ''){
-		console.log('check')
-	}
+	let senderProfile = $('#senderProfile').data('file-name')
+	
 	let fileInput = $('#fileInput')
 	if(fileInput.length != 0 && fileInput[0].files.length > 0) {
 		let file = fileInput[0].files[0]
@@ -212,8 +216,11 @@ $('#chatSend').click(function(event){
 						<img class="direct-chat-img"  src="/file/member/${chatMessageVO.memberFilesVO.fileName}" alt="message user image">
 					</c:otherwise>
 				</c:choose>*/
-				
-				child = child + '<img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image">'
+				if(senderProfile == ''){
+					child = child +'<img class="direct-chat-img" src="/images/profile.jpg" alt="message user image">'
+				} else {
+					child = child + '<img class="direct-chat-img"  src="/file/member/'+senderProfile+'" alt="message user image">'
+				}
 				child = child + '<div class="direct-chat-text text-right">'+msgContents+'</div></div>'
 				$('#messageList').append(child)
 				let message = {
@@ -230,7 +237,11 @@ $('#chatSend').click(function(event){
 			child = child + '<div class="direct-chat-infos clearfix">'
 			child = child + '<span class="direct-chat-name float-right">'+msgSender+'</span>'
 			child = child + '<span class="direct-chat-timestamp float-left">'+date+'</span></div>'
-			child = child + '<img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image">'
+			if(senderProfile == ''){
+				child = child +'<img class="direct-chat-img" src="/images/profile.jpg" alt="message user image">'
+			} else {
+				child = child + '<img class="direct-chat-img"  src="/file/member/'+senderProfile+'" alt="message user image">'
+			}
 			child = child + '<div class="direct-chat-text text-right"><a href="#">'+fileName+'</a></div></div>'
 			msgContents=fileName
 			$('#messageList').append(child)
@@ -268,7 +279,11 @@ $('#chatSend').click(function(event){
 		child = child + '<div class="direct-chat-infos clearfix">'
 		child = child + '<span class="direct-chat-name float-right">'+msgSender+'</span>'
 		child = child + '<span class="direct-chat-timestamp float-left">'+date+'</span></div>'
-		child = child + '<img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image">'
+		if(senderProfile == ''){
+			child = child +'<img class="direct-chat-img" src="/images/profile.jpg" alt="message user image">'
+		} else {
+			child = child + '<img class="direct-chat-img"  src="/file/member/'+senderProfile+'" alt="message user image">'
+		}
 		child = child + '<div class="direct-chat-text text-right">'+msgContents+'</div></div>'
 		$('#messageList').append(child)
 		sendMessage(JSON.stringify(message))
@@ -285,31 +300,113 @@ $('#chatSend').click(function(event){
 //enter키 눌렀을때
 $('#message').keydown(function(event) {
   if (event.key === 'Enter') {
-    event.preventDefault(); // 폼 제출 동작 막기
-
-    let msgContents = $('#message').val();
-    let msgSender = getUrlParameter('roomSender');
-    let msgRecipient = getUrlParameter('roomRecipient');
-    let chatNum = $('#chatNum').val();
-    let date = new Date().toLocaleTimeString();
-    console.log(chatNum);
-    let message = {
-      msgContents: msgContents,
-      msgRecipient: msgRecipient,
-      msgSender: msgSender,
-      chatNum: chatNum
-    };
-
-    let child = '<div class="direct-chat-msg right">';
-    child += '<div class="direct-chat-infos clearfix">';
-    child += '<span class="direct-chat-name float-right">' + msgSender + '</span>';
-    child += '<span class="direct-chat-timestamp float-left">' + date + '</span></div>';
-    child += '<img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image">';
-    child += '<div class="direct-chat-text text-right">' + msgContents + '</div></div>';
-    $('#messageList').append(child);
-    sendMessage(JSON.stringify(message));
-    scrollToBottom();
-    $('#message').val('');
+	event.preventDefault()
+	let msgContents = $('#message').val()
+	let msgSender = getUrlParameter('roomSender')
+	let msgRecipient = getUrlParameter('roomRecipient')
+	let chatNum = $('#chatNum').val();
+	let date = new Date().toLocaleTimeString();
+	let senderProfile = $('#senderProfile').data('file-name')
+	
+	let fileInput = $('#fileInput')
+	if(fileInput.length != 0 && fileInput[0].files.length > 0) {
+		let file = fileInput[0].files[0]
+		let fileName=file.name
+		let reader = new FileReader()
+		reader.onload = function(){
+			let child
+			if(msgContents != ''){
+				child = '<div class="direct-chat-msg right">'
+				child = child + '<div class="direct-chat-infos clearfix">'
+				child = child + '<span class="direct-chat-name float-right">'+msgSender+'</span>'
+				child = child + '<span class="direct-chat-timestamp float-left">'+date+'</span></div>'
+				/*<c:choose>
+					<c:when test="${empty chatMessageVO.memberFilesVO.fileName}">
+						<img class="direct-chat-img" src="/images/profile.jpg" alt="message user image">
+					</c:when>
+					<c:otherwise>
+						<img class="direct-chat-img"  src="/file/member/${chatMessageVO.memberFilesVO.fileName}" alt="message user image">
+					</c:otherwise>
+				</c:choose>*/
+				if(senderProfile == ''){
+					child = child +'<img class="direct-chat-img" src="/images/profile.jpg" alt="message user image">'
+				} else {
+					child = child + '<img class="direct-chat-img"  src="/file/member/'+senderProfile+'" alt="message user image">'
+				}
+				child = child + '<div class="direct-chat-text text-right">'+msgContents+'</div></div>'
+				$('#messageList').append(child)
+				let message = {
+					type : 'text',
+					msgContents : msgContents,
+					msgRecipient : msgRecipient,
+					msgSender : msgSender,
+					chatNum : chatNum
+				}
+				
+				sendMessage(JSON.stringify(message))
+			}
+			child = '<div class="direct-chat-msg right">'
+			child = child + '<div class="direct-chat-infos clearfix">'
+			child = child + '<span class="direct-chat-name float-right">'+msgSender+'</span>'
+			child = child + '<span class="direct-chat-timestamp float-left">'+date+'</span></div>'
+			if(senderProfile == ''){
+				child = child +'<img class="direct-chat-img" src="/images/profile.jpg" alt="message user image">'
+			} else {
+				child = child + '<img class="direct-chat-img"  src="/file/member/'+senderProfile+'" alt="message user image">'
+			}
+			child = child + '<div class="direct-chat-text text-right"><a href="#">'+fileName+'</a></div></div>'
+			msgContents=fileName
+			$('#messageList').append(child)
+			let message = {
+				type : 'file',
+				file : file,
+				fileName : fileName,
+				msgContents : msgContents,
+				msgRecipient : msgRecipient,
+				msgSender : msgSender,
+				chatNum : chatNum
+			}
+			
+			sendMessage(JSON.stringify(message))
+			let arrayBuffer=this.result
+			console.log(arrayBuffer)
+			sendMessage(arrayBuffer)
+			scrollToBottom()
+			$('#message').val('')
+		}
+		reader.readAsArrayBuffer(file)
+		$('#fileSend').remove()
+		count--
+	} else {
+		
+		let message = {
+			type : 'text',
+			msgContents : msgContents,
+			msgRecipient : msgRecipient,
+			msgSender : msgSender,
+			chatNum : chatNum
+		}
+		
+		let child = '<div class="direct-chat-msg right">'
+		child = child + '<div class="direct-chat-infos clearfix">'
+		child = child + '<span class="direct-chat-name float-right">'+msgSender+'</span>'
+		child = child + '<span class="direct-chat-timestamp float-left">'+date+'</span></div>'
+		if(senderProfile == ''){
+			child = child +'<img class="direct-chat-img" src="/images/profile.jpg" alt="message user image">'
+		} else {
+			child = child + '<img class="direct-chat-img"  src="/file/member/'+senderProfile+'" alt="message user image">'
+		}
+		child = child + '<div class="direct-chat-text text-right">'+msgContents+'</div></div>'
+		$('#messageList').append(child)
+		sendMessage(JSON.stringify(message))
+		scrollToBottom()
+		$('#message').val('')
+		$('#fileSend').remove()
+		if(count=1){
+			count--
+		}
+	}
+	
   }
 });
 

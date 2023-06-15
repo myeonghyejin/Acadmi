@@ -70,5 +70,17 @@ public class ChatController {
 		int result = ar.size();
 		return result;
 	}
+	
+	@GetMapping("fileDown")
+	public ModelAndView getFileDown(ChatFilesVO chatFilesVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		chatFilesVO = chatService.getFileDetail(chatFilesVO);
+		
+		mv.addObject("chatFilesVO", chatFilesVO);
+		mv.setViewName("fileManager");
+		
+		return mv;
+	}
 
 }
