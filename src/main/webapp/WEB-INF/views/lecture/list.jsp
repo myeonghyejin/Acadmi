@@ -42,9 +42,9 @@
 									<div class="card-header">
 					                	<!-- <h3 class="card-title" style="font-weight:normal;">강의 목록</h3> -->
 					                	<div class="card-tools">
-					                		<div class="input-group input-group-sm" style="width: 230px;">
+					                		<div class="input-group input-group-sm" style="width: 250px;">
 					                		<input type="hidden" value="${list[0].temporary}">
-					                  			<select class="form-control mx-3" style="height: auto;" id="temporary" name="temporary" onchange="this.form.submit()">
+					                  			<select class="select2 mr-3" style="height: auto;width:120px" id="temporary" name="temporary" onchange="this.form.submit()">
 					                    			<option name="temporary" id="temporary" for="temporary"  value=" ">강의 조회</option>
 													<option for="temporary" value=" " >전체</option>
 													<option for="temporary" value="1" >등록</option>
@@ -122,6 +122,12 @@
 		<!-- Footer 적용 -->
 		<c:import url="../temp/footer.jsp"></c:import>
 		<!-- Footer 끝 -->
+		
+		<script>
+    $(function () {
+	      $('.select2').select2()
+	    });
+	</script>
 
 	</div>
 <!-- ./wrapper -->

@@ -34,9 +34,31 @@
             	<div class="card card-info card-outline">
             		<c:forEach items="${list}" var="LectureVO">
 	            		<div class="card-header">
+	            			[ ${LectureVO.category} ]&nbsp;&nbsp;
 							<a href="lecture/main?lectureNum=${LectureVO.lectureNum}" style="color: black;">${LectureVO.lectureName}</a>
-	            			&nbsp;[ ${LectureVO.category} ]
-	            			&nbsp;( ${LectureVO.weekday}${LectureVO.startTime}-${LectureVO.endTime} )
+	            			
+	            			&nbsp;&nbsp;( ${LectureVO.weekday}
+	            			<c:if test="${LectureVO.startTime eq 1}">AM 09:00</c:if>
+							<c:if test="${LectureVO.startTime eq 2}">AM 10:00</c:if>
+							<c:if test="${LectureVO.startTime eq 3}">AM 11:00</c:if>
+							<c:if test="${LectureVO.startTime eq 4}">PM 12:00</c:if>
+							<c:if test="${LectureVO.startTime eq 5}">PM 13:00</c:if>
+							<c:if test="${LectureVO.startTime eq 6}">PM 14:00</c:if>
+							<c:if test="${LectureVO.startTime eq 7}">PM 15:00</c:if>
+							<c:if test="${LectureVO.startTime eq 8}">PM 16:00</c:if>
+							<c:if test="${LectureVO.startTime eq 9}">PM 17:00</c:if>										<c:if test="${lectureVO.startTime eq 10}">PM 18:00</c:if>
+	            			~
+	            			<c:if test="${LectureVO.endTime eq 1}">AM 10:00</c:if>
+							<c:if test="${LectureVO.endTime eq 2}">AM 11:00</c:if>
+							<c:if test="${LectureVO.endTime eq 3}">PM 12:00</c:if>
+							<c:if test="${LectureVO.endTime eq 4}">PM 13:00</c:if>
+							<c:if test="${LectureVO.endTime eq 5}">PM 14:00</c:if>
+							<c:if test="${LectureVO.endTime eq 6}">PM 15:00</c:if>
+							<c:if test="${LectureVO.endTime eq 7}">PM 16:00</c:if>
+							<c:if test="${LectureVO.endTime eq 8}">PM 17:00</c:if>
+							<c:if test="${LectureVO.endTime eq 9}">PM 18:00</c:if>
+							<c:if test="${LectureVO.endTime eq 10}">PM 19:00</c:if>
+							)
 						</div>
 					</c:forEach>
             	</div>

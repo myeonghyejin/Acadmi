@@ -47,7 +47,7 @@
 								<div class="card">
 									<!-- table-header start -->
 									<div class="card-header">
-					                	<div class="input-group" style="width:40%;float:right;">
+					                	<div class="input-group input-group-lg" style="width:40%;float:right;">
 						                  	<div class="input-group-prepend">
 						                    	<select class="select2" id="kind" name="kind" style="width: 120px;border-color:#17a2b8">
 									                <option value="">전체</option>
@@ -55,12 +55,11 @@
 													<option value="name">이름</option>
 												</select>
 						                  	</div>
-						                  	<input type="text" class="form-control" name="search" id="search">
+						                  	<input type="text" class="form-control form-control-lg" name="search" id="search">
 						                  	<div class="input-group-append">
-						                    	<div class="input-group-text">
-						                    	<button type="submit"></button>
-						                    		<i class="fas fa-search"></i>
-						                    	</div>
+						                    	<button type="submit" class="btn btn-lg btn-default" id="submit">
+													<i class="fa fa-search"></i>
+												</button>
 						                  	</div>
 						                </div>
 					              	</div>
