@@ -27,7 +27,7 @@
 
 <div class="wrapper">
 	<!-- Header 적용 -->
-		<c:import url="../temp/administrator.jsp"></c:import>
+		<c:import url="../temp/administrator_header.jsp"></c:import>
 		<!-- Header 끝 -->
 	<div class="content-wrapper">
 			
@@ -65,14 +65,14 @@
 				            <div id="emailResult"></div>
 				          	 <div class="form-group">
 				           	  <label>단과대</label>
-			                  <select class="form-control select2" style="width: 100%;" name="collegeNum" id="college" onchange="updateDepartmentOptions()">
+			                  <select class="form-control select" style="width: 100%;" name="collegeNum" id="college" onchange="updateDepartmentOptions()">
 			               
 								<option value="1">행정</option>
 			                  </select>
 				           </div>
 				           <div class="form-group">
 				           	  <label>학과</label>
-			                  	<select  class="form-control select2" style="width: 100%;" name="deptNum" id="dept">
+			                  	<select class="form-control select" style="width: 100%;" name="deptNum" id="dept">
 									<option value="1">행정</option>
 								</select>
 				           </div>
@@ -107,8 +107,10 @@
 				            </div>
 				          
 				            <input type="hidden" name="category" value="0">
-				            <button type="button" class="btn btn-info" id="adminBtn" >직원가입</button> 
-				            <button type="button" class="btn btn-danger" id="backBtn">취소</button>
+				            <div style="width:auto; float: right;">
+					            <button type="button" class="btn btn-info" id="adminBtn" >직원가입</button> 
+					            <button type="button" class="btn btn-danger" id="backBtn">취소</button>
+				            </div>
 				          </form>
 			          </div>
 			        </div>
@@ -134,6 +136,10 @@
 	        }
 	    }).open();
 	});
+	
+	$(function () {
+	      $('.select2').select2()
+	 });	
 	
 </script>	
 </body>

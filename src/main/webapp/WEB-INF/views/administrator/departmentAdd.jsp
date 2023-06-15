@@ -30,7 +30,7 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 	<!-- Header 적용 -->
-	<c:import url="../temp/administrator.jsp"></c:import>
+	<c:import url="../temp/administrator_header.jsp"></c:import>
 	<!-- Header 끝 -->
 		<div class="content-wrapper">
 			<div class="content-fluid">
@@ -73,9 +73,10 @@
 				                       		</label>
 					                     </div>
 				                     </div>
-					                 
-						            <button type="submit" class="btn btn-info">등록</button> 
-						            <button type="button" class="btn btn-danger" id="backBtn">취소</button>
+					                 <div  style="width:auto; float: right;">
+							            <button type="submit" class="btn btn-info">등록</button> 
+							            <button type="button" class="btn btn-danger" id="backBtn">취소</button>
+						            </div>
 						          </form>
 					          </div>
 					        </div>
@@ -87,6 +88,7 @@
 			</div>
 		</div>	
 </div>
+<c:import url="../temp/footer.jsp"></c:import>	
 <script type="text/javascript">
 //취소
 $("#backBtn").click(function() {

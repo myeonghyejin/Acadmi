@@ -56,7 +56,7 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 	<!-- Header 적용 -->
-		<c:import url="../temp/administrator.jsp"></c:import>
+		<c:import url="../temp/administrator_header.jsp"></c:import>
 	<!-- Header 끝 -->
 	<div class="content-wrapper">
 		<div class="container-fluid">
@@ -78,7 +78,7 @@
 						<div class="card search">
 							<div class="row content" >
 								<label style="margin : 10px;">강의실 건물</label>
-								<select class="form-control select" name="lectureBuilding" style="width: 20%;">
+								<select class="select2" name="lectureBuilding" style="width: 20%;">
 									<option value="">전체</option>
 									<c:forEach items="${list2}" var="lectureRoom">
 										<option value="${lectureRoom.lectureBuilding}">${lectureRoom.lectureBuilding }</option>
@@ -87,7 +87,7 @@
 								<label style="margin : 10px;">강의실 호수</label>
 								<input type="text" class="form-control" name="lectureRoom" placeholder="내용을 입력해주세요" style="width : 20%">
 								<label style="margin : 10px;">상태</label>
-								<select class="form-control select" name="status" style="width: 20%;">
+								<select class="select2" name="status" style="width: 20%;">
 									<option value="">전체</option>
 									<option value="1">사용가능</option>
 									<option value="0">사용불가</option>
@@ -140,7 +140,7 @@
 												<td class="lectureRoom" style="color: #E2E2E2;">${lectureRoomVO.lectureRoom}</td>
 												<td class="lectureRoom" style="color: #E2E2E2;">${lectureRoomVO.personal}</td>
 												<td>
-													<select name="status" class="status">
+													<select name="status" class="select2" style="width : 50%">
 														<option value="0"selected >사용불가</option>
 														<option value="1">사용가능</option>
 													</select>
@@ -151,7 +151,7 @@
 												<td>${lectureRoomVO.lectureRoom}</td>
 												<td >${lectureRoomVO.personal}</td>
 												<td>
-													<select name="status" class="status">
+													<select name="status" class="select2" style="width : 50%">
 														<option value="0" >사용불가</option>
 														<option value="1"selected>사용가능</option>
 													</select>
@@ -174,24 +174,24 @@
 				    <a href="./lectureRoomAdd"><button type="button" id="add2" class="btn btn-info">작성</button></a>
 				    </section>
 				    	
-				    	<div class="row" style="margin: 20px auto;" id="pagination">
+				    	<div class="row g-3 justify-content-center" style="margin: 20px auto;" id="pagination">
 							<nav aria-label="Page navigation example">
-								<ul class="pagination d-flex justify-content-center">
+								<ul class="pagination pagination-sm mx-auto" style="width: 200px;">
 									<li class="page-item ${pagination.page eq 1? 'disabled' : '' }">
-										<a class="page-link" href="./lectureRoomList?page=1&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="1">
+										<a class="page-link" href="./lectureRoomList?page=1&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="1" style="color:#17a2b8;">
 											<span aria-hidden="true">&laquo;</span>
 										</a>
 									</li>
 									<li class="page-item ${pagination.pre eq false ? 'disabled' : ''}">
-										<a class="page-link" href="./lectureRoomList"page=${pagination.startNum-1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="${pagination.startNum-1}">
+										<a class="page-link" href="./lectureRoomList"page=${pagination.startNum-1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="${pagination.startNum-1}" style="color:#17a2b8;">
 											<span aria-hidden="true">&lsaquo;</span>
 										</a>
 									</li>
 									<c:forEach begin="${pagination.startNum}" end="${pagination.lastNum}" var="i">
-										<li class="page-item"><a class="page-link" href="./lectureRoomList?page=${i}&kind=${pagination.kind}&search=${pagination.search}" data-board-page="${i}">${i}</a></li>
+										<li class="page-item"><a class="page-link" href="./lectureRoomList?page=${i}&kind=${pagination.kind}&search=${pagination.search}" data-board-page="${i}" style="color:#17a2b8;">${i}</a></li>
 									</c:forEach>
 									<li class="page-item ${pagination.next eq false ? 'disabled' : ''}">
-										<a class="page-link" href="./lectureRoomList?page=${pagination.lastNum+1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next" data-board-page="${pagination.lastNum+1}">
+										<a class="page-link" href="./lectureRoomList?page=${pagination.lastNum+1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next" data-board-page="${pagination.lastNum+1}" style="color:#17a2b8;">
 											<span aria-hidden="true">&rsaquo;</span>
 										</a>
 									</li>
@@ -208,10 +208,14 @@
 		</div>
 	</div>
 </div>
-
+<c:import url="../temp/footer.jsp"></c:import>	
 <script type="text/javascript" src="../js/administrator/lectureRoomList.js"></script>
 <script type="text/javascript">
-/* 페이지네이션 선택 색상 */
+/*select 디자인  */
+ $(function () {
+     $('.select2').select2()
+ });
+ 
 
 </script>
 </body>

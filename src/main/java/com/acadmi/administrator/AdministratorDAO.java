@@ -12,6 +12,7 @@ import com.acadmi.college.CollegeVO;
 import com.acadmi.department.DepartmentVO;
 import com.acadmi.lecture.LectureVO;
 import com.acadmi.lecture.room.LectureRoomVO;
+import com.acadmi.lecture.room.TimeTableVO;
 import com.acadmi.member.MemberSeqVO;
 import com.acadmi.member.MemberVO;
 import com.acadmi.period.PeriodVO;
@@ -91,4 +92,7 @@ public interface AdministratorDAO {
 	public Long getTotalCountAssiginment(Pagination pagination) throws Exception;
  	public int setLectureRoomAssignmentUpdate(LectureVO lectureVO) throws Exception;
 	public LectureVO getLectureNum(LectureVO lectureVO) throws Exception;
+	
+	public List<LectureRoomVO> getLectureRoom() throws Exception;
+	public List<TimeTableVO> getTimeTable() throws Exception;
 }

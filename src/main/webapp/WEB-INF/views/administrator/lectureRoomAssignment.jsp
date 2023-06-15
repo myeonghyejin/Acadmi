@@ -49,7 +49,7 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 <!-- Header 적용 -->
-		<c:import url="../temp/administrator.jsp"></c:import>
+		<c:import url="../temp/administrator_header.jsp"></c:import>
 <!-- Header 끝 -->
 	<div class="content-wrapper">
 		<div class="container-fluid">

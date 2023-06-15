@@ -481,5 +481,13 @@ public class AdministratorService{
 	public LectureVO getLectureNum(LectureVO lectureVO) throws Exception {
 		return administratorDAO.getLectureNum(lectureVO);
 	}
+	
+	public List<LectureRoomVO> getLectureRoom() throws Exception {
+		return administratorDAO.getLectureRoom();
 
+	}
+	
+	public List<TimeTableVO> getTimeTable() throws Exception {
+		return administratorDAO.getTimeTable();
+	}
 }

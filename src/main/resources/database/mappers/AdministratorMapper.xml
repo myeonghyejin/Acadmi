@@ -293,7 +293,7 @@
  	<!-- 강의실 등록 -->
  	<insert id="setLectureRoomAdd" parameterType="LectureRoomVO">
  		INSERT INTO LECTURE_ROOM
- 		VALUES(#{lectureBuilding},#{lectureRoom},#{personal},1)
+ 		VALUES(#{lectureBuilding},#{lectureRoom},#{personal},1,)
  	</insert>
  	<select id="getLectureBuilding" resultType="LectureRoomVO">
  		SELECT DISTINCT LECTUREBUILDING 
@@ -432,7 +432,7 @@
 
   
   <!--강의실 배정  -->
-  <select id="getLectureRoomAssignment" resultMap="LectureRoomAssignment" parameterType="Map">
+  <select id="getLectureRoomAssignment" resultMap="LectureRoomAssignment" parameterType="Pagination">
 	SELECT * FROM LECTURE_ROOM 
 	WHERE PERSONAL &gt;= #{personal}
 	AND STATUS=1
@@ -441,9 +441,9 @@
 			SELECT LECTUREROOM , LECTUREBUILDING 
 			FROM TIMETABLE 
 				WHERE WEEKDAY = #{weekday}
-				AND TIME BETWEEN #{startTime} AND #{lastTime} 
+				AND TIME BETWEEN #{time} AND #{time}
 		)
-	LIMIT #{startRow}, #{perPage}	
+	LIMIT #{startRow}, #{perPage}
   </select>
   <resultMap type="LectureRoomVO" id="LectureRoomAssignment">
   	<id column="LECTUREBUILDING" property="lectureBuilding"/>
@@ -453,8 +453,17 @@
   		<collection property="timeTableVOs" javaType="List" ofType="TimeTableVO">
   			<id column="WEEKDAY" property="weekday"/>
   			<id column="TIME" property="time"/>
+  			
   		</collection>
   </resultMap>
+  
+  <select id="getTimeTable" resultType="TimeTableVO">
+  	SELECT * FROM TIMETABLE
+  </select>
+ 
+  <select id="getLectureRoom" resultType="LectureRoomVO">
+  	SELECT * FROM LECTUREROOM
+  </select>
   
   <select id="getTotalCountAssiginment" resultType="Long">
   	SELECT COUNT(LECTUREROOM) FROM LECTURE_ROOM
