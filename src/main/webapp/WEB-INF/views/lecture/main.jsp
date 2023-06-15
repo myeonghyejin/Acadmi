@@ -57,11 +57,11 @@
               					<div row>
 	              					<div class="column">
 	              						<i class="fas fa-microphone"></i>
-	                					<a href="#">공지사항</a>
+	                					<a href="/lectureNotice/list?lectureNum=${lecture.lectureNum}">공지사항</a>
 	                				</div>
 	                				<div class="column">
 	                				<i class="fas fa-question"></i>
-	                					<a href="#">질의응답</a>
+	                					<a href="/lectureQna/list?lectureNum=${lecture.lectureNum}">질의응답</a>
 	                				</div>
                 				</div>
               				</div>
