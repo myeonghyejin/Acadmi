@@ -53,7 +53,7 @@
 											<div class="form-group">
 												<label>학과</label>
 												<select class="select2" style="width: 100%;" name="department">
-													<option value="" selected>전체</option>
+													<option value="">전체</option>
 													<c:forEach items="${department}" var="departmentVO" begin="2">
 														<option value="${departmentVO.deptNum}" ${param.department == departmentVO.deptNum ? 'selected' : ''}>${departmentVO.deptName}</option>
 													</c:forEach>
@@ -63,7 +63,7 @@
 										<div class="col-4">
 											<div class="form-group">
 												<label>구분</label>
-												<select class="select2" multiple="multiple" style="width: 100%;" name="category">
+												<select class="select2" style="width: 100%;" name="category">
 													<option value="">전체</option>
 													<option value="전공 필수" ${param.category == '전공 필수' ? 'selected' : ''}>전공 필수</option>
 													<option value="전공 선택" ${param.category == '전공 선택' ? 'selected' : ''}>전공 선택</option>
@@ -75,7 +75,7 @@
 										<div class="col-4">
 											<div class="form-group">
 												<label>학년</label>
-												<select class="select2" multiple="multiple" style="width: 100%;" name="grade">
+												<select class="select2" style="width: 100%;" name="grade">
 													<option value="">전체</option>
 													<option value="1" ${param.grade == 1 ? 'selected' : ''}>1학년</option>
 													<option value="2" ${param.grade == 2 ? 'selected' : ''}>2학년</option>
@@ -210,32 +210,30 @@
 				
 				<!-- Pagination -->
 				<div class="row g-3 justify-content-center">
-					<nav aria-label="Page navigation example">
-						<ul class="pagination">
-							<c:if test="${pagination.pre}">
-								<li class="page-item">
-									<a class="page-link" href="#" aria-label="Previous" data-all-page="1">
-										<span aria-hidden="true">&laquo;</span>
-									</a>
-								</li>
-							</c:if>
-							<c:forEach begin="${pagination.startNum}" end="${pagination.lastNum}" var="page">
-								<li class="page-item">
-									<a class="page-link" href="#" data-all-page="${page}">${page}</a>
-								</li>
-							</c:forEach>
-							<c:if test="${pagination.next}">
-								<li class="page-item">
-									<a class="page-link" href="#" aria-label="Next" data-all-page="${pagination.totalPage}">
-										<span aria-hidden="true">&raquo;</span>
-									</a>
-								</li>
-							</c:if>
-						</ul>
-					</nav>
+					<ul class="pagination pagination-sm mx-auto" style="width: 200px;">
+						<c:if test="${pagination.pre}">
+							<li class="page-item">
+								<a class="page-link" href="#" aria-label="Previous" data-all-page="1" style="color:#17a2b8;">
+									<span aria-hidden="true">&laquo;</span>
+								</a>
+							</li>
+						</c:if>
+						<c:forEach begin="${pagination.startNum}" end="${pagination.lastNum}" var="page">
+							<li class="page-item">
+								<a class="page-link" href="#" data-all-page="${page}" style="color:#17a2b8;">${page}</a>
+							</li>
+						</c:forEach>
+						<c:if test="${pagination.next}">
+							<li class="page-item">
+								<a class="page-link" href="#" aria-label="Next" data-all-page="${pagination.totalPage}" style="color:#17a2b8;">
+									<span aria-hidden="true">&raquo;</span>
+								</a>
+							</li>
+						</c:if>
+					</ul>
 				</div>
 				
-				<div class="row mb-3">
+				<div class="row">
 					<div class="col">
 						<div class="card">
 							<h6 class="my-3 mx-3">신청 학점 : ${not empty credit ? credit : 0}점&emsp;|&emsp;잔여 학점 : ${20 - credit}점&emsp;|&emsp;수강 가능한 총 학점 : 20점</h6>

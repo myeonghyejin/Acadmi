@@ -27,7 +27,6 @@ public class StudentService {
 	//현재 수강중인 강의
 	public List<LectureVO> getCurrentLectureList() throws Exception {
 		List<LectureVO> ar =  studentDAO.getCurrentLectureList();
-		log.error("current :: {}", ar.get(0).getLectureName());
 		return ar;
 	}
 	
