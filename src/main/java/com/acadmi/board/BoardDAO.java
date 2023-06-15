@@ -5,6 +5,7 @@ import java.util.List;
 import com.acadmi.board.lectureNotice.LectureNoticeVO;
 import com.acadmi.board.notice.NoticeVO;
 import com.acadmi.board.qna.QnaVO;
+import com.acadmi.lecture.LectureVO;
 import com.acadmi.professor.ProfessorVO;
 import com.acadmi.student.StudentVO;
 import com.acadmi.util.FileVO;
@@ -48,4 +49,5 @@ public interface BoardDAO {
 	
 	public List<ProfessorVO> getProfessor() throws Exception;
 	
+	public LectureVO getLecture(LectureVO lectureVO) throws Exception;
 }

@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.acadmi.board.BoardService;
 import com.acadmi.board.BoardVO;
+import com.acadmi.lecture.LectureVO;
 import com.acadmi.professor.ProfessorVO;
 import com.acadmi.util.FileManager;
 import com.acadmi.util.FileVO;
@@ -105,5 +106,9 @@ public class LectureNoticeService implements BoardService {
 	
 	public List<ProfessorVO> getProfessor() throws Exception {
 		return lectureNoticeDAO.getProfessor();
+	}
+	
+	public LectureVO getLecture(LectureVO lectureVO) throws Exception {
+		return lectureNoticeDAO.getLecture(lectureVO);
 	}
 }

@@ -1,19 +1,25 @@
 package com.acadmi.board.lectureNotice;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.acadmi.board.BoardVO;
 import com.acadmi.notification.NotificationService;
 import com.acadmi.notification.NotificationVO;
+import com.acadmi.lecture.LectureVO;
 import com.acadmi.professor.ProfessorVO;
 import com.acadmi.util.FileVO;
 import com.acadmi.util.Pagination;
@@ -33,13 +39,18 @@ public class LectureNoticeController {
 	}
 	
 	@GetMapping("list")
-	public ModelAndView getList(Pagination pagination) throws Exception {
+	public ModelAndView getList(Pagination pagination, LectureVO lectureVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
+		List<LectureNoticeVO> list = new ArrayList<>();
 		
 		List<BoardVO> ar = lectureNoticeService.getList(pagination);
 		
 		List<ProfessorVO> professors = lectureNoticeService.getProfessor();
 		
+		lectureVO.setLectureNum(pagination.getLectureNum());		
+		lectureVO = lectureNoticeService.getLecture(lectureVO);
+		
+		mv.addObject("lecture", lectureVO);
 		mv.addObject("professors", professors);
 		mv.addObject("list", ar);
 		mv.setViewName("board/list");
@@ -57,14 +68,13 @@ public class LectureNoticeController {
 	}
 	
 	@PostMapping("add")
-	public ModelAndView setInsert(LectureNoticeVO lectureNoticeVO, MultipartFile [] addfiles) throws Exception {
+	public ModelAndView setInsert(@RequestParam("lectureNum") Long lectureNum, LectureNoticeVO lectureNoticeVO, MultipartFile [] addfiles) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
 		int result = lectureNoticeService.setInsert(lectureNoticeVO, addfiles);
 		
 		result = notificationService.setLectureNotice(lectureNoticeVO);
-		
-		mv.setViewName("redirect:./list");
+		mv.setViewName("redirect:./list?lectureNum=" + lectureNum);
 		
 		return mv;
 	}
@@ -83,7 +93,7 @@ public class LectureNoticeController {
 		
 		mv.addObject("boardVO", lectureNoticeVO);
 		mv.setViewName("board/detail");
-		
+		                        
 		return mv;
 	}
 	
@@ -115,7 +125,9 @@ public class LectureNoticeController {
 		
 		int result = lectureNoticeService.setUpdate(lectureNoticeVO, addfiles);
 		
-		mv.setViewName("redirect:./list");
+		lectureNoticeVO = (LectureNoticeVO)lectureNoticeService.getDetail(lectureNoticeVO);
+		
+		mv.setViewName("redirect:./list?lectureNum=" + lectureNoticeVO.getLectureNum());
 		
 		return mv;
 	}
