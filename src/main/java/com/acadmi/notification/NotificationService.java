@@ -171,6 +171,7 @@ public class NotificationService {
 		notificationVO.setNum(lectureQnaVO.getNum());
 		//recipient는 강의의 교수(username)
 		notificationVO.setRecipient(lectureVO.getUsername());
+		result = notificationDAO.setNotification(notificationVO);
 		return result;
 	}
 	

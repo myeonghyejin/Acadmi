@@ -94,10 +94,10 @@
 									 					<a href="../qna/detail?num=${notificationVO.num}&notificationNum=${notificationVO.notificationNum}">
 									 				</c:if>
 									 				<c:if test="${notificationVO.notificationKind eq 4}">
-									 					<a href="../lecture/notice/detail?num=${notificationVO.num}&notificationNum=${notificationVO.notificationNum}">
+									 					<a href="../lectureNotice/detail?num=${notificationVO.num}&notificationNum=${notificationVO.notificationNum}">
 									 				</c:if>
 									 				<c:if test="${notificationVO.notificationKind eq 5}">
-									 					<a href="../lecture/qna/detail?num=${notificationVO.num}&notificationNum=${notificationVO.notificationNum}">
+									 					<a href="../lectureQna/detail?num=${notificationVO.num}&notificationNum=${notificationVO.notificationNum}">
 									 				</c:if>
 									 				<c:if test="${notificationVO.notificationKind eq 6}">
 									 					<a href="../lecture/qna/detail?num=${notificationVO.num}&notificationNum=${notificationVO.notificationNum}">
