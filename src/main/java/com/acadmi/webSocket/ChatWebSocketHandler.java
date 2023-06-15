@@ -111,28 +111,36 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 		if(message instanceof BinaryMessage) {
 			String sessionId = session.getPrincipal().getName();
 			String oriName = (String)session.getAttributes().get(sessionId+"_fileName");
-			Long msgNum = (Long)session.getAttributes().get(sessionId+"_msgNum");
+			Long myMsgNum = (Long)session.getAttributes().get(sessionId+"_myMsgNum");
+			Long yourMsgNum = (Long)session.getAttributes().get(sessionId+"_yourMsgNum");
 			BinaryMessage binaryMessage = (BinaryMessage) message;
 			byte[] payload = binaryMessage.getPayload().array();
 			String fileName = fileManager.saveFile(path, payload, oriName);
 			ChatFilesVO chatFilesVO = new ChatFilesVO();
-			chatFilesVO.setMsgNum(msgNum);
+			chatFilesVO.setMsgNum(myMsgNum);
 			chatFilesVO.setFileName(fileName);
 			chatFilesVO.setOriName(oriName);
 			int result = chatDAO.setChatFileAdd(chatFilesVO);
-			session.getAttributes().remove(sessionId+"_msgNum");
+			chatFilesVO.setMsgNum(yourMsgNum);
+			result = chatDAO.setChatFileAdd(chatFilesVO);
+			log.info("======myMsgNum : {}",myMsgNum);
+			log.info("======yourMsgNum : {}",yourMsgNum);
+			session.getAttributes().remove(sessionId+"_myMsgNum");
+			session.getAttributes().remove(sessionId+"_yourMsgNum");
 			session.getAttributes().remove(sessionId+"_fileName");
 		} else if (message instanceof TextMessage) {
 			String payload = (String)message.getPayload();
+			ChatMessageVO chatMessageVO = this.processMessage(payload);
 			ObjectMapper mapper = new ObjectMapper();
 			String type = mapper.readValue(payload, Map.class).get("type").toString();
-			Long chatNum = Long.parseLong(mapper.readValue(payload, Map.class).get("chatNum").toString());
+			
+			Long myChatNum = Long.parseLong(mapper.readValue(payload, Map.class).get("chatNum").toString());
 			if(type.equals("file")) {
 				String fileName = mapper.readValue(payload, Map.class).get("fileName").toString();
 				String sessionId = session.getPrincipal().getName();
 				session.getAttributes().put(sessionId+"_fileName", fileName);
 			}
-			ChatMessageVO chatMessageVO = this.processMessage(payload);
+			
 			if(session.getPrincipal().getName().equals(chatMessageVO.getMsgSender())) {
 				log.info("=======보내는 msgContents : {}",chatMessageVO.getMsgContents());
 				log.info("=======보내는 recipient : {}",chatMessageVO.getMsgRecipient());
@@ -140,8 +148,11 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 				log.info("=======보내는 chatNum : {}",chatMessageVO.getChatNum());
 				this.sendMessage(chatMessageVO);
 				if(type.equals("file")) {
-					Long msgNum = chatDAO.getMsgNum(chatNum);
-					session.getAttributes().put(session.getPrincipal().getName()+"_msgNum", msgNum);
+					Long myMsgNum = chatDAO.getMsgNum(myChatNum);
+					session.getAttributes().put(session.getPrincipal().getName()+"_myMsgNum", myMsgNum);
+					Long yourChatNum = chatMessageVO.getChatNum();
+					Long yourMsgNum = chatDAO.getMsgNum(yourChatNum);
+					session.getAttributes().put(session.getPrincipal().getName()+"_yourMsgNum", yourMsgNum);
 				}
 			} else {
 				log.info("=======받는 msgContents : {}",chatMessageVO.getMsgContents());
