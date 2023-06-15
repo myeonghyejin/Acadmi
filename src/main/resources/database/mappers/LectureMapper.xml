@@ -22,6 +22,14 @@
   		</if>
   	</trim>
   </sql>
+  <sql id="attendeeCondition">
+		<if test="kind=='userName'">
+			AND S.USERNAME LIKE CONCAT('%', #{search}, '%')
+		</if>
+		<if test="kind=='name'">
+			AND NAME LIKE CONCAT('%', #{search}, '%')
+		</if>
+  </sql>
  
  	<!--  홈페이지 강의 목록 -->
  	<select id="getHomeLectureList" parameterType="LectureVO" resultType="LectureVO">
@@ -89,8 +97,8 @@
  	</delete>
  	
  	<!-- 단과대학 정보 -->
-	<select id="getCollege" parameterType="lectureVO" resultType="CollegeVO">
-		SELECT C.* FROM COLLEGE C INNER JOIN DEPARTMENT D ON (C.COLLEGENUM=C.COLLEGENUM) WHERE DEPTNUM=#{deptNum}
+	<select id="getCollege" parameterType="Integer" resultType="CollegeVO">
+		SELECT * FROM COLLEGE WHERE COLLEGENUM =(SELECT COLLEGENUM  FROM DEPARTMENT WHERE DEPTNUM=#{deptNum})
 	</select>
  	
  	<!-- 교수 정보 -->
@@ -100,10 +108,10 @@
   	</select>
   	
   	<!-- 참여자 정보 -->
-  	<select id="getLectureAttendee" parameterType="LectureVO" resultMap="StudentResult">
+  	<select id="getLectureAttendee" parameterType="Pagination" resultMap="StudentResult">
   		SELECT S.*,M.EMAIL,D.DEPTNAME FROM `MEMBER` M INNER JOIN STUDENT S ON (M.USERNAME=S.USERNAME) 
 		INNER JOIN STUDENT_LECTURE SL ON (M.USERNAME=SL.USERNAME) INNER JOIN DEPARTMENT D ON(S.DEPTNUM=D.DEPTNUM) 
-		WHERE LECTURENUM=#{lectureNum}
+		WHERE LECTURENUM=#{lectureNum} <include refid="attendeeCondition"></include>
   	</select>
   	
   	<!-- 계획서 존재 여부 -->

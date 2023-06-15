@@ -50,7 +50,7 @@
 													<option for="temporary" value="1" >등록</option>
 													<option for="temporary" value="0">미등록</option>
 												</select>
-					                    		<a class="btn btn-info" href="./add">강의 등록</a></button>
+					                    		<a class="btn btn-info" href="./add">강의 등록</a>
 					                  		</div>
 					                	</div>
 					              	</div>

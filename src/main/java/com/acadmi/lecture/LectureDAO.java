@@ -10,6 +10,7 @@ import com.acadmi.period.PeriodVO;
 import com.acadmi.student.StudentVO;
 import com.acadmi.syllabus.ClassVO;
 import com.acadmi.syllabus.SyllabusVO;
+import com.acadmi.util.Pagination;
 
 @Mapper
 public interface LectureDAO {
@@ -28,11 +29,11 @@ public interface LectureDAO {
 	//강의 정보
 	public LectureVO getLectureDetail(LectureVO lectureVO) throws Exception;
 	//단과대학 정보
-	public CollegeVO getCollege(LectureVO lectureVO) throws Exception;
+	public CollegeVO getCollege(Integer integer) throws Exception;
 	//교수 정보
 	public LectureVO getLectureProfessor(LectureVO lectureVO) throws Exception;
 	//참여자 정보
-	public List<StudentVO> getLectureAttendee(LectureVO lectureVO) throws Exception;
+	public List<StudentVO> getLectureAttendee(Pagination pagination) throws Exception;
 	//계획서 정보
 	public LectureVO getSyllabusDetail(LectureVO lectureVO) throws Exception;
 	public List<ClassVO> getSyllabusClass(LectureVO lectureVO) throws Exception;

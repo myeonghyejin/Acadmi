@@ -11,6 +11,7 @@ import com.acadmi.period.PeriodVO;
 import com.acadmi.student.StudentVO;
 import com.acadmi.syllabus.ClassVO;
 import com.acadmi.syllabus.SyllabusVO;
+import com.acadmi.util.Pagination;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -47,16 +48,16 @@ public class LectureService {
 		return lectureDAO.getLectureDetail(lectureVO);
 	}
 	//학과 목록
-	public CollegeVO getCollege(LectureVO lectureVO) throws Exception{
-		return lectureDAO.getCollege(lectureVO);
+	public CollegeVO getCollege(Integer integer) throws Exception{
+		return lectureDAO.getCollege(integer);
 	}
 	//교수 정보
 	public LectureVO getLectureProfessor(LectureVO lectureVO) throws Exception{
 		return lectureDAO.getLectureProfessor(lectureVO);
 	}
 	//참여자 정보
-	public List<StudentVO> getLectureAttendee(LectureVO lectureVO) throws Exception{
-		return (List<StudentVO>) lectureDAO.getLectureAttendee(lectureVO);
+	public List<StudentVO> getLectureAttendee(Pagination pagination) throws Exception{
+		return (List<StudentVO>) lectureDAO.getLectureAttendee(pagination);
 	}
 	//계획서 정보
 	public LectureVO getSyllabusDetail(LectureVO lectureVO) throws Exception{

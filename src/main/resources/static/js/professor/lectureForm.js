@@ -74,7 +74,7 @@
 	        collegeResult.innerHTML='단과대를 먼저 선택해주세요.';
 	        deptCheck=false;
 	        collegeResult.classList.add("redResult")
-	    }else if(deptNum.value.length==0){
+		}else if(deptNum.value.length==0 &&collegeNum.value.length!=0){
 	        deptResult.innerHTML='학과 선택은 필수입니다.';
 	        collegeResult.innerHTML='';
 	        deptCheck=false;

@@ -24,6 +24,7 @@ import com.acadmi.period.PeriodVO;
 import com.acadmi.student.StudentVO;
 import com.acadmi.syllabus.ClassVO;
 import com.acadmi.syllabus.SyllabusVO;
+import com.acadmi.util.Pagination;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -47,17 +48,6 @@ public class LectureController {
 		mv.setViewName("professor/homeLecture");
 		return mv;
 	}
-	//홈 공지사항 목록
-		@GetMapping("homeNotice")
-		public ModelAndView getHomeNoticeList(LectureVO lectureVO, HttpSession session) throws Exception{
-			ModelAndView mv = new ModelAndView();
-			Object obj = session.getAttribute("SPRING_SECURITY_CONTEXT");
-			SecurityContextImpl contextImpl = (SecurityContextImpl) obj; 
-			Authentication authentication = contextImpl.getAuthentication();
-			
-			mv.setViewName("professor/homeNotice");
-			return mv;
-		}
 	
 	//강의 목록
 	@GetMapping("list")
@@ -112,13 +102,13 @@ public class LectureController {
 		List<DepartmentVO> department = lectureService.getDepartmentList(departmentVO);
 		List<CollegeVO> college = lectureService.getCollegeList(collegeVO);
 		List<PeriodVO> period = lectureService.getSemesterList(periodVO);
-		collegeVO = lectureService.getCollege(lectureVO);
 		mv.addObject("period",period);
 		mv.addObject("college", college);
-		mv.addObject("result", collegeVO);
 		mv.addObject("department",department);
 		lectureVO = lectureService.getLectureDetail(lectureVO);
 		mv.addObject("update",lectureVO);
+		collegeVO = lectureService.getCollege(lectureVO.getDeptNum());
+		mv.addObject("result", collegeVO);
 		mv.setViewName("lecture/update");
 		return mv;
 	}
@@ -177,9 +167,10 @@ public class LectureController {
 	
 	//강의 참여자 페이지
 	@GetMapping("attendee")
-	public ModelAndView getLectureAttendee(LectureVO lectureVO, StudentVO studentVO) throws Exception{
+	public ModelAndView getLectureAttendee(Pagination pagination,LectureVO lectureVO, StudentVO studentVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		List<StudentVO> ar = lectureService.getLectureAttendee(lectureVO);
+		pagination.setLectureNum(lectureVO.getLectureNum());
+		List<StudentVO> ar = lectureService.getLectureAttendee(pagination);
 		mv.addObject("list",ar);
 		lectureVO = lectureService.getLectureDetail(lectureVO);
 		mv.addObject("lecture",lectureVO);
