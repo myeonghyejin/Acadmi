@@ -25,6 +25,8 @@ if(notificationKind == 1)	{
 } else if(notificationKind == 7) {
 	$('#cardTitle').html('강의등록')
 	$('#lectureButton').addClass('active')
+} else {
+	$('#cardTitle').html('전체 알림')
 }
 
 function getUrlParameter(name){

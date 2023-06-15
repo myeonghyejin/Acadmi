@@ -28,14 +28,20 @@
 			<c:import url="../temp/administrator_header.jsp"></c:import>
 		</sec:authorize>		
 		<!-- Header 끝 -->
-		<div class="container-fluid">
-			<div class="row">
+		
 				<!-- 2레벨 Sidebar 적용 -->
 				<div class="content-wrapper">
-				</div>
+				
 				<!-- 2레벨 Sidebar 끝 -->
 				<!-- Contents -->
 				<div class="col">
+					<div class="row">
+						<div class="col mt-3">
+							<div class="card">
+								<h3 class="my-3 mx-3">메시지</h3>
+							</div>
+						</div>
+					</div>
 					<div class="card direct-chat direct-chat-lime">
 						<div class="card-header">
 							<h3 class="card-title">${chatRoom.recipientName}</h3>
@@ -46,7 +52,7 @@
 									</c:when>
 									<c:otherwise>
 										<button id="deleteButton" class="btn btn-block btn-danger btn-xs" data-chat-num="${chatRoom.chatNum}"
-										data-room-sender="${chatRoom.roomSender}" data-room-recipient="${chatRoom.roomRecipient}"><i class="fa-regular fa-trash-can"></i></button>
+										data-room-sender="${chatRoom.roomSender}" data-room-recipient="${chatRoom.roomRecipient}"><i class="fa-solid fa-door-open"></i></button>
 									</c:otherwise>
 								</c:choose>
 							</small>
@@ -138,12 +144,12 @@
 									<input type="hidden" id="chatNum" name="chatNum" value="${chatRoom.chatNum}">
 	                      
 									<div class="input-group">
-										<input id="message" type="text" name="message" placeholder="Type Message ..." class="form-control">
+										<input id="message" type="text" name="message" placeholder="메시지 전송" class="form-control">
 										<span class="input-group-append">
-										<button type="button" class="btn" id="fileButton"><i class="fa-regular fa-file"></i></button>
+										<button type="button" class="btn btn-default" id="fileButton"><i class="fa-regular fa-file"></i></button>
 										</span>
 										<span class="input-group-append">
-											<button type="button" class="btn btn-info" id="chatSend">Send</button>
+											<button type="button" class="btn btn-info" id="chatSend" data-sender-name="${chatRoom.senderName}" data-recipient-name="${chatRoom.recipientName}">전송</button>
 										</span>
 									</div>
 								</div>
@@ -154,7 +160,7 @@
 					<!--/.direct-chat -->
 				</div>
 			</div>
-		</div>
+		
 		<!-- Footer 적용 -->
 		<c:import url="../temp/footer.jsp"></c:import>
 		<!-- Footer 끝 -->

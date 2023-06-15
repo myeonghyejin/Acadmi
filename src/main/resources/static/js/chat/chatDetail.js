@@ -28,7 +28,7 @@ $('#fileButton').click(function(){
 		return
 	}
 	count++
-	let child = '<div class="input-group" id="fileSend"><div class="custom-file">'
+	let child = '<div class="input-group" id="fileSend"><div class="custom-file ml-5">'
 	child = child + '<input type="file" class="custom-file-input" id="fileInput">'
 	child = child + '<label class="custom-file-label" for="fileInput">Choose file</label></div>'
 	child = child + '<div class="input-group-append"><span class="btn btn-danger" id="deleteFile">X</span></div>'
@@ -40,18 +40,15 @@ $('#fileButton').click(function(){
 
 
 
-$('#deleteButton').hide();
 $('#addButton').hide()
 $('.deleteMessage').hide()
 
 $('.card-header').on('mouseenter',function(){
-	$('#deleteButton').show();
 	$('#addButton').show();	
 })
 
 	
 $('.card-header').on('mouseleave',function(){
-	$(this).find('#deleteButton').hide()
 	$(this).find('#addButton').hide()
 })
 
@@ -162,6 +159,7 @@ websocket.onmessage = function(event){
 	let msgRecipient = getUrlParameter('roomSender')
 	let chatNum = $('#chatNum').val();
 	let date = new Date().toLocaleTimeString();
+	let recipientName = $(this).data('recipient-name')
 	let recipientProfile = $('#recipientProfile').data('file-name')
 	console.log(recipientProfile)
 	let message = {
@@ -172,7 +170,7 @@ websocket.onmessage = function(event){
 		chatNum : chatNum
 	}
 	let child = '<div class="direct-chat-msg">'
-	child = child + '<span class="direct-chat-name float-left">'+msgSender+'</span>'
+	child = child + '<span class="direct-chat-name float-left">'+recipientName+'('+msgSender+')'+'</span>'
 	child = child + '<span class="direct-chat-timestamp float-right">'+date+'</span></div>'
 	if(recipientProfile == ''){
 		child = child +'<img class="direct-chat-img" src="/images/profile.jpg" alt="message user image">'
@@ -195,6 +193,7 @@ $('#chatSend').click(function(event){
 	let chatNum = $('#chatNum').val();
 	let date = new Date().toLocaleTimeString();
 	let senderProfile = $('#senderProfile').data('file-name')
+	let senderName = $(this).data('sender-name')
 	
 	let fileInput = $('#fileInput')
 	if(fileInput.length != 0 && fileInput[0].files.length > 0) {
@@ -206,16 +205,8 @@ $('#chatSend').click(function(event){
 			if(msgContents != ''){
 				child = '<div class="direct-chat-msg right">'
 				child = child + '<div class="direct-chat-infos clearfix">'
-				child = child + '<span class="direct-chat-name float-right">'+msgSender+'</span>'
+				child = child + '<span class="direct-chat-name float-right">'+senderName+'('+msgSender+')'+'</span>'
 				child = child + '<span class="direct-chat-timestamp float-left">'+date+'</span></div>'
-				/*<c:choose>
-					<c:when test="${empty chatMessageVO.memberFilesVO.fileName}">
-						<img class="direct-chat-img" src="/images/profile.jpg" alt="message user image">
-					</c:when>
-					<c:otherwise>
-						<img class="direct-chat-img"  src="/file/member/${chatMessageVO.memberFilesVO.fileName}" alt="message user image">
-					</c:otherwise>
-				</c:choose>*/
 				if(senderProfile == ''){
 					child = child +'<img class="direct-chat-img" src="/images/profile.jpg" alt="message user image">'
 				} else {
@@ -235,7 +226,7 @@ $('#chatSend').click(function(event){
 			}
 			child = '<div class="direct-chat-msg right">'
 			child = child + '<div class="direct-chat-infos clearfix">'
-			child = child + '<span class="direct-chat-name float-right">'+msgSender+'</span>'
+			child = child + '<span class="direct-chat-name float-right">'+senderName+'('+msgSender+')'+'</span>'
 			child = child + '<span class="direct-chat-timestamp float-left">'+date+'</span></div>'
 			if(senderProfile == ''){
 				child = child +'<img class="direct-chat-img" src="/images/profile.jpg" alt="message user image">'
@@ -266,7 +257,9 @@ $('#chatSend').click(function(event){
 		$('#fileSend').remove()
 		count--
 	} else {
-		
+		if(msgContents==''){
+			return
+		}
 		let message = {
 			type : 'text',
 			msgContents : msgContents,
@@ -277,7 +270,7 @@ $('#chatSend').click(function(event){
 		
 		let child = '<div class="direct-chat-msg right">'
 		child = child + '<div class="direct-chat-infos clearfix">'
-		child = child + '<span class="direct-chat-name float-right">'+msgSender+'</span>'
+		child = child + '<span class="direct-chat-name float-right">'+senderName+'('+msgSender+')'+'</span>'
 		child = child + '<span class="direct-chat-timestamp float-left">'+date+'</span></div>'
 		if(senderProfile == ''){
 			child = child +'<img class="direct-chat-img" src="/images/profile.jpg" alt="message user image">'
@@ -318,16 +311,8 @@ $('#message').keydown(function(event) {
 			if(msgContents != ''){
 				child = '<div class="direct-chat-msg right">'
 				child = child + '<div class="direct-chat-infos clearfix">'
-				child = child + '<span class="direct-chat-name float-right">'+msgSender+'</span>'
+				child = child + '<span class="direct-chat-name float-right">'+senderName+'('+msgSender+')'+'</span>'
 				child = child + '<span class="direct-chat-timestamp float-left">'+date+'</span></div>'
-				/*<c:choose>
-					<c:when test="${empty chatMessageVO.memberFilesVO.fileName}">
-						<img class="direct-chat-img" src="/images/profile.jpg" alt="message user image">
-					</c:when>
-					<c:otherwise>
-						<img class="direct-chat-img"  src="/file/member/${chatMessageVO.memberFilesVO.fileName}" alt="message user image">
-					</c:otherwise>
-				</c:choose>*/
 				if(senderProfile == ''){
 					child = child +'<img class="direct-chat-img" src="/images/profile.jpg" alt="message user image">'
 				} else {
@@ -347,7 +332,7 @@ $('#message').keydown(function(event) {
 			}
 			child = '<div class="direct-chat-msg right">'
 			child = child + '<div class="direct-chat-infos clearfix">'
-			child = child + '<span class="direct-chat-name float-right">'+msgSender+'</span>'
+			child = child + '<span class="direct-chat-name float-right">'+senderName+'('+msgSender+')'+'</span>'
 			child = child + '<span class="direct-chat-timestamp float-left">'+date+'</span></div>'
 			if(senderProfile == ''){
 				child = child +'<img class="direct-chat-img" src="/images/profile.jpg" alt="message user image">'
@@ -389,7 +374,7 @@ $('#message').keydown(function(event) {
 		
 		let child = '<div class="direct-chat-msg right">'
 		child = child + '<div class="direct-chat-infos clearfix">'
-		child = child + '<span class="direct-chat-name float-right">'+msgSender+'</span>'
+		child = child + '<span class="direct-chat-name float-right">'+senderName+'('+msgSender+')'+'</span>'
 		child = child + '<span class="direct-chat-timestamp float-left">'+date+'</span></div>'
 		if(senderProfile == ''){
 			child = child +'<img class="direct-chat-img" src="/images/profile.jpg" alt="message user image">'

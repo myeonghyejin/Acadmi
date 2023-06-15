@@ -81,7 +81,7 @@ function qnaReplyNotification(){
 			notificationKind : 3
 		},
 		success : function(result){
-			$('#qnaReplyNotification').html(result+'개의 질의응답 답글')
+			$('#qnaReplyNotification').html(result+'개의 질의응답')
 		},
 		error : function(){
 			console.log('error')
@@ -135,7 +135,7 @@ function lectureQnaReplyNotification(){
 			notificationKind : 6
 		},
 		success : function(result){
-			$('#lectureQnaReplyNotification').html(result+'개의 강의 질의응답 답글')
+			$('#lectureQnaReplyNotification').html(result+'개의 강의 질의응답')
 		},
 		error : function(){
 			console.log('error')
