@@ -34,7 +34,6 @@
 		<!-- Header 끝 -->
 		
 		<!-- Main Contents -->
-		<div class="container-fluid">
 			<div class="content-wrapper">
 				<!-- Contents -->
 				<div class="col">
@@ -55,7 +54,7 @@
 								<div class="card">
 									<!-- table-header start -->
 									<div class="card-header"">
-					                	<h3 class="card-title" style="font-weight:normal;">학생 관리 | ${detail.lectureName}</h3>
+					                	<h3 class="card-title my-1" style="font-weight:normal;">${detail.lectureName}</h3>
 					                	<div class="card-tools">
 					                		<div class="input-group input-group-sm" style="width: 160px;">
 					                  			<button class="btn btn-info mx-3" id="btn" type="submit">등록</button>
@@ -107,8 +106,6 @@
 					<!-- form end -->
 				</div>
 			</div>
-		</div>
-		
 		<!-- Footer 적용 -->
 		<c:import url="../temp/footer.jsp"></c:import>
 		<!-- Footer 끝 -->

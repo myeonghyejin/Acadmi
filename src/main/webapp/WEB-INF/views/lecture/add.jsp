@@ -36,7 +36,6 @@
 		<!-- Header 끝 -->
 
 		<!-- Main Contents -->
-		<div class="container-fluid">
 			<div class="content-wrapper">
 				<!-- Contents -->
 				<div class="col">
@@ -54,9 +53,6 @@
 					<form id="frm" action="./add" method="post">
 						<jsp:useBean id="now" class="java.util.Date" />
 						<div class="card card-default">
-							<div class="card-header">
-								<h3 class="card-title" style="color: white;">강의 등록</h3>
-          					</div>
           					<!-- card-header start -->
 							<div class="card-body">
 								<div class="row"">
@@ -183,7 +179,6 @@
 					</form>
 				</div>
 			</div>
-		</div>
 
 	               		
 		<!-- Footer 적용 -->
