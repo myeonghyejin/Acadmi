@@ -2,8 +2,11 @@ package com.acadmi.board.notice;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.acadmi.board.BoardVO;
+import com.acadmi.lecture.LectureVO;
 import com.acadmi.notification.NotificationService;
 import com.acadmi.notification.NotificationVO;
 import com.acadmi.util.FileVO;
@@ -163,5 +167,27 @@ public class NoticeController {
 		
 		return mv;
 	}
+	
+	//홈 공지사항 목록
+	@GetMapping("homeNotice")
+	public ModelAndView getHomeNoticeList(Pagination pagination, HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		pagination.setPerPage(5L);
+		List<BoardVO> ar = noticeService.getList(pagination);
+		
+		mv.addObject("list", ar);
+		mv.setViewName("professor/homeNotice");
+		return mv;
+	}
+	//홈 중요 공지사항 목록
+		@GetMapping("homeImportant")
+		public ModelAndView getHomeImportantList(NoticeVO noticeVO, HttpSession session) throws Exception{
+			ModelAndView mv = new ModelAndView();
+			noticeVO.setImportant(1L);
+			List<BoardVO> ar = noticeService.getImportantList(noticeVO);
+			mv.addObject("list", ar);
+			mv.setViewName("professor/homeImportant");
+			return mv;
+		}
 
 }

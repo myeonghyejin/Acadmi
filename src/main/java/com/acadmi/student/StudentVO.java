@@ -22,6 +22,8 @@ public class StudentVO extends MemberVO{
 	private String addressDetail;
 	private Integer status;
 	
+	private Integer rank;
+	
 	private DepartmentVO departmentVO;
 	private CreditVO creditVO;
 }

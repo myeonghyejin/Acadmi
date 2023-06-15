@@ -62,9 +62,9 @@
 							                	</tr>
 							                	<tr>
 							                		<th style="background-color:#f8f9fa;color:#17a2b8;"rowspan="2">목표</th>
-							                		<th style="background-color:#f8f9fa;color:#17a2b8;">수업방식</th>
+							                		<th style="background-color:#f8f9fa;color:#17a2b8;">수업 방식</th>
 							                		<th style="background-color:#f8f9fa;color:#17a2b8;">목표</th>
-							                		<th style="background-color:#f8f9fa;color:#17a2b8;">평가방법</th>
+							                		<th style="background-color:#f8f9fa;color:#17a2b8;">평가 방법</th>
 							                	</tr>
 							                	<tr>
 							                		<td><input type="text" name="method" class="form-control" id="method" value="${lecture.syllabusVO.method}"></td>
@@ -100,18 +100,18 @@
 											</tbody>
 										</table>
 										<table class="table table-bordered" style="text-align: center;margin-top: 20px">
+										<input type="hidden" name="syllabusNum" value="${lecture.syllabusVO.syllabusNum}">
                     						<tbody>
 	                    						<tr style="background-color:#17a2b8; color:white;">
 	                    							<th>차수</th>
                     								<th>수업 주제</th>
-                    								<th>주차별 수업목표</th>
+                    								<th>주차별 수업 목표</th>
                     								<th>관련 역량</th>
                     								<th>비고</th>
 	                    						</tr>
 	                    						
 		                    					<c:forEach items="${classes}" var="classes" varStatus="status">
 		                    						<tr>
-		                    							<td><input type="hidden" name="syllabusNum" value="${lecture.syllabusVO.syllabusNum}"></td>
 													    <td><input type="hidden" name="order${status.count}" value="${status.count}">${classes.order}차수</td>
 													    <td><input type="text" name="subject${status.count}" class="form-control" id="subject${status.count}" value="${classes.subject}"></td>
 													    <td><input type="text" name="goal${status.count}" class="form-control" id="goal${status.count}" value="${classes.goal}"></td>

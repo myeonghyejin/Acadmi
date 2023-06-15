@@ -16,6 +16,7 @@
 		<!-- Header 적용 -->
 		<c:import url="../temp/professor_header.jsp"></c:import>
 		<!-- Header 끝 -->
+		
 		<!-- Main Contents -->
 		<div class="container-fluid">
 			<div class="content-wrapper">
@@ -65,9 +66,9 @@
 				 										<td>${LectureVO.semester}학기</td>
 				 										<td>${LectureVO.grade}학년</td>
 				 										<td>${LectureVO.category}</td>
-				 										<td><button class="btn btn-info">
-				 											<a href="./attendee?lectureNum=${LectureVO.lectureNum}" style="color: white;">학생 조회</a>
-				 										</button></td>
+				 										<td>
+				 											<button class="btn btn-info"><a href="./attendee?lectureNum=${LectureVO.lectureNum}" style="color: white;">학생 조회</a></button>
+				 										</td>
 					                    			</tr>
 					                    		</c:forEach>
 					                    	</tbody>
@@ -88,6 +89,6 @@
 		<!-- Footer 끝 -->
 
 	</div>
-<!-- ./wrapper -->
+	<!-- ./wrapper -->
 </body>
 </html>
