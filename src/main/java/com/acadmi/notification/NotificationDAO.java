@@ -55,6 +55,9 @@ public interface NotificationDAO {
 	//읽은 알림 삭제
 	public int setDelete(NotificationVO notificationVO) throws Exception;
 	
+	//글이 삭제되었을 때 알림도 삭제
+	public int setBoardNotificationDelete(NotificationVO notificationVO) throws Exception;
+	
 	//알림 detail
 	public NotificationVO getDetail(NotificationVO notificationVO) throws Exception;
 	

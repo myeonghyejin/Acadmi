@@ -14,6 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.acadmi.board.BoardVO;
+import com.acadmi.notification.NotificationService;
+import com.acadmi.notification.NotificationVO;
 import com.acadmi.professor.ProfessorVO;
 import com.acadmi.student.StudentVO;
 import com.acadmi.util.FileVO;
@@ -25,6 +27,9 @@ public class QnaController {
 
 	@Autowired
 	private QnaService qnaService;
+	
+	@Autowired
+	private NotificationService notificationService;
 	
 	@ModelAttribute("board")
 	public String getBoardName() {
@@ -50,12 +55,16 @@ public class QnaController {
 	}
 	
 	@GetMapping(value = "detail")
-	public ModelAndView getDetail(QnaVO qnaVO, HttpSession session) throws Exception {
+	public ModelAndView getDetail(QnaVO qnaVO, NotificationVO notificationVO, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
 		Long num = qnaService.getQnaList(qnaVO);
 		
 		qnaVO = (QnaVO)qnaService.getDetail(qnaVO);
+		
+		if(notificationVO.getNotificationNum() != null) {
+			int result = notificationService.setDelete(notificationVO);
+		}
 		
 		session.setAttribute("qnaVO", qnaVO);
 		
@@ -67,10 +76,14 @@ public class QnaController {
 	}
 	
 	@GetMapping(value = "replyDetail")
-	public ModelAndView getReplyDetail(QnaVO qnaVO) throws Exception {
+	public ModelAndView getReplyDetail(QnaVO qnaVO, NotificationVO notificationVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
 		qnaVO = qnaService.getReplyDetail(qnaVO);
+		
+		if(notificationVO.getNotificationNum() != null) {
+			int result = notificationService.setDelete(notificationVO);
+		}
 		
 		mv.addObject("reply", qnaVO);
 		mv.setViewName("board/replyDetail");
@@ -92,6 +105,8 @@ public class QnaController {
 		ModelAndView mv = new ModelAndView();
 		
 		int result = qnaService.setInsert(qnaVO, addfiles);
+		
+		result = notificationService.setQna(qnaVO);
 		
 		mv.setViewName("redirect:./list");
 		
@@ -133,10 +148,12 @@ public class QnaController {
 	}
 	
 	@GetMapping("delete")
-	public ModelAndView setDelete(BoardVO boardVO) throws Exception {
+	public ModelAndView setDelete(BoardVO boardVO, NotificationVO notificationVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
 		int result = qnaService.setDelete(boardVO);
+		
+		result = notificationService.setBoardNotificationDelete(notificationVO);
 		
 		mv.setViewName("redirect:./list");
 		
@@ -168,6 +185,8 @@ public class QnaController {
 		ModelAndView mv = new ModelAndView();
 		
 		int result = qnaService.setReplyAdd(qnaVO);
+		
+		result = notificationService.setQnaReply(qnaVO);
 		                             
 		mv.setViewName("redirect:./detail?num=" + qnaVO.getNum());
 		

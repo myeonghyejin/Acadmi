@@ -11,11 +11,8 @@
   			<if test="kind == 'title'">
   				TITLE LIKE CONCAT('%', #{search}, '%')
   			</if>
-  			<if test="kind == 'content'">
+  			<if test="kind == 'contents'">
   				CONTENTS LIKE CONCAT('%', #{search}, '%')
-  			</if>
-  			<if test="kind == 'writer'">
-  				WRITER LIKE CONCAT('%', #{search}, '%')
   			</if>
   		</where>
   	</sql>

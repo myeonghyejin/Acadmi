@@ -11,6 +11,7 @@ import com.acadmi.board.BoardService;
 import com.acadmi.board.BoardVO;
 
 import com.acadmi.board.qna.QnaVO;
+import com.acadmi.lecture.LectureVO;
 import com.acadmi.professor.ProfessorVO;
 import com.acadmi.student.StudentVO;
 import com.acadmi.util.FileManager;
@@ -100,7 +101,7 @@ public class LectureQnaService implements BoardService {
 		return lectureQnaDAO.setBoardFileDelete(fileVO);
 	}
 	
-	public int setReplyAdd(LectureQnaVO lectureQnaVO) throws Exception {
+	public int setReplyAdd(LectureQnaVO lectureQnaVO, MultipartFile[] multipartFiles) throws Exception {
 		
 		LectureQnaVO parent = (LectureQnaVO)lectureQnaDAO.getDetail(lectureQnaVO);
 		
@@ -113,6 +114,20 @@ public class LectureQnaService implements BoardService {
 		int result = lectureQnaDAO.setStepUpdate(parent);
 				
 		result = lectureQnaDAO.setReplyAdd(lectureQnaVO);
+		
+		if(multipartFiles != null) {
+			for(MultipartFile multipartFile : multipartFiles) {
+				if(!multipartFile.isEmpty()) {
+					String fileName = fileManager.saveFile(path, multipartFile);
+					FileVO fileVO = new FileVO();
+					fileVO.setNum(lectureQnaVO.getNum());
+					fileVO.setFileName(fileName);
+					fileVO.setOriName(multipartFile.getOriginalFilename());
+					
+					result = lectureQnaDAO.setBoardFileAdd(fileVO);
+				}
+			}
+		}
 			
 		return result; 
 		
@@ -133,5 +148,8 @@ public class LectureQnaService implements BoardService {
 	public List<ProfessorVO> getProfessor() throws Exception {
 		return lectureQnaDAO.getProfessor();
 	}
-
+	
+	public LectureVO getLecture(LectureVO lectureVO) throws Exception {
+		return lectureQnaDAO.getLecture(lectureVO);
+	}
 }

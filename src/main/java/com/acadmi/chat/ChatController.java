@@ -7,7 +7,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.acadmi.util.Pagination;
@@ -32,11 +34,52 @@ public class ChatController {
 	}
 	
 	@GetMapping("detail")
-	public ModelAndView getChatRoomDetail(ChatMessageVO chatMessageVO) throws Exception {
+	public ModelAndView getChatRoomDetail(ChatRoomVO chatRoomVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		List<ChatMessageVO> ar = chatService.getChatMessage(chatMessageVO);
-		mv.addObject("messageList", ar);
+		chatRoomVO = chatService.getChatRoom(chatRoomVO);
+		log.info("chatNum : {}",chatRoomVO.getChatNum());
+		mv.addObject("chatRoom", chatRoomVO);
 		mv.setViewName("chat/detail");
+		return mv;
+	}
+	
+	@PostMapping("chatRoomDelete")
+	@ResponseBody
+	public int setChatRoomDelete(ChatRoomVO chatRoomVO) throws Exception {
+		int result = chatService.setChatRoomDelete(chatRoomVO);
+		return result;
+	}
+	
+	@PostMapping("inviteChat")
+	@ResponseBody
+	public int setInviteChat(ChatRoomVO chatRoomVO) throws Exception{
+		return chatService.setInviteChat(chatRoomVO);
+	}
+	
+	@PostMapping("deleteMessage")
+	@ResponseBody
+	public int setDeleteMessage(ChatMessageVO chatMessageVO) throws Exception {
+		return chatService.setDeleteMessage(chatMessageVO);
+	}
+	
+	@GetMapping("chatList")
+	@ResponseBody
+	public int getChatList(HttpSession Session) throws Exception {
+		ChatRoomVO chatRoomVO = new ChatRoomVO();
+		List<ChatRoomVO> ar = chatService.getChatList(chatRoomVO, Session);
+		int result = ar.size();
+		return result;
+	}
+	
+	@GetMapping("fileDown")
+	public ModelAndView getFileDown(ChatFilesVO chatFilesVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		chatFilesVO = chatService.getFileDetail(chatFilesVO);
+		
+		mv.addObject("chatFilesVO", chatFilesVO);
+		mv.setViewName("fileManager");
+		
 		return mv;
 	}
 

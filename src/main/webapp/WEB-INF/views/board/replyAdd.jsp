@@ -14,30 +14,19 @@
 </head>
 <body class="hold-transition sidebar-mini">
 
-	<c:import url="../temp/header.jsp"></c:import>
+	<sec:authorize access="hasRole('ROLE_PROFESSOR')">
+		<c:import url="../temp/professor_header.jsp"></c:import>
+	</sec:authorize>
+	
+	<sec:authorize access="hasRole('ROLE_STUDENT')">
+		<c:import url="../temp/header.jsp"></c:import>
+	</sec:authorize>
 
 	<div class="wrapper">
 		<div class="content-wrapper">
-		  <section class="content-header">
-			<div class="container-fluid">
-			  <div class="row mb-2">
-				<div class="col-sm-6">
-				<h1>
-					<c:if test="${board eq 'qna'}">
-						질의응답
-					</c:if>
-					<c:if test="${board eq 'lectureQna'}">
-						강의질의응답
-					</c:if>
-				  </h1>
-				</div>
-			  </div>
-			</div>
-		  </section>
-	  
 		  <section class="content">
 			<div class="row">
-			  <div class="col-md-12">
+			  <div class="col-md-12 mt-5">
 				<div class="card card-secondary">
 				  <div class="card-header">
 					<h3 class="card-title">답글 등록</h3>
@@ -47,36 +36,35 @@
 					<sec:authentication property="principal.username" var="userName" />
 					
 					<div class="row col-md-7 mx-auto">
-						<form class="row g-3" action="./reply" method="post">
+						<form id="contactForm" class="row g-3" action="./reply" method="post" enctype="multipart/form-data">
 							<input type="hidden" name="num" value="${qnaVO.num}">
 							
-							<%-- 	<c:if test="${board eq 'lectureQna'}">
-								<div class="col-md-12 mt-3">
-									<label for="lectureNum" class="form-label strongFont2">강의번호</label> 
-									<input type="text" class="form-control" name="lectureNum" id="lectureNum">
-								</div>
-							</c:if> --%>
-						
-							<div class="col-md-12" style="margin-top: 30px;">
+							<c:if test="${board eq 'lectureQna'}">
+								<input type="hidden" class="form-control" name="lectureNum" id="lectureNum" value="">
+							</c:if>
+
+							<div class="col-md-6" style="margin-top: 30px;">
+								<label for="writer" class="form-label strongFont2">작성자</label>
+								<input type="text" name="writer" class="form-control" id="writer" readonly value="${userName}">
+							</div>
+							
+							<div class="col-md-7" style="margin-top: 20px;">
 								<label for="title" class="form-label strongFont2">제목</label> 
 								<input type="text" class="form-control" name="title" id="title" placeholder="제목을 입력하세요">
 							</div>
 							
-							<div class="col-md-12" style="margin-top: 20px;">
-								<label for="writer" class="form-label strongFont2">작성자</label> 
-								<input type="text" name="writer" class="form-control" id="writer" readonly value="${userName}">
+							<div class="col-md-6">
+								<c:if test="${board eq 'lectureQna'}">
+									<div class="row mt-4">
+										  <div style="display: flex; align-items: center;">
+										    <label for="secret" class="form-label strongFont2" style="margin-bottom: 0; margin-left:10px">비밀글</label>
+										    <div style="margin-left: 10px;">
+										      <input type="checkbox" class="form-control" name="secret" id="secret" style="width: 20px; height: 20px; margin-bottom: 0;">
+										    </div>
+										 </div>
+									</div>
+								</c:if>
 							</div>
-							
-							<c:if test="${board eq 'lectureQna'}">
-								<div class="row mt-4">
-									  <div style="display: flex; align-items: center;">
-									    <label for="secret" class="form-label strongFont2" style="margin-bottom: 0; margin-left:15px">비밀글</label>
-									    <div style="margin-left: 10px;">
-									      <input type="checkbox" class="form-control" name="secret" id="secret" style="width: 20px; height: 20px; margin-bottom: 0;">
-									    </div>
-									 </div>
-								</div>
-							</c:if>
 							
 							<div class="col-md-12 mt-4">
 								<label for="contents" class="form-label strongFont2">내용</label>
@@ -84,9 +72,15 @@
 									placeholder="내용을 입력하세요"></textarea>
 							</div>
 						
+							<div class="col-md-11 mt-3">
+								<div id="fileList">
+									<button class="col-md-12 mt-3 btn btn-primary" id="fileAdd" type="button">파일추가</button>
+								</div> 
+							</div>
+							
 							<div class="row" style="margin-top: 50px; margin-left: 1080px;">		
-								<button type="submit" class="submitButton btn btn-info" style="margin-right: 5px;">등록</button>
-								<button type="button" class="btn btn-danger" onclick="location.href='./list'">취소</button>
+								<button type="button" class="submitButton btn btn-info" style="margin-right: 5px;">등록</button>
+								<button type="button" class="btn btn-danger" onclick="window.history.back();">취소</button>
 							</div>
 						</form>
 					</div>
@@ -100,15 +94,29 @@
 
 	<c:import url="../temp/footer.jsp"></c:import>
 
+	<script src="/js/filemanager.js"></script>
+	<script src="/js/board/qnaReply.js"></script>
+	<script src="/js/board/notice.js"></script>
+	<script src="/js/board/boardCheck.js"></script>
+	
 	<script>
 		$("#replyContents").summernote({
 			height : 500,
 			width : 1187.48
 		});
-	</script>
+		
+		function getParameterByName(name) {
+		    name = name.replace(/[\[\]]/g, '\\$&');
+		    let regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+		        results = regex.exec(window.location.href);
+		    if (!results) return null;
+		    if (!results[2]) return '';
+		    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+		  }
 
-	<script src="/js/filemanager.js"></script>
-	<script src="/js/board/qnaReply.js"></script>
-	<script src="/js/board/notice.js"></script>
+		  let lectureNum = getParameterByName('lectureNum');
+		  let lectureNumInput = document.getElementById('lectureNum');
+		  lectureNumInput.value = lectureNum;
+	</script>
 </body>
 </html>
