@@ -23,12 +23,11 @@ import lombok.extern.slf4j.Slf4j;
 	  public ModelAndView getNoticeList() throws Exception {
 		  ModelAndView mv = new ModelAndView();
 	  
-//		  List<BoardVO> ar = studentService.getNoticeList();
-//		  List<LectureVO> ar2 = studentService.getCurrentLectureList();
-//		  log.error("current ::: {}", ar2.get(0).getLectureName());
-//		  
-//		  mv.addObject("notice", ar); 
-//		  mv.addObject("currentLecture", ar2);
+		  List<BoardVO> ar = studentService.getNoticeList();
+		  List<LectureVO> ar2 = studentService.getCurrentLectureList();
+		  
+		  mv.addObject("notice", ar); 
+		  mv.addObject("currentLecture", ar2);
 		  
 		  
 		  mv.setViewName("index");

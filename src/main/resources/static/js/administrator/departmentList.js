@@ -1,5 +1,5 @@
 $('#table2').on('click', '[data-dept]', function() {
-    let status = $(this).parents('.dept').find('.status').val();
+    let status = $(this).parents('.dept').find('.select2').val();
     
     let deptNum = $(this).attr('data-dept')
      

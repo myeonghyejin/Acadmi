@@ -55,7 +55,7 @@
 
 <div class="wrapper">
 
-<c:import url="../temp/administrator.jsp"></c:import>
+<c:import url="../temp/administrator_header.jsp"></c:import>
 
 	<div class="content-wrapper">
 		<div class="container-fluid">
@@ -98,7 +98,7 @@
 								<label style="margin : 10px;">성명</label>
 								<input type="text" class="form-control" name="search" placeholder="내용을 입력해주세요" style="width : 20%" value="${pagination.search}">
 								<label style="margin : 10px;">상태</label>
-								<select class="form-control select" name="status" style="width: 20%;">
+								<select class="select2" name="status" style="width: 20%;">
 									<option value="">전체</option>
 									<option value="1"${administratorStatus eq 1 ? 'selected' : '' }>재직</option>
 									<option value="2"${administratorStatus eq 2 ? 'selected' : '' } >휴직</option>
@@ -205,34 +205,33 @@
 				      <!-- /.card -->
 				
 				    </section>
-				  	<div class="row" style="margin: 20px auto;" id="pagination">
-							<nav aria-label="Page navigation example">
-								<ul class="pagination d-flex justify-content-center">
+				  	<div class="row g-3 justify-content-center" style="margin: 20px auto;" id="pagination">
+								<ul class="pagination pagination-sm mx-auto"  style="width: 200px;">
 									<li class="page-item ${pagination.page eq 1? 'disabled' : '' }">
-										<a class="page-link" href="./administratorList?page=1&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="1">
+										<a class="page-link" href="./administratorList?page=1&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="1" style="color:#17a2b8;">
 											<span aria-hidden="true">&laquo;</span>
 										</a>
 									</li>
 									<li class="page-item ${pagination.pre eq false ? 'disabled' : ''}">
-										<a class="page-link" href="./administratorList?page=${pagination.startNum-1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="${pagination.startNum-1}">
+										<a class="page-link" href="./administratorList?page=${pagination.startNum-1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="${pagination.startNum-1}" style="color:#17a2b8;">
 											<span aria-hidden="true">&lsaquo;</span>
 										</a>
 									</li>
 									<c:forEach begin="${pagination.startNum}" end="${pagination.lastNum}" var="i">
-										<li class="page-item"><a class="page-link" href="./administratorList?page=${i}&kind=${pagination.kind}&search=${pagination.search}" data-board-page="${i}">${i}</a></li>
+										<li class="page-item"><a class="page-link" href="./administratorList?page=${i}&kind=${pagination.kind}&search=${pagination.search}" data-board-page="${i}" style="color:#17a2b8;">${i}</a></li>
 									</c:forEach>
 									<li class="page-item ${pagination.next eq false ? 'disabled' : ''}">
-										<a class="page-link" href="./administratorList?page=${pagination.lastNum+1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next" data-board-page="${pagination.lastNum+1}">
+										<a class="page-link" href="./administratorList?page=${pagination.lastNum+1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next" data-board-page="${pagination.lastNum+1}" style="color:#17a2b8;">
 											<span aria-hidden="true">&rsaquo;</span>
 										</a>
 									</li>
 									<li class="page-item ${pagination.next eq totalPage ? 'disabled' : ''}">
-										<a class="page-link" href="./administratorList?page=${pagination.totalPage}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next" data-board-page="${pagination.totalPage}">
+										<a class="page-link" href="./administratorList?page=${pagination.totalPage}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next" data-board-page="${pagination.totalPage}" style="color:#17a2b8;">
 											<span aria-hidden="true">&raquo;</span>
 										</a>
 									</li>
 								</ul>
-							</nav>
+						
 					</div>
 				</div>
 				
@@ -241,9 +240,13 @@
 	
 	</div>
 </div>	
+<c:import url="../temp/footer.jsp"></c:import>
 <script type="text/javascript">
  /* 페이지네이션 선택 색상 */ 
 
+   $(function () {
+      $('.select2').select2()
+    });
 </script>
 </body>
 </html>

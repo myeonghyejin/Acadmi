@@ -26,7 +26,7 @@
 
 <div class="wrapper">
 	<!-- Header 적용 -->
-		<c:import url="../temp/administrator.jsp"></c:import>
+		<c:import url="../temp/administrator_header.jsp"></c:import>
 	<!-- Header 끝 -->
 <div class="content-wrapper">
 			
@@ -118,8 +118,10 @@
 	              <input type="text" id="detailAddress"  class="form-control" name="addressDetail"/>
 	            </div>
 	            <input type="hidden" name="category" value="1">
-	            <button type="button" class="btn btn-info" id="professorBtn">교수가입</button> 
-	            <button type="button" class="btn btn-danger" id="backBtn">취소</button>
+	            <div style="width:auto; float: right;">
+		            <button type="button" class="btn btn-info" id="professorBtn">교수가입</button> 
+		            <button type="button" class="btn btn-danger" id="backBtn">취소</button>
+	            </div>
 	          </form>
           </div>
         </div>
