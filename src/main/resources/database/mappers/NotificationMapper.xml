@@ -78,7 +78,7 @@
   	
   	<!-- lectureQna의 원문을 가져오는 쿼리 -->
   	<select id="getOriginalLectureQna" parameterType="LectureQnaVO" resultType="LectureQnaVO">
-  		SELECT * FROM LECTUREQNA WHERE NUM = #{num}
+  		SELECT * FROM LECTURE_QNA WHERE NUM = #{num}
   	</select>
   	
   	<!-- 읽은 알림 삭제 -->
