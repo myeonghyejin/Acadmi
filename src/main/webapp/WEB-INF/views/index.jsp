@@ -16,33 +16,26 @@
 	<div class="wrapper">
 
 		<!-- Header 적용 -->
+		<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
+			<c:import url="./temp/administrator_header.jsp"></c:import>
+			<div class="content-wrapper">
+				<c:import url="./temp/student_index.jsp"></c:import>
+			</div>
+		</sec:authorize>
 		<sec:authorize access="hasRole('ROLE_PROFESSOR')">
 			<c:import url="./temp/professor_header.jsp"></c:import>
 			<!-- Header 끝 -->
-			<div class="content-wrapper">
+			<div class="content-wrapper row">
 				<c:import url="./temp/professor_index.jsp"></c:import>
 			</div>
 		</sec:authorize>
 		
 		<sec:authorize access="hasRole('ROLE_STUDENT')">
-			<c:import url="./temp/header.jsp"></c:import>
+			<c:import url="./temp/student_header.jsp"></c:import>
 			<div class="content-wrapper">
 				<c:import url="./temp/student_index.jsp"></c:import>
-		</div>	
-			
+			</div>
 		</sec:authorize>
-		<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
-			<c:import url="./temp/header.jsp"></c:import>
-				행정페이지
-		</sec:authorize>
-		
-		<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
-			<c:import url="./temp/administrator_header.jsp"></c:import>
-			<div class="content-wrapper">
-				<c:import url="./temp/student_index.jsp"></c:import>
-		</div>
-		</sec:authorize>
-		
 
 		<!-- Footer 적용 -->
 		<c:import url="./temp/footer.jsp"></c:import>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,12 +27,22 @@
 
 <div class="wrapper">
 	<!-- Header 적용 -->
-		<c:import url="../temp/administrator_header.jsp"></c:import>
+		<sec:authorize access="hasRole('ROLE_PROFESSOR')">
+			<c:import url="../temp/professor_header.jsp"></c:import>
+		</sec:authorize>
+		
+		<sec:authorize access="hasRole('ROLE_STUDENT')">
+			<c:import url="../temp/student_header.jsp"></c:import>
+		</sec:authorize>
+		
+		<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
+			<c:import url="../temp/administrator_header.jsp"></c:import>
+		</sec:authorize>
 	<!-- Header 끝 -->
 <div class="content-wrapper">
 			
-	<div class="container-fluid">
-		<div class="row">
+	<!-- <div class="container-fluid">
+		<div class="row"> -->
 			<!-- 2레벨 Sidebar 적용 -->
 				
 			<c:import url="../temp/sidebar/administrator_join.jsp"></c:import>
@@ -129,8 +140,8 @@
 
     </section>
 			</div>
-		</div>
-	</div>
+		<!-- </div>
+	</div> -->
 </div>
 </div>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
