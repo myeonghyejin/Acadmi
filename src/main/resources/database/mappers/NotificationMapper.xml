@@ -62,7 +62,7 @@
   	
   	<!-- qna의 원문을 가져오는 쿼리 -->
   	<select id="getOriginalQna" parameterType="QnaVO" resultType="QnaVO">
-  		SELECT * FROM QNA WHERE NUM #{num}
+  		SELECT * FROM QNA WHERE NUM = #{num}
   	</select>
   	
   	<!-- 강의 정보를 가져오는 쿼리 -->
@@ -84,6 +84,11 @@
   	<!-- 읽은 알림 삭제 -->
   	<delete id="setDelete" parameterType="NotificationVO">
   		DELETE FROM NOTIFICATION WHERE NOTIFICATIONNUM = #{notificationNum} 
+  	</delete>
+  	
+  	<!-- 글이 삭제되었을때 알림도 삭제 -->
+  	<delete id="setBoardNotificationDelete" parameterType="NotificationVO">
+  		DELETE FROM NOTIFICATION WHERE NUM =#{num}
   	</delete>
   	
   	<!-- 알림 detail -->

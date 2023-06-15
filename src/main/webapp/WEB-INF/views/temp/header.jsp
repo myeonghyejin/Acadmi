@@ -77,61 +77,10 @@
 
 		<!-- 채팅 -->
 		<li class="nav-item dropdown">
-			<a class="nav-link" data-toggle="dropdown" href="#">
+			<a class="nav-link" href="/chat/list">
 				<i class="far fa-comments"></i>
-				<span class="badge badge-danger navbar-badge">3</span>
+				<span class="badge badge-danger navbar-badge" id="chat"></span>
 			</a>
-		<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-			<a href="#" class="dropdown-item">
-				<!-- Message Start -->
-				<div class="media">
-					<img src="/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-					<div class="media-body">
-						<h3 class="dropdown-item-title">
-							Brad Diesel
-							<span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-						</h3>
-						<p class="text-sm">Call me whenever you can...</p>
-						<p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-					</div>
-				</div>
-				<!-- Message End -->
-			</a>
-			<div class="dropdown-divider"></div>
-				<a href="#" class="dropdown-item">
-					<!-- Message Start -->
-					<div class="media">
-						<img src="/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-						<div class="media-body">
-							<h3 class="dropdown-item-title">
-								John Pierce
-								<span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-							</h3>
-							<p class="text-sm">I got your message bro</p>
-							<p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-						</div>
-					</div>
-					<!-- Message End -->
-				</a>
-			<div class="dropdown-divider"></div>
-				<a href="#" class="dropdown-item">
-					<!-- Message Start -->
-					<div class="media">
-						<img src="/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-						<div class="media-body">
-							<h3 class="dropdown-item-title">
-								Nora Silvester
-								<span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                			</h3>
-							<p class="text-sm">The subject goes here</p>
-							<p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-						</div>
-					</div>
-					<!-- Message End -->
-				</a>
-			<div class="dropdown-divider"></div>
-				<a href="/chat/list" class="dropdown-item dropdown-footer">See All Messages</a>
-			</div>
 		</li>
 
 		<!-- 전체 보기 -->
@@ -238,25 +187,25 @@
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
-							<a href="/student/lecture/all_lecture" class="nav-link">
+							<a href="#" class="nav-link" onclick="handleAllLectureClick()">
 								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>수강 신청 & 장바구니</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="/student/lecture/my_lecture" class="nav-link">
+							<a href="#" class="nav-link" onclick="handleMyLectureClick()">
 								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>내 수강 신청</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="/student/lecture/my_favorite" class="nav-link">
+							<a href="#" class="nav-link" onclick="handleMyFavoriteClick()">
 								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>내 장바구니</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="/student/lecture/timetable" class="nav-link">
+							<a href="#" class="nav-link" onclick="handleTimetableClick()">
 								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>시간표 조회</p>
 							</a>
@@ -295,7 +244,51 @@
     </div>
     <!-- /.sidebar -->
 </aside>
+<script>
+    //현재 연도와 현재 학기를 계산하는 함수
+    function calculateCurrentYear() {
+        let currentDate = new Date();
+        return currentDate.getFullYear();
+    }
 
+    function calculateCurrentSemester() {
+        let currentDate = new Date();
+        let month = currentDate.getMonth() + 1;
+        return (month >= 2 && month <= 7) ? 1 : 2;
+    }
+	
+    //수강 신청 & 장바구니 메뉴 클릭 시 URL에 현재 연도와 현재 학기 값을 추가하는 함수
+    function handleAllLectureClick() {
+        let year = calculateCurrentYear();
+        let semester = calculateCurrentSemester();
+        let url = "/student/lecture/all_lecture?year=" + year + "&semester=" + semester;
+        window.location.href = url;
+    }
+    
+    //내 수강 신청 메뉴 클릭 시 URL에 현재 연도와 현재 학기 값을 추가하는 함수
+    function handleMyLectureClick() {
+        let year = calculateCurrentYear();
+        let semester = calculateCurrentSemester();
+        let url = "/student/lecture/my_lecture?year=" + year + "&semester=" + semester;
+        window.location.href = url;
+    }
+    
+    //내 장바구니 메뉴 클릭 시 URL에 현재 연도와 현재 학기 값을 추가하는 함수
+    function handleMyFavoriteClick() {
+        let year = calculateCurrentYear();
+        let semester = calculateCurrentSemester();
+        let url = "/student/lecture/my_favorite?year=" + year + "&semester=" + semester;
+        window.location.href = url;
+    }
+    
+    //시간표 조회 메뉴 클릭 시 URL에 현재 연도와 현재 학기 값을 추가하는 함수
+    function handleTimetableClick() {
+        let year = calculateCurrentYear();
+        let semester = calculateCurrentSemester();
+        let url = "/student/lecture/timetable?year=" + year + "&semester=" + semester;
+        window.location.href = url;
+    }
+</script>
 <style>
 .fa-circle {
 	margin: 0 8px;

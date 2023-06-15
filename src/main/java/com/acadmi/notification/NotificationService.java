@@ -44,7 +44,6 @@ public class NotificationService {
 	//kind에 따른 새 알림 list
 	public List<NotificationVO> getnotificationKindList(NotificationVO notificationVO, HttpSession session) throws Exception {
 		Enumeration<String> names = session.getAttributeNames();
-		log.info("========{}", names.nextElement());
 		Object ojt = session.getAttribute("SPRING_SECURITY_CONTEXT");
 		SecurityContextImpl contextImpl = (SecurityContextImpl)ojt;
 		Authentication authentication = (Authentication) contextImpl.getAuthentication();
@@ -223,6 +222,11 @@ public class NotificationService {
 			return 1;
 		}
 		return notificationDAO.setDelete(notificationVO);
+	}
+	
+	//글이 삭제되었을때 알림도 삭제
+	public int setBoardNotificationDelete(NotificationVO notificationVO) throws Exception {
+		return notificationDAO.setBoardNotificationDelete(notificationVO);
 	}
 	
 	//알림 저장 처리

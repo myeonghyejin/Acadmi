@@ -15,7 +15,7 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 	<div class="wrapper">
 		<!-- Header 적용 -->
-		<c:import url="../temp/header.jsp"></c:import>
+		<c:import url="../temp/professor_header.jsp"></c:import>
 		<!-- Header 끝 -->
 		<div class="container-fluid">
 			<div class="row">
@@ -88,19 +88,19 @@
 									 					<a href="../notice/detail?num=${notificationVO.num}&notificationNum=${notificationVO.notificationNum}">
 									 				</c:if>
 									 				<c:if test="${notificationVO.notificationKind eq 2}">
-									 					<a href="../qna/detail?num=${notificationVO.num}">
+									 					<a href="../qna/detail?num=${notificationVO.num}&notificationNum=${notificationVO.notificationNum}">
 									 				</c:if>
 									 				<c:if test="${notificationVO.notificationKind eq 3}">
-									 					<a href="../qna/detail?num=${notificationVO.num}">
+									 					<a href="../qna/detail?num=${notificationVO.num}&notificationNum=${notificationVO.notificationNum}">
 									 				</c:if>
 									 				<c:if test="${notificationVO.notificationKind eq 4}">
-									 					<a href="../lecture/notice/detail?num=${notificationVO.num}">
+									 					<a href="../lecture/notice/detail?num=${notificationVO.num}&notificationNum=${notificationVO.notificationNum}">
 									 				</c:if>
 									 				<c:if test="${notificationVO.notificationKind eq 5}">
-									 					<a href="../lecture/qna/detail?num=${notificationVO.num}">
+									 					<a href="../lecture/qna/detail?num=${notificationVO.num}&notificationNum=${notificationVO.notificationNum}">
 									 				</c:if>
 									 				<c:if test="${notificationVO.notificationKind eq 6}">
-									 					<a href="../lecture/qna/detail?num=${notificationVO.num}">
+									 					<a href="../lecture/qna/detail?num=${notificationVO.num}&notificationNum=${notificationVO.notificationNum}">
 									 				</c:if>
 									 				<c:if test="${notificationVO.notificationKind eq 7}">
 									 					<a href="../lecture/detail?num=${notificationVO.lectureNum}">
@@ -110,10 +110,10 @@
 												</td>
 												<td>${notificationVO.notificationDate}</td>
 												<c:if test="${notificationVO.notificationStatus == 0 or notificationVO.notificationStatus == 1}">
-													<td><button type="button" class="float-right btn btn-info saveNotification" data-notification-num="${notificationVO.notificationNum}" data-notification-kind="${notificationVO.notificationKind}">알림저장</button></td>
+													<td><button type="button" class="float-right btn btn-info saveNotification" data-notification-num="${notificationVO.notificationNum}" data-notification-kind="${notificationVO.notificationKind}">알림보관</button></td>
 												</c:if>
 												<c:if test="${notificationVO.notificationStatus eq 2}">
-													<td><button type="button" class="float-right btn btn-danger cancleNotification" data-notification-num="${notificationVO.notificationNum}" data-notification-kind="${notificationVO.notificationKind}">저장취소</button></td>
+													<td><button type="button" class="float-right btn btn-danger cancleNotification" data-notification-num="${notificationVO.notificationNum}" data-notification-kind="${notificationVO.notificationKind}">보관취소</button></td>
 												</c:if>
 									 		</tr>
 									 	</c:forEach>

@@ -11,6 +11,11 @@
 	<!-- CSS/favicon 적용 -->
 	<c:import url="../temp/style.jsp"></c:import>
 	<!-- CSS/favicon 끝 -->
+	<style>
+		.redResult{
+			color: tomato;
+		}
+	</style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 	<div class="wrapper">
@@ -34,7 +39,7 @@
 					</div>
 					<!-- header end -->
 					
-					<form action="./update" method="post">
+					<form action="./update" id="frm" method="post">
 	                	<div class="card card-default">
 							<div class="card-header">
 								<h3 class="card-title" style="color: white;"><input type="hidden" name="lectureNum" value="${update.lectureNum}"></h3>
@@ -44,62 +49,57 @@
 								<div class="row">
 									<div class="col-6">
                 						<label>강의 연도</label>
-										<select class="form-control" id="year" name="year">
-		                    				<option name="year" id="year" value="">연도 선택</option>
-		                    				<c:forEach items="${period}" var="period">
-		                    					<option for="year" value="${period.year}" ${update.year == period.year ?'selected':''}>${period.year}</option>
-		                    				</c:forEach>
-										</select>
+										<input type="text" name="year" class="form-control" id="year" readonly="readonly" value="${update.year}" style="background:white;color:#17a2b8;font-weight:500;">
 									</div>
 									<div class="col-6">
 	                					<label>강의 학기</label>
-										<select class="form-control" id="semester" name="semester">
-											<option name="semester" id="semester">학기 선택</option>
-											<option for="semester" value="1" ${update.semester eq '1' ?'selected':''}>1학기</option>
-											<option for="semester" value="2" ${update.semester eq '2' ?'selected':''}>2학기</option>
-										</select>
+										<input type="text" name="semester" class="form-control" id="semester" readonly="readonly" value="${update.semester}" style="background:white;color:#17a2b8;font-weight:500;">
 									</div>
 	              				</div>
-	              				<div class="row" style="margin-top: 20px">
+	              				<div class="row" style="margin-top: 20px;">
 	              					<div class="col-4">
-						                <label>단과대</label>
-	                					<select class="form-control" id="collegeNum" name="collegeNum">
-											<option name="collegeNum" id="collegeNum" value="단과대">단과대 선택</option>
+						                <label>단과대</label>&nbsp;<label style="color:#17a2b8;">(필수)</label>
+	                					<select class="form-control" id="collegeNum" name="collegeNum"  onchange="updateDepartment()">
+											<option name="collegeNum" id="collegeNum" value="">단과대 선택</option>
 							                <c:forEach items="${college}" var="col">
-						                    	<option for="collegeNum" value="${col.collegeNum}">${col.collegeName}</option>
+						                    	<option for="collegeNum" value="${col.collegeNum}" ${result.collegeName == col.collegeName ?'selected':''}>${col.collegeName}</option>
 						                    </c:forEach>
 										</select>
+										<div class="mt-1 mx-1" id="collegeResult"></div>
 									</div>
 									<div class="col-4">
-						                <label>학과</label>
+						                <label>학과</label>&nbsp;<label style="color:#17a2b8;">(필수)</label>
 	                					<select class="form-control" id="deptNum" name="deptNum">
 											<option name="deptNum" id="deptNum" value="">학과 선택</option>
 											<c:forEach items="${department}" var="dept">
 						                    	<option for="deptNum" value="${dept.deptNum}" ${update.deptNum == dept.deptNum ?'selected':''}>${dept.deptName}</option>
 						                    </c:forEach>
 										</select>
+										<div class="mt-1 mx-1" id="deptResult"></div>
 									</div>
                 					<div class="col-4">
-                						<label>구분</label>
-										<select class="form-control" id="category" name="category">
-							                <option name="category" id="category">구분 선택</option>
+                						<label>구분</label>&nbsp;<label style="color:#17a2b8;">(필수)</label>
+										<select class="form-control" id="category" name="category"">
+							                <option name="category" id="category" value="">구분 선택</option>
 											<option for="category" value="전공 필수" ${update.category eq '전공 필수' ?'selected':''}>전공 필수</option>
 											<option for="category" value="전공 선택" ${update.category eq '전공 선택' ?'selected':''}>전공 선택</option>
 											<option for="category" value="교양 필수" ${update.category eq '교양 필수' ?'selected':''}>교양 필수</option>
 											<option for="category" value="교양 선택" ${update.category eq '교양 선택' ?'selected':''}>교양 선택</option>
 										</select>
+										<div class="mt-1 mx-1" id="categoryResult"></div>
                   					</div>
             					</div>
-            					<div class="row" style="margin-top: 20px">
+            					<div class="row" style="margin-top: 20px;">
 									<div class="col-12">
-					                  	<label>강의 이름</label>
-					                  	<input type="text" name="lectureName" class="form-control" id="lectureName" placeholder="강의 이름 입력" value="${update.lectureName}"><br>
+					                  	<label>강의 이름</label>&nbsp;<label style="color:#17a2b8;">(필수)</label>
+					                  	<input type="text" name="lectureName" class="form-control" id="lectureName" placeholder="강의 이름 입력" value="${update.lectureName}">
+					              		<div class="mt-1 mx-1" id="nameResult"></div>
 					              	</div>
 					            </div>
-					            <div class="row"> 
+					            <div class="row" style="margin-top: 20px;"> 
 					              	<div class="col-4">
 					              		<label>대상 학년</label>
-										<select class="form-control" id="grade" name="grade">
+										<select class="form-control" id="grade" name="grade"">
 						                    <option name="grade" id="grade" value="">학년 선택</option>
 											<c:forEach begin="1" end="4" step="1" var="i">
 						                    	<option for="grade" value="${i}" ${update.grade == i ?'selected':''}>${i}</option>
@@ -107,8 +107,8 @@
 										</select>
 									</div>
 									<div class="col-4">
-						              	<label>수강인원</label>
-										<select class="form-control" id="personal" name="personal">
+						              	<label>수강 인원</label>
+										<select class="form-control" id="personal" name="personal"">
 						                    <option name="personal" id="personal" value="">수강 인원 선택</option>
 						                    <c:forEach begin="10" end="45" step="5" var="i">
 						                    	<option for="personal" value="${i}" ${update.personal == i ?'selected':''}>${i}</option>
@@ -117,7 +117,7 @@
 									</div>
 									<div class="col-4">
 						              	<label>학점</label>
-										<select class="form-control" id="completionGrade" name="completionGrade">
+										<select class="form-control" id="completionGrade" name="completionGrade";">
 						                    <option name="completionGrade" id="completionGrade" value="">학점 선택</option>
 						                    <c:forEach begin="1" end="4" step="1" var="i">
 						                    	<option for="completionGrade" value="${i}" ${update.completionGrade == i ?'selected':''}>${i}</option>
@@ -125,7 +125,7 @@
 										</select>
 									</div>
 								</div>
-								<div class="row" style="margin-top: 20px">
+								<div class="row" style="margin-top: 20px;">
 									<div class="col-4">
 						              	<label>강의 요일</label>
 										<select class="form-control" id="weekday" name="weekday">
@@ -139,7 +139,7 @@
 									</div>
 									<div class="col-4">
 						              	<label>시작 시간</label>
-										<select class="form-control" id="startTime" name="startTime" onchange="updateEndTime()">
+										<select class="form-control" id="startTime" name="startTime"">
 						                    <option name="startTime" id="startTime" value="">시작시간 선택</option>
 						                    <c:forEach begin="1" end="9" step="1" var="i">
 						                    	<option for="startTime" value="${i}" ${update.startTime == i ?'selected':''}>${i}</option>
@@ -148,7 +148,7 @@
 									</div>
 									<div class="col-4">
 						              	<label>종료 시간</label>
-										<select class="form-control" id="endTime" name="endTime">
+										<select class="form-control" id="endTime" name="endTime"">
 						                    <option name="endTime" id="endTime" value="">종료시간 선택</option>
 						                    <c:forEach begin="1" end="9" step="1" var="i">
 						                    	<option for="endTime" value="${i}" ${update.endTime == i ?'selected':''}>${i}</option>
@@ -156,9 +156,9 @@
 										</select>
 									</div>
 								</div>
-								<div style="width:auto; float: right; margin-top: 25px">
-					            	<button class="btn btn-primary" type="submit" name="buttonType" value="0">임시등록</button>
-					                <button class="btn btn-info" type="submit" name="buttonType" value="1">등록</button>
+								<div style="width:auto; float: right; margin-top: 50px">
+					            	<button class="btn btn-primary" type="button" id="btn0">임시등록</button>
+					                <button class="btn btn-info" type="button" id="btn1">등록</button>
 					                <a class="btn btn-danger" href="./list" style="color: white;">뒤로가기</a>
 				                </div>
 							</div>
@@ -174,6 +174,8 @@
 
 	</div>
 	<!-- ./wrapper -->
+	<script src="/js/professor/lectureForm.js"></script>
+	
 	<script type="text/javascript">
 		function updateDepartment() {
 			let college = new Array()
@@ -200,6 +202,38 @@
 			}
 	       console.log(department)
 	    }
+	</script>
+	<script>
+		const startTimeSelect = document.getElementById("startTime");
+		const endTimeSelect = document.getElementById("endTime");
+	
+		startTimeSelect.addEventListener("change", function() {
+		    const selectedStartTime = parseInt(startTimeSelect.value);
+		
+		    endTimeSelect.innerHTML = '<option name="endTime" id="endTime" value="">종료시간 선택</option>';
+		
+		    for (let i = selectedStartTime + 1; i <= 9; i++) {
+				const option = document.createElement("option");
+		      	option.setAttribute("for", "endTime");
+		      	option.setAttribute("value", i);
+		      	option.textContent = i;
+		      	endTimeSelect.appendChild(option);
+		    }
+	  	});
+		
+		/* endTimeSelect.addEventListener("change", function() {
+		    const selectedEndTime = parseInt(endTimeSelect.value);
+		
+		    startTimeSelect.innerHTML = '<option name="startTime" id="startTime" value="">시작시간 선택</option>';
+		
+		    for (let i = 1; i <= selectedEndTime - 1; i++) {
+				const option = document.createElement("option");
+		      	option.setAttribute("for", "startTime");
+		      	option.setAttribute("value", i);
+		      	option.textContent = i;
+		      	startTimeSelect.appendChild(option);
+		    }
+	  	}); */
 	</script>
 
 </body>

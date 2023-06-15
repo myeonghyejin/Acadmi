@@ -62,9 +62,9 @@
 							                	</tr>
 							                	<tr>
 							                		<th style="background-color:#f8f9fa;color:#17a2b8;"rowspan="2">목표</th>
-							                		<th style="background-color:#f8f9fa;color:#17a2b8;">수업방식</th>
+							                		<th style="background-color:#f8f9fa;color:#17a2b8;">수업 방식</th>
 							                		<th style="background-color:#f8f9fa;color:#17a2b8;">목표</th>
-							                		<th style="background-color:#f8f9fa;color:#17a2b8;">평가방법</th>
+							                		<th style="background-color:#f8f9fa;color:#17a2b8;">평가 방법</th>
 							                	</tr>
 							                	<tr>
 							                		<td><input type="text" name="method" class="form-control" id="method"value=""></td>
@@ -104,7 +104,7 @@
 	                    						<tr style="background-color:#17a2b8; color:white;">
 	                    							<th>차수</th>
                     								<th>수업 주제</th>
-                    								<th>주차별 수업목표</th>
+                    								<th>주차별 수업 목표</th>
                     								<th>관련 역량</th>
                     								<th>비고</th>
 	                    						</tr>

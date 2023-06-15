@@ -43,7 +43,7 @@
 							                		<td>${lecture.professorVO.name}</td>
 							                		<td>${lecture.professorVO.phone}</td>
 							                		<td>${lecture.professorVO.professorRoom}</td>
-							                		<td>wldnjsqkek29@naver.com</td>
+							                		<td>${lecture.professorVO.email}</td>
 							                	</tr>
 							                	
 											</tbody>
@@ -51,17 +51,17 @@
 	                	<div class="card">
 							<!-- table-header start -->
 							<div class="card-header"style="background-color:#f8f9fa;">
-					        	<h3 class="card-title" style="font-weight:normal;">강의 개요</h3>
+					        	<h3 class="card-title" style="font-weight:normal; color:#17a2b8">강의 개요</h3>
 					        </div>
               				<div class="card-body">
               					<div row>
 	              					<div class="column">
 	              						<i class="fas fa-microphone"></i>
-	                					<a href="#">공지사항</a>
+	                					<a href="/lectureNotice/list?lectureNum=${lecture.lectureNum}">공지사항</a>
 	                				</div>
 	                				<div class="column">
 	                				<i class="fas fa-question"></i>
-	                					<a href="#">질의응답</a>
+	                					<a href="/lectureQna/list?lectureNum=${lecture.lectureNum}">질의응답</a>
 	                				</div>
                 				</div>
               				</div>
@@ -84,7 +84,7 @@
 									            <c:if test="${not empty classes}">
 									            	<c:forEach items="${classes}" var="classes">
 				                    				<tr>
-				                    					<td><h5>${classes.order}주차 학습목표</h5><br>${classes.subject}</td>
+				                    					<td style="color:gray;"><h5 style="color:black;"">${classes.order}주차 학습목표</h5>${classes.subject}</td>
 				                    				 </tr>
 				                    				 </c:forEach>	
 			                    				 </c:if>

@@ -14,20 +14,38 @@
   			TEMPORARY = #{temporary}
   		</if>
   		<if test="username!=null">
-  			AND USERNAME=#{username}
-  		</if>
-  		<if test="year!=null">
-  			AND YEAR>=DATE_FORMAT(now(),'%Y')
+  			AND USERNAME=#{username} AND YEAR=DATE_FORMAT(now(),'%Y') AND 
+  			SEMESTER = CASE
+    		WHEN MONTH(NOW()) BETWEEN 3 AND 8 THEN 1
+    		ELSE 2
+			END
   		</if>
   	</trim>
   </sql>
+  <sql id="attendeeCondition">
+		<if test="kind=='userName'">
+			AND S.USERNAME LIKE CONCAT('%', #{search}, '%')
+		</if>
+		<if test="kind=='name'">
+			AND NAME LIKE CONCAT('%', #{search}, '%')
+		</if>
+  </sql>
+ 
+ 	<!--  홈페이지 강의 목록 -->
+ 	<select id="getHomeLectureList" parameterType="LectureVO" resultType="LectureVO">
+ 		SELECT * FROM LECTURE WHERE YEAR=DATE_FORMAT(now(),'%Y') AND USERNAME=#{username} AND TEMPORARY=1 AND
+ 		SEMESTER = CASE
+    	WHEN MONTH(NOW()) BETWEEN 3 AND 8 THEN 1
+    	ELSE 2
+		END;
+ 	</select>
   
-  	<!-- 강의 목록 출력 및 상태 구분 -->
+  	<!-- 강의 목록 및 상태 구분 -->
   	<select id="getLectureList" parameterType="LectureVO" resultType="LectureVO">
   		SELECT * FROM LECTURE <include refid="lectureCondition"></include>
   	</select>
   	
-  	<!-- 강의 상세 출력 -->
+  	<!-- 강의 정보 -->
   	<select id="getLectureDetail" parameterType="LectureVO" resultMap="LectureResult">
   		SELECT * FROM LECTURE L INNER JOIN DEPARTMENT D ON(L.DEPTNUM=D.DEPTNUM) WHERE LECTURENUM=#{lectureNum}
   	</select>
@@ -36,9 +54,13 @@
 	<select id="getCollegeList" parameterType="CollegeVO" resultType="CollegeVO">
 		SELECT * FROM COLLEGE WHERE COLLEGENUM>1
 	</select>
+	
+	<!-- 학과 목록 - 행정제외 -->
 	<select id="getDepartmentList" parameterType="DepartmentVO" resultType="DepartmentVO">
 		SELECT * FROM DEPARTMENT
 	</select>
+	
+	<!-- 년도 목록 -->
 	<select id="getSemesterList" parameterType="PeriodVO" resultType="PeriodVO">
 		SELECT DISTINCT(YEAR) FROM PERIOD
 	</select>
@@ -57,7 +79,7 @@
   		#{startTime},#{endTime},#{personal},#{completionGrade},0)
   	</insert>
   
-  	<!-- update -->
+  	<!-- 강의 update -->
   	<update id="setLectureUpdate" parameterType="LectureVO">
  		UPDATE LECTURE SET SEMESTER=#{semester}, DEPTNUM=#{deptNum},LECTURENAME=#{lectureName},CATEGORY=#{category},
  		GRADE= #{grade},YEAR=#{year}, WEEKDAY=#{weekday},STARTTIME=#{startTime},ENDTIME=#{endTime},PERSONAL=#{personal},
@@ -69,49 +91,69 @@
  		COMPLETIONGRADE=#{completionGrade}, TEMPORARY=0 WHERE LECTURENUM=#{lectureNum}
  	</update>
 
+	<!-- 강의 delete -->
  	<delete id="setLectureDelete" parameterType="LectureVO">
  		DELETE FROM LECTURE WHERE LECTURENUM=#{lectureNum}
  	</delete>
  	
+ 	<!-- 단과대학 정보 -->
+	<select id="getCollege" parameterType="Integer" resultType="CollegeVO">
+		SELECT * FROM COLLEGE WHERE COLLEGENUM =(SELECT COLLEGENUM  FROM DEPARTMENT WHERE DEPTNUM=#{deptNum})
+	</select>
+ 	
+ 	<!-- 교수 정보 -->
  	<select id="getLectureProfessor" parameterType="LectureVO" resultMap="LectureResult">
   		SELECT * FROM `MEMBER` M INNER JOIN PROFESSOR P ON (M.USERNAME=P.USERNAME) 
 		INNER JOIN LECTURE L ON (P.USERNAME=L.USERNAME) WHERE LECTURENUM=#{lectureNum}
   	</select>
   	
-  	<select id="getLectureAttendee" parameterType="LectureVO" resultMap="StudentResult">
+  	<!-- 참여자 정보 -->
+  	<select id="getLectureAttendee" parameterType="Pagination" resultMap="StudentResult">
   		SELECT S.*,M.EMAIL,D.DEPTNAME FROM `MEMBER` M INNER JOIN STUDENT S ON (M.USERNAME=S.USERNAME) 
 		INNER JOIN STUDENT_LECTURE SL ON (M.USERNAME=SL.USERNAME) INNER JOIN DEPARTMENT D ON(S.DEPTNUM=D.DEPTNUM) 
-		WHERE LECTURENUM=#{lectureNum}
+		WHERE LECTURENUM=#{lectureNum} <include refid="attendeeCondition"></include>
   	</select>
   	
-  	<select id="getSyllabusDetail" parameterType="LectureVO" resultMap="LectureResult">
-  		SELECT * FROM SYLLABUS S INNER JOIN LECTURE L ON(S.LECTURENUM=L.LECTURENUM) 
-  		INNER JOIN PROFESSOR P ON(L.USERNAME=P.USERNAME)INNER JOIN MEMBER M ON(M.USERNAME=P.USERNAME)
-  		INNER JOIN DEPARTMENT D ON(L.DEPTNUM=D.DEPTNUM) WHERE LECTURENAME=#{lectureName}
-  	</select>
+  	<!-- 계획서 존재 여부 -->
   	<select id="getSyllabusExists" parameterType="LectureVO" resultType="Integer">
   		SELECT COUNT(S.SYLLABUSNUM) FROM SYLLABUS S WHERE LECTURENUM=#{lectureNum}
   	</select>
+  	
+  	<!-- 계획서 정보 -->
+  	<select id="getSyllabusDetail" parameterType="LectureVO" resultMap="LectureResult">
+  		SELECT * FROM SYLLABUS S INNER JOIN LECTURE L ON(S.LECTURENUM=L.LECTURENUM) 
+  		INNER JOIN PROFESSOR P ON(L.USERNAME=P.USERNAME)INNER JOIN MEMBER M ON(M.USERNAME=P.USERNAME)
+  		INNER JOIN DEPARTMENT D ON(L.DEPTNUM=D.DEPTNUM) WHERE S.LECTURENUM=#{lectureNum}
+  	</select>
+  	
+  	<!-- 계획서 차수 정보 -->
   	<select id="getSyllabusClass" parameterType="LectureVO" resultType="ClassVO">
   		 SELECT C.* FROM SYLLABUS S INNER JOIN CLASS C ON(S.SYLLABUSNUM=C.SYLLABUSNUM) 
-  		 INNER JOIN LECTURE L ON(S.LECTURENUM=L.LECTURENUM) WHERE LECTURENAME=#{lectureName}
+  		 INNER JOIN LECTURE L ON(S.LECTURENUM=L.LECTURENUM) WHERE S.LECTURENUM=#{lectureNum}
   	</select>
+  	
+  	<!-- 계획서 insert -->
   	<insert id="setSyllabusAdd" parameterType="SyllabusVO"  useGeneratedKeys="true" keyProperty="syllabusNum">
   		INSERT INTO SYLLABUS (LECTURENUM, CURRICULUMOUTLINE, GOAL, EVALUATION, METHOD, BOOKNAME, 
   		BOOKAUTHOR, BOOKPUBLISHER, BOOKPUBLICATIONDATE, BOOKISBN, BOOKNOTE) VALUES (#{lectureNum},#{curriculumOutline},
   		 #{goal},#{evaluation},#{method},#{bookName},#{bookAuthor},#{bookPublisher},#{bookPublicationDate},
   		  #{bookISBN},#{bookNote})
   	</insert>
+  	
+  	<!-- 계획서 차수 insert -->
   	<insert id="setClassAdd" parameterType="ClassVO">
   		INSERT INTO CLASS (SYLLABUSNUM,`ORDER`,SUBJECT,GOAL,CAPABILITY,NOTE) VALUES (#{syllabusNum},#{order},#{subject},#{goal},
   		#{capability},#{note})
   	</insert>
   	
+  	<!-- 계획서 update -->
   	<update id="setSyllabusUpdate" parameterType="SyllabusVO">
   		UPDATE SYLLABUS SET CURRICULUMOUTLINE=#{curriculumOutline},GOAL=#{goal},EVALUATION=#{evaluation},METHOD=#{method},
   		BOOKNAME=#{bookName},BOOKAUTHOR=#{bookAuthor},BOOKPUBLISHER=#{bookPublisher},BOOKPUBLICATIONDATE=#{bookPublicationDate},
   		BOOKISBN=#{bookISBN},BOOKNOTE=#{bookNote} WHERE LECTURENUM=#{lectureNum}
   	</update>
+  	
+  	<!-- 계획서 차수 update -->
   	<update id="setClassUpdate" parameterType="ClassVO">
   		UPDATE CLASS SET SUBJECT=#{subject},GOAL=#{goal},CAPABILITY=#{capability},NOTE=#{note} 
   		WHERE SYLLABUSNUM=#{syllabusNum} AND `ORDER`=#{order}
@@ -190,6 +232,7 @@
   				<result column="NOTE" property="note"/>
   			</collection>
   	</resultMap>
+  	
   	<resultMap type="StudentVO" id="StudentResult">
   		<id column="USERNAME" property="username"/>
   		<result column="DEPTNUM" property="deptNum" />

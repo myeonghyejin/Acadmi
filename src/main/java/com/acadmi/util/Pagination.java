@@ -1,10 +1,5 @@
 package com.acadmi.util;
 
-import java.util.List;
-
-import com.acadmi.lecture.LectureVO;
-import com.acadmi.student.StudentVO;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,10 +8,12 @@ import lombok.Setter;
 public class Pagination {
 	
 	//강의 관련 검색
+	private String username;
+	private Integer semester;
 	private String category;
 	private Integer department;
 	private Integer grade;
-	private String username;
+	private Integer year;
 	
 	//member 관련 검색
 	private String deptName;
@@ -28,8 +25,6 @@ public class Pagination {
 	private Integer lectureRoom;
 	
 	//강의 검색
-	private Integer year;
-	private Integer semester;
 	private String lectureName;
 	
 	//참여자

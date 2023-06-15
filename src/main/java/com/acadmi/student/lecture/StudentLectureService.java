@@ -4,9 +4,11 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.acadmi.department.DepartmentVO;
 import com.acadmi.lecture.LectureVO;
 import com.acadmi.util.Pagination;
 
@@ -29,8 +31,6 @@ public class StudentLectureService {
 			pagination.setLastNum(1L);
 			pagination.setNext(false);
 		}
-		
-//		log.error("{}", studentLectureDAO.getAllLectureList(pagination).isEmpty());
 		
 		return studentLectureDAO.getAllLectureList(pagination);
 	}
@@ -55,9 +55,30 @@ public class StudentLectureService {
 		return studentLectureDAO.getMyFavorite(favoriteLectureVO);
 	}
 	
+	//현재 수강 중인 강의들의 총 학점 계산
+	public Long getSumCredit(StudentLectureVO studentLectureVO) throws Exception {
+		return studentLectureDAO.getSumCredit(studentLectureVO);
+	}
+	
+	//수강하고자 하는 강의와 현재 수강 중인 강의들의 총 학점 계산
+	public Long getCalculateCredit(StudentLectureVO studentLectureVO) throws Exception {
+		return studentLectureDAO.getCalculateCredit(studentLectureVO);
+	}
+	
+	//이미 수강한 강의와 요일/시간이 겹치는지 확인
+	public List<LectureVO> getDuplicateTime(StudentLectureVO studentLectureVO, LectureVO lectureVO) throws Exception {
+		return studentLectureDAO.getDuplicateTime(studentLectureVO, lectureVO);
+	}
+	
+	//학과 조회
+	public List<DepartmentVO> getDepartment() throws Exception {
+		return studentLectureDAO.getDepartment();
+	}
+	
 	/** INSERT **/
 	//수강 신청
 	public int insertToStudentLecture(StudentLectureVO studentLectureVO, LectureVO lectureVO, HttpSession session) throws Exception {
+		studentLectureVO.setLectureVO(lectureVO);
 		return studentLectureDAO.insertToStudentLecture(studentLectureVO);
 	}
 	
@@ -95,6 +116,7 @@ public class StudentLectureService {
 	
 	//장바구니 빼기
 	public int deleteToFavoriteLecture(FavoriteLectureVO favoriteLectureVO, LectureVO lectureVO, HttpSession session) throws Exception {
+		log.info("Deleting favorite for lecture: {}", lectureVO.getLectureNum());
 		return studentLectureDAO.deleteToFavoriteLecture(favoriteLectureVO);
 	}
 	
