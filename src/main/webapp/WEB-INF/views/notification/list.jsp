@@ -15,13 +15,23 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 	<div class="wrapper">
 		<!-- Header 적용 -->
-		<c:import url="../temp/professor_header.jsp"></c:import>
+		<sec:authorize access="hasRole('ROLE_PROFESSOR')">
+			<c:import url="../temp/professor_header.jsp"></c:import>
+		</sec:authorize>
+		
+		<sec:authorize access="hasRole('ROLE_STUDENT')">
+			<c:import url="../temp/student_header.jsp"></c:import>
+		</sec:authorize>
+		
+		<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
+			<c:import url="../temp/administrator_header.jsp"></c:import>
+		</sec:authorize>
 		<!-- Header 끝 -->
-		<div class="container-fluid">
-			<div class="row">
+		<!-- <div class="container-fluid">
+			<div class="row"> -->
 				<!-- 2레벨 Sidebar 적용 -->
 				<div class="content-wrapper">
-				</div>
+				
 				<!-- 2레벨 Sidebar 끝 -->
 					
 				<!-- Contents -->
@@ -123,14 +133,15 @@
 						</div>
 					</section>
 				</div>
-			</div>
+				<!-- </div>
+			</div> -->
 		</div>
 		
 		<!-- Footer 적용 -->
 		<c:import url="../temp/footer.jsp"></c:import>
 		<!-- Footer 끝 -->
-		<script src="../js/notification/notificationList.js"></script>
 	</div>
 <!-- ./wrapper -->
+		<script src="../js/notification/notificationList.js"></script>
 </body>
 </html>

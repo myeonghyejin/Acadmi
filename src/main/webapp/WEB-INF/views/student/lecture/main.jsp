@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +15,17 @@
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 	<div class="wrapper">
-		<c:import url="../../temp/header.jsp"></c:import>
+		<sec:authorize access="hasRole('ROLE_PROFESSOR')">
+			<c:import url="../../temp/professor_header.jsp"></c:import>
+		</sec:authorize>
+		
+		<sec:authorize access="hasRole('ROLE_STUDENT')">
+			<c:import url="../../temp/student_header.jsp"></c:import>
+		</sec:authorize>
+		
+		<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
+			<c:import url="../../temp/administrator_header.jsp"></c:import>
+		</sec:authorize>
 				<!-- 2레벨 Sidebar 적용 -->
 			<div class="container-fluid">
 				<div class="row">

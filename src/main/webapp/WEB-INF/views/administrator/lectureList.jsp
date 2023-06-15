@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,7 +35,17 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
-<c:import url="../temp/administrator.jsp"></c:import>
+		<sec:authorize access="hasRole('ROLE_PROFESSOR')">
+			<c:import url="../temp/professor_header.jsp"></c:import>
+		</sec:authorize>
+		
+		<sec:authorize access="hasRole('ROLE_STUDENT')">
+			<c:import url="../temp/student_header.jsp"></c:import>
+		</sec:authorize>
+		
+		<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
+			<c:import url="../temp/administrator_header.jsp"></c:import>
+		</sec:authorize>
 
 	<div class="content-wrapper">
 		<div class="container-fluid">
@@ -60,7 +71,7 @@
 						<div class="card search">
 							<div class="row content" >
 								<label style="margin : 10px;">학과</label>
-								<select  class="form-control select" style="width: 15%;" name="deptName" id="dept">
+								<select  class="select2" style="width: 15%;" name="deptName" id="dept">
 									<option value="">전체</option>
 									<c:forEach items="${department}" var="departmentVO">
 										<c:if test="${departmentVO.deptNum !=1 && departmentVO.deptNum !=2 }">
@@ -69,7 +80,7 @@
 									</c:forEach>
 								</select>
 								<label style="margin : 10px;">학년도</label>
-								<select class="form-control select2" name="year" style="width: 20%;">
+								<select class="select2" name="year" style="width: 20%;">
 									<option value="">전체</option>
 										<c:forEach items="${year}" var="year">
 											<option value="${year}">${year}</option>
@@ -77,7 +88,7 @@
 										
 								</select>
 								<label style="margin : 10px;">학기</label>
-								<select class="form-control select3" name="semester" style="width: 20%;">
+								<select class="select2" name="semester" style="width: 20%;">
 									<option value=''>전체</option>
 									<option value="1">1학기</option>
 									<option value="2">2학기</option>
@@ -86,14 +97,14 @@
 							</div>
 							<div class="row content2">
 								<label style="margin : 10px;">상태</label>
-								<select class="form-control select4" name="status" style="width: 20%;">
+								<select class="select2" name="status" style="width: 20%;">
 									<option value="">전체</option>
 									<option value="0">폐강</option>
 									<option value="1">개강</option>
 									
 								</select>
 								<label style="margin : 10px;">강의</label>
-								<input type="text" class="form-control" name="lectureName" placeholder="강의를 입력해주세요" style="width : 20%">
+								<input type="text" class="form-control" name="search" placeholder="강의를 입력해주세요" style="width : 20%">
 								
 									<button type="submit" class="btn btn-info" style="margin : 0 0 0 20px; width : 15%">검색</button>
 							</div>
@@ -199,29 +210,29 @@
 				      <!-- /.card -->
 				
 				    </section>
-				    <div class="row" style="margin: 20px auto;" id="pagination">
-							<nav aria-label="Page navigation example">
-								<ul class="pagination d-flex justify-content-center">
+				    <div class="row g-3 justify-content-center" style="margin: 20px auto;" id="pagination">
+							<nav aria-label="pagination pagination-sm mx-auto" >
+								<ul class="pagination pagination-sm mx-auto" style="width: 200px;">
 									<li class="page-item ${pagination.page eq 1? 'disabled' : '' }">
-										<a class="page-link" href="./lectureList?page=1&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="1">
+										<a class="page-link" href="./lectureList?page=1&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="1" style="color:#17a2b8;">
 											<span aria-hidden="true">&laquo;</span>
 										</a>
 									</li>
 									<li class="page-item ${pagination.pre eq false ? 'disabled' : ''}">
-										<a class="page-link" href="./lectureList?"page=${pagination.startNum-1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="${pagination.startNum-1}">
+										<a class="page-link" href="./lectureList?page=${pagination.startNum-1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="${pagination.startNum-1}" style="color:#17a2b8;">
 											<span aria-hidden="true">&lsaquo;</span>
 										</a>
 									</li>
 									<c:forEach begin="${pagination.startNum}" end="${pagination.lastNum}" var="i">
-										<li class="page-item"><a class="page-link" href="./lectureList?page=${i}&kind=${pagination.kind}&search=${pagination.search}" data-board-page="${i}">${i}</a></li>
+										<li class="page-item"><a class="page-link" href="./lectureList?page=${i}&kind=${pagination.kind}&search=${pagination.search}" data-board-page="${i}" style="color:#17a2b8;">${i}</a></li>
 									</c:forEach>
 									<li class="page-item ${pagination.next eq false ? 'disabled' : ''}">
-										<a class="page-link" href="./lectureList?page=${pagination.lastNum+1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next" data-board-page="${pagination.lastNum+1}">
+										<a class="page-link" href="./lectureList?page=${pagination.lastNum+1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next" data-board-page="${pagination.lastNum+1}" style="color:#17a2b8;">
 											<span aria-hidden="true">&rsaquo;</span>
 										</a>
 									</li>
 									<li class="page-item ${pagination.next eq totalPage ? 'disabled' : ''}">
-										<a class="page-link" href="./lecturetList?page=${pagination.totalPage}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next" data-board-page="${pagination.totalPage}">
+										<a class="page-link" href="./lecturetList?page=${pagination.totalPage}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next" data-board-page="${pagination.totalPage}" style="color:#17a2b8;">
 											<span aria-hidden="true">&raquo;</span>
 										</a>
 									</li>
@@ -235,6 +246,7 @@
 	
 	</div>
 </div>	
+<c:import url="../temp/footer.jsp"></c:import>
 <script type="text/javascript">
 	/* 토글 */
 	let toggleButtons = document.getElementsByClassName("toggleButton");
@@ -254,8 +266,10 @@
 	  });
 	}
 	
-	/* 페이지네이션 선택 색상 */
-
+/* select 디자인 */
+   $(function () {
+	      $('.select2').select2()
+	 });
 </script>
 </body>
 </html>

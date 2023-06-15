@@ -11,5 +11,9 @@ public class TimeTableVO {
 	private Integer time;
 	private Integer lectureBuilding;
 	private Integer lectureRoom;
+	private Integer startTime;
+	private Integer lastTime;
+	
+	
 	
 }

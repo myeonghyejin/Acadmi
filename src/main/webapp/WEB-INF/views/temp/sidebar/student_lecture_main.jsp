@@ -2,6 +2,11 @@
     pageEncoding="UTF-8"%>
     
 <link rel="stylesheet" href="/css/sidebar.css">
+<style>
+	a:hover{
+		color : white;
+	}
+</style>
 
 <div class="sidebar-dropdown">
 

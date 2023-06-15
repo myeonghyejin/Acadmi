@@ -20,6 +20,7 @@ import com.acadmi.college.CollegeVO;
 import com.acadmi.department.DepartmentVO;
 import com.acadmi.lecture.LectureVO;
 import com.acadmi.lecture.room.LectureRoomVO;
+import com.acadmi.lecture.room.TimeTableVO;
 import com.acadmi.member.MemberSeqVO;
 import com.acadmi.member.MemberVO;
 import com.acadmi.period.PeriodVO;
@@ -381,7 +382,6 @@ public class AdministratorController {
 	public ModelAndView setPeriodAdd(@Valid PeriodVO periodVO, BindingResult bindingResult) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		log.error("applicationStart ::: {}", periodVO.getApplicationStart());
 		int result = administratorService.setPeriodAdd(periodVO);
 		
 		if(bindingResult.hasErrors()) {
@@ -415,7 +415,6 @@ public class AdministratorController {
 		List<DepartmentVO> ar2 =  administratorService.getDepartment();
 		List<String> ar3 =  administratorService.getCurrentYear();
 		
-		
 		mv.addObject("list", ar);
 		mv.addObject("department", ar2);
 		mv.addObject("year", ar3);
@@ -431,6 +430,8 @@ public class AdministratorController {
 		
 		List<LectureRoomVO> ar = administratorService.getLectureRoomAssignment(pagination);
 		lectureVO = administratorService.getLectureNum(lectureVO);
+		
+		
 		
 		mv.addObject("list", ar);
 		mv.addObject("lectureNum", lectureVO);
