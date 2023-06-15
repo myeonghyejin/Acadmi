@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class ChatFilesVO {
 	
-	private Long fileNum;
+	private Long chatFileNum;
 	private Long msgNum;
 	private String fileName;
 	private String oriName;

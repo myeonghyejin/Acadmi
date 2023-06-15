@@ -31,6 +31,10 @@
 			</div>	
 			
 		</sec:authorize>
+		<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
+			<c:import url="./temp/header.jsp"></c:import>
+				행정페이지
+		</sec:authorize>
 		
 
 		<!-- Footer 적용 -->

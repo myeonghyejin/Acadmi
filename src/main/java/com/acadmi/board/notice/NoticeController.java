@@ -22,8 +22,11 @@ import com.acadmi.notification.NotificationVO;
 import com.acadmi.util.FileVO;
 import com.acadmi.util.Pagination;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
 @RequestMapping("/notice/*")
+@Slf4j
 public class NoticeController {
 
 	@Autowired
@@ -75,12 +78,14 @@ public class NoticeController {
 		ModelAndView mv = new ModelAndView();
 		
 		int result = noticeService.setInsert(noticeVO, addfiles);
-		
+		mv.setViewName("redirect:./list");
 		if(noticeVO.getImportant()==1) {
 			result = notificationService.setIptNotice(noticeVO);
+		} else {
+			return mv;
 		}
 		
-		mv.setViewName("redirect:./list");
+		
 		
 		return mv;
 	}
@@ -93,12 +98,13 @@ public class NoticeController {
 		
 		int result = noticeService.setNoticeHit(noticeVO);
 		
-		if(notificationVO != null) {
+		if(notificationVO.getNotificationNum() != null) {
 			result = notificationService.setDelete(notificationVO);
 		}
 		
 		mv.addObject("boardVO", noticeVO);
 		mv.setViewName("board/detail");
+		
 		
 		return mv;
 	}
@@ -137,10 +143,13 @@ public class NoticeController {
 	}
 	
 	@GetMapping("delete")
-	public ModelAndView setDelete(BoardVO boardVO) throws Exception {
+	public ModelAndView setDelete(BoardVO boardVO, NotificationVO notificationVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
 		int result = noticeService.setDelete(boardVO);
+		
+		result = notificationService.setBoardNotificationDelete(notificationVO);
+		
 		
 		mv.setViewName("redirect:./list");
 		

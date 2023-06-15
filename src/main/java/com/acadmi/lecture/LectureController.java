@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.acadmi.college.CollegeVO;
 import com.acadmi.department.DepartmentVO;
+import com.acadmi.notification.NotificationService;
 import com.acadmi.period.PeriodVO;
 import com.acadmi.student.StudentVO;
 import com.acadmi.syllabus.ClassVO;
@@ -34,6 +35,8 @@ import lombok.extern.slf4j.Slf4j;
 public class LectureController {
 	@Autowired
 	private LectureService lectureService;
+	@Autowired
+	private NotificationService notificationService;
 	
 	//홈 강의 목록
 	@GetMapping("homeLecture")
@@ -86,6 +89,7 @@ public class LectureController {
 		if(buttonType.equals("1")) {
 			int result = lectureService.setLectureAdd(lectureVO);
 			mv.addObject("result","강의가 등록되었습니다.");
+			result = notificationService.setLecture(lectureVO);
 		} else if(buttonType.equals("0")){
 			int result = lectureService.setTemporaryAdd(lectureVO);
 			mv.addObject("result","강의가 임시등록되었습니다.");

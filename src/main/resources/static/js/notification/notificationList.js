@@ -35,7 +35,7 @@ function getUrlParameter(name){
 $('.saveNotification').each(function(index,item){
 	$(item).click(function(){
 		console.log('click')
-		let save = confirm('저장하시겠습니까?')
+		let save = confirm('보관하시겠습니까?')
 		if(save){
 			$.ajax({
 				type : "GET",
