@@ -160,7 +160,6 @@
  			UPDATE MEMBER M
  				LEFT JOIN STUDENT S ON (M.USERNAME  = S.USERNAME)
 				   SET 
-				   	   S.NAME = #{name},
 				   	   S.PHONE = #{phone},
 				   	   S.ADDRESS = #{address},
 				   	   S.ADDRESSDETAIL = #{addressDetail},
@@ -172,7 +171,6 @@
  			UPDATE MEMBER M
  				LEFT JOIN PROFESSOR P ON (M.USERNAME  = P.USERNAME)
 				   SET 
-				   	   P.NAME = #{name},
 				   	   P.PHONE = #{phone},
 				   	   P.ADDRESS = #{address},
 				   	   P.ADDRESSDETAIL = #{addressDetail},
@@ -184,7 +182,6 @@
  			UPDATE MEMBER M
  				LEFT JOIN ADMINISTRATOR A ON (M.USERNAME  = A.USERNAME)
 				   SET 
-				   	   A.NAME = #{name},
 				   	   A.PHONE = #{phone},
 				   	   A.ADDRESS = #{address},
 				   	   A.ADDRESSDETAIL = #{addressDetail},

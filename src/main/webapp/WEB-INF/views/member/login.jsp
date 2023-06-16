@@ -48,16 +48,10 @@
 									<c:if test="${not empty param.errorMessage}">
                                 		<p><font color="red">${param.errorMessage}</font></p>
                                 	</c:if>
-									<div class="row">
 									
-										<p class="mt-2 ml-2">
-											<a href="./findPw">비밀번호 찾기</a>
-										</p>
- 										
-										<div class="row-4 justify-content-end">
-											<button class="btn btn-info" id="submitButton" type="submit">로그인</button>
-										</div>
-
+									<div style="display: flex; align-items: center;">
+									  <a href="./findPw" style="margin-right: auto;">비밀번호 찾기</a>
+									  <button class="btn btn-info" id="submitButton" type="submit">로그인</button>
 									</div>
 								</form>
 							</div>
