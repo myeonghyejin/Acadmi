@@ -28,10 +28,10 @@ public class UserLoginFailHandler implements AuthenticationFailureHandler{
 		String errorMessage = "";
 		
 		if(exception instanceof BadCredentialsException) {
-			errorMessage="비번 틀림";
+			errorMessage="존재하지 않는 비밀번호입니다.";
 		}
 		else if(exception instanceof InternalAuthenticationServiceException) {
-			errorMessage="ID 확인";
+			errorMessage="존재하지 않는 아이디입니다.";
 		}
 		else if(exception instanceof DisabledException) {
 			errorMessage="유효하지 않은 사용자";
