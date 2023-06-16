@@ -12,18 +12,17 @@ xhttpLecture.addEventListener('readystatechange', function(){
 });
 
 let xhttpNotice = new XMLHttpRequest();
-xhttpNotice.open('GET', '/notice/homeNotice');
+xhttpNotice.open('GET', '/notice/homeStudentNotice');
 
 xhttpNotice.send();
     
 xhttpNotice.addEventListener('readystatechange', function(){
     if(this.readyState==4 && this.status==200){
-        document.getElementById("homeNotice").innerHTML=this.responseText.trim();
+        document.getElementById("homeStudentNotice").innerHTML=this.responseText.trim();
     }
-
 });
 
-let xhttpLectureNotice = new XMLHttpRequest();
+/**let xhttpLectureNotice = new XMLHttpRequest();
 xhttpNotice.open('GET', '/notice/homeLectureNotice');
 
 xhttpNotice.send();
@@ -33,7 +32,7 @@ xhttpNotice.addEventListener('readystatechange', function(){
         document.getElementById("homeLectureNotice").innerHTML=this.responseText.trim();
     }
 
-});
+});**/
 
 
 let xhttpImportant = new XMLHttpRequest();

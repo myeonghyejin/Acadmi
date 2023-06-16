@@ -35,15 +35,8 @@
                                 </div>
 
                                     <div class="row justify-content-end">
-
-                                        
-
-                                       
+                                          <button class="btn btn-info mr-2" id="submitButton" type="button">다음</button>
                                            
-                                                <button class="btn btn-info mr-2" id="submitButton" type="button">다음</button>
-                                           
-                                        
-
                                     </div>
                            		</form:form>
                                 </div>

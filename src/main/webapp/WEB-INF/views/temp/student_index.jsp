@@ -10,7 +10,7 @@
 		</div>
 		
 		<!-- 공지사항 목록 -->
-		<div id="homeNotice">
+		<div id="homeStudentNotice">
 		
 		</div>
 		<!-- 강의 공지사항 목록 -->
@@ -27,7 +27,5 @@
 </div>
 
 <script type="text/javascript" src="/js/student/home.js">
-
-
 	
 </script>

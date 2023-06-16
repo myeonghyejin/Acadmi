@@ -179,15 +179,27 @@ public class NoticeController {
 		mv.setViewName("professor/homeNotice");
 		return mv;
 	}
+	
+	//홈 학생 공지사항 목록
+	@GetMapping("homeStudentNotice")
+	public ModelAndView getNoticeList(Pagination pagination, HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		List<BoardVO> ar = noticeService.getList(pagination);
+		
+		mv.addObject("list", ar);
+		mv.setViewName("student/homeNotice");
+		return mv;
+	}
+	
 	//홈 중요 공지사항 목록
-		@GetMapping("homeImportant")
-		public ModelAndView getHomeImportantList(NoticeVO noticeVO, HttpSession session) throws Exception{
-			ModelAndView mv = new ModelAndView();
-			noticeVO.setImportant(1L);
-			List<BoardVO> ar = noticeService.getImportantList(noticeVO);
-			mv.addObject("list", ar);
-			mv.setViewName("professor/homeImportant");
-			return mv;
-		}
+	@GetMapping("homeImportant")
+	public ModelAndView getHomeImportantList(NoticeVO noticeVO, HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		noticeVO.setImportant(1L);
+		List<BoardVO> ar = noticeService.getImportantList(noticeVO);
+		mv.addObject("list", ar);
+		mv.setViewName("professor/homeImportant");
+		return mv;
+	}
 
 }

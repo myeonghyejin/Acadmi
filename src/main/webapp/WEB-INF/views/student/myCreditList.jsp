@@ -13,7 +13,14 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <title>Insert title here</title>
 <style type="text/css">
-
+	.content {
+		margin : 20px 10px 20px 0px;
+		width : 100%;
+	}
+	.search {
+		padding-left : 50px;
+		padding-top : 10px;
+	}
 </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
