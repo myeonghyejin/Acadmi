@@ -6,16 +6,16 @@
 
 	<div style="margin-left: 20px;">
 		<div class="row" style="margin-bottom: 20px">
-			<img class="fileIcon" src="/images/chatImg.png" style="margin-right: 5px; transform: scale(0.8);">
-			<h3><a href="./detail?num=${reply.num}" style="color: black">댓글</a></h3>
-			<h3 style="color: red; margin-left: 5px;">1</h3>
-			<h3 style="margin-left: 5px; color: black;">개</h3>
+			<img class="fileIcon" src="/images/chatImg.png" style="margin-right: 5px; transform: scale(0.6);">
+			<h3><a href="./detail?num=${reply.num}" style="color: black; font-size: 20px;">답글</a></h3>
+			<h3 style="color: red; margin-left: 5px; margin-top: 7px; font-size: 20px;">1</h3>
+			<h3 style="margin-left: 5px; color: black; margin-top: 8px; font-size: 20px;">개</h3>
 		</div>
 		
 		<div class="strongFont3">
-			<span class="mr-4 fontlight" style="font-size: 1.5em;">${reply.writer}</span>
-			<span class="mr-4 fontlight" style="margin-left: 100px; font-size: 1.5em;">${reply.regDate}</span>
-			<div class="row" style="margin-top: 5px;">
+			<span class="mr-4 fontlight" style="font-size: 1.1em;">${reply.writer}</span>
+			<span class="mr-4 fontlight" style="margin-left: 100px; font-size: 1.1em;">${reply.regDate}</span>
+			<div class="row" style="margin-top: 10px;">
 				<span class="mr-4 fontlight">
 					<c:forEach items="${reply.fileVOs}" var="fileVO">
 						<c:if test="${fileVO.oriName ne null}">
@@ -31,7 +31,7 @@
 			</div>
 		</div>
 		
-		<div class="row" style="margin-top: 100px;"> 
+		<div class="row justify-content-end" style="margin-top: 100px;"> 
 			<c:if test="${userName eq reply.writer}">
 				<a href="./update?num=${reply.num}" id="update" class="btn btn-info" style="margin-right: 5px;">수정</a>
 				<a id="replyDelete" data-board-num="${reply.num}" data-board-lectureNum="${reply.lectureNum}" class="btn btn-danger">삭제</a>                                    
