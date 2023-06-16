@@ -28,10 +28,10 @@ $('#fileButton').click(function(){
 		return
 	}
 	count++
-	let child = '<div class="input-group" id="fileSend"><div class="custom-file ml-5">'
+	let child = '<div class="input-group my-2" id="fileSend"><div class="custom-file">'
 	child = child + '<input type="file" class="custom-file-input" id="fileInput">'
-	child = child + '<label class="custom-file-label" for="fileInput">Choose file</label></div>'
-	child = child + '<div class="input-group-append"><span class="btn btn-danger" id="deleteFile">X</span></div>'
+	child = child + '<label class="custom-file-label" for="fileInput">파일 선택</label></div>'
+	child = child + '<div class="input-group-append"><span class="btn btn-danger" style="width : 42px;" id="deleteFile"><i class="fa-solid fa-xmark"></i></span></div>'
 	$(function () {
 	  bsCustomFileInput.init();
 	});
