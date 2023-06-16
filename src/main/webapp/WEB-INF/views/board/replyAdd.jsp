@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>답글 작성</title>
+<title>Acadmi</title>
 <c:import url="../temp/style.jsp"></c:import>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
@@ -14,24 +14,37 @@
 </head>
 <body class="hold-transition sidebar-mini">
 
-	<sec:authorize access="hasRole('ROLE_PROFESSOR')">
-		<c:import url="../temp/professor_header.jsp"></c:import>
-	</sec:authorize>
-	
-	<sec:authorize access="hasRole('ROLE_STUDENT')">
-		<c:import url="../temp/header.jsp"></c:import>
-	</sec:authorize>
-
 	<div class="wrapper">
+
+		<!-- Header 적용 -->
+		<sec:authorize access="hasRole('ROLE_ADMIN')">
+	     	<c:import url="../temp/administrator_header.jsp"></c:import>
+	  	</sec:authorize>
+		
+		<sec:authorize access="hasRole('ROLE_PROFESSOR')">
+			<c:import url="../temp/professor_header.jsp"></c:import>
+		</sec:authorize>
+	
+		<sec:authorize access="hasRole('ROLE_STUDENT')">
+			<c:import url="../temp/header.jsp"></c:import>
+		</sec:authorize>	
+		<!-- Header 끝 -->
+	
 		<div class="content-wrapper">
 		  <section class="content">
+		  <div class="row" style="padding-top:20px">
+			<div class="col-12">
+				<div class="card">
+					<h3 class="my-3 mx-3">
+						답글 등록
+					</h3>
+				</div>
+			</div>
+		 </div>
+		 
 			<div class="row">
-			  <div class="col-md-12 mt-5">
+			  <div class="col-md-12" style="margin-top: 10px;">
 				<div class="card card-secondary">
-				  <div class="card-header">
-					<h3 class="card-title">답글 등록</h3>
-				  </div>
-
 				  <div class="card-body">
 					<sec:authentication property="principal.username" var="userName" />
 					
@@ -43,17 +56,14 @@
 								<input type="hidden" class="form-control" name="lectureNum" id="lectureNum" value="">
 							</c:if>
 
-							<div class="col-md-6" style="margin-top: 30px;">
-								<label for="writer" class="form-label strongFont2">작성자</label>
-								<input type="text" name="writer" class="form-control" id="writer" readonly value="${userName}">
-							</div>
+							<input type="hidden" name="writer" class="form-control" id="writer" readonly value="${userName}">
 							
-							<div class="col-md-7" style="margin-top: 20px;">
+							<div class="col-md-12" style="margin-top: 20px;">
 								<label for="title" class="form-label strongFont2">제목</label> 
 								<input type="text" class="form-control" name="title" id="title" placeholder="제목을 입력하세요">
 							</div>
 							
-							<div class="col-md-6">
+							<div class="col-md-12">
 								<c:if test="${board eq 'lectureQna'}">
 									<div class="row mt-4">
 										  <div style="display: flex; align-items: center;">
@@ -72,15 +82,27 @@
 									placeholder="내용을 입력하세요"></textarea>
 							</div>
 						
-							<div class="col-md-11 mt-3">
+							<!-- <div class="col-md-12 mt-3">
 								<div id="fileList">
 									<button class="col-md-12 mt-3 btn btn-primary" id="fileAdd" type="button">파일추가</button>
 								</div> 
-							</div>
+							</div> -->
 							
-							<div class="row" style="margin-top: 50px; margin-left: 1080px;">		
-								<button type="button" class="submitButton btn btn-info" style="margin-right: 5px;">등록</button>
-								<button type="button" class="btn btn-danger" onclick="window.history.back();">취소</button>
+							<div class="col-md-12 mt-5">
+								<div class="form-group">
+									<div class="input-group">
+										<div class="custom-file">
+											<input type="file" class="custom-file-input" id="exampleInputFile" name="addfiles">
+											<label class="custom-file-label" for="exampleInputFile">파일을 선택해주세요</label>
+										</div>
+									</div>
+							    </div>											
+							</div> 
+							
+							
+							<div class="col-md-12 mt-4">
+								<button type="button" class="btn btn-danger float-right" onclick="window.history.back();">취소</button>		
+								<button type="button" class="submitButton btn btn-info float-right" style="margin-right: 5px;">등록</button>
 							</div>
 						</form>
 					</div>
@@ -100,9 +122,17 @@
 	<script src="/js/board/boardCheck.js"></script>
 	
 	<script>
+		const fileInput = document.getElementById('exampleInputFile');
+	    const fileLabel = document.querySelector('.custom-file-label');
+	
+	    fileInput.addEventListener('change', function() {
+	      const fileName = this.files[0].name;
+	      fileLabel.textContent = fileName;
+	    });
+	
 		$("#replyContents").summernote({
-			height : 500,
-			width : 1187.48
+			height : 300,
+			width : 1300
 		});
 		
 		function getParameterByName(name) {
