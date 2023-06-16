@@ -12,105 +12,98 @@
 	rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <style type="text/css">
-
-	#pagination {
-		 display: flex;
-   	 	justify-content: center;
-	
+	#row {
+	  display: flex;
+	  justify-content: center; /* 가로 방향으로 가운데 정렬 */
+	  align-items: center; /* 세로 방향으로 가운데 정렬 */
 	}
 	
-	.content {
-		margin: 30px;
+	.col-custom {
+	  flex-grow: 1;
 	}
 	
-	.selected-page{
-		  background-color: #E2E2E2;
-		  color: white;
-	}
-	#table1 {
-		width : 90%;
-	}
-	h3 {
-		margin : 40px;
-	}
-	.content {
-		margin: 30px;
-	}
-	#add2 {
-		float : right;
-		clear : both;
-		width : 10%;
-		
-	} 
-	.card-title {
-		margin : 5px 0 10px 5px;
-	}
-	.card-body{
-		display: flex;
-	  	justify-content: center;
-	 	align-items: center;
-	 	margin : 10px 0 30px 0;
-	}
 </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
-	<!-- Header 적용 -->
+	<div class="wrapper">
+
+		<!-- Header 적용 -->
 		<c:import url="../temp/administrator_header.jsp"></c:import>
-	<!-- Header 끝 -->
-	<div class="content-wrapper">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col">
-					<!-- header start -->
-	               <div class="row" style="padding-top:10px">
-	                  <div class="col-12">
-	                     <div class="card">
-	                        <h3 class="my-3 mx-3">강의실</h3>
-	                     </div>
-	                  </div>
-	               </div>
-               <!-- header end -->
-				    <section class="content">
-				    
-				    <form action="./lectureRoomList" id="search-form">
-						<input type="hidden" name="page" value="1">
-						<div class="card search">
-							<div class="row content" >
-								<label style="margin : 10px;">강의실 건물</label>
-								<select class="select2" name="lectureBuilding" style="width: 20%;">
-									<option value="">전체</option>
-									<c:forEach items="${list2}" var="lectureRoom">
-										<option value="${lectureRoom.lectureBuilding}">${lectureRoom.lectureBuilding }</option>
-									</c:forEach>
-								</select>
-								<label style="margin : 10px;">강의실 호수</label>
-								<input type="text" class="form-control" name="lectureRoom" placeholder="내용을 입력해주세요" style="width : 20%">
-								<label style="margin : 10px;">상태</label>
-								<select class="select2" name="status" style="width: 20%;">
-									<option value="">전체</option>
-									<option value="1">사용가능</option>
-									<option value="0">사용불가</option>
-									
-								</select>
-								<button type="submit" class="btn btn-info" style="margin : 0 0 0 20px; width : 15%">검색</button>
-							</div>
+		<!-- Header 끝 -->
+	
+		<div class="content-wrapper">
+			<div class="col">
+					
+				<!-- header start -->
+				<div class="row">
+					<div class="col mt-3">
+						<div class="card">
+							<h3 class="my-3 mx-3">강의실 조회</h3>
 						</div>
-					</form>
-				
-				      <!-- Default box -->
-				      <div class="card">
-				        <div class="card-header">
-				          <h3 class="card-title">강의실 조회</h3>
-				
-				          <div class="card-tools">
-				            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-				              <i class="fas fa-minus"></i>
-				            </button>
-				          </div>
-				        </div>
+					</div>
+				</div>
+				<!-- header end -->
+	
+				<!-- Default box -->
+				<div class="card">
+					<div class="card-header">
+							
+						<div class="card-tools">
+							<button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+								<i class="fas fa-minus"></i>
+							</button>		
+						</div>
+					
+						<!-- Search -->
+						<form action="./lectureRoomList" id="search-form">
+								<input type="hidden" name="page" value="1">
+									<div class="row justify-content-center mx-auto my-3" >
+										<div class="col-custom">
+											<div class="row"  id="row">
+												<div class="col-2">
+													<div class="form-group">
+														<label>상태</label>
+														<select class="select2" name="status" style="width : 100%;">
+															<option value="">전체</option>
+															<option value="1">사용 가능</option>
+															<option value="0">사용 불가</option>
+															
+														</select>
+													</div>
+												</div>
+												<div class="col-2">
+													<div class="form-group">
+														<label>강의실 건물</label>
+														<select class="select2" name="lectureBuilding" style="width: 100%;">
+															<option value="">전체</option>
+															<c:forEach items="${list2}" var="lectureRoom">
+																<option value="${lectureRoom.lectureBuilding}">${lectureRoom.lectureBuilding }</option>
+															</c:forEach>
+														</select>
+													</div>
+												</div>
+											<div class="col-4">
+												<div class="form-group">
+													<label>강의실 호수</label>
+													<div class="input-group">
+														<input type="text" class="form-control" name="lectureRoom" placeholder="강의실 호수를 입력하세요.">
+														<div class="input-group-append">
+															<button type="submit" class="btn btn-default" id="submit">
+																<i class="fas fa-search "></i>
+															</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							
+						</form>
+					</div>
+						   <!-- Default box -->
 				        <div class="card-body p-0">
-				          <table class="table table-hover text-nowrap" style="text-align : center;"id="table1">
+							<table class="table table-hover text-nowrap" style="text-align : center;"id="table1">
 				              <thead>
 				                  <tr>
 				                      <th style="width: 10%">
@@ -120,10 +113,10 @@
 				                          강의실 호수
 				                      </th>
 				                      <th style="width: 10%" class="text-center">
-				                          최대수용인원
+				                          최대 수용 인원
 				                      </th>
 				                      <th style="width : 15%">
-				                          사용어부
+				                          사용 여부
 				                      </th>
 				                      <th style="width: 10%">
 				                 
@@ -140,9 +133,9 @@
 												<td class="lectureRoom" style="color: #E2E2E2;">${lectureRoomVO.lectureRoom}</td>
 												<td class="lectureRoom" style="color: #E2E2E2;">${lectureRoomVO.personal}</td>
 												<td>
-													<select name="status" class="select2" style="width : 50%">
-														<option value="0"selected >사용불가</option>
-														<option value="1">사용가능</option>
+													<select name="status" class="select2" style="width : 31%">
+														<option value="0"selected >사용 불가</option>
+														<option value="1">사용 가능</option>
 													</select>
 												</td>
 											</c:if>
@@ -151,9 +144,9 @@
 												<td>${lectureRoomVO.lectureRoom}</td>
 												<td >${lectureRoomVO.personal}</td>
 												<td>
-													<select name="status" class="select2" style="width : 50%">
-														<option value="0" >사용불가</option>
-														<option value="1"selected>사용가능</option>
+													<select name="status" class="select2" style="width : 31%">
+														<option value="0" >사용 불가</option>
+														<option value="1"selected>사용 가능</option>
 													</select>
 												</td>
 											</c:if>
@@ -168,12 +161,8 @@
 				              </tbody>
 				          </table>
 				        </div>
-				        <!-- /.card-body -->
-				      </div>
-				      <!-- /.card -->
-				    <a href="./lectureRoomAdd"><button type="button" id="add2" class="btn btn-info">작성</button></a>
-				    </section>
-				    	
+					<!-- /.card-body -->
+					<!-- Pagination -->
 				    	<div class="row g-3 justify-content-center" style="margin: 20px auto;" id="pagination">
 							<nav aria-label="Page navigation example">
 								<ul class="pagination pagination-sm mx-auto" style="width: 200px;">
@@ -202,21 +191,24 @@
 									</li>
 								</ul>
 							</nav>
-					</div>
+					   </div>
+					<div class="wrapper" style="margin : 0 20px 20px 0;">
+						 <a href="./lectureRoomAdd"><button type="button" id="add2" class="btn btn-info" style="float : right;">강의실 등록</button></a>
+					 </div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
-<c:import url="../temp/footer.jsp"></c:import>	
+				
+	<!-- ./wrapper -->
+
+<c:import url="../temp/footer.jsp"></c:import>
 <script type="text/javascript" src="../js/administrator/lectureRoomList.js"></script>
 <script type="text/javascript">
-/*select 디자인  */
- $(function () {
-     $('.select2').select2()
- });
- 
-
+/* select 디자인 */
+   $(function () {
+	      $('.select2').select2()
+	 });
 </script>
 </body>
 </html>

@@ -24,7 +24,7 @@
                         </div>
                         <div class="card-body">
                          	<div class="text-center">
-                        		<h4 class="fa-solid fa-circle-check text-center">이메일을 확인해주세요!</h4>
+                        		<h6 class="fa-solid fa-circle-check text-center" style="font-weight : normal;">이메일을 확인해주세요!</h6>
                         	</div>
                         </div>
 					</div>

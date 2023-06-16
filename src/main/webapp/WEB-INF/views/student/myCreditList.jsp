@@ -13,13 +13,7 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <title>Insert title here</title>
 <style type="text/css">
-	.content {
-		margin : 20px 10px 20px 0px;
-		width : 100%;
-	}
-	.search {
-		padding : 10px;
-	}
+
 </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -68,9 +62,8 @@
 		               				 <sec:authentication property="principal" var="user"/>
 		               					<thead>
 		               						<tr>
-		               							<th style="width : 10%"></th>
 		               							<th style="width : 30%">강좌명</th>
-		               							<th style="width : 10%">담당교수</th>
+		               							<th style="width : 10%">담당 교수</th>
 		               							<th style="width : 10%">학점</th>
 		               							<th style="width : 10%">구분</th>
 		               							
@@ -79,7 +72,7 @@
 		               					<tbody>
 		               						<c:forEach items="${list}" var="lectureVO" varStatus="status">
 		               							<tr>
-		               								<td>${status.index+1 }</td>
+		               								
 		               								<td>${lectureVO.lectureName}</td>
 		               								<td>${lectureVO.professorVO.name}</td>
 		               								<td>${lectureVO.studentLectureVO.creditVO.credit}</td>

@@ -209,7 +209,7 @@
 				<!-- 게시판 -->
 				<li class="nav-item">
 					<a href="#" class="nav-link">
-						<i class="nav-icon fas fa-chalkboard"></i>
+						<i class="nav-icon fas fa-comment-dots"></i>
 						<p>
 							게시판
 							<i class="fas fa-angle-left right"></i>
@@ -234,7 +234,7 @@
 				<!-- 강의 관리 -->
 				<li class="nav-item">
 					<a href="#" class="nav-link">
-						<i class="nav-icon fas fa-chalkboard-user"></i>
+						<i class="nav-icon fas fa-chalkboard"></i>
 						<p>
 							강의 관리
 							<i class="fas fa-angle-left right"></i>
@@ -253,7 +253,7 @@
 				<!-- 회원 관리 -->
 				<li class="nav-item">
 					<a href="#" class="nav-link">
-						<i class="nav-icon fas fa-comment-dots"></i>
+						<i class="nav-icon fa-solid fa-user-group"></i>
 						<p>
 							회원 관리
 							<i class="fas fa-angle-left right"></i>
@@ -269,7 +269,7 @@
 						<li class="nav-item">
 							<a href="/administrator/studentList" class="nav-link">
 								<i class="fa-solid fa-circle fa-2xs"></i>
-								<p>회원 조회</p>
+								<p>회원 목록</p>
 							</a>
 						</li>
 					</ul>
@@ -278,7 +278,7 @@
 				<!-- 기간 관리 -->
 				<li class="nav-item">
 					<a href="#" class="nav-link">
-						<i class="nav-icon fas fa-comment-dots"></i>
+						<i class="nav-icon fa-regular fa-clock"></i>
 						<p>
 							기간 관리
 							<i class="fas fa-angle-left right"></i>
@@ -288,7 +288,7 @@
 						<li class="nav-item">
 							<a href="/administrator/periodAdd" class="nav-link">
 								<i class="fa-solid fa-circle fa-2xs"></i>
-								<p>기간 관리</p>
+								<p>기간 설정</p>
 							</a>
 						</li>
 					</ul>
@@ -298,7 +298,7 @@
 				<!-- 강의실 관리 -->
 				<li class="nav-item">
 					<a href="#" class="nav-link">
-						<i class="nav-icon fas fa-comment-dots"></i>
+						<i class="nav-icon fa-solid fa-door-open"></i>
 						<p>
 							강의실 관리
 							<i class="fas fa-angle-left right"></i>
@@ -318,9 +318,9 @@
 				<!-- 학사 관리 -->
 				<li class="nav-item">
 					<a href="#" class="nav-link">
-						<i class="nav-icon fas fa-comment-dots"></i>
+						<i class="nav-icon fa-regular fa-address-card"></i>
 						<p>
-							학사 관리
+							학과 관리
 							<i class="fas fa-angle-left right"></i>
 						</p>
 					</a>
@@ -329,7 +329,7 @@
 						<li class="nav-item">
 							<a href="/administrator/departmentList" class="nav-link">
 								<i class="fa-solid fa-circle fa-2xs"></i>
-								<p>학과 관리</p>
+								<p>학과 목록</p>
 							</a>
 						</li>
 					</ul>
