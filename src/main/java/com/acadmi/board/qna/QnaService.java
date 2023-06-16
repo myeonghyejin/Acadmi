@@ -34,6 +34,11 @@ public class QnaService implements BoardService {
 		
 		pagination.makeNum(qnaDAO.getTotalCount(pagination));
 		
+		if(qnaDAO.getTotalCount(pagination) == 0) {
+			pagination.setLastNum(1L);
+			pagination.setNext(false);
+		}
+		
 		return qnaDAO.getList(pagination);
 	}
 
