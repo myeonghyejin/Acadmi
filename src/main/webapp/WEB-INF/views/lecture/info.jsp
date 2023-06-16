@@ -11,6 +11,12 @@
 	<!-- CSS/favicon 적용 -->
 	<c:import url="../temp/style.jsp"></c:import>
 	<!-- CSS/favicon 끝 -->
+	<style type="text/css">
+	.sidebar-dropdown{
+	height:87.5vh !important
+	}
+	</style>
+	
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 	<div class="wrapper">
@@ -33,79 +39,110 @@
 		</sec:authorize>
 		<!-- Header 끝 -->
 
-		<!-- Main Contents -->
-		<div class="container-fluid">
-			<div class="row">
-				<!-- 2레벨 Sidebar 적용 -->
-				<div class="content-wrapper">
+		<!-- Main Contents start -->
+		<div class="content-wrapper">
+			<div class="container-fluid">
+				<div class="row">
+					<!-- 2레벨 Sidebar 적용 -->
 					<c:import url="../temp/sidebar/professor_lecture.jsp"></c:import>
-				</div>
-				<!-- 2레벨 Sidebar 끝 -->
+					<!-- 2레벨 Sidebar 끝 -->
 				
-				<!-- Contents -->
-				<div class="col">
-					<!-- header start -->
-					<div class="row" style="padding-top:20px">
-						<div class="col-12">
-							<div class="card">
-								<h3 class="my-3 mx-3">강의 상세</h3>
+					<!-- Contents start -->
+					<div class="col">
+						<!-- header start -->
+						<div class="row" style="padding-top:10px">
+							<div class="col-12">
+								<div class="card">
+									<h3 class="my-3 mx-3">강의 상세</h3>
+								</div>
 							</div>
 						</div>
+						<!-- header end -->
+						
+						<!-- body start -->
+						<form action="./info" method="get">
+							<div class="card card-default">
+							<input type="hidden" name="lectureNum" value="${lecture.lectureNum}">
+	          					<!-- card-header start -->
+	          					<div class="card-body">
+	          						<table class="table table-bordered" style="text-align: center;">
+								    	<tbody>
+								        	<tr>
+								            	<th style="background-color:#f8f9fa;color:#17a2b8;">강의 이름</th>
+								                <td colspan="5">${lecture.lectureName}</td>
+											</tr>
+								            <tr>
+								            	<th style="background-color:#f8f9fa;color:#17a2b8;">강의 연도</th>
+								                <td colspan="2">${lecture.year}년</td>
+								                <th style="background-color:#f8f9fa;color:#17a2b8;">강의 학기</th>
+								                <td colspan="2">${lecture.semester}학기</td>
+											</tr>
+								            <tr>
+								            	<th style="background-color:#f8f9fa;color:#17a2b8;">학부(과)</th>
+								                <td colspan="2">${lecture.departmentVO.deptName}</td>
+								                <th style="background-color:#f8f9fa;color:#17a2b8;">교과 구분</th>
+								                <td colspan="2">${lecture.category}</td>
+											</tr>
+								            <tr>
+								            	<th style="background-color:#f8f9fa;color:#17a2b8;">강의 요일</th>
+								                <td>${lecture.weekday}요일</td>
+								                <th style="background-color:#f8f9fa;color:#17a2b8;">시작 시간</th>
+								                <td>
+								                	${lecture.startTime}교시(
+									                <c:if test="${lecture.startTime eq 1}"> 09:00</c:if>
+													<c:if test="${lecture.startTime eq 2}"> 10:00</c:if>
+													<c:if test="${lecture.startTime eq 3}"> 11:00</c:if>
+													<c:if test="${lecture.startTime eq 4}"> 12:00</c:if>
+													<c:if test="${lecture.startTime eq 5}"> 13:00</c:if>
+													<c:if test="${lecture.startTime eq 6}"> 14:00</c:if>
+													<c:if test="${lecture.startTime eq 7}"> 15:00</c:if>
+													<c:if test="${lecture.startTime eq 8}"> 16:00</c:if>
+													<c:if test="${lecture.startTime eq 9}"> 17:00</c:if>
+													<c:if test="${lecture.startTime eq 10}"> 18:00</c:if>
+													)
+								                </td>
+								                <th style="background-color:#f8f9fa;color:#17a2b8;">종료 시간</th>
+												<td>
+								                	${lecture.endTime}교시(
+									                <c:if test="${lecture.endTime eq 1}"> 09:00</c:if>
+													<c:if test="${lecture.endTime eq 2}"> 10:00</c:if>
+													<c:if test="${lecture.endTime eq 3}"> 11:00</c:if>
+													<c:if test="${lecture.endTime eq 4}"> 12:00</c:if>
+													<c:if test="${lecture.endTime eq 5}"> 13:00</c:if>
+													<c:if test="${lecture.endTime eq 6}"> 14:00</c:if>
+													<c:if test="${lecture.endTime eq 7}"> 15:00</c:if>
+													<c:if test="${lecture.endTime eq 8}"> 16:00</c:if>
+													<c:if test="${lecture.endTime eq 9}"> 17:00</c:if>
+													<c:if test="${lecture.endTime eq 10}"> 18:00</c:if>
+													)
+								                </td>
+								            </tr>
+								            <tr>
+								            	<th style="background-color:#f8f9fa;color:#17a2b8;">대상 학년</th>
+								                <td>${lecture.grade}학년</td>
+								                <th style="background-color:#f8f9fa;color:#17a2b8;">수강 인원</th>
+								                <td>${lecture.personal}명</td>
+								                <th style="background-color:#f8f9fa;color:#17a2b8;">학점</th>
+								                <td>${lecture.completionGrade}학점</td>
+											</tr>
+										</tbody>
+									</table>
+			            		</div>
+							</div>
+						</form>
+						<!-- body end -->
 					</div>
-					<!-- header end -->
-					<form action="./info" method="get">
-						<div class="card card-default">
-						<input type="hidden" name="lectureNum" value="${lecture.lectureNum}">
-          					<!-- card-header start -->
-          					<div class="card-body">
-          						<table class="table table-bordered" style="text-align: center;">
-							    	<tbody>
-							        	<tr>
-							            	<th style="background-color:#f8f9fa;color:#17a2b8;">강의 이름</th>
-							                <td colspan="5">${lecture.lectureName}</td>
-										</tr>
-							            <tr>
-							            	<th style="background-color:#f8f9fa;color:#17a2b8;">강의연도</th>
-							                <td colspan="2">${lecture.year}년</td>
-							                <th style="background-color:#f8f9fa;color:#17a2b8;">강의학기</th>
-							                <td colspan="2">${lecture.semester}학기</td>
-										</tr>
-							            <tr>
-							            	<th style="background-color:#f8f9fa;color:#17a2b8;">학부(과)</th>
-							                <td colspan="2">${lecture.departmentVO.deptName}</td>
-							                <th style="background-color:#f8f9fa;color:#17a2b8;">교과구분</th>
-							                <td colspan="2">${lecture.category}</td>
-										</tr>
-							            <tr>
-							            	<th style="background-color:#f8f9fa;color:#17a2b8;">강의요일</th>
-							                <td>${lecture.weekday}요일</td>
-							                <th style="background-color:#f8f9fa;color:#17a2b8;">강의시간</th>
-							                <td>${lecture.startTime}교시</td>
-							                <th style="background-color:#f8f9fa;color:#17a2b8;">종료시간</th>
-											<td>${lecture.endTime}교시</td>
-							            </tr>
-							            <tr>
-							            	<th style="background-color:#f8f9fa;color:#17a2b8;">대상학년</th>
-							                <td>${lecture.grade}학년</td>
-							                <th style="background-color:#f8f9fa;color:#17a2b8;">수강인원</th>
-							                <td>${lecture.personal}명</td>
-							                <th style="background-color:#f8f9fa;color:#17a2b8;">학점</th>
-							                <td>${lecture.completionGrade}학점</td>
-										</tr>
-									</tbody>
-								</table>
-		            		</div>
-						</div>
-					</form>
+					<!-- Contents end -->
 				</div>
 			</div>
 		</div>
-
+		<!-- Main Contents end -->
+		
 		<!-- Footer 적용 -->
 		<c:import url="../temp/footer.jsp"></c:import>
 		<!-- Footer 끝 -->
-
+		
 	</div>
-<!-- ./wrapper -->
+	<!-- ./wrapper -->
 </body>
 </html>
