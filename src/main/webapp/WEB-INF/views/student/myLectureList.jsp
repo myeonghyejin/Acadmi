@@ -18,7 +18,8 @@
 		width : 100%;
 	}
 	.search {
-		padding : 10px;
+		padding-left : 50px;
+		padding-top : 10px;
 	}
 </style>
 </head>
@@ -86,24 +87,29 @@
 		               					<thead>
 		               						<tr>
 		               							
-		               							<th style="width : 10%"></th>
 		               							<th style="width : 30%">강좌명</th>
 		               							<th style="width : 10%">담당교수</th>
-		               							<th style="width : 10%">수강인원</th>
+		               							<th>강의 요일</th>
+		               							<th>시작 시간</th>
+		               							<th>종료 시간</th>
 		               							<th style="width : 10%">구분</th>
+		               							<th>학점</th>
 		               							
 		               						</tr>
 		               					</thead>
 		               					<tbody>
 		               						<c:forEach items="${list}" var="lectureVO" varStatus="status">
 		               							<tr>
-		               								<td>${status.index+1}</td>
+		               								
 		               								<td><a href="./lecture/main?lectureNum=${lectureVO.lectureNum}">${lectureVO.lectureName}</a></td>
 		               								<td>${lectureVO.professorVO.name}</td>
-		               								<td>${lectureVO.subscription}</td>
+		               								<td>${lectureVO.weekday}</td>
+		               								<td>${lectureVO.startTime }교시</td>
+		               								<td>${lectureVO.endTime }교시</td>
 		               								<td>
 		               									${lectureVO.category}
 		               								</td>
+		               								<td>${lectureVO.completionGrade }학점</td>
 		               								
 		               							</tr>
 		               						</c:forEach>

@@ -13,19 +13,7 @@
 	rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <style type="text/css">
-	.col {
-		margin : 30px 0 0 0;
-	}
-	.card{
-		margin : 30px 0 20px 0;
-		width : 80%;
-	}
-	h3 {
-		margin : 30px;
-	}
-	.content {
-		margin: 30px;
-	}
+
 </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -48,12 +36,18 @@
 		<c:import url="../temp/student_header.jsp"></c:import>
 	</sec:authorize>
 	<!-- Header 끝 -->
-	
-		<div class="content-wrapper">
-			<div class="content-fluid">
-				<div class="row">
+		<div class="container-fluid">
+			<div class="content-wrapper">
 					<div class="col">
-						<h3>학과 등록</h3>
+						<!-- header start -->
+						<div class="row" style="padding-top:10px">
+							<div class="col-12">
+								<div class="card">
+									<h3 class="my-3 mx-3">학과 등록</h3>
+								</div>
+							</div>
+						</div>
+						<!-- header end -->
 							<section class="content">
 
 					      <!-- Default box -->	
@@ -62,7 +56,7 @@
 					          <div class="col-7">
 						         <form action="./departmentAdd" method="post">
 						          	 <div class="form-group">
-						           	  <label>단과대학</label>
+						           	  <label>단과 대학</label>
 					                  <select class="form-control select2" style="width: 100%;" name="collegeNum">
 					                  	<c:forEach items="${list}" var="collegeVO">
 											<option value="${collegeVO.collegeNum}">${collegeVO.collegeName }</option>
@@ -79,14 +73,14 @@
 						            <div class="icheck-primary d-inline">
 				                        <input type="radio" id="radioPrimary1" name="status" value="1" checked>
 				                        	<label for="radioPrimary1">
-				                        	사용가능
+				                        	사용 가능
 				                       		</label>
 				                     </div>
 				                     
 					                      <div class="icheck-primary d-inline">
 					                        <input type="radio" id="radioPrimary1" name="status" value="0">
 				                        	<label for="radioPrimary1">
-				                        	사용불가
+				                        	사용 불가
 				                       		</label>
 					                     </div>
 				                     </div>
@@ -101,7 +95,7 @@
 			
 			    	</section>
 					</div>
-				</div>
+				
 			</div>
 		</div>	
 </div>

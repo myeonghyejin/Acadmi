@@ -59,7 +59,7 @@
 						<div class="card card-default">
           					<!-- card-header start -->
 							<div class="card-body">
-								<div class="row"">
+								<div class="row">
               						<div class="col-6">
                 						<label>강의 연도</label>
 										<fmt:formatDate value="${now}" pattern="yyyy" var="year"/>
