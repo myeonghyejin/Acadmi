@@ -22,15 +22,15 @@
 					<div class="login-box">
 
 						<div class="card card-outline card-info">
-							<div class="card-header text-center">
-								<a href="./login" class="h1"><b>Acadmi</b></a>
+							<div class="card-header text-center" >
+								<a href="./login" class="h1"><img src="/images/black.png" style="width: 100%; height: 100%;"></a>
 							</div>
 							<div class="card-body">
-								<p class="login-box-msg">로그인 후 Acadmi에 접속하세요!</p>
+								<p class="login-box-msg">로그인 후 Acadmi에 접속하세요</p>
 								<form id="contactForm" action="./login" method="post" >
             						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 									<div class="input-group mb-3">
-										<input class="form-control" id="username" name="username"  placeholder="아이디를 입력하세요"/>
+										<input class="form-control" id="username" name="username"  placeholder="아이디를 입력하세요."/>
 										<div class="input-group-append">
 											<div class="input-group-text">
 												<span class="fas fa-user"></span>
@@ -38,7 +38,7 @@
 										</div>
 									</div>
 									<div class="input-group mb-3">
-										<input class="form-control" id="password" name="password" type="password" placeholder="비밀번호를 입력하세요"/>
+										<input class="form-control" id="password" name="password" type="password" placeholder="비밀번호를 입력하세요."/>
 										<div class="input-group-append">
 											<div class="input-group-text">
 												<span class="fas fa-lock"></span>
@@ -48,16 +48,14 @@
 									<c:if test="${not empty param.errorMessage}">
                                 		<p><font color="red">${param.errorMessage}</font></p>
                                 	</c:if>
-									<div class="row mx-auto">
+									<div class="row">
 									
-
-										<p class="mb-1 mx-2">
+										<p class="mt-2 ml-2">
 											<a href="./findPw">비밀번호 찾기</a>
 										</p>
-
-										
-										<div class="col-4 mx-5">
-											<button class="btn btn-info btn-block mx-5" id="submitButton" type="submit">로그인</button>
+ 										
+										<div class="row-4 justify-content-end">
+											<button class="btn btn-info" id="submitButton" type="submit">로그인</button>
 										</div>
 
 									</div>
