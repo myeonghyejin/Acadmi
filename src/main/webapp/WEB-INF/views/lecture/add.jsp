@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
@@ -21,11 +22,24 @@
 	<div class="wrapper">
 
 		<!-- Header 적용 -->
-		<c:import url="../temp/professor_header.jsp"></c:import>
+		<sec:authorize access="hasRole('ROLE_ADMIN')">
+			<c:import url="../temp/administrator_header.jsp"></c:import>
+		</sec:authorize>
+		
+		<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
+			<c:import url="../temp/administrator_header.jsp"></c:import>
+		</sec:authorize>
+		
+		<sec:authorize access="hasRole('ROLE_PROFESSOR')">
+			<c:import url="../temp/professor_header.jsp"></c:import>
+		</sec:authorize>
+			
+		<sec:authorize access="hasRole('ROLE_STUDENT')">
+			<c:import url="../temp/student_header.jsp"></c:import>
+		</sec:authorize>
 		<!-- Header 끝 -->
 
 		<!-- Main Contents -->
-		<div class="container-fluid">
 			<div class="content-wrapper">
 				<!-- Contents -->
 				<div class="col">
@@ -43,9 +57,6 @@
 					<form id="frm" action="./add" method="post">
 						<jsp:useBean id="now" class="java.util.Date" />
 						<div class="card card-default">
-							<div class="card-header">
-								<h3 class="card-title" style="color: white;">강의 등록</h3>
-          					</div>
           					<!-- card-header start -->
 							<div class="card-body">
 								<div class="row">
@@ -172,7 +183,6 @@
 					</form>
 				</div>
 			</div>
-		</div>
 
 	               		
 		<!-- Footer 적용 -->

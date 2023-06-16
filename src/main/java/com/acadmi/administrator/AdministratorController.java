@@ -23,6 +23,8 @@ import com.acadmi.lecture.room.LectureRoomVO;
 import com.acadmi.lecture.room.TimeTableVO;
 import com.acadmi.member.MemberSeqVO;
 import com.acadmi.member.MemberVO;
+import com.acadmi.notification.NotificationService;
+import com.acadmi.notification.NotificationVO;
 import com.acadmi.period.PeriodVO;
 import com.acadmi.professor.ProfessorVO;
 import com.acadmi.student.StudentVO;
@@ -38,6 +40,9 @@ public class AdministratorController {
 	
 	@Autowired
 	private AdministratorService administratorService;
+	
+	@Autowired
+	private NotificationService notificationService;
 
 	//회원 관리
 	//아이디
@@ -425,13 +430,15 @@ public class AdministratorController {
 
 	//강의실 배정
 	@GetMapping("lectureRoomAssignment")
-	public ModelAndView getLectureRoomAssignment(Pagination pagination, LectureVO lectureVO) throws Exception {
+	public ModelAndView getLectureRoomAssignment(Pagination pagination, NotificationVO notificationVO, LectureVO lectureVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
 		List<LectureRoomVO> ar = administratorService.getLectureRoomAssignment(pagination);
 		lectureVO = administratorService.getLectureNum(lectureVO);
 		
-		
+		if(notificationVO.getNotificationNum() != null) {
+			int result = notificationService.setDelete(notificationVO);
+		}
 		
 		mv.addObject("list", ar);
 		mv.addObject("lectureNum", lectureVO);

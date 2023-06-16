@@ -17,12 +17,11 @@
 			<a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
 		</li>		
 	</ul>
-	
-	
-
+	<h3 class="my-1" style="vertical-align:middle;"><a href="/lecture/main?lectureNum=${lecture.lectureNum}">${lecture.lectureName}</a></h3>
 	<!-- Right navbar links -->
 	<ul class="navbar-nav ml-auto">
-	<!-- 알림 -->
+
+		<!-- 알림 -->
 		<li class="nav-item dropdown">
 			<a class="nav-link" data-toggle="dropdown" href="#">
 				<i class="far fa-bell"></i>
@@ -35,6 +34,7 @@
 							<i class="fas fa-envelope mr-2"></i> 
 							<span id="noticeNotification"></span>
 						</a>
+					<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
 					<div class="dropdown-divider"></div>
 						<a href="/notification/list?notificationKind=2" class="dropdown-item">
 							<i class="fas fa-users mr-2"></i>
@@ -45,12 +45,35 @@
 							<i class="fas fa-file mr-2"></i>
 							<span id="lectureNotification"></span>
 						</a>
+					</sec:authorize>
+					<sec:authorize access="hasRole('ROLE_PROFESSOR')">
+						<a href="/notification/list?notificationKind=3" class="dropdown-item">
+							<i class="fas fa-users mr-2"></i>
+							<span id="qnaReplyNotification"></span>
+						</a>
+						<a href="/notification/list?notificationKind=5" class="dropdown-item">
+							<i class="fas fa-users mr-2"></i>
+							<span id="lectureQnaNotification"></span>
+						</a>
+					</sec:authorize>
+					<sec:authorize access="hasRole('ROLE_STUDENT')">
+						<a href="/notification/list?notificationKind=4" class="dropdown-item">
+							<i class="fas fa-users mr-2"></i>
+							<span id="lectureNoticeNotification"></span>
+						</a>
+						<a href="/notification/list?notificationKind=3" class="dropdown-item">
+							<i class="fas fa-users mr-2"></i>
+							<span id="qnaReplyNotification"></span>
+						</a>
+						<a href="/notification/list?notificationKind=6" class="dropdown-item">
+							<i class="fas fa-users mr-2"></i>
+							<span id="lectureQnaReplyNotification"></span>
+						</a>
+					</sec:authorize>
 					<div class="dropdown-divider"></div>
-				<a href="/notification/list" class="dropdown-item dropdown-footer">알림 전체보기</a>
+				<a href="/notification/list?notificationKind=1" class="dropdown-item dropdown-footer">알림 전체보기</a>
 			</div>
 		</li>
-	
-		
 
 		<!-- 채팅 -->
 		<li class="nav-item dropdown">
@@ -75,7 +98,7 @@
 		</li>
 	</ul>
 </nav>
-	<!-- /.navbar -->
+<!-- /.navbar -->
 
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -91,44 +114,78 @@
 		<div class="user-panel mt-3 pb-3 mb-3 d-flex">
 			<div class="image">
 				<sec:authorize access="hasRole('STUDENT')">
-                <sec:authentication property="principal" var="user"/>
-					<img src="/images/profile.jpg" class="img-circle elevation-2" alt="User Image" >
+					<img src="https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927" class="img-circle elevation-2" alt="User Image">
 				</sec:authorize>
 				
 				<sec:authorize access="hasRole('PROFESSOR')">
-                <sec:authentication property="Principal" var="user"/>
-					<img src="/images/profile.jpg" class="img-circle elevation-2" alt="User Image">
+					<img src="https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927" class="img-circle elevation-2" alt="User Image">
 				</sec:authorize>
 				
 				<sec:authorize access="hasRole('ADMINISTRATOR')">
-                <sec:authentication property="Principal" var="user"/>
-					<img src="/images/profile.jpg" class="img-circle elevation-2" alt="User Image">
+					<img src="https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927" class="img-circle elevation-2" alt="User Image">
 				</sec:authorize>
 			</div>
 			<div class="info">
 				<sec:authorize access="hasRole('STUDENT')">
                 <sec:authentication property="Principal" var="user"/>
-                    <a href="/member/studentPage?username=${user.username}">${user.username}</a>
+                    <a href="/member/studentPage?username=${user.username}">STUDENT</a>
                 </sec:authorize>
                 
 				<sec:authorize access="hasRole('PROFESSOR')">
 				<sec:authentication property="Principal" var="user"/>
-					<a href="/member/professorPage?username=${user.username}">${user.username}</a>
+					<a href="/member/professorPage?username=${user.username}">PROFESSOR</a>
 				</sec:authorize>
 				
 				<sec:authorize access="hasRole('ADMINISTRATOR')">
 				<sec:authentication property="Principal" var="user"/>
-					<a href="/member/administratorPage?username=${user.username}">${user.username}</a>
+					<a href="/member/administratorPage?username=${user.username}">ADMINISTRATOR</a>
 				</sec:authorize>
 			</div>
 		</div>
-		
 
 		<!-- Sidebar Menu -->
 		<nav class="mt-2">
 			<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 			<!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
 			
+				<!-- 내 강의 -->
+				<li class="nav-item">
+					<a href="#" class="nav-link">
+						<i class="nav-icon fas fa-chalkboard"></i>
+						<p>
+							내 강의
+							<i class="fas fa-angle-left right"></i>
+						</p>
+					</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item">
+							<a href="/lecture/list" class="nav-link">
+								<i class="fa-solid fa-circle fa-2xs"></i>
+								<p>강의 목록</p>
+							</a>
+						</li>
+					</ul>
+				</li>
+				
+				<!-- 수강 -->
+				<li class="nav-item">
+					<a href="#" class="nav-link">
+						<i class="nav-icon fas fa-chalkboard-user"></i>
+						<p>
+							성적
+							<i class="fas fa-angle-left right"></i>
+						</p>
+					</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item">
+							<a href="/credit/list" class="nav-link">
+								<i class="fa-solid fa-circle fa-2xs"></i>
+								<p>성적 관리</p>
+							</a>
+						</li>
+					</ul>
+				</li>
+	
 				<!-- 게시판 -->
 				<li class="nav-item">
 					<a href="#" class="nav-link">
@@ -148,111 +205,7 @@
 						<li class="nav-item">
 							<a href="/qna/list" class="nav-link">
 								<i class="fa-solid fa-circle fa-2xs"></i>
-								<p>질의 응답</p>
-							</a>
-						</li>
-					</ul>
-				</li>
-				
-				<!-- 강의 관리 -->
-				<li class="nav-item">
-					<a href="#" class="nav-link">
-						<i class="nav-icon fas fa-chalkboard"></i>
-						<p>
-							강의 관리
-							<i class="fas fa-angle-left right"></i>
-						</p>
-					</a>
-					<ul class="nav nav-treeview">
-						<li class="nav-item">
-							<a href="/administrator/lectureList" class="nav-link">
-								<i class="fa-solid fa-circle fa-2xs"></i>
-								<p>강의 목록</p>
-							</a>
-						</li>
-					</ul>
-				</li>
-	
-				<!-- 회원 관리 -->
-				<li class="nav-item">
-					<a href="#" class="nav-link">
-						<i class="nav-icon fa-solid fa-user-group"></i>
-						<p>
-							회원 관리
-							<i class="fas fa-angle-left right"></i>
-						</p>
-					</a>
-					<ul class="nav nav-treeview">
-						<li class="nav-item">
-							<a href="/administrator/studentAdd" class="nav-link">
-								<i class="fa-solid fa-circle fa-2xs"></i>
-								<p>계정 관리</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="/administrator/studentList" class="nav-link">
-								<i class="fa-solid fa-circle fa-2xs"></i>
-								<p>회원 목록</p>
-							</a>
-						</li>
-					</ul>
-				</li>
-				
-				<!-- 기간 관리 -->
-				<li class="nav-item">
-					<a href="#" class="nav-link">
-						<i class="nav-icon fa-regular fa-clock"></i>
-						<p>
-							기간 관리
-							<i class="fas fa-angle-left right"></i>
-						</p>
-					</a>
-					<ul class="nav nav-treeview">
-						<li class="nav-item">
-							<a href="/administrator/periodAdd" class="nav-link">
-								<i class="fa-solid fa-circle fa-2xs"></i>
-								<p>기간 설정</p>
-							</a>
-						</li>
-					</ul>
-					
-				</li>
-				
-				<!-- 강의실 관리 -->
-				<li class="nav-item">
-					<a href="#" class="nav-link">
-						<i class="nav-icon fa-solid fa-door-open"></i>
-						<p>
-							강의실 관리
-							<i class="fas fa-angle-left right"></i>
-						</p>
-					</a>
-					<ul class="nav nav-treeview">
-						<li class="nav-item">
-							<a href="/administrator/lectureRoomList" class="nav-link">
-								<i class="fa-solid fa-circle fa-2xs"></i>
-								<p>강의실 목록</p>
-							</a>
-						</li>
-					</ul>
-					
-				</li>
-				
-				<!-- 학사 관리 -->
-				<li class="nav-item">
-					<a href="#" class="nav-link">
-						<i class="nav-icon fa-regular fa-address-card"></i>
-						<p>
-							학과 관리
-							<i class="fas fa-angle-left right"></i>
-						</p>
-					</a>
-					<ul class="nav nav-treeview">
-						
-						<li class="nav-item">
-							<a href="/administrator/departmentList" class="nav-link">
-								<i class="fa-solid fa-circle fa-2xs"></i>
-								<p>학과 목록</p>
+								<p>질의응답</p>
 							</a>
 						</li>
 					</ul>

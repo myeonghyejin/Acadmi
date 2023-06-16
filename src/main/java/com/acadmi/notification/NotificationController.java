@@ -27,7 +27,6 @@ public class NotificationController {
 	@GetMapping("list")
 	public ModelAndView getList(NotificationVO notificationVO, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		//알림전체보기를 눌렀을때 기본적으로 notificationkind가 1로 들어가게 jsp에서 설정
 		List<NotificationVO> ar = notificationService.getKindList(notificationVO, session);
 		mv.addObject("list", ar);
 		mv.setViewName("notification/list");

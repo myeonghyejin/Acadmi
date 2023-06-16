@@ -20,7 +20,9 @@
   	<!-- kind에 따른 알림 list -->
   	<select id="getKindList" parameterType="NotificationVO" resultType="NotificationVO">
   		SELECT * FROM NOTIFICATION
-  		WHERE NOTIFICATIONKIND = #{notificationKind} AND RECIPIENT = #{recipient}
+  		WHERE RECIPIENT = #{recipient}
+  		<if test="notificationKind != null">AND NOTIFICATIONKIND = #{notificationKind}</if>
+  		ORDER BY NOTIFICATIONNUM DESC
   	</select>
   	
   	<!-- notification add -->

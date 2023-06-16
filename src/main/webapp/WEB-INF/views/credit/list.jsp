@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,11 +15,24 @@
 	<div class="wrapper"> 
 
 		<!-- Header 적용 -->
-		<c:import url="../temp/professor_header.jsp"></c:import>
+		<sec:authorize access="hasRole('ROLE_ADMIN')">
+			<c:import url="../temp/administrator_header.jsp"></c:import>
+		</sec:authorize>
+		
+		<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
+			<c:import url="../temp/administrator_header.jsp"></c:import>
+		</sec:authorize>
+		
+		<sec:authorize access="hasRole('ROLE_PROFESSOR')">
+			<c:import url="../temp/professor_header.jsp"></c:import>
+		</sec:authorize>
+			
+		<sec:authorize access="hasRole('ROLE_STUDENT')">
+			<c:import url="../temp/student_header.jsp"></c:import>
+		</sec:authorize>
 		<!-- Header 끝 -->
 		
 		<!-- Main Contents -->
-		<div class="container-fluid">
 			<div class="content-wrapper">
 				<!-- Contents -->
 				<div class="col">
@@ -37,11 +51,6 @@
 						<div class="row">
 							<div class="col-12">
 								<div class="card">
-									<!-- table-header start -->
-									<div class="card-header">
-					                	<h3 class="card-title" style="font-weight:normal;color: white">강의 목록</h3>
-					              	</div>
-					              	<!-- table-header end -->
               
               						<!-- table-body start -->
               						<div class="card-body table-responsive p-0">
@@ -49,8 +58,8 @@
 				                    		<thead>
 					                    		<tr>
 					                    			<th style="width: 150px">강의번호</th>
-					                    			<th>강의이름</th>
-					                    			<th>강의년도</th>
+					                    			<th>강의 이름</th>
+					                    			<th>강의 연도</th>
 					                    			<th>학기</th>
 					                    			<th>학년</th>
 					                    			<th>구분</th>
@@ -62,7 +71,7 @@
 					                    			<tr>
 					                    				<td>${LectureVO.lectureNum}</td>
 					                    				<td>${LectureVO.lectureName}</td>
-					                    				<td>${LectureVO.year}</td>
+					                    				<td>${LectureVO.year}년도</td>
 				 										<td>${LectureVO.semester}학기</td>
 				 										<td>${LectureVO.grade}학년</td>
 				 										<td>${LectureVO.category}</td>
@@ -82,7 +91,6 @@
 					<!-- form end -->
 				</div>
 			</div>
-		</div>
 		
 		<!-- Footer 적용 -->
 		<c:import url="../temp/footer.jsp"></c:import>

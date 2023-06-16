@@ -34,29 +34,6 @@
 							<i class="fas fa-envelope mr-2"></i> 
 							<span id="noticeNotification"></span>
 						</a>
-					<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
-					<div class="dropdown-divider"></div>
-						<a href="/notification/list?notificationKind=2" class="dropdown-item">
-							<i class="fas fa-users mr-2"></i>
-							<span id="qnaNotification"></span>
-						</a>
-					<div class="dropdown-divider"></div>
-						<a href="/notification/list?notificationKind=7" class="dropdown-item">
-							<i class="fas fa-file mr-2"></i>
-							<span id="lectureNotification"></span>
-						</a>
-					</sec:authorize>
-					<sec:authorize access="hasRole('ROLE_PROFESSOR')">
-						<a href="/notification/list?notificationKind=3" class="dropdown-item">
-							<i class="fas fa-users mr-2"></i>
-							<span id="qnaReplyNotification"></span>
-						</a>
-						<a href="/notification/list?notificationKind=5" class="dropdown-item">
-							<i class="fas fa-users mr-2"></i>
-							<span id="lectureQnaNotification"></span>
-						</a>
-					</sec:authorize>
-					<sec:authorize access="hasRole('ROLE_STUDENT')">
 						<a href="/notification/list?notificationKind=4" class="dropdown-item">
 							<i class="fas fa-users mr-2"></i>
 							<span id="lectureNoticeNotification"></span>
@@ -69,9 +46,8 @@
 							<i class="fas fa-users mr-2"></i>
 							<span id="lectureQnaReplyNotification"></span>
 						</a>
-					</sec:authorize>
 					<div class="dropdown-divider"></div>
-				<a href="/notification/list?notificationKind=1" class="dropdown-item dropdown-footer">알림 전체보기</a>
+				<a href="/notification/list" class="dropdown-item dropdown-footer">알림 전체보기</a>
 			</div>
 		</li>
 

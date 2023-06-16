@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,15 +16,36 @@
 	<div class="wrapper">
 
 		<!-- Header 적용 -->
-		<c:import url="../temp/header.jsp"></c:import>
+		<sec:authorize access="hasRole('ROLE_ADMIN')">
+			<c:import url="../temp/administrator_header.jsp"></c:import>
+		</sec:authorize>
+		
+		<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
+			<c:import url="../temp/administrator_header.jsp"></c:import>
+		</sec:authorize>
+		
+		<sec:authorize access="hasRole('ROLE_PROFESSOR')">
+			<c:import url="../temp/professor_header.jsp"></c:import>
+		</sec:authorize>
+			
+		<sec:authorize access="hasRole('ROLE_STUDENT')">
+			<c:import url="../temp/student_header.jsp"></c:import>
+		</sec:authorize>
 		<!-- Header 끝 -->
-		<div class="container-fluid">
-			<div class="row">
+		
 				<!-- 2레벨 Sidebar 적용 -->
-				<div class="content-wrapper"></div>
+				<div class="content-wrapper">
+				
 				<!-- 2레벨 Sidebar 끝 -->
 				<!-- Contents -->
 				<div class="col">
+					<div class="row">
+						<div class="col mt-3">
+							<div class="card">
+								<h3 class="my-3 mx-3">메시지</h3>
+							</div>
+						</div>
+					</div>
 					<div class="card direct-chat direct-chat-lime">
 						<div class="card-header">
 							<h3 class="card-title">${chatRoom.recipientName}</h3>
@@ -34,7 +56,7 @@
 									</c:when>
 									<c:otherwise>
 										<button id="deleteButton" class="btn btn-block btn-danger btn-xs" data-chat-num="${chatRoom.chatNum}"
-										data-room-sender="${chatRoom.roomSender}" data-room-recipient="${chatRoom.roomRecipient}"><i class="fa-regular fa-trash-can"></i></button>
+										data-room-sender="${chatRoom.roomSender}" data-room-recipient="${chatRoom.roomRecipient}"><i class="fa-solid fa-door-open"></i></button>
 									</c:otherwise>
 								</c:choose>
 							</small>
@@ -118,19 +140,20 @@
 								<!-- /.direct-chat-msg -->
 							<!--/.direct-chat-messages-->
 							</div>
+						</div>
 						<!-- /.card-body -->
 						<div class="card-footer">
 							<form>
-								<div class="form-group" id="formSend">
+								<div class="form-group my-2" id="formSend">
 									<input type="hidden" id="chatNum" name="chatNum" value="${chatRoom.chatNum}">
 	                      
 									<div class="input-group">
-										<input id="message" type="text" name="message" placeholder="Type Message ..." class="form-control">
+										<input id="message" type="text" name="message" placeholder="메시지 전송" class="form-control">
 										<span class="input-group-append">
-										<button type="button" class="btn" id="fileButton"><i class="fa-regular fa-file"></i></button>
+										<button type="button" class="btn btn-default" id="fileButton"><i class="fa-regular fa-file"></i></button>
 										</span>
 										<span class="input-group-append">
-											<button type="button" class="btn btn-info" id="chatSend">Send</button>
+											<button type="button" class="btn btn-info" id="chatSend" data-sender-name="${chatRoom.senderName}" data-recipient-name="${chatRoom.recipientName}"><i class="fa-regular fa-paper-plane"></i></button>
 										</span>
 									</div>
 								</div>
@@ -141,7 +164,7 @@
 					<!--/.direct-chat -->
 				</div>
 			</div>
-		</div>
+		
 		<!-- Footer 적용 -->
 		<c:import url="../temp/footer.jsp"></c:import>
 		<!-- Footer 끝 -->

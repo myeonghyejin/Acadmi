@@ -53,8 +53,6 @@ public class NotificationService {
 	
 	//kind에 따른 알림 list
 	public List<NotificationVO> getKindList(NotificationVO notificationVO, HttpSession session) throws Exception {
-		Enumeration<String> names = session.getAttributeNames();
-		log.info("========{}", names.nextElement());
 		Object ojt = session.getAttribute("SPRING_SECURITY_CONTEXT");
 		SecurityContextImpl contextImpl = (SecurityContextImpl)ojt;
 		Authentication authentication = (Authentication) contextImpl.getAuthentication();
@@ -171,6 +169,7 @@ public class NotificationService {
 		notificationVO.setNum(lectureQnaVO.getNum());
 		//recipient는 강의의 교수(username)
 		notificationVO.setRecipient(lectureVO.getUsername());
+		result = notificationDAO.setNotification(notificationVO);
 		return result;
 	}
 	

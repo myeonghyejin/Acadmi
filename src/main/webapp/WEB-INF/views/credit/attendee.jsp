@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,16 +15,29 @@
 	<div class="wrapper"> 
 	
 		<!-- Header 적용 -->
-		<c:import url="../temp/professor_header.jsp"></c:import>
+		<sec:authorize access="hasRole('ROLE_ADMIN')">
+			<c:import url="../temp/administrator_header.jsp"></c:import>
+		</sec:authorize>
+		
+		<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
+			<c:import url="../temp/administrator_header.jsp"></c:import>
+		</sec:authorize>
+		
+		<sec:authorize access="hasRole('ROLE_PROFESSOR')">
+			<c:import url="../temp/professor_header.jsp"></c:import>
+		</sec:authorize>
+			
+		<sec:authorize access="hasRole('ROLE_STUDENT')">
+			<c:import url="../temp/student_header.jsp"></c:import>
+		</sec:authorize>
 		<!-- Header 끝 -->
 		
 		<!-- Main Contents -->
-		<div class="container-fluid">
 			<div class="content-wrapper">
 				<!-- Contents -->
 				<div class="col">
 					<!-- header start -->
-					<div class="row mt-3">
+					<div class="row" style="padding-top:10px">
 						<div class="col-12">
 							<div class="card">
 								<h3 class="my-3 mx-3">성적 관리</h3>
@@ -39,7 +53,7 @@
 								<div class="card">
 									<!-- table-header start -->
 									<div class="card-header"">
-					                	<h3 class="card-title" style="font-weight:normal;">학생 관리 | ${detail.lectureName}</h3>
+					                	<h3 class="card-title my-1" style="font-weight:normal;">${detail.lectureName}</h3>
 					                	<div class="card-tools">
 					                		<div class="input-group input-group-sm" style="width: 105px;">
 					                			<c:if test="${attendee[0].creditVO.credit==null}">
@@ -101,7 +115,6 @@
 					<!-- form end -->
 				</div>
 			</div>
-		</div>
 		
 		<!-- Footer 적용 -->
 		<c:import url="../temp/footer.jsp"></c:import>
