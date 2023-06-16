@@ -19,7 +19,7 @@ $(".submitButton").on("click", function(){
     if(check.includes(true)){
         $('#contactForm').submit();
     }else{
-		alert('제목을 작성해주세요')
+		alert('제목을 작성해주세요.')
     }
 });
 
