@@ -50,18 +50,13 @@
 				<!-- Default box -->
 				<div class="card">
 					<div class="card-header">
-						<h3 class="card-title">신청 과목</h3>		
-						<div class="card-tools">
-							<button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-								<i class="fas fa-minus"></i>
-							</button>
-						</div>
+						<h3 class="card-title">신청 과목</h3>
 					</div>
 								
 					<div class="card-body p-0" id="myFavoriteList">
 						<table class="table table-hover text-nowrap">
 							<thead>
-								<tr>
+								<tr style="text-align: center;">
 									<th style="width: 8%">강의 번호</th>
 									<th style="width: 8%">강의 이름</th>
 									<th style="width: 8%">학년</th>
@@ -78,7 +73,7 @@
 							</thead>
 							<tbody>
 								<c:forEach items="${list}" var="lectureVO">
-									<tr>
+									<tr style="text-align: center;">
 										<td>${lectureVO.lectureNum}</td>
 										<td><a>${lectureVO.lectureName}</a><br/><small>${lectureVO.professorVO.username}</small></td>
 										<td>${lectureVO.grade}학년</td>
@@ -92,28 +87,28 @@
 										<td>${lectureVO.completionGrade}</td>
 										<td>${lectureVO.weekday}요일</td>
 										<td>
-											<c:if test="${lectureVO.startTime eq 1}">AM 09:00</c:if>
-											<c:if test="${lectureVO.startTime eq 2}">AM 10:00</c:if>
-											<c:if test="${lectureVO.startTime eq 3}">AM 11:00</c:if>
-											<c:if test="${lectureVO.startTime eq 4}">PM 12:00</c:if>
-											<c:if test="${lectureVO.startTime eq 5}">PM 13:00</c:if>
-											<c:if test="${lectureVO.startTime eq 6}">PM 14:00</c:if>
-											<c:if test="${lectureVO.startTime eq 7}">PM 15:00</c:if>
-											<c:if test="${lectureVO.startTime eq 8}">PM 16:00</c:if>
-											<c:if test="${lectureVO.startTime eq 9}">PM 17:00</c:if>
-											<c:if test="${lectureVO.startTime eq 10}">PM 18:00</c:if>
+											<c:if test="${lectureVO.startTime eq 1}">09:00</c:if>
+											<c:if test="${lectureVO.startTime eq 2}">10:00</c:if>
+											<c:if test="${lectureVO.startTime eq 3}">11:00</c:if>
+											<c:if test="${lectureVO.startTime eq 4}">12:00</c:if>
+											<c:if test="${lectureVO.startTime eq 5}">13:00</c:if>
+											<c:if test="${lectureVO.startTime eq 6}">14:00</c:if>
+											<c:if test="${lectureVO.startTime eq 7}">15:00</c:if>
+											<c:if test="${lectureVO.startTime eq 8}">16:00</c:if>
+											<c:if test="${lectureVO.startTime eq 9}">17:00</c:if>
+											<c:if test="${lectureVO.startTime eq 10}">18:00</c:if>
 										</td>
 										<td>
-											<c:if test="${lectureVO.endTime eq 1}">AM 10:00</c:if>
-											<c:if test="${lectureVO.endTime eq 2}">AM 11:00</c:if>
-											<c:if test="${lectureVO.endTime eq 3}">PM 12:00</c:if>
-											<c:if test="${lectureVO.endTime eq 4}">PM 13:00</c:if>
-											<c:if test="${lectureVO.endTime eq 5}">PM 14:00</c:if>
-											<c:if test="${lectureVO.endTime eq 6}">PM 15:00</c:if>
-											<c:if test="${lectureVO.endTime eq 7}">PM 16:00</c:if>
-											<c:if test="${lectureVO.endTime eq 8}">PM 17:00</c:if>
-											<c:if test="${lectureVO.endTime eq 9}">PM 18:00</c:if>
-											<c:if test="${lectureVO.endTime eq 10}">PM 19:00</c:if>
+											<c:if test="${lectureVO.endTime eq 1}">10:00</c:if>
+											<c:if test="${lectureVO.endTime eq 2}">11:00</c:if>
+											<c:if test="${lectureVO.endTime eq 3}">12:00</c:if>
+											<c:if test="${lectureVO.endTime eq 4}">13:00</c:if>
+											<c:if test="${lectureVO.endTime eq 5}">14:00</c:if>
+											<c:if test="${lectureVO.endTime eq 6}">15:00</c:if>
+											<c:if test="${lectureVO.endTime eq 7}">16:00</c:if>
+											<c:if test="${lectureVO.endTime eq 8}">17:00</c:if>
+											<c:if test="${lectureVO.endTime eq 9}">18:00</c:if>
+											<c:if test="${lectureVO.endTime eq 10}">19:00</c:if>
 										</td>
 										<td>${lectureVO.lectureRoomVO.lectureBuilding} ${lectureVO.lectureRoomVO.lectureRoom}</td>
 										<td>${lectureVO.subscription}/${lectureVO.personal}명</td>
