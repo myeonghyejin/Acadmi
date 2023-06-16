@@ -144,7 +144,7 @@
 						<!-- /.card-body -->
 						<div class="card-footer">
 							<form>
-								<div class="form-group" id="formSend">
+								<div class="form-group my-2" id="formSend">
 									<input type="hidden" id="chatNum" name="chatNum" value="${chatRoom.chatNum}">
 	                      
 									<div class="input-group">
@@ -153,7 +153,7 @@
 										<button type="button" class="btn btn-default" id="fileButton"><i class="fa-regular fa-file"></i></button>
 										</span>
 										<span class="input-group-append">
-											<button type="button" class="btn btn-info" id="chatSend" data-sender-name="${chatRoom.senderName}" data-recipient-name="${chatRoom.recipientName}">전송</button>
+											<button type="button" class="btn btn-info" id="chatSend" data-sender-name="${chatRoom.senderName}" data-recipient-name="${chatRoom.recipientName}"><i class="fa-regular fa-paper-plane"></i></button>
 										</span>
 									</div>
 								</div>
