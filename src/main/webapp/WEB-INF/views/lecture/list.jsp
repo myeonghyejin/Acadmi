@@ -57,15 +57,15 @@
 									<div class="card-header">
 					                	<!-- <h3 class="card-title" style="font-weight:normal;">강의 목록</h3> -->
 					                	<div class="card-tools">
-					                		<div class="input-group input-group-sm" style="width: 230px;">
-					                		<input type="hidden" value="${list[0].temporary}">
-					                  			<select class="form-control mx-3" style="height: auto;" id="temporary" name="temporary" onchange="this.form.submit()">
+					                		<div class="mr-2">
+					                			<input type="hidden" value="${list[0].temporary}">
+					                  			<select class="select2" style="height: auto;width:115px" id="temporary" name="temporary" onchange="this.form.submit()">
 					                    			<option name="temporary" id="temporary" for="temporary"  value=" ">강의 조회</option>
 													<option for="temporary" value=" " >전체</option>
 													<option for="temporary" value="1" >등록</option>
 													<option for="temporary" value="0">미등록</option>
 												</select>
-					                    		<a class="btn btn-info" href="./add">강의 등록</a>
+					                    		<a class="btn btn-info ml-1" href="./add">강의 등록</a>
 					                  		</div>
 					                	</div>
 					              	</div>
@@ -76,10 +76,10 @@
                 						<table class="table table-hover text-nowrap" style="text-align: center;">
                   							<thead>
                     							<tr>
-										            <th>강의년도</th>
+										            <th>강의 연도</th>
 										            <th>학기</th>
 										            <th>학년</th>
-										            <th style="width:30%">강의이름</th>
+										            <th style="width:30%">강의 이름</th>
 										            <th>구분</th>
 										            <th>등록 상태</th>
 										            <th></th>
@@ -88,7 +88,7 @@
 								            <tbody>
 			                    				<c:forEach items="${list}" var="LectureVO">
 			                    					<tr>
-						                    			<td style="vertical-align:middle;">${LectureVO.year}</td>
+						                    			<td style="vertical-align:middle;">${LectureVO.year}년도</td>
 					 									<td style="vertical-align:middle;">${LectureVO.semester}학기</td>
 					 									<td style="vertical-align:middle;">
 						 									<c:if test="${LectureVO.grade !=null}">
@@ -137,6 +137,12 @@
 		<!-- Footer 적용 -->
 		<c:import url="../temp/footer.jsp"></c:import>
 		<!-- Footer 끝 -->
+		
+		<script>
+    $(function () {
+	      $('.select2').select2()
+	    });
+	</script>
 
 	</div>
 <!-- ./wrapper -->
