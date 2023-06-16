@@ -25,7 +25,7 @@
 		</sec:authorize>
 		
 		<sec:authorize access="hasRole('ROLE_PROFESSOR')">
-			<c:import url="../temp/professor_header.jsp"></c:import>
+			<c:import url="../temp/lecture_header.jsp"></c:import>
 		</sec:authorize>
 			
 		<sec:authorize access="hasRole('ROLE_STUDENT')">

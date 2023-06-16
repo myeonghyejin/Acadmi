@@ -29,7 +29,7 @@
 		</sec:authorize>
 			
 		<sec:authorize access="hasRole('ROLE_STUDENT')">
-			<c:import url="../temp/student_header.jsp"></c:import>
+			<c:import url="../../temp/lecture_header.jsp"></c:import>
 		</sec:authorize>
 		<!-- Header 끝 -->
 				<!-- 2레벨 Sidebar 적용 -->
@@ -38,7 +38,7 @@
 					<div class="content-wrapper">
 							<c:import url="../../temp/sidebar/student_lecture_main.jsp"></c:import>
 					</div>
-					<!-- 2레벨 Sidebar 끝 -->'
+					<!-- 2레벨 Sidebar 끝 -->
 					<!-- Contents -->
 					<div class="col" style="padding-top:80px">
 					<form action="./main" method="get">

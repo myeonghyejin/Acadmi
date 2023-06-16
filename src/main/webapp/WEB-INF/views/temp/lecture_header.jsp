@@ -17,7 +17,7 @@
 			<a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
 		</li>		
 	</ul>
-	<h3 class="my-1" style="vertical-align:middle;"><a href="/lecture/main?lectureNum=${lecture.lectureNum}">${lecture.lectureName}</a></h3>
+	<a href="/lecture/main?lectureNum=${lecture.lectureNum}" style="font-weight: bold;">${lecture.lectureName}</a>
 	<!-- Right navbar links -->
 	<ul class="navbar-nav ml-auto">
 

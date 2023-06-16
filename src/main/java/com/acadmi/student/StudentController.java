@@ -89,7 +89,7 @@ public class StudentController {
 		mv.addObject("lecture", lectureVO);
 		mv.addObject("classes",ar);
 		mv.setViewName("student/lecture/main");
-		
+		mv.setViewName("temp/lecture_header");
 		return mv;
 		
 	}
