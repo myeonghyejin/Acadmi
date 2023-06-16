@@ -20,7 +20,7 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 	
 	<!-- Header 적용 -->
-	<sec:authorize acess="hasRole('ROLE_ADMIN')">
+	<sec:authorize access="hasRole('ROLE_ADMIN')">
 		<c:import url="../temp/administrator_header.jsp"></c:import>
 	</sec:authorize>
 	
