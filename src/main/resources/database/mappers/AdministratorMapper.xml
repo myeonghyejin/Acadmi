@@ -88,8 +88,8 @@
 			<if test="collegeNum !=null and !collegeNum.equals('')">
 				AND COLLEGENUM = #{collegeNum}
 			</if>
-			<if test="deptName !=null and !deptName.equals('')">
-				AND DEPTNAME = #{deptName}
+			<if test="search != null and !search.equals('')">
+				AND DEPTNAME LIKE CONCAT('%', #{search}, '%')
 			</if>
 			<if test="status !=null and !status.equals('')">
 				AND STATUS = #{status}

@@ -100,7 +100,7 @@
 												<div class="form-group">
 													<label>학과</label>
 													<div class="input-group">
-														<input type="text" class="form-control" name="deptName" placeholder="학과를 입력하세요.">
+														<input type="text" class="form-control" name="search" placeholder="학과를 입력하세요.">
 														<div class="input-group-append">
 															<button type="submit" class="btn btn-default" id="submit">
 																<i class="fas fa-search "></i>
@@ -129,7 +129,7 @@
 				                      <th style="width: 10%" class="text-center">
 				                          학과
 				                      </th>
-				                      <th style="width : 15%">
+				                      <th style="width : 18%">
 				                          사용 여부
 				                      </th>
 				                      <th style="width: 10%">

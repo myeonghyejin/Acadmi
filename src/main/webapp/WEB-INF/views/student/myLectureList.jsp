@@ -127,7 +127,7 @@
 <c:import url="../temp/footer.jsp"></c:import>		
 <script type="text/javascript">
 	/*입학년도 ~ 재학년도 */
-
+	
 
 	/* 검색 기능 */
 	$("#year").on("change", function() {
