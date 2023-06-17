@@ -119,27 +119,30 @@
 										<select class="form-control" id="grade" name="grade">
 						                    <option name="grade" id="grade" value="">학년 선택</option>
 											<c:forEach begin="1" end="4" step="1" var="i">
-						                    	<option for="grade" value="${i}" >${i}</option>
+						                    	<option for="grade" value="${i}" >${i}학년</option>
 						                    </c:forEach>
 										</select>
+										<div class="mt-1 mx-1" id="gradeResult"></div>
 									</div>
 									<div class="col-4">
 						              	<label>수강 인원</label>
 										<select class="form-control" id="personal" name="personal">
 						                    <option name="personal" id="personal" value="">수강 인원 선택</option>
 						                    <c:forEach begin="10" end="45" step="5" var="i">
-						                    	<option for="personal" value="${i}" >${i}</option>
+						                    	<option for="personal" value="${i}" >${i}명</option>
 						                    </c:forEach>
 										</select>
+										<div class="mt-1 mx-1" id="personalResult"></div>
 									</div>
 									<div class="col-4">
 						              	<label>학점</label>
 										<select class="form-control" id="completionGrade" name="completionGrade">
 						                    <option name="completionGrade" id="completionGrade" value="">학점 선택</option>
 						                    <c:forEach begin="1" end="4" step="1" var="i">
-						                    	<option for="completionGrade" value="${i}" >${i}</option>
+						                    	<option for="completionGrade" value="${i}" >${i}학점</option>
 						                    </c:forEach>
 										</select>
+										<div class="mt-1 mx-1" id="completionGradeResult"></div>
 									</div>
 								</div>
 								<div class="row" style="margin-top: 20px;">
@@ -147,30 +150,55 @@
 						              	<label>강의 요일</label>
 										<select class="form-control" id="weekday" name="weekday">
 							            	<option name="weekday" id="weekday" value="">요일 선택</option>
-											<option for="weekday" value="월" >월</option>
-											<option for="weekday" value="화">화</option>
-											<option for="weekday" value="수" >수</option>
-											<option for="weekday" value="목">목</option>
-											<option for="weekday" value="금" >금</option>
+											<option for="weekday" value="월" >월요일</option>
+											<option for="weekday" value="화">화요일</option>
+											<option for="weekday" value="수" >수요일</option>
+											<option for="weekday" value="목">목요일</option>
+											<option for="weekday" value="금" >금요일</option>
 										</select>
+										<div class="mt-1 mx-1" id="weekdayResult"></div>
 									</div>
 									<div class="col-4">
 						              	<label>시작 시간</label>
 										<select class="form-control" id="startTime" name="startTime">
-						                    <option name="startTime" id="startTime" value="">시작시간 선택</option>
-						                    <c:forEach begin="1" end="9" step="1" var="i">
-						                    	<option for="startTime" value="${i}" >${i}</option>
+						                    <option name="startTime" id="startTime" value="">시작 시간 선택</option>
+						                    <c:forEach begin="1" end="10" step="1" var="i">
+						                    	<option for="startTime" value="${i}" >
+						                    		<c:if test="${i eq 1}"> 09:00</c:if>
+													<c:if test="${i eq 2}"> 10:00</c:if>
+													<c:if test="${i eq 3}"> 11:00</c:if>
+													<c:if test="${i eq 4}"> 12:00</c:if>
+													<c:if test="${i eq 5}"> 13:00</c:if>
+													<c:if test="${i eq 6}"> 14:00</c:if>
+													<c:if test="${i eq 7}"> 15:00</c:if>
+													<c:if test="${i eq 8}"> 16:00</c:if>
+													<c:if test="${i eq 9}"> 17:00</c:if>
+													<c:if test="${i eq 10}"> 18:00</c:if>
+												</option>
 						                    </c:forEach>
 										</select>
+										<div class="mt-1 mx-1" id="startTimeResult"></div>
 									</div>
 									<div class="col-4">
 						              	<label>종료 시간</label>
 										<select class="form-control" id="endTime" name="endTime">
-						                    <option name="endTime" id="endTime" value="">종료시간 선택</option>
-						                    <c:forEach begin="1" end="9" step="1" var="i">
-						                    	<option for="endTime" value="${i}" ${update.endTime == i ?'selected':''}>${i}</option>
+						                    <option name="endTime" id="endTime" value="">종료 시간 선택</option>
+						                    <c:forEach begin="1" end="10" step="1" var="i">
+						                    	<option for="endTime" value="${i}" ${update.endTime == i ?'selected':''}>
+						                    		<c:if test="${i eq 1}"> 10:00</c:if>
+													<c:if test="${i eq 2}"> 11:00</c:if>
+													<c:if test="${i eq 3}"> 12:00</c:if>
+													<c:if test="${i eq 4}"> 13:00</c:if>
+													<c:if test="${i eq 5}"> 14:00</c:if>
+													<c:if test="${i eq 6}"> 15:00</c:if>
+													<c:if test="${i eq 7}"> 16:00</c:if>
+													<c:if test="${i eq 8}"> 17:00</c:if>
+													<c:if test="${i eq 9}"> 18:00</c:if>
+													<c:if test="${i eq 10}"> 19:00</c:if>
+						                    	</option>
 						                    </c:forEach>
 										</select>
+										<div class="mt-1 mx-1" id="endTimeResult"></div>
 									</div>
 								</div>
 								<div style="width:auto; float: right; margin-top: 50px">
@@ -196,9 +224,7 @@
 		function updateDepartment() {
 			let college = new Array()
 			<c:forEach items = "${college}" var="col" >
-	         	/*  console.log(${collegeVO.collegeNum})*/
 				college.push(${col.collegeNum})
-	        	 /* 1,2,3,4,5,6 */
 			</c:forEach>
 			$("#deptNum option[value='전체']").remove();   
 			$("#deptNum").empty();
@@ -217,6 +243,7 @@
 			}
 	    }
 	</script>
+	
 	<script>
 		const startTimeSelect = document.getElementById("startTime");
 		const endTimeSelect = document.getElementById("endTime");
@@ -226,11 +253,32 @@
 		
 		    endTimeSelect.innerHTML = '<option name="endTime" id="endTime" value="">종료시간 선택</option>';
 		
-		    for (let i = selectedStartTime + 1; i <= 9; i++) {
+		    for (let i = selectedStartTime; i <= 10; i++) {
 				const option = document.createElement("option");
 		      	option.setAttribute("for", "endTime");
 		      	option.setAttribute("value", i);
-		      	option.textContent = i;
+		      	switch(i){
+		      	case 1: option.textContent = '10:00';
+      					break;
+		      	case 2: option.textContent = '12:00';
+      					break;
+		      	case 3: option.textContent = '12:00';
+      					break;
+		      	case 4: option.textContent = '13:00';
+      					break;
+		      	case 5: option.textContent = '14:00';
+      					break;
+		      	case 6: option.textContent = '15:00';
+      					break;
+		      	case 7: option.textContent = '16:00';
+      					break;
+		      	case 8: option.textContent = '17:00';
+      					break;
+		      	case 9: option.textContent = '18:00';
+		      			break;
+		      	case 10: option.textContent = '19:00';
+		      			break;
+		      	}
 		      	endTimeSelect.appendChild(option);
 		    }
 	  	});

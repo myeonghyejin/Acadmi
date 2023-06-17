@@ -48,8 +48,8 @@
 			            	<table class="table table-bordered" style="text-align: center;background-color:white;">
 								<tbody>
 									<tr>
-								    	<th style="background-color:#ECEFF1;color:#17a2b8;vertical-align:middle;" rowspan="2">담당교수</th>
-										<th style="background-color:#ECEFF1;color:#17a2b8;">성명</th>
+								    	<th style="background-color:#ECEFF1;color:#17a2b8;vertical-align:middle;" rowspan="2">담당 교수</th>
+										<th style="background-color:#ECEFF1;color:#17a2b8;">이름</th>
 								        <th style="background-color:#ECEFF1;color:#17a2b8;">전화번호</th>
 								        <th style="background-color:#ECEFF1;color:#17a2b8;">연구실</th>
 								        <th style="background-color:#ECEFF1;color:#17a2b8;">이메일</th>

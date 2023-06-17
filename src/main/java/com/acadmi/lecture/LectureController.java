@@ -176,6 +176,7 @@ public class LectureController {
 	public ModelAndView getLectureAttendee(Pagination pagination,LectureVO lectureVO, StudentVO studentVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		pagination.setLectureNum(lectureVO.getLectureNum());
+		
 		List<StudentVO> ar = lectureService.getLectureAttendee(pagination);
 		mv.addObject("list",ar);
 		lectureVO = lectureService.getLectureDetail(lectureVO);

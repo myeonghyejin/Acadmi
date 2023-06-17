@@ -8,10 +8,9 @@
 	}
 </style>
 
-<div class="sidebar-dropdown">
+<div class="sidebar-dropdown" style="padding-top:70px;">
 
 	<!-- Menu -->
-		<h3 style="margin-top: 20px; text-align: center;"><a href="/student/lecture/main?lectureNum=${lecture.lectureNum}">${lecture.lectureName}</a></h3>
 	
 	<!-- Submenu_1 -->
 	<button onclick="myFunction_1()" class="sidebar-menu">

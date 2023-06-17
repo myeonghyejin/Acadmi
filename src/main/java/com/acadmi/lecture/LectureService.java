@@ -57,7 +57,15 @@ public class LectureService {
 	}
 	//참여자 정보
 	public List<StudentVO> getLectureAttendee(Pagination pagination) throws Exception{
-		return (List<StudentVO>) lectureDAO.getLectureAttendee(pagination);
+		pagination.makeStartRow();
+		pagination.makeNum(lectureDAO.getTotalAttendee(pagination));
+		
+		if(lectureDAO.getTotalAttendee(pagination) == 0) {
+			pagination.setLastNum(1L);
+			pagination.setNext(false);
+		}
+		
+		return lectureDAO.getLectureAttendee(pagination);
 	}
 	//계획서 정보
 	public LectureVO getSyllabusDetail(LectureVO lectureVO) throws Exception{

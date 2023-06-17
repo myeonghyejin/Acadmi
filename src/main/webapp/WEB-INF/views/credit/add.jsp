@@ -92,10 +92,22 @@
 					                    				<td width:"30" style="vertical-align:middle;">${attendee.departmentVO.deptName}</td>
 					                    				<td width:"30" style="vertical-align:middle;">${attendee.name}</td>
 					                    				<td width:"30" style="vertical-align:middle;">${attendee.grade}학년</td>
-					                    				<td><input type="number" name="semiGrade${status.count}" id="semiGrade${status.count}" placeholder="중간 점수" style="width:100px;text-align:center;"><br><div class="mt-1" style="font-size:13px;" id="semiResult${status.count}"></div></td>
-					                    				<td><input type="number" name="finalGrade${status.count}" id="finalGrade${status.count}" placeholder="기말 점수" style="width:100px;text-align:center;"><br><div class="mt-1" style="font-size:13px;" id="finalResult${status.count}"></div></td>
-					                    				<td><input type="number" name="reportGrade${status.count}" id="reportGrade${status.count}" placeholder="과제 점수" style="width:100px;text-align:center;"><br><div class="mt-1" style="font-size:13px;" id="reportResult${status.count}"></div></td>
-					                    				<td><input type="number" name="attendance${status.count}" id="attendance${status.count}" placeholder="출석 점수" style="width:100px;text-align:center;"><br><div class="mt-1" style="font-size:13px;" id="attendanceResult${status.count}"></div></td>
+					                    				<td>
+					                    					<input type="number" name="semiGrade${status.count}" id="semiGrade${status.count}" placeholder="중간 점수" style="width:100px;text-align:center;"><br>
+					                    					<div class="mt-1" style="font-size:13px;" id="semiResult${status.count}"></div>
+					                    				</td>
+					                    				<td>
+					                    					<input type="number" name="finalGrade${status.count}" id="finalGrade${status.count}" placeholder="기말 점수" style="width:100px;text-align:center;"><br>
+					                    					<div class="mt-1" style="font-size:13px;" id="finalResult${status.count}"></div>
+					                    				</td>
+					                    				<td>
+					                    					<input type="number" name="reportGrade${status.count}" id="reportGrade${status.count}" placeholder="과제 점수" style="width:100px;text-align:center;"><br>
+					                    					<div class="mt-1" style="font-size:13px;" id="reportResult${status.count}"></div>
+					                    				</td>
+					                    				<td>
+					                    					<input type="number" name="attendance${status.count}" id="attendance${status.count}" placeholder="출석 점수" style="width:100px;text-align:center;"><br>
+					                    					<div class="mt-1" style="font-size:13px;" id="attendanceResult${status.count}"></div>
+					                    				</td>
 					                    			</tr>
 					                    		</c:forEach>
 					                    	</tbody>

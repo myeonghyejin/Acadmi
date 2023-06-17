@@ -10,8 +10,8 @@
 					<div class="col-9 my-1 mr-4" style=" float: left: ;">
 					<h4 class="my-2 mx-4" style="color:#17a2b8;margin-bottom:0px;">공지사항</h4>
 					</div>
-					<div class="col-2 mx-4" style="text-align:right; float: right;">
-						<a class="btn btn-info my-2 mx-3" href="./notice/list">더보기</a>
+					<div class="col-2 ml-4" style="text-align:right; float: right;">
+						<a class="btn btn-info my-2 mx-2" href="./notice/list">더보기</a>
 					</div>
 					</div>
 					<hr class="mx-3" style="margin:0px">

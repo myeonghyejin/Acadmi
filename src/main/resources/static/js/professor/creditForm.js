@@ -5,10 +5,10 @@
 	const attendanceGrades = document.querySelectorAll("[id^='attendance']");
 	const frm = document.getElementById("frm");
 	const btn = document.getElementById("btn");
-	let semiCheck=false;
-	let finalCheck=false;
-	let reportCheck=false;
-	let attendanceCheck=false;
+	let semiCheck=[true];
+	let finalCheck=[];
+	let reportCheck=[];
+	let attendanceCheck=[];
 
 	//중간 점수
 	semiGrades.forEach(semiGrade => {
@@ -17,23 +17,39 @@
 		semiGrade.addEventListener("blur",function(){
 			 if(semiGrade.value>100){
 		        semiResult.innerHTML='최대 점수는 100점입니다.';
-		        semiCheck=false;
+		        semiCheck[index]=false;
+		        console.log(index)
+		        console.log(semiCheck)
+		        console.log(semiTrue)
 		        semiResult.classList.add("redResult")
 		    }else if(semiGrade.value<0){
 		        semiResult.innerHTML='최소 점수는 0점입니다.';
-		        semiCheck=false;
+		        semiCheck[index]=false;
+		        console.log(index)
+		        console.log(semiCheck)
+		        console.log(semiTrue)
 		        semiResult.classList.add("redResult")
 		    }else if(semiGrade.value.length!=0){
 		        semiResult.innerHTML='';
-		        semiCheck=true;
+		        semiCheck[index]=true;
+		        console.log(index)
+		        console.log(semiCheck[1])
+		        console.log(semiCheck[2])
+		        console.log(semiTrue)
 		        semiResult.classList.remove("redResult")
 		    }else{
 		        semiResult.innerHTML='중간 점수를 입력해주세요.';
-		        semiCheck=false;
+		        semiCheck[index]=false;
+		        console.log(index)
+		        console.log(semiCheck[1])
+		        console.log(semiCheck[2])
+		        console.log(semiTrue)
 		        semiResult.classList.add("redResult")
 		    }
 		});
 	});
+	let semiTrue = semiCheck.includes('false');
+
 	
 	//기말 점수
 	finalGrades.forEach(finalGrade => {
@@ -42,19 +58,19 @@
 		finalGrade.addEventListener("blur",function(){
 			if(finalGrade.value>100){
 		        finalResult.innerHTML='최대 점수는 100점입니다.';
-		        finalCheck=false;
+		        finalCheck[index]=false;
 		        finalResult.classList.add("redResult")
 		    }else if(finalGrade.value<0){
 		        finalResult.innerHTML='최소 점수는 0점입니다.';
-		        finalCheck=false;
+		        finalCheck[index]=false;
 		        finalResult.classList.add("redResult")
 		    }else if(finalGrade.value.length!=0){
 		        finalResult.innerHTML='';
-		        finalCheck=true;
+		        finalCheck[index]=true;
 		        finalResult.classList.remove("redResult")
 		    }else{
 		        finalResult.innerHTML='기말 점수를 입력해주세요.';
-		        finalCheck=false;
+		        finalCheck[index]=false;
 		        finalResult.classList.add("redResult")
 		    }
 		});
@@ -67,19 +83,19 @@
 		reportGrade.addEventListener("blur",function(){
 			if(reportGrade.value>100){
 		        reportResult.innerHTML='최대 점수는 100점입니다.';
-		        reportCheck=false;
+		        reportCheck[index]=false;
 		        reportResult.classList.add("redResult")
 		    }else if(reportGrade.value<0){
 		        reportResult.innerHTML='최소 점수는 0점입니다.';
-		        reportCheck=false;
+		        reportCheck[index]=false;
 		        reportResult.classList.add("redResult")
 		    }else if(reportGrade.value.length!=0){
 		        reportResult.innerHTML='';
-		        reportCheck=true;
+		        reportCheck[index]=true;
 		        reportResult.classList.remove("redResult")
 		    }else{
 		        reportResult.innerHTML='과제 점수를 입력해주세요.';
-		        reportCheck=false;
+		        reportCheck[index]=false;
 		        reportResult.classList.add("redResult")
 		    }
 		});
@@ -92,28 +108,32 @@
 		attendance.addEventListener("blur",function(){
 			if(attendance.value>100){
 		        attendanceResult.innerHTML='최대 점수는 100점입니다.';
-		        attendanceCheck=false;
+		        attendanceCheck[index]=false;
 		        attendanceResult.classList.add("redResult")
 		    }else if(attendance.value<0){
 		        attendanceResult.innerHTML='최소 점수는 0점입니다.';
-		        attendanceCheck=false;
+		        attendanceCheck[index]=false;
 		        attendanceResult.classList.add("redResult")
 		    }else if(attendance.value.length!=0){
 		        attendanceResult.innerHTML='';
-		        attendanceCheck=true;
+		        attendanceCheck[index]=true;
 		        attendanceResult.classList.remove("redResult")
 		    }else{
 		        attendanceResult.innerHTML='출석 점수를 입력해주세요.';
-		        attendanceCheck=false;
+		        attendanceCheck[index]=false;
 		        attendanceResult.classList.add("redResult")
 		    }
 		});
 	});
-
+	
+	
+	const finalTrue = finalCheck.every(element => element === true);
+	const reportTrue = reportCheck.every(element => element === true);
+	const attendanceTrue = attendanceCheck.every(element => element === true);
+	
 	//form 전송
 	btn.addEventListener("click",function(){
-	    //if(!checks.includes(false)) ->회원가입성공
-	    if(semiCheck&&finalCheck&&reportCheck&&attendanceCheck){
+	    if(semiTrue&&finalTrue&&reportTrue&&attendanceTrue){
 	        frm.submit();
 	    }else{
 	        alert("점수를 모두 입력해주세요.")

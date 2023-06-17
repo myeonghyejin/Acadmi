@@ -83,7 +83,31 @@
 								                	</tr>
 								                	<tr>
 								                		<th style="background-color:#f8f9fa;color:#17a2b8;">수업 시간</th>
-								                		<td>${lecture.weekday}${lecture.startTime}-${lecture.endTime}</td>
+									                		<td>${lecture.weekday}
+									                			(
+										                		<c:if test="${lecture.startTime eq 1}"> 09:00</c:if>
+																<c:if test="${lecture.startTime eq 2}"> 10:00</c:if>
+																<c:if test="${lecture.startTime eq 3}"> 11:00</c:if>
+																<c:if test="${lecture.startTime eq 4}"> 12:00</c:if>
+																<c:if test="${lecture.startTime eq 5}"> 13:00</c:if>
+																<c:if test="${lecture.startTime eq 6}"> 14:00</c:if>
+																<c:if test="${lecture.startTime eq 7}"> 15:00</c:if>
+																<c:if test="${lecture.startTime eq 8}"> 16:00</c:if>
+																<c:if test="${lecture.startTime eq 9}"> 17:00</c:if>
+																<c:if test="${lecture.startTime eq 10}"> 18:00</c:if>
+										                		~
+										                		<c:if test="${lecture.endTime eq 1}"> 09:00</c:if>
+																<c:if test="${lecture.endTime eq 2}"> 10:00</c:if>
+																<c:if test="${lecture.endTime eq 3}"> 11:00</c:if>
+																<c:if test="${lecture.endTime eq 4}"> 12:00</c:if>
+																<c:if test="${lecture.endTime eq 5}"> 13:00</c:if>
+																<c:if test="${lecture.endTime eq 6}"> 14:00</c:if>
+																<c:if test="${lecture.endTime eq 7}"> 15:00</c:if>
+																<c:if test="${lecture.endTime eq 8}"> 16:00</c:if>
+																<c:if test="${lecture.endTime eq 9}"> 17:00</c:if>
+																<c:if test="${lecture.endTime eq 10}"> 18:00</c:if>
+																)
+									                		</td>
 								                		<th style="background-color:#f8f9fa;color:#17a2b8;">수업 장소</th>
 								                		<td>${lecture.lectureBuilding}${lecture.lectureRoom}</td>
 								                		<th style="background-color:#f8f9fa;color:#17a2b8;">학점</th>

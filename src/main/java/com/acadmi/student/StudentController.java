@@ -88,8 +88,8 @@ public class StudentController {
 		List<ClassVO> ar = studentService.getSyllabusClass(lectureVO); 
 		mv.addObject("lecture", lectureVO);
 		mv.addObject("classes",ar);
-		mv.setViewName("student/lecture/main");
 		mv.setViewName("temp/lecture_header");
+		mv.setViewName("student/lecture/main");
 		return mv;
 		
 	}
@@ -103,6 +103,7 @@ public class StudentController {
 		lectureVO = studentService.getLectureProfessor(lectureVO);
 		mv.addObject("list", ar);
 		mv.addObject("lecture", lectureVO);
+		mv.setViewName("temp/lecture_header");
 		mv.setViewName("student/lecture/attendee");
 		
 		return mv;
@@ -120,6 +121,7 @@ public class StudentController {
 		
 		mv.addObject("lecture", lectureVO);
 		mv.addObject("classes", ar);
+		mv.setViewName("temp/lecture_header");
 		mv.setViewName("student/lecture/syllabusDetail");
 		
 		return mv;
