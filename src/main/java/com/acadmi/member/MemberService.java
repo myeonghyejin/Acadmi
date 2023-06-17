@@ -77,47 +77,22 @@ public class MemberService implements UserDetailsService{
 		return memberVO;
 	}
 	
-//	public boolean getFindPw(MemberVO memberVO, BindingResult bindingResult) throws Exception {
-//		boolean result = false;
-//		
-//		result = bindingResult.hasErrors();
-//		
-//		if(memberDAO.getFindPw(memberVO) != null) {
-//			String charaters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-//			SecureRandom random = new SecureRandom();
-//			StringBuffer sb = new StringBuffer(6);
-//			for(int i = 0;i<6;i++) {
-//				sb.append(charaters.charAt(random.nextInt(charaters.length())));
-//			}
-//			String password = sb.toString();
-//			mailManager.send(memberVO.getEmail(), "임시 비밀번호 입니다", "임시비밀번호는 " + password + "입니다.");
-//			memberVO.setPassword(passwordEncoder.encode(password));
-//			memberDAO.setPwUpdate(memberVO);
-//
-//		} else {
-//			bindingResult.rejectValue("email", "member.username.email");
-//			result = true;
-//		}
-//		
-//		return result;
-//		
-//	}
-	
 	public boolean getFindPw(MemberVO memberVO, BindingResult bindingResult) throws Exception {
 		boolean result = false;
 		
 		result = bindingResult.hasErrors();
 		
 		if(memberDAO.getFindPw(memberVO) != null) {
-			String link = "http://localhost/member/pwUpdate";
-			String pwCheck = "<html><body><p>링크를 클릭하세요: <a href=\"" + link + "\">비밀번호 수정</a></p></body></html>";
-			
-			
-			mailManager.send(memberVO.getEmail(), "이메일 인증", "이메일 인증을 완료하려면 다음 링크를 클릭하세요: " + pwCheck);
-//			String password = sb.toString();
-//			mailManager.send(memberVO.getEmail(), "임시 비밀번호 입니다", "임시비밀번호는 " + password + "입니다.");
-//			memberVO.setPassword(passwordEncoder.encode(password));
-//			memberDAO.setPwUpdate(memberVO);
+			String charaters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+			SecureRandom random = new SecureRandom();
+			StringBuffer sb = new StringBuffer(6);
+			for(int i = 0;i<6;i++) {
+				sb.append(charaters.charAt(random.nextInt(charaters.length())));
+			}
+			String password = sb.toString();
+			mailManager.send(memberVO.getEmail(), "임시 비밀번호 발급", "임시비밀번호는 " + password + "입니다." + " 다시 로그인 시도하세요.");
+			memberVO.setPassword(passwordEncoder.encode(password));
+			memberDAO.setPwUpdate(memberVO);
 
 		} else {
 			bindingResult.rejectValue("email", "member.username.email");
@@ -136,7 +111,7 @@ public class MemberService implements UserDetailsService{
 		if(!memberVO.isEnabled()) {
 			
 			String link = "http://localhost/member/login";
-			String emailCheck = "<html><body><p>Click the following link: <a href=\"" + link + "\">Link</a></p></body></html>";
+			String emailCheck = "<html><body><p>링크를 클릭하세요: <a href=\"" + link + "\">최초 이메일 인증</a></p></body></html>";
 			
 			
 			mailManager.send(memberVO.getEmail(), "이메일 인증", "이메일 인증을 완료하려면 다음 링크를 클릭하세요: " + emailCheck);
@@ -179,6 +154,11 @@ public class MemberService implements UserDetailsService{
 	
 	public int setStudentUpdate(StudentVO studentVO, MultipartFile multipartFile) throws Exception{
 		int result = memberDAO.setStudentUpdate(studentVO);
+		
+		MemberVO memberVO = new MemberVO();
+		
+		memberVO.setPassword(passwordEncoder.encode(memberVO.getPassword()));
+		memberDAO.setPwUpdate(memberVO);
 			
 			if(multipartFile != null) {
 				String fileName = fileManager.saveFile(path, multipartFile);
@@ -209,6 +189,10 @@ public class MemberService implements UserDetailsService{
 	public int setProfessorUpdate(ProfessorVO professorVO, MultipartFile multipartFile) throws Exception{
 		int result = memberDAO.setProfessorUpdate(professorVO);
 		
+		MemberVO memberVO = new MemberVO();
+		
+		memberVO.setPassword(passwordEncoder.encode(memberVO.getPassword()));
+		
 		if(multipartFile != null) {
 			String fileName = fileManager.saveFile(path, multipartFile);
 			MemberFilesVO memberFilesVO = new MemberFilesVO();
@@ -235,6 +219,10 @@ public class MemberService implements UserDetailsService{
 	
 	public int setAdministratorUpdate(AdministratorVO administratorVO, MultipartFile multipartFile) throws Exception{
 		int result = memberDAO.setAdministratorUpdate(administratorVO);
+		
+		MemberVO memberVO = new MemberVO();
+		
+		memberVO.setPassword(passwordEncoder.encode(memberVO.getPassword()));
 		
 		if(multipartFile != null) {
 			String fileName = fileManager.saveFile(path, multipartFile);

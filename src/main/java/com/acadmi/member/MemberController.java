@@ -73,7 +73,7 @@ public class MemberController {
 				mv.setViewName("member/findPw");
 				return mv;
 			}
-			mv.setViewName("member/login");
+			mv.setViewName("member/findPwEmailCheck");
 			return mv;
 		}
 	   

@@ -107,6 +107,11 @@
 																		<p class="text-muted"><input value="${professorVO.address}" class="form-control" type="text" id="address" name="address"></p>
 																	<strong><i class="mr-1"></i> 상세 주소 입력</strong>
 																		<p class="text-muted"><input value="${professorVO.addressDetail}" class="form-control" type="text" id="addressDetail" name="addressDetail"></p>
+																<hr>
+																	<strong><i class="fas fa-lock mr-1"></i> 비밀번호</strong>
+																		<p class="text-muted"><input class="form-control" type="password" id="password" name="password" placeholder="비밀번호를 입력하세요."/></p>
+																	<strong><i class="mr-1"></i> 비밀번호 확인</strong>
+																		<p class="text-muted"><input class="form-control" type="password" id="password" name="password" placeholder="비밀번호를 다시 입력하세요."/></p>
 														</div>
 													</c:forEach>
 														<sec:authentication property="Principal" var="user"/>
