@@ -24,9 +24,31 @@
                 <div class="card card-info card-outline">
                     <c:forEach items="${list}" var="lectureVO">
                         <div class="card-header">
-                            <a href="lecture/main?lectureNum=${lectureVO.lectureNum}" style="color: black;">${lectureVO.lectureName}</a>
+                            <a href="student/lecture/main?lectureNum=${lectureVO.lectureNum}" style="color: black;">${lectureVO.lectureName}</a>
                             &nbsp;[ ${lectureVO.professorVO.name} ]
-                            &nbsp;( ${lectureVO.weekday}${lectureVO.startTime}-${lectureVO.endTime} )
+                            &nbsp;&nbsp;( ${lectureVO.weekday}
+	            			<c:if test="${lectureVO.startTime eq 1}"> 09:00</c:if>
+							<c:if test="${lectureVO.startTime eq 2}"> 10:00</c:if>
+							<c:if test="${lectureVO.startTime eq 3}"> 11:00</c:if>
+							<c:if test="${lectureVO.startTime eq 4}"> 12:00</c:if>
+							<c:if test="${lectureVO.startTime eq 5}"> 13:00</c:if>
+							<c:if test="${lectureVO.startTime eq 6}"> 14:00</c:if>
+							<c:if test="${lectureVO.startTime eq 7}"> 15:00</c:if>
+							<c:if test="${lectureVO.startTime eq 8}"> 16:00</c:if>
+							<c:if test="${lectureVO.startTime eq 9}"> 17:00</c:if>
+							<c:if test="${lectureVO.startTime eq 10}"> 18:00</c:if>
+	            			~
+	            			<c:if test="${lectureVO.endTime eq 1}"> 10:00</c:if>
+							<c:if test="${lectureVO.endTime eq 2}"> 11:00</c:if>
+							<c:if test="${lectureVO.endTime eq 3}"> 12:00</c:if>
+							<c:if test="${lectureVO.endTime eq 4}"> 13:00</c:if>
+							<c:if test="${lectureVO.endTime eq 5}"> 14:00</c:if>
+							<c:if test="${lectureVO.endTime eq 6}"> 15:00</c:if>
+							<c:if test="${lectureVO.endTime eq 7}"> 16:00</c:if>
+							<c:if test="${lectureVO.endTime eq 8}"> 17:00</c:if>
+							<c:if test="${lectureVO.endTime eq 9}"> 18:00</c:if>
+							<c:if test="${lectureVO.endTime eq 10}"> 19:00</c:if>
+							)
                         </div>
                     </c:forEach>
                 </div>

@@ -60,40 +60,65 @@
 	          					<!-- card-header start -->
 								<div class="card-body">
 									<h3 class="my-3 mx-3" style="text-align:center;margin-top:40px;">${lecture.year}년도 ${lecture.semester}학기 강의계획서</h3>
+									<input type="hidden" name="lectureNum" value="${lecture.lectureNum}">
 									<div class="row" style="margin-top: 20px">
 	              						<!-- table-body start -->
 	              						<div class="card-body">
-		              						<c:if test="${empty lecture.syllabusNum}">
+		              						<c:if test="${empty lectureVO.syllabusVO.syllabusNum}">
 		              							<div style="vertical-align:middle;text-align:center;">
 		              								<h5 style="color:gray;">현재 강의계획서가 작성되지 않았습니다.</h5>
 		              							</div>
 		              						</c:if>
-		              						<c:if test="${not empty lecture.syllabusNum}">
+		              						<c:if test="${not empty lectureVO.syllabusVO.syllabusNum}">
 		                						<table class="table table-bordered" style="text-align: center;">
 									                <tbody>
 									                	<tr>
 									                		<th style="background-color:#f8f9fa;color:#17a2b8;">강의 이름</th>
-									                		<td colspan="3">${lecture.lectureName}</td>
+									                		<td colspan="3">${lectureVO.lectureName}</td>
 									                		<th style="background-color:#f8f9fa;color:#17a2b8;">교과 구분</th>
-									                		<td colspan="3">${lecture.category}</td>
+									                		<td colspan="3">${lectureVO.category}</td>
 									                	
 									                	</tr>
 									                	<tr>
 									                		<th style="background-color:#f8f9fa;color:#17a2b8;">강의 번호</th>
-									                		<td>${lecture.lectureNum}</td>
+									                		<td>${lectureVO.lectureNum}</td>
 									                		<th style="background-color:#f8f9fa;color:#17a2b8;">학부(과)</th>
-									                		<td>${lecture.departmentVO.deptName}</td>
+									                		<td>${lectureVO.departmentVO.deptName}</td>
 									                		<th style="background-color:#f8f9fa;color:#17a2b8;">학년</th>
-									                		<td>${lecture.grade}학년</td>
+									                		<td>${lectureVO.grade}학년</td>
 									                		
 									                	</tr>
 									                	<tr>
 									                		<th style="background-color:#f8f9fa;color:#17a2b8;">수업 시간</th>
-									                		<td>${lecture.weekday}${lecture.startTime}-${lecture.endTime}</td>
+									                		<td>${lectureVO.weekday}
+									                			(
+										                		<c:if test="${lectureVO.startTime eq 1}"> 09:00</c:if>
+																<c:if test="${lectureVO.startTime eq 2}"> 10:00</c:if>
+																<c:if test="${lectureVO.startTime eq 3}"> 11:00</c:if>
+																<c:if test="${lectureVO.startTime eq 4}"> 12:00</c:if>
+																<c:if test="${lectureVO.startTime eq 5}"> 13:00</c:if>
+																<c:if test="${lectureVO.startTime eq 6}"> 14:00</c:if>
+																<c:if test="${lectureVO.startTime eq 7}"> 15:00</c:if>
+																<c:if test="${lectureVO.startTime eq 8}"> 16:00</c:if>
+																<c:if test="${lectureVO.startTime eq 9}"> 17:00</c:if>
+																<c:if test="${lectureVO.startTime eq 10}"> 18:00</c:if>
+										                		~
+										                		<c:if test="${lectureVO.endTime eq 1}"> 09:00</c:if>
+																<c:if test="${lectureVO.endTime eq 2}"> 10:00</c:if>
+																<c:if test="${lectureVO.endTime eq 3}"> 11:00</c:if>
+																<c:if test="${lectureVO.endTime eq 4}"> 12:00</c:if>
+																<c:if test="${lectureVO.endTime eq 5}"> 13:00</c:if>
+																<c:if test="${lectureVO.endTime eq 6}"> 14:00</c:if>
+																<c:if test="${lectureVO.endTime eq 7}"> 15:00</c:if>
+																<c:if test="${lectureVO.endTime eq 8}"> 16:00</c:if>
+																<c:if test="${lectureVO.endTime eq 9}"> 17:00</c:if>
+																<c:if test="${lectureVO.endTime eq 10}"> 18:00</c:if>
+																)
+									                		</td>
 									                		<th style="background-color:#f8f9fa;color:#17a2b8;">수업 장소</th>
-									                		<td>${lecture.lectureBuilding}${lecture.lectureRoom}</td>
+									                		<td>${lectureVO.lectureBuilding}${lecture.lectureRoom}</td>
 									                		<th style="background-color:#f8f9fa;color:#17a2b8;">학점</th>
-									                		<td>${lecture.completionGrade}학점</td>
+									                		<td>${lectureVO.completionGrade}학점</td>
 									                	</tr>
 													</tbody>
 												</table>
@@ -102,7 +127,7 @@
 									                <tbody>
 									                	<tr>
 									                		<th style="background-color:#f8f9fa;color:#17a2b8;">교과 개요</th>
-									                		<td colspan="3">${lecture.syllabusVO.curriculumOutline}</td>
+									                		<td colspan="3">${lectureVO.syllabusVO.curriculumOutline}</td>
 									                	</tr>
 									                	<tr>
 									                		<th style="background-color:#f8f9fa;color:#17a2b8;vertical-align:middle;" rowspan="2">목표</th>
@@ -111,9 +136,9 @@
 									                		<th style="background-color:#f8f9fa;color:#17a2b8;">평가 방법</th>
 									                	</tr>
 									                	<tr>
-									                		<td>${lecture.syllabusVO.method}</td>
-									                		<td>${lecture.syllabusVO.goal}</td>
-									                		<td>${lecture.syllabusVO.evaluation}</td>
+									                		<td>${lectureVO.syllabusVO.method}</td>
+									                		<td>${lectureVO.syllabusVO.goal}</td>
+									                		<td>${lectureVO.syllabusVO.evaluation}</td>
 									                	</tr>
 													</tbody>
 												</table>
@@ -127,9 +152,9 @@
 									                		<th style="background-color:#f8f9fa;color:#17a2b8;">출판사</th>
 									                	</tr>
 									                	<tr>
-									                		<td>${lecture.syllabusVO.bookName}</td>
-									                		<td>${lecture.syllabusVO.bookAuthor}</td>
-									                		<td>${lecture.syllabusVO.bookPublisher}</td>
+									                		<td>${lectureVO.syllabusVO.bookName}</td>
+									                		<td>${lectureVO.syllabusVO.bookAuthor}</td>
+									                		<td>${lectureVO.syllabusVO.bookPublisher}</td>
 									                	</tr>
 									                	<tr>
 									                		<th style="background-color:#f8f9fa;color:#17a2b8;">출판년도</th>
@@ -137,9 +162,9 @@
 									                		<th style="background-color:#f8f9fa;color:#17a2b8;">비고</th>
 									                	</tr>
 									                	<tr>
-									                		<td>${lecture.syllabusVO.bookPublicationDate}</td>
-									                		<td>${lecture.syllabusVO.bookISBN}</td>
-									                		<td>${lecture.syllabusVO.bookNote}</td>
+									                		<td>${lectureVO.syllabusVO.bookPublicationDate}</td>
+									                		<td>${lectureVO.syllabusVO.bookISBN}</td>
+									                		<td>${lectureVO.syllabusVO.bookNote}</td>
 									                	</tr>
 													</tbody>
 												</table>

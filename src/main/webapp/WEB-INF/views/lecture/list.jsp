@@ -34,7 +34,6 @@
 		<!-- Header 끝 -->
 
 		<!-- Main Contents -->
-		<!-- <div class="container-fluid"> -->
 			<div class="content-wrapper">
 				<!-- Contents -->
 				<div class="col">
@@ -55,7 +54,6 @@
 								<div class="card">
 									<!-- table-header start -->
 									<div class="card-header">
-					                	<!-- <h3 class="card-title" style="font-weight:normal;">강의 목록</h3> -->
 					                	<div class="card-tools">
 					                		<div class="mr-2">
 					                			<input type="hidden" value="${list[0].temporary}">
@@ -99,7 +97,7 @@
 					 										<td style="vertical-align:middle;">${LectureVO.lectureName}</td>
 					 									</c:if>
 					 									<c:if test="${LectureVO.temporary eq 1}">
-					 										<td style="vertical-align:middle;"><a href="./main?lectureNum=${LectureVO.lectureNum}" style="color: black;">${LectureVO.lectureName}</a></td>
+					 										<td style="vertical-align:middle;"><a href="./main?lectureNum=${LectureVO.lectureNum}">${LectureVO.lectureName}</a></td>
 					 									</c:if>
 					 											
 					 									<td style="vertical-align:middle;">${LectureVO.category}</td>

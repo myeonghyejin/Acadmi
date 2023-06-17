@@ -56,7 +56,15 @@
 									</tr>
 								    <tr>
 								    	<td>${lecture.professorVO.name}</td>
-								        <td>0${lecture.professorVO.phone}</td>
+								        <td>
+								        	<script type="text/javascript">
+									        	const number = '${lecture.professorVO.phone}'
+									        	const countryCode = number.substring(0, 2);
+									        	const areaCode = number.substring(2, 6);
+									        	const phoneNumber = number.substring(6);
+									        	document.write(0,countryCode,'-',areaCode,'-',phoneNumber);
+								        	</script>
+								        </td>
 								        <td>${lecture.professorVO.professorRoom}</td>
 								        <td>${lecture.professorVO.email}</td>
 									</tr>

@@ -44,10 +44,10 @@
 		</sec:authorize>
 		<!-- Header 끝 -->
 		
-		<div class="content-wrapper">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col">
+		<!-- Main Contents -->
+			<div class="content-wrapper">
+				<!-- Contents -->
+				<div class="col">
 						<!--header start  -->
 						<div class="row" style="padding-top:10px">
 		                  <div class="col-12">
@@ -59,7 +59,6 @@
 		               <!--header end  -->
 		               
 		               <!-- Main content -->
-		               <section class="content">
 		               		<div class="card search">
 		               			<div class="row content">
 		               				<label style="margin : 10px;">수강 년도</label>
@@ -86,13 +85,11 @@
 		               				 <sec:authentication property="principal" var="user"/>
 		               					<thead>
 		               						<tr>
-		               							
-		               							<th style="width : 30%">강좌명</th>
-		               							<th style="width : 10%">담당교수</th>
+		               							<th style="width : 15%">구분</th>
+		               							<th style="width : 30%">강좌 이름</th>
 		               							<th>강의 요일</th>
-		               							<th>시작 시간</th>
-		               							<th>종료 시간</th>
-		               							<th style="width : 10%">구분</th>
+		               							<th>수업 시간</th>
+		               							<th>담당 교수</th>
 		               							<th>학점</th>
 		               							
 		               						</tr>
@@ -100,15 +97,35 @@
 		               					<tbody>
 		               						<c:forEach items="${list}" var="lectureVO" varStatus="status">
 		               							<tr>
-		               								
-		               								<td><a href="./lecture/main?lectureNum=${lectureVO.lectureNum}">${lectureVO.lectureName}</a></td>
-		               								<td>${lectureVO.professorVO.name}</td>
-		               								<td>${lectureVO.weekday}</td>
-		               								<td>${lectureVO.startTime }교시</td>
-		               								<td>${lectureVO.endTime }교시</td>
 		               								<td>
 		               									${lectureVO.category}
 		               								</td>
+		               								<td><a href="./lecture/main?lectureNum=${lectureVO.lectureNum}">${lectureVO.lectureName}</a></td>		               								
+		               								<td>${lectureVO.weekday}요일</td>
+		               								<td>
+								            			<c:if test="${lectureVO.startTime eq 1}"> 09:00</c:if>
+														<c:if test="${lectureVO.startTime eq 2}"> 10:00</c:if>
+														<c:if test="${lectureVO.startTime eq 3}"> 11:00</c:if>
+														<c:if test="${lectureVO.startTime eq 4}"> 12:00</c:if>
+														<c:if test="${lectureVO.startTime eq 5}"> 13:00</c:if>
+														<c:if test="${lectureVO.startTime eq 6}"> 14:00</c:if>
+														<c:if test="${lectureVO.startTime eq 7}"> 15:00</c:if>
+														<c:if test="${lectureVO.startTime eq 8}"> 16:00</c:if>
+														<c:if test="${lectureVO.startTime eq 9}"> 17:00</c:if>
+														<c:if test="${lectureVO.startTime eq 10}"> 18:00</c:if>
+								            			~
+								            			<c:if test="${lectureVO.endTime eq 1}"> 10:00</c:if>
+														<c:if test="${lectureVO.endTime eq 2}"> 11:00</c:if>
+														<c:if test="${lectureVO.endTime eq 3}"> 12:00</c:if>
+														<c:if test="${lectureVO.endTime eq 4}"> 13:00</c:if>
+														<c:if test="${lectureVO.endTime eq 5}"> 14:00</c:if>
+														<c:if test="${lectureVO.endTime eq 6}"> 15:00</c:if>
+														<c:if test="${lectureVO.endTime eq 7}"> 16:00</c:if>
+														<c:if test="${lectureVO.endTime eq 8}"> 17:00</c:if>
+														<c:if test="${lectureVO.endTime eq 9}"> 18:00</c:if>
+														<c:if test="${lectureVO.endTime eq 10}"> 19:00</c:if>		               								
+		               								</td>
+		               								<td>${lectureVO.professorVO.name}</td>
 		               								<td>${lectureVO.completionGrade }학점</td>
 		               								
 		               							</tr>
@@ -117,7 +134,6 @@
 		               				</table>
 		               			</div>
 		               		</div>
-		               </section>
 		               
 					</div>
 				</div>

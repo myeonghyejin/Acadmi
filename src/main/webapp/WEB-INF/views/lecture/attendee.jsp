@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
@@ -118,7 +119,9 @@
 								                    		<td style="vertical-align:middle;">${attendee.username}</td>
 								                    		<td style="vertical-align:middle;">${attendee.name}</td>
 							 								<td style="vertical-align:middle;">${attendee.departmentVO.deptName}</td>
-							 								<td style="vertical-align:middle;">0${attendee.phone}</td>
+							 								<td style="vertical-align:middle;">
+							 									0${fn:substring(attendee.phone, 0, 2)}-${fn:substring(attendee.phone, 2, 6)}-${fn:substring(attendee.phone, 6,10)}
+							 								</td>
 								                    	</tr>
 													</c:forEach>
 												</tbody>
@@ -176,6 +179,7 @@
 		        e.preventDefault();
 		    });
 		</script>
+		
 	</div>
 <!-- ./wrapper -->
 </body>

@@ -11,10 +11,10 @@
 	<c:import url="../temp/style.jsp"></c:import>
 	<!-- CSS/favicon 끝 -->
 	<style>
-	.redResult{
-		color: tomato;
-	}
-</style>
+		.redResult{
+			color: tomato;
+		}
+	</style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 	<div class="wrapper"> 
