@@ -12,137 +12,125 @@
 	rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <style type="text/css">
-
-	#pagination {
-		 display: flex;
-   	 	justify-content: center;
-	
+	#row {
+	  display: flex;
+	  justify-content: center; /* 가로 방향으로 가운데 정렬 */
+	  align-items: center; /* 세로 방향으로 가운데 정렬 */
 	}
 	
-	.content {
-		margin: 30px;
-	}
-	
-	.col {
-		background-color : white;
-	}
-	
-	#table2 {
-		width : 90%; 
-	}
-	
-	h3 {
-		margin : 40px;
-	}
-	.content {
-		margin: 30px;
-	}
-	#add2 {
-		float : right;
-		clear : both;
-		width : 10%;
-		
-	} 
-	.card-title {
-		margin : 20px 0 20px 40px;
-	}
-	.card-body{
-		display: flex;
-	  	justify-content: center;
-	 	align-items: center;
-	 	margin : 10px 0 30px 0;
+	.col-custom {
+	  flex-grow: 1;
 	}
 </style>
 <title>Insert title here</title>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
-	<!-- Header 적용 -->
-	<sec:authorize access="hasRole('ROLE_ADMIN')">
-		<c:import url="../temp/administrator_header.jsp"></c:import>
-	</sec:authorize>
-	
-	<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
-		<c:import url="../temp/administrator_header.jsp"></c:import>
-	</sec:authorize>
-	
-	<sec:authorize access="hasRole('ROLE_PROFESSOR')">
-		<c:import url="../temp/professor_header.jsp"></c:import>
-	</sec:authorize>
+	<div class="wrapper">
+
+		<!-- Header 적용 -->
+		<sec:authorize access="hasRole('ROLE_ADMIN')">
+			<c:import url="../temp/administrator_header.jsp"></c:import>
+		</sec:authorize>
 		
-	<sec:authorize access="hasRole('ROLE_STUDENT')">
-		<c:import url="../temp/student_header.jsp"></c:import>
-	</sec:authorize>
-	<!-- Header 끝 -->
+		<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
+			<c:import url="../temp/administrator_header.jsp"></c:import>
+		</sec:authorize>
+		
+		<sec:authorize access="hasRole('ROLE_PROFESSOR')">
+			<c:import url="../temp/professor_header.jsp"></c:import>
+		</sec:authorize>
+			
+		<sec:authorize access="hasRole('ROLE_STUDENT')">
+			<c:import url="../temp/student_header.jsp"></c:import>
+		</sec:authorize>
+		<!-- Header 끝 -->
 	
-	<div class="content-wrapper">
-		<div class="container-fulid">
-			<div class="row">
-				<div class="col">
-					<!-- header start -->
-	               <div class="row" style="padding-top:10px; margin-left: 10px;">
-	                  <div class="col-12">
-	                     <div class="card">
-	                        <h3 class="my-3 mx-3">학과 조회</h3>
-	                     </div>
-	                  </div>
-	               </div>
-               <!-- header end -->
-					<!-- Main content -->
-				    <section class="content">
-				    
-				      
-				    <form action="./departmentList" id="search-form">
-						<input type="hidden" name="page" value="1">
-						<div class="card search">
-							<div class="row content" >
-								<label style="margin : 10px;">단과대학</label>
-								<select class="select2" name="collegeNum" style="width: 20%;">
-									<option value="">전체</option>
-									<c:forEach items="${college}" var="collegeVO">
-										<option value="${collegeVO.collegeNum}">${collegeVO.collegeName}</option>
-									</c:forEach>
-								</select>
-								<label style="margin : 10px;">학과</label>
-								<input type="text" class="form-control" name="deptName" placeholder="내용을 입력해주세요" style="width : 20%">
-								<label style="margin : 10px;">상태</label>
-								<select class="select2" name="status" style="width: 20%;">
-									<option value="">전체</option>
-									<option value="1">사용가능</option>
-									<option value="0">사용불가</option>
-									
-								</select>
-								<button type="submit" class="btn btn-info" style="margin : 0 0 0 20px; width : 15%">검색</button>
-							</div>
+		<div class="content-wrapper">
+			<div class="col">
+					
+				<!-- header start -->
+				<div class="row">
+					<div class="col mt-3">
+						<div class="card">
+							<h3 class="my-3 mx-3">학과 조회</h3>
 						</div>
-					</form>
-				
-				      <!-- Default box -->
-				      <div class="card">
-				        <div class="card-header">
-				          <h3 class="card-title">학과 목록 조회</h3>
-				
-				          <div class="card-tools">
-				            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-				              <i class="fas fa-minus"></i>
-				            </button>
-				          </div>
-				        </div>
+					</div>
+				</div>
+				<!-- header end -->
+	
+				<!-- Default box -->
+				<div class="card">
+					<div class="card-header">
+							
+						<div class="card-tools">
+							<button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+								<i class="fas fa-minus"></i>
+							</button>		
+						</div>
+					
+						<!-- Search -->
+						<form action="./departmentList" id="search-form">
+								<input type="hidden" name="page" value="1">
+									<div class="row justify-content-center mx-auto my-3" >
+										<div class="col-custom">
+											<div class="row"  id="row">
+												<div class="col-2">
+													<div class="form-group">
+														<label>상태</label>
+														<select class="select2" name="status" style="width: 100%;">
+															<option value="">전체</option>
+															<option value="1">사용가능</option>
+															<option value="0">사용불가</option>
+															
+														</select>
+													</div>
+												</div>
+												<div class="col-2">
+													<div class="form-group">
+														<label>단과 대학</label>
+														<select class="select2" name="collegeNum" style="width: 100%;">
+															<option value="">전체</option>
+															<c:forEach items="${college}" var="collegeVO">
+																<option value="${collegeVO.collegeNum}">${collegeVO.collegeName}</option>
+															</c:forEach>
+														</select>
+													</div>
+												</div>
+											<div class="col-4">
+												<div class="form-group">
+													<label>학과</label>
+													<div class="input-group">
+														<input type="text" class="form-control" name="deptName" placeholder="학과를 입력하세요.">
+														<div class="input-group-append">
+															<button type="submit" class="btn btn-default" id="submit">
+																<i class="fas fa-search "></i>
+															</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							
+						</form>
+					</div>
+						   <!-- Default box -->
 				        <div class="card-body p-0">
-				          <table class="table table-hover text-nowrap" style="text-align : center;"  id="table2">
+							<table class="table table-hover text-nowrap" style="text-align : center;"  id="table2">
 				              <thead>
 				                  <tr>
 				                      <th style="width: 10%">
 				                         학과 번호
 				                      </th>
 				                      <th style="width: 10%">
-				                          단과대학
+				                          단과 대학
 				                      </th>
 				                      <th style="width: 10%" class="text-center">
 				                          학과
 				                      </th>
 				                      <th style="width : 15%">
-				                          사용여부
+				                          사용 여부
 				                      </th>
 				                      <th style="width: 10%">
 				                 
@@ -163,7 +151,7 @@
 												<td><c:out value="${collegeName}"></c:out></td>
 												<td><c:out value="${deptName}"></c:out></td>
 												<td>
-													<select name="status" class="select2" style="width : 50%">
+													<select name="status" class="select2" style="width : 31%">
 														<option value="1" selected>사용가능</option>
 														<option value="0">사용불가</option>
 													</select>
@@ -174,7 +162,7 @@
 												<td style="color: #E2E2E2;"><c:out value="${collegeName}"></c:out></td>
 												<td style="color: #E2E2E2;"><c:out value="${deptName}"></c:out></td>
 												<td>
-													<select name="status" class="select2" style="width : 50%">
+													<select name="status" class="select2" style="width : 31%">
 														<option value="1">사용가능</option>
 														<option value="0" selected>사용불가</option>
 													</select>
@@ -191,23 +179,19 @@
 								</c:forEach>
 				            </tbody>
 				          </table>
-							
 				        </div>
-				        <!-- /.card-body -->
-				      </div>
-				      <!-- /.card -->
-				     <a href="./departmentAdd"><button type="button" id="add2" class="btn btn-info">작성</button></a>
-				    </section>
-				
+					<!-- /.card-body -->
+					<!-- Pagination -->
 				    	<div class="row g-3 justify-content-center" style="margin: 20px auto;" id="pagination">
-								<ul class="pagination pagination-sm mx-auto" style="width : 200px;">
+							<nav aria-label="Page navigation example">
+								<ul class="pagination pagination-sm mx-auto" style="width: 200px;">
 									<li class="page-item ${pagination.page eq 1? 'disabled' : '' }">
 										<a class="page-link" href="./departmentList?page=1&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="1" style="color:#17a2b8;">
 											<span aria-hidden="true">&laquo;</span>
 										</a>
 									</li>
 									<li class="page-item ${pagination.pre eq false ? 'disabled' : ''}">
-										<a class="page-link" href="./departmentList?"page=${pagination.startNum-1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="${pagination.startNum-1}" style="color:#17a2b8;">
+										<a class="page-link" href="./departmentList?page=${pagination.startNum-1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="${pagination.startNum-1}" style="color:#17a2b8;">
 											<span aria-hidden="true">&lsaquo;</span>
 										</a>
 									</li>
@@ -220,18 +204,22 @@
 										</a>
 									</li>
 									<li class="page-item ${pagination.next eq totalPage ? 'disabled' : ''}">
-										<a class="page-link" href="./departmentList?page=${pagination.totalPage}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next" data-board-page="${pagination.totalPage}" style="color:#17a2b8;">
+										<a class="page-link" href="./departmentList?page=${pagination.totalPage}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next" data-board-page="${pagination.totalPage}">
 											<span aria-hidden="true">&raquo;</span>
 										</a>
 									</li>
 								</ul>
-							
-					</div>
+							</nav>
+					   </div>
+					<div class="wrapper" style="margin : 0 20px 20px 0;">
+						 <a href="./departmentAdd"><button type="button" id="add2" class="btn btn-info" style="float : right;">학과 등록</button></a>
+					 </div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
+				
+	<!-- ./wrapper -->
 
 <c:import url="../temp/footer.jsp"></c:import>
 <script type="text/javascript" src="../js/administrator/departmentList.js"></script>	
@@ -242,5 +230,6 @@
       $('.select2').select2()
     });
 </script>
+
 </body>
 </html>

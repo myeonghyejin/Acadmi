@@ -114,3 +114,22 @@ $("#fileAdd").click(()=>{
 
     idx++;
 });
+
+$("#BoardFileAdd").click(()=>{
+    if(count >= max){
+        alert('첨부파일은 최대 ' + max + '개 까지만 가능합니다.');
+        return;
+    }
+        count++;
+
+     let child = '<div class="input-group">';
+       	child = child+ '<div class="custom-file">'
+        child = child+ '<input type="file" class="custom-file-input" id="exampleInputFile" name="addfiles">'
+        child = child + '<label class="custom-file-label" for="exampleInputFile">파일을 선택해주세요</label>'
+        child = child + '</div>'
+        child = child + '</div>'
+        			
+    $("#fileList").append(child);
+
+    idx++;
+});

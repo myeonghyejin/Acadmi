@@ -35,6 +35,20 @@ public class StudentController {
 	private StudentService studentService;
 	
 
+	//홈 진행중인 강의 리스트
+	@GetMapping("homeLecture")
+	public ModelAndView getCurrentLectureList(HttpSession session) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		Object obj = session.getAttribute("SPRING_SECURITY_CONTEXT");
+		SecurityContextImpl contextImpl = (SecurityContextImpl) obj; 
+		Authentication authentication = contextImpl.getAuthentication();
+		List<LectureVO> ar = studentService.getCurrentLectureList();
+		mv.addObject("list", ar);
+		mv.setViewName("student/homeLecture");
+		
+		return mv;
+	}
+	
 	//내 수강 리스트
 	@GetMapping("myLectureList")
 	public ModelAndView getMyLectureList(HttpSession session, LectureVO lectureVO) throws Exception {

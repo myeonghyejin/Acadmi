@@ -34,18 +34,9 @@
                                     </div>
                                 </div>
 
-                                    <div class="row mx-auto">
-
-                                        <p class="mb-1 mx-2">
-                                            
-                                        </p>
-
-                                        <p class="mx-5">
-                                            <div class="col-4 mx-5">
-                                                <button class="btn btn-info btn-block mx-5" id="submitButton" type="button">다음</button>
-                                            </div>
-                                        </p>
-
+                                    <div class="row justify-content-end">
+                                          <button class="btn btn-info mr-2" id="submitButton" type="button">다음</button>
+                                           
                                     </div>
                            		</form:form>
                                 </div>

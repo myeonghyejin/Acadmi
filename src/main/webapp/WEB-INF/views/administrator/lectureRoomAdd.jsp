@@ -13,19 +13,7 @@
 	rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <style type="text/css">
-	.col {
-		margin : 30px 0 0 0;
-	}
-	.card{
-		margin : 30px 0 20px 0;
-		width : 80%;
-	}
-	h3 {
-		margin : 30px;
-	}
-	.content {
-		margin: 30px;
-	}
+
 </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -48,16 +36,24 @@
 		<c:import url="../temp/student_header.jsp"></c:import>
 	</sec:authorize>
 	<!-- Header 끝 -->
-	<div class="content-wrapper">
-		<div class="container-fluid">
-			<div class="row">
+	<div class="container-fluid">
+		<div class="content-wrapper">
 				<div class="col">
-					<h3>강의실 등록</h3>
-					<section class="content">
+					<!-- header start -->
+					<div class="row" style="padding-top:10px">
+						<div class="col-12">
+							<div class="card">
+								<h3 class="my-3 mx-3">강의실 등록</h3>
+							</div>
+						</div>
+					</div>
+					<!-- header end -->
+			
 
 					      <!-- Default box -->
 					      <div class="card">
-					        <div class="card-body row">
+					      
+					        <div class="card-body">
 					          <div class="col-7">
 						         <form action="./lectureRoomAdd" method="post" id="lectureRoomForm">
 						          	 <div class="form-group">
@@ -76,7 +72,7 @@
 						            	
 						            </div>
 						            <div class="form-group">
-						              <label for="personal">최대수용인원</label>
+						              <label for="personal">최대 수용 인원</label>
 						              <input type="text" id="personal" class="form-control" name="personal"/>
 						            </div>
 						            <div id="personalResult"></div>
@@ -85,14 +81,14 @@
 						            <div class="icheck-primary d-inline">
 				                        <input type="radio" id="radioPrimary1" name="status" value="1" checked>
 				                        	<label for="radioPrimary1">
-				                        	사용가능
+				                        	사용 가능
 				                       		</label>
 				                     </div>
 				                     
 					                      <div class="icheck-primary d-inline">
 					                        <input type="radio" id="radioPrimary2" name="status" value="0" disabled>
 				                        	<label for="radioPrimary1">
-				                        	사용불가
+				                        	사용 불가
 				                       		</label>
 					                     </div>
 				                     </div>
@@ -105,9 +101,9 @@
 					        </div>
 					      </div>
 			
-			    	</section>
+		
 				</div>
-			</div>
+		
 		</div>
 	</div>	
 </div>

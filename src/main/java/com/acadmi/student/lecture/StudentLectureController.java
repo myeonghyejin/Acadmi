@@ -1,6 +1,7 @@
 package com.acadmi.student.lecture;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -16,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.acadmi.department.DepartmentVO;
 import com.acadmi.lecture.LectureVO;
+import com.acadmi.period.PeriodVO;
+import com.acadmi.student.StudentService;
 import com.acadmi.util.Pagination;
 
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +30,9 @@ public class StudentLectureController {
 	
 	@Autowired
 	private StudentLectureService studentLectureService;
+	
+	@Autowired
+	private StudentService studentService;
 	
 	//현재 연도 계산
 	private int calculateCurrentYear() {
@@ -60,6 +66,19 @@ public class StudentLectureController {
 		pagination.setUsername(authentication.getName());
 		studentLectureVO.setUsername(authentication.getName());
 
+		PeriodVO periodVO =  studentService.getFavoirte();
+				
+			if(periodVO == null || periodVO.toString().isEmpty()) {
+				String message = "장바구니 기간이 아닙니다";
+				
+				mv.addObject("result", message);
+				mv.setViewName("common/result");
+				
+				mv.addObject("url", "/");
+				
+				return mv;
+			}
+		
 		List<LectureVO> ar = studentLectureService.getAllLectureList(pagination);
 		List<DepartmentVO> ar2 = studentLectureService.getDepartment();
 	    Long totalCredit = studentLectureService.getSumCredit(studentLectureVO);

@@ -87,7 +87,7 @@ public class AdministratorController {
 			}
 			
 			mv.addObject("result", message);
-			mv.setViewName("administrator/result");
+			mv.setViewName("common/result");
 			
 			mv.addObject("url", "./studentList");
 			return mv;
@@ -130,7 +130,7 @@ public class AdministratorController {
 		}
 		
 		mv.addObject("result", message);
-		mv.setViewName("administrator/result");
+		mv.setViewName("common/result");
 		
 		mv.addObject("url", "./administratorList");
 		return mv;
@@ -175,7 +175,7 @@ public class AdministratorController {
 		}
 		
 		mv.addObject("result", message);
-		mv.setViewName("administrator/result");
+		mv.setViewName("common/result");
 		
 		mv.addObject("url", "./professorList");
 		return mv;
@@ -285,7 +285,7 @@ public class AdministratorController {
 		}
 		
 		mv.addObject("result", message);
-		mv.setViewName("administrator/result");
+		mv.setViewName("common/result");
 		
 		mv.addObject("url", "./lectureRoomList");
 		return mv;
@@ -364,7 +364,7 @@ public class AdministratorController {
 		}
 		
 		mv.addObject("result", message);
-		mv.setViewName("administrator/result");
+		mv.setViewName("common/result");
 		
 		mv.addObject("url", "./departmentList");
 		return mv;
@@ -403,7 +403,7 @@ public class AdministratorController {
 		}
 		
 		mv.addObject("result", message);
-		mv.setViewName("administrator/result");
+		mv.setViewName("common/result");
 		
 		mv.addObject("url", "./periodAdd");
 		return mv;
@@ -467,7 +467,7 @@ public class AdministratorController {
 		}
 		
 		mv.addObject("result", message);
-		mv.setViewName("administrator/result");
+		mv.setViewName("common/result");
 		
 		mv.addObject("url", "./lectureRoomAssignment");
 		return mv;

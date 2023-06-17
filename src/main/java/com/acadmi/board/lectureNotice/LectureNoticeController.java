@@ -157,4 +157,18 @@ public class LectureNoticeController {
 		return mv;
 	}
 	
+	//강의 공지사항
+	@GetMapping("homeLectureNotice")
+	public ModelAndView getHomeLectureNoticeList(Pagination pagination) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		List<BoardVO> ar = lectureNoticeService.getList(pagination);
+		
+		mv.addObject("list", ar);
+		mv.setViewName("student/homeLectureNotice");
+		
+		return mv;
+		
+	}
+	
 }
