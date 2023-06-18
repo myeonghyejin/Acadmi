@@ -163,9 +163,9 @@ public class MemberController {
 	   }
 
 	   @PostMapping("studentUpdate")
-	   public ModelAndView setStudentUpdate(String username, StudentVO studentVO, ModelAndView mv, MultipartFile addfiles) throws Exception {
+	   public ModelAndView setStudentUpdate(String username, StudentVO studentVO, ModelAndView mv, MultipartFile addfiles, MemberVO memberVO) throws Exception {
 	       
-	       int result = memberService.setStudentUpdate(studentVO, addfiles);
+	       int result = memberService.setStudentUpdate(studentVO, addfiles, memberVO);
 	       
 	       mv.setViewName("redirect:./studentPage?username=" + username);
 
@@ -189,10 +189,10 @@ public class MemberController {
 	   }
 	   
 	   @PostMapping("professorUpdate")
-	   public ModelAndView setProfessorUpdate(String username, ProfessorVO professorVO, ModelAndView mv, MultipartFile addfiles) throws Exception {
+	   public ModelAndView setProfessorUpdate(String username, ProfessorVO professorVO, ModelAndView mv, MultipartFile addfiles, MemberVO memberVO) throws Exception {
 		     
-		   int result = memberService.setProfessorUpdate(professorVO, addfiles);
-
+		   int result = memberService.setProfessorUpdate(professorVO, addfiles, memberVO);
+		   
 	       mv.setViewName("redirect:./professorPage?username=" + username);
 	      
 	      return mv;
@@ -215,9 +215,9 @@ public class MemberController {
 	   }
 	   
 	   @PostMapping("administratorUpdate")
-	   public ModelAndView setAdministratorUpdate(String username, AdministratorVO administratorVO, ModelAndView mv, MultipartFile addfiles) throws Exception {
+	   public ModelAndView setAdministratorUpdate(String username, AdministratorVO administratorVO, ModelAndView mv, MultipartFile addfiles, MemberVO memberVO) throws Exception {
 		     
-	       int result = memberService.setAdministratorUpdate(administratorVO, addfiles);
+	       int result = memberService.setAdministratorUpdate(administratorVO, addfiles, memberVO);
 
 	       mv.setViewName("redirect:./administratorPage?username=" + username);
 	      

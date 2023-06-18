@@ -163,7 +163,7 @@
 				   	   S.PHONE = #{phone},
 				   	   S.ADDRESS = #{address},
 				   	   S.ADDRESSDETAIL = #{addressDetail},
-				   	   M.EMAIL = #{email}  
+				   	   M.EMAIL = #{email}
  			WHERE M.USERNAME = #{username}
  		</update>
  		

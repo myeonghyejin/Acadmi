@@ -111,13 +111,13 @@
 																	<strong><i class="fas fa-lock mr-1"></i> 비밀번호</strong>
 																		<p class="text-muted"><input class="form-control" type="password" id="password" name="password" placeholder="비밀번호를 입력하세요."/></p>
 																	<strong><i class="mr-1"></i> 비밀번호 확인</strong>
-																		<p class="text-muted"><input class="form-control" type="password" id="password" name="password" placeholder="비밀번호를 다시 입력하세요."/></p>
+																		<p class="text-muted" id="pwCheck"><input class="form-control" type="password" id="passwordCheck" name="passwordCheck" placeholder="비밀번호를 다시 입력하세요."/></p>
 														</div>
 													</c:forEach>
 														<sec:authentication property="Principal" var="user"/>
 	                 										<a href="/member/professorPage?username=${user.username}" class="btn btn-danger float-right mx-3">취소</a>
-													</form>
 	                 									<button class="btn btn-info float-right" id="submitButton" type="submit">수정</button>
+													</form>
 												</div>
 											</div>
 										</div>
@@ -146,6 +146,6 @@
     });
 }
 </script>
-
+<script src="/js/member/pwUpdate.js"></script>
 </body>
 </html>

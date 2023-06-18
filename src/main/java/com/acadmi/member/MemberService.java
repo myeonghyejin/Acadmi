@@ -152,14 +152,16 @@ public class MemberService implements UserDetailsService{
 //	======================================================================================================================
 	
 	
-	public int setStudentUpdate(StudentVO studentVO, MultipartFile multipartFile) throws Exception{
+	public int setStudentUpdate(StudentVO studentVO, MultipartFile multipartFile, MemberVO memberVO) throws Exception{
 		int result = memberDAO.setStudentUpdate(studentVO);
-		
-		MemberVO memberVO = new MemberVO();
-		
-		memberVO.setPassword(passwordEncoder.encode(memberVO.getPassword()));
-		memberDAO.setPwUpdate(memberVO);
 			
+		if(memberVO.getPassword() != null) {
+			
+			memberVO.setPassword(passwordEncoder.encode(memberVO.getPassword()));
+			memberDAO.setPwUpdate(memberVO);
+			
+		}
+		
 			if(multipartFile != null) {
 				String fileName = fileManager.saveFile(path, multipartFile);
 				MemberFilesVO memberFilesVO = new MemberFilesVO();
@@ -186,66 +188,72 @@ public class MemberService implements UserDetailsService{
 		    
 	}
 	
-	public int setProfessorUpdate(ProfessorVO professorVO, MultipartFile multipartFile) throws Exception{
+	public int setProfessorUpdate(ProfessorVO professorVO, MultipartFile multipartFile, MemberVO memberVO) throws Exception{
 		int result = memberDAO.setProfessorUpdate(professorVO);
 		
-		MemberVO memberVO = new MemberVO();
-		
-		memberVO.setPassword(passwordEncoder.encode(memberVO.getPassword()));
-		
-		if(multipartFile != null) {
-			String fileName = fileManager.saveFile(path, multipartFile);
-			MemberFilesVO memberFilesVO = new MemberFilesVO();
-			memberFilesVO.setUsername(professorVO.getUsername());
-			memberFilesVO = memberDAO.getFileDetail(memberFilesVO);
-		
+		if(memberVO.getPassword() != null) {
 			
-			if(memberFilesVO == null) {
-				memberFilesVO = new MemberFilesVO();
-				memberFilesVO.setUsername(professorVO.getUsername());
-				memberFilesVO.setFileName(fileName);
-				memberFilesVO.setOriName(multipartFile.getOriginalFilename());
-				result = memberDAO.setFileAdd(memberFilesVO);	
-			}
-			else {
-				memberFilesVO.setUsername(professorVO.getUsername());
-				memberFilesVO.setFileName(fileName);
-				memberFilesVO.setOriName(multipartFile.getOriginalFilename());
-				result = memberDAO.setFileUpdate(memberFilesVO);
-			}
+			memberVO.setPassword(passwordEncoder.encode(memberVO.getPassword()));
+			memberDAO.setPwUpdate(memberVO);
+			
 		}
+		
+			if(multipartFile != null) {
+				String fileName = fileManager.saveFile(path, multipartFile);
+				MemberFilesVO memberFilesVO = new MemberFilesVO();
+				memberFilesVO.setUsername(professorVO.getUsername());
+				memberFilesVO = memberDAO.getFileDetail(memberFilesVO);
+			
+				
+				if(memberFilesVO == null) {
+					memberFilesVO = new MemberFilesVO();
+					memberFilesVO.setUsername(professorVO.getUsername());
+					memberFilesVO.setFileName(fileName);
+					memberFilesVO.setOriName(multipartFile.getOriginalFilename());
+					result = memberDAO.setFileAdd(memberFilesVO);	
+				}
+				else {
+					memberFilesVO.setUsername(professorVO.getUsername());
+					memberFilesVO.setFileName(fileName);
+					memberFilesVO.setOriName(multipartFile.getOriginalFilename());
+					result = memberDAO.setFileUpdate(memberFilesVO);
+				}
+			}
 		return result;
 	}
 	
-	public int setAdministratorUpdate(AdministratorVO administratorVO, MultipartFile multipartFile) throws Exception{
+	public int setAdministratorUpdate(AdministratorVO administratorVO, MultipartFile multipartFile, MemberVO memberVO) throws Exception{
 		int result = memberDAO.setAdministratorUpdate(administratorVO);
 		
-		MemberVO memberVO = new MemberVO();
-		
-		memberVO.setPassword(passwordEncoder.encode(memberVO.getPassword()));
-		
-		if(multipartFile != null) {
-			String fileName = fileManager.saveFile(path, multipartFile);
-			MemberFilesVO memberFilesVO = new MemberFilesVO();
-			memberFilesVO.setUsername(administratorVO.getUsername());
-			memberFilesVO = memberDAO.getFileDetail(memberFilesVO);
-		
+		if(memberVO.getPassword() != null) {
 			
-			if(memberFilesVO == null) {
-				memberFilesVO = new MemberFilesVO();
-				memberFilesVO.setUsername(administratorVO.getUsername());
-				memberFilesVO.setFileName(fileName);
-				memberFilesVO.setOriName(multipartFile.getOriginalFilename());
-				result = memberDAO.setFileAdd(memberFilesVO);	
-			}
-			else {
-				memberFilesVO.setUsername(administratorVO.getUsername());
-				memberFilesVO.setFileName(fileName);
-				memberFilesVO.setOriName(multipartFile.getOriginalFilename());
-//				log.info("oriname : {}", memberFilesVO.getUsername());
-				result = memberDAO.setFileUpdate(memberFilesVO);
-			}
+			memberVO.setPassword(passwordEncoder.encode(memberVO.getPassword()));
+			memberDAO.setPwUpdate(memberVO);
+			
 		}
+		
+			if(multipartFile != null) {
+				String fileName = fileManager.saveFile(path, multipartFile);
+				MemberFilesVO memberFilesVO = new MemberFilesVO();
+				memberFilesVO.setUsername(administratorVO.getUsername());
+				memberFilesVO = memberDAO.getFileDetail(memberFilesVO);
+			
+				
+				if(memberFilesVO == null) {
+					memberFilesVO = new MemberFilesVO();
+					memberFilesVO.setUsername(administratorVO.getUsername());
+					memberFilesVO.setFileName(fileName);
+					memberFilesVO.setOriName(multipartFile.getOriginalFilename());
+					result = memberDAO.setFileAdd(memberFilesVO);	
+				}
+				else {
+					memberFilesVO.setUsername(administratorVO.getUsername());
+					memberFilesVO.setFileName(fileName);
+					memberFilesVO.setOriName(multipartFile.getOriginalFilename());
+	//				log.info("oriname : {}", memberFilesVO.getUsername());
+					result = memberDAO.setFileUpdate(memberFilesVO);
+				}
+			}
 		return result;
 	}
 	
