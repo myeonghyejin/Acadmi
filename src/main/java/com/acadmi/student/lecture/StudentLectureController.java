@@ -66,18 +66,18 @@ public class StudentLectureController {
 		pagination.setUsername(authentication.getName());
 		studentLectureVO.setUsername(authentication.getName());
 
-		PeriodVO periodVO =  studentService.getFavoirte();
+		PeriodVO periodVO = studentService.getFavoirte();
 				
-			if(periodVO == null || periodVO.toString().isEmpty()) {
-				String message = "장바구니 기간이 아닙니다";
+		if(periodVO == null || periodVO.toString().isEmpty()) {
+			String message = "장바구니 기간이 아닙니다.";
 				
-				mv.addObject("result", message);
-				mv.setViewName("common/result");
+			mv.addObject("result", message);
+			mv.setViewName("common/result");
 				
-				mv.addObject("url", "/");
+			mv.addObject("url", "/");
 				
-				return mv;
-			}
+			return mv;
+		}
 		
 		List<LectureVO> ar = studentLectureService.getAllLectureList(pagination);
 		List<DepartmentVO> ar2 = studentLectureService.getDepartment();
@@ -88,6 +88,7 @@ public class StudentLectureController {
 		mv.addObject("department", ar2);
 		mv.addObject("year", calculateCurrentYear());
 		mv.addObject("semester", calculateCurrentSemester());
+		mv.addObject("period", periodVO);
 		mv.setViewName("student/lecture/all_lecture");
 
 		return mv;

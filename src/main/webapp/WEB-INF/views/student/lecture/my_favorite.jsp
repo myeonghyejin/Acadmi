@@ -115,7 +115,7 @@
 										<td class="project-actions text-right">
 											<c:choose>
 												<c:when test="${lectureVO.subscription ge lectureVO.personal}">											
-													<button class="btn btn-danger btn-sm" id="mli" type="button" disabled>
+													<button class="btn btn-secondary btn-sm" id="mli" type="button" disabled>
 														<i class="fas fa-circle-xmark"></i>
 														마감
 													</button>
