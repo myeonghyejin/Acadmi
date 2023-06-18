@@ -16,25 +16,27 @@
 	<div class="wrapper">
 
 		<!-- Header 적용 -->
-		<c:import url="./temp/header.jsp"></c:import>
-		
 		<sec:authorize access="hasRole('ROLE_ADMIN')">
 			<div class="content-wrapper">
+				<c:import url="./temp/administrator_header.jsp"></c:import>
 				<c:import url="./temp/administrator_index.jsp"></c:import>
 			</div>
 		</sec:authorize>
 		<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
 			<div class="content-wrapper">
+				<c:import url="./temp/administrator_header.jsp"></c:import>
 				<c:import url="./temp/administrator_index.jsp"></c:import>
 			</div>
 		</sec:authorize>
 		<sec:authorize access="hasRole('ROLE_PROFESSOR')">
 			<div class="content-wrapper row">
+				<c:import url="./temp/progessor_header.jsp"></c:import>
 				<c:import url="./temp/professor_index.jsp"></c:import>
 			</div>
 		</sec:authorize>
 		<sec:authorize access="hasRole('ROLE_STUDENT')">
 			<div class="content-wrapper">
+				<c:import url="./temp/student_header.jsp"></c:import>
 				<c:import url="./temp/student_index.jsp"></c:import>
 			</div>
 		</sec:authorize>
