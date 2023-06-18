@@ -21,6 +21,10 @@
 		<sec:authorize access="hasRole('ROLE_ADMIN')">
 	     	<c:import url="../temp/administrator_header.jsp"></c:import>
 	  	</sec:authorize>
+	  	
+	  	<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
+	     	<c:import url="../temp/administrator_header.jsp"></c:import>
+	  	</sec:authorize>
 		
 		<sec:authorize access="hasRole('ROLE_PROFESSOR')">
 			<c:import url="../temp/professor_header.jsp"></c:import>
