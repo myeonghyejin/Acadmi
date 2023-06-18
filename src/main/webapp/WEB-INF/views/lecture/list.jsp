@@ -58,10 +58,11 @@
 					                		<div class="mr-2">
 					                			<input type="hidden" value="${list[0].temporary}">
 					                  			<select class="select2" style="height: auto;width:115px" id="temporary" name="temporary" onchange="this.form.submit()">
-					                    			<option name="temporary" id="temporary" for="temporary"  value=" ">강의 조회</option>
-													<option for="temporary" value=" " >전체</option>
-													<option for="temporary" value="1" >등록</option>
-													<option for="temporary" value="0">미등록</option>
+					                    			
+													<option for="temporary" value="">전체</option>
+													<option for="temporary" value="1" ${param.temporary == '1' ? 'selected' : ''}>등록</option>
+													<option for="temporary" value="0" ${param.temporary == '0' ? 'selected' : ''}>미등록</option>
+													
 												</select>
 					                    		<a class="btn btn-info ml-1" href="./add">강의 등록</a>
 					                  		</div>

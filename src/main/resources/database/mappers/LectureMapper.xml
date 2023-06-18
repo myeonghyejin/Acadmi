@@ -7,9 +7,6 @@
   <mapper namespace="com.acadmi.lecture.LectureDAO">
   <sql id="lectureCondition">
   	<trim prefix="WHERE" prefixOverrides="AND">
-  		<if test="temporary==null">
-  			(TEMPORARY = 0 OR TEMPORARY=1)
-  		</if>
   		<if test="temporary!=null">
   			TEMPORARY = #{temporary}
   		</if>
@@ -41,7 +38,7 @@
  	</select>
   
   	<!-- 강의 목록 및 상태 구분 -->
-  	<select id="getLectureList" parameterType="LectureVO" resultType="LectureVO">
+  	<select id="getLectureList" parameterType="Pagination" resultType="LectureVO">
   		SELECT * FROM LECTURE <include refid="lectureCondition"></include>
   	</select>
   	

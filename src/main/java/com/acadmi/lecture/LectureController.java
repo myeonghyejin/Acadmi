@@ -54,14 +54,14 @@ public class LectureController {
 	
 	//강의 목록
 	@GetMapping("list")
-	public ModelAndView getLectureList(LectureVO lectureVO, HttpSession session) throws Exception{
+	public ModelAndView getLectureList(Pagination pagination,LectureVO lectureVO, HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		Object obj = session.getAttribute("SPRING_SECURITY_CONTEXT");
 		SecurityContextImpl contextImpl = (SecurityContextImpl) obj; 
 		Authentication authentication = contextImpl.getAuthentication();
-		lectureVO.setUsername(authentication.getName());
+		pagination.setUsername(authentication.getName());
 		
-		List<LectureVO> ar = lectureService.getLectureList(lectureVO);
+		List<LectureVO> ar = lectureService.getLectureList(pagination);
 		mv.addObject("list",ar);
 		mv.setViewName("lecture/list");
 		return mv;

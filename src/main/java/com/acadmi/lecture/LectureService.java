@@ -27,8 +27,8 @@ public class LectureService {
 		return lectureDAO.getHomeLectureList(lectureVO);
 	}
 	//강의 목록
-	public List<LectureVO> getLectureList(LectureVO lectureVO) throws Exception{
-		return lectureDAO.getLectureList(lectureVO);
+	public List<LectureVO> getLectureList(Pagination pagination) throws Exception{
+		return lectureDAO.getLectureList(pagination);
 	}
 	//단과대학 목록
 	public List<CollegeVO> getCollegeList(CollegeVO collegeVO) throws Exception{
