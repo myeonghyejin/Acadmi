@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>게시글 수정</title>
+<title>Acadmi</title>
 <c:import url="../temp/style.jsp"></c:import>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
@@ -14,41 +14,52 @@
 </head>
 <body class="hold-transition sidebar-mini">
 
+	<div class="wrapper">
+	
+		<!-- Header 적용 -->
+		<sec:authorize access="hasRole('ROLE_ADMIN')">
+	     	<c:import url="../temp/administrator_header.jsp"></c:import>
+	  	</sec:authorize>
+	  	
+	  	<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
+	     	<c:import url="../temp/administrator_header.jsp"></c:import>
+	  	</sec:authorize>
+		
 		<sec:authorize access="hasRole('ROLE_PROFESSOR')">
 			<c:import url="../temp/professor_header.jsp"></c:import>
 		</sec:authorize>
-		
+	
 		<sec:authorize access="hasRole('ROLE_STUDENT')">
 			<c:import url="../temp/student_header.jsp"></c:import>
-		</sec:authorize>
-		
-		<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
-			<c:import url="../temp/administrator_header.jsp"></c:import>
-		</sec:authorize>
+		</sec:authorize>	
+		<!-- Header 끝 -->
 
-	<div class="wrapper">
 		<div class="content-wrapper">
 		  <section class="content">
+		  	<div class="row" style="padding-top:20px">
+				<div class="col-12">
+					<div class="card">
+						<h3 class="my-3 mx-3">
+							<c:if test="${board eq 'notice'}">
+								공지사항 수정
+							</c:if>
+							<c:if test="${board eq 'qna'}">
+								질의응답 수정
+							</c:if>
+							<c:if test="${board eq 'lectureNotice'}">
+								공지사항 수정
+							</c:if>
+							<c:if test="${board eq 'lectureQna'}">
+								질의응답 수정
+							</c:if>
+						</h3>
+					</div>
+				</div>
+			</div>
+		  
 			<div class="row">
-			  <div class="col-md-12 mt-5">
+			  <div class="col-md-12" style="margin-top: 10px;">
 				<div class="card card-secondary">
-				  <div class="card-header">
-					<h3 class="card-title">
-						<c:if test="${board eq 'notice'}">
-							공지사항 수정
-						</c:if>
-						<c:if test="${board eq 'qna'}">
-							질의응답 수정
-						</c:if>
-						<c:if test="${board eq 'lectureNotice'}">
-							강의공지사항 수정
-						</c:if>
-						<c:if test="${board eq 'lectureQna'}">
-							강의질의응답 수정
-						</c:if>
-					</h3>  		
-				  </div>
-				  
 				  <div class="card-body">
 					<sec:authentication property="principal.username" var="userName" />
 		
@@ -56,18 +67,15 @@
 						<form id="contactForm" class="row g-3" action="./update" method="post" enctype="multipart/form-data">
 							<input type="hidden" name="num" value="${dto.num}">
 							
-							<div class="col-md-6" style="margin-top: 20px;">
-								<label for="writer" class="form-label strongFont2">작성자</label> 
-								<input type="text" name="writer" class="form-control" id="writer" readonly value="${userName}">
-							</div>
+							<input type="hidden" name="writer" class="form-control" id="writer" readonly value="${userName}">
 							
-							<div class="col-md-7 mt-3">
+							<div class="col-md-12 mt-3">
 								<label for="title" class="form-label strongFont2">제목</label>
 								<input type="text" class="form-control" name="title" id="title" value="${dto.title}">
 							</div>
 							
 							<c:if test="${board eq 'notice'}">
-								<div class="col-md-6">
+								<div class="col-md-12">
 									<div class="row mt-4">
 									  <div style="display: flex; align-items: center;">
 									    <label for="important" class="form-label strongFont2" style="margin-bottom: 0; margin-left:10px">중요표시</label>
@@ -85,7 +93,7 @@
 							</c:if>
 							
 							<c:if test="${board eq 'lectureQna'}">
-								<div class="col-md-6">
+								<div class="col-md-12">
 									<div class="row mt-4">
 										 <div style="display: flex; align-items: center;">
 										   <label for="secret" class="form-label strongFont2" style="margin-bottom: 0; margin-left:10px">비밀글</label>
@@ -107,7 +115,7 @@
 								<textarea class="form-control" name="contents" id="contents">${dto.contents}</textarea>
 							</div>
 							
-							<div class="col-md-11 mt-3">
+							<%-- <div class="col-md-12 mt-5">
 								<div id="fileList">
 									<button class="col-md-12 mt-5 btn btn-primary" id="fileAdd" type="button">파일추가</button>
 									<c:forEach items="${dto.fileVOs}" var="fileVO">
@@ -119,11 +127,30 @@
 										</div>
 									</c:forEach>	
 								</div>	
-							</div>
+							</div> --%>
+							
+							<div class="col-md-12 mt-2">
+								<div class="form-group" id="fileList">
+									<button class="col-md-12 mt-5 btn btn-secondary" id="BoardFileAdd" type="button">파일추가</button>
+									<c:forEach items="${dto.fileVOs}" var="fileVO">
+											<div class="input-group">
+												<c:if test="${not empty fileVO.fileName}">
+													<div class="input-group-text" style="width: 38px;">
+														<input class="form-check-input mt-0 deleteCheck" type="checkbox" name="fileNum" value="${fileVO.fileNum}" style="margin-left: auto;">
+													</div>
+												</c:if>
+												<div class="custom-file">
+													<input type="file" class="custom-file-input" id="exampleInputFile" name="addfiles" disabled value="${fileVO.oriName}">
+													<label class="custom-file-label" for="exampleInputFile">${fileVO.oriName}</label>
+												</div>
+									    	</div>			    	
+							    	</c:forEach>
+						    	</div>											
+							</div> 
 
-							<div class="row" style="margin-top: 50px; margin-left: 1080px;">	
-								<button type="button" class="submitButton btn btn-info" style="margin-right: 5px;">수정</button>
-								<a href="./detail?num=${dto.num}" class="btn btn-danger">취소</a>
+							<div class="col-md-12 mt-4">
+								<a href="./detail?num=${dto.num}" class="btn btn-danger float-right">취소</a>	
+								<button type="button" class="submitButton btn btn-info float-right" style="margin-right: 5px;">수정</button>
 							</div>
 						</form>
 					</div>
@@ -141,12 +168,21 @@
 	<script src="/js/board/notice.js"></script>
 	<script src="/js/board/boardCheck.js"></script>
 	<script>
-		setCount(${dto.fileVOs.size()});
 	
 		$("#contents").summernote({
-			height : 500,
-			width : 1187.48
+			height : 300,
+			width : 1300
 		});
+		
+		setCount(${dto.fileVOs.size()});
+		
+		const fileInput = document.getElementById('exampleInputFile');
+	    const fileLabel = document.querySelector('.custom-file-label');
+
+	    fileInput.addEventListener('change', function() {
+	      const fileName = this.files[0].name;
+	      fileLabel.textContent = fileName;
+	    });
 	</script>
 </body>
 </html>

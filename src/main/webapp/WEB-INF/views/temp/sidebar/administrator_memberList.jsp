@@ -5,20 +5,18 @@
 
 <div class="sidebar-dropdown">
 
-	<!-- Menu -->
-	<h4>회원 조회</h4>
 	
 	<!-- 더 많은 개수의 submenu가 필요할 경우
 	필요한 수 만큼 복사하고 div 태그의 아이디 'submenu_숫자' 형식으로 수정하여 사용하면 됨 -->
 	<!-- Submenu_1 -->
 	<button onclick="myFunction_1()" class="sidebar-menu">
 		<i class="fas fa-angle-down fa-2xs"></i>&nbsp
-		회원 조회
+		회원 목록
 	</button>
 	<div id="submenu_1" class="sidebar-dropdown-content">
-		<a href="../administrator/studentList">학생 목록</a>
-		<a href="../administrator/professorList">교수 목록</a>
-		<a href="../administrator/administratorList">직원 목록</a>
+		<a href="../administrator/studentList">학생 조회</a>
+		<a href="../administrator/professorList">교수 조회</a>
+		<a href="../administrator/administratorList">직원 조회</a>
 	</div>
 	
 	

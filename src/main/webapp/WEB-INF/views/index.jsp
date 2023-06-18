@@ -16,10 +16,16 @@
 	<div class="wrapper">
 
 		<!-- Header 적용 -->
+		<sec:authorize access="hasRole('ROLE_ADMIN')">
+			<c:import url="./temp/administrator_header.jsp"></c:import>
+			<div class="content-wrapper">
+				<c:import url="./temp/administrator_index.jsp"></c:import>
+			</div>
+		</sec:authorize>
 		<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
 			<c:import url="./temp/administrator_header.jsp"></c:import>
 			<div class="content-wrapper">
-				<c:import url="./temp/student_index.jsp"></c:import>
+				<c:import url="./temp/administrator_index.jsp"></c:import>
 			</div>
 		</sec:authorize>
 		<sec:authorize access="hasRole('ROLE_PROFESSOR')">

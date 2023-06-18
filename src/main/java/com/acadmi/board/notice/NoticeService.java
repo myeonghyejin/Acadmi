@@ -34,6 +34,11 @@ public class NoticeService implements BoardService {
 		
 		pagination.makeNum(noticeDAO.getTotalCount(pagination));
 		
+		if(noticeDAO.getTotalCount(pagination) == 0) {
+			pagination.setLastNum(1L);
+			pagination.setNext(false);
+		}
+		
 		return noticeDAO.getList(pagination);
 	}
 	

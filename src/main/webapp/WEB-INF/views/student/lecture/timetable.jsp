@@ -17,16 +17,20 @@
 	<div class="wrapper">
 
 		<!-- Header 적용 -->
-		<sec:authorize access="hasRole('ROLE_PROFESSOR')">
-			<c:import url="../../temp/professor_header.jsp"></c:import>
-		</sec:authorize>
-		
-		<sec:authorize access="hasRole('ROLE_STUDENT')">
-			<c:import url="../../temp/student_header.jsp"></c:import>
+		<sec:authorize access="hasRole('ROLE_ADMIN')">
+			<c:import url="../../temp/administrator_header.jsp"></c:import>
 		</sec:authorize>
 		
 		<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
 			<c:import url="../../temp/administrator_header.jsp"></c:import>
+		</sec:authorize>
+		
+		<sec:authorize access="hasRole('ROLE_PROFESSOR')">
+			<c:import url="../../temp/professor_header.jsp"></c:import>
+		</sec:authorize>
+			
+		<sec:authorize access="hasRole('ROLE_STUDENT')">
+			<c:import url="../../temp/student_header.jsp"></c:import>
 		</sec:authorize>
 		<!-- Header 끝 -->
 
@@ -91,11 +95,11 @@
 											<thead>
 												<tr class="text-center">
 													<th scope="col" style="width: 10%"></th>
-													<th scope="col" style="width: 15%">Monday</th>
-													<th scope="col" style="width: 15%">Tuesday</th>
-													<th scope="col" style="width: 15%">Wednesday</th>
-													<th scope="col" style="width: 15%">Thursday</th>
-													<th scope="col" style="width: 15%">Friday</th>
+													<th scope="col" style="width: 15%">월요일</th>
+													<th scope="col" style="width: 15%">화요일</th>
+													<th scope="col" style="width: 15%">수요일</th>
+													<th scope="col" style="width: 15%">목요일</th>
+													<th scope="col" style="width: 15%">금요일</th>
 												</tr>
 											</thead>				
 											<tbody>

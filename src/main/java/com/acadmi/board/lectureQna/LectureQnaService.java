@@ -37,6 +37,11 @@ public class LectureQnaService implements BoardService {
 		
 		pagination.makeNum(lectureQnaDAO.getTotalCount(pagination));
 		
+		if(lectureQnaDAO.getTotalCount(pagination) == 0) {
+			pagination.setLastNum(1L);
+			pagination.setNext(false);
+		}
+		
 		return lectureQnaDAO.getList(pagination);
 	}
 

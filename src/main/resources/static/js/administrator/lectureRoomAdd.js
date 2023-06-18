@@ -5,7 +5,7 @@ let check= [false,false,false]
 $("#lectureRoom").blur(function() {
     if($("#lectureRoom").val() == '') {
         check[0] = false
-        $("#lecture").html("<p style='color : red;'>강의실 호수는 필수사항입니다</p>")
+        $("#lecture").html("<p style='color : red;'>강의실 호수는 필수사항입니다.</p>")
 
     }else {
         $.ajax ( {
@@ -19,10 +19,10 @@ $("#lectureRoom").blur(function() {
             success : function(result) {
                 console.log(result)
                 if(result) {
-                    $("#lecture").html("<p>등록가능한 강의실입니다</p>")
+                    $("#lecture").html("<p>등록 가능한 강의실입니다.</p>")
                     check[0] = true
                 }else {
-                    $("#lecture").html("<p style='color : red;'>중복된 강의실입니다</p>")
+                    $("#lecture").html("<p style='color : red;'>중복된 강의실입니다.</p>")
                     check[0] = false
                 }
             },
@@ -39,7 +39,7 @@ $("#lectureRoom").blur(function() {
 $("#personal").blur(function() {
     if($("#personal").val()== '') {
         check[1] = false
-        $("#personalResult").html("<p style='color : red;'>최대수용인원은 필수사항입니다</p>")
+        $("#personalResult").html("<p style='color : red;'>최대 수용 인원은 필수사항입니다.</p>")
     }else {
        check[1] = true
        $("#personalResult").html("")
@@ -61,7 +61,7 @@ $("#roomAdd").click(function() {
             return;
         }
         if(!check[1]) {
-            alert("최대수용인원을 입력하세요")
+            alert("최대 수용 인원을 입력하세요")
             return;
         }
         //console.log("성공")

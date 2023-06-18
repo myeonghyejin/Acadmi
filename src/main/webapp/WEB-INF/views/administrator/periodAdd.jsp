@@ -18,29 +18,38 @@
 </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
-	<div class="wrapper">
-		<!-- Header 적용 -->
-		<sec:authorize access="hasRole('ROLE_PROFESSOR')">
-			<c:import url="../temp/professor_header.jsp"></c:import>
-		</sec:authorize>
+	
+	<!-- Header 적용 -->
+	<sec:authorize access="hasRole('ROLE_ADMIN')">
+		<c:import url="../temp/administrator_header.jsp"></c:import>
+	</sec:authorize>
+	
+	<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
+		<c:import url="../temp/administrator_header.jsp"></c:import>
+	</sec:authorize>
+	
+	<sec:authorize access="hasRole('ROLE_PROFESSOR')">
+		<c:import url="../temp/professor_header.jsp"></c:import>
+	</sec:authorize>
 		
-		<sec:authorize access="hasRole('ROLE_STUDENT')">
-			<c:import url="../temp/student_header.jsp"></c:import>
-		</sec:authorize>
+	<sec:authorize access="hasRole('ROLE_STUDENT')">
+		<c:import url="../temp/student_header.jsp"></c:import>
+	</sec:authorize>
+	<!-- Header 끝 -->
 		
-		<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
-			<c:import url="../temp/administrator_header.jsp"></c:import>
-		</sec:authorize>
-		<!-- Header 끝 -->
-	</div>
-	<div class="content-wrapper">
+		<!-- Main Contents -->
 		<div class="container-fluid">
-			<div class="row">
+			<div class="content-wrapper">
 				<div class="col">
-				<h3>기간 설정</h3>
-					<div class="callout callout-info">
-					시작일은 18:00:00  &nbsp;종료일은 23:59:59로 고정됩니다.
+					<!-- header start -->
+					<div class="row" style="padding-top:10px">
+						<div class="col-12">
+							<div class="card">
+								<h3 class="my-3 mx-3">기간 등록</h3>
+							</div>
+						</div>
 					</div>
+					<!-- header end -->
 					
 					<section class="content">
 						<div class="card">
@@ -69,7 +78,7 @@
 										<div class="card-body">
 											<div class="row">
 											  <div class="col">
-											    <label style="font-size: 20px;">장바구니 기간설정</label>
+											    <label style="font-size: 20px;">장바구니 기간 설정</label>
 											  </div>
 											</div>
 											
@@ -94,13 +103,13 @@
 										<div class="card-body">
 											<div class="row">
 											  <div class="col">
-											    <label style="font-size: 20px;">수강신청 기간설정</label>
+											    <label style="font-size: 20px;">수강 신청 기간 설정</label>
 											  </div>
 											</div>
 											<div class="row" style="margin-top : 20px;">
 											  <div class="col">
 											    <div class="form-group">
-											      <label>수강신청 시작일</label>
+											      <label>수강 신청 시작일</label>
 											      <br>
 											      <input type="date" class="form-control" name="applicationStart" style=" display: inline-block; margin-right: 40px;">
 											    </div>
@@ -108,9 +117,9 @@
 											
 											  <div class="col">
 											    <div class="form-group">
-											      <label>수강신청 종료일</label>
+											      <label>수강 신청 종료일</label>
 											      <br>
-											      <input type="date" class="form-control" id="applicationEnd" " name="applicationEnd" style=" display: inline-block;">
+											      <input type="date" class="form-control" id="applicationEnd" " name="applicationEnd" style=" display: inline-block;" readonly="readonly">
 											    </div>
 											  </div>
 											</div>
@@ -119,7 +128,7 @@
 										<div class="card-body">
 											<div class="row">
 											  <div class="col">
-											    <label style="font-size: 20px;">강의마감일 기간설정</label>
+											    <label style="font-size: 20px;">강의 마감일 기간 설정</label>
 											  </div>
 											</div>
 											<div class="row" style="margin-top : 20px;">
@@ -131,8 +140,8 @@
 											    </div>
 											  </div>
 											</div>
-										<div style="width:auto; float: right;">
-							                <button class="btn btn-info" type="submit" name="buttonType" value="1">등록</button>
+										<div style="width:auto; float: right; margin-top:20px;">
+							                <button class="btn btn-info" type="submit" name="buttonType" value="1" style="margin-right : 10px;">기간 등록</button>
 							                <a class="btn btn-danger"  style="color: white;" id="backBtn">취소</a>
 				               		 	</div>
 										
@@ -148,20 +157,19 @@
 				</div>
 			</div>
 		</div>
-	</div>
-<c:import url="../temp/footer.jsp"></c:import>	
+		
+	
 <script type="text/javascript">
 
-/*장바구니종료일, 수강신청 종료일 기간이 같음  */
-function updateApplicationEnd() {
-	let favoriteEnd= $("#favoriteEnd").val()
+//수강 신청 종료일 자동 설정
+function updateApplicationEnd(){
+	let favoriteEnd = $("#favoriteEnd").val()
+	console.log(favoriteEnd)
 	
-	/* console.log(applicationEnd) */
-	
-	$("#applicationEnd").val(favoriteEnd);
-}	
+	$("#applicationEnd").val(favoriteEnd)
+}
 
-//취소
+//취소 
 $("#backBtn").click(function() {
     let back = confirm("정말 취소하시겠습니까?")
 

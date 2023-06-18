@@ -13,139 +13,156 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <title>Insert title here</title>
 <style type="text/css">
-	.col {
-		margin : 30px 0 0 0;
-	}
-	.card{
-		margin : 30px 0 20px 0;
-		width : 80%;
-	}
+
 
 </style>
 </head>
-
 <body class="hold-transition sidebar-mini layout-fixed">
+	<div class="wrapper">
 
-<div class="wrapper">
-	<!-- Header 적용 -->
-		<sec:authorize access="hasRole('ROLE_PROFESSOR')">
-			<c:import url="../temp/professor_header.jsp"></c:import>
-		</sec:authorize>
-		
-		<sec:authorize access="hasRole('ROLE_STUDENT')">
-			<c:import url="../temp/student_header.jsp"></c:import>
+		<!-- Header 적용 -->
+		<sec:authorize access="hasRole('ROLE_ADMIN')">
+			<c:import url="../temp/administrator_header.jsp"></c:import>
 		</sec:authorize>
 		
 		<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
 			<c:import url="../temp/administrator_header.jsp"></c:import>
 		</sec:authorize>
-		<!-- Header 끝 -->
-<div class="content-wrapper">
+		
+		<sec:authorize access="hasRole('ROLE_PROFESSOR')">
+			<c:import url="../temp/professor_header.jsp"></c:import>
+		</sec:authorize>
 			
-	<div class="container-fluid">
-		<div class="row">
-			<!-- 2레벨 Sidebar 적용 -->
-				
+		<sec:authorize access="hasRole('ROLE_STUDENT')">
+			<c:import url="../temp/student_header.jsp"></c:import>
+		</sec:authorize>
+		<!-- Header 끝 -->
+
+		<!-- Main Contents -->
+		<div class="container-fluid">
+			<div class="row">
+				<!-- 2레벨 Sidebar 적용 -->
+				<div class="content-wrapper">
 					<c:import url="../temp/sidebar/administrator_join.jsp"></c:import>
-				
+				</div>
 				<!-- 2레벨 Sidebar 끝 -->
 				
-			<div class="col">
-					<h3>학생 계정 생성</h3>
-			 <section class="content">
-
-      <!-- Default box -->
-      <div class="card">
-        <div class="card-body row">
-          <div class="col-7">
-	         <form action="./studentAdd" method="post" id="studentForm">
-	            <div class="form-group">
-	              <label for="year">입학년도</label>
-	              <input type="text" id="year" class="form-control" name="year"/>
-	            </div>
-	            <div id="yearResult"></div>
-	            <div class="form-group">
-	              <label for="password">비밀번호</label>
-	              <input type="password" id="password" class="form-control" name="password"/>
-	            </div>
-	            <div id="passwordResult"></div>
-	            <div class="form-group">
-	              <label for="email">이메일</label>
-	              <input type="email" id="email" class="form-control" name="email"/>
-	            </div>
-	            <div id="emailResult"></div>
-	           <div class="form-group">
-	           	  <label>단과대</label>
-                  <select class="form-control select" style="width: 100%;" name="collegeNum" id="college" onchange="updateDepartmentOptions()">
-                  	<option value="단과대">전체</option>
-					<c:forEach items="${college}" var="collegeVO">
-						<c:if test="${collegeVO.collegeNum != 1 && collegeVO.collegeNum != 2}">
-							<option value="${collegeVO.collegeNum}">${collegeVO.collegeName}</option>
-						</c:if>
-					</c:forEach>
-                  </select>
-	           </div>
-	           <div class="form-group">
-	           	  <label>학과</label>
-                  	<select  class="form-control select" style="width: 100%;" name="deptNum" id="dept">
-                  		<option value="">전체</option>
-					</select>
-	           </div>
-	           <div id="deptResult"></div>
-	           <div class="form-group">
-	           	  <label>학년</label>
-                  	<select  class="form-control select" style="width: 100%;" name="grade" id="grade">
-                  		<option value="1">신입생</option>
-                  		<option value="3">편입생</option>
-					</select>
-					<div class="grade">
-						단, 신입생은 1학년이고, 편입생은 3학년으로 들어갑니다 
+				<!-- Contents -->
+				<div class="col">
+				<!-- header start -->
+					<div class="row" style="padding-top:10px">
+						<div class="col-12">
+							<div class="card">
+								<h3 class="my-3 mx-3">학생 계정 생성</h3>
+							</div>
+						</div>
 					</div>
-	           </div>
-	           
-	           <div class="form-group">
-	              <label for="name">이름</label>
-	              <input type="text" id="name" class="form-control" name="name"/>
-	            </div>
-	            <div id="nameResult"></div>
-	            <div class="form-group">
-	              <label for="phone">전화번호</label>
-	              <input type="text" id="phone" class="form-control" name="phone"/>
-	            </div>
-	            <div id="phoneResult"></div>
-	            <!-- Date -->
-              	<div class="form-group">
-                 	<label>생년월일</label>
-                   	 <input type="date" class="form-control" name="birth" id="birth"/>     	
-               	</div>
-               	 <div id="birthResult"></div>
-               	 
-                 <div class="form-group">
-	              <label for="address_kakao">주소</label>
-	              <input type="text" id="address_kakao" readonly class="form-control" name="addressDetail"/>
-	            </div>
-	            <div id="addressResult"></div>
-	            
-	             <div class="form-group">
-	              <label for="detailAddress">상세주소</label>
-	              <input type="text" id="detailAddress"  class="form-control" name="address"/>
-	            </div>
-	            <input type="hidden" name="category" value="2">
-	            <div style="width:auto; float: right;">
-		            <button type="button" class="btn btn-info" id="studentBtn">학생가입</button> 
-		            <button type="button" class="btn btn-danger" id="backBtn">취소</button>
-	            </div>
-	          </form>
-          </div>
-        </div>
-      </div>
-
-    </section>
+				<!-- header end -->
+				<!-- form start -->
+					<form  action="./studentAdd" method="post" id="studentForm">
+						<div class="card card-default">
+							
+          					<!-- card-header start -->
+							<div class="card-body">
+								<div class="row">
+              						<div class="col-6">
+                						<label for="year">입학 연도</label>
+										 <input type="text" id="year" class="form-control" name="year"/>
+										  <div class="mt-1 mx-1" id="yearResult"></div>
+                					</div>
+                					
+	                				<div class="col-6">
+	                					<label for="password">비밀번호</label>
+	                					 <input type="password" id="password" class="form-control" name="password"/>
+	                					 <div class="mt-1 mx-1" id="passwordResult"></div>
+									</div>
+								
+	              				</div>
+	              				<div class="row" style="margin-top: 20px;">
+	              					<div class="col-4">
+						                 <label for="email">이메일</label>
+	                					 <input type="email" id="email" class="form-control" name="email"/>
+										<div class="mt-1 mx-1" id="emailResult"></div>
+									</div>
+              						<div class="col-4">
+						               <label>단과대</label>
+						                  <select class="form-control select" style="width: 100%;" name="collegeNum" id="college" onchange="updateDepartmentOptions()">
+						                  	<option value="단과대">전체</option>
+											<c:forEach items="${college}" var="collegeVO">
+												<c:if test="${collegeVO.collegeNum != 1 && collegeVO.collegeNum != 2}">
+													<option value="${collegeVO.collegeNum}">${collegeVO.collegeName}</option>
+												</c:if>
+											</c:forEach>
+						                  </select>
+						              	<div class="mt-1 mx-1" id="collegeResult"></div>    
+									</div>
+                					<div class="col-4">
+                						 <label>학과</label>
+						                  	<select  class="form-control select" style="width: 100%;" name="deptNum" id="dept">
+						                  		<option value="">전체</option>
+											</select>
+										<div class="mt-1 mx-1" id="deptResult"></div>
+                  					</div>
+            					</div>
+								<div class="row" style="margin-top: 20px;">
+									<div class="col-6">
+										 <label>학년</label>
+						                  	<select  class="form-control select" style="width: 100%;" name="grade" id="grade">
+						                  		<option value="1">신입생</option>
+						                  		<option value="3">편입생</option>
+											</select>
+											
+									</div>
+									<div class="col-6">
+					                  	<label for="name">이름</label>
+				             			<input type="text" id="name" class="form-control" name="name"/>
+				             		   <div id="nameResult"></div>
+					              	</div>
+					            
+								</div>
+								<div class="row" style="margin-top:20px;">
+									<div class="col-6">
+					              		<label for="phone">전화번호</label>
+				              			<input type="text" id="phone" class="form-control" name="phone"/>
+				              			 <div id="phoneResult"></div>
+									</div>
+								
+									<div class="col-6">
+						              	<label>생년월일</label>
+										<input type="date" class="form-control" name="birth" id="birth"/>
+										 <div id="birthResult"></div>
+									</div>
+								</div>
+								<div class="row" style="margin-top: 30px;">
+									<div class="col-6">
+										<label for="address_kakao">주소</label>
+				              			<input type="text" id="address_kakao" readonly class="form-control" name="address"/>
+									</div>
+									<div class="col-6">
+										 <label for="detailAddress">상세주소</label>
+				             			 <input type="text" id="detailAddress"  class="form-control" name="addressDetail"/>
+									</div>
+									
+								</div>
+								<input type="hidden" name="category" value="2">
+								<div style="width:auto; float: right; margin-top : 50px;">
+						            <button type="button" class="btn btn-info" id="studentBtn" style="margin-right :10px;">학생 가입</button> 
+						            <button type="button" class="btn btn-danger" id="backBtn">취소</button>
+				            	</div>
+							</div>
+						</div>
+					</form>
+					
+				</div>
 			</div>
 		</div>
+
+	               		
+		<!-- Footer 적용 -->
+		<c:import url="../temp/footer.jsp"></c:import>
+		<!-- Footer 끝 -->
 	</div>
-</div>
-</div>
+	<!-- ./wrapper -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="../js/administrator/studentAdd.js"></script>
 <script type="text/javascript">
@@ -199,7 +216,7 @@ $(function () {
       $('.select2').select2()
 });
 
-
 </script>	
 </body>
+
 </html>

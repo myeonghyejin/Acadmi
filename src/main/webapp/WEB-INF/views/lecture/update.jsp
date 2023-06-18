@@ -22,21 +22,24 @@
 	<div class="wrapper">
 
 		<!-- Header 적용 -->
-		<sec:authorize access="hasRole('ROLE_PROFESSOR')">
-			<c:import url="../temp/professor_header.jsp"></c:import>
-		</sec:authorize>
-		
-		<sec:authorize access="hasRole('ROLE_STUDENT')">
-			<c:import url="../temp/student_header.jsp"></c:import>
+		<sec:authorize access="hasRole('ROLE_ADMIN')">
+			<c:import url="../temp/administrator_header.jsp"></c:import>
 		</sec:authorize>
 		
 		<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
 			<c:import url="../temp/administrator_header.jsp"></c:import>
 		</sec:authorize>
+		
+		<sec:authorize access="hasRole('ROLE_PROFESSOR')">
+			<c:import url="../temp/professor_header.jsp"></c:import>
+		</sec:authorize>
+			
+		<sec:authorize access="hasRole('ROLE_STUDENT')">
+			<c:import url="../temp/student_header.jsp"></c:import>
+		</sec:authorize>
 		<!-- Header 끝 -->
 
 		<!-- Main Contents -->
-		<div class="container-fluid">
 			<div class="content-wrapper">
 				<!-- Contents -->
 				<div class="col">
@@ -52,10 +55,7 @@
 					
 					<form action="./update" id="frm" method="post">
 	                	<div class="card card-default">
-							<div class="card-header">
-								<h3 class="card-title" style="color: white;"><input type="hidden" name="lectureNum" value="${update.lectureNum}"></h3>
-          					</div>
-          					<!-- card-header start -->
+	                	<input type="hidden" name="lectureNum" value="${update.lectureNum}">
           					<div class="card-body">
 								<div class="row">
 									<div class="col-6">
@@ -170,7 +170,7 @@
 								<div style="width:auto; float: right; margin-top: 50px">
 					            	<button class="btn btn-primary" type="button" id="btn0">임시등록</button>
 					                <button class="btn btn-info" type="button" id="btn1">등록</button>
-					                <a class="btn btn-danger" href="./list" style="color: white;">뒤로가기</a>
+					                <a class="btn btn-danger" href="./list" style="color: white;">취소</a>
 				                </div>
 							</div>
 						</div>

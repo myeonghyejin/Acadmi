@@ -19,32 +19,26 @@
 				<body class="hold-transition sidebar-mini layout-fixed">
 					<div class="wrapper">
 						<!-- Header 적용 -->
-		<sec:authorize access="hasRole('ROLE_PROFESSOR')">
-			<c:import url="../temp/professor_header.jsp"></c:import>
-		</sec:authorize>
-		
-		<sec:authorize access="hasRole('ROLE_STUDENT')">
-			<c:import url="../temp/student_header.jsp"></c:import>
-		</sec:authorize>
-		
-		<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
-			<c:import url="../temp/administrator_header.jsp"></c:import>
-		</sec:authorize>
+						<sec:authorize access="hasRole('ROLE_ADMIN')">
+							<c:import url="../temp/administrator_header.jsp"></c:import>
+						</sec:authorize>
+						
+						<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
+							<c:import url="../temp/administrator_header.jsp"></c:import>
+						</sec:authorize>
+						
+						<sec:authorize access="hasRole('ROLE_PROFESSOR')">
+							<c:import url="../temp/professor_header.jsp"></c:import>
+						</sec:authorize>
+							
+						<sec:authorize access="hasRole('ROLE_STUDENT')">
+							<c:import url="../temp/student_header.jsp"></c:import>
+						</sec:authorize>
 						<!-- Header 끝 -->
 
 						<div class="content-wrapper">
 
-							<section class="content-header">
-								<div class="container-fluid">
-									<div class="row mb-2">
-										<div class="col-sm-6 ml-5">
-											<br>
-											<br>
-											<br>
-										</div>
-									</div>
-								</div>
-							</section>
+							
 
 							<section class="content">
 								<div class="container-fluid">
@@ -85,7 +79,7 @@
 															<strong><i class="fas fa-book mr-1"></i> 학과</strong>
 															<p class="text-muted">
 																<c:set value="${departmentVO.deptName}" var="administratorDeptName"></c:set>
-																	학과 이름 : &ensp;<c:out value="${administratorDeptName}"></c:out>
+																	학과 이름 : <c:out value="${administratorDeptName}"></c:out>
 															</p>
 																<hr>
 																	<strong><i class="fa-solid fa-cake-candles mr-1"></i> 생년월일</strong>

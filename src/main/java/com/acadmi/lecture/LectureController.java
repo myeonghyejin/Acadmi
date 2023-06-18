@@ -141,7 +141,7 @@ public class LectureController {
 		return mv;
 	}
 	
-	//강의 페이지
+	//강의 메인 페이지
 	@GetMapping("main")
 	public ModelAndView getLectureMain(LectureVO lectureVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
@@ -152,6 +152,7 @@ public class LectureController {
 		int exists = lectureService.getSyllabusExists(lectureVO);
 		mv.addObject("exists",exists);
 		mv.setViewName("temp/sidebar/professor_lecture");
+		mv.setViewName("temp/lecture_header");
 		mv.setViewName("lecture/main");
 		return mv;
 	}
@@ -165,6 +166,7 @@ public class LectureController {
 		int exists = lectureService.getSyllabusExists(lectureVO);
 		mv.addObject("exists",exists);
 		mv.setViewName("temp/sidebar/professor_lecture");
+		mv.setViewName("temp/lecture_header");
 		mv.setViewName("lecture/info");
 		return mv;
 	}
@@ -181,6 +183,7 @@ public class LectureController {
 		int exists = lectureService.getSyllabusExists(lectureVO);
 		mv.addObject("exists",exists);
 		mv.setViewName("temp/sidebar/professor_lecture");
+		mv.setViewName("temp/lecture_header");
 		mv.setViewName("lecture/attendee");
 		return mv;
 	}
@@ -196,6 +199,7 @@ public class LectureController {
 			int exists = lectureService.getSyllabusExists(lectureVO);
 			mv.addObject("exists",exists);
 			mv.setViewName("temp/sidebar/professor_lecture");
+			mv.setViewName("temp/lecture_header");
 			mv.setViewName("lecture/syllabusDetail");
 			return mv;
 		}
@@ -209,6 +213,7 @@ public class LectureController {
 		int exists = lectureService.getSyllabusExists(lectureVO);
 		mv.addObject("exists",exists);
 		mv.setViewName("temp/sidebar/professor_lecture");
+		mv.setViewName("temp/lecture_header");
 		mv.setViewName("lecture/syllabusAdd");
 		return mv;
 	}
@@ -242,6 +247,7 @@ public class LectureController {
 		List<ClassVO> ar = lectureService.getSyllabusClass(lectureVO);
 		mv.addObject("classes",ar);
 		mv.setViewName("temp/sidebar/professor_lecture");
+		mv.setViewName("temp/lecture_header");
 		mv.setViewName("lecture/syllabusUpdate");
 		return mv;
 	}

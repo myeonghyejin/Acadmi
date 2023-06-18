@@ -18,23 +18,32 @@
 		width : 100%;
 	}
 	.search {
-		padding : 10px;
+		padding-left : 50px;
+		padding-top : 10px;
 	}
 </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 	<div class="wrapper">
-		<sec:authorize access="hasRole('ROLE_PROFESSOR')">
-			<c:import url="../temp/professor_header.jsp"></c:import>
-		</sec:authorize>
 		
-		<sec:authorize access="hasRole('ROLE_STUDENT')">
-			<c:import url="../temp/student_header.jsp"></c:import>
+		<!-- Header 적용 -->
+		<sec:authorize access="hasRole('ROLE_ADMIN')">
+			<c:import url="../temp/administrator_header.jsp"></c:import>
 		</sec:authorize>
 		
 		<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
 			<c:import url="../temp/administrator_header.jsp"></c:import>
 		</sec:authorize>
+		
+		<sec:authorize access="hasRole('ROLE_PROFESSOR')">
+			<c:import url="../temp/professor_header.jsp"></c:import>
+		</sec:authorize>
+			
+		<sec:authorize access="hasRole('ROLE_STUDENT')">
+			<c:import url="../temp/student_header.jsp"></c:import>
+		</sec:authorize>
+		<!-- Header 끝 -->
+		
 		<div class="content-wrapper">
 			<div class="container-fluid">
 				<div class="row">
@@ -78,9 +87,8 @@
 		               				 <sec:authentication property="principal" var="user"/>
 		               					<thead>
 		               						<tr>
-		               							<th style="width : 10%"></th>
 		               							<th style="width : 30%">강좌명</th>
-		               							<th style="width : 10%">담당교수</th>
+		               							<th style="width : 10%">담당 교수</th>
 		               							<th style="width : 10%">학점</th>
 		               							<th style="width : 10%">구분</th>
 		               							
@@ -89,7 +97,7 @@
 		               					<tbody>
 		               						<c:forEach items="${list}" var="lectureVO" varStatus="status">
 		               							<tr>
-		               								<td>${status.index+1 }</td>
+		               								
 		               								<td>${lectureVO.lectureName}</td>
 		               								<td>${lectureVO.professorVO.name}</td>
 		               								<td>${lectureVO.studentLectureVO.creditVO.credit}</td>

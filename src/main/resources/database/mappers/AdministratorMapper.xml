@@ -135,7 +135,7 @@
   	<!--계정 생성  -->
   	<insert id="setMemberAdd" parameterType="MemberVO" useGeneratedKeys="true" keyProperty="username">
   		INSERT INTO MEMBER
-  		VALUES(#{username},#{password},#{email},#{category},1)
+  		VALUES(#{username},#{password},#{email},#{category},0)
   	</insert>
   	<insert id="setStudentAdd" parameterType="StudentVO" >
   		INSERT INTO STUDENT
