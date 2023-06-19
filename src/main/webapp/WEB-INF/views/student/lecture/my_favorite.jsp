@@ -48,11 +48,7 @@
 				<!-- header end -->
 	
 				<!-- Default box -->
-				<div class="card">
-					<div class="card-header">
-						<h3 class="card-title">신청 과목</h3>
-					</div>
-								
+				<div class="card">		
 					<div class="card-body p-0" id="myFavoriteList">
 						<table class="table table-hover text-nowrap">
 							<thead>
@@ -84,7 +80,7 @@
 											<c:if test="${lectureVO.category eq '교양 선택'}">교양 선택</c:if>
 										</td>
 										<td>${lectureVO.departmentVO.deptName}</td>
-										<td>${lectureVO.completionGrade}</td>
+										<td>${lectureVO.completionGrade}학점</td>
 										<td>${lectureVO.weekday}요일</td>
 										<td>
 											<c:if test="${lectureVO.startTime eq 1}">09:00</c:if>

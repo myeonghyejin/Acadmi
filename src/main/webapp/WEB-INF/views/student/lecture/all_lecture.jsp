@@ -142,7 +142,7 @@
 										<c:if test="${lectureVO.category eq '교양 선택'}">교양 선택</c:if>
 									</td>
 									<td>${lectureVO.departmentVO.deptName}</td>
-									<td>${lectureVO.completionGrade}</td>
+									<td>${lectureVO.completionGrade}학점</td>
 									<td>${lectureVO.weekday}요일</td>
 									<td>
 										<c:if test="${lectureVO.startTime eq 1}">09:00</c:if>
