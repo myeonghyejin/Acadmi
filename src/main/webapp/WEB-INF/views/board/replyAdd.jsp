@@ -15,7 +15,8 @@
 <body class="hold-transition sidebar-mini">
 
 	<div class="wrapper">
-
+		<sec:authentication property="principal.username" var="userName" />
+		
 		<!-- Header 적용 -->
 		<sec:authorize access="hasRole('ROLE_ADMIN')">
 	     	<c:import url="../temp/administrator_header.jsp"></c:import>
@@ -49,11 +50,8 @@
 			<div class="row">
 			  <div class="col-md-12" style="margin-top: 10px;">
 				<div class="card card-secondary">
-				  <div class="card-body">
-					<sec:authentication property="principal.username" var="userName" />
-					
-					<div class="row col-md-7 mx-auto">
-						<form id="contactForm" class="row g-3" action="./reply" method="post" enctype="multipart/form-data">
+				  <div class="card-body" style="margin: 0 auto">
+						<form id="contactForm" action="./reply" method="post" enctype="multipart/form-data">
 							<input type="hidden" name="num" value="${qnaVO.num}">
 							
 							<c:if test="${board eq 'lectureQna'}">
@@ -82,15 +80,8 @@
 							
 							<div class="col-md-12 mt-4">
 								<label for="contents" class="form-label strongFont2">내용</label>
-								<textarea class="form-control " name="contents" id="replyContents"
-									placeholder="내용을 입력하세요"></textarea>
-							</div>
-						
-							<!-- <div class="col-md-12 mt-3">
-								<div id="fileList">
-									<button class="col-md-12 mt-3 btn btn-primary" id="fileAdd" type="button">파일추가</button>
-								</div> 
-							</div> -->
+								<textarea class="form-control " name="contents" id="replyContents" placeholder="내용을 입력하세요"></textarea>
+							</div>	
 							
 							<div class="col-md-12 mt-5">
 								<div class="form-group">
@@ -103,13 +94,11 @@
 							    </div>											
 							</div> 
 							
-							
 							<div class="col-md-12 mt-4">
 								<button type="button" class="btn btn-danger float-right" onclick="window.history.back();">취소</button>		
 								<button type="button" class="submitButton btn btn-info float-right" style="margin-right: 5px;">등록</button>
 							</div>
 						</form>
-					</div>
 				  </div>
 				</div>
 			  </div>
@@ -135,8 +124,7 @@
 	    });
 	
 		$("#replyContents").summernote({
-			height : 300,
-			width : 1300
+			height : 300
 		});
 		
 		function getParameterByName(name) {

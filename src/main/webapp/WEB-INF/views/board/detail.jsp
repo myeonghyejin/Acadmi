@@ -14,10 +14,10 @@
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 
-<div class="wrapper">
-	<sec:authentication property="principal.username" var="userName" />
+	<div class="wrapper">
+		<sec:authentication property="principal.username" var="userName" />
 					
-	<sec:authentication property="principal.category" var="category" />
+		<sec:authentication property="principal.category" var="category" />
 
 		<!-- Header 적용 -->
 		<sec:authorize access="hasRole('ROLE_ADMIN')">
@@ -130,7 +130,7 @@
 										<a href="./update?num=${boardVO.num}" id="update" class="btn btn-info float-right" style="margin-right: 5px">수정</a>
 									</c:if>
 									<c:if test="${board eq 'qna' || board eq 'notice'}">
-						            	<a href="./list" class="btn btn-light float-right">목록</a>
+						            	<a href="./list" class="btn btn-light float-right" style="margin-right: 5px">목록</a>
 						            </c:if>
 						            <c:if test="${board eq 'lectureQna' || board eq 'lectureNotice'}">
 						            	<a href="./list?lectureNum=${boardVO.lectureNum}" class="btn btn-light float-right" style="margin-right: 5px">목록</a>
