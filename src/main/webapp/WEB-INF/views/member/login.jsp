@@ -22,11 +22,10 @@
 					<div class="login-box">
 
 						<div class="card card-outline card-info">
-							<div class="card-header text-center" >
-								<a href="./login" class="h1"><img src="/images/black.png" style="width: 100%; height: 100%;"></a>
+							<div class="card-header text-center">
+								<a href="./login" class="h1"><img src="/images/black.png" style="width: 70%; height: 70%;"></a>
 							</div>
 							<div class="card-body">
-								<p class="login-box-msg">로그인 후 Acadmi에 접속하세요</p>
 								<form id="contactForm" action="./login" method="post" >
             						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 									<div class="input-group mb-3">
