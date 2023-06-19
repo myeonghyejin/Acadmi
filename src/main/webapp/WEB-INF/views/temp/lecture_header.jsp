@@ -105,13 +105,13 @@
 				<sec:authorize access="hasRole('PROFESSOR')">
 					<img src="https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927" class="img-circle elevation-2" alt="User Image">
 					<sec:authentication property="Principal" var="user"/>
-					<a href="/member/professorPage?username=${user.username}">PROFESSOR</a>
+				<a href="/member/professorPage?username=${user.username}" style="margin-left: 8px">${user.username}</a>
 				</sec:authorize>
 				
 				<sec:authorize access="hasRole('STUDENT')">
 					<img src="https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927" class="img-circle elevation-2" alt="User Image">
-	                <sec:authentication property="Principal" var="user"/>
-	                <a href="/member/studentPage?username=${user.username}">STUDENT</a>
+	               <sec:authentication property="Principal" var="user"/>
+                <a href="/member/studentPage?username=${user.username}" style="margin-left: 8px">${user.username}</a>
 				</sec:authorize>
 			</div>
 		</div>
