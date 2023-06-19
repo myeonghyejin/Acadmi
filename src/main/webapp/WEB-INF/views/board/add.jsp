@@ -13,6 +13,7 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 </head>
 <body class="hold-transition sidebar-mini">
+
 	<div class="wrapper">
 	
 		<sec:authentication property="principal.username" var="userName" />
@@ -31,7 +32,7 @@
 		</sec:authorize>
 	
 		<sec:authorize access="hasRole('ROLE_STUDENT')">
-			<c:import url="../temp/header.jsp"></c:import>
+			<c:import url="../temp/student_header.jsp"></c:import>
 		</sec:authorize>	
 		<!-- Header 끝 -->
 
@@ -67,9 +68,8 @@
 					<div class="row">
 						<div class="col-md-12" style="margin-top: 10px;">
 							<div class="card card-secondary">
-						 		<div class="card-body">
-									<div class="row col-md-7 mx-auto">
-										<form id="contactForm" class="row g-3" action="./add" method="post" enctype="multipart/form-data">
+						 		<div class="card-body" style="margin: 0 auto">
+										<form id="contactForm" action="./add" method="post" enctype="multipart/form-data">
 											
 											<c:if test="${board eq 'lectureNotice' || board eq 'lectureQna'}">
 												<input type="hidden" class="form-control" name="lectureNum" id="lectureNum" value="">
@@ -125,7 +125,6 @@
 												<button type="button" class="submitButton btn btn-info float-right" style="margin-right: 5px;">등록</button>
 											</div>
 										</form>
-									</div>
 							  	</div>
 							</div>
 						</div>
@@ -155,8 +154,7 @@
 	    });
 	
 		$("#contents").summernote({
-			height : 300,
-			width : 1300
+			height : 300
 		});
 		
 		function getParameterByName(name) {
