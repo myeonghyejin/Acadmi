@@ -59,13 +59,6 @@
 			</a>
 		</li>
 
-		<!-- 전체 보기 -->
-		<li class="nav-item">
-			<a class="nav-link" data-widget="fullscreen" href="#" role="button">
-				<i class="fas fa-expand-arrows-alt"></i>
-			</a>
-		</li>
-		
 		<!-- 로그아웃 -->
 		<li class="nav-item">
 			<a class="nav-link" href="/member/logout" role="button">
@@ -89,32 +82,9 @@
 		<!-- Sidebar user panel (optional) -->
 		<div class="user-panel mt-3 pb-3 mb-3 d-flex">
 			<div class="image">
-				<sec:authorize access="hasRole('STUDENT')">
-					<img src="/images/profile.jpg" class="img-circle elevation-2" alt="User Image" >
-				</sec:authorize>
-				
-				<sec:authorize access="hasRole('PROFESSOR')">
-					<img src="/images/profile.jpg" class="img-circle elevation-2" alt="User Image">
-				</sec:authorize>
-				
-				<sec:authorize access="hasRole('ADMINISTRATOR')">
-					<img src="/images/profile.jpg" class="img-circle elevation-2" alt="User Image">
-				</sec:authorize>
-				
-				<sec:authorize access="hasRole('STUDENT')">
-                <sec:authentication property="Principal" var="user"/>
-                    <a href="/member/studentPage?username=${user.username}" style="margin-left: 8px">${user.username}</a>
-                </sec:authorize>
-                
-				<sec:authorize access="hasRole('PROFESSOR')">
+				<img src="/images/profile.jpg" class="img-circle elevation-2" alt="User Image" >
 				<sec:authentication property="Principal" var="user"/>
-					<a href="/member/professorPage?username=${user.username}" style="margin-left: 8px">${user.username}</a>
-				</sec:authorize>
-				
-				<sec:authorize access="hasRole('ADMINISTRATOR')">
-				<sec:authentication property="Principal" var="user"/>
-					<a href="/member/administratorPage?username=${user.username}" style="margin-left: 8px">${user.username}</a>
-				</sec:authorize>
+                <a href="/member/studentPage?username=${user.username}" style="margin-left: 8px">${user.username}</a>   
 			</div>
 		</div>
 
@@ -266,3 +236,4 @@
 	margin: 0 8px;
 }
 </style>
+<script src="/js/sidebarActive/studentSidebarActive.js"></script>

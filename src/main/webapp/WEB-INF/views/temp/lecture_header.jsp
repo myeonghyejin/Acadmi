@@ -161,8 +161,8 @@
 				</li>
 	
 				<!-- 게시판 -->
-				<li class="nav-item">
-					<a href="#" class="nav-link">
+				<li class="nav-item" id="boardItem">
+					<a href="#" class="nav-link" id="boardLink">
 						<i class="nav-icon fas fa-comment-dots"></i>
 						<p>
 							게시판
@@ -171,13 +171,13 @@
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
-							<a href="/notice/list" class="nav-link">
+							<a href="/notice/list" class="nav-link" id="noticeLink">
 								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>공지사항</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="/qna/list" class="nav-link">
+							<a href="/qna/list" class="nav-link" id="qnaLink">
 								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>질의응답</p>
 							</a>
@@ -294,4 +294,7 @@
 </style>
 <sec:authorize access="hasRole('ROLE_PROFESSOR')">
 	<script src="/js/sidebarActive/professorSidebarActive.js"></script>
+</sec:authorize>
+<sec:authorize access="hasRole('ROLE_STUDENT')">
+	<script src="/js/sidebarActive/studentSidebarActive.js"></script>
 </sec:authorize>
