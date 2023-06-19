@@ -184,6 +184,7 @@ public class NoticeController {
 	@GetMapping("homeStudentNotice")
 	public ModelAndView getNoticeList(Pagination pagination, HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
+		pagination.setPerPage(5L);
 		List<BoardVO> ar = noticeService.getList(pagination);
 		
 		mv.addObject("list", ar);
