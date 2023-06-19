@@ -460,7 +460,7 @@ public class AdministratorController {
 	public ModelAndView getLectureRoomAssignment(Pagination pagination, NotificationVO notificationVO, LectureVO lectureVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		List<LectureRoomVO> ar = administratorService.getLectureRoomAssignment(pagination);
+		List<LectureRoomVO> ar = administratorService.getLectureRoom();
 		lectureVO = administratorService.getLectureNum(lectureVO);
 		
 		if(notificationVO.getNotificationNum() != null) {

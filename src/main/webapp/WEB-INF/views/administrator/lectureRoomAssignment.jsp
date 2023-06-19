@@ -14,37 +14,7 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
 <style type="text/css">
-	#pagination {
-		 display: flex;
-   	 	justify-content: center;
 	
-	}
-	
-	#table1 {
-		width : 90%;
-	}
-	
-	h3 {
-		margin : 40px;
-	}
-	
-	.card-title {
-		margin : 5px 0 10px 5px;
-	}
-	.card-body{
-		display: flex;
-	  	justify-content: center;
-	 	align-items: center;
-	 	margin : 10px 0 30px 0;
-	}
-	
-	.content {
-		margin: 30px;
-	}
-	
-	.content2 {
-		margin : 10px 0 30px 30px;
-	}
 </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -87,12 +57,10 @@
 						<input type="hidden" name="page" value="1">
 						<div class="card search">
 							<div class="row content" >
-					
+								
 								
 							</div>
 							<div class="row content2">
-								
-								
 									<button type="submit" class="btn btn-info" style="margin : 0 0 0 20px; width : 15%">검색</button>
 							</div>
 						</div>

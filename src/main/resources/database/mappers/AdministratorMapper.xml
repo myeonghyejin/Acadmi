@@ -467,37 +467,42 @@
 
   
   <!--강의실 배정  -->
+  
   <select id="getLectureRoomAssignment" resultMap="LectureRoomAssignment" parameterType="Pagination">
-	SELECT * FROM LECTURE_ROOM 
-	WHERE PERSONAL &gt;= #{personal}
-	AND STATUS=1
-	AND (LECTUREROOM, LECTUREBUILDING ) NOT IN 
-		( 
-			SELECT LECTUREROOM , LECTUREBUILDING 
-			FROM TIMETABLE 
-				WHERE WEEKDAY = #{weekday}
-				AND TIME BETWEEN #{time} AND #{time}
-		)
-	LIMIT #{startRow}, #{perPage}
+		SELECT R.LECTUREBUILDING, R.LECTUREROOM,R.PERSONAL,R.STATUS,R.`TIME`, R.STARTTIME,R.ENDTIME,TB.`YEAR`,TB.SEMESTER, TB.TIME, TB.WEEKDAY FROM 
+		(SELECT * FROM LECTURE_ROOM LR,TIMEINFO T
+			WHERE STATUS=1) R
+			LEFT OUTER JOIN 
+				TIMETABLE TB
+			ON (TB. LECTUREBUILDING=R.LECTUREBUILDING AND TB.LECTUREROOM=R.LECTUREROOM AND R.TIME=TB.TIME) 
+		ORDER BY 1,2,5
+		LIMIT #{startRow},#{perPage}
   </select>
-  <resultMap type="LectureRoomVO" id="LectureRoomAssignment">
-  	<id column="LECTUREBUILDING" property="lectureBuilding"/>
-  	<id column="LECTUREROOM" property="lectureRoom"/>
-  	<result column="PERSONAL" property="personal"/>
-  	<result column="STATUS" property="status"/>
-  		<collection property="timeTableVOs" javaType="List" ofType="TimeTableVO">
-  			<id column="WEEKDAY" property="weekday"/>
-  			<id column="TIME" property="time"/>
-  			
-  		</collection>
-  </resultMap>
+ 	<resultMap type="LectureRoomVO" id="LectureRoomAssignment">
+ 		<id column="LECTUREBUILDING" property="lectureBuilding"/>
+ 		<id column="LECTUREROOM" property="lectureRoom"/>
+ 		<result column="PERSONAL" property="personal"/>
+ 		<result column="STATUS" property="status"/>
+ 		<collection property="timeTableVOs" javaType="List" ofType="TimeTableVO">
+ 			<id column="TIMETABLENUM" property="timeTableNum"/>
+ 			<result column="WEEKDAY" property="weekday"/>
+ 			<result column="TIME" property="time"/>
+ 			<result column="YEAR" property="year"/>
+ 			<result column="SEMESTER" property="semester"/>
+ 			<collection property="timeInfoVOs" javaType="List" ofType="TimeInfoVO">
+ 				<id column="TIME" property="time"/>
+ 				<result column="STARTTIME" property="startTime"/>
+ 				<result column="ENDTIME" property="endTime"/>
+ 			</collection>
+ 		</collection>
+ 	</resultMap>
   
   <select id="getTimeTable" resultType="TimeTableVO">
   	SELECT * FROM TIMETABLE
   </select>
  
   <select id="getLectureRoom" resultType="LectureRoomVO">
-  	SELECT * FROM LECTUREROOM
+  	SELECT * FROM LECTURE_ROOM
   </select>
   
   <select id="getTotalCountAssiginment" resultType="Long">
