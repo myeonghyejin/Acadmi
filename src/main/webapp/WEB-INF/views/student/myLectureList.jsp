@@ -52,7 +52,7 @@
 						<div class="row" style="padding-top:10px">
 		                  <div class="col-12">
 		                     <div class="card">
-		                        <h3 class="my-3 mx-3">수강 강의</h3>
+		                        <h3 class="my-3 mx-3">강의 목록</h3>
 		                     </div>
 		                  </div>
 		               </div>

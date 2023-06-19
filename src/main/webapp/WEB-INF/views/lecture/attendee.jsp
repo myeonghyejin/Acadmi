@@ -74,8 +74,8 @@
 														<option value="name"${param.kind == 'name' ? 'selected' : ''}>이름</option>
 													</select>
 								                </div>
-							                 	<div class="input-group input-group-sm my-1 mr-2 col-7" style="width:210px;">
-								                	<input type="text" class="form-control form-control-lg" name="search" id="search" value="${pagination.search}">
+							                 	<div class="input-group my-1 mr-2 col-7" style="width:210px;">
+								                	<input type="text" class="form-control" name="search" id="search" value="${pagination.search}">
 													<div class="input-group-append">
 							                      		<button type="submit" class="btn btn-default" id="submit">
 							                        		<i class="fas fa-search"></i>
