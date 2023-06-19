@@ -15,10 +15,15 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
+
 	<div class="wrapper">
 		
 		<!-- Header 적용 -->
 		<sec:authorize access="hasRole('ROLE_ADMIN')">
+	     	<c:import url="../temp/administrator_header.jsp"></c:import>
+	  	</sec:authorize>
+	  	
+	  	<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
 	     	<c:import url="../temp/administrator_header.jsp"></c:import>
 	  	</sec:authorize>
 		
@@ -27,7 +32,7 @@
 		</sec:authorize>
 	
 		<sec:authorize access="hasRole('ROLE_STUDENT')">
-			<c:import url="../temp/header.jsp"></c:import>
+			<c:import url="../temp/student_header.jsp"></c:import>
 		</sec:authorize>	
 		<!-- Header 끝 -->
 
