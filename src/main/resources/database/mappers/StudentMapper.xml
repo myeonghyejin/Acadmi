@@ -44,17 +44,17 @@
 				ON L.USERNAME = P.USERNAME
 		WHERE SL.USERNAME=#{username}
 		<if test="year ==null and semester ==null">
-			AND YEAR=DATE_FORMAT(now(),'%Y') AND 
-  			SEMESTER = CASE
+			AND L.YEAR=DATE_FORMAT(now(),'%Y') AND 
+  			L.SEMESTER = CASE
     		WHEN MONTH(NOW()) BETWEEN 3 AND 8 THEN 1
     		ELSE 2
 			END
 		</if>
 		<if test="year !=null and !year.equals('')">
-			AND l.YEAR = #{year}
+			AND L.YEAR = #{year}
 		</if>
 		<if test="semester !=null and !semester.equals('')">
-			AND l.SEMESTER=#{semester}
+			AND L.SEMESTER=#{semester}
 		</if>
  	</select>
  	<resultMap type="LectureVO" id="MyLectureList">

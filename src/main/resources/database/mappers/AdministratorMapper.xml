@@ -501,7 +501,7 @@
   	SELECT * FROM TIMETABLE
   </select>
  
-  <select id="getLectureRoom" resultType="LectureRoomVO">
+  <select id="getLectureRoom" resultType="LectureRoomVO" parameterType="Pagination">
   	SELECT * FROM LECTURE_ROOM
   </select>
   

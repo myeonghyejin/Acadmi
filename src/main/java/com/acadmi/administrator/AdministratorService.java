@@ -499,8 +499,8 @@ public class AdministratorService{
 		return administratorDAO.getLectureNum(lectureVO);
 	}
 	
-	public List<LectureRoomVO> getLectureRoom() throws Exception {
-		return administratorDAO.getLectureRoom();
+	public List<LectureRoomVO> getLectureRoom(Pagination pagination) throws Exception {
+		return administratorDAO.getLectureRoom(pagination);
 
 	}
 	

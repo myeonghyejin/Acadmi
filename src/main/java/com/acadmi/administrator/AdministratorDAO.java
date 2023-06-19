@@ -98,6 +98,6 @@ public interface AdministratorDAO {
  	public int setLectureRoomAssignmentUpdate(LectureVO lectureVO) throws Exception;
 	public LectureVO getLectureNum(LectureVO lectureVO) throws Exception;
 	
-	public List<LectureRoomVO> getLectureRoom() throws Exception;
+	public List<LectureRoomVO> getLectureRoom(Pagination pagination) throws Exception;
 	public List<TimeTableVO> getTimeTable() throws Exception;
 }
