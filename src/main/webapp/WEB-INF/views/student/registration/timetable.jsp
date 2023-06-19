@@ -54,11 +54,11 @@
 						<div class="col-3">
 							<label>수강 연도</label>
 							<select class="select2" style="width: 100%;" name="year">
-								<option value="${year - 2}" ${param.year == year - 2 ? 'selected' : ''}>${year - 2}</option>
-								<option value="${year - 1}" ${param.year == year - 1 ? 'selected' : ''}>${year - 1}</option>
 								<option value="${year}" ${param.year == year ? 'selected' : ''}>${year}</option>
-								<option value="${year + 1}" ${param.year == year + 1 ? 'selected' : ''}>${year + 1}</option>
-								<option value="${year + 2}" ${param.year == year + 2 ? 'selected' : ''}>${year + 2}</option>
+								<option value="${year - 1}" ${param.year == year - 1 ? 'selected' : ''}>${year - 1}</option>
+								<option value="${year - 2}" ${param.year == year - 2 ? 'selected' : ''}>${year - 2}</option>
+								<option value="${year - 3}" ${param.year == year - 3 ? 'selected' : ''}>${year - 3}</option>
+								<option value="${year - 4}" ${param.year == year - 4 ? 'selected' : ''}>${year - 4}</option>
 							</select>
 						</div>
 						<div class="col-3">
