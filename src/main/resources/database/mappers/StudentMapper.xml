@@ -151,6 +151,8 @@
 	<resultMap type="lectureVO" id="LectureResult">
 		<id column="LECTURENUM" property="lectureNum"/>
 		<result column="LECTURENAME" property="lectureName"/>
+		<result column="YEAR" property="year"/>
+		<result column="SEMESTER" property="semester"/>
 		<association property="professorVO" javaType="ProfessorVO">
 			<id column="USERNAME" property="username"/>
 			<result column="NAME" property="name"/>
@@ -179,6 +181,11 @@
 	</select>
 
 	<!--강의 계획서 열람  -->
+	
+	<select id="getLectureDetail" parameterType="LectureVO" resultType="LectureVO">
+		SELECT * FROM LECTURE WHERE LECTURENUM=#{lectureNum}
+	</select>
+	
 	<select id="getSyllabusDetail" parameterType="LectureVO" resultMap="SyllabusDetail">
 		SELECT * FROM SYLLABUS S 
 			INNER JOIN 
@@ -196,6 +203,7 @@
 		<id column="LECTURENUM" property="lectureNum"/>
 		<result column="LECTURENAME" property="lectureName"/>
 		<result column="YEAR" property="year"/>
+		<result column="WEEKDAY" property="weekday"/>
 		<result column="STARTTIME" property="startTime"/>
 		<result column="ENDTIME" property="endTime"/>
 		<result column="GRADE" property="grade"/>

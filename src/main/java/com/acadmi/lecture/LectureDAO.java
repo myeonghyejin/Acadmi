@@ -15,10 +15,11 @@ import com.acadmi.util.Pagination;
 @Mapper
 public interface LectureDAO {
 
+	
 	//홈 강의 목록
 	public List<LectureVO> getHomeLectureList(LectureVO lectureVO) throws Exception;
 	//강의 목록
-	public List<LectureVO> getLectureList(LectureVO lectureVO) throws Exception;
+	public List<LectureVO> getLectureList(Pagination pagination) throws Exception;
 	//단과대학 목록
 	public List<CollegeVO> getCollegeList(CollegeVO collegeVO) throws Exception;
 	//학과 목록
@@ -34,6 +35,8 @@ public interface LectureDAO {
 	public LectureVO getLectureProfessor(LectureVO lectureVO) throws Exception;
 	//참여자 정보
 	public List<StudentVO> getLectureAttendee(Pagination pagination) throws Exception;
+	//참여자 수
+	public Long getTotalAttendee(Pagination pagination) throws Exception;
 	//계획서 정보
 	public LectureVO getSyllabusDetail(LectureVO lectureVO) throws Exception;
 	public List<ClassVO> getSyllabusClass(LectureVO lectureVO) throws Exception;

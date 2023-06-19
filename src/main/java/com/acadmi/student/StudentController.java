@@ -102,8 +102,8 @@ public class StudentController {
 		List<ClassVO> ar = studentService.getSyllabusClass(lectureVO); 
 		mv.addObject("lecture", lectureVO);
 		mv.addObject("classes",ar);
+		mv.setViewName("temp/lecture_header");
 		mv.setViewName("student/lecture/main");
-		
 		return mv;
 		
 	}
@@ -117,6 +117,7 @@ public class StudentController {
 		lectureVO = studentService.getLectureProfessor(lectureVO);
 		mv.addObject("list", ar);
 		mv.addObject("lecture", lectureVO);
+		mv.setViewName("temp/lecture_header");
 		mv.setViewName("student/lecture/attendee");
 		
 		return mv;
@@ -129,11 +130,14 @@ public class StudentController {
 	public ModelAndView getSyllabusDetail(LectureVO lectureVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		lectureVO =  studentService.getSyllabusDetail(lectureVO);
-		List<ClassVO> ar = studentService.getSyllabusClass(lectureVO);
-		
+		lectureVO = studentService.getLectureDetail(lectureVO);
 		mv.addObject("lecture", lectureVO);
+		lectureVO =  studentService.getSyllabusDetail(lectureVO);
+		mv.addObject("lectureVO", lectureVO);
+		List<ClassVO> ar = studentService.getSyllabusClass(lectureVO);
 		mv.addObject("classes", ar);
+		
+		mv.setViewName("temp/lecture_header");
 		mv.setViewName("student/lecture/syllabusDetail");
 		
 		return mv;

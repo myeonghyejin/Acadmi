@@ -17,7 +17,14 @@
 			<a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
 		</li>		
 	</ul>
-	<h3 class="my-1" style="vertical-align:middle;"><a href="/lecture/main?lectureNum=${lecture.lectureNum}">${lecture.lectureName}</a></h3>
+	<!-- Header -->
+	<sec:authorize access="hasRole('ROLE_PROFESSOR')">
+		<a href="/lecture/main?lectureNum=${lecture.lectureNum}" style="font-weight: bold;">${lecture.lectureName}</a>
+	</sec:authorize>
+	<sec:authorize access="hasRole('ROLE_STUDENT')">
+		<a href="/student/lecture/main?lectureNum=${lecture.lectureNum}" style="font-weight: bold;">${lecture.lectureName}</a>
+	</sec:authorize>
+	
 	<!-- Right navbar links -->
 	<ul class="navbar-nav ml-auto">
 
@@ -145,6 +152,7 @@
 
 		<!-- Sidebar Menu -->
 		<nav class="mt-2">
+		<sec:authorize access="hasRole('ROLE_PROFESSOR')">
 			<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 			<!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
 			
@@ -212,6 +220,101 @@
 				</li>
 				
 			</ul>
+		</sec:authorize>
+		<sec:authorize access="hasRole('ROLE_STUDENT')">
+			<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+			<!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
+			
+				<!-- 내 강의 -->
+				<li class="nav-item">
+					<a href="#" class="nav-link">
+						<i class="nav-icon fas fa-chalkboard"></i>
+						<p>
+							내 강의
+							<i class="fas fa-angle-left right"></i>
+						</p>
+					</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item">
+							<a href="/student/myLectureList" class="nav-link">
+								<i class="fa-solid fa-circle fa-2xs"></i>
+								<p>강의 목록</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="/student/myCreditList" class="nav-link">
+								<i class="fa-solid fa-circle fa-2xs"></i>
+								<p>성적 조회</p>
+							</a>
+						</li>
+					</ul>
+				</li>
+				
+				<!-- 수강 -->
+				<li class="nav-item">
+					<a href="#" class="nav-link">
+						<i class="nav-icon fas fa-chalkboard-user"></i>
+						<p>
+							수강
+							<i class="fas fa-angle-left right"></i>
+						</p>
+					</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item">
+							<a href="#" class="nav-link" onclick="handleAllLectureClick()">
+								<i class="fa-solid fa-circle fa-2xs"></i>
+								<p>수강 신청 & 장바구니</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="#" class="nav-link" onclick="handleMyLectureClick()">
+								<i class="fa-solid fa-circle fa-2xs"></i>
+								<p>내 수강 신청</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="#" class="nav-link" onclick="handleMyFavoriteClick()">
+								<i class="fa-solid fa-circle fa-2xs"></i>
+								<p>내 장바구니</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="#" class="nav-link" onclick="handleTimetableClick()">
+								<i class="fa-solid fa-circle fa-2xs"></i>
+								<p>시간표 조회</p>
+							</a>
+						</li>
+					</ul>
+				</li>
+	
+				<!-- 게시판 -->
+				<li class="nav-item">
+					<a href="#" class="nav-link">
+						<i class="nav-icon fas fa-comment-dots"></i>
+						<p>
+							게시판
+							<i class="fas fa-angle-left right"></i>
+						</p>
+					</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item">
+							<a href="/notice/list" class="nav-link">
+								<i class="fa-solid fa-circle fa-2xs"></i>
+								<p>공지사항</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="/qna/list" class="nav-link">
+								<i class="fa-solid fa-circle fa-2xs"></i>
+								<p>질의응답</p>
+							</a>
+						</li>
+					</ul>
+				</li>
+				
+			</ul>
+		</sec:authorize>
+		
 		</nav>
 		<!-- /.sidebar-menu -->
     </div>

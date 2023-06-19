@@ -4,9 +4,8 @@
     
 <link rel="stylesheet" href="/css/sidebar.css">
 
-<div class="sidebar-dropdown" style="background-color:#ECEFF1;padding-top:10px;">
-		<h5 style="margin-bottom:0px;padding:20px;padding-bottom:10px"><a href="/lecture/main?lectureNum=${lecture.lectureNum}">강의실 홈</a></h5>
-	
+<div class="sidebar-dropdown" style="padding-top:70px;">
+
 	<!-- Menu -->
 	
 	<!-- 더 많은 개수의 submenu가 필요할 경우
