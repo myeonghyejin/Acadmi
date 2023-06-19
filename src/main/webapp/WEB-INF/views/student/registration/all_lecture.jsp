@@ -215,7 +215,10 @@
 						</table>
 					</div>
 					<!-- /.card-body -->
-						
+				
+				</div>
+				<!-- /.card -->
+				
 				<!-- Pagination -->
 				<div class="row g-3 mt-3 justify-content-center">
 					<ul class="pagination pagination-sm mx-auto" style="width: 200px;">
@@ -240,10 +243,6 @@
 						</c:if>
 					</ul>
 				</div>
-				
-				</div>
-				<!-- /.card -->
-				
 				
 				<div class="row">
 					<div class="col">
