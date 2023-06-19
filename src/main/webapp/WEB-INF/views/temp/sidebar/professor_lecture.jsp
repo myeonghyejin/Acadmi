@@ -16,16 +16,16 @@
 		강의 정보
 	</button>
 	<div id="submenu_1" class="sidebar-dropdown-content">
-		<a href="/lecture/info?lectureNum=${lecture.lectureNum}">강의 상세</a>
+		<a href="/lecture/info?lectureNum=${lecture.lectureNum}" id="professorLectureDetail">강의 상세</a>
 		<c:choose>
 			<c:when test="${exists==1}">
-				<a href="/lecture/syllabusDetail?lectureNum=${lecture.lectureNum}">강의 계획서</a>
+				<a href="/lecture/syllabusDetail?lectureNum=${lecture.lectureNum}" id="professorSyllabus">강의 계획서</a>
 			</c:when>
 			<c:otherwise>
-				<a href="/lecture/syllabusAdd?lectureNum=${lecture.lectureNum}">강의 계획서</a>
+				<a href="/lecture/syllabusAdd?lectureNum=${lecture.lectureNum}" id="professorSyllabus">강의 계획서</a>
 			</c:otherwise>
 		</c:choose>
-		<a href="/lecture/attendee?lectureNum=${lecture.lectureNum}">참여자 목록</a>
+		<a href="/lecture/attendee?lectureNum=${lecture.lectureNum}" id="professorAttendee">참여자 목록</a>
 	</div>
 	
 	<!-- Submenu_2 -->
@@ -77,3 +77,4 @@
 	  }
 	}
 </script>
+<script src="/js/sidebarActive/professorLectureSidebarActive.js"></script>
