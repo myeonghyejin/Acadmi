@@ -44,7 +44,7 @@
 										<div class="col-md-6" style="padding-top:20px">
 											<div class="card card-info card-outline ml-5">
 												<div class="card-body box-profile">
-													<div class="text-center">
+													<div class="text-center mb-3">
 		     	 										<c:forEach items="${departmentVO.professorVOs}" var="professorVO">
 		     	 												<c:choose>
 																    <c:when test="${empty professorVO.memberFilesVO.fileName}">
@@ -103,12 +103,11 @@
 																<hr>
 																	<strong><i class="fas fa-map-marker-alt mr-1"></i> 주소</strong>
 																		<p class="text-muted"><c:out value="${professorAddress}"></c:out>&ensp;<c:out value="${professorAddressDetail}"></c:out></p>
+															
+															<sec:authentication property="Principal" var="user"/>
+															<a href="/member/professorUpdate?username=${user.username}" id="professorUpdate" class="btn btn-info float-right">수정</a>
 														</div>
 													</c:forEach>
-
-														<sec:authentication property="Principal" var="user"/>
-														<a href="/member/professorUpdate?username=${user.username}" id="professorUpdate" class="btn btn-info float-right">수정</a>
-
 												</div>
 											</div>
 										</div>
