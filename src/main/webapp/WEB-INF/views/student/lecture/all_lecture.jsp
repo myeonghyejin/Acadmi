@@ -40,7 +40,11 @@
 				<div class="row">
 					<div class="col mt-3">
 						<div class="card">
-							<h3 class="my-3 mx-3">수강 신청 & 장바구니</h3>
+							<h3 class="mx-3 mt-3" style="margin-bottom: 0;">${year}년 ${semester}학기 수강 신청</h3>
+							<div class="mx-3 mt-1 mb-3">
+								<span style="font-size: 14px; color: #17a2b8;"><i class="fa-solid fa-calendar-check"></i>&nbsp;장바구니 기간 : ${period.favoriteStart} ~ ${period.favoriteEnd}</span>&ensp;
+								<span style="font-size: 14px; color: #17a2b8;"><i class="fa-solid fa-calendar-check"></i>&nbsp;수강 신청 기간 : ${period.applicationStart} ~ ${period.applicationEnd}</span>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -130,7 +134,7 @@
 							<c:forEach items="${list}" var="lectureVO">
 								<tr style="text-align: center;">
 									<td>${lectureVO.lectureNum}</td>
-									<td><a>${lectureVO.lectureName}</a><br/><small>${lectureVO.professorVO.username}</small></td>
+									<td><a>${lectureVO.lectureName}</a><br/><small>${lectureVO.professorVO.name}</small></td>
 									<td>${lectureVO.grade}학년</td>
 									<td>
 										<c:if test="${lectureVO.category eq '전공 필수'}">전공 필수</c:if>										<c:if test="${lectureVO.category eq '전공 선택'}">전공 선택</c:if>
@@ -138,7 +142,7 @@
 										<c:if test="${lectureVO.category eq '교양 선택'}">교양 선택</c:if>
 									</td>
 									<td>${lectureVO.departmentVO.deptName}</td>
-									<td>${lectureVO.completionGrade}</td>
+									<td>${lectureVO.completionGrade}학점</td>
 									<td>${lectureVO.weekday}요일</td>
 									<td>
 										<c:if test="${lectureVO.startTime eq 1}">09:00</c:if>
@@ -168,7 +172,7 @@
 									<td class="project-actions text-right">
 										<c:choose>
 											<c:when test="${lectureVO.subscription ge lectureVO.personal}">
-												<button class="btn btn-danger btn-sm" id="mli" type="button" disabled>
+												<button class="btn btn-secondary btn-sm" id="mli" type="button" disabled>
 													<i class="fas fa-circle-xmark"></i>
 													마감
 												</button>
@@ -189,7 +193,7 @@
 										</c:choose>
 										<c:choose>
 											<c:when test="${lectureVO.favorite eq 1}">
-												<button class="btn btn-danger btn-sm" id="mfi" type="button" disabled>
+												<button class="btn btn-secondary btn-sm" id="mfi" type="button" disabled>
 													<i class="fas fa-solid fa-heart"></i>
 													담김
 												</button>
