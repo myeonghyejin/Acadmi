@@ -19,4 +19,3 @@ $('#submitButton').click(()=>{
 		alert('이메일을 작성해주세요')
     }
 })
-

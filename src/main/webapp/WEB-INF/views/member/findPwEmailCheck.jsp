@@ -25,6 +25,7 @@
                         <div class="card-body">
                          	<div class="text-center">
                         		<h6 class="fa-solid fa-circle-check text-center" style="font-weight : normal;">   이메일을 확인해주세요</h6>
+                        		<p>로고 클릭시 로그인으로 돌아갑니다</p>
                         	</div>
                         </div>
 					</div>
