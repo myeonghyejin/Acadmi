@@ -115,6 +115,7 @@ $("#fileAdd").click(()=>{
     idx++;
 });
 
+// 게시판 파일 추가 버튼
 $("#BoardFileAdd").click(()=>{
     if(count >= max){
         alert('첨부파일은 최대 ' + max + '개 까지만 가능합니다.');

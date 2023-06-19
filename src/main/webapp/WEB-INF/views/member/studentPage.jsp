@@ -38,22 +38,10 @@
 						
 						<div class="content-wrapper">
 
-							<section class="content-header">
-								<div class="container-fluid">
-									<div class="row mb-2">
-										<div class="col-sm-6 ml-5">
-											<br>
-											<br>
-											<br>
-										</div>
-									</div>
-								</div>
-							</section>
-
 							<section class="content">
 								<div class="container-fluid">
 									<div class="row justify-content-center">
-										<div class="col-md-6">
+										<div class="col-md-6" style="padding-top:20px">
 											<div class="card card-info card-outline ml-5">
 												<div class="card-body box-profile">
 													<div class="text-center">
@@ -87,11 +75,11 @@
 															<c:set var="studentEmail" value="${studentVO.email}"></c:set>
 
 														<div class="card-body">
-															<strong><i class="fas fa-book mr-1"></i> 학과, 학년</strong>
+															<strong><i class="fas fa-book mr-1"></i> 학과정보</strong>
 															<p class="text-muted">
 																<c:set value="${departmentVO.deptName}" var="studentDeptName"></c:set>
-																	학과 이름 : &ensp;<c:out value="${studentDeptName}"></c:out><br>
-																	학년 : &ensp;<c:out value="${studentGrade}"></c:out>학년
+																	<c:out value="${studentDeptName}"></c:out><br>
+																	<c:out value="${studentGrade}"></c:out>학년
 															</p>
 																<hr>
 																	<strong><i class="fa-solid fa-cake-candles mr-1"></i> 생년월일</strong>

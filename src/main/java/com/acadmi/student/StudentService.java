@@ -81,6 +81,10 @@ public class StudentService {
 	}
 	
 	//강의 계획서 열람
+	public LectureVO getLectureDetail(LectureVO lectureVO) throws Exception{
+		return studentDAO.getLectureDetail(lectureVO);
+	}
+	
 	public LectureVO getSyllabusDetail(LectureVO lectureVO) throws Exception {
 		return studentDAO.getSyllabusDetail(lectureVO);
 	}

@@ -34,7 +34,12 @@
 		<div class="row justify-content-end" style="margin-top: 100px;"> 
 			<c:if test="${userName eq reply.writer}">
 				<a href="./update?num=${reply.num}" id="update" class="btn btn-info" style="margin-right: 5px;">수정</a>
-				<a id="replyDelete" data-board-num="${reply.num}" data-board-lectureNum="${reply.lectureNum}" class="btn btn-danger">삭제</a>                                    
+				<c:if test="${board eq 'qna'}">
+					<a id="replyDelete" data-board-num="${reply.num}" class="btn btn-danger">삭제</a>   
+				</c:if>   
+				<c:if test="${board eq 'lectureQna'}">
+					<a id="replyDelete" data-board-num="${reply.num}" data-board-lectureNum="${reply.lectureNum}" class="btn btn-danger">삭제</a> 
+				  </c:if>                            
 			</c:if>
 		</div>	
 	</div>
