@@ -67,14 +67,14 @@
 										<!-- table-header start -->
 										<div class="card-header">
 							                <div class="card-tools row">
-								                <div class="col-3 mr-2">
+								                <div class="col-3 ml-2 mr-2 mt-1">
 								                	<select class="select2" id="kind" name="kind" style="width:80px;border-color:#17a2b8">
 												    	<option value="">전체</option>
 														<option value="userName"${param.kind == 'userName' ? 'selected' : ''} >학번</option>
 														<option value="name"${param.kind == 'name' ? 'selected' : ''}>이름</option>
 													</select>
 								                </div>
-							                 	<div class="input-group my-1 mr-2 col-7" style="width:210px;">
+							                 	<div class="input-group my-1 col-8" style="width:210px;">
 								                	<input type="text" class="form-control" name="search" id="search" value="${pagination.search}">
 													<div class="input-group-append">
 							                      		<button type="submit" class="btn btn-default" id="submit">
