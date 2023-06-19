@@ -80,7 +80,7 @@
 			<div class="image">
 				<img src="/images/professor.png" class="img-circle elevation-2" alt="User Image">
 				<sec:authentication property="Principal" var="user"/>
-				<a href="/member/professorPage?username=${user.username}" style="margin-left: 8px">${user.username}</a>
+				<a href="/member/professorPage?username=${user.username}" style="margin-left: 8px">${name} (${user.username})</a>
 			</div>
 		</div>
 
