@@ -20,13 +20,13 @@
                 <div class="login-box">
                     <div class="card card-outline card-info">
                         <div class="card-header text-center">
-                            <a href="./login" class="h1"><img src="/images/black.png" style="width: 100%; height: 100%;"></a>
+                            <a href="./login" class="h1"><img src="/images/black.png" style="width: 70%; height: 70%;"></a>
                         </div>
                         <div class="card-body">
                             <p class="login-box-msg">최초 이메일 인증</p>
                             <form:form id="contactForm" modelAttribute="memberVO" action="./firstEmail" method="post">
                                 <div class="input-group mb-3">
-                                    <input type="email" id="email" name="email" class="form-control" placeholder="이메일을 입력하세요"></input>
+                                    <input type="email" id="email" name="email" class="form-control" placeholder="이메일을 입력하세요."></input>
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <span class="fas fa-envelope"></span>

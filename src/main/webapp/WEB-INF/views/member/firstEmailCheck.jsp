@@ -20,11 +20,11 @@
                 <div class="login-box">
                     <div class="card card-outline card-info">
                         <div class="card-header text-center">
-                            <a href="./login" class="h1"><img src="/images/black.png" style="width: 100%; height: 100%;"></a>
+                            <a href="./login" class="h1"><img src="/images/black.png" style="width: 70%; height: 70%;"></a>
                         </div>
                         <div class="card-body">
                          	<div class="text-center">
-                        		<h6 class="fa-solid fa-circle-check text-center" style="font-weight : normal;">   이메일을 확인해주세요</h6>
+                        		<h6 class="fa-solid fa-circle-check text-center" style="font-weight : normal;">   이메일을 확인해 주세요.</h6>
                         	</div>
                         </div>
 					</div>
