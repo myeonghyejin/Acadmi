@@ -108,6 +108,7 @@ public class MemberController {
 		   return mv;
 	   }
 	   
+
 //	   ========================================멤버 권한에 따른 마이페이지========================================
 	   
 	   @GetMapping("studentPage")

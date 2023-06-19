@@ -48,7 +48,7 @@
   		<update id="setEnabledUpdate" parameterType="MemberVO">
   			UPDATE MEMBER SET ENABLED = 1 WHERE ENABLED = 0
   		</update>
-  		
+ 
  <!-- ============================================================================================================================ -->
   		
   		

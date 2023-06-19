@@ -85,31 +85,13 @@
 		<!-- Sidebar user panel (optional) -->
 		<div class="user-panel mt-3 pb-3 mb-3 d-flex">
 			<div class="image">
-				<sec:authorize access="hasRole('STUDENT')">
-					<img src="/images/profile.jpg" class="img-circle elevation-2" alt="User Image">
-				</sec:authorize>
-				
 				<sec:authorize access="hasRole('PROFESSOR')">
-					<img src="/images/profile.jpg" class="img-circle elevation-2" alt="User Image">
+					<img src="/images/professor.png" class="img-circle elevation-2" alt="User Image">
 				</sec:authorize>
-				
-				<sec:authorize access="hasRole('ADMINISTRATOR')">
-					<img src="/images/profile.jpg" class="img-circle elevation-2" alt="User Image">
-				</sec:authorize>
-			
-				<sec:authorize access="hasRole('STUDENT')">
-                <sec:authentication property="Principal" var="user"/>
-                    <a href="/member/studentPage?username=${user.username}" style="margin-left: 8px">${user.username}</a>
-                </sec:authorize>
-                
+
 				<sec:authorize access="hasRole('PROFESSOR')">
 				<sec:authentication property="Principal" var="user"/>
-					<a href="/member/professorPage?username=${user.username}" style="margin-left: 8px">${user.username}</a>
-				</sec:authorize>
-				
-				<sec:authorize access="hasRole('ADMINISTRATOR')">
-				<sec:authentication property="Principal" var="user"/>
-					<a href="/member/administratorPage?username=${user.username}" style="margin-left: 8px">${user.username}</a>
+					<a href="/member/professorPage?username=${user.username}" style="margin-left: 8px">(${user.username})</a>
 				</sec:authorize>
 			</div>
 		</div>
