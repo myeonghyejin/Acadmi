@@ -9,3 +9,4 @@
 	</div>
 </footer>
 <script src="/js/headerMiniList.js"></script>
+<script src="/js/sidebarActive.js"></script>
