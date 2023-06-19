@@ -107,7 +107,7 @@
 															<c:forEach items="${list}" var="lectureVO">
 																<c:if test="${lectureVO.weekday eq day && lectureVO.startTime <= hour && lectureVO.endTime >= hour}">
 																	<td class="timetable-workout" data-lecture-num="${lectureVO.lectureNum}">${lectureVO.lectureName}<br>
-																		<small>${lectureVO.professorVO.username}</small><br>
+																		<small>${lectureVO.professorVO.name} 교수님</small><br>
 																	<small>${lectureVO.lectureRoomVO.lectureBuilding} ${lectureVO.lectureRoomVO.lectureRoom}</small>
 																	</td>
 																	<c:set var="hasLecture" value="true" />
