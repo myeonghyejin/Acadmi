@@ -8,7 +8,7 @@
   
   	<!-- 강의 목록 -->
 	<select id="getLectureList" parameterType="LectureVO" resultType="LectureVO">
-  		SELECT * FROM LECTURE WHERE USERNAME=#{username} AND TEMPORARY=1 AND STATUS=1 
+  		SELECT * FROM LECTURE WHERE USERNAME=#{username} AND STATUS=1 AND TEMPORARY=1 AND STATUS=1 
   			AND YEAR=DATE_FORMAT(now(),'%Y') AND 
   			SEMESTER = CASE
     		WHEN MONTH(NOW()) BETWEEN 3 AND 8 THEN 1

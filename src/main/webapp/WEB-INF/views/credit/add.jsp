@@ -62,7 +62,7 @@
 					                	<div class="card-tools">
 					                		<div class="input-group input-group-sm" style="width: 160px;">
 					                  			<button class="btn btn-info mx-3" id="btn" type="button">등록</button>
-					                  			<button class="btn btn-danger"><a href="./attendee?lectureNum=${detail.lectureNum}" style="color: white;">취소</a></button>
+					                  			<a class="btn btn-danger" href="./attendee?lectureNum=${detail.lectureNum}" style="color: white;">취소</a>
 					                  		</div>
 					                	</div>
 					              	</div>

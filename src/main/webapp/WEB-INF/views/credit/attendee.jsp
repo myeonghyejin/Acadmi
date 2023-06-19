@@ -57,10 +57,10 @@
 					                	<div class="card-tools">
 					                		<div class="input-group input-group-sm" style="width: 105px;">
 					                			<c:if test="${attendee[0].creditVO.credit==null}">
-					                  				<button class="btn btn-info"><a href="./add?lectureNum=${detail.lectureNum}" style="color: white;">성적 등록</a></button>
+					                  				<a class="btn btn-info" href="./add?lectureNum=${detail.lectureNum}" style="color: white;">성적 등록</a>
 					                  			</c:if>
 					                  			<c:if test="${attendee[0].creditVO.credit!=null}">
-					                  				<button class="btn btn-info"><a href="./update?lectureNum=${detail.lectureNum}" style="color: white;">성적 수정</a></button>
+					                  				<a class="btn btn-info" href="./update?lectureNum=${detail.lectureNum}" style="color: white;">성적 수정</a>
 					                  			</c:if>
 					                  		</div>
 					                	</div>
