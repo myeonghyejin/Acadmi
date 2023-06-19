@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.acadmi.department.DepartmentVO;
 import com.acadmi.lecture.LectureVO;
+import com.acadmi.period.PeriodVO;
 import com.acadmi.util.Pagination;
 
 @Mapper
