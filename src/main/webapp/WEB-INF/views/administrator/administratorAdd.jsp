@@ -18,33 +18,31 @@
 </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
+	<div class="wrapper">
 
-<div class="wrapper">
-
-	<!-- Header 적용 -->
-	<sec:authorize access="hasRole('ROLE_ADMIN')">
-		<c:import url="../temp/administrator_header.jsp"></c:import>
-	</sec:authorize>
-	
-	<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
-		<c:import url="../temp/administrator_header.jsp"></c:import>
-	</sec:authorize>
-	
-	<sec:authorize access="hasRole('ROLE_PROFESSOR')">
-		<c:import url="../temp/professor_header.jsp"></c:import>
-	</sec:authorize>
+		<!-- Header 적용 -->
+		<sec:authorize access="hasRole('ROLE_ADMIN')">
+			<c:import url="../temp/administrator_header.jsp"></c:import>
+		</sec:authorize>
 		
-	<sec:authorize access="hasRole('ROLE_STUDENT')">
-		<c:import url="../temp/student_header.jsp"></c:import>
-	</sec:authorize>
-	<!-- Header 끝 -->
-	
-	<div class="content-wrapper">
+		<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
+			<c:import url="../temp/administrator_header.jsp"></c:import>
+		</sec:authorize>
+		
+		<sec:authorize access="hasRole('ROLE_PROFESSOR')">
+			<c:import url="../temp/professor_header.jsp"></c:import>
+		</sec:authorize>
 			
-	<div class="container-fluid">
-		<div class="row">
-			<!-- 2레벨 Sidebar 적용 -->
-				
+		<sec:authorize access="hasRole('ROLE_STUDENT')">
+			<c:import url="../temp/student_header.jsp"></c:import>
+		</sec:authorize>
+		<!-- Header 끝 -->
+
+		<!-- Main Contents -->
+		<div class="container-fluid">
+			<div class="row">
+				<!-- 2레벨 Sidebar 적용 -->
+				<div class="content-wrapper">
 					<c:import url="../temp/sidebar/administrator_join.jsp"></c:import>
 				</div>
 				<!-- 2레벨 Sidebar 끝 -->
@@ -61,7 +59,7 @@
 					</div>
 				<!-- header end -->
 				<!-- form start -->
-					<form  action="./administratorAdd" method="post" id="adminForm">
+				<form  action="./administratorAdd" method="post" id="adminForm">
 						<div class="card card-default">
 							
           					<!-- card-header start -->
@@ -104,19 +102,19 @@
 									<div class="col-4">
 					                  	<label for="name">이름</label>
 				             			<input type="text" id="name" class="form-control" name="name"/>
-				             		   <div id="nameResult"></div>
+				             		   <div class="mt-1 mx-1" id="nameResult"></div>
 					              	</div>
 					            
 					              	<div class="col-4">
 					              		<label for="phone">전화번호</label>
 				              			<input type="text" id="phone" class="form-control" name="phone"/>
-				              			 <div id="phoneResult"></div>
+				              			 <div  class="mt-1 mx-1" id="phoneResult"></div>
 									</div>
 								
 									<div class="col-4">
 						              	<label>생년월일</label>
 										<input type="date" class="form-control" name="birth" id="birth"/>
-										 <div id="birthResult"></div>
+										 <div  class="mt-1 mx-1" id="birthResult"></div>
 									</div>
 								</div>
 								<div class="row" style="margin-top: 20px;">
@@ -139,6 +137,7 @@
 						</div>
 					</form>
 					
+					
 				</div>
 			</div>
 		</div>
@@ -150,9 +149,8 @@
 	</div>
 	<!-- ./wrapper -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script type="text/javascript" src="../js/administrator/administratorAdd.js"></script>
+<script type="text/javascript" src="../js/administrator/professorAdd.js"></script>
 <script type="text/javascript">
-
 //카카오 주소 api	
 	//주소 입력
 	document.getElementById("address_kakao").addEventListener("click", function(){ //주소입력칸을 클릭하면
@@ -163,11 +161,6 @@
 	        }
 	    }).open();
 	});
-	
-	$(function () {
-	      $('.select2').select2()
-	 });	
-	
-</script>		
-</body>
+</script>
+</body>	
 </html>
