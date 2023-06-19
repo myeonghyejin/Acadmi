@@ -15,9 +15,9 @@
 		계정 생성
 	</button>
 	<div id="submenu_1" class="sidebar-dropdown-content">
-		<a href="../administrator/studentAdd">학생 계정 생성</a>
-		<a href="../administrator/professorAdd">교수 계정 생성</a>
-		<a href="../administrator/administratorAdd">직원 계정 생성</a>
+		<a href="../administrator/studentAdd" id="administratorStudentAdd">학생 계정 생성</a>
+		<a href="../administrator/professorAdd" id="administratorProfessorAdd">교수 계정 생성</a>
+		<a href="../administrator/administratorAdd" id="administratorAdministratorAdd">직원 계정 생성</a>
 	</div>
 	
 	
@@ -53,3 +53,4 @@
 	  }
 	}
 </script>
+<script src="/js/sidebarActive/administratorJoinSidebarActive.js"></script>
