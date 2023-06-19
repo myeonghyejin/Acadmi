@@ -18,7 +18,7 @@
 		강의 정보
 	</button>
 		<div id="submenu_1" class="sidebar-dropdown-content">
-			<a href="/student/lecture/syllabusDetail?lectureNum=${lecture.lectureNum}">강의계획서 열람 </a>
+			<a href="/student/lecture/syllabusDetail?lectureNum=${lecture.lectureNum}" id="studentSyllabusDetail">강의계획서 열람 </a>
 			<a href="/student/lecture/attendee?lectureNum=${lecture.lectureNum}">참여자 목록</a>
 		</div>
 	
@@ -60,3 +60,4 @@
 	  }
 	}
 </script>
+<script src="/js/sidebarActive/studentLectureMainSidebarActive.js"></script>
