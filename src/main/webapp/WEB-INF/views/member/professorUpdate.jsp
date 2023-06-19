@@ -47,7 +47,7 @@
 													<form action="./professorUpdate" method="post" enctype="multipart/form-data">
 														<sec:authentication property="Principal" var="user"/>
 															<input type="hidden" name="username" value="${user.username}">
-																<div class="text-center">
+																<div class="text-center mb-3">
 																	<c:forEach items="${departmentVO.professorVOs}" var="professorVO">
 				     	 												<c:choose>
 																		    <c:when test="${empty professorVO.memberFilesVO.fileName}">

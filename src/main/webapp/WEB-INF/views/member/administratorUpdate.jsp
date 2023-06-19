@@ -47,7 +47,7 @@
 													<form action="./administratorUpdate" method="post" enctype="multipart/form-data">
 														<sec:authentication property="Principal" var="user"/>
 															<input type="hidden" name="username" value="${user.username}">
-																<div class="text-center">
+																<div class="text-center mb-3">
 																	<c:forEach items="${departmentVO.administratorVOs}" var="administratorVO">
 				     	 												<c:choose>
 																		    <c:when test="${empty administratorVO.memberFilesVO.fileName}">
