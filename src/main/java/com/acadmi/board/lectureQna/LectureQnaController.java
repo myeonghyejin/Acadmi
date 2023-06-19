@@ -74,6 +74,12 @@ public class LectureQnaController {
 		
 		session.setAttribute("qnaVO", lectureQnaVO);
 		
+		LectureVO lectureVO = new LectureVO();
+		
+		lectureVO.setLectureNum(lectureQnaVO.getLectureNum());
+		lectureVO = lectureQnaService.getLecture(lectureVO);
+		
+		mv.addObject("lecture", lectureVO);
 		mv.addObject("num", num);
 		mv.addObject("boardVO", lectureQnaVO);
 		mv.setViewName("board/detail");
@@ -184,7 +190,11 @@ public class LectureQnaController {
 	
 	@GetMapping(value = "reply")
 	public ModelAndView setReplyAdd(ModelAndView mv ,LectureQnaVO lectureQnaVO) throws Exception {
+		LectureVO lectureVO = new LectureVO();
+		lectureVO.setLectureNum(lectureQnaVO.getLectureNum());
+		lectureVO = lectureQnaService.getLecture(lectureVO);
 		
+		mv.addObject("lecture", lectureVO);
 		mv.setViewName("board/replyAdd");
 		
 		return mv;

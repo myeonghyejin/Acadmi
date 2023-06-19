@@ -108,8 +108,10 @@
 										 <tr>
 											<th width=20% class="text-center warning" style="background-color:#f8f9fa">작성자</th>
 											<td width=30% class="text-center">${boardVO.writer}</td>
-											<th width=20% class="text-center warning" style="background-color:#f8f9fa; border-bottom: 1px solid #d6d6cd;">수정일</th>
-											<td width=30% class="text-center" style="border-bottom: 1px solid #d6d6cd;">${boardVO.modifyDate}</td>
+											<c:if test="${board eq 'notice' or board eq 'lectureNotice'}">
+												<th width=20% class="text-center warning" style="background-color:#f8f9fa; border-bottom: 1px solid #d6d6cd;">수정일</th>
+												<td width=30% class="text-center" style="border-bottom: 1px solid #d6d6cd;">${boardVO.modifyDate}</td>
+											</c:if>
 								         </tr>
 										 <tr>
 									         <th width=20% class="text-center warning" style="background-color:#f8f9fa">제목</th>
