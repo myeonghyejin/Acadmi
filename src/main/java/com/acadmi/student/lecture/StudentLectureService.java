@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.acadmi.department.DepartmentVO;
 import com.acadmi.lecture.LectureVO;
+import com.acadmi.period.PeriodVO;
 import com.acadmi.util.Pagination;
 
 import lombok.extern.slf4j.Slf4j;
