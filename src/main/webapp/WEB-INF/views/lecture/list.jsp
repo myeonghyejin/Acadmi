@@ -34,7 +34,6 @@
 		<!-- Header 끝 -->
 
 		<!-- Main Contents -->
-		<!-- <div class="container-fluid"> -->
 			<div class="content-wrapper">
 				<!-- Contents -->
 				<div class="col">
@@ -55,15 +54,15 @@
 								<div class="card">
 									<!-- table-header start -->
 									<div class="card-header">
-					                	<!-- <h3 class="card-title" style="font-weight:normal;">강의 목록</h3> -->
 					                	<div class="card-tools">
 					                		<div class="mr-2">
 					                			<input type="hidden" value="${list[0].temporary}">
 					                  			<select class="select2" style="height: auto;width:115px" id="temporary" name="temporary" onchange="this.form.submit()">
-					                    			<option name="temporary" id="temporary" for="temporary"  value=" ">강의 조회</option>
-													<option for="temporary" value=" " >전체</option>
-													<option for="temporary" value="1" >등록</option>
-													<option for="temporary" value="0">미등록</option>
+					                    			
+													<option for="temporary" value="">전체</option>
+													<option for="temporary" value="1" ${param.temporary == '1' ? 'selected' : ''}>등록</option>
+													<option for="temporary" value="0" ${param.temporary == '0' ? 'selected' : ''}>미등록</option>
+													
 												</select>
 					                    		<a class="btn btn-info ml-1" href="./add">강의 등록</a>
 					                  		</div>
@@ -99,7 +98,7 @@
 					 										<td style="vertical-align:middle;">${LectureVO.lectureName}</td>
 					 									</c:if>
 					 									<c:if test="${LectureVO.temporary eq 1}">
-					 										<td style="vertical-align:middle;"><a href="./main?lectureNum=${LectureVO.lectureNum}" style="color: black;">${LectureVO.lectureName}</a></td>
+					 										<td style="vertical-align:middle;"><a href="./main?lectureNum=${LectureVO.lectureNum}">${LectureVO.lectureName}</a></td>
 					 									</c:if>
 					 											
 					 									<td style="vertical-align:middle;">${LectureVO.category}</td>

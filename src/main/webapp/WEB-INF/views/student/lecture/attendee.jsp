@@ -66,150 +66,152 @@
 		</sec:authorize>
 			
 		<sec:authorize access="hasRole('ROLE_STUDENT')">
-			<c:import url="../../temp/student_header.jsp"></c:import>
+			<c:import url="../../temp/lecture_header.jsp"></c:import>
 		</sec:authorize>
 		<!-- Header 끝 -->
 		
+		<!-- Main Contents start -->
+		<div class="content-wrapper">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="content-wrapper">
-							<c:import url="../../temp/sidebar/student_lecture_main.jsp"></c:import>
-					</div>
-					<!-- Contents -->
-					<div class="col" style="background-color : white;">
-							<!-- header start -->
-			               <div class="row" style="padding-top:10px">
-			                  <div class="col-12">
-			                     <div class="card">
-			                        <h3 class="my-3 mx-3">참여자 목록</h3>
-			                     </div>
-			                  </div>
-			               </div>
-		              	 <!-- header end -->
-		              	 <!-- Main content -->
-		              	 <section class="content">
-		              	 
-		              	 <!--Search -->
-		              	 
-							<form action="./attendee" id="search-form">
-							<input type="hidden" name="lectureNum" value="${pagination.lectureNum}">
-							<input type="hidden" name="page" value="1">
-							
-							
-							<div class="card search">
-								<div class="row content" >
-									<label style="margin : 10px;">학번</label>
-									<input type="text" class="form-control" name="search" placeholder="내용을 입력해주세요" style="width : 20%" value="${pagination.search }">
-									<label style="margin : 10px;">성명</label>
-									<input type="text" class="form-control" name="name" placeholder="내용을 입력해주세요" style="width : 20%">
-									<button type="submit" class="btn btn-info" style="margin : 0 0 0 20px; width : 15%">검색</button>
+					<c:import url="../../temp/sidebar/student_lecture_main.jsp"></c:import>
+					
+					<!-- Contents start -->
+					<div class="col">
+						<!-- header start -->
+						<div class="row" style="padding-top:10px">
+							<div class="col-12">
+								<div class="card">
+									<h3 class="my-3 mx-3">참여자 목록</h3>
 								</div>
 							</div>
-								
-							</form>
-					
-		              	 <!-- Default box -->
-					      <div class="card">
-					      
-					        <div class="card-body p-0">
-					          <table class="table table-hover text-nowrap" style="text-align : center;"  id="tableAdmin">
-					              <thead>
-					                  <tr>
-					                      <th style="width: 10%">
-					                          쪽지
-					                      </th>
-					                      <th style="width: 10%">
-					                          사진
-					                      </th>
-					                      <th style="width: 10%">
-					                      	  학부
-					                      </th>
-					                      <th style="width: 10%" class="text-center">
-					                          학과(전공)
-					                      </th>
-					                      <th style="width : 15%">
-					                          학번
-					                      </th>
-					                      <th style="width: 10%" class="text-center">
-					                          이름
-					                      </th>
-					                      
-					                  </tr>
-					              </thead>
-					              <tbody>
-					                  <c:forEach items="${list}" var="lectureVO">
-						   	 		<tr>
-						   	 			<c:set var="studentName" value="${lectureVO.studentVO.name}"></c:set>
-										<c:set var="studentUsername" value="${lectureVO.studentVO.username }"></c:set>
-										<c:set var="department" value="${lectureVO.departmentVO.deptName}"></c:set>
-										<c:set var="college" value="${lectureVO.collegeVO.collegeName }"></c:set>
-										<c:set var="memberFiles" value="${lectureVO.studentVO.memberFilesVO.fileName }"></c:set>
-										
-										<td>
-	     	 								<sec:authentication property="principal.username" var="username"/>
-				     	 					<a href="../../chat/detail?roomSender=${username}&roomRecipient=${lectureVO.studentVO.username}"><i class="fa-regular fa-envelope fa-2xl" style="margin:30px 0 0 0;"></i></a>
-	     	 							</td>
-	     	 							<td>
-	     	 								<c:if test="${empty memberFiles}">
-						   	 					  <img class="profile-user-img img-fluid img-circle"
-											             src="/images/profile.jpg"
-											             alt="User profile picture">
-						   	 				</c:if>
-						   	 				<c:if test="${not empty memberFiles}">
-						   	 					<img class="img-circle elevation-2" src="/file/member/${memberFiles}" width="70rem" height="70rem">
-						   	 				</c:if>	
-	     	 							</td>
-	     	 							<td><c:out value="${college}"></c:out></td>
-	     	 							<td><c:out value="${department}"></c:out> </td>
-	     	 							<td>
-	     	 								<c:out value="${studentUsername.substring(0, 4)}****"></c:out>
-	     	 							
-	     	 							</td>
-	     	 							<td><c:out value="${studentName}"></c:out> </td>
-						   	 		</tr>	
-						   	 		</c:forEach>
-					              </tbody>
-					          </table>
-					          
-					        </div>
-					        <!-- /.card-body -->
-					      </div>
-					      <!-- /.card -->
-		              	 </section>
-		              	 
-		              	 <div class="row g-3 justify-content-center" style="margin: 20px auto;" id="pagination">
-							<nav aria-label="Page navigation example">
-								<ul class="pagination pagination-sm mx-auto" style="width: 200px;">
-									<li class="page-item ${pagination.page eq 1? 'disabled' : '' }">
-										<a class="page-link" href="./attendee?lectureNum=${pagination.lectureNum}&page=1&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="1" style="color:#17a2b8;">
-											<span aria-hidden="true">&laquo;</span>
-										</a>
-									</li>
-									<li class="page-item ${pagination.pre eq false ? 'disabled' : ''}">
-										<a class="page-link" href="./attendee?lectureNum=${pagination.lectureNum}&page=${pagination.startNum-1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="${pagination.startNum-1}" style="color:#17a2b8;">
-											<span aria-hidden="true">&lsaquo;</span>
-										</a>
-									</li>
-									<c:forEach begin="${pagination.startNum}" end="${pagination.lastNum}" var="i">
-										<li class="page-item"><a class="page-link" href="./attendee?lectureNum=${pagination.lectureNum}&page=${i}&kind=${pagination.kind}&search=${pagination.search}" data-board-page="${i}" style="color:#17a2b8;">${i}</a></li>
-									</c:forEach>
-									<li class="page-item ${pagination.next eq false ? 'disabled' : ''}">
-										<a class="page-link" href="./attendee?lectureNum=${pagination.lectureNum}&page=${pagination.lastNum+1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next" data-board-page="${pagination.lastNum+1}" style="color:#17a2b8;">
-											<span aria-hidden="true">&rsaquo;</span>
-										</a>
-									</li>
-									<li class="page-item ${pagination.next eq totalPage ? 'disabled' : ''}">
-										<a class="page-link" href="./attendee?lectureNum=${pagination.lectureNum}&page=${pagination.totalPage}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next" data-board-page="${pagination.totalPage}" style="color:#17a2b8;">
-											<span aria-hidden="true">&raquo;</span>
-										</a>
-									</li>
-								</ul>
-							</nav>
+						</div>
+						
+						<form action="./attendee" id="search-form">
+							<input type="hidden" name="lectureNum" value="${pagination.lectureNum}">
+			            	<div class="row">
+								<div class="col-12">
+									<div class="card">
+										<!-- table-header start -->
+										<div class="card-header">
+							                <div class="card-tools row">
+								                <div class="col-3 mr-2">
+								                	<select class="select2" id="kind" name="kind" style="width:80px;border-color:#17a2b8">
+												    	<option value="">전체</option>
+														<option value="userName"${param.kind == 'userName' ? 'selected' : ''} >학번</option>
+														<option value="name"${param.kind == 'name' ? 'selected' : ''}>이름</option>
+													</select>
+								                </div>
+							                 	<div class="input-group input-group-sm my-1 mr-2 col-7" style="width:210px;">
+								                	<input type="text" class="form-control form-control-lg" name="search" id="search" value="${pagination.search}">
+													<div class="input-group-append">
+							                      		<button type="submit" class="btn btn-default" id="submit">
+							                        		<i class="fas fa-search"></i>
+							                      		</button>
+							                    	</div>
+							                  	</div>
+							                </div>
+							            </div>
+						              	<!-- table-header end -->
+	              
+	              						<!-- table-body start -->
+	              						<div class="card-body" id="allLectureList">
+	                						<table class="table table-bordered" style="text-align: center;">
+	                  							<thead style="background-color: #f8f9fa;color:#17a2b8;">
+	                    							<tr>
+	                    								<th></th>
+								                    	<th>사진</th>
+								                    	<th>학번</th>
+								                    	<th>이름</th>
+								                    	<th>단과대학</th>
+								                    	<th>학과</th>
+								                    </tr>
+												</thead>
+					              				<tbody>
+					                  				<c:forEach items="${list}" var="lectureVO">
+						   	 							<tr>
+											   	 			<c:set var="studentName" value="${lectureVO.studentVO.name}"></c:set>
+															<c:set var="studentUsername" value="${lectureVO.studentVO.username }"></c:set>
+															<c:set var="department" value="${lectureVO.departmentVO.deptName}"></c:set>
+															<c:set var="college" value="${lectureVO.collegeVO.collegeName }"></c:set>
+															<c:set var="memberFiles" value="${lectureVO.studentVO.memberFilesVO.fileName }"></c:set>
+															<td style="vertical-align:middle; width:10%">
+						     	 								<sec:authentication property="principal.username" var="username"/>
+									     	 					<a href="../../chat/detail?roomSender=${username}&roomRecipient=${lectureVO.studentVO.username}"><i class="fa-regular fa-envelope fa-2xl" style="margin:30px 0 0 0;"></i></a>
+						     	 							</td>
+						     	 							<td style="vertical-align:middle; width:13%;">
+						     	 								<c:if test="${empty memberFiles}">
+											   	 					  <img class="img" src="/images/profile.jpg"alt="User profile picture" width="60rem" height="60rem" style="border-radius:5px">
+											   	 				</c:if>
+											   	 				<c:if test="${not empty memberFiles}">
+											   	 					<img class="img" src="/file/member/${memberFiles}" width="60rem" height="60rem" style="border-radius:5px">
+											   	 				</c:if>	
+						     	 							</td>
+						     	 							<td style="vertical-align:middle;">
+						     	 								<c:out value="${studentUsername.substring(0, 4)}****"></c:out>
+						     	 							</td>
+		     	 											<td style="vertical-align:middle;"><c:out value="${studentName}"></c:out> </td>
+		     	 											<td style="vertical-align:middle;"><c:out value="${college}"></c:out> </td>
+						     	 							<td style="vertical-align:middle;"><c:out value="${department}"></c:out> </td>
+					     	 							</tr>
+													</c:forEach>
+												</tbody>
+											</table>
+										</div>
+	              						<!-- table-body end -->
+	              						
+	              						<!-- pagination start -->
+	              						<div class="row g-3 justify-content-center" id="allLectureList">
+											<ul class="pagination pagination-sm mx-auto justify-content-center" style="width: 200px;">
+												<c:if test="${pagination.pre}">
+													<li class="page-item">
+														<a class="page-link" href="#" aria-label="Previous" data-all-page="1" style="color:#17a2b8;">
+															<span aria-hidden="true">&laquo;</span>
+														</a>
+													</li>
+												</c:if>
+												<c:forEach begin="${pagination.startNum}" end="${pagination.lastNum}" var="page">
+													<li class="page-item">
+														<a class="page-link" href="#" data-all-page="${page}" style="color:#17a2b8;">${page}</a>
+													</li>
+												</c:forEach>
+												<c:if test="${pagination.next}">
+													<li class="page-item">
+														<a class="page-link" href="#" aria-label="Next" data-all-page="${pagination.totalPage}" style="color:#17a2b8;">
+															<span aria-hidden="true">&raquo;</span>
+														</a>
+													</li>
+												</c:if>
+											</ul>
+										</div>
+						              <!-- pagination end -->	              						
+	            					</div>
+								</div> 
+							</div>
+						</form>
 					</div>
-					</div>
+					<!-- Contents end -->
 				</div>
 			</div>
+		</div>
+		<!-- Main Contents end -->
+
+		<!-- Footer 적용 -->
+		<c:import url="../../temp/footer.jsp"></c:import>
+		<!-- Footer 끝 -->	
+		
+		<script>
+		    $(function () {
+		      $('.select2').select2()
+		    });
+		    $("#allLectureList").on("click",".page-link", function(e){
+		        let page = $(this).attr("data-all-page");
+		        getList(page);
+		        e.preventDefault();
+		    });
+		</script>
+			
 	</div>
-<c:import url="../../temp/footer.jsp"></c:import>		
+<!-- ./wrapper -->		
 </body>
 </html>

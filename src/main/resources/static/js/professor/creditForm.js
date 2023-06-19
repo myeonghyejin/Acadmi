@@ -14,6 +14,9 @@
 	semiGrades.forEach(semiGrade => {
 		const index = semiGrade.id.slice(9);
 		const semiResult = document.getElementById(`semiResult${index}`);
+		if(semiGrade.value!=0){
+			semiCheck=true;
+		}
 		semiGrade.addEventListener("blur",function(){
 			 if(semiGrade.value>100){
 		        semiResult.innerHTML='최대 점수는 100점입니다.';
@@ -34,11 +37,15 @@
 		    }
 		});
 	});
+
 	
 	//기말 점수
 	finalGrades.forEach(finalGrade => {
 	    const index = finalGrade.id.slice(10); 
 		const finalResult = document.getElementById(`finalResult${index}`);
+		if(finalGrade.value!=0){
+			finalCheck=true;
+		}
 		finalGrade.addEventListener("blur",function(){
 			if(finalGrade.value>100){
 		        finalResult.innerHTML='최대 점수는 100점입니다.';
@@ -64,6 +71,9 @@
 	reportGrades.forEach(reportGrade => {
 	    const index = reportGrade.id.slice(11);
 	    const reportResult = document.getElementById(`reportResult${index}`);
+	    if(reportGrade.value!=0){
+			reportCheck=true;
+		}
 		reportGrade.addEventListener("blur",function(){
 			if(reportGrade.value>100){
 		        reportResult.innerHTML='최대 점수는 100점입니다.';
@@ -89,6 +99,9 @@
 	attendanceGrades.forEach(attendance => {
 	    const index = attendance.id.slice(10); 
 	    const attendanceResult = document.getElementById(`attendanceResult${index}`);
+	    if(attendanceGrade.value!=0){
+			attendanceCheck=true;
+		}
 		attendance.addEventListener("blur",function(){
 			if(attendance.value>100){
 		        attendanceResult.innerHTML='최대 점수는 100점입니다.';
@@ -109,10 +122,10 @@
 		    }
 		});
 	});
-
+	
+	
 	//form 전송
 	btn.addEventListener("click",function(){
-	    //if(!checks.includes(false)) ->회원가입성공
 	    if(semiCheck&&finalCheck&&reportCheck&&attendanceCheck){
 	        frm.submit();
 	    }else{
