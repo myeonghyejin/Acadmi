@@ -4,7 +4,8 @@
 <link rel="stylesheet" href="/css/sidebar.css">
 
 <div class="sidebar-dropdown">
-
+	<!-- Menu -->
+	<h4>회원 목록</h4>
 	
 	<!-- 더 많은 개수의 submenu가 필요할 경우
 	필요한 수 만큼 복사하고 div 태그의 아이디 'submenu_숫자' 형식으로 수정하여 사용하면 됨 -->

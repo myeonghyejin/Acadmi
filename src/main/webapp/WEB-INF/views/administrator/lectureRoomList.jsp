@@ -178,35 +178,30 @@
 				        </div>
 					<!-- /.card-body -->
 					<!-- Pagination -->
-				    	<div class="row g-3 justify-content-center" style="margin: 20px auto;" id="pagination">
-							<nav aria-label="Page navigation example">
-								<ul class="pagination pagination-sm mx-auto" style="width: 200px;">
-									<li class="page-item ${pagination.page eq 1? 'disabled' : '' }">
+			    	 <div class="row g-3 justify-content-center" style="margin: 20px auto;" id="pagination">
+							<ul class="pagination pagination-sm mx-auto"  style="width: 200px;">
+								<c:if test="${pagination.pre}">
+									<li class="page-item">
 										<a class="page-link" href="./lectureRoomList?page=1&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="1" style="color:#17a2b8;">
 											<span aria-hidden="true">&laquo;</span>
 										</a>
 									</li>
-									<li class="page-item ${pagination.pre eq false ? 'disabled' : ''}">
-										<a class="page-link" href="./lectureRoomList"page=${pagination.startNum-1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="${pagination.startNum-1}" style="color:#17a2b8;">
-											<span aria-hidden="true">&lsaquo;</span>
-										</a>
-									</li>
-									<c:forEach begin="${pagination.startNum}" end="${pagination.lastNum}" var="i">
-										<li class="page-item"><a class="page-link" href="./lectureRoomList?page=${i}&kind=${pagination.kind}&search=${pagination.search}" data-board-page="${i}" style="color:#17a2b8;">${i}</a></li>
-									</c:forEach>
-									<li class="page-item ${pagination.next eq false ? 'disabled' : ''}">
-										<a class="page-link" href="./lectureRoomList?page=${pagination.lastNum+1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next" data-board-page="${pagination.lastNum+1}" style="color:#17a2b8;">
-											<span aria-hidden="true">&rsaquo;</span>
-										</a>
-									</li>
-									<li class="page-item ${pagination.next eq totalPage ? 'disabled' : ''}">
-										<a class="page-link" href="./lectureRoomList?page=${pagination.totalPage}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next" data-board-page="${pagination.totalPage}">
+								</c:if>
+								
+								<c:forEach begin="${pagination.startNum}" end="${pagination.lastNum}" var="i">
+									<li class="page-item"><a class="page-link" href="./lectureRoomList?page=${i}&kind=${pagination.kind}&search=${pagination.search}" data-board-page="${i}" style="color:#17a2b8;">${i}</a></li>
+								</c:forEach>
+								
+								<c:if test="${pagination.next }">
+									<li class="page-item">
+										<a class="page-link" href="./lectureRoomList?page=${pagination.totalPage}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next" data-board-page="${pagination.totalPage}" style="color:#17a2b8;">
 											<span aria-hidden="true">&raquo;</span>
 										</a>
 									</li>
-								</ul>
-							</nav>
-					   </div>
+								</c:if>
+							</ul>
+								
+						</div>
 					<div class="wrapper" style="margin : 0 20px 20px 0;">
 						 <a href="./lectureRoomAdd"><button type="button" id="add2" class="btn btn-info" style="float : right;">강의실 등록</button></a>
 					 </div>

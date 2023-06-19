@@ -54,7 +54,7 @@
 					      <div class="card">
 					        <div class="card-body row">
 					          <div class="col-7">
-						         <form action="./departmentAdd" method="post">
+						         <form action="./departmentAdd" method="post" id="deptForm">
 						          	 <div class="form-group">
 						           	  <label>단과 대학</label>
 					                  <select class="form-control select2" style="width: 100%;" name="collegeNum">
@@ -67,6 +67,7 @@
 						              <label for="deptName">학과 이름</label>
 						              <input type="text" id="deptName" class="form-control" name="deptName"/>
 						              <input type="hidden" name="deptNum">
+						              <div id="deptNameResult" style="margin-top : 10px;"></div>
 						            </div>
 						           
 						            <div class="form-group clearfix">
@@ -85,7 +86,7 @@
 					                     </div>
 				                     </div>
 					                 <div  style="width:auto; float: right;">
-							            <button type="submit" class="btn btn-info">등록</button> 
+							            <button type="button" class="btn btn-info" id="deptBtn" style="margin-right : 10px;">등록</button> 
 							            <button type="button" class="btn btn-danger" id="backBtn">취소</button>
 						            </div>
 						          </form>
@@ -100,6 +101,7 @@
 		</div>	
 </div>
 <c:import url="../temp/footer.jsp"></c:import>	
+<script type="text/javascript" src="/js/administrator/departmentAdd.js"></script>
 <script type="text/javascript">
 //취소
 $("#backBtn").click(function() {
@@ -111,6 +113,8 @@ $("#backBtn").click(function() {
         return;
     }
 })
+
+
 </script>	
 </body>
 </html>

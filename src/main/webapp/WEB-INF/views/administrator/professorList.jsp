@@ -232,36 +232,31 @@
 	   	 						</tbody>
 	   	 					</table>
 			            	</div>
-			            	  <div class="row g-3 justify-content-center" style="margin: 20px auto;" id="pagination">
-								<nav aria-label="Page navigation example">
-									<ul class="pagination pagination-sm mx-auto"  style="width: 200px;">
+			            	 <div class="row g-3 justify-content-center" style="margin: 20px auto;" id="pagination">
 									
-										<li class="page-item ${pagination.page eq 1? 'disabled' : '' }">
+								<ul class="pagination pagination-sm mx-auto"  style="width: 200px;">
+									<c:if test="${pagination.pre}">
+										<li class="page-item">
 											<a class="page-link" href="./professorList?page=1&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="1" style="color:#17a2b8;">
 												<span aria-hidden="true">&laquo;</span>
 											</a>
 										</li>
-										<li class="page-item ${pagination.pre eq false ? 'disabled' : ''}">
-											<a class="page-link" href="./professorList?page=${pagination.startNum-1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="${pagination.startNum-1}" style="color:#17a2b8;">
-												<span aria-hidden="true">&lsaquo;</span>
-											</a>
-										</li>
-										<c:forEach begin="${pagination.startNum}" end="${pagination.lastNum}" var="i">
-											<li class="page-item"><a class="page-link" href="./professorList?page=${i}&kind=${pagination.kind}&search=${pagination.search}" data-board-page="${i}" style="color:#17a2b8;">${i}</a></li>
-										</c:forEach>
-										<li class="page-item ${pagination.next eq false ? 'disabled' : ''}">
-											<a class="page-link" href="./professorList?page=${pagination.lastNum+1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next" data-board-page="${pagination.lastNum+1}" style="color:#17a2b8;">
-												<span aria-hidden="true">&rsaquo;</span>
-											</a>
-										</li>
-										<li class="page-item ${pagination.next eq totalPage ? 'disabled' : ''}">
+									</c:if>
+									
+									<c:forEach begin="${pagination.startNum}" end="${pagination.lastNum}" var="i">
+										<li class="page-item"><a class="page-link" href="./professorList?page=${i}&kind=${pagination.kind}&search=${pagination.search}" data-board-page="${i}" style="color:#17a2b8;">${i}</a></li>
+									</c:forEach>
+									
+									<c:if test="${pagination.next }">
+										<li class="page-item">
 											<a class="page-link" href="./professorList?page=${pagination.totalPage}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next" data-board-page="${pagination.totalPage}" style="color:#17a2b8;">
 												<span aria-hidden="true">&raquo;</span>
 											</a>
 										</li>
-									</ul>
-								</nav>
-							</div>
+									</c:if>
+								</ul>
+									
+								</div>
 							
 						</form>
 					</div>

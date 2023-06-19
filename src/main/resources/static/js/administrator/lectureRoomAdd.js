@@ -5,7 +5,7 @@ let check= [false,false,false]
 $("#lectureRoom").blur(function() {
     if($("#lectureRoom").val() == '') {
         check[0] = false
-        $("#lecture").html("<p style='color : red;'>강의실 호수는 필수사항입니다.</p>")
+        $("#lecture").html("<p style='color : red;'>강의실 호수는 필수 사항입니다.</p>")
 
     }else {
         $.ajax ( {
@@ -39,7 +39,7 @@ $("#lectureRoom").blur(function() {
 $("#personal").blur(function() {
     if($("#personal").val()== '') {
         check[1] = false
-        $("#personalResult").html("<p style='color : red;'>최대 수용 인원은 필수사항입니다.</p>")
+        $("#personalResult").html("<p style='color : red;'>최대 수용 인원은 필수 사항입니다.</p>")
     }else {
        check[1] = true
        $("#personalResult").html("")
@@ -53,7 +53,7 @@ if($("#radioPrimary1").val() == 1) {
 $("#roomAdd").click(function() {
     if(!check.includes(false) || check[2]) {
         if($("#lectureRoom").val() == '') {
-            alert("강의실 호수는 필수사항입니다")
+            alert("강의실 호수는 필수 사항입니다")
             return
         }
         if(!check[0]) {
