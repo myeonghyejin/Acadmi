@@ -26,7 +26,6 @@ import com.acadmi.professor.ProfessorVO;
 import lombok.extern.slf4j.Slf4j;
 
 @Component
-@Slf4j
 public class UserSuccessHandler implements AuthenticationSuccessHandler{
 	
 	@Autowired
@@ -36,7 +35,6 @@ public class UserSuccessHandler implements AuthenticationSuccessHandler{
 	@Override
 		public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 				Authentication authentication) throws IOException, ServletException {
-			 log.error("===ID : {}", authentication.getName());
 			 Collection<? extends GrantedAuthority> auths =  authentication.getAuthorities();
 			 Map<String, String> map = new HashMap<>();
 			 try {
