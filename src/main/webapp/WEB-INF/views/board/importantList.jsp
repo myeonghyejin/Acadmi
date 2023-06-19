@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	
 <c:forEach items="${importantList}" var="importantList">
-	<tr style="background-color: #fbfae1;">
+	<tr style="background-color: #fbfae1; text-align: center; line-height: 32px;">
 		<td class="noticeNum" data-num-id="${importantList.num}">
 			<img class="fileIcon" width="30" height="30" src="/images/speaker.svg" style="margin-left: 5px;">
 		</td>
@@ -15,7 +15,6 @@
 		</c:forEach>
 		</td>
 		<td>${importantList.regDate}</td>
-		<td>${importantList.modifyDate}</td>
 		<td>${importantList.hit}</td>
 	</tr>
 </c:forEach>
