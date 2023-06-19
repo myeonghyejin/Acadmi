@@ -134,7 +134,7 @@
 							<c:forEach items="${list}" var="lectureVO">
 								<tr style="text-align: center;">
 									<td>${lectureVO.lectureNum}</td>
-									<td><a>${lectureVO.lectureName}</a><br/><small>${lectureVO.professorVO.name}</small></td>
+									<td><a>${lectureVO.lectureName}</a><br/><small>${lectureVO.professorVO.name} 교수님</small></td>
 									<td>${lectureVO.grade}학년</td>
 									<td>
 										<c:if test="${lectureVO.category eq '전공 필수'}">전공 필수</c:if>										<c:if test="${lectureVO.category eq '전공 선택'}">전공 선택</c:if>
@@ -215,7 +215,10 @@
 						</table>
 					</div>
 					<!-- /.card-body -->
-						
+				
+				</div>
+				<!-- /.card -->
+				
 				<!-- Pagination -->
 				<div class="row g-3 mt-3 justify-content-center">
 					<ul class="pagination pagination-sm mx-auto" style="width: 200px;">
@@ -240,10 +243,6 @@
 						</c:if>
 					</ul>
 				</div>
-				
-				</div>
-				<!-- /.card -->
-				
 				
 				<div class="row">
 					<div class="col">

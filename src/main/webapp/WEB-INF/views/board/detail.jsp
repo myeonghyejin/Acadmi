@@ -50,10 +50,10 @@
 										질의응답
 									</c:if>
 									<c:if test="${board eq 'lectureNotice'}">
-										강의공지사항
+										강의 공지사항
 									</c:if>
 									<c:if test="${board eq 'lectureQna'}">
-										강의질의응답
+										강의 질의응답
 									</c:if>
 								</h3>
 							</div>
@@ -71,8 +71,10 @@
 							        <td width=30% class="text-center" style="border-bottom: 1px solid #d6d6cd;">${boardVO.regDate}</td>
 							    </tr>     
 								 <tr>
-							         <th width=20% class="text-center warning" style="background-color:#f8f9fa">작성자</th>
-								   	 <td width=30% class="text-center">${boardVO.writer}</td>
+									<th width=20% class="text-center warning" style="background-color:#f8f9fa">작성자</th>
+									<td width=30% class="text-center">${boardVO.writer}</td>
+									<th width=20% class="text-center warning" style="background-color:#f8f9fa; border-bottom: 1px solid #d6d6cd;">수정일</th>
+									<td width=30% class="text-center" style="border-bottom: 1px solid #d6d6cd;">${boardVO.modifyDate}</td>
 						         </tr>
 								 <tr>
 							         <th width=20% class="text-center warning" style="background-color:#f8f9fa">제목</th>
@@ -81,7 +83,7 @@
 							         </td>
 						         </tr>
 						         <tr>
-							         <th width=20% class="text-center warning" style="background-color:#f8f9fa">첨부파일</th>
+							         <th width=20% class="text-center warning" style="background-color:#f8f9fa">첨부 파일</th>
 							         <td colspan="3">
 							         	<div style="margin-left: 20px;">
 								         	<c:forEach items="${boardVO.fileVOs}" var="fileVO">

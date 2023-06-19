@@ -77,7 +77,7 @@
 								<div class="col-md-12">
 									<div class="row mt-4">
 									  <div style="display: flex; align-items: center;">
-									    <label for="important" class="form-label strongFont2" style="margin-bottom: 0; margin-left:10px">중요표시</label>
+									    <label for="important" class="form-label strongFont2" style="margin-bottom: 0; margin-left:10px">중요 표시</label>
 									    <div style="margin-left: 10px;">
 									    	<c:if test="${dto.important == 0 || empty dto.important}">
 									      		<input type="checkbox" class="form-control" name="important" id="important" style="width: 20px; height: 20px; margin-bottom: 0;">
@@ -116,7 +116,7 @@
 							
 							<div class="col-md-12 mt-2">
 								<div class="form-group" id="fileList">
-									<button class="col-md-12 mt-5 btn btn-secondary" id="BoardFileAdd" type="button">파일추가</button>
+									<button class="col-md-12 mt-5 btn btn-secondary" id="BoardFileAdd" type="button">파일 추가</button>
 									<c:forEach items="${dto.fileVOs}" var="fileVO">
 											<div class="input-group">
 												<c:if test="${not empty fileVO.fileName}">

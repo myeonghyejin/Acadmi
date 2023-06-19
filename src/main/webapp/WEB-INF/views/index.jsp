@@ -30,7 +30,7 @@
 		</sec:authorize>
 		<sec:authorize access="hasRole('ROLE_PROFESSOR')">
 			<c:import url="./temp/professor_header.jsp"></c:import>
-			<div class="content-wrapper row">
+			<div class="content-wrapper">
 				<c:import url="./temp/professor_index.jsp"></c:import>
 			</div>
 		</sec:authorize>
