@@ -1,5 +1,6 @@
 package com.acadmi.lecture;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -38,6 +39,28 @@ public class LectureController {
 	@Autowired
 	private NotificationService notificationService;
 	
+	//현재 연도 계산
+	private int calculateCurrentYear() {
+		LocalDate currentDate = LocalDate.now();
+		int year = currentDate.getYear();
+		return year;
+	}
+	
+	//현재 학기 계산
+	private int calculateCurrentSemester() {
+		LocalDate currentDate = LocalDate.now();
+		int month = currentDate.getMonthValue();
+		int semester;
+		
+		//1학기인지 2학기인지 판단
+	    if (month >= 3 && month <= 8) {
+	        semester = 1; //3월부터 8월까지는 1학기
+	    } else {
+	    	semester = 2; //9월부터 2월까지는 2학기
+	    }
+	    return semester;
+	}
+	
 	//홈 강의 목록
 	@GetMapping("homeLecture")
 	public ModelAndView getHomeLectureList(LectureVO lectureVO, HttpSession session) throws Exception{
@@ -54,15 +77,18 @@ public class LectureController {
 	
 	//강의 목록
 	@GetMapping("list")
-	public ModelAndView getLectureList(Pagination pagination,LectureVO lectureVO, HttpSession session) throws Exception{
+	public ModelAndView getLectureList(Pagination pagination,LectureVO lectureVO,PeriodVO periodVO, HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		Object obj = session.getAttribute("SPRING_SECURITY_CONTEXT");
 		SecurityContextImpl contextImpl = (SecurityContextImpl) obj; 
 		Authentication authentication = contextImpl.getAuthentication();
 		pagination.setUsername(authentication.getName());
-		
+		List<PeriodVO> period = lectureService.getSemesterList(periodVO);
 		List<LectureVO> ar = lectureService.getLectureList(pagination);
+		mv.addObject("period",period);
 		mv.addObject("list",ar);
+		mv.addObject("year", calculateCurrentYear());
+		mv.addObject("semester", calculateCurrentSemester());
 		mv.setViewName("lecture/list");
 		return mv;
 	}

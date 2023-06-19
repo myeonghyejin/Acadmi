@@ -43,6 +43,13 @@
 					PROFESSOR P 
 				ON L.USERNAME = P.USERNAME
 		WHERE SL.USERNAME=#{username}
+		<if test="year ==null and semester ==null">
+			AND L.YEAR=DATE_FORMAT(now(),'%Y') AND 
+  			L.SEMESTER = CASE
+    		WHEN MONTH(NOW()) BETWEEN 3 AND 8 THEN 1
+    		ELSE 2
+			END
+		</if>
 		<if test="year !=null and !year.equals('')">
 			AND L.YEAR = #{year}
 		</if>

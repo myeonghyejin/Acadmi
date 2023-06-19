@@ -48,17 +48,37 @@
 					<!-- header end -->
 					
 					<!-- form start -->
-					<form action="./list" method="get">
+					<form action="./list" id="myForm" method="get">
 						<div class="row">
 							<div class="col-12">
 								<div class="card">
 									<!-- table-header start -->
 									<div class="card-header">
+										<div class="card-title" style="width: 50%">
+					            		<label class="mx-2 mb-2 mt-3">수강 연도</label>
+					               		<select  class="select2" name="year" style="width:115px;" id="year" >
+					               			<option value="${year}" ${param.year == year ? 'selected' : ''}>${year}</option>
+					               			<option value="${year - 1}" ${param.year == year - 1 ? 'selected' : ''}>${year - 1}</option>
+					               			<option value="${year - 2}" ${param.year == year - 2 ? 'selected' : ''}>${year - 2}</option>
+					               			<option value="${year - 3}" ${param.year == year - 3 ? 'selected' : ''}>${year - 3}</option>
+					               			<option value="${year - 4}" ${param.year == year - 4 ? 'selected' : ''}>${year - 4}</option>
+					               		</select>
+					               		<label class="ml-3 mr-2 mb-2 mt-3">학기</label>
+					               		<select class="select2" name="semester"style="width:115px;" id="semester">
+					               			<option value="1" ${param.semester eq 1 or semester eq 1 ? 'selected' : '' }>1학기</option>
+					               			<option value="2" ${param.semester eq 2 or semester eq 2 ? 'selected' : '' }>2학기</option>
+					               		</select>
+					               		<button type="submit" class="btn btn-default ml-2" id="submit">
+							            	<i class="fas fa-search"></i>
+							            </button>
+					                </div>
+					                </form>
+					                
 					                	<div class="card-tools">
-					                		<div class="mr-2">
+					                	<form  action="./list"  method="get">
+					                		<div class="mr-2 mt-2">
 					                			<input type="hidden" value="${list[0].temporary}">
 					                  			<select class="select2" style="height: auto;width:115px" id="temporary" name="temporary" onchange="this.form.submit()">
-					                    			
 													<option for="temporary" value="">전체</option>
 													<option for="temporary" value="1" ${param.temporary == '1' ? 'selected' : ''}>등록</option>
 													<option for="temporary" value="0" ${param.temporary == '0' ? 'selected' : ''}>미등록</option>
@@ -142,6 +162,10 @@
 	      $('.select2').select2()
 	    });
 	</script>
+	
+
+	
+
 
 	</div>
 <!-- ./wrapper -->

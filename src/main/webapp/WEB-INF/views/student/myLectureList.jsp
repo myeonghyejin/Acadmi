@@ -52,34 +52,36 @@
 						<div class="row" style="padding-top:10px">
 		                  <div class="col-12">
 		                     <div class="card">
-		                        <h3 class="my-3 mx-3">수강 강의</h3>
+		                        <h3 class="my-3 mx-3">강의 목록</h3>
 		                     </div>
 		                  </div>
 		               </div>
 		               <!--header end  -->
 		               
-		               <!-- Main content -->
-		               		<div class="card search">
-		               			<div class="row content">
-		               				<label style="margin : 10px;">수강 년도</label>
-		               				<select  class="select2" name="year" style="width: 15%;" id="year" >
-		               				<option value="">전체</option>
-		               				<c:forEach  begin="${map['min']}" end="${map['max']}" varStatus="i">
-		               					<option value="${i.index}" ${lectureVO.year eq i.index  ? 'selected' : ''}>${i.index}</option>
-		               				</c:forEach>
-		               				
-		       
-		               				</select>
-		               				<label style="margin : 10px;">학기</label>
-		               				<select class="select2" name="semester"style="width: 15%;" id="semester">
-		               					<option value="">전체</option>
-		               					<option value="1" ${lectureVO.semester eq 1 ? 'selected' : '' }>1학기</option>
-		               					<option value="2" ${lectureVO.semester eq 2 ? 'selected' : '' }>2학기</option>
-		               				</select>
-		               			</div>
-		               		</div>
-		               		<!-- Default box -->
+		               	<!-- Default box -->
+		               	<form action="./myLectureList" id="search-form">
 		               		<div class="card">
+		               			<!-- table-header start -->
+								<div class="card-header">
+									<div class="row justify-content-center my-3">
+					            		<label class="mx-2 my-2">수강 연도</label>
+					               		<select  class="select2" name="year" style="width:115px;" id="year" >
+					               			<option value="${year}" ${param.year == year ? 'selected' : ''}>${year}</option>
+					               			<option value="${year - 1}" ${param.year == year - 1 ? 'selected' : ''}>${year - 1}</option>
+					               			<option value="${year - 2}" ${param.year == year - 2 ? 'selected' : ''}>${year - 2}</option>
+					               			<option value="${year - 3}" ${param.year == year - 3 ? 'selected' : ''}>${year - 3}</option>
+					               			<option value="${year - 4}" ${param.year == year - 4 ? 'selected' : ''}>${year - 4}</option>
+					               		</select>
+					               		<label class="ml-3 mr-2 mb-2 mt-3">학기</label>
+					               		<select class="select2" name="semester"style="width:115px;" id="semester">
+					               			<option value="1" ${param.semester eq 1 or semester eq 1 ? 'selected' : '' }>1학기</option>
+					               			<option value="2" ${param.semester eq 2 or semester eq 2 ? 'selected' : '' }>2학기</option>
+					               		</select>
+					               		<button type="submit" class="btn btn-default ml-4" id="submit">
+							            	<i class="fas fa-search"></i>
+							            </button>
+					                </div>
+					            </div>
 		               			<div class="card-body p-0">
 		               				<table class="table table-hover text-nowrap" style="text-align : center;"  id="tableMyLecture">
 		               				 <sec:authentication property="principal" var="user"/>
@@ -134,7 +136,7 @@
 		               				</table>
 		               			</div>
 		               		</div>
-		               
+		               	</form>
 					</div>
 				</div>
 			</div>
@@ -143,46 +145,9 @@
 <c:import url="../temp/footer.jsp"></c:import>		
 <script type="text/javascript">
 	/*입학년도 ~ 재학년도 */
-
-
-	/* 검색 기능 */
-	$("#year").on("change", function() {
-		let year = $(this).val()
-		let semester = $("#semester").val()
-		
-		
-		$.ajax({
-			url : "./myLectureList",
-			type : "GET",
-			data : {
-				year : year,
-				semester : semester
-			},
-			
-			success : function(response) {
-				location.href="./myLectureList?year=" + year + "&semester=" + semester
-				
-			}
-		})
-	})
 	
-	$("#semester").on("change", function() {
-		let semester = $(this).val()
-		let year = $("#year").val()
-		
-		$.ajax({
-			url : "./myLectureList",
-			type : "GET",
-			data : {
-				year : year,
-				semester : semester
-			},
-			
-			success : function(response) {
-				location.href="./myLectureList?year=" + year + "&semester=" + semester
-			}
-		})
-	})
+
+	
 	
 	$(function () {
       $('.select2').select2()

@@ -76,10 +76,15 @@ public interface AdministratorDAO {
 	
 	//학과 수정
 	public int setDepartmentUpdate(DepartmentVO departmentVO) throws Exception;
+	
+	//학과 중복 체크
+	public DepartmentVO departmentDuplicateCheck(DepartmentVO departmentVO) throws Exception;
 
 
 	//기간 설정
 	public int setPeriodAdd(PeriodVO periodVO) throws Exception;
+	public List<PeriodVO> getPeriodList(Pagination pagination) throws Exception;
+	public Long getTotalCountPeriod(Pagination pagination) throws Exception;
 	public List<String> getCurrentYear() throws Exception;
 	
 	//강의 조회
@@ -93,6 +98,6 @@ public interface AdministratorDAO {
  	public int setLectureRoomAssignmentUpdate(LectureVO lectureVO) throws Exception;
 	public LectureVO getLectureNum(LectureVO lectureVO) throws Exception;
 	
-	public List<LectureRoomVO> getLectureRoom() throws Exception;
+	public List<LectureRoomVO> getLectureRoom(Pagination pagination) throws Exception;
 	public List<TimeTableVO> getTimeTable() throws Exception;
 }

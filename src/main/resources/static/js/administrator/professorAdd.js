@@ -92,7 +92,7 @@ $("#birth").blur(function() {
 $("#address_kakao").blur(function() {
     if($("#address_kakao").val() == '') {
         check[8] = false
-        $("#addressResult").html("<p style='color : red;'>주소는 필수사항입니다.</p>")
+        $("#addressResult").html("<p style='color : red;'>주소는 필수 사항입니다.</p>")
     }else {
         check[8] = true
         $("#addressResult").html("")
@@ -104,7 +104,7 @@ $("#professorBtn").click(function() {
     if(!check.includes(false)) {
         // console.log("성공")
         $("#professorForm").submit()
-        console.log("test1")
+        //console.log("test1")
     }
     else {
         // console.log("실패")

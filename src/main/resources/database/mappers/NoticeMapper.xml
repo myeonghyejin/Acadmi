@@ -38,6 +38,7 @@
 			 NOTICEFILES
 			 USING(NUM)
   		WHERE IMPORTANT = #{important}
+  		ORDER BY NUM DESC
   	</select>
   	
   	<select id="getDetail" parameterType="NoticeVO" resultMap="getDetailResult">

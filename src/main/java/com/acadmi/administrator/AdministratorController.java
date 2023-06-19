@@ -370,7 +370,33 @@ public class AdministratorController {
 		return mv;
 	}
 	
+	//학과 중복 체크
+	@GetMapping("departmentDuplicateCheck")
+	@ResponseBody
+	public boolean departmentDuplicateCheck(DepartmentVO departmentVO) throws Exception {
+		boolean check = true;
+		departmentVO = administratorService.departmentDuplicateCheck(departmentVO);
+		
+		if(departmentVO !=null) {
+			check = false;
+		}
+		
+		return check;
+	}
+	
 	//기간 설정
+	
+	@GetMapping("periodList")
+	public ModelAndView getPeriodList(Pagination pagination) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		List<PeriodVO> ar = administratorService.getPeriodList(pagination);
+		
+		mv.addObject("list", ar);
+		mv.setViewName("administrator/periodList");
+		
+		return mv;
+	}
+	
 	@GetMapping("periodAdd")
 	public ModelAndView setPeriodAdd() throws Exception {
 		ModelAndView mv = new ModelAndView();
@@ -389,11 +415,12 @@ public class AdministratorController {
 		
 		int result = administratorService.setPeriodAdd(periodVO);
 		
-		if(bindingResult.hasErrors()) {
-			log.warn("검증에 실패");
-			mv.setViewName("administrator/periodAdd");
-			return mv;
-		}
+		
+		  if(bindingResult.hasErrors()) { 
+			  log.warn("검증에 실패");
+			  mv.setViewName("administrator/periodAdd"); return mv; 
+		 }
+		 
 		
 		String message= "등록 실패";
 		
@@ -405,7 +432,7 @@ public class AdministratorController {
 		mv.addObject("result", message);
 		mv.setViewName("common/result");
 		
-		mv.addObject("url", "./periodAdd");
+		mv.addObject("url", "./periodList");
 		return mv;
 		
 		
@@ -433,7 +460,8 @@ public class AdministratorController {
 	public ModelAndView getLectureRoomAssignment(Pagination pagination, NotificationVO notificationVO, LectureVO lectureVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		List<LectureRoomVO> ar = administratorService.getLectureRoomAssignment(pagination);
+		List<LectureRoomVO> ar = administratorService.getLectureRoom(pagination);
+		List<LectureRoomVO> ar2 =  administratorService.getLectureRoomAssignment(pagination);
 		lectureVO = administratorService.getLectureNum(lectureVO);
 		
 		if(notificationVO.getNotificationNum() != null) {
@@ -441,6 +469,8 @@ public class AdministratorController {
 		}
 		
 		mv.addObject("list", ar);
+		
+		mv.addObject("room", ar2);
 		mv.addObject("lectureNum", lectureVO);
 		mv.setViewName("administrator/lectureRoomAssignment");
 		
