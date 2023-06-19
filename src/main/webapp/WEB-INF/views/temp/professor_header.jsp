@@ -55,13 +55,6 @@
 			</a>
 		</li>
 
-		<!-- 전체 보기 -->
-		<li class="nav-item">
-			<a class="nav-link" data-widget="fullscreen" href="#" role="button">
-				<i class="fas fa-expand-arrows-alt"></i>
-			</a>
-		</li>
-		
 		<!-- 로그아웃 -->
 		<li class="nav-item">
 			<a class="nav-link" href="/member/logout" role="button">
@@ -73,7 +66,7 @@
 <!-- /.navbar -->
 
 <!-- Main Sidebar Container -->
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
+<aside class="main-sidebar sidebar-dark-info elevation-4">
 	<!-- Brand Logo -->
 	<a href="/" class="brand-link">
 		<img src="/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">

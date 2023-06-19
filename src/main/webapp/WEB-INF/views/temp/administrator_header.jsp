@@ -71,7 +71,7 @@
 	<!-- /.navbar -->
 
 <!-- Main Sidebar Container -->
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
+<aside class="main-sidebar sidebar-dark-info elevation-4">
 	<!-- Brand Logo -->
 	<a href="/" class="brand-link">
 		<img src="/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
@@ -83,32 +83,11 @@
 		<!-- Sidebar user panel (optional) -->
 		<div class="user-panel mt-3 pb-3 mb-3 d-flex">
 			<div class="image">
-				<sec:authorize access="hasRole('STUDENT')">
-					<img src="/images/profile.jpg" class="img-circle elevation-2" alt="User Image" >
-				</sec:authorize>
 				
-				<sec:authorize access="hasRole('PROFESSOR')">
-					<img src="/images/profile.jpg" class="img-circle elevation-2" alt="User Image">
-				</sec:authorize>
+				<img src="/images/profile.jpg" class="img-circle elevation-2" alt="User Image">
 				
-				<sec:authorize access="hasRole('ADMINISTRATOR')">
-					<img src="/images/profile.jpg" class="img-circle elevation-2" alt="User Image">
-				</sec:authorize>
-			
-				<sec:authorize access="hasRole('STUDENT')">
-                <sec:authentication property="Principal" var="user"/>
-                    <a href="/member/studentPage?username=${user.username}" style="margin-left: 8px">${user.username}</a>
-                </sec:authorize>
-                
-				<sec:authorize access="hasRole('PROFESSOR')">
 				<sec:authentication property="Principal" var="user"/>
-					<a href="/member/professorPage?username=${user.username}" style="margin-left: 8px">${user.username}</a>
-				</sec:authorize>
-				
-				<sec:authorize access="hasRole('ADMINISTRATOR')">
-				<sec:authentication property="Principal" var="user"/>
-					<a href="/member/administratorPage?username=${user.username}" style="margin-left: 8px">${user.username}</a>
-				</sec:authorize>
+				<a href="/member/administratorPage?username=${user.username}" style="margin-left: 8px">${user.username}</a>
 			</div>
 		</div>
 		
