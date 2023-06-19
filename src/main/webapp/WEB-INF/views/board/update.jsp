@@ -16,8 +16,14 @@
 
 	<div class="wrapper">
 	
+		<sec:authentication property="principal.username" var="userName" />
+	
 		<!-- Header 적용 -->
 		<sec:authorize access="hasRole('ROLE_ADMIN')">
+	     	<c:import url="../temp/administrator_header.jsp"></c:import>
+	  	</sec:authorize>
+	  	
+	  	<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
 	     	<c:import url="../temp/administrator_header.jsp"></c:import>
 	  	</sec:authorize>
 		
@@ -26,7 +32,7 @@
 		</sec:authorize>
 	
 		<sec:authorize access="hasRole('ROLE_STUDENT')">
-			<c:import url="../temp/header.jsp"></c:import>
+			<c:import url="../temp/student_header.jsp"></c:import>
 		</sec:authorize>	
 		<!-- Header 끝 -->
 
@@ -56,11 +62,8 @@
 			<div class="row">
 			  <div class="col-md-12" style="margin-top: 10px;">
 				<div class="card card-secondary">
-				  <div class="card-body">
-					<sec:authentication property="principal.username" var="userName" />
-		
-					<div class="row col-md-7 mx-auto">
-						<form id="contactForm" class="row g-3" action="./update" method="post" enctype="multipart/form-data">
+				  <div class="card-body" style="margin: 0 auto">				
+						<form id="contactForm" action="./update" method="post" enctype="multipart/form-data">
 							<input type="hidden" name="num" value="${dto.num}">
 							
 							<input type="hidden" name="writer" class="form-control" id="writer" readonly value="${userName}">
@@ -111,20 +114,6 @@
 								<textarea class="form-control" name="contents" id="contents">${dto.contents}</textarea>
 							</div>
 							
-							<%-- <div class="col-md-12 mt-5">
-								<div id="fileList">
-									<button class="col-md-12 mt-5 btn btn-primary" id="fileAdd" type="button">파일추가</button>
-									<c:forEach items="${dto.fileVOs}" var="fileVO">
-										<div class="input-group mb-3">
-											<div class="input-group-text" style="width: 38px;">
-												<input class="form-check-input mt-0 deleteCheck" type="checkbox" name="fileNum" value="${fileVO.fileNum}" style="margin-left: auto;">
-											</div>
-											<input type="text" disabled value="${fileVO.oriName}" class="form-control">
-										</div>
-									</c:forEach>	
-								</div>	
-							</div> --%>
-							
 							<div class="col-md-12 mt-2">
 								<div class="form-group" id="fileList">
 									<button class="col-md-12 mt-5 btn btn-secondary" id="BoardFileAdd" type="button">파일추가</button>
@@ -149,7 +138,6 @@
 								<button type="button" class="submitButton btn btn-info float-right" style="margin-right: 5px;">수정</button>
 							</div>
 						</form>
-					</div>
 				  </div>
 				</div>
 			  </div>
@@ -166,19 +154,20 @@
 	<script>
 	
 		$("#contents").summernote({
-			height : 300,
-			width : 1300
+			height : 300
 		});
 		
 		setCount(${dto.fileVOs.size()});
 		
-		const fileInput = document.getElementById('exampleInputFile');
-	    const fileLabel = document.querySelector('.custom-file-label');
+		$("#BoardFileAdd").click(()=>{
+			const fileInput = document.getElementById('exampleInputFile');
+		    const fileLabel = document.querySelector('.custom-file-label');
 
-	    fileInput.addEventListener('change', function() {
-	      const fileName = this.files[0].name;
-	      fileLabel.textContent = fileName;
-	    });
+		    fileInput.addEventListener('change', function() {
+		      const fileName = this.files[0].name;
+		      fileLabel.textContent = fileName;
+		    });
+		});
 	</script>
 </body>
 </html>
