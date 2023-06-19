@@ -18,8 +18,6 @@
 		</li>		
 	</ul>
 	
-	
-
 	<!-- Right navbar links -->
 	<ul class="navbar-nav ml-auto">
 	<!-- 알림 -->
@@ -30,28 +28,26 @@
 			</a>
 			<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 				<span class="dropdown-item dropdown-header" id="allNotification"></span>
-					<div class="dropdown-divider"></div>
-						<a href="/notification/list?notificationKind=1" class="dropdown-item">
-							<i class="fas fa-envelope mr-2"></i> 
-							<span id="noticeNotification"></span>
-						</a>
-					<div class="dropdown-divider"></div>
-						<a href="/notification/list?notificationKind=2" class="dropdown-item">
-							<i class="fas fa-users mr-2"></i>
-							<span id="qnaNotification"></span>
-						</a>
-					<div class="dropdown-divider"></div>
-						<a href="/notification/list?notificationKind=7" class="dropdown-item">
-							<i class="fas fa-file mr-2"></i>
-							<span id="lectureNotification"></span>
-						</a>
-					<div class="dropdown-divider"></div>
+				<div class="dropdown-divider"></div>
+				<a href="/notification/list?notificationKind=1" class="dropdown-item">
+					<i class="fas fa-envelope mr-2"></i> 
+					<span id="noticeNotification"></span>
+				</a>
+				<div class="dropdown-divider"></div>
+				<a href="/notification/list?notificationKind=2" class="dropdown-item">
+					<i class="fas fa-users mr-2"></i>
+					<span id="qnaNotification"></span>
+				</a>
+				<div class="dropdown-divider"></div>
+				<a href="/notification/list?notificationKind=7" class="dropdown-item">
+					<i class="fas fa-file mr-2"></i>
+					<span id="lectureNotification"></span>
+				</a>
+				<div class="dropdown-divider"></div>
 				<a href="/notification/list" class="dropdown-item dropdown-footer">알림 전체보기</a>
 			</div>
 		</li>
 	
-		
-
 		<!-- 채팅 -->
 		<li class="nav-item dropdown">
 			<a class="nav-link" href="/chat/list">
@@ -83,9 +79,7 @@
 		<!-- Sidebar user panel (optional) -->
 		<div class="user-panel mt-3 pb-3 mb-3 d-flex">
 			<div class="image">
-				
 				<img src="/images/profile.jpg" class="img-circle elevation-2" alt="User Image">
-				
 				<sec:authentication property="Principal" var="user"/>
 				<a href="/member/administratorPage?username=${user.username}" style="margin-left: 8px">${user.username}</a>
 			</div>
@@ -238,3 +232,4 @@
 	margin: 0 8px;
 }
 </style>
+<script src="/js/sidebarActive/administratorSidebarActive.js"></script>
