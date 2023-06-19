@@ -27,86 +27,121 @@
 	  	</sec:authorize>
 		
 		<sec:authorize access="hasRole('ROLE_PROFESSOR')">
-			<c:import url="../temp/professor_header.jsp"></c:import>
+			<c:choose>
+				<c:when test="${board eq 'lectureNotice'}">
+					<c:import url="../temp/lecture_header.jsp"></c:import>
+				</c:when>
+				<c:when test="${board eq 'lectureQna'}">
+					<c:import url="../temp/lecture_header.jsp"></c:import>
+				</c:when>
+				<c:otherwise>
+					<c:import url="../temp/professor_header.jsp"></c:import>
+				</c:otherwise>
+			</c:choose>
 		</sec:authorize>
 	
 		<sec:authorize access="hasRole('ROLE_STUDENT')">
-			<c:import url="../temp/student_header.jsp"></c:import>
+			<c:choose>
+				<c:when test="${board eq 'lectureNotice'}">
+					<c:import url="../temp/lecture_header.jsp"></c:import>
+				</c:when>
+				<c:when test="${board eq 'lectureQna'}">
+					<c:import url="../temp/lecture_header.jsp"></c:import>
+				</c:when>
+				<c:otherwise>
+					<c:import url="../temp/student_header.jsp"></c:import>
+				</c:otherwise>
+			</c:choose>
 		</sec:authorize>	
 		<!-- Header 끝 -->
 	
 		<div class="content-wrapper">
-		  <section class="content">
-		  <div class="row" style="padding-top:20px">
-			<div class="col-12">
-				<div class="card">
-					<h3 class="my-3 mx-3">
-						답글 등록
-					</h3>
+			<div class="container-fluid">
+				<div class="row">
+					<!-- 2레벨 Sidebar 적용 -->
+					<c:if test="${board eq 'lectureNotice' || board eq 'lectureQna'}">
+						<sec:authorize access="hasRole('ROLE_PROFESSOR')">
+							<c:import url="../temp/sidebar/professor_lecture.jsp"></c:import>
+						</sec:authorize>
+									
+						<sec:authorize access="hasRole('ROLE_STUDENT')">
+							<c:import url="../temp/sidebar/student_lecture_main.jsp"></c:import>
+						</sec:authorize>
+					</c:if>
+					<!-- 2레벨 Sidebar 끝 -->
+				<!-- Contents -->
+					<div class="col">
+						<div class="row" style="padding-top:20px">
+							<div class="col-12">
+								<div class="card">
+									<h3 class="my-3 mx-3">
+										답글 등록
+									</h3>
+								</div>
+							</div>
+						</div>
+					 
+						<div class="row">
+							<div class="col-md-12" style="margin-top: 10px;">
+								<div class="card card-secondary">
+									<div class="card-body" style="margin: 0 auto">
+										<form id="contactForm" action="./reply" method="post" enctype="multipart/form-data">
+											<input type="hidden" name="num" value="${qnaVO.num}">
+										
+											<c:if test="${board eq 'lectureQna'}">
+												<input type="hidden" class="form-control" name="lectureNum" id="lectureNum" value="">
+											</c:if>
+				
+											<input type="hidden" name="writer" class="form-control" id="writer" readonly value="${userName}">
+											
+											<div class="col-md-12" style="margin-top: 20px;">
+												<label for="title" class="form-label strongFont2">제목</label> 
+												<input type="text" class="form-control" name="title" id="title" placeholder="제목을 입력하세요">
+											</div>
+											
+											<div class="col-md-12">
+												<c:if test="${board eq 'lectureQna'}">
+													<div class="row mt-4">
+														  <div style="display: flex; align-items: center;">
+														    <label for="secret" class="form-label strongFont2" style="margin-bottom: 0; margin-left:10px">비밀글</label>
+														    <div style="margin-left: 10px;">
+														      <input type="checkbox" class="form-control" name="secret" id="secret" style="width: 20px; height: 20px; margin-bottom: 0;">
+														    </div>
+														 </div>
+													</div>
+												</c:if>
+											</div>
+											
+											<div class="col-md-12 mt-4">
+												<label for="contents" class="form-label strongFont2">내용</label>
+												<textarea class="form-control " name="contents" id="replyContents" placeholder="내용을 입력하세요"></textarea>
+											</div>	
+											
+											<div class="col-md-12 mt-5">
+												<div class="form-group">
+													<div class="input-group">
+														<div class="custom-file">
+															<input type="file" class="custom-file-input" id="exampleInputFile" name="addfiles">
+															<label class="custom-file-label" for="exampleInputFile">파일을 선택해주세요</label>
+														</div>
+													</div>
+											    </div>											
+											</div> 
+											
+											<div class="col-md-12 mt-4">
+												<button type="button" class="btn btn-danger float-right" onclick="window.history.back();">취소</button>		
+												<button type="button" class="submitButton btn btn-info float-right" style="margin-right: 5px;">등록</button>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-		 </div>
-		 
-			<div class="row">
-			  <div class="col-md-12" style="margin-top: 10px;">
-				<div class="card card-secondary">
-				  <div class="card-body" style="margin: 0 auto">
-						<form id="contactForm" action="./reply" method="post" enctype="multipart/form-data">
-							<input type="hidden" name="num" value="${qnaVO.num}">
-							
-							<c:if test="${board eq 'lectureQna'}">
-								<input type="hidden" class="form-control" name="lectureNum" id="lectureNum" value="">
-							</c:if>
-
-							<input type="hidden" name="writer" class="form-control" id="writer" readonly value="${userName}">
-							
-							<div class="col-md-12" style="margin-top: 20px;">
-								<label for="title" class="form-label strongFont2">제목</label> 
-								<input type="text" class="form-control" name="title" id="title" placeholder="제목을 입력하세요">
-							</div>
-							
-							<div class="col-md-12">
-								<c:if test="${board eq 'lectureQna'}">
-									<div class="row mt-4">
-										  <div style="display: flex; align-items: center;">
-										    <label for="secret" class="form-label strongFont2" style="margin-bottom: 0; margin-left:10px">비밀글</label>
-										    <div style="margin-left: 10px;">
-										      <input type="checkbox" class="form-control" name="secret" id="secret" style="width: 20px; height: 20px; margin-bottom: 0;">
-										    </div>
-										 </div>
-									</div>
-								</c:if>
-							</div>
-							
-							<div class="col-md-12 mt-4">
-								<label for="contents" class="form-label strongFont2">내용</label>
-								<textarea class="form-control " name="contents" id="replyContents" placeholder="내용을 입력하세요"></textarea>
-							</div>	
-							
-							<div class="col-md-12 mt-5">
-								<div class="form-group">
-									<div class="input-group">
-										<div class="custom-file">
-											<input type="file" class="custom-file-input" id="exampleInputFile" name="addfiles">
-											<label class="custom-file-label" for="exampleInputFile">파일을 선택해주세요</label>
-										</div>
-									</div>
-							    </div>											
-							</div> 
-							
-							<div class="col-md-12 mt-4">
-								<button type="button" class="btn btn-danger float-right" onclick="window.history.back();">취소</button>		
-								<button type="button" class="submitButton btn btn-info float-right" style="margin-right: 5px;">등록</button>
-							</div>
-						</form>
-				  </div>
-				</div>
-			  </div>
-			</div>
-		  </section>
 		</div>
-	  </div>
-
+	</div>
 	<c:import url="../temp/footer.jsp"></c:import>
 
 	<script src="/js/filemanager.js"></script>

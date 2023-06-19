@@ -28,11 +28,31 @@
 	  	</sec:authorize>
 		
 		<sec:authorize access="hasRole('ROLE_PROFESSOR')">
-			<c:import url="../temp/professor_header.jsp"></c:import>
+			<c:choose>
+				<c:when test="${board eq 'lectureNotice'}">
+					<c:import url="../temp/lecture_header.jsp"></c:import>
+				</c:when>
+				<c:when test="${board eq 'lectureQna'}">
+					<c:import url="../temp/lecture_header.jsp"></c:import>
+				</c:when>
+				<c:otherwise>
+					<c:import url="../temp/professor_header.jsp"></c:import>
+				</c:otherwise>
+			</c:choose>
 		</sec:authorize>
 	
 		<sec:authorize access="hasRole('ROLE_STUDENT')">
-			<c:import url="../temp/student_header.jsp"></c:import>
+			<c:choose>
+				<c:when test="${board eq 'lectureNotice'}">
+					<c:import url="../temp/lecture_header.jsp"></c:import>
+				</c:when>
+				<c:when test="${board eq 'lectureQna'}">
+					<c:import url="../temp/lecture_header.jsp"></c:import>
+				</c:when>
+				<c:otherwise>
+					<c:import url="../temp/student_header.jsp"></c:import>
+				</c:otherwise>
+			</c:choose>
 		</sec:authorize>	
 		<!-- Header 끝 -->
 
