@@ -5,25 +5,23 @@
 		<!-- homeLecture Head start -->
         <div class="row mt-4">
 			<div class="col-12">
-				<div class="card card-info card-outline" style="vertical-align:middle;">
-				<div class="row">
-					<div class="col-9 my-1 mr-4" style=" float: left: ;">
-					<h4 class="my-2 mx-4" style="color:#17a2b8;margin-bottom:0px;">공지사항</h4>
-					</div>
-					<div class="col-2 ml-4" style="text-align:right; float: right;">
-						<a class="btn btn-info my-2 mx-2" href="./notice/list">더보기</a>
-					</div>
+				<div class="card card-info card-outline">
+					<div class="row">
+						<h4 class="my-3 ml-4 mr-2" style="color: #17a2b8;">공지사항</h4>
+						<div style="display: inline-block; margin-top: 14.4px;">
+							<a class="btn btn-info btn-sm" href="./notice/list">더 보기</a>
+						</div>
 					</div>
 					<hr class="mx-3" style="margin:0px">
             		<c:forEach items="${list}" var="notice">
 						<a class="title ml-1" href="/notice/detail?num=${notice.num}" style="color:black;">
-		            		<div class="card-header mx-3 row" style="padding-left:0px">
+		            		<div class="card-header mx-3 row" style="padding-left:0px;">
 		            			<div class="col-9">
-		            			<i class="fa-solid fa-circle fa-2xs" style="color: #17a2b8;"></i>
-		            			${notice.title}
+			            			<i class="fa-solid fa-circle fa-2xs" style="color: #17a2b8;"></i>
+			            			${notice.title}
 		            			</div>
 		            			<div class="col-3" style="text-align:right;">
-		            			${notice.regDate}
+		            				${notice.regDate}
 		            			</div>
 		            		</div>
 						</a>
@@ -32,8 +30,3 @@
 			</div>
 		</div>
 	</div>
-
-	
-								
-	
-	
