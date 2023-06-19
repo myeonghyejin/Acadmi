@@ -415,11 +415,12 @@ public class AdministratorController {
 		
 		int result = administratorService.setPeriodAdd(periodVO);
 		
-		if(bindingResult.hasErrors()) {
-			log.warn("검증에 실패");
-			mv.setViewName("administrator/periodAdd");
-			return mv;
-		}
+		
+		  if(bindingResult.hasErrors()) { 
+			  log.warn("검증에 실패");
+			  mv.setViewName("administrator/periodAdd"); return mv; 
+		 }
+		 
 		
 		String message= "등록 실패";
 		
@@ -431,7 +432,7 @@ public class AdministratorController {
 		mv.addObject("result", message);
 		mv.setViewName("common/result");
 		
-		mv.addObject("url", "./periodAdd");
+		mv.addObject("url", "./periodList");
 		return mv;
 		
 		

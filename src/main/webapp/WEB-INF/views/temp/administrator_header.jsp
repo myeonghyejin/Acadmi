@@ -125,50 +125,6 @@
 			<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 			<!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
 			
-				<!-- 게시판 -->
-				<li class="nav-item">
-					<a href="#" class="nav-link">
-						<i class="nav-icon fas fa-comment-dots"></i>
-						<p>
-							게시판
-							<i class="fas fa-angle-left right"></i>
-						</p>
-					</a>
-					<ul class="nav nav-treeview">
-						<li class="nav-item">
-							<a href="/notice/list" class="nav-link">
-								<i class="fa-solid fa-circle fa-2xs"></i>
-								<p>공지사항</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="/qna/list" class="nav-link">
-								<i class="fa-solid fa-circle fa-2xs"></i>
-								<p>질의 응답</p>
-							</a>
-						</li>
-					</ul>
-				</li>
-				
-				<!-- 강의 관리 -->
-				<li class="nav-item">
-					<a href="#" class="nav-link">
-						<i class="nav-icon fas fa-chalkboard"></i>
-						<p>
-							강의 관리
-							<i class="fas fa-angle-left right"></i>
-						</p>
-					</a>
-					<ul class="nav nav-treeview">
-						<li class="nav-item">
-							<a href="/administrator/lectureList" class="nav-link">
-								<i class="fa-solid fa-circle fa-2xs"></i>
-								<p>강의 목록</p>
-							</a>
-						</li>
-					</ul>
-				</li>
-	
 				<!-- 회원 관리 -->
 				<li class="nav-item">
 					<a href="#" class="nav-link">
@@ -180,13 +136,13 @@
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
-							<a href="/administrator/studentAdd" class="nav-link">
+							<a href="/administrator/administratorAdd" class="nav-link">
 								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>계정 관리</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="/administrator/studentList" class="nav-link">
+							<a href="/administrator/administratorList" class="nav-link">
 								<i class="fa-solid fa-circle fa-2xs"></i>
 								<p>회원 목록</p>
 							</a>
@@ -205,29 +161,17 @@
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
-							<a href="/administrator/periodAdd" class="nav-link">
+							<a href="/administrator/periodList" class="nav-link">
 								<i class="fa-solid fa-circle fa-2xs"></i>
-								<p>기간 설정</p>
+								<p>기간 목록</p>
 							</a>
 						</li>
 					</ul>
-					
-				</li>
-				
-				<!-- 강의실 관리 -->
-				<li class="nav-item">
-					<a href="#" class="nav-link">
-						<i class="nav-icon fa-solid fa-door-open"></i>
-						<p>
-							강의실 관리
-							<i class="fas fa-angle-left right"></i>
-						</p>
-					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
-							<a href="/administrator/lectureRoomList" class="nav-link">
+							<a href="/administrator/periodAdd" class="nav-link">
 								<i class="fa-solid fa-circle fa-2xs"></i>
-								<p>강의실 목록</p>
+								<p>기간 설정</p>
 							</a>
 						</li>
 					</ul>
@@ -253,6 +197,79 @@
 						</li>
 					</ul>
 				</li>
+				
+					
+				<!-- 강의실 관리 -->
+				<li class="nav-item">
+					<a href="#" class="nav-link">
+						<i class="nav-icon fa-solid fa-door-open"></i>
+						<p>
+							강의실 관리
+							<i class="fas fa-angle-left right"></i>
+						</p>
+					</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item">
+							<a href="/administrator/lectureRoomList" class="nav-link">
+								<i class="fa-solid fa-circle fa-2xs"></i>
+								<p>강의실 목록</p>
+							</a>
+						</li>
+					</ul>
+					
+				</li>
+				
+				<!-- 강의 관리 -->
+				<li class="nav-item">
+					<a href="#" class="nav-link">
+						<i class="nav-icon fas fa-chalkboard"></i>
+						<p>
+							강의 관리
+							<i class="fas fa-angle-left right"></i>
+						</p>
+					</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item">
+							<a href="/administrator/lectureList" class="nav-link">
+								<i class="fa-solid fa-circle fa-2xs"></i>
+								<p>강의 목록</p>
+							</a>
+						</li>
+					</ul>
+				</li>
+				<!-- 게시판 -->
+				<li class="nav-item">
+					<a href="#" class="nav-link">
+						<i class="nav-icon fas fa-comment-dots"></i>
+						<p>
+							게시판
+							<i class="fas fa-angle-left right"></i>
+						</p>
+					</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item">
+							<a href="/notice/list" class="nav-link">
+								<i class="fa-solid fa-circle fa-2xs"></i>
+								<p>공지사항</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="/qna/list" class="nav-link">
+								<i class="fa-solid fa-circle fa-2xs"></i>
+								<p>질의 응답</p>
+							</a>
+						</li>
+					</ul>
+				</li>
+				
+	
+	
+				
+				
+	
+			
+				
+		
 				
 			</ul>
 		</nav>

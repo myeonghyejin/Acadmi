@@ -53,7 +53,11 @@
 					
 					<section class="content">
 						<div class="card">
+							<div class="wrapper">
+								<h6 style="color: gray; margin : 20px;">시작일은 18:00:00, 종료일은 23:59:59로 들어갑니다.</h6>
+							</div>	
 							<div class="card-body row">
+								
 								<div class="col">
 									<form action="./periodAdd" method="post">
 										<div class="wrapper">
@@ -139,7 +143,7 @@
 											    <div class="form-group">
 											      <label>강의 등록 시작일</label>
 											      <br>
-											      <input type="date" class="form-control" name="" style=" display: inline-block; margin-right: 40px;">
+											      <input type="date" class="form-control" name="registrationStart" style=" display: inline-block; margin-right: 40px;">
 											    </div>
 											  </div>
 											

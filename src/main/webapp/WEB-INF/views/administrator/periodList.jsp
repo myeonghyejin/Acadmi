@@ -105,12 +105,12 @@
 					   					<tr class="container">
 					   						<td>${periodVO.year }</td>
 					   						<td>${periodVO.semester }</td>
-					   						<td><fmt:formatDate value="${periodVO.applicationStart}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-					   						<td><fmt:formatDate value="${periodVO.applicationEnd}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-					   						<td><fmt:formatDate value="${periodVO.favoriteStart}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-					   						<td><fmt:formatDate value="${periodVO.favoriteEnd}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-					   						<td></td>
-					   						<td><fmt:formatDate value="${periodVO.deadline}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+					   						<td>${periodVO.applicationStart}</td>
+					   						<td>${periodVO.applicationEnd }</td>
+					   						<td>${periodVO.favoriteStart }</td>
+					   						<td>${periodVO.favoriteEnd }</td>
+					   						<td>${periodVO.registrationStart }</td>
+					   						<td>${periodVO.deadline }</td>
 					   					</tr>
 					   				</c:forEach>
 					   			</tbody>
@@ -121,36 +121,32 @@
 				</div>
 				<!-- /.card -->
 				
-					<!-- Pagination -->
+				<!-- Pagination -->
 				 <div class="row g-3 justify-content-center" style="margin: 20px auto;" id="pagination">
-							<nav aria-label="pagination pagination-sm mx-auto" >
-								<ul class="pagination pagination-sm mx-auto" style="width: 200px;">
-									<li class="page-item ${pagination.page eq 1? 'disabled' : '' }">
-										<a class="page-link" href="./periodList?page=1&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="1" style="color:#17a2b8;">
-											<span aria-hidden="true">&laquo;</span>
-										</a>
-									</li>
-									<li class="page-item ${pagination.pre eq false ? 'disabled' : ''}">
-										<a class="page-link" href="./periodList?page=${pagination.startNum-1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="${pagination.startNum-1}" style="color:#17a2b8;">
-											<span aria-hidden="true">&lsaquo;</span>
-										</a>
-									</li>
-									<c:forEach begin="${pagination.startNum}" end="${pagination.lastNum}" var="i">
-										<li class="page-item"><a class="page-link" href="./periodList?page=${i}&kind=${pagination.kind}&search=${pagination.search}" data-board-page="${i}" style="color:#17a2b8;">${i}</a></li>
-									</c:forEach>
-									<li class="page-item ${pagination.next eq false ? 'disabled' : ''}">
-										<a class="page-link" href="./periodList?page=${pagination.lastNum+1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next" data-board-page="${pagination.lastNum+1}" style="color:#17a2b8;">
-											<span aria-hidden="true">&rsaquo;</span>
-										</a>
-									</li>
-									<li class="page-item ${pagination.next eq totalPage ? 'disabled' : ''}">
-										<a class="page-link" href="./periodList?page=${pagination.totalPage}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next" data-board-page="${pagination.totalPage}" style="color:#17a2b8;">
-											<span aria-hidden="true">&raquo;</span>
-										</a>
-									</li>
-								</ul>
-							</nav>
-					</div>
+									
+					<ul class="pagination pagination-sm mx-auto"  style="width: 200px;">
+						<c:if test="${pagination.pre}">
+							<li class="page-item">
+								<a class="page-link" href="./periodList?page=1&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="1" style="color:#17a2b8;">
+									<span aria-hidden="true">&laquo;</span>
+								</a>
+							</li>
+						</c:if>
+						
+						<c:forEach begin="${pagination.startNum}" end="${pagination.lastNum}" var="i">
+							<li class="page-item"><a class="page-link" href="./periodList?page=${i}&kind=${pagination.kind}&search=${pagination.search}" data-board-page="${i}" style="color:#17a2b8;">${i}</a></li>
+						</c:forEach>
+						
+						<c:if test="${pagination.next }">
+							<li class="page-item">
+								<a class="page-link" href="./periodList?page=${pagination.totalPage}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next" data-board-page="${pagination.totalPage}" style="color:#17a2b8;">
+									<span aria-hidden="true">&raquo;</span>
+								</a>
+							</li>
+						</c:if>
+					</ul>
+				
+				</div>
 			</div>
 		</div>
 	</div>

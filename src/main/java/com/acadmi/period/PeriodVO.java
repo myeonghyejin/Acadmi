@@ -1,8 +1,6 @@
 package com.acadmi.period;
 
 
-import java.util.Date;
-
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,11 +11,12 @@ public class PeriodVO {
 	
 	private Integer year;
 	private Integer semester;
-	private Date applicationStart;
-	private Date applicationEnd;
-	private Date favoriteStart;
-	private Date favoriteEnd;
-	private Date deadline;
+	private String applicationStart;
+	private String applicationEnd;
+	private String favoriteStart;
+	private String favoriteEnd;
+	private String registrationStart;
+	private String deadline;
 	
 }
 

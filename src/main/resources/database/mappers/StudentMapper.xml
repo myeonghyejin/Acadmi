@@ -35,19 +35,22 @@
 
  	<!--내 수강 강좌 -->
  	<select id="getMyLectureList" parameterType="lectureVO" resultMap="MyLectureList">
-		SELECT *  FROM LECTURE L 
-			INNER JOIN 
-				STUDENT_LECTURE SL 
-			USING(LECTURENUM)
-				INNER JOIN 
-					PROFESSOR P 
-				ON L.USERNAME = P.USERNAME
-		WHERE SL.USERNAME=#{username}
+		SELECT sl.*, l.*, p.NAME  
+			FROM LECTURE l  
+				JOIN STUDENT_LECTURE sl 
+			ON (sl.LECTURENUM = l.LECTURENUM)
+					JOIN PROFESSOR p
+				ON (l.USERNAME = p.USERNAME)
+		WHERE l.`YEAR` = DATE_FORMAT(NOW(), '%Y') 
+			AND (
+			  (l.SEMESTER = 1 AND DATE_FORMAT(NOW(), '%m') BETWEEN 3 AND 6)
+			  OR (l.SEMESTER = 2 AND DATE_FORMAT(NOW(), '%m') BETWEEN 7 AND 12)
+		)
 		<if test="year !=null and !year.equals('')">
-			AND L.YEAR = #{year}
+			AND l.YEAR = #{year}
 		</if>
 		<if test="semester !=null and !semester.equals('')">
-			AND L.SEMESTER=#{semester}
+			AND l.SEMESTER=#{semester}
 		</if>
  	</select>
  	<resultMap type="LectureVO" id="MyLectureList">
