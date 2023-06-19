@@ -58,28 +58,29 @@
 		               </div>
 		               <!--header end  -->
 		               
-		               <!-- Main content -->
-		               		<div class="card search">
-		               			<div class="row content">
-		               				<label style="margin : 10px;">수강 년도</label>
-		               				<select  class="select2" name="year" style="width: 15%;" id="year" >
-		               				<option value="">전체</option>
-		               				<c:forEach  begin="${map['min']}" end="${map['max']}" varStatus="i">
-		               					<option value="${i.index}" ${lectureVO.year eq i.index  ? 'selected' : ''}>${i.index}</option>
-		               				</c:forEach>
-		               				
-		       
-		               				</select>
-		               				<label style="margin : 10px;">학기</label>
-		               				<select class="select2" name="semester"style="width: 15%;" id="semester">
-		               					<option value="">전체</option>
-		               					<option value="1" ${lectureVO.semester eq 1 ? 'selected' : '' }>1학기</option>
-		               					<option value="2" ${lectureVO.semester eq 2 ? 'selected' : '' }>2학기</option>
-		               				</select>
-		               			</div>
-		               		</div>
 		               		<!-- Default box -->
 		               		<div class="card">
+		               			<!-- table-header start -->
+								<div class="card-header">
+									<div class="row justify-content-center my-3">
+					            		<label class="mx-2 my-2">수강 연도</label>
+					               		<select  class="select2" name="year" style="width:7%;" id="year" >
+					               			<option value="">전체</option>
+					               			<c:forEach  begin="${map['min']}" end="${map['max']}" varStatus="i">
+					               				<option value="${i.index}" ${lectureVO.year eq i.index  ? 'selected' : ''}>${i.index}</option>
+					               			</c:forEach>
+					               		</select>
+					               		<label class="ml-3 mr-2 my-2">학기</label>
+					               		<select class="select2" name="semester"style="width:7%;" id="semester">
+					               			<option value="">전체</option>
+					               			<option value="1" ${lectureVO.semester eq 1 ? 'selected' : '' }>1학기</option>
+					               			<option value="2" ${lectureVO.semester eq 2 ? 'selected' : '' }>2학기</option>
+					               		</select>
+					               		<button type="submit" class="btn btn-default ml-4" id="submit">
+							            	<i class="fas fa-search"></i>
+							            </button>
+					                </div>
+					            </div>
 		               			<div class="card-body p-0">
 		               				<table class="table table-hover text-nowrap" style="text-align : center;"  id="tableMyLecture">
 		               				 <sec:authentication property="principal" var="user"/>
