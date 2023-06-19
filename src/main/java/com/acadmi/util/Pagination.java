@@ -14,6 +14,7 @@ public class Pagination {
 	private Integer department;
 	private Integer grade;
 	private Integer year;
+	private Integer temporary;
 	
 	//member 관련 검색
 	private String deptName;

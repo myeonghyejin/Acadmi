@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
@@ -31,7 +32,7 @@
 		</sec:authorize>
 		
 		<sec:authorize access="hasRole('ROLE_PROFESSOR')">
-			<c:import url="../temp/professor_header.jsp"></c:import>
+			<c:import url="../temp/lecture_header.jsp"></c:import>
 		</sec:authorize>
 			
 		<sec:authorize access="hasRole('ROLE_STUDENT')">
@@ -65,30 +66,24 @@
 									<div class="card">
 										<!-- table-header start -->
 										<div class="card-header">
-							               
-							                <div class="card-tools row" style="margin:0px">
-							                <div class="col-3 mr-2">
-							                <select class="select2" id="kind" name="kind" style="width:80px;border-color:#17a2b8">
-											    	<option value="">전체</option>
-													<option value="userName"${param.kind == 'userName' ? 'selected' : ''} >학번</option>
-													<option value="name"${param.kind == 'name' ? 'selected' : ''}>이름</option>
-												</select>
+							                <div class="card-tools row">
+								                <div class="col-3 mr-2">
+								                	<select class="select2" id="kind" name="kind" style="width:80px;border-color:#17a2b8">
+												    	<option value="">전체</option>
+														<option value="userName"${param.kind == 'userName' ? 'selected' : ''} >학번</option>
+														<option value="name"${param.kind == 'name' ? 'selected' : ''}>이름</option>
+													</select>
+								                </div>
+							                 	<div class="input-group input-group-sm my-1 mr-2 col-7" style="width:210px;">
+								                	<input type="text" class="form-control form-control-lg" name="search" id="search" value="${pagination.search}">
+													<div class="input-group-append">
+							                      		<button type="submit" class="btn btn-default" id="submit">
+							                        		<i class="fas fa-search"></i>
+							                      		</button>
+							                    	</div>
+							                  	</div>
 							                </div>
-							                 <div class="input-group input-group-sm my-1 mr-2 col-7" style="width: 200px;">
-								                 
-							                  	<input type="text" class="form-control form-control-lg" name="search" id="search" value="${pagination.search}">
-							
-							                    <div class="input-group-append">
-							                      <button type="submit" class="btn btn-default" id="submit">
-							                        <i class="fas fa-search"></i>
-							                      </button>
-							                    </div>
-							                  </div>
-							                </div>
-							                
-							                
-							              </div>
-										
+							            </div>
 						              	<!-- table-header end -->
 	              
 	              						<!-- table-body start -->
@@ -107,23 +102,26 @@
 								                <tbody>
 								                	<c:forEach items="${list}" var="attendee">
 								                    	<tr>
-								                    		<td style="vertical-align:middle;"><sec:authentication property="principal.username" var="username"/>
-								                    		<a href="../chat/detail?sender=${username}&recipient=${attendee.username}">
-								                    		<i class="fa-regular fa-envelope fa-2xl"></i></a></td>
-								                    		<td style="vertical-align:middle;">
-						     	 								<c:if test="${empty memberFiles}">
-											   	 					  <img class="profile-user-img img-fluid img-circle"
-																             src="/images/profile.jpg"
-																             alt="User profile picture" style="width:70px;height:70px">
+								                    		<td style="vertical-align:middle; width:10%">
+								                    			<sec:authentication property="principal.username" var="username"/>
+									                    		<a href="../chat/detail?sender=${username}&recipient=${attendee.username}">
+									                    			<i class="fa-regular fa-envelope fa-2xl"></i>
+									                    		</a>
+								                    		</td>
+								                    		<td style="vertical-align:middle; width:13%">
+						     	 								<c:if test="${empty attendee.memberFilesVO}">
+											   	 					  <img class="img" src="/images/profile.jpg" alt="User profile picture" width="60rem" height="60rem" style="border-radius:5px">
 											   	 				</c:if>
-											   	 				<c:if test="${not empty memberFiles}">
-											   	 					<img class="img-circle elevation-2" src="/file/member/${memberFiles}" width="70rem" height="70rem">
+											   	 				<c:if test="${not empty attendee.memberFilesVO}">
+											   	 					<img class="img" src="/file/member/${attendee.memberFilesVO.fileName}" width="60rem" height="60rem" style="border-radius:5px">
 											   	 				</c:if>	
 						     	 							</td>
 								                    		<td style="vertical-align:middle;">${attendee.username}</td>
 								                    		<td style="vertical-align:middle;">${attendee.name}</td>
 							 								<td style="vertical-align:middle;">${attendee.departmentVO.deptName}</td>
-							 								<td style="vertical-align:middle;">0${attendee.phone}</td>
+							 								<td style="vertical-align:middle;">
+							 									0${fn:substring(attendee.phone, 0, 2)}-${fn:substring(attendee.phone, 2, 6)}-${fn:substring(attendee.phone, 6,10)}
+							 								</td>
 								                    	</tr>
 													</c:forEach>
 												</tbody>
@@ -133,7 +131,7 @@
 	              						
 	              						<!-- pagination start -->
 	              						<div class="row g-3 justify-content-center" id="allLectureList">
-											<ul class="pagination pagination-sm mx-auto" style="width: 200px;">
+											<ul class="pagination pagination-sm mx-auto justify-content-center" style="width: 200px;">
 												<c:if test="${pagination.pre}">
 													<li class="page-item">
 														<a class="page-link" href="#" aria-label="Previous" data-all-page="1" style="color:#17a2b8;">
@@ -181,6 +179,7 @@
 		        e.preventDefault();
 		    });
 		</script>
+		
 	</div>
 <!-- ./wrapper -->
 </body>
