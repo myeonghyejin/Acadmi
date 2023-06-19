@@ -88,7 +88,15 @@
 																		<p class="text-muted"><c:out value="${professorRoom}"></c:out>호</p>
 																<hr>
 																	<strong><i class="fa-solid fa-phone mr-1"></i> 전화번호</strong>
-																		<p class="text-muted"><c:out value="${professorPhone}"></c:out></p>
+																		<p class="text-muted">
+																			<script type="text/javascript">
+																	        	const number = '${professorVO.phone}'
+																	        	const countryCode = number.substring(0, 3);
+																	        	const areaCode = number.substring(3, 7);
+																	        	const phoneNumber = number.substring(7, 11);
+																	        	document.write(countryCode,'-',areaCode,'-',phoneNumber);
+																        	</script>
+															        	</p>
 																<hr>
 																	<strong><i class="fas fa-envelope mr-1"></i> 이메일</strong>
 																		<p class="text-muted"><c:out value="${professorEmail}"></c:out></p>
