@@ -3,6 +3,7 @@ package com.acadmi.administrator;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.acadmi.college.CollegeVO;
 import com.acadmi.department.DepartmentVO;
@@ -478,17 +481,18 @@ public class AdministratorService{
 	}
 	
 	//강의실 배정
-	public List<LectureRoomVO> getLectureRoomAssignment(Pagination pagination) throws Exception {
+	public List<LectureRoomVO> getLectureRoomAssignment(Map<String, Object> map) throws Exception {
 		
+//		
+//		Long totalCount = administratorDAO.getTotalCountAssiginment(pagination);
+//		
+//		pagination.makeNum(totalCount);
+//		pagination.makeStartRow();
+	
+
+		List<LectureRoomVO> ar = administratorDAO. getLectureRoomAssignment(map);
 		
-		Long totalCount = administratorDAO.getTotalCountAssiginment(pagination);
-		
-		pagination.makeNum(totalCount);
-		pagination.makeStartRow();
-		
-		
-		
-		return administratorDAO.getLectureRoomAssignment(pagination);
+		return ar;
 	}
  	
 	public int setLectureRoomAssignmentUpdate(LectureVO lectureVO) throws Exception {

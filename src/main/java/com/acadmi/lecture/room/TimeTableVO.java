@@ -13,7 +13,7 @@ public class TimeTableVO {
 	private String lectureBuilding;
 	private Integer lectureRoom;
 	private String weekday;
-	private Integer time;
+	private Integer timeNum;
 	private Integer year;
 	private Integer semester;
 	

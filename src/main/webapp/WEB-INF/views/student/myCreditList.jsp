@@ -123,7 +123,7 @@
 /*입학년도 ~ 재학년도 */
  	
 /* 검색 기능 */
-$("#year").on("change", function() {
+/* $("#year").on("change", function() {
 	let year = $(this).val()
 	let semester = $("#semester").val()
 	
@@ -157,7 +157,7 @@ $("#semester").on("change", function() {
 			location.href="./myCreditList?year=" + year + "&semester=" + semester
 		}
 	})
-})
+}) */
 
 $(function () {
      $('.select2').select2()

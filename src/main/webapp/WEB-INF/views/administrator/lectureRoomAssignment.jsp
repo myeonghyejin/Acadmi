@@ -41,7 +41,7 @@
 	<div class="content-wrapper">
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col" style="background-color : white;">
+				<div class="col" >
 						<!-- header start -->
 	               <div class="row" style="padding-top:10px">
 	                  <div class="col-12">
@@ -55,8 +55,7 @@
                
                	<div class="card">
              		 <div class="card-header">
-			          <h3 class="card-title">강의실 조회</h3>
-			
+			       
 			          <div class="card-tools">
 			            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
 			              <i class="fas fa-minus"></i>
@@ -74,31 +73,69 @@
 											<label>요일</label>
 											<select class="select2" name="weekday" style="width : 100%;" id="weekday">
 												<option value="">전체</option>
-												<option value="">월요일</option>
-												<option value="">화요일</option>
-												<option value="">수요일</option>
-												<option value="">목요일</option>
-												<option value="">금요일</option>
+												<option value="월">월요일</option>
+												<option value="화">화요일</option>
+												<option value="수">수요일</option>
+												<option value="목">목요일</option>
+												<option value="금">금요일</option>
 												</select>
 										</div>
 									</div>
 									<div class="col-4">
 										<div class="form-group">
 											<label>시작 시간</label>
-											<select class="select2" name="startTime" style="widt : 100%;" id="startTime">
+											<select class="select2" name="startTime" style="width : 100%;" id="startTime">
 												<option value="">전체</option>
-												<c:forEach items="${room}" var="room">
-													<c:forEach items="${room.timeTableVOs}" var="timeTableVO">
-														<c:forEach items="${timeTableVO.timeInfoVOs}" var="timeInfoVO">
-															<option value="">${timeInfoVO.startTime }</option>
-														</c:forEach>
-													</c:forEach>
-												</c:forEach>
+												<option value="1">9:00</option>
+												<option value="2">10:00</option>
+												<option value="3">11:00</option>
+												<option value="4">12:00</option>
+												<option value="5">13:00</option>
+												<option value="6">14:00</option>
+												<option value="7">15:00</option>
+												<option value="8">16:00</option>
+												<option value="9">17:00</option>
+												<option value="10">18:00</option>
+												
 											</select>
 										</div>
 									</div>
 								</div>	
-								<button type="submit" class="btn btn-info" style="margin : 0 0 0 20px; width : 15%">검색</button>
+								<div class="row">
+									<div class="col-4">
+										<div class="form-group">
+											<label>종료 시간</label>
+											<select class="select2" name="endTime" style="width : 100%;" id="endTime">
+												<option value="">전체</option>
+												<option value="1">10:00</option>
+												<option value="2">11:00</option>
+												<option value="3">12:00</option>
+												<option value="4">13:00</option>
+												<option value="5">14:00</option>
+												<option value="6">15:00</option>
+												<option value="7">16:00</option>
+												<option value="8">17:00</option>
+												<option value="9">18:00</option>
+												<option value="10">19:00</option>
+												
+											</select>
+										</div>
+									</div>
+									<div class="col-6">
+										<div class="form-group">
+											<label>수용 인원</label>
+												<div class="input-group">
+													<input type="text" class="form-control" placeholder="수용인원을 입력하세요." name="personal" >
+													<div class="input-group-append">
+														<button type="submit" class="btn btn-default" id="submit">
+															<i class="fas fa-search "></i>
+														</button>
+													</div>
+												</div>
+										</div>
+									</div>
+								</div>
+								
 							</div>
 							
 						</div>
@@ -184,5 +221,10 @@
 	</div>
 </div>	
 <script type="text/javascript" src="../js/administrator/lectureRoomAssignment.js"></script>
+<script>
+	    $(function () {
+	      $('.select2').select2()
+	    });
+</script>
 </body>
 </html>

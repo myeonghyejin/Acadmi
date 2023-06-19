@@ -43,6 +43,8 @@
 					PROFESSOR P 
 				ON L.USERNAME = P.USERNAME
 		WHERE SL.USERNAME=#{username}
+		AND L.STATUS=1
+		
 		<if test="year ==null and semester ==null">
 			AND L.YEAR=DATE_FORMAT(now(),'%Y') AND 
   			L.SEMESTER = CASE

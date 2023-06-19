@@ -1,6 +1,8 @@
 package com.acadmi.administrator;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -20,6 +22,7 @@ import com.acadmi.college.CollegeVO;
 import com.acadmi.department.DepartmentVO;
 import com.acadmi.lecture.LectureVO;
 import com.acadmi.lecture.room.LectureRoomVO;
+import com.acadmi.lecture.room.TimeInfoVO;
 import com.acadmi.lecture.room.TimeTableVO;
 import com.acadmi.member.MemberSeqVO;
 import com.acadmi.member.MemberVO;
@@ -457,20 +460,33 @@ public class AdministratorController {
 
 	//강의실 배정
 	@GetMapping("lectureRoomAssignment")
-	public ModelAndView getLectureRoomAssignment(Pagination pagination, NotificationVO notificationVO, LectureVO lectureVO) throws Exception {
+	public ModelAndView getLectureRoomAssignment( NotificationVO notificationVO,LectureRoomVO lectureRoomVO, TimeTableVO timeTableVO, TimeInfoVO timeInfoVO, LectureVO lectureVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		List<LectureRoomVO> ar = administratorService.getLectureRoom(pagination);
-		List<LectureRoomVO> ar2 =  administratorService.getLectureRoomAssignment(pagination);
+		Map<String, Object> map = new HashMap<>();
+		
+//		log.error("personal::{}", lectureRoomVO.getPersonal());
+//		log.error("weekday ::{}", timeTableVO.getWeekday());
+//		log.error("startTime::{}",timeInfoVO.getStartTime());
+//		log.error("endTime ::{}", timeInfoVO.getEndTime());
+//		
+		
+		map.put("personal", lectureRoomVO.getPersonal());
+		map.put("weekday", timeTableVO.getWeekday());
+		map.put("startTime", timeInfoVO.getStartTime());
+		map.put("endTime", timeInfoVO.getEndTime());
+		
+		
+		List<LectureRoomVO> ar =  administratorService.getLectureRoomAssignment(map);	
 		lectureVO = administratorService.getLectureNum(lectureVO);
+		
 		
 		if(notificationVO.getNotificationNum() != null) {
 			int result = notificationService.setDelete(notificationVO);
 		}
 		
 		mv.addObject("list", ar);
-		
-		mv.addObject("room", ar2);
+	
 		mv.addObject("lectureNum", lectureVO);
 		mv.setViewName("administrator/lectureRoomAssignment");
 		

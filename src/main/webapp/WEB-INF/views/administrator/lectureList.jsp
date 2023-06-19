@@ -156,46 +156,70 @@
 				                  </tr>
 				              </thead>
 				              <tbody>
-				                  <c:forEach items="${list}" var="lectureVO">
-					   	 		<tr class="container">
-					   	 			
-					   	 			<td> ${lectureVO.lectureNum}</td>
-					   	 			<td>${lectureVO.lectureName}</td>
-					   	 			<td>${lectureVO.weekday}</td>
-					   	 			<td>${lectureVO.startTime}교시</td>
-					   	 			<td>${lectureVO.endTime}교시</td>
-					   	 			<td>${lectureVO.personal}</td>
-					   	 			<c:if test="${lectureVO.status eq 1}">
-					   	 				<td>개강</td>	
-					   	 			</c:if>
-					   	 			<c:if test="${lectureVO.status eq 0}">
-					   	 				<td>폐강</td>
-					   	 			</c:if>
-					   	 			<c:if test="${lectureVO.status eq null }">
-					   	 				<td>상태 없음</td>
-					   	 			</c:if>
-					   	 			<td>
-						   	 				<button class="toggleButton" style="background-color : white; border : none; outline : none; ">+</button>
-						   	 				<div class="toggleContent" style="display:none">
-						   	 					<div class="contentContainer">
-							   	 					  <table class="table table-hover text-nowrap" style="text-align: center;" id="table1">
-								                        <tr>
-								                            <th>학년도</th>
-								                            <th>학과</th>
-								                           	<th>학기</th>
-								                           	<th>담당교수</th>
-								                           	<th>강의실</th>
-								                           	<th></th>
-								                        </tr>
-								                        <tr>
-								                        	<td>${lectureVO.year}</td>
-								                        	<td>${lectureVO.departmentVO.deptName}</td>
-								                        	<td>${lectureVO.semester }</td>
-								                        	<td>${lectureVO.professorVO.name}</td>
-								                        	<td>${lectureVO.lectureBuilding} ${lectureVO.lectureRoom}</td>
-								                        	<c:if test="${lectureVO.lectureBuilding eq  null}">
-								                        		<td><a href="./lectureRoomAssignment?lectureNum=${lectureVO.lectureNum}"><button class="btn btn-info">강의실 배정</button></a></td>
-								                        	</c:if>
+					               <c:forEach items="${list}" var="lectureVO">
+					               <c:set value="${lectureVO.lectureNum }" var="lectureNum"></c:set>
+					               <c:set value="${lectureVO.lectureName }" var="lectureName"></c:set>
+					               <c:set value="${lectureVO.weekday }" var="lectureWeekday"></c:set>
+					               <c:set value="${lectureVO.startTime }" var="lectureStartTime"></c:set>
+					               <c:set value="${lectureVO.endTime }" var="lectureEndTime"></c:set>
+					               <c:set value="${lectureVO.personal }" var="lecturePersonal"></c:set>
+					               <c:set value="${lectureVO.status }" var="lectureStatus"></c:set>
+					               <c:set value="${lectureVO.year}" var="year"></c:set>
+					               <c:set value="${lectureVO.departmentVO.deptName}" var="deptName"></c:set>
+					               <c:set value="${lectureVO.semester}" var="semester"></c:set>
+					               <c:set value="${lectureVO.professorVO.name}" var="professorName"></c:set>
+								   <c:set value="${lectureVO.lectureBuilding}" var="lectureBuilding"></c:set>
+								    <c:set value="${lectureVO.lectureRoom}" var="lectureRoom"></c:set>
+					               <c:set value="${lectureVO.lectureRoomVO.personal}" var="lectureRoomPersonal"></c:set>
+						   	 			<c:forEach items="${letureRoomVO.timeTableVOs}" var="timeTableVO">
+						   	 				<c:set value="${timeTableVO.weekday}" var="weekday"></c:set>
+						   	 				<c:forEach items="${timeTableVO.timeInfoVOs}" var="timeInfoVO">
+						   	 					<c:set value="${timeInfoVO.startTime}" var="startTime"></c:set>
+						   	 					<c:set value="${timeInfoVO.endTime}" var="endTime"></c:set>
+						   	 				</c:forEach>
+						   	 			</c:forEach>
+						   	 		
+						   	
+						   	 		<tr class="container">
+						   	 			
+						   	 			
+						   	 			<td> ${lectureNum}</td>
+						   	 			<td>${lectureName}</td>
+						   	 			<td>${lectureWeekday}요일</td>
+						   	 			<td>${lectureStartTime}교시</td>
+						   	 			<td>${lectureEndTime}교시</td>
+						   	 			<td>${lecturePersonal}</td>
+						   	 			<c:if test="${lectureStatus eq 1}">
+						   	 				<td>개강</td>	
+						   	 			</c:if>
+						   	 			<c:if test="${lectureStatus eq 0}">
+						   	 				<td>폐강</td>
+						   	 			</c:if>
+						   	 			<c:if test="${lectureVO.status eq null }">
+						   	 				<td>상태 없음</td>
+						   	 			</c:if>
+						   	 			<td>
+							   	 				<button class="toggleButton" style="background-color : white; border : none; outline : none; ">+</button>
+							   	 				<div class="toggleContent" style="display:none">
+							   	 					<div class="contentContainer">
+								   	 					  <table class="table table-hover text-nowrap" style="text-align: center;" id="table1">
+									                        <tr>
+									                            <th>학년도</th>
+									                            <th>학과</th>
+									                           	<th>학기</th>
+									                           	<th>담당교수</th>
+									                           	<th>강의실</th>
+									                           	<th></th>
+									                        </tr>
+									                        <tr>
+									                        	<td>${year}</td>
+									                        	<td>${deptName}</td>
+									                        	<td>${semester }</td>
+									                        	<td>${professorName}</td>
+									                        	<td>${lectureBuilding} ${lectureRoom}</td>
+									                        	<c:if test="${lectureBuilding eq  null}">
+									                        		<td><a href="./lectureRoomAssignment?lectureNum=${lectureNum}&startTime=${lectureStartTime}&endTime=${lectureEndTime}&weekday=${lectureWeekday}&personal=${lectureRoomPersonal}"><button class="btn btn-info">강의실 배정</button></a></td>
+									                        	</c:if>
 								                        </tr>
 								                       
 								                    </table>
@@ -206,6 +230,7 @@
 					   	 			
 					   	 		</tr>	
 					   	 		</c:forEach>
+					   	 		
 				              </tbody>
 				          </table>
 				          

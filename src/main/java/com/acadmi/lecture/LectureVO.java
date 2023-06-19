@@ -48,5 +48,6 @@ public class LectureVO {
 	private DepartmentVO departmentVO;
 	private CollegeVO collegeVO;
 	private SyllabusVO syllabusVO;
+	
 
 }

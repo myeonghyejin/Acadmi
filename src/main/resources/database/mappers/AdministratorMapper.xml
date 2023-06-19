@@ -459,6 +459,18 @@
  		<id column="USERNAME" property="username"/>
  		<result column="NAME" property="name"/>
  	</association>
+ 	<association property="lectureRoomVO" javaType="LectureRoomVO">
+ 		<result column="PERSONAL" property="personal"/>
+ 		<collection property="timeTableVOs" javaType="List" ofType="TimeTableVO">
+ 			<id column="TIMETABLENUM" property="timeTableNum"/>
+ 			<result column="WEEKDAY" property="weekday"/>
+ 			<collection property="timeInfoVOs" javaType="List" ofType="TimeInfoVO">
+ 				<id column="TIMENUM" property="timeNum"/>
+ 				<result column="STARTTIME" property="startTime"/>
+ 				<result column="ENDTIME" property="endTime"/>
+ 			</collection>
+ 		</collection>
+ 	</association>
  </resultMap>
  
   <select id="getTotalCountLecture" resultType="Long">
@@ -468,34 +480,53 @@
   
   <!--강의실 배정  -->
   
-  <select id="getLectureRoomAssignment" resultMap="LectureRoomAssignment" parameterType="Pagination">
-		SELECT R.LECTUREBUILDING, R.LECTUREROOM,R.PERSONAL,R.STATUS,R.`TIME`, R.STARTTIME,R.ENDTIME,TB.`YEAR`,TB.SEMESTER, TB.TIME, TB.WEEKDAY FROM 
-		(SELECT * FROM LECTURE_ROOM LR,TIMEINFO T
-			WHERE STATUS=1) R
-			LEFT OUTER JOIN 
-				TIMETABLE TB
-			ON (TB. LECTUREBUILDING=R.LECTUREBUILDING AND TB.LECTUREROOM=R.LECTUREROOM AND R.TIME=TB.TIME) 
-		ORDER BY 1,2,5
-		LIMIT #{startRow},#{perPage}
+  <select id="getLectureRoomAssignment" resultMap="LectureRoomAssignment" parameterType="Map" >
+		SELECT * FROM LECTURE_ROOM 
+			WHERE PERSONAL &gt;= #{personal}
+			AND STATUS=1
+			AND (LECTUREROOM, LECTUREBUILDING ) NOT IN ( 
+				SELECT LECTUREROOM , LECTUREBUILDING 
+				FROM TIMETABLE 
+					WHERE WEEKDAY = #{weekday}
+					AND TIMENUM IN (
+						SELECT TIMENUM 
+						FROM TIMEINFO T 
+						WHERE STARTTIME = #{startTime} AND ENDTIME=  #{endTime}
+						<if test="weekday !=null and !weekday.equals('')">
+							AND WEEKDAY = #{weekday}
+						</if>
+						<if test="startTime !=null and !startTime.equals('')">
+							AND STARTTIME = #{startTime}
+						</if>
+						<if test="endTime !=null and !endTime.equals('')">
+							AND ENDTIME = #{endTime}
+						</if>
+						<if test="personal !=null and personal.equals('')">
+							AND PERSONAL = #{personal}
+						</if>
+				)	
+		)
   </select>
- 	<resultMap type="LectureRoomVO" id="LectureRoomAssignment">
- 		<id column="LECTUREBUILDING" property="lectureBuilding"/>
- 		<id column="LECTUREROOM" property="lectureRoom"/>
- 		<result column="PERSONAL" property="personal"/>
- 		<result column="STATUS" property="status"/>
- 		<collection property="timeTableVOs" javaType="List" ofType="TimeTableVO">
- 			<id column="TIMETABLENUM" property="timeTableNum"/>
- 			<result column="WEEKDAY" property="weekday"/>
- 			<result column="TIME" property="time"/>
- 			<result column="YEAR" property="year"/>
- 			<result column="SEMESTER" property="semester"/>
- 			<collection property="timeInfoVOs" javaType="List" ofType="TimeInfoVO">
- 				<id column="TIME" property="time"/>
- 				<result column="STARTTIME" property="startTime"/>
- 				<result column="ENDTIME" property="endTime"/>
- 			</collection>
- 		</collection>
- 	</resultMap>
+  <resultMap type="LectureRoomVO" id="LectureRoomAssignment">
+  	<id column="LECTUREBUILDING" property="lectureBuilding"/>
+  	<id column="LECTUREROOM" property="lectureRoom"/>
+  	<result column="PERSONAL" property="personal"/>
+  	<result column="STATUS" property="status"/>
+  	<collection property="timeTableVOs" javaType="List" ofType="TimeTableVO">
+  		<id column="TIMETABLENUM" property="timeTableVO"/>
+  		<result column="WEEKDAY" property="weekday"/>
+  		<result column="TIMENUM" property="timeNum"/>
+  		<result column="YEAR" property="year"/>
+  		<result column="SEMESTER" property="semester"/>
+  		<collection property="timeInfoVOs" javaType="List" ofType="TimeInfoVO">
+  			<id column="TIMENUM" property="timeNum"/>
+  			<result column="STARTTIME" property="startTime"/>
+  			<result column="ENDTIME" property="endTime"/>
+  		</collection>
+  	</collection>
+  </resultMap>
+ 	
+ 
   
   <select id="getTimeTable" resultType="TimeTableVO">
   	SELECT * FROM TIMETABLE
