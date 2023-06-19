@@ -82,9 +82,9 @@
 		<!-- Sidebar user panel (optional) -->
 		<div class="user-panel mt-3 pb-3 mb-3 d-flex">
 			<div class="image">
-				<img src="/images/profile.jpg" class="img-circle elevation-2" alt="User Image" >
+				<img src="/images/student.jpg" class="img-circle elevation-2" alt="User Image" >
 				<sec:authentication property="Principal" var="user"/>
-                <a href="/member/studentPage?username=${user.username}" style="margin-left: 8px">${user.username}</a>   
+                <a href="/member/studentPage?username=${user.username}" style="margin-left: 8px">${name} (${user.username})</a>   
 			</div>
 		</div>
 

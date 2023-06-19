@@ -48,7 +48,7 @@
   		<update id="setEnabledUpdate" parameterType="MemberVO">
   			UPDATE MEMBER SET ENABLED = 1 WHERE ENABLED = 0
   		</update>
-  		
+ 
  <!-- ============================================================================================================================ -->
   		
   		
@@ -152,6 +152,22 @@
         		</association>
   			</collection>
   		</resultMap>
+  <!-- ============================================================================================================================ -->
+  
+  	<select id="getName" parameterType="map" resultType="String">
+  		SELECT NAME FROM
+  		<choose>
+  			<when test="role == 'ROLE_ADMINISTRATOR'">
+  				ADMINISTRATOR
+  			</when>
+  			<when test="role == 'ROLE_PROFESSOR'">
+  				PROFESSOR
+  			</when>
+  			<otherwise>STUDENT</otherwise>
+  		</choose> 
+  		WHERE USERNAME = #{username}		 
+  	</select>
+  
   		
 	
  <!-- ============================================================================================================================ -->

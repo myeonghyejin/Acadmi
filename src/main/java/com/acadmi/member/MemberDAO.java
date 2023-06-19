@@ -28,6 +28,8 @@ public interface MemberDAO {
 	public int setFileUpdate(MemberFilesVO memberFilesVO) throws Exception;
 	public int setFileDelete(MemberFilesVO memberFilesVO) throws Exception;
 	
+	public String getName(Map<String, String> map) throws Exception;
+	
 //	========================================================================================
 	
 	public DepartmentVO getStudent(StudentVO studentVO) throws Exception;
