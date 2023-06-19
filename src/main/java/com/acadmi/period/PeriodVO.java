@@ -1,12 +1,8 @@
 package com.acadmi.period;
 
 
-import java.sql.Date;
-import java.time.LocalDateTime;
+import java.util.Date;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Getter;
 import lombok.Setter;

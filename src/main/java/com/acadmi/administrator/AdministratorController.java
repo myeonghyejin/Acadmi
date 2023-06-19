@@ -370,7 +370,33 @@ public class AdministratorController {
 		return mv;
 	}
 	
+	//학과 중복 체크
+	@GetMapping("departmentDuplicateCheck")
+	@ResponseBody
+	public boolean departmentDuplicateCheck(DepartmentVO departmentVO) throws Exception {
+		boolean check = true;
+		departmentVO = administratorService.departmentDuplicateCheck(departmentVO);
+		
+		if(departmentVO !=null) {
+			check = false;
+		}
+		
+		return check;
+	}
+	
 	//기간 설정
+	
+	@GetMapping("periodList")
+	public ModelAndView getPeriodList(Pagination pagination) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		List<PeriodVO> ar = administratorService.getPeriodList(pagination);
+		
+		mv.addObject("list", ar);
+		mv.setViewName("administrator/periodList");
+		
+		return mv;
+	}
+	
 	@GetMapping("periodAdd")
 	public ModelAndView setPeriodAdd() throws Exception {
 		ModelAndView mv = new ModelAndView();

@@ -435,12 +435,29 @@ public class AdministratorService{
 		return administratorDAO.setDepartmentUpdate(departmentVO);
 	}
 	
+	//학과 중복 체크
+	public DepartmentVO departmentDuplicateCheck(DepartmentVO departmentVO) throws Exception {
+		return administratorDAO.departmentDuplicateCheck(departmentVO);
+	}
+	
 	//기간 설정
 	public int setPeriodAdd(PeriodVO periodVO) throws Exception {
 		int result = administratorDAO.setPeriodAdd(periodVO);
 		return result;
 		
 	}
+	
+	public List<PeriodVO> getPeriodList(Pagination pagination) throws Exception {
+		Long totalCount = administratorDAO.getTotalCountPeriod(pagination);
+		
+		pagination.makeNum(totalCount);;
+		pagination.makeStartRow();
+		
+		List<PeriodVO> ar =  administratorDAO.getPeriodList(pagination);
+		
+		return ar;
+	}
+	
 	public List<String> getCurrentYear() throws Exception {
 		List<String> result = administratorDAO.getCurrentYear();
 		
