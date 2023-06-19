@@ -100,7 +100,7 @@
 												<div class="form-group">
 													<label>학과</label>
 													<div class="input-group">
-														<input type="text" class="form-control" name="deptName" placeholder="학과를 입력하세요.">
+														<input type="text" class="form-control" name="search" placeholder="학과를 입력하세요.">
 														<div class="input-group-append">
 															<button type="submit" class="btn btn-default" id="submit">
 																<i class="fas fa-search "></i>
@@ -129,7 +129,7 @@
 				                      <th style="width: 10%" class="text-center">
 				                          학과
 				                      </th>
-				                      <th style="width : 15%">
+				                      <th style="width : 18%">
 				                          사용 여부
 				                      </th>
 				                      <th style="width: 10%">
@@ -181,36 +181,31 @@
 				          </table>
 				        </div>
 					<!-- /.card-body -->
-					<!-- Pagination -->
-				    	<div class="row g-3 justify-content-center" style="margin: 20px auto;" id="pagination">
-							<nav aria-label="Page navigation example">
-								<ul class="pagination pagination-sm mx-auto" style="width: 200px;">
-									<li class="page-item ${pagination.page eq 1? 'disabled' : '' }">
+						<div class="row g-3 justify-content-center" style="margin: 20px auto;" id="pagination">
+									
+							<ul class="pagination pagination-sm mx-auto"  style="width: 200px;">
+								<c:if test="${pagination.pre}">
+									<li class="page-item">
 										<a class="page-link" href="./departmentList?page=1&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="1" style="color:#17a2b8;">
 											<span aria-hidden="true">&laquo;</span>
 										</a>
 									</li>
-									<li class="page-item ${pagination.pre eq false ? 'disabled' : ''}">
-										<a class="page-link" href="./departmentList?page=${pagination.startNum-1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="${pagination.startNum-1}" style="color:#17a2b8;">
-											<span aria-hidden="true">&lsaquo;</span>
-										</a>
-									</li>
-									<c:forEach begin="${pagination.startNum}" end="${pagination.lastNum}" var="i">
-										<li class="page-item"><a class="page-link" href="./departmentList?page=${i}&kind=${pagination.kind}&search=${pagination.search}" data-board-page="${i}" style="color:#17a2b8;">${i}</a></li>
-									</c:forEach>
-									<li class="page-item ${pagination.next eq false ? 'disabled' : ''}">
-										<a class="page-link" href="./departmentList?page=${pagination.lastNum+1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next" data-board-page="${pagination.lastNum+1}" style="color:#17a2b8;">
-											<span aria-hidden="true">&rsaquo;</span>
-										</a>
-									</li>
-									<li class="page-item ${pagination.next eq totalPage ? 'disabled' : ''}">
-										<a class="page-link" href="./departmentList?page=${pagination.totalPage}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next" data-board-page="${pagination.totalPage}">
+								</c:if>
+								
+								<c:forEach begin="${pagination.startNum}" end="${pagination.lastNum}" var="i">
+									<li class="page-item"><a class="page-link" href="./departmentList?page=${i}&kind=${pagination.kind}&search=${pagination.search}" data-board-page="${i}" style="color:#17a2b8;">${i}</a></li>
+								</c:forEach>
+								
+								<c:if test="${pagination.next }">
+									<li class="page-item">
+										<a class="page-link" href="./departmentList?page=${pagination.totalPage}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next" data-board-page="${pagination.totalPage}" style="color:#17a2b8;">
 											<span aria-hidden="true">&raquo;</span>
 										</a>
 									</li>
-								</ul>
-							</nav>
-					   </div>
+								</c:if>
+							</ul>
+									
+						</div>
 					<div class="wrapper" style="margin : 0 20px 20px 0;">
 						 <a href="./departmentAdd"><button type="button" id="add2" class="btn btn-info" style="float : right;">학과 등록</button></a>
 					 </div>

@@ -14,37 +14,7 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
 <style type="text/css">
-	#pagination {
-		 display: flex;
-   	 	justify-content: center;
 	
-	}
-	
-	#table1 {
-		width : 90%;
-	}
-	
-	h3 {
-		margin : 40px;
-	}
-	
-	.card-title {
-		margin : 5px 0 10px 5px;
-	}
-	.card-body{
-		display: flex;
-	  	justify-content: center;
-	 	align-items: center;
-	 	margin : 10px 0 30px 0;
-	}
-	
-	.content {
-		margin: 30px;
-	}
-	
-	.content2 {
-		margin : 10px 0 30px 30px;
-	}
 </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -82,22 +52,7 @@
 	               </div>
                <!-- header end -->
                <section class="content">
-                   <!--Search -->
-					<form action="./lectureRoomAssignment" id="search-form">
-						<input type="hidden" name="page" value="1">
-						<div class="card search">
-							<div class="row content" >
-					
-								
-							</div>
-							<div class="row content2">
-								
-								
-									<button type="submit" class="btn btn-info" style="margin : 0 0 0 20px; width : 15%">검색</button>
-							</div>
-						</div>
-					</form>
-               	
+               
                	<div class="card">
              		 <div class="card-header">
 			          <h3 class="card-title">강의실 조회</h3>
@@ -108,6 +63,47 @@
 			            </button>
 			          </div>
 		        	</div>
+		        	 <!--Search -->
+					<form action="./lectureRoomAssignment" id="search-form">
+						<input type="hidden" name="page" value="1">
+						<div class="row justify-content-center mx-auto my-3 ">
+							<div class="col-md-8">
+								<div class="row">
+									<div class="col-4">
+										<div class="form-group">
+											<label>요일</label>
+											<select class="select2" name="weekday" style="width : 100%;" id="weekday">
+												<option value="">전체</option>
+												<option value="">월요일</option>
+												<option value="">화요일</option>
+												<option value="">수요일</option>
+												<option value="">목요일</option>
+												<option value="">금요일</option>
+												</select>
+										</div>
+									</div>
+									<div class="col-4">
+										<div class="form-group">
+											<label>시작 시간</label>
+											<select class="select2" name="startTime" style="widt : 100%;" id="startTime">
+												<option value="">전체</option>
+												<c:forEach items="${room}" var="room">
+													<c:forEach items="${room.timeTableVOs}" var="timeTableVO">
+														<c:forEach items="${timeTableVO.timeInfoVOs}" var="timeInfoVO">
+															<option value="">${timeInfoVO.startTime }</option>
+														</c:forEach>
+													</c:forEach>
+												</c:forEach>
+											</select>
+										</div>
+									</div>
+								</div>	
+								<button type="submit" class="btn btn-info" style="margin : 0 0 0 20px; width : 15%">검색</button>
+							</div>
+							
+						</div>
+					</form>
+               	
 		        	
 		        	<div class="card-body p-0">
 		        		<table class="table table-hover text-nowrap"  style="text-align : center;"id="table1">
