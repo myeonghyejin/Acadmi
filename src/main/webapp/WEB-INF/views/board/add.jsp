@@ -79,13 +79,13 @@
 											
 											<div class="col-md-12 mt-3">
 												<label for="title" class="form-label strongFont2">제목</label> 
-												<input type="text" class="form-control" name="title" id="title" placeholder="제목을 입력하세요">
+												<input type="text" class="form-control" name="title" id="title" placeholder="제목을 입력하세요.">
 											</div>
 											
 											<c:if test="${board eq 'notice'}">
 												<div class="col-md-12 mt-4">
 												  <div style="display: flex; align-items: center;">
-												    <label for="important" class="form-label strongFont2" style="margin-bottom: 0; margin-left:5px">중요표시</label>
+												    <label for="important" class="form-label strongFont2" style="margin-bottom: 0; margin-left:5px">중요 표시</label>
 												    <div style="margin-left: 10px;">
 												      <input type="checkbox" class="form-control" name="important" id="important" style="width: 20px; height: 20px; margin-bottom: 0;">
 												    </div>
@@ -106,7 +106,7 @@
 											
 											<div class="col-md-12 mt-4">
 												<label for="contents" class="form-label strongFont2">내용</label>
-												<textarea class="form-control" name="contents" id="contents" placeholder="내용을 입력하세요"></textarea>
+												<textarea class="form-control" name="contents" id="contents" placeholder="내용을 입력하세요."></textarea>
 											</div>
 											
 											<div class="col-md-12 mt-5">
@@ -114,7 +114,7 @@
 								                    <div class="input-group">
 								                    	<div class="custom-file">
 								                        	<input type="file" class="custom-file-input" id="exampleInputFile" name="addfiles">
-								                        	<label class="custom-file-label" for="exampleInputFile">파일을 선택해주세요</label>
+								                        	<label class="custom-file-label" for="exampleInputFile">파일을 선택해 주세요.</label>
 								                     	</div>
 							                    	</div>
 						                    	</div>											

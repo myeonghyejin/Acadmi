@@ -71,7 +71,7 @@
 								<c:forEach items="${list}" var="lectureVO">
 									<tr style="text-align: center;">
 										<td>${lectureVO.lectureNum}</td>
-										<td><a>${lectureVO.lectureName}</a><br/><small>${lectureVO.professorVO.username}</small></td>
+										<td><a>${lectureVO.lectureName}</a><br/><small>${lectureVO.professorVO.name} 교수님</small></td>
 										<td>${lectureVO.grade}학년</td>
 										<td>
 											<c:if test="${lectureVO.category eq '전공 필수'}">전공 필수</c:if>
