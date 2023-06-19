@@ -131,6 +131,7 @@ public class MemberService implements UserDetailsService{
 		return memberDAO.setFileDelete(memberFilesVO);
 	}
 	
+	
 //	======================================================================================================================
 	
 	public DepartmentVO getStudent(StudentVO studentVO) throws Exception {

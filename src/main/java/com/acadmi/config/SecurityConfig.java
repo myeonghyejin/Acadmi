@@ -25,6 +25,9 @@ import com.acadmi.security.UserSuccessHandler;
 @EnableWebSecurity
 public class SecurityConfig {
 	
+	@Autowired
+	private UserSuccessHandler userSuccessHandler;
+	
 	 @Bean
 	   WebSecurityCustomizer webSecurityConfig() {
 	      return web -> web
@@ -65,7 +68,8 @@ public class SecurityConfig {
 	                  .and()
 	               .formLogin()
 	                  .loginPage("/member/login")
-	                  .defaultSuccessUrl("/")
+	                  //.defaultSuccessUrl("/")
+	                  .successHandler(userSuccessHandler)
 	                  .failureHandler(new UserLoginFailHandler())
 	                  .permitAll()
 	                  .and()
