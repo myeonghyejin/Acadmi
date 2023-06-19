@@ -25,7 +25,7 @@
 		</sec:authorize>
 		
 		<sec:authorize access="hasRole('ROLE_PROFESSOR')">
-			<c:import url="../temp/professor_header.jsp"></c:import>
+			<c:import url="../temp/lecture_header.jsp"></c:import>
 		</sec:authorize>
 			
 		<sec:authorize access="hasRole('ROLE_STUDENT')">
@@ -48,15 +48,23 @@
 			            	<table class="table table-bordered" style="text-align: center;background-color:white;">
 								<tbody>
 									<tr>
-								    	<th style="background-color:#ECEFF1;color:#17a2b8;vertical-align:middle;" rowspan="2">담당교수</th>
-										<th style="background-color:#ECEFF1;color:#17a2b8;">성명</th>
+								    	<th style="background-color:#ECEFF1;color:#17a2b8;vertical-align:middle;" rowspan="2">담당 교수</th>
+										<th style="background-color:#ECEFF1;color:#17a2b8;">이름</th>
 								        <th style="background-color:#ECEFF1;color:#17a2b8;">전화번호</th>
 								        <th style="background-color:#ECEFF1;color:#17a2b8;">연구실</th>
 								        <th style="background-color:#ECEFF1;color:#17a2b8;">이메일</th>
 									</tr>
 								    <tr>
 								    	<td>${lecture.professorVO.name}</td>
-								        <td>${lecture.professorVO.phone}</td>
+								        <td>
+								        	<script type="text/javascript">
+									        	const number = '${lecture.professorVO.phone}'
+									        	const countryCode = number.substring(0, 2);
+									        	const areaCode = number.substring(2, 6);
+									        	const phoneNumber = number.substring(6);
+									        	document.write(0,countryCode,'-',areaCode,'-',phoneNumber);
+								        	</script>
+								        </td>
 								        <td>${lecture.professorVO.professorRoom}</td>
 								        <td>${lecture.professorVO.email}</td>
 									</tr>

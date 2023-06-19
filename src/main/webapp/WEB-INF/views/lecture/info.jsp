@@ -31,7 +31,7 @@
 		</sec:authorize>
 		
 		<sec:authorize access="hasRole('ROLE_PROFESSOR')">
-			<c:import url="../temp/professor_header.jsp"></c:import>
+			<c:import url="../temp/lecture_header.jsp"></c:import>
 		</sec:authorize>
 			
 		<sec:authorize access="hasRole('ROLE_STUDENT')">
@@ -88,7 +88,6 @@
 								                <td>${lecture.weekday}요일</td>
 								                <th style="background-color:#f8f9fa;color:#17a2b8;">시작 시간</th>
 								                <td>
-								                	${lecture.startTime}교시(
 									                <c:if test="${lecture.startTime eq 1}"> 09:00</c:if>
 													<c:if test="${lecture.startTime eq 2}"> 10:00</c:if>
 													<c:if test="${lecture.startTime eq 3}"> 11:00</c:if>
@@ -99,11 +98,9 @@
 													<c:if test="${lecture.startTime eq 8}"> 16:00</c:if>
 													<c:if test="${lecture.startTime eq 9}"> 17:00</c:if>
 													<c:if test="${lecture.startTime eq 10}"> 18:00</c:if>
-													)
 								                </td>
 								                <th style="background-color:#f8f9fa;color:#17a2b8;">종료 시간</th>
 												<td>
-								                	${lecture.endTime}교시(
 									                <c:if test="${lecture.endTime eq 1}"> 09:00</c:if>
 													<c:if test="${lecture.endTime eq 2}"> 10:00</c:if>
 													<c:if test="${lecture.endTime eq 3}"> 11:00</c:if>
@@ -114,7 +111,6 @@
 													<c:if test="${lecture.endTime eq 8}"> 16:00</c:if>
 													<c:if test="${lecture.endTime eq 9}"> 17:00</c:if>
 													<c:if test="${lecture.endTime eq 10}"> 18:00</c:if>
-													)
 								                </td>
 								            </tr>
 								            <tr>

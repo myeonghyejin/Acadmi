@@ -7,9 +7,6 @@
   <mapper namespace="com.acadmi.lecture.LectureDAO">
   <sql id="lectureCondition">
   	<trim prefix="WHERE" prefixOverrides="AND">
-  		<if test="temporary==null">
-  			(TEMPORARY = 0 OR TEMPORARY=1)
-  		</if>
   		<if test="temporary!=null">
   			TEMPORARY = #{temporary}
   		</if>
@@ -41,7 +38,7 @@
  	</select>
   
   	<!-- 강의 목록 및 상태 구분 -->
-  	<select id="getLectureList" parameterType="LectureVO" resultType="LectureVO">
+  	<select id="getLectureList" parameterType="Pagination" resultType="LectureVO">
   		SELECT * FROM LECTURE <include refid="lectureCondition"></include>
   	</select>
   	
@@ -108,11 +105,17 @@
   	</select>
   	
   	<!-- 참여자 정보 -->
-  	<select id="getLectureAttendee" parameterType="Pagination" resultMap="StudentResult">
-  		SELECT S.*,M.EMAIL,D.DEPTNAME FROM `MEMBER` M INNER JOIN STUDENT S ON (M.USERNAME=S.USERNAME) 
-		INNER JOIN STUDENT_LECTURE SL ON (M.USERNAME=SL.USERNAME) INNER JOIN DEPARTMENT D ON(S.DEPTNUM=D.DEPTNUM) 
-		WHERE LECTURENUM=#{lectureNum} <include refid="attendeeCondition"></include>
+  	<select id="getTotalAttendee" parameterType="Pagination" resultType="Long">
+  		SELECT COUNT(USERNAME) FROM STUDENT S INNER JOIN STUDENT_LECTURE SL USING(USERNAME) 
+  		WHERE LECTURENUM=#{lectureNum}<include refid="attendeeCondition"></include>
   	</select>
+  	<select id="getLectureAttendee" parameterType="Pagination" resultMap="StudentResult">
+  		SELECT S.*,M.EMAIL,MF.*,D.DEPTNAME FROM `MEMBER` M LEFT OUTER JOIN MEMBERFILES MF ON(M.USERNAME=MF.USERNAME) 
+  		INNER JOIN STUDENT S ON (M.USERNAME=S.USERNAME) INNER JOIN STUDENT_LECTURE SL ON (M.USERNAME=SL.USERNAME) 
+  		INNER JOIN DEPARTMENT D ON(S.DEPTNUM=D.DEPTNUM) WHERE LECTURENUM=#{lectureNum} 
+  		<include refid="attendeeCondition"></include>  LIMIT #{startRow}, #{perPage}
+  	</select>
+
   	
   	<!-- 계획서 존재 여부 -->
   	<select id="getSyllabusExists" parameterType="LectureVO" resultType="Integer">
@@ -243,6 +246,10 @@
   		<result column="ADDRESS" property="address" />
   		<result column="STATUS" property="status" />
   		<result column="EMAIL" property="email"/>
+  		<association property="memberFilesVO" javaType="MemberFilesVO">
+			<id column="FILENUM" property="fileNum"/>
+			<result column="FILENAME" property="fileName"/>
+		</association>
   		<association property="departmentVO" javaType="DepartmentVO">
   			<id column="DEPTNUM" property="deptNum"/>
   			<result column="DEPTNAME" property="deptName"/>

@@ -39,6 +39,7 @@ public interface StudentDAO {
 	public Long getTotalCountStudent(Pagination pagination) throws Exception;
 	
 	//강의 계획서 열람
+	public LectureVO getLectureDetail(LectureVO lectureVO) throws Exception;
 	public LectureVO getSyllabusDetail(LectureVO lectureVO) throws Exception;
 	
 	//수강신청,장바구니 막기

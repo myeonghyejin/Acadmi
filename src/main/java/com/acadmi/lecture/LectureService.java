@@ -27,8 +27,8 @@ public class LectureService {
 		return lectureDAO.getHomeLectureList(lectureVO);
 	}
 	//강의 목록
-	public List<LectureVO> getLectureList(LectureVO lectureVO) throws Exception{
-		return lectureDAO.getLectureList(lectureVO);
+	public List<LectureVO> getLectureList(Pagination pagination) throws Exception{
+		return lectureDAO.getLectureList(pagination);
 	}
 	//단과대학 목록
 	public List<CollegeVO> getCollegeList(CollegeVO collegeVO) throws Exception{
@@ -57,7 +57,15 @@ public class LectureService {
 	}
 	//참여자 정보
 	public List<StudentVO> getLectureAttendee(Pagination pagination) throws Exception{
-		return (List<StudentVO>) lectureDAO.getLectureAttendee(pagination);
+		pagination.makeStartRow();
+		pagination.makeNum(lectureDAO.getTotalAttendee(pagination));
+		
+		if(lectureDAO.getTotalAttendee(pagination) == 0) {
+			pagination.setLastNum(1L);
+			pagination.setNext(false);
+		}
+		
+		return lectureDAO.getLectureAttendee(pagination);
 	}
 	//계획서 정보
 	public LectureVO getSyllabusDetail(LectureVO lectureVO) throws Exception{
