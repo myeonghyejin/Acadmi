@@ -5,7 +5,7 @@ let check = [true,true,true,true,true,true,true,true]
 $("#year").blur(function() {
     if($("#year").val() == '') {
         check[0] = false
-        $("#yearResult").html("<p style='color : red;'>입학년도는 필수사항입니다.</p>")
+        $("#yearResult").html("<p style='color : red;'>입학년도는 필수 사항입니다.</p>")
     }else {
        check[0] = true
        $("#yearResult").html("")
@@ -16,7 +16,7 @@ $("#year").blur(function() {
 $("#password").blur(function() {
     if($("#password").val()== '') {
         check[1] = false
-        $("#passwordResult").html("<p style='color : red;'>비밀번호는 필수사항입니다.</p>")
+        $("#passwordResult").html("<p style='color : red;'>비밀번호는 필수 사항입니다.</p>")
     }else {
        check[1] = true
        $("#passwordResult").html("")
@@ -27,7 +27,7 @@ $("#password").blur(function() {
 $("#email").blur(function() {
     if($("#email").val() == '') {
         check[2] = false
-        $("#emailResult").html("<p style='color : red;'>이메일은 필수사항입니다.</p>")
+        $("#emailResult").html("<p style='color : red;'>이메일은 필수 사항입니다.</p>")
     }else {
         check[2] = true
         $("#emailResult").html("")
@@ -38,7 +38,7 @@ $("#email").blur(function() {
 $("#name").blur(function() {
     if($("#name").val() == '') {
         check[3] = false
-        $("#nameResult").html("<p style='color : red;'>이름은 필수사항입니다.</p>")
+        $("#nameResult").html("<p style='color : red;'>이름은 필수 사항입니다.</p>")
     }else {
         check[3] = true
         $("#nameResult").html("")
@@ -49,7 +49,7 @@ $("#name").blur(function() {
 $("#phone").blur(function() {
     if($("#phone").val() == '') {
         check[4] = false
-        $("#phoneResult").html("<p style='color : red;'>전화번호는 필수사항입니다.</p>")
+        $("#phoneResult").html("<p style='color : red;'>전화번호는 필수 사항입니다.</p>")
     }else {
         check[4] = true
         $("#phoneResult").html("")
@@ -61,7 +61,7 @@ $("#phone").blur(function() {
 $("#dept").blur(function() {
     if($("#dept").val() == '') {
         check[5] = false
-        $("#deptResult").html("<p style='color : red;'>학과는 필수사항입니다.</p>")
+        $("#deptResult").html("<p style='color : red;'>학과는 필수 사항입니다.</p>")
     }else {
         check[5] = true
         $("#deptResult").html("")
@@ -72,7 +72,7 @@ $("#dept").blur(function() {
 $("#birth").blur(function() {
     if($("#birth").val() == '') {
         check[6] = false
-        $("#birthResult").html("<p style='color : red;'>생년월일 필수사항입니다.</p>")
+        $("#birthResult").html("<p style='color : red;'>생년월일 필수 사항입니다.</p>")
     }else {
         check[6] = true
         $("#birthResult").html("")
@@ -83,7 +83,7 @@ $("#birth").blur(function() {
 $("#address_kakao").blur(function() {
     if($("#address_kakao").val() == '') {
         check[7] = false
-        $("#addressResult").html("<p style='color : red;'>주소는 필수사항입니다.</p>")
+        $("#addressResult").html("<p style='color : red;'>주소는 필수 사항입니다.</p>")
     }else {
         check[7] = true
         $("#addressResult").html("")

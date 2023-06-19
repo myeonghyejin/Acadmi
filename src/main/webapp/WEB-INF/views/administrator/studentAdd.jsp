@@ -116,7 +116,7 @@
 									<div class="col-6">
 					                  	<label for="name">이름</label>
 				             			<input type="text" id="name" class="form-control" name="name"/>
-				             		   <div id="nameResult"></div>
+				             		   <div  class="mt-1 mx-1" id="nameResult"></div>
 					              	</div>
 					            
 								</div>
@@ -124,13 +124,13 @@
 									<div class="col-6">
 					              		<label for="phone">전화번호</label>
 				              			<input type="text" id="phone" class="form-control" name="phone"/>
-				              			 <div id="phoneResult"></div>
+				              			 <div  class="mt-1 mx-1" id="phoneResult"></div>
 									</div>
 								
 									<div class="col-6">
 						              	<label>생년월일</label>
 										<input type="date" class="form-control" name="birth" id="birth"/>
-										 <div id="birthResult"></div>
+										 <div  class="mt-1 mx-1" id="birthResult"></div>
 									</div>
 								</div>
 								<div class="row" style="margin-top: 30px;">

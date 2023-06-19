@@ -66,7 +66,7 @@ public class StudentLectureController {
 		pagination.setUsername(authentication.getName());
 		studentLectureVO.setUsername(authentication.getName());
 
-		PeriodVO periodVO =  studentService.getFavoirte();
+		PeriodVO periodVO =  studentService.getApplication();
 				
 			if(periodVO == null || periodVO.toString().isEmpty()) {
 				String message = "장바구니 기간이 아닙니다";

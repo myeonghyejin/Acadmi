@@ -75,7 +75,34 @@
 											</div>
 										</div>
 										
-										<div class="card-body">
+										<div class="">
+											<div class="row">
+											  <div class="col">
+											    <label style="font-size: 20px;">수강 신청 기간 설정</label>
+											  </div>
+											</div>
+											<div class="row" style="margin-top : 20px;">
+											  <div class="col">
+											    <div class="form-group">
+											      <label>수강 신청 시작일</label>
+											      <br>
+											      <input type="date" class="form-control" name="applicationStart" style=" display: inline-block; margin-right: 40px;">
+											    </div>
+											  </div>
+											
+											  <div class="col">
+											    <div class="form-group">
+											      <label>수강 신청 종료일</label>
+											      <br>
+											      <input type="date" class="form-control" id="applicationEnd" " name="applicationEnd" style=" display: inline-block;">
+											    </div>
+											  </div>
+											</div>
+											
+										</div>
+										
+										
+										<div class="">
 											<div class="row">
 											  <div class="col">
 											    <label style="font-size: 20px;">장바구니 기간 설정</label>
@@ -100,55 +127,36 @@
 											  </div>
 											</div>
 										</div>
-										<div class="card-body">
+									
+										<div class="">
 											<div class="row">
 											  <div class="col">
-											    <label style="font-size: 20px;">수강 신청 기간 설정</label>
+											    <label style="font-size: 20px;">강의 기간 설정</label>
 											  </div>
 											</div>
 											<div class="row" style="margin-top : 20px;">
 											  <div class="col">
 											    <div class="form-group">
-											      <label>수강 신청 시작일</label>
+											      <label>강의 등록 시작일</label>
 											      <br>
-											      <input type="date" class="form-control" name="applicationStart" style=" display: inline-block; margin-right: 40px;">
+											      <input type="date" class="form-control" name="" style=" display: inline-block; margin-right: 40px;">
 											    </div>
 											  </div>
 											
 											  <div class="col">
 											    <div class="form-group">
-											      <label>수강 신청 종료일</label>
+											      <label>강의 등록 종료일</label>
 											      <br>
-											      <input type="date" class="form-control" id="applicationEnd" " name="applicationEnd" style=" display: inline-block;" readonly="readonly">
+											      <input type="date" class="form-control" id="deadline" " name="deadline" style=" display: inline-block;" >
 											    </div>
 											  </div>
 											</div>
 											
 										</div>
-										<div class="card-body">
-											<div class="row">
-											  <div class="col">
-											    <label style="font-size: 20px;">강의 마감일 기간 설정</label>
-											  </div>
-											</div>
-											<div class="row" style="margin-top : 20px;">
-											  <div class="col">
-											    <div class="form-group">
-											      <label>강의 종료일</label>
-											      <br>
-											      <input type="date" class="form-control" name="deadline" style=" display: inline-block; margin-right: 40px;">
-											    </div>
-											  </div>
-											</div>
-										<div style="width:auto; float: right; margin-top:20px;">
-							                <button class="btn btn-info" type="submit" name="buttonType" value="1" style="margin-right : 10px;">기간 등록</button>
-							                <a class="btn btn-danger"  style="color: white;" id="backBtn">취소</a>
-				               		 	</div>
-										
-									 </div>	
-				
-								
-		
+										<div style="width:auto; float: right; margin-top : 50px;">
+								            <button type="submit" class="btn btn-info" id="periodBtn" style="margin-right :10px;">등록</button> 
+								            <button type="button" class="btn btn-danger" id="backBtn">취소</button>
+						            	</div>
 									</form>
 								</div>
 							</div>
@@ -157,7 +165,9 @@
 				</div>
 			</div>
 		</div>
-		
+	<!-- Footer 적용 -->
+		<c:import url="../temp/footer.jsp"></c:import>
+	<!-- Footer 끝 -->
 	
 <script type="text/javascript">
 
@@ -174,11 +184,13 @@ $("#backBtn").click(function() {
     let back = confirm("정말 취소하시겠습니까?")
 
     if(back == true) {
-        location.href="/"
+        location.href="./periodList"
     }else {
         return;
     }
 })
+
+
 </script>
 </body>
 </html>

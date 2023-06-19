@@ -293,7 +293,7 @@
  	<!-- 강의실 등록 -->
  	<insert id="setLectureRoomAdd" parameterType="LectureRoomVO">
  		INSERT INTO LECTURE_ROOM
- 		VALUES(#{lectureBuilding},#{lectureRoom},#{personal},1,)
+ 		VALUES(#{lectureBuilding},#{lectureRoom},#{personal},1)
  	</insert>
  	<select id="getLectureBuilding" resultType="LectureRoomVO">
  		SELECT DISTINCT LECTUREBUILDING 
@@ -350,12 +350,45 @@
 	VALUES(#{deptNum},#{collegeNum},#{deptName},#{status})
   </insert>	
   
+  <!--학과 중복 체크  -->
+  <select id="departmentDuplicateCheck" parameterType="DepartmentVO" resultType="DepartmentVO">
+  	SELECT DEPTNAME FROM DEPARTMENT
+  	WHERE DEPTNAME= #{deptName}
+  </select>
   
   <!--기간 설정  -->
   <insert id="setPeriodAdd" parameterType="PeriodVO">
-  INSERT INTO PERIOD (YEAR,SEMESTER,APPLICATIONSTART,APPLICATIONEND,FAVORITESTART,FAVORITEEND,DEADLINE) 
-  VALUES (#{year},#{semester},CONCAT(#{applicationStart},':18:00:00'), CONCAT(#{applicationEnd},':23:59:59'),CONCAT(#{favoriteStart},':18:00:00'),CONCAT(#{favoriteEnd},':23:59:59'),CONCAT(#{deadline},':23:59:59') )
+	INSERT INTO PERIOD 
+		SET YEAR = #{year}
+		 	SEMESTER = #{semester},
+		APPLICATIONSTART = CONCAT(#{applicationStart},'18:00:00'), 
+		APPLICATIONEND = CONCAT(#{applicationEnd},'23:59:59'),
+		FAVORITESTART = CONCAT(#{favoriteStart},'18:00:00'),
+		FAVORITEEND  = CONCAT(#{favoriteEnd},'23:59:59'),
+		DEADLINE  = CONCAT(#{deadline},'23:59:59'),
+			ON DUPLICATE KEY UPDATE 
+		APPLICATIONSTART =  CONCAT(#{applicationStart},'18:00:00'), 
+		APPLICATIONEND = CONCAT(#{applicationEnd},'23:59:59'),
+		FAVORITESTART = CONCAT(#{favoriteStart},'18:00:00'),
+		FAVORITEEND =  CONCAT(#{favoriteEnd},'23:59:59'),
+		DEADLINE = CONCAT(#{deadline},'23:59:59'),
   </insert>
+  
+  <!--기간 조회 -->
+  <select id="getPeriodList" resultType="PeriodVO" parameterType="Pagination">
+  	SELECT * FROM PERIOD
+  	<if test="year !=null and year.equals('')">
+  		AND YEAR = #{year}
+  	</if>
+  	<if test="semester !=null and semester.equals('')">
+  		AND SEMESTER = #{semester}
+  	</if>
+ 	LIMIT #{startRow},#{perPage}
+  </select>
+  
+   <select id="getTotalCountPeriod" resultType="Long" >
+   		SELECT COUNT(YEAR) FROM PERIOD 
+   </select>
   
   <select id="getCurrentYear" resultType="java.lang.String">
   	SELECT YEAR(CURRENT_DATE()) AS YEAR
