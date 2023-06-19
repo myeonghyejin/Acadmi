@@ -9,4 +9,8 @@ if(window.location.pathname == '/lecture/info'){
 	$('#professorSyllabus').addClass('active')
 } else if(window.location.pathname == '/lecture/attendee'){
 	$('#professorAttendee').addClass('active')
+} else if(window.location.pathname.startsWith('/lectureNotice')){
+	$('#lectureNoticeList').addClass('active')
+} else if(window.location.pathname.startsWith('/lectureQna')){
+	$('#lectureQnaList').addClass('active')
 }
