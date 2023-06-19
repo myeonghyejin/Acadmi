@@ -24,7 +24,7 @@ import com.acadmi.util.Pagination;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
-@RequestMapping("/student/lecture/*")
+@RequestMapping("/student/registration/*")
 @Slf4j
 public class StudentLectureController {
 	
@@ -89,7 +89,7 @@ public class StudentLectureController {
 		mv.addObject("year", calculateCurrentYear());
 		mv.addObject("semester", calculateCurrentSemester());
 		mv.addObject("period", periodVO);
-		mv.setViewName("student/lecture/all_lecture");
+		mv.setViewName("student/registration/all_lecture");
 
 		return mv;
 	}
@@ -105,7 +105,7 @@ public class StudentLectureController {
 		List<StudentLectureVO> ar = studentLectureService.getMyLectureList(studentLectureVO);
 		
 		mv.addObject("list", ar);
-		mv.setViewName("student/lecture/my_lecture");
+		mv.setViewName("student/registration/my_lecture");
 		
 		return mv;
 	}
@@ -121,7 +121,7 @@ public class StudentLectureController {
 		List<FavoriteLectureVO> ar = studentLectureService.getMyFavoriteList(favoriteLectureVO);
 		
 		mv.addObject("list", ar);
-		mv.setViewName("student/lecture/my_favorite");
+		mv.setViewName("student/registration/my_favorite");
 		
 		return mv;
 	}
@@ -142,7 +142,7 @@ public class StudentLectureController {
 		mv.addObject("day", arr);
 		mv.addObject("year", calculateCurrentYear());
 		mv.addObject("semester", calculateCurrentSemester());
-		mv.setViewName("student/lecture/timetable");
+		mv.setViewName("student/registration/timetable");
 		
 		return mv;
 	}
