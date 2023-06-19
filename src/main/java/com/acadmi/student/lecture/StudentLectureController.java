@@ -24,7 +24,7 @@ import com.acadmi.util.Pagination;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
-@RequestMapping("/student/lecture/*")
+@RequestMapping("/student/registration/*")
 @Slf4j
 public class StudentLectureController {
 	
@@ -66,18 +66,18 @@ public class StudentLectureController {
 		pagination.setUsername(authentication.getName());
 		studentLectureVO.setUsername(authentication.getName());
 
-		PeriodVO periodVO =  studentService.getApplication();
+		PeriodVO periodVO = studentService.getFavoirte();
 				
-			if(periodVO == null || periodVO.toString().isEmpty()) {
-				String message = "장바구니 기간이 아닙니다";
+		if(periodVO == null || periodVO.toString().isEmpty()) {
+			String message = "장바구니 기간이 아닙니다.";
 				
-				mv.addObject("result", message);
-				mv.setViewName("common/result");
+			mv.addObject("result", message);
+			mv.setViewName("common/result");
 				
-				mv.addObject("url", "/");
+			mv.addObject("url", "/");
 				
-				return mv;
-			}
+			return mv;
+		}
 		
 		List<LectureVO> ar = studentLectureService.getAllLectureList(pagination);
 		List<DepartmentVO> ar2 = studentLectureService.getDepartment();
@@ -88,7 +88,8 @@ public class StudentLectureController {
 		mv.addObject("department", ar2);
 		mv.addObject("year", calculateCurrentYear());
 		mv.addObject("semester", calculateCurrentSemester());
-		mv.setViewName("student/lecture/all_lecture");
+		mv.addObject("period", periodVO);
+		mv.setViewName("student/registration/all_lecture");
 
 		return mv;
 	}
@@ -104,7 +105,7 @@ public class StudentLectureController {
 		List<StudentLectureVO> ar = studentLectureService.getMyLectureList(studentLectureVO);
 		
 		mv.addObject("list", ar);
-		mv.setViewName("student/lecture/my_lecture");
+		mv.setViewName("student/registration/my_lecture");
 		
 		return mv;
 	}
@@ -120,7 +121,7 @@ public class StudentLectureController {
 		List<FavoriteLectureVO> ar = studentLectureService.getMyFavoriteList(favoriteLectureVO);
 		
 		mv.addObject("list", ar);
-		mv.setViewName("student/lecture/my_favorite");
+		mv.setViewName("student/registration/my_favorite");
 		
 		return mv;
 	}
@@ -141,7 +142,7 @@ public class StudentLectureController {
 		mv.addObject("day", arr);
 		mv.addObject("year", calculateCurrentYear());
 		mv.addObject("semester", calculateCurrentSemester());
-		mv.setViewName("student/lecture/timetable");
+		mv.setViewName("student/registration/timetable");
 		
 		return mv;
 	}

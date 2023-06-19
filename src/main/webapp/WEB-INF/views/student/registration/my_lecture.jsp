@@ -36,24 +36,20 @@
 		<!-- Main Contents -->
 		<div class="content-wrapper">
 			<div class="col">
-	
+
 				<!-- header start -->
 				<div class="row">
 					<div class="col mt-3">
 						<div class="card">
-							<h3 class="my-3 mx-3">내 장바구니</h3>
+							<h3 class="my-3 mx-3">내 수강 신청</h3>
 						</div>
 					</div>
 				</div>
 				<!-- header end -->
-	
+						
 				<!-- Default box -->
 				<div class="card">
-					<div class="card-header">
-						<h3 class="card-title">신청 과목</h3>
-					</div>
-								
-					<div class="card-body p-0" id="myFavoriteList">
+					<div class="card-body p-0" id="myLectureList">
 						<table class="table table-hover text-nowrap">
 							<thead>
 								<tr style="text-align: center;">
@@ -84,7 +80,7 @@
 											<c:if test="${lectureVO.category eq '교양 선택'}">교양 선택</c:if>
 										</td>
 										<td>${lectureVO.departmentVO.deptName}</td>
-										<td>${lectureVO.completionGrade}</td>
+										<td>${lectureVO.completionGrade}학점</td>
 										<td>${lectureVO.weekday}요일</td>
 										<td>
 											<c:if test="${lectureVO.startTime eq 1}">09:00</c:if>
@@ -113,30 +109,9 @@
 										<td>${lectureVO.lectureRoomVO.lectureBuilding} ${lectureVO.lectureRoomVO.lectureRoom}</td>
 										<td>${lectureVO.subscription}/${lectureVO.personal}명</td>
 										<td class="project-actions text-right">
-											<c:choose>
-												<c:when test="${lectureVO.subscription ge lectureVO.personal}">											
-													<button class="btn btn-danger btn-sm" id="mli" type="button" disabled>
-														<i class="fas fa-circle-xmark"></i>
-														마감
-													</button>
-												</c:when>
-												<c:otherwise>
-													<button class="btn btn-info btn-sm" id="mli" type="button"
-													data-mli-num="${lectureVO.lectureNum}"
-													data-year="${lectureVO.periodVO.year}"
-													data-semester="${lectureVO.periodVO.semester}"
-													data-weekday="${lectureVO.weekday}"
-													data-start-time="${lectureVO.startTime}"
-													data-end-time="${lectureVO.endTime}"
-													data-completion-grade="${lectureVO.completionGrade}">
-														<i class="fas fa-circle-check"></i>
-														신청
-													</button>
-												</c:otherwise>
-											</c:choose>
-											<button class="btn btn-danger btn-sm" id="mfd" type="button" data-mfd-num="${lectureVO.favoriteLectureVO.favoriteNum}">
-												<i class="fas fa-basket-shopping"></i>
-												빼기
+											<button class="btn btn-danger btn-sm" id="mld" type="button" data-mld-num="${lectureVO.lectureNum}">
+												<i class="fas fa-xmark"></i>
+												취소
 											</button>
 										</td>
 									</tr>
@@ -158,7 +133,7 @@
 	<!-- Footer 적용 -->
 	<c:import url="../../temp/footer.jsp"></c:import>
 	<!-- Footer 끝 -->
-<script src="/js/student/lecture/my_favorite.js"></script>
+<script src="/js/student/lecture/my_lecture.js"></script>
 <script>
 </script>
 </body>

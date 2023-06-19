@@ -99,7 +99,7 @@
 	attendanceGrades.forEach(attendance => {
 	    const index = attendance.id.slice(10); 
 	    const attendanceResult = document.getElementById(`attendanceResult${index}`);
-	    if(attendanceGrade.value!=0){
+	    if(attendance.value!=0){
 			attendanceCheck=true;
 		}
 		attendance.addEventListener("blur",function(){
