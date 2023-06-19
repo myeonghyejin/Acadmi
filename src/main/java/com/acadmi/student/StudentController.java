@@ -1,5 +1,6 @@
 package com.acadmi.student;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +35,27 @@ public class StudentController {
 	@Autowired
 	private StudentService studentService;
 	
+	//현재 연도 계산
+	private int calculateCurrentYear() {
+		LocalDate currentDate = LocalDate.now();
+		int year = currentDate.getYear();
+		return year;
+	}
+	
+	//현재 학기 계산
+	private int calculateCurrentSemester() {
+		LocalDate currentDate = LocalDate.now();
+		int month = currentDate.getMonthValue();
+		int semester;
+		
+		//1학기인지 2학기인지 판단
+	    if (month >= 3 && month <= 8) {
+	        semester = 1; //3월부터 8월까지는 1학기
+	    } else {
+	    	semester = 2; //9월부터 2월까지는 2학기
+	    }
+	    return semester;
+	}
 
 	//홈 진행중인 강의 리스트
 	@GetMapping("homeLecture")
@@ -67,7 +89,8 @@ public class StudentController {
 		
 		mv.addObject("map", studentService.getYear(lectureVO));
 		mv.addObject("obj", lectureVO);
-		
+		mv.addObject("year", calculateCurrentYear());
+		mv.addObject("semester", calculateCurrentSemester());
 		mv.setViewName("student/myLectureList");
 		return mv;
 		
@@ -86,7 +109,8 @@ public class StudentController {
 		lectureVO.setUsername(authentication.getName());
 		
 		List<LectureVO> ar = studentService.getMyCreditList(lectureVO);
-		
+		mv.addObject("year", calculateCurrentYear());
+		mv.addObject("semester", calculateCurrentSemester());
 		mv.addObject("list", ar);
 		mv.addObject("map", studentService.getYear(lectureVO));
 		mv.setViewName("student/myCreditList");

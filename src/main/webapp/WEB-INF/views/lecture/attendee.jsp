@@ -120,7 +120,7 @@
 								                    		<td style="vertical-align:middle;">${attendee.name}</td>
 							 								<td style="vertical-align:middle;">${attendee.departmentVO.deptName}</td>
 							 								<td style="vertical-align:middle;">
-							 									0${fn:substring(attendee.phone, 0, 2)}-${fn:substring(attendee.phone, 2, 6)}-${fn:substring(attendee.phone, 6,10)}
+							 									0${fn:substring(fn:replace(attendee.phone,"-",""), 0, 2)}-${fn:substring(fn:replace(attendee.phone,"-",""), 2, 6)}-${fn:substring(fn:replace(attendee.phone,"-",""), 6,10)}
 							 								</td>
 								                    	</tr>
 													</c:forEach>
