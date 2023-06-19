@@ -116,18 +116,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- SELECT -->
 	<select id="getAllLectureList" parameterType="Pagination" resultMap="allLectureList">
-		SELECT L.*, D.DEPTNAME
+		SELECT L.*, D.DEPTNAME, PR.NAME, LR.LECTUREBUILDING, LR.LECTUREROOM
 		FROM LECTURE L
 			LEFT JOIN	
 			DEPARTMENT D
 			ON D.DEPTNUM = L.DEPTNUM
+				INNER JOIN
+				PROFESSOR PR
+				ON PR.USERNAME = L.USERNAME
+					INNER JOIN
+					LECTURE_ROOM LR
+					ON LR.LECTUREBUILDING = L.LECTUREBUILDING AND LR.LECTUREROOM = L.LECTUREROOM
 		<include refid="search"></include>
 		ORDER BY LECTURENUM DESC
 		LIMIT #{startRow}, #{perPage}
 	</select>
 	
 	<select id="getMyLectureList" parameterType="StudentLectureVO" resultMap="allLectureList">
-		SELECT L.*, D.DEPTNAME, SL.*
+		SELECT L.*, D.DEPTNAME, SL.*, PR.NAME, LR.LECTUREBUILDING, LR.LECTUREROOM
 		FROM STUDENT_LECTURE SL
 			LEFT OUTER JOIN
 			LECTURE L
@@ -138,6 +144,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					INNER JOIN
 					STUDENT S
 					ON S.USERNAME = SL.USERNAME
+						INNER JOIN
+						PROFESSOR PR
+						ON PR.USERNAME = L.USERNAME
+							INNER JOIN
+							LECTURE_ROOM LR
+							ON LR.LECTUREBUILDING = L.LECTUREBUILDING AND LR.LECTUREROOM = L.LECTUREROOM
 		WHERE S.USERNAME = #{username}
 			AND SL.YEAR = #{year}
 			AND SL.SEMESTER = #{semester}
@@ -145,7 +157,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="getMyFavoriteList" parameterType="FavoriteLectureVO" resultMap="allLectureList">
-		SELECT FL.*, L.*, D.DEPTNAME
+		SELECT FL.*, L.*, D.DEPTNAME, PR.NAME, LR.LECTUREBUILDING, LR.LECTUREROOM
 		FROM FAVORITE_LECTURE FL
 			LEFT OUTER JOIN
 			LECTURE L
@@ -156,6 +168,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					INNER JOIN
 					STUDENT S
 					ON S.USERNAME = FL.USERNAME
+						INNER JOIN
+						PROFESSOR PR
+						ON PR.USERNAME = L.USERNAME
+							INNER JOIN
+							LECTURE_ROOM LR
+							ON LR.LECTUREBUILDING = L.LECTUREBUILDING AND LR.LECTUREROOM = L.LECTUREROOM
 		WHERE FL.LECTURENUM NOT IN (SELECT LECTURENUM FROM STUDENT_LECTURE WHERE USERNAME = #{username})
 			AND FL.YEAR = #{year}
 			AND FL.SEMESTER = #{semester}
