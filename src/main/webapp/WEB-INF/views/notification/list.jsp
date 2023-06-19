@@ -35,9 +35,17 @@
 		<!-- Contents -->
 		<div class="content-wrapper">
 			<div class="col">
+					<div class="row">
+						<div class="col mt-3">
+							<div class="card">
+								<h3 class="my-3 mx-3">알림</h3>
+							</div>
+						</div>
+					</div>
 				<section class="content">
 					<!-- 알림의 종류의 네비바 -->					
 					<div class="btn-group w-100 mb-2 my-3">
+						<a class="btn btn-info" href="./list" id="notificationButton">전체알림</a>
 						<a class="btn btn-info" href="./list?notificationKind=1" id="noticeButton">공지사항</a>
 						<sec:authorize access="hasRole('ROLE_ADMINISTRATOR')">
 							<a class="btn btn-info" href="./list?notificationKind=2" id="qnaButton">질의응답</a>
@@ -58,9 +66,7 @@
 				
 					<!-- 알림 내용 -->
 					<div class="card">
-						<div class="card-header">
-							<h3 class="card-title" id="cardTitle"></h3>
-						</div>
+						
 						<div class="card-body p-0" id="allLectureList">
 							<table class="table table-hover text-nowrap">
 								 <thead>

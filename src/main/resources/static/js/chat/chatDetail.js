@@ -293,13 +293,14 @@ $('#chatSend').click(function(event){
 //enter키 눌렀을때
 $('#message').keydown(function(event) {
   if (event.key === 'Enter') {
-	event.preventDefault()
+	  event.preventDefault()
 	let msgContents = $('#message').val()
 	let msgSender = getUrlParameter('roomSender')
 	let msgRecipient = getUrlParameter('roomRecipient')
 	let chatNum = $('#chatNum').val();
 	let date = new Date().toLocaleTimeString();
 	let senderProfile = $('#senderProfile').data('file-name')
+	let senderName = $('#chatSend').data('sender-name')
 	
 	let fileInput = $('#fileInput')
 	if(fileInput.length != 0 && fileInput[0].files.length > 0) {
@@ -363,7 +364,9 @@ $('#message').keydown(function(event) {
 		$('#fileSend').remove()
 		count--
 	} else {
-		
+		if(msgContents==''){
+			return
+		}
 		let message = {
 			type : 'text',
 			msgContents : msgContents,
@@ -392,7 +395,7 @@ $('#message').keydown(function(event) {
 		}
 	}
 	
-  }
+	}
 });
 
 
