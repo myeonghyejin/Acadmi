@@ -20,10 +20,10 @@
                 <div class="login-box">
                     <div class="card card-outline card-info">
                         <div class="card-header text-center">
-                            <a href="./login" class="h1"><b>Acadmi</b></a>
+                            <a href="./login" class="h1"><img src="/images/black.png" style="width: 100%; height: 100%;"></a>
                         </div>
                         <div class="card-body">
-                            <p class="login-box-msg">비밀번호를 잊어버리셨나요? <br> 아이디와 이메일을 입력하여 <br> 임시 비밀번호를 받으세요!</p>
+                            <p class="login-box-msg">임시 비밀번호 발급</p>
                             <form:form id="contactForm" modelAttribute="memberVO" action="./findPw" method="post">
                                 <div class="input-group mb-3">
                                     <form:input path="username" id="username" class="form-control" placeholder="아이디를 입력하세요"></form:input>
@@ -34,31 +34,22 @@
                                     </div>
                                 </div>
                                 <div class="input-group mb-3">
-                                    <form:input path="email" id="email" class="form-control" placeholder="이메일을 입력하세요"></form:input>
+                                    <form:input path="email" id="email" class="form-control" placeholder="이메일을 입력하세요."></form:input>
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <span class="fas fa-envelope"></span>
                                         </div>
                                     </div>
                                 </div>
+    
+                                <div style="display: flex; align-items: center;">
+									<a href="./login" style="margin-right: auto;">로그인</a>
+									<button class="btn btn-info" id="submitButton" type="submit">다음</button>
+								</div>
 
-                                    <div class="row mx-auto">
-
-                                        <p class="mb-1 mx-2">
-                                            <a href="./login">로그인</a>
-                                        </p>
-
-                                        <p class="mx-4">
-                                            <div class="col-4 mx-5">
-                                                <button class="btn btn-info btn-block mx-5" id="submitButton" type="submit">다음</button>
-                                            </div>
-                                        </p>
-
-                                    </div>
                            		</form:form>
                                 </div>
                         </div>
-
                     </div>
            
 </body>
