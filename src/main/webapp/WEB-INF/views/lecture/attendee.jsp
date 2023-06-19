@@ -74,8 +74,8 @@
 														<option value="name"${param.kind == 'name' ? 'selected' : ''}>이름</option>
 													</select>
 								                </div>
-							                 	<div class="input-group input-group-sm my-1 mr-2 col-7" style="width:210px;">
-								                	<input type="text" class="form-control form-control-lg" name="search" id="search" value="${pagination.search}">
+							                 	<div class="input-group my-1 mr-2 col-7" style="width:210px;">
+								                	<input type="text" class="form-control" name="search" id="search" value="${pagination.search}">
 													<div class="input-group-append">
 							                      		<button type="submit" class="btn btn-default" id="submit">
 							                        		<i class="fas fa-search"></i>
@@ -120,7 +120,7 @@
 								                    		<td style="vertical-align:middle;">${attendee.name}</td>
 							 								<td style="vertical-align:middle;">${attendee.departmentVO.deptName}</td>
 							 								<td style="vertical-align:middle;">
-							 									0${fn:substring(attendee.phone, 0, 2)}-${fn:substring(attendee.phone, 2, 6)}-${fn:substring(attendee.phone, 6,10)}
+							 									0${fn:substring(fn:replace(attendee.phone,"-",""), 0, 2)}-${fn:substring(fn:replace(attendee.phone,"-",""), 2, 6)}-${fn:substring(fn:replace(attendee.phone,"-",""), 6,10)}
 							 								</td>
 								                    	</tr>
 													</c:forEach>
