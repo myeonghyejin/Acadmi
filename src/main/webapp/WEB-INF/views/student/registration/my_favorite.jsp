@@ -92,7 +92,6 @@
 											<c:if test="${lectureVO.startTime eq 7}">15:00</c:if>
 											<c:if test="${lectureVO.startTime eq 8}">16:00</c:if>
 											<c:if test="${lectureVO.startTime eq 9}">17:00</c:if>
-											<c:if test="${lectureVO.startTime eq 10}">18:00</c:if>
 										</td>
 										<td>
 											<c:if test="${lectureVO.endTime eq 1}">10:00</c:if>
@@ -104,7 +103,6 @@
 											<c:if test="${lectureVO.endTime eq 7}">16:00</c:if>
 											<c:if test="${lectureVO.endTime eq 8}">17:00</c:if>
 											<c:if test="${lectureVO.endTime eq 9}">18:00</c:if>
-											<c:if test="${lectureVO.endTime eq 10}">19:00</c:if>
 										</td>
 										<td>${lectureVO.lectureRoomVO.lectureBuilding} ${lectureVO.lectureRoomVO.lectureRoom}</td>
 										<td>${lectureVO.subscription}/${lectureVO.personal}명</td>
