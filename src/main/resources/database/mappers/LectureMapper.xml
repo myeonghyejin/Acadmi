@@ -74,9 +74,9 @@
   	</insert>
   	<insert id="setTemporaryAdd" parameterType="LectureVO" useGeneratedKeys="true" keyProperty="lectureNum">
   		INSERT INTO LECTURE (USERNAME,LECTURENAME,SEMESTER,CATEGORY,DEPTNUM,GRADE,
-  		YEAR,WEEKDAY, STARTTIME, ENDTIME, PERSONAL, COMPLETIONGRADE,TEMPORARY)
+  		YEAR,WEEKDAY, STARTTIME, ENDTIME, PERSONAL, COMPLETIONGRADE,STATUS,TEMPORARY)
   		VALUES (#{username},#{lectureName},#{semester},#{category},#{deptNum},#{grade},#{year},#{weekday},
-  		#{startTime},#{endTime},#{personal},#{completionGrade},0)
+  		#{startTime},#{endTime},#{personal},#{completionGrade},1,0)
   	</insert>
   
   	<!-- 강의 update -->

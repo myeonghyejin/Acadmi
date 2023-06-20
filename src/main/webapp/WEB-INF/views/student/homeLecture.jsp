@@ -10,18 +10,15 @@
         </div>
     </div>
 
-    <c:choose>
-        <c:when test="${empty list}">
-            <div class="card-body" style="padding:0px">
-                <div class="card card-info card-outline" style="padding: 15px;">
-                    수강 중인 강의가 없습니다.
-                </div>
-            </div>
-        </c:when>
-
-        <c:otherwise>
             <div class="card-body" style="padding:0px">
                 <div class="card card-info card-outline">
+					<c:when test="${empty list}">
+			            <div class="card-body" style="padding:0px">
+			                <div class="card" style="padding: 15px;color: gray">
+			                    수강 중인 강의가 없습니다.
+			                </div>
+			            </div>
+			        </c:when>
                     <c:forEach items="${list}" var="lectureVO">
                     	<a href="student/lecture/main?lectureNum=${lectureVO.lectureNum}" style="color: black;">
 	                        <div class="card-header">
@@ -55,6 +52,4 @@
                     </c:forEach>
                 </div>
             </div>
-        </c:otherwise>
-    </c:choose>
 </div>
