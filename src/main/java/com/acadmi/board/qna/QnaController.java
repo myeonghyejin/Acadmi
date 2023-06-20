@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.acadmi.administrator.AdministratorVO;
 import com.acadmi.board.BoardVO;
 import com.acadmi.notification.NotificationService;
 import com.acadmi.notification.NotificationVO;
@@ -46,8 +47,11 @@ public class QnaController {
 		
 		List<ProfessorVO> professors = qnaService.getProfessor();
 		
+		List<AdministratorVO> administrators = qnaService.getAdministrator();
+		
 		mv.addObject("students", students);
 		mv.addObject("professors", professors);
+		mv.addObject("administrators", administrators);
 		mv.addObject("list", ar);
 		mv.setViewName("board/list");
 		
