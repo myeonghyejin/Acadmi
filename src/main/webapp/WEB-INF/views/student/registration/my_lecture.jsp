@@ -131,7 +131,7 @@
 	<!-- Footer 적용 -->
 	<c:import url="../../temp/footer.jsp"></c:import>
 	<!-- Footer 끝 -->
-<script src="/js/student/lecture/my_lecture.js"></script>
+<script src="/js/student/registration/my_lecture.js"></script>
 <script>
 </script>
 </body>

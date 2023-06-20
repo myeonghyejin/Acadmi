@@ -220,19 +220,19 @@
 					<ul class="pagination pagination-sm">
 						<c:if test="${pagination.pre}">
 							<li class="page-item">
-								<a class="page-link" href="#" aria-label="Previous" data-all-page="1" style="color:#17a2b8;">
+								<a class="page-link" href="#" aria-label="Previous" data-page="1" style="color:#17a2b8;">
 									<span aria-hidden="true">&laquo;</span>
 								</a>
 							</li>
 						</c:if>
 						<c:forEach begin="${pagination.startNum}" end="${pagination.lastNum}" var="page">
 							<li class="page-item">
-								<a class="page-link" href="#" data-all-page="${page}" style="color:#17a2b8;">${page}</a>
+								<a class="page-link" href="#" data-page="${page}" style="color:#17a2b8;">${page}</a>
 							</li>
 						</c:forEach>
 						<c:if test="${pagination.next}">
 							<li class="page-item">
-								<a class="page-link" href="#" aria-label="Next" data-all-page="${pagination.totalPage}" style="color:#17a2b8;">
+								<a class="page-link" href="#" aria-label="Next" data-page="${pagination.totalPage}" style="color:#17a2b8;">
 									<span aria-hidden="true">&raquo;</span>
 								</a>
 							</li>
@@ -266,6 +266,6 @@
       $('.select2').select2()
     });
 </script>
-<script src="/js/student/lecture/all_lecture.js"></script>
+<script src="/js/student/registration/all_lecture.js"></script>
 </body>
 </html>
