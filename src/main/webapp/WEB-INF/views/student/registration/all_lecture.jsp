@@ -215,12 +215,9 @@
 					</div>
 					<!-- /.card-body -->
 				
-				</div>
-				<!-- /.card -->
-				
 				<!-- Pagination -->
-				<div class="row g-3 mt-3 justify-content-center">
-					<ul class="pagination pagination-sm mx-auto" style="width: 200px;">
+				<div class="row g-3 mt-3 justify-content-center mx-auto">
+					<ul class="pagination pagination-sm">
 						<c:if test="${pagination.pre}">
 							<li class="page-item">
 								<a class="page-link" href="#" aria-label="Previous" data-all-page="1" style="color:#17a2b8;">
@@ -242,6 +239,10 @@
 						</c:if>
 					</ul>
 				</div>
+				
+				</div>
+				<!-- /.card -->
+				
 				
 				<div class="row">
 					<div class="col">
