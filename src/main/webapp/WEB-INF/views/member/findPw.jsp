@@ -20,13 +20,13 @@
                 <div class="login-box">
                     <div class="card card-outline card-info">
                         <div class="card-header text-center">
-                            <a href="./login" class="h1"><img src="/images/black.png" style="width: 100%; height: 100%;"></a>
+                            <a href="./login" class="h1"><img src="/images/black.png" style="width: 70%; height: 70%;"></a>
                         </div>
                         <div class="card-body">
                             <p class="login-box-msg">임시 비밀번호 발급</p>
                             <form:form id="contactForm" modelAttribute="memberVO" action="./findPw" method="post">
                                 <div class="input-group mb-3">
-                                    <form:input path="username" id="username" class="form-control" placeholder="아이디를 입력하세요"></form:input>
+                                    <form:input path="username" id="username" class="form-control" placeholder="아이디를 입력하세요."></form:input>
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <span class="fas fa-user"></span>
