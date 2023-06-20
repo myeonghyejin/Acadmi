@@ -493,8 +493,8 @@ public class AdministratorController {
 	public ModelAndView getHomeLectureRoom(Pagination pagination) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
+		pagination.setPerPage(5L);
 		List<LectureVO> ar = administratorService.getLectureList(pagination);
-		
 		mv.addObject("list", ar);
 		
 		mv.setViewName("administrator/homeLectureRoom");
