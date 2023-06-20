@@ -15,11 +15,9 @@
 		회원 목록
 	</button>
 	<div id="submenu_1" class="sidebar-dropdown-content">
-		<a href="../administrator/administratorList">직원 조회</a>
-		<a href="../administrator/professorList">교수 조회</a>
-		<a href="../administrator/studentList">학생 조회</a>
-		
-	
+		<a href="../administrator/studentList" id="administratorStudentList">학생 조회</a>
+		<a href="../administrator/professorList" id="administratorProfessorList">교수 조회</a>
+		<a href="../administrator/administratorList" id="administratorAdministratorList">직원 조회</a>
 	</div>
 	
 	
@@ -54,3 +52,4 @@
 	  }
 	}
 </script>
+<script src="/js/sidebarActive/administratorMemberListSidebarActive.js"></script>

@@ -11,7 +11,6 @@
 	<!-- CSS/favicon 적용 -->
 	<c:import url="../../temp/style.jsp"></c:import>
 	<!-- CSS/favicon 끝 -->
-<title>Insert title here</title>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 	<div class="wrapper">

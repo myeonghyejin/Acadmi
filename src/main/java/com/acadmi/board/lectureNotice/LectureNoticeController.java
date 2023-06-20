@@ -24,8 +24,11 @@ import com.acadmi.professor.ProfessorVO;
 import com.acadmi.util.FileVO;
 import com.acadmi.util.Pagination;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
 @RequestMapping("/lectureNotice/*")
+@Slf4j
 public class LectureNoticeController {
 
 	@Autowired
@@ -59,9 +62,10 @@ public class LectureNoticeController {
 	}
 	
 	@GetMapping("add")
-	public ModelAndView setInsert(LectureNoticeVO lectureNoticeVO) throws Exception {
+	public ModelAndView setInsert(LectureVO lectureVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		
+		lectureVO = lectureNoticeService.getLecture(lectureVO);
+		mv.addObject("lecture", lectureVO);
 		mv.setViewName("board/add");
 		
 		return mv;
@@ -91,6 +95,11 @@ public class LectureNoticeController {
 			result = notificationService.setDelete(notificationVO);
 		}
 		
+		LectureVO lectureVO = new LectureVO();
+		lectureVO.setLectureNum(lectureNoticeVO.getLectureNum());
+		lectureVO = lectureNoticeService.getLecture(lectureVO);
+		
+		mv.addObject("lecture", lectureVO);
 		mv.addObject("boardVO", lectureNoticeVO);
 		mv.setViewName("board/detail");
 		                        
@@ -113,7 +122,11 @@ public class LectureNoticeController {
 	public ModelAndView setUpdate(LectureNoticeVO lectureNoticeVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		lectureNoticeVO = (LectureNoticeVO)lectureNoticeService.getDetail(lectureNoticeVO);
-		
+		LectureVO lectureVO = new LectureVO();
+		log.info("======lectureNum : {}",lectureNoticeVO.getLectureNum());
+		lectureVO.setLectureNum(lectureNoticeVO.getLectureNum());
+		lectureVO = lectureNoticeService.getLecture(lectureVO);
+		mv.addObject("lecture", lectureVO);
 		mv.addObject("dto", lectureNoticeVO);
 		mv.setViewName("board/update");
 		

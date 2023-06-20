@@ -272,10 +272,13 @@ public class LectureController {
 		lectureVO = lectureService.getSyllabusDetail(lectureVO);
 		mv.addObject("lecture", lectureVO);
 		List<ClassVO> ar = lectureService.getSyllabusClass(lectureVO);
+		int exists = lectureService.getSyllabusExists(lectureVO);
+		mv.addObject("exists",exists);
 		mv.addObject("classes",ar);
 		mv.setViewName("temp/sidebar/professor_lecture");
 		mv.setViewName("temp/lecture_header");
 		mv.setViewName("lecture/syllabusUpdate");
+		
 		return mv;
 	}
 	@PostMapping("syllabusUpdate")

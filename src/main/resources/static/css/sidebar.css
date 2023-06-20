@@ -46,6 +46,11 @@ h4 {
 	color: #17a2b8;
 }
 
+/* Change color of dropdown links on active */
+.sidebar-dropdown-content a.active {
+	color: #17a2b8;
+}
+
 /* Show the dropdown menu */
 .sidebar-dropdown .show {
 	display: none;
