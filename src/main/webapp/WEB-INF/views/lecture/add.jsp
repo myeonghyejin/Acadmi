@@ -183,7 +183,7 @@
 						              	<label>종료 시간</label>
 										<select class="form-control" id="endTime" name="endTime">
 						                    <option name="endTime" id="endTime" value="">종료 시간 선택</option>
-						                    <c:forEach begin="1" end="10" step="1" var="i">
+						                    <c:forEach begin="1" end="9" step="1" var="i">
 						                    	<option for="endTime" value="${i}" ${update.endTime == i ?'selected':''}>
 						                    		<c:if test="${i eq 1}"> 10:00</c:if>
 													<c:if test="${i eq 2}"> 11:00</c:if>
@@ -194,7 +194,6 @@
 													<c:if test="${i eq 7}"> 16:00</c:if>
 													<c:if test="${i eq 8}"> 17:00</c:if>
 													<c:if test="${i eq 9}"> 18:00</c:if>
-													<c:if test="${i eq 10}"> 19:00</c:if>
 						                    	</option>
 						                    </c:forEach>
 										</select>
@@ -253,14 +252,14 @@
 		
 		    endTimeSelect.innerHTML = '<option name="endTime" id="endTime" value="">종료시간 선택</option>';
 		
-		    for (let i = selectedStartTime; i <= 10; i++) {
+		    for (let i = selectedStartTime; i <= 9; i++) {
 				const option = document.createElement("option");
 		      	option.setAttribute("for", "endTime");
 		      	option.setAttribute("value", i);
 		      	switch(i){
 		      	case 1: option.textContent = '10:00';
       					break;
-		      	case 2: option.textContent = '12:00';
+		      	case 2: option.textContent = '11:00';
       					break;
 		      	case 3: option.textContent = '12:00';
       					break;
@@ -275,8 +274,6 @@
 		      	case 8: option.textContent = '17:00';
       					break;
 		      	case 9: option.textContent = '18:00';
-		      			break;
-		      	case 10: option.textContent = '19:00';
 		      			break;
 		      	}
 		      	endTimeSelect.appendChild(option);

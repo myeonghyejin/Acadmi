@@ -263,7 +263,7 @@
 				endTimeResult.innerHTML='종료 시간을 선택해주세요.';
 	        	endTimeResult.classList.add("redResult")
 	        	}
-	        	if(endTime.value<startTime.value){
+	        	if(endTime.value<=startTime.value){
 				endTimeResult.innerHTML='시작 시간 이후 시간을 선택해주세요.';
 			    endTimeResult.classList.add("redResult")
 			    }
