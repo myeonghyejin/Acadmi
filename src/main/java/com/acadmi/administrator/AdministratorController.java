@@ -495,8 +495,6 @@ public class AdministratorController {
 		
 		pagination.setPerPage(5L);
 		List<LectureVO> ar = administratorService.getLectureList(pagination);
-		
-		
 		mv.addObject("list", ar);
 		
 		mv.setViewName("administrator/homeLectureRoom");

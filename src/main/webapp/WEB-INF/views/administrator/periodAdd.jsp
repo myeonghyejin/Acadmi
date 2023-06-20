@@ -53,8 +53,9 @@
 					
 					<section class="content">
 						<div class="card">
-							<div class="wrapper">
-								<h6 style="color: gray; margin : 20px;">시작일은 18:00:00, 종료일은 23:59:59로 들어갑니다.</h6>
+							<div class="card-header" style="color: gray;">
+								<i class="fa-solid fa-clock"></i>
+								<span class="mt-2"> 시작일 10:00:00 | 종료일 23:59:59</span>
 							</div>	
 							<div class="card-body row">
 								
@@ -62,7 +63,7 @@
 									<form action="./periodAdd" method="post">
 										<div class="wrapper">
 											<div class="form-group">
-								          	  <label>수강년도</label>
+								          	  <label>수강 연도</label>
 								                <select  class="form-control select2" style="width: 100%;" name="year" id="year" >
 													<c:forEach items="${year}" var="year">
 														<option value="${year}">${year }</option>
@@ -79,14 +80,32 @@
 											</div>
 										</div>
 										
-										<div class="">
-											<div class="row">
+										<div>
+											
+											<div class="row" style="margin-top : 30px;">
 											  <div class="col">
-											    <label style="font-size: 20px;">수강 신청 기간 설정</label>
+											  <label style="font-size: 20px;">강의 기간 설정</label>
+											    <div class="form-group">
+											      <label>강의 등록 시작일</label>
+											      <br>
+											      <input type="date" class="form-control" name="registrationStart" style=" display: inline-block; margin-right: 40px;">
+											    </div>
+											  </div>
+											
+											  <div class="col" style="margin-top : 37px;">
+											    <div class="form-group">
+											      <label>강의 등록 종료일</label>
+											      <br>
+											      <input type="date" class="form-control" id="deadline" " name="deadline" style=" display: inline-block;" >
+											    </div>
 											  </div>
 											</div>
+										</div>
+										
+										<div>
 											<div class="row" style="margin-top : 20px;">
 											  <div class="col">
+											    <label style="font-size: 20px;">수강 신청 기간 설정</label>
 											    <div class="form-group">
 											      <label>수강 신청 시작일</label>
 											      <br>
@@ -94,7 +113,7 @@
 											    </div>
 											  </div>
 											
-											  <div class="col">
+											  <div class="col" style="margin-top : 37px;">
 											    <div class="form-group">
 											      <label>수강 신청 종료일</label>
 											      <br>
@@ -106,15 +125,10 @@
 										</div>
 										
 										
-										<div class="">
-											<div class="row">
+										<div>
+											<div class="row" style="margin-top : 15px;">
 											  <div class="col">
 											    <label style="font-size: 20px;">장바구니 기간 설정</label>
-											  </div>
-											</div>
-											
-											<div class="row" style="margin-top : 20px;">
-											  <div class="col">
 											    <div class="form-group">
 											      <label>장바구니 시작일</label>
 											      <br>
@@ -122,7 +136,7 @@
 											    </div>
 											  </div>
 											
-											  <div class="col">
+											  <div class="col" style="margin-top: 37px;">
 											    <div class="form-group">
 											      <label>장바구니 종료일</label>
 											      <br>
@@ -130,32 +144,6 @@
 											    </div>
 											  </div>
 											</div>
-										</div>
-									
-										<div class="">
-											<div class="row">
-											  <div class="col">
-											    <label style="font-size: 20px;">강의 기간 설정</label>
-											  </div>
-											</div>
-											<div class="row" style="margin-top : 20px;">
-											  <div class="col">
-											    <div class="form-group">
-											      <label>강의 등록 시작일</label>
-											      <br>
-											      <input type="date" class="form-control" name="registrationStart" style=" display: inline-block; margin-right: 40px;">
-											    </div>
-											  </div>
-											
-											  <div class="col">
-											    <div class="form-group">
-											      <label>강의 등록 종료일</label>
-											      <br>
-											      <input type="date" class="form-control" id="deadline" " name="deadline" style=" display: inline-block;" >
-											    </div>
-											  </div>
-											</div>
-											
 										</div>
 										<div style="width:auto; float: right; margin-top : 50px;">
 								            <button type="submit" class="btn btn-info" id="periodBtn" style="margin-right :10px;">등록</button> 

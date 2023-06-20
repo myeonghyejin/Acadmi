@@ -349,10 +349,9 @@
 									</c:if>
 								</div>
 							</div>
-						</div>
-						  
+							
 						<!-- pagination -->
-						<div class="row justify-content-center">
+						<div class="row justify-content-center mx-auto">
 							<c:if test="${board eq 'qna' || board eq 'notice'}">
 								<ul class="pagination pagination-sm">
 									<c:if test="${pagination.pre}">
@@ -404,6 +403,9 @@
 							</c:if>		
 						</div>
 						<!-- pagination end -->
+						
+						</div>
+						  
 				
 					</div>
 				</div>

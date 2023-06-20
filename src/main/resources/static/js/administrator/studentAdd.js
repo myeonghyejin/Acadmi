@@ -5,7 +5,7 @@ let check = [true,true,true,true,true,true,true,true]
 $("#year").blur(function() {
     if($("#year").val() == '') {
         check[0] = false
-        $("#yearResult").html("<p style='color : red;'>입학년도는 필수 사항입니다.</p>")
+        $("#yearResult").html("<p style='color : red;'>입학 연도는 필수 사항입니다.</p>")
     }else {
        check[0] = true
        $("#yearResult").html("")
@@ -72,7 +72,7 @@ $("#dept").blur(function() {
 $("#birth").blur(function() {
     if($("#birth").val() == '') {
         check[6] = false
-        $("#birthResult").html("<p style='color : red;'>생년월일 필수 사항입니다.</p>")
+        $("#birthResult").html("<p style='color : red;'>생년월일은 필수 사항입니다.</p>")
     }else {
         check[6] = true
         $("#birthResult").html("")
@@ -98,13 +98,13 @@ $("#studentBtn").click(function() {
         $("#studentForm").submit()
     }else {
         // console.log("실패")
-        alert("모든 사항을 입력하세요")
+        alert("모든 사항을 입력하세요.")
     }
 })
 
 //취소
 $("#backBtn").click(function() {
-    let back = confirm("정말 취소하시겠습니까?")
+    let back = confirm("취소하시겠습니까?")
 
     if(back == true) {
         location.href="/"
