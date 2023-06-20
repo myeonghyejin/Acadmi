@@ -135,7 +135,7 @@ public class StudentLectureController {
 		
 		List<StudentLectureVO> ar = studentLectureService.getMyLectureList(studentLectureVO);
 		
-		String[] arr = {"월","화", "수", "목", "금"};
+		String[] arr = {"월", "화", "수", "목", "금"};
 		
 		mv.addObject("list", ar);
 		mv.addObject("day", arr);

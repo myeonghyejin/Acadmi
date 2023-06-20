@@ -131,7 +131,7 @@
 						<li class="nav-item">
 							<a href="#" class="nav-link" onclick="handleAllLectureClick()" id="registrationAllLecture">
 								<i class="fa-solid fa-circle fa-2xs"></i>
-								<p>수강 신청 & 장바구니</p>
+								<p>수강 신청</p>
 							</a>
 						</li>
 						<li class="nav-item">
@@ -203,7 +203,7 @@
     function handleAllLectureClick() {
         let year = calculateCurrentYear();
         let semester = calculateCurrentSemester();
-        let url = "/student/registration/all_lecture?year=" + year + "&semester=" + semester;
+        let url = "/student/registration/all_lecture?page=1&year=" + year + "&semester=" + semester;
         window.location.href = url;
     }
     
@@ -211,7 +211,7 @@
     function handleMyLectureClick() {
         let year = calculateCurrentYear();
         let semester = calculateCurrentSemester();
-        let url = "/student/registration/my_lecture?year=" + year + "&semester=" + semester;
+        let url = "/student/registration/my_lecture?page=1&year=" + year + "&semester=" + semester;
         window.location.href = url;
     }
     
@@ -219,7 +219,7 @@
     function handleMyFavoriteClick() {
         let year = calculateCurrentYear();
         let semester = calculateCurrentSemester();
-        let url = "/student/registration/my_favorite?year=" + year + "&semester=" + semester;
+        let url = "/student/registration/my_favorite?page=1&year=" + year + "&semester=" + semester;
         window.location.href = url;
     }
     
