@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.acadmi.board.qna.QnaVO;
+import com.acadmi.lecture.LectureVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,6 +29,8 @@ public class NotificationController {
 	public ModelAndView getList(NotificationVO notificationVO, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		List<NotificationVO> ar = notificationService.getKindList(notificationVO, session);
+		List<LectureVO> lectureList = notificationService.getLectureList();
+		mv.addObject("lecture", lectureList);
 		mv.addObject("list", ar);
 		mv.setViewName("notification/list");
 		return mv;
