@@ -50,8 +50,6 @@ public class SecurityConfig {
 	               .authorizeRequests()
 	                  // URL과 권한 매칭
 	                  .antMatchers("/member/login").permitAll()
-//	                  .antMatchers("/member/studentPage?username=${username}").authenticated()
-	                  .antMatchers("/member/join").permitAll()
 	                  .antMatchers("/").hasAnyRole("ADMIN", "ADMINISTRATOR", "PROFESSOR", "STUDENT")
 	                  .antMatchers("/notice/add").hasRole("ADMINISTRATOR")
 	                  .antMatchers("/notice/update").hasRole("ADMINISTRATOR")
@@ -65,6 +63,8 @@ public class SecurityConfig {
 	                  .antMatchers("/lectureQna/add").hasAnyRole("PROFESSOR", "STUDENT")
 	                  .antMatchers("/lectureQna/update").hasAnyRole("PROFESSOR", "STUDENT")
 	                  .antMatchers("/lectureQna/delete").hasAnyRole("PROFESSOR", "STUDENT")
+	                  .antMatchers("/chat/*").hasAnyRole("PROFESSOR", "STUDENT", "ADMINISTRATOR")
+	                  .antMatchers("/notification/*").hasAnyRole("PROFESSOR", "STUDENT", "ADMINISTRATOR")
 	                  .and()
 	               .formLogin()
 	                  .loginPage("/member/login")
