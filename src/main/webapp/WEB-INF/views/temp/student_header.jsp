@@ -73,8 +73,8 @@
 <aside class="main-sidebar sidebar-dark-info elevation-4">
 	<!-- Brand Logo -->
 	<a href="/" class="brand-link">
-		<img src="/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-		<span class="brand-text font-weight-light">Acadmi!</span>
+		<img src="/images/white.png" alt="AdminLTE Logo" class="mx-4" style="opacity: .8; width : 70%; height : 70%;">
+		<span>&nbsp</span>
     </a>
 
 	<!-- Sidebar -->
@@ -82,7 +82,7 @@
 		<!-- Sidebar user panel (optional) -->
 		<div class="user-panel mt-3 pb-3 mb-3 d-flex">
 			<div class="image">
-				<img src="/images/student.png" class="img-circle elevation-2" alt="User Image" >
+				<img src="/images/student.png" class="img-circle elevation-2" alt="User Image" style="opacity: .8;">
 				<sec:authentication property="Principal" var="user"/>
                 <a href="/member/studentPage?username=${user.username}" style="margin-left: 8px">${name} (${user.username})</a>   
 			</div>
