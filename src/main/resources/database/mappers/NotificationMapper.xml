@@ -72,6 +72,11 @@
   		SELECT * FROM LECTURE WHERE LECTURENUM = #{lectureNum}
   	</select>
   	
+  	<!-- 강의들을 가져오는 쿼리 -->
+  	<select id="getLectureList" resultType="LectureVO">
+  		SELECT * FROM LECTURE
+  	</select>
+  	
   	<!-- 수강 강의 정보를 가져오는 List -->
 
   	<select id="getStudentLectureList" parameterType="LectureVO" resultType="StudentLectureVO">
