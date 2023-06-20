@@ -156,7 +156,7 @@ public class MemberService implements UserDetailsService{
 	public int setStudentUpdate(StudentVO studentVO, MultipartFile multipartFile, MemberVO memberVO) throws Exception{
 		int result = memberDAO.setStudentUpdate(studentVO);
 			
-		if(memberVO.getPassword() != null) {
+		if(memberVO.getPassword() != null && memberVO.getPassword().length() > 0) {
 			memberVO.setPassword(passwordEncoder.encode(memberVO.getPassword()));
 			memberDAO.setPwUpdate(memberVO);
 			
@@ -191,7 +191,7 @@ public class MemberService implements UserDetailsService{
 	public int setProfessorUpdate(ProfessorVO professorVO, MultipartFile multipartFile, MemberVO memberVO) throws Exception{
 		int result = memberDAO.setProfessorUpdate(professorVO);
 		
-		if(memberVO.getPassword() != null) {
+		if(memberVO.getPassword() != null && memberVO.getPassword().length() > 0) {
 			memberVO.setPassword(passwordEncoder.encode(memberVO.getPassword()));
 			memberDAO.setPwUpdate(memberVO);
 		}
@@ -223,7 +223,7 @@ public class MemberService implements UserDetailsService{
 	public int setAdministratorUpdate(AdministratorVO administratorVO, MultipartFile multipartFile, MemberVO memberVO) throws Exception{
 		int result = memberDAO.setAdministratorUpdate(administratorVO);
 		
-		if(memberVO.getPassword() != null) {
+		if(memberVO.getPassword() != null && memberVO.getPassword().length() > 0) {
 			memberVO.setPassword(passwordEncoder.encode(memberVO.getPassword()));
 			memberDAO.setPwUpdate(memberVO);
 		}
