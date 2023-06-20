@@ -230,8 +230,8 @@
 					   	 			<c:if test="${lectureBuilding eq  null}">
 			                        		<td><a href="./lectureRoomAssignment?lectureNum=${lectureNum}&startTime=${lectureStartTime}&endTime=${lectureEndTime}&weekday=${lectureWeekday}&personal=${lectureRoomPersonal}"><button class="btn btn-info">강의실 배정</button></a></td>
 			                        </c:if>
-			                        <c:if test="${lectureBuilding ne null }">
-			                        	<td><button class="btn btn-danger" data-lectureNum="${lectureNum}">폐강</button> </td>
+			                        <c:if test="${lectureBuilding ne null && lectureStatus ne 0}">
+			                        	<td><button class="btn btn-danger" data-lecturenum="${lectureNum}">폐강</button> </td>
 					   	 			</c:if>
 					   	 		
 					   	 		</tr>	
