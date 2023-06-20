@@ -132,10 +132,10 @@
 										<a href="./update?num=${boardVO.num}" id="update" class="btn btn-info float-right" style="margin-right: 5px">수정</a>
 									</c:if>
 									<c:if test="${board eq 'qna' || board eq 'notice'}">
-						            	<a href="./list" class="btn btn-light float-right" style="margin-right: 5px">목록</a>
+						            	<a href="./list" class="btn btn-info float-right" style="margin-right: 5px">목록</a>
 						            </c:if>
 						            <c:if test="${board eq 'lectureQna' || board eq 'lectureNotice'}">
-						            	<a href="./list?lectureNum=${boardVO.lectureNum}" class="btn btn-light float-right" style="margin-right: 5px">목록</a>
+						            	<a href="./list?lectureNum=${boardVO.lectureNum}" class="btn btn-info float-right" style="margin-right: 5px">목록</a>
 						            </c:if>
 						          </td>
 						        </tr>

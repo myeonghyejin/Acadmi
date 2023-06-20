@@ -468,7 +468,7 @@
   
   <!--강의실 배정  -->
   
-  <select id="getLectureRoomAssignment" resultMap="LectureRoomAssignment" parameterType="Pagination">
+  <!-- <select id="getLectureRoomAssignment" resultMap="LectureRoomAssignment" parameterType="Pagination">
 		SELECT R.LECTUREBUILDING, R.LECTUREROOM,R.PERSONAL,R.STATUS,R.`TIME`, R.STARTTIME,R.ENDTIME,TB.`YEAR`,TB.SEMESTER, TB.TIME, TB.WEEKDAY FROM 
 		(SELECT * FROM LECTURE_ROOM LR,TIMEINFO T
 			WHERE STATUS=1) R
@@ -495,7 +495,7 @@
  				<result column="ENDTIME" property="endTime"/>
  			</collection>
  		</collection>
- 	</resultMap>
+ 	</resultMap> -->
   
   <select id="getTimeTable" resultType="TimeTableVO">
   	SELECT * FROM TIMETABLE
