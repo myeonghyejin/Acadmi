@@ -59,12 +59,13 @@ public class StudentController {
 
 	//홈 진행중인 강의 리스트
 	@GetMapping("homeLecture")
-	public ModelAndView getCurrentLectureList(HttpSession session) throws Exception {
+	public ModelAndView getCurrentLectureList(HttpSession session, LectureVO lectureVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		Object obj = session.getAttribute("SPRING_SECURITY_CONTEXT");
 		SecurityContextImpl contextImpl = (SecurityContextImpl) obj; 
 		Authentication authentication = contextImpl.getAuthentication();
-		List<LectureVO> ar = studentService.getCurrentLectureList();
+		lectureVO.setUsername(authentication.getName());
+		List<LectureVO> ar = studentService.getCurrentLectureList(lectureVO);
 		mv.addObject("list", ar);
 		mv.setViewName("student/homeLecture");
 		
@@ -81,11 +82,14 @@ public class StudentController {
 		Authentication authentication = contextImpl.getAuthentication();
 		
 		lectureVO.setUsername(authentication.getName()); 
+		
+		log.error("name ::{}", authentication.getName());
 	
 		
 		List<LectureVO> ar =  studentService.getMyLectureList(lectureVO);
 		
 		mv.addObject("list", ar);
+		
 		
 		mv.addObject("map", studentService.getYear(lectureVO));
 		mv.addObject("obj", lectureVO);
@@ -137,7 +141,7 @@ public class StudentController {
 	public ModelAndView getAttendeeList(Pagination pagination, LectureVO lectureVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		List<LectureVO> ar = studentService.getAttendeeList(pagination);
+		List<StudentLectureVO> ar = studentService.getAttendeeList(pagination);
 		lectureVO = studentService.getLectureProfessor(lectureVO);
 		mv.addObject("list", ar);
 		mv.addObject("lecture", lectureVO);

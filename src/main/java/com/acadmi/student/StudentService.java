@@ -25,8 +25,8 @@ public class StudentService {
 	private StudentDAO studentDAO;
 	
 	//현재 수강중인 강의
-	public List<LectureVO> getCurrentLectureList() throws Exception {
-		List<LectureVO> ar =  studentDAO.getCurrentLectureList();
+	public List<LectureVO> getCurrentLectureList(LectureVO lectureVO) throws Exception {
+		List<LectureVO> ar =  studentDAO.getCurrentLectureList(lectureVO);
 		return ar;
 	}
 	
@@ -71,7 +71,7 @@ public class StudentService {
 	}
 	
 	//강의 참여자 목록
-	public List<LectureVO> getAttendeeList(Pagination pagination) throws Exception {
+	public List<StudentLectureVO> getAttendeeList(Pagination pagination) throws Exception {
 		Long totalCount = studentDAO.getTotalCountStudent(pagination);
 		
 		pagination.makeNum(totalCount);

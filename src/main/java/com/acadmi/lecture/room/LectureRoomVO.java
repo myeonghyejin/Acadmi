@@ -16,4 +16,5 @@ public class LectureRoomVO {
 	private Integer status;
 	
 	private List<TimeTableVO> timeTableVOs;
+
 }

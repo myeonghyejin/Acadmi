@@ -3,6 +3,7 @@ package com.acadmi.administrator;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.acadmi.college.CollegeVO;
 import com.acadmi.department.DepartmentVO;
@@ -464,6 +467,10 @@ public class AdministratorService{
 		return result;
 	}
 	
+	public List<String> getCurrentYearMinus() throws Exception {
+		return administratorDAO.getCurrentYearMinus();
+	}
+	
 	//강의 조회
 	public List<LectureVO> getLectureList(Pagination pagination) throws Exception {
 		Long totalCount = administratorDAO.getTotalCountLecture(pagination);
@@ -477,18 +484,26 @@ public class AdministratorService{
 		return ar;
 	}
 	
+	//강의 폐강
+	public int setLectureUpdate(LectureVO lectureVO) throws Exception {
+		return administratorDAO.setLectureUpdate(lectureVO);
+	}
+	
 	//강의실 배정
-	public List<LectureRoomVO> getLectureRoomAssignment(Pagination pagination) throws Exception {
+	public List<LectureRoomVO> getLectureRoomAssignment(Map<String, Object> map) throws Exception {
 		
+		Long totalCount = administratorDAO.getTotalCountAssiginment();
 		
-		Long totalCount = administratorDAO.getTotalCountAssiginment(pagination);
-		
+		Pagination pagination = (Pagination)map.get("pagination");
 		pagination.makeNum(totalCount);
 		pagination.makeStartRow();
 		
+		map.put("startRow", pagination.getStartRow());
+		map.put("perPage", pagination.getPerPage());
 		
+		List<LectureRoomVO> ar = administratorDAO. getLectureRoomAssignment(map);
 		
-		return administratorDAO.getLectureRoomAssignment(pagination);
+		return ar;
 	}
  	
 	public int setLectureRoomAssignmentUpdate(LectureVO lectureVO) throws Exception {

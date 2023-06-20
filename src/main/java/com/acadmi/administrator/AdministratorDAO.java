@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.acadmi.college.CollegeVO;
 import com.acadmi.department.DepartmentVO;
@@ -86,15 +87,19 @@ public interface AdministratorDAO {
 	public List<PeriodVO> getPeriodList(Pagination pagination) throws Exception;
 	public Long getTotalCountPeriod(Pagination pagination) throws Exception;
 	public List<String> getCurrentYear() throws Exception;
+	public List<String> getCurrentYearMinus() throws Exception;
 	
 	//강의 조회
 	public List<LectureVO> getLectureList(Pagination pagination) throws Exception;
 	
 	public Long getTotalCountLecture(Pagination pagination) throws Exception;
 	
+	//강의 폐강
+	public int setLectureUpdate(LectureVO lectureVO) throws Exception;
+	
 	//강의실 배정 
-	public List<LectureRoomVO> getLectureRoomAssignment(Pagination pagination) throws Exception;
-	public Long getTotalCountAssiginment(Pagination pagination) throws Exception;
+	public List<LectureRoomVO> getLectureRoomAssignment(Map<String, Object> map) throws Exception;
+	public Long getTotalCountAssiginment() throws Exception;
  	public int setLectureRoomAssignmentUpdate(LectureVO lectureVO) throws Exception;
 	public LectureVO getLectureNum(LectureVO lectureVO) throws Exception;
 	

@@ -22,10 +22,10 @@ if(window.location.pathname.startsWith('/notice')){
 	$('#memberItem').addClass('menu-open')
 	$('#memberLink').addClass('active')
 	$('#acountList').addClass('active')
-} else if(window.location.pathname == '/administrator/periodAdd'){
+} else if(window.location.pathname == '/administrator/periodList' || window.location.pathname == '/administrator/periodAdd'){
 	$('#periodItem').addClass('menu-open')
 	$('#periodLink').addClass('active')
-	$('#periodAddLink').addClass('active')
+	$('#periodListLink').addClass('active')
 } else if(window.location.pathname == '/administrator/lectureRoomList'){
 	$('#lectureRoomItem').addClass('menu-open')
 	$('#lectureRoomLink').addClass('active')

@@ -8,7 +8,7 @@
 				<div class="card card-info card-outline">
 					<div class="row">
 						<h4 class="my-3 ml-4 mr-2" style="color: #17a2b8;">공지사항</h4>
-						<div style="display: inline-block; margin-top: 14.4px; margin-left : 13px;">
+						<div style="display: inline-block; margin-top: 14.4px;">
 							<a class="btn btn-info btn-sm" href="./notice/list">더 보기</a>
 						</div>
 					</div>
