@@ -490,18 +490,13 @@ public class AdministratorService{
 	}
 	
 	//강의실 배정
-	public List<LectureRoomVO> getLectureRoomAssignment(Map<String, Object> map) throws Exception {
+	public List<LectureRoomVO> getLectureRoomAssignment(LectureVO lectureVO) throws Exception {
 		
 		Long totalCount = administratorDAO.getTotalCountAssiginment();
 		
-		Pagination pagination = (Pagination)map.get("pagination");
-		pagination.makeNum(totalCount);
-		pagination.makeStartRow();
+	
 		
-		map.put("startRow", pagination.getStartRow());
-		map.put("perPage", pagination.getPerPage());
-		
-		List<LectureRoomVO> ar = administratorDAO. getLectureRoomAssignment(map);
+		List<LectureRoomVO> ar = administratorDAO. getLectureRoomAssignment(lectureVO);
 		
 		return ar;
 	}

@@ -506,7 +506,7 @@
   
   <!--강의실 배정  -->
   
-  <select id="getLectureRoomAssignment" resultMap="LectureRoomAssignment" parameterType="Map">
+  <select id="getLectureRoomAssignment" resultMap="LectureRoomAssignment" parameterType="LectureVO">
 		SELECT * FROM LECTURE_ROOM 
 			WHERE PERSONAL &gt;= #{personal}
 			AND STATUS=1
@@ -518,22 +518,12 @@
 						SELECT TIMENUM 
 						FROM TIMEINFO T 
 						WHERE STARTTIME = #{startTime} AND ENDTIME=  #{endTime}
-						<if test="weekday !=null and !weekday.equals('')">
-							AND WEEKDAY = #{weekday}
-						</if>
-						<if test="startTime !=null and !startTime.equals('')">
-							AND STARTTIME = #{startTime}
-						</if>
-						<if test="endTime !=null and !endTime.equals('')">
-							AND ENDTIME = #{endTime}
-						</if>
-						<if test="personal !=null and !personal.equals('')">
-							AND PERSONAL = #{personal}
-						</if>
-					
 				)	
 		)
-		LIMIT #{startRow}, #{perPage}
+			<if test="lectureBuilding !=null and !lectureBuilding.equals('')">
+					AND LECTUREBUILDING = #{lectureBuilding}
+			</if>
+	
   </select>
   <resultMap type="LectureRoomVO" id="LectureRoomAssignment">
   	<id column="LECTUREBUILDING" property="lectureBuilding"/>

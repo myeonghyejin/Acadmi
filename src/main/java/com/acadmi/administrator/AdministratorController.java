@@ -258,8 +258,8 @@ public class AdministratorController {
 	@GetMapping("lectureRoomAdd")
 	public ModelAndView getLectureRoomAdd() throws Exception {
 		ModelAndView mv = new ModelAndView();
-		List<LectureRoomVO> ar = administratorService.getLectureBuilding();
-		mv.addObject("lectureRoom", ar);
+		List<CollegeVO> ar = administratorService.getCollege();
+		mv.addObject("college", ar);
 		mv.setViewName("administrator/lectureRoomAdd");
 		
 		return mv;
@@ -505,25 +505,23 @@ public class AdministratorController {
 	
 	//강의실 배정
 	@GetMapping("lectureRoomAssignment")
-	public ModelAndView getLectureRoomAssignment( NotificationVO notificationVO,Pagination pagination,LectureRoomVO lectureRoomVO, TimeTableVO timeTableVO, TimeInfoVO timeInfoVO, LectureVO lectureVO) throws Exception {
+	public ModelAndView getLectureRoomAssignment( NotificationVO notificationVO,Pagination pagination,LectureVO lectureVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		Map<String, Object> map = new HashMap<>();
 		
-//		log.error("personal::{}", lectureRoomVO.getPersonal());
-//		log.error("weekday ::{}", timeTableVO.getWeekday());
-//		log.error("startTime::{}",timeInfoVO.getStartTime());
-//		log.error("endTime ::{}", timeInfoVO.getEndTime());
+		log.error("personal::{}", lectureVO.getPersonal());
+		log.error("weekday ::{}", lectureVO.getWeekday());
+		log.error("startTime::{}",lectureVO.getStartTime());
+		log.error("endTime ::{}", lectureVO.getEndTime());
 //		
-		map.put("pagination", pagination);
-		map.put("personal", lectureRoomVO.getPersonal());
-		map.put("weekday", timeTableVO.getWeekday());
-		map.put("startTime", timeInfoVO.getStartTime());
-		map.put("endTime", timeInfoVO.getEndTime());
-		
-		
-		List<LectureRoomVO> ar =  administratorService.getLectureRoomAssignment(map);	
+		List<CollegeVO> ar2 = administratorService.getCollege();
+		List<LectureRoomVO> ar =  administratorService.getLectureRoomAssignment(lectureVO);	
 		lectureVO = administratorService.getLectureNum(lectureVO);
+		
+		log.error("personal::{}", lectureVO.getPersonal());
+		log.error("weekday ::{}", lectureVO.getWeekday());
+		log.error("startTime::{}",lectureVO.getStartTime());
+		log.error("endTime ::{}", lectureVO.getEndTime());
 		
 		
 		if(notificationVO.getNotificationNum() != null) {
@@ -531,8 +529,9 @@ public class AdministratorController {
 		}
 		
 		mv.addObject("list", ar);
+		mv.addObject("collegeVO", ar2);
 	
-		mv.addObject("lectureNum", lectureVO);
+		mv.addObject("lectureVO", lectureVO);
 		mv.setViewName("administrator/lectureRoomAssignment");
 		
 		return mv;

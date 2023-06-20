@@ -98,7 +98,7 @@ public interface AdministratorDAO {
 	public int setLectureUpdate(LectureVO lectureVO) throws Exception;
 	
 	//강의실 배정 
-	public List<LectureRoomVO> getLectureRoomAssignment(Map<String, Object> map) throws Exception;
+	public List<LectureRoomVO> getLectureRoomAssignment(LectureVO lectureVO) throws Exception;
 	public Long getTotalCountAssiginment() throws Exception;
  	public int setLectureRoomAssignmentUpdate(LectureVO lectureVO) throws Exception;
 	public LectureVO getLectureNum(LectureVO lectureVO) throws Exception;
