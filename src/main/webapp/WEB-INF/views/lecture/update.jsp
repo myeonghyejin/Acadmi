@@ -256,7 +256,7 @@
 		      	switch(i){
 		      	case 1: option.textContent = '10:00';
       					break;
-		      	case 2: option.textContent = '12:00';
+		      	case 2: option.textContent = '11:00';
       					break;
 		      	case 3: option.textContent = '12:00';
       					break;
