@@ -24,7 +24,7 @@
 						<a class="title ml-1"  style="color:black;">
 							<c:if test="${lectureVO.lectureBuilding eq null}">
 		            		<div class="card-header mx-3 row" style="padding-left:0px;">
-		            			<div class="col-3">
+		            			<div class="col-5">
 			            			${lectureVO.lectureName}
 		            			</div>
 		            			<div class="col-1">
@@ -39,9 +39,7 @@
 		            			<div class="col-2">
 		            				${lectureVO.personal}명
 		            			</div>
-		            			<div class="col-4 text-right" >
-								    <button class ="btn btn-info" style="display:inline-block;" data-lecture= "${lectureVO.lectureBuilding}"${lectureVO.lectureRoom }" >강의실 배정</button>
-								</div>
+		            			
 		            		</div>
 		            		</c:if>
 						</a>
@@ -50,8 +48,3 @@
 			</div>
 	</div>
 </div>
-<script>
-	let button = $('[data-lecture]')
-	
-	button
-</script>

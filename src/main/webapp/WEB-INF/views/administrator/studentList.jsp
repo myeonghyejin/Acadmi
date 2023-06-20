@@ -2,8 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-
-</head>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,7 +35,7 @@
 		<!-- Header 끝 -->
 
 		<!-- Main Contents -->
-		<div class="container-fluid">
+				<div class="container-fluid">
 			<div class="row">
 				<!-- 2레벨 Sidebar 적용 -->
 				<div class="content-wrapper">
@@ -270,6 +268,11 @@
 			</div>
 		</div>
 	</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<!-- Footer 적용 -->
 	<c:import url="../temp/footer.jsp"></c:import>
@@ -283,5 +286,6 @@
 
 </div>
 <!-- ./wrapper -->
+						
 </body>
 </html>
