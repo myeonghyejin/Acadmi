@@ -37,19 +37,18 @@
 		<!-- Header 끝 -->
 
 		<!-- Main Contents -->
+		<div class="content-wrapper">
 		<div class="container-fluid">
 			<div class="row">
 				<!-- 2레벨 Sidebar 적용 -->
-				<div class="content-wrapper">
 					<c:import url="../temp/sidebar/administrator_memberList.jsp"></c:import>
-				</div>
 				<!-- 2레벨 Sidebar 끝 -->
 				
 				<!-- Contents -->
 				<div class="col">
 				<!-- header start -->
-					<div class="row" style="padding-top:20px">
-						<div class="col-12">
+					<div class="row">
+						<div class="col-12 mt-3">
 							<div class="card">
 								<h3 class="my-3 mx-3">학생 목록 조회</h3>
 							</div>
@@ -59,20 +58,15 @@
 					<!-- Default box -->
 					<div class="card">
 						<div class="card-header">
-							<div class="card-tools">
-								<button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-									<i class="fas fa-minus"></i>
-								</button>		
-							</div>
 						<form action="./studentList" id="search-form">
 							
 								<input type="hidden" name="page" value="1">
-									<div class="row justify-content-center mx-auto my-3" >
+									<div class="row justify-content-center mx-auto my-3">
 										<div class="col-md-8">
 											<div class="row">
 												<div class="col-3">
 													<div class="form-group">
-														<label>단과 대학</label>
+														<label>단과대학</label>
 														<select class=" select2" name="collegeName"  id="college" style="width : 100%;" onchange="updateDepartmentOptions()">
 															<option value="">전체</option>
 																<c:forEach items="${college}" var="collegeVO">
@@ -146,7 +140,6 @@
 											</div>
 									</div>
 									</div>
-			              		<div class="card-body">
 								 	  <table class="table table-hover text-nowrap" style="text-align : center;"  id="tableStudent">
 							              <thead>
 							                  <tr>
@@ -176,7 +169,7 @@
 							                      	학년
 							                      </th>
 							                      <th style="width: 20%">
-							                      	  학적상태
+							                      	  학적 상태
 							                      </th>
 							                  </tr>
 							              </thead>
@@ -237,10 +230,9 @@
 					     	 				</c:forEach>
 									    </tbody>
 				          		</table>
-			            	</div>
 			            	  <div class="row g-3 justify-content-center" style="margin: 20px auto;" id="pagination">
 									
-									<ul class="pagination pagination-sm mx-auto"  style="width: 200px;">
+									<ul class="pagination pagination-sm mx-auto">
 										<c:if test="${pagination.pre}">
 											<li class="page-item">
 												<a class="page-link" href="./studentList?page=1&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="1" style="color:#17a2b8;">
@@ -269,6 +261,7 @@
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 
 	<!-- Footer 적용 -->
