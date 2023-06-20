@@ -81,7 +81,7 @@
 												</div>
 												<div class="col-2">
 													<div class="form-group">
-														<label>단과 대학</label>
+														<label>단과대학</label>
 														<select class="select2" name="collegeNum" style="width: 100%;">
 															<option value="">전체</option>
 															<c:forEach items="${college}" var="collegeVO">
@@ -175,8 +175,7 @@
 				          </table>
 				        </div>
 					<!-- /.card-body -->
-						<div class="row g-3 justify-content-center" style="margin: 20px auto;" id="pagination">
-									
+						<div class="row g-3 my-3 justify-content-center" id="pagination">
 							<ul class="pagination pagination-sm mx-auto">
 								<c:if test="${pagination.pre}">
 									<li class="page-item">

@@ -1,10 +1,3 @@
-//page
-$("#allLectureList").on("click",".page-link", function(e){
-    let page = $(this).attr("data-page");
-    getList(page);
-    e.preventDefault();
-});
-
 //my_lecture_insert
 $("#allLectureList").on("click", "#mli", function(e) {
     let check = window.confirm("신청하시겠습니까?");

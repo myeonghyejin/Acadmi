@@ -40,8 +40,8 @@
 		<div class="content-wrapper">
 				<div class="col">
 					<!-- header start -->
-					<div class="row" style="padding-top:10px">
-						<div class="col-12">
+					<div class="row">
+						<div class="col-12 mt-3">
 							<div class="card">
 								<h3 class="my-3 mx-3">강의실 등록</h3>
 							</div>
@@ -54,10 +54,9 @@
 					      <div class="card">
 					      
 					        <div class="card-body">
-					          <div class="col-7">
 						         <form action="./lectureRoomAdd" method="post" id="lectureRoomForm">
 						          	 <div class="form-group">
-						           	  <label>단과대 건물</label>
+						           	  <label>단과대학 건물</label>
 					                  <select class="form-control select2" style="width: 100%;" name="lectureBuilding" id="lectureBuilding">
 					                  	<c:forEach items="${lectureRoom}" var="lectureRoom">
 											<option value="${lectureRoom.lectureBuilding}">${lectureRoom.lectureBuilding}
@@ -66,26 +65,26 @@
 						           </div>
 						           <div class="form-group">
 						              <label for="lectureRoom">강의실 호수</label>
-						              <input type="text" id="lectureRoom" class="form-control" name="lectureRoom"/>
+						              <input type="number" id="lectureRoom" class="form-control" name="lectureRoom"/>
 						            </div>
 						             <div id="lecture">
 						            	
 						            </div>
 						            <div class="form-group">
 						              <label for="personal">최대 수용 인원</label>
-						              <input type="text" id="personal" class="form-control" name="personal"/>
+						              <input type="number" id="personal" class="form-control" name="personal"/>
 						            </div>
 						            <div id="personalResult"></div>
 						           
 						            <div class="form-group clearfix">
-						            <div class="icheck-primary d-inline">
+						            <div class="icheck-info d-inline">
 				                        <input type="radio" id="radioPrimary1" name="status" value="1" checked>
 				                        	<label for="radioPrimary1">
 				                        	사용 가능
 				                       		</label>
 				                     </div>
 				                     
-					                      <div class="icheck-primary d-inline">
+					                      <div class="icheck-info d-inline ml-3">
 					                        <input type="radio" id="radioPrimary2" name="status" value="0" disabled>
 				                        	<label for="radioPrimary1">
 				                        	사용 불가
@@ -97,7 +96,6 @@
 							            <button type="button" class="btn btn-danger" id="backBtn">취소</button>
 						            </div>
 						          </form>
-					          </div>
 					        </div>
 					      </div>
 			
