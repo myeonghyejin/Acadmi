@@ -37,12 +37,11 @@
 		<!-- Header 끝 -->
 
 		<!-- Main Contents -->
+		<div class="content-wrapper">
 		<div class="container-fluid">
 			<div class="row">
 				<!-- 2레벨 Sidebar 적용 -->
-				<div class="content-wrapper">
 					<c:import url="../temp/sidebar/administrator_memberList.jsp"></c:import>
-				</div>
 				<!-- 2레벨 Sidebar 끝 -->
 				
 				<!-- Contents -->
@@ -72,7 +71,7 @@
 											<div class="row">
 												<div class="col-3">
 													<div class="form-group">
-														<label>단과 대학</label>
+														<label>단과대학</label>
 														<select class=" select2" name="collegeName"  id="college" style="width : 100%;" onchange="updateDepartmentOptions()">
 															<option value="">전체</option>
 																<c:forEach items="${college}" var="collegeVO">
@@ -176,7 +175,7 @@
 							                      	학년
 							                      </th>
 							                      <th style="width: 20%">
-							                      	  학적상태
+							                      	  학적 상태
 							                      </th>
 							                  </tr>
 							              </thead>
@@ -240,7 +239,7 @@
 			            	</div>
 			            	  <div class="row g-3 justify-content-center" style="margin: 20px auto;" id="pagination">
 									
-									<ul class="pagination pagination-sm mx-auto"  style="width: 200px;">
+									<ul class="pagination pagination-sm mx-auto">
 										<c:if test="${pagination.pre}">
 											<li class="page-item">
 												<a class="page-link" href="./studentList?page=1&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="1" style="color:#17a2b8;">
@@ -269,6 +268,7 @@
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 
 	<!-- Footer 적용 -->
