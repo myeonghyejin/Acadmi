@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.acadmi.administrator.AdministratorVO;
 import com.acadmi.board.BoardService;
 import com.acadmi.board.BoardVO;
 import com.acadmi.professor.ProfessorVO;
@@ -135,5 +136,9 @@ public class QnaService implements BoardService {
 	
 	public List<ProfessorVO> getProfessor() throws Exception {
 		return qnaDAO.getProfessor();
+	}
+	
+	public List<AdministratorVO> getAdministrator() throws Exception{
+		return qnaDAO.getAdministrator();
 	}
 }
