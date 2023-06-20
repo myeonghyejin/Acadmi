@@ -218,6 +218,7 @@
 		</div>
 	</div>
 </div>	
+<c:import url="../temp/footer.jsp"></c:import>
 <script type="text/javascript" src="../js/administrator/lectureRoomAssignment.js"></script>
 <script>
 	    $(function () {

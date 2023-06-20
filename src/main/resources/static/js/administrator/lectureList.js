@@ -1,5 +1,4 @@
-let button = $('[data-lectureNum]')
-
+console.log("test")
 $("#tableAdmin").on("click", '[data-lectureNum]', function() {
     let confirm = prompt("강의 번호를 입력하세요.") 
 

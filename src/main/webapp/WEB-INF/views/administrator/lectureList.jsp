@@ -184,7 +184,6 @@
 						   	
 						   	 		<tr class="container">
 						   	 			
-						   	 			
 						   	 			<td> ${lectureNum}</td>
 						   	 			<td>${lectureName}</td>
 						   	 			<td>${lectureWeekday}요일</td>
@@ -201,7 +200,6 @@
 						   	 				<td>상태 없음</td>
 						   	 			</c:if>
 						   	 			<td>${lectureBuilding} ${lectureRoom}</td>
-			                        	
 						   	 				
 						
 						   	 			<td>
@@ -232,8 +230,10 @@
 					   	 			<c:if test="${lectureBuilding eq  null}">
 			                        		<td><a href="./lectureRoomAssignment?lectureNum=${lectureNum}&startTime=${lectureStartTime}&endTime=${lectureEndTime}&weekday=${lectureWeekday}&personal=${lectureRoomPersonal}"><button class="btn btn-info">강의실 배정</button></a></td>
 			                        </c:if>
-					   	 			
-					   	 			
+			                        <c:if test="${lectureBuilding ne null }">
+			                        	<td><button class="btn btn-danger" data-lectureNum="${lectureNum}">폐강</button> </td>
+					   	 			</c:if>
+					   	 		
 					   	 		</tr>	
 					   	 		</c:forEach>
 					   	 		
@@ -277,6 +277,8 @@
 	<!-- ./wrapper -->
 
 <c:import url="../temp/footer.jsp"></c:import>
+
+<script type="text/javascript" src="../js/administrator/lectureList.js"></script>	
 
 <script type="text/javascript">
 	/* 토글 */
