@@ -457,10 +457,24 @@ public class AdministratorController {
 		
 		return mv;
 	}
+	
+	@GetMapping("homeLectureRoom")
+	public ModelAndView getHomeLectureRoom(Pagination pagination) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		List<LectureVO> ar = administratorService.getLectureList(pagination);
+		
+		mv.addObject("list", ar);
+		
+		mv.setViewName("administrator/homeLectureRoom");
+		
+		return mv;
+	}
 
+	
 	//강의실 배정
 	@GetMapping("lectureRoomAssignment")
-	public ModelAndView getLectureRoomAssignment( NotificationVO notificationVO,LectureRoomVO lectureRoomVO, TimeTableVO timeTableVO, TimeInfoVO timeInfoVO, LectureVO lectureVO) throws Exception {
+	public ModelAndView getLectureRoomAssignment( NotificationVO notificationVO,Pagination pagination,LectureRoomVO lectureRoomVO, TimeTableVO timeTableVO, TimeInfoVO timeInfoVO, LectureVO lectureVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
 		Map<String, Object> map = new HashMap<>();
@@ -470,7 +484,7 @@ public class AdministratorController {
 //		log.error("startTime::{}",timeInfoVO.getStartTime());
 //		log.error("endTime ::{}", timeInfoVO.getEndTime());
 //		
-		
+		map.put("pagination", pagination);
 		map.put("personal", lectureRoomVO.getPersonal());
 		map.put("weekday", timeTableVO.getWeekday());
 		map.put("startTime", timeInfoVO.getStartTime());

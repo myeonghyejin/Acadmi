@@ -192,6 +192,8 @@ public class NoticeController {
 		return mv;
 	}
 	
+	
+	
 	//홈 중요 공지사항 목록
 	@GetMapping("homeImportant")
 	public ModelAndView getHomeImportantList(NoticeVO noticeVO, HttpSession session) throws Exception{

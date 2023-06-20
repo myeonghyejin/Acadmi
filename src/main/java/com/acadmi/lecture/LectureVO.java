@@ -37,6 +37,7 @@ public class LectureVO {
 	private Integer status;
 	private Integer temporary;
 	private Integer favorite;
+	private Integer rank;
 	
 	private StudentLectureVO studentLectureVO;
 	private List<StudentLectureVO> studentLectureVOs;

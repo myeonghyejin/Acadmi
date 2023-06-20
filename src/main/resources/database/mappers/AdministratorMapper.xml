@@ -476,11 +476,13 @@
   <select id="getTotalCountLecture" resultType="Long">
   	SELECT COUNT(LECTURENUM) FROM LECTURE
   </select>
+  
+
 
   
   <!--강의실 배정  -->
   
-  <select id="getLectureRoomAssignment" resultMap="LectureRoomAssignment" parameterType="Map" >
+  <select id="getLectureRoomAssignment" resultMap="LectureRoomAssignment" parameterType="Map">
 		SELECT * FROM LECTURE_ROOM 
 			WHERE PERSONAL &gt;= #{personal}
 			AND STATUS=1
@@ -501,11 +503,13 @@
 						<if test="endTime !=null and !endTime.equals('')">
 							AND ENDTIME = #{endTime}
 						</if>
-						<if test="personal !=null and personal.equals('')">
+						<if test="personal !=null and !personal.equals('')">
 							AND PERSONAL = #{personal}
 						</if>
+					
 				)	
 		)
+		LIMIT #{startRow}, #{perPage}
   </select>
   <resultMap type="LectureRoomVO" id="LectureRoomAssignment">
   	<id column="LECTUREBUILDING" property="lectureBuilding"/>

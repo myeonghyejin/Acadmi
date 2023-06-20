@@ -116,11 +116,6 @@
 					   			</tbody>
 					   		</table>
 					   </div>
-					   
-					   <!-- /.card-body -->
-				</div>
-				<!-- /.card -->
-				
 				<!-- Pagination -->
 				 <div class="row g-3 justify-content-center" style="margin: 20px auto;" id="pagination">
 									
@@ -147,6 +142,16 @@
 					</ul>
 				
 				</div>
+					   
+				 <!-- /.card-body -->
+				 <div class="wrapper" style="margin : 0 20px 20px 0;">
+					 <a href="./periodAdd"><button type="button" id="periodAdd" class="btn btn-info" style="float : right;">기간 등록</button></a>
+				</div>
+				</div>
+				
+				<!-- /.card -->
+				
+				
 			</div>
 		</div>
 	</div>
