@@ -128,22 +128,23 @@
 								                    </tr>
 												</thead>
 					              				<tbody>
-					                  				<c:forEach items="${list}" var="lectureVO">
+					                  				<c:forEach items="${list}" var="studentLectureVO">
 						   	 							<tr>
-											   	 			<c:set var="studentName" value="${lectureVO.studentVO.name}"></c:set>
-															<c:set var="studentUsername" value="${lectureVO.studentVO.username }"></c:set>
-															<c:set var="department" value="${lectureVO.departmentVO.deptName}"></c:set>
-															<c:set var="college" value="${lectureVO.collegeVO.collegeName }"></c:set>
-															<c:set var="memberFiles" value="${lectureVO.studentVO.memberFilesVO.fileName }"></c:set>
+						   	 							
+											   	 			<c:set var="studentName" value="${studentLectureVO.lectureVO.studentVO.name}"></c:set>
+															<c:set var="studentUsername" value="${studentLectureVO.lectureVO.studentVO.username }"></c:set>
+															<c:set var="department" value="${studentLectureVO.lectureVO.departmentVO.deptName}"></c:set>
+															<c:set var="college" value="${studentLectureVO.lectureVO.collegeVO.collegeName }"></c:set>
+															<c:set var="memberFiles" value="${studentLectureVO.lectureVO.studentVO.memberFilesVO.fileName }"></c:set>
 															<td style="vertical-align:middle; width:10%">
 						     	 								<sec:authentication property="principal.username" var="username"/>
 									     	 					<a href="../../chat/detail?roomSender=${username}&roomRecipient=${lectureVO.studentVO.username}"><i class="fa-regular fa-envelope fa-2xl" style="margin:30px 0 0 0;"></i></a>
 						     	 							</td>
 						     	 							<td style="vertical-align:middle; width:13%;">
-						     	 								<c:if test="${empty memberFiles}">
+						     	 								<c:if test="${memberFiles eq null}">
 											   	 					  <img class="img" src="/images/profile.jpg"alt="User profile picture" width="60rem" height="60rem" style="border-radius:5px">
 											   	 				</c:if>
-											   	 				<c:if test="${not empty memberFiles}">
+											   	 				<c:if test="${ memberFiles ne null}">
 											   	 					<img class="img" src="/file/member/${memberFiles}" width="60rem" height="60rem" style="border-radius:5px">
 											   	 				</c:if>	
 						     	 							</td>

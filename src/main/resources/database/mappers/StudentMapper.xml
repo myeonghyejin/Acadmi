@@ -7,7 +7,7 @@
   <mapper namespace="com.acadmi.student.StudentDAO">
   
   	<!-- 메인페이지 현재수강중인 강의 출력 -->
-  	<select id="getCurrentLectureList" resultMap="CurrentLectureList">
+  	<select id="getCurrentLectureList" resultMap="CurrentLectureList" parameterType="LectureVO">
   		SELECT sl.*, l.*, p.NAME  
 			FROM LECTURE l  
 				JOIN STUDENT_LECTURE sl 
@@ -18,7 +18,8 @@
 			AND (
 			  (l.SEMESTER = 1 AND DATE_FORMAT(NOW(), '%m') BETWEEN 3 AND 6)
 			  OR (l.SEMESTER = 2 AND DATE_FORMAT(NOW(), '%m') BETWEEN 7 AND 12)
-		);
+		)
+		AND sl.USERNAME = #{username}
 		
   	</select>
   	<resultMap type="LectureVO" id="CurrentLectureList">
@@ -43,6 +44,8 @@
 					PROFESSOR P 
 				ON L.USERNAME = P.USERNAME
 		WHERE SL.USERNAME=#{username}
+		AND L.STATUS=1
+		
 		<if test="year ==null and semester ==null">
 			AND L.YEAR=DATE_FORMAT(now(),'%Y') AND 
   			L.SEMESTER = CASE
@@ -83,23 +86,29 @@
  	
  	<!--내 성적 조회  -->
  	<select id="getMyCreditList" parameterType="lectureVO" resultMap="myCreditList">
-		SELECT *FROM LECTURE L
-			INNER JOIN
-				STUDENT_LECTURE SL 
-			ON L.LECTURENUM = SL.LECTURENUM
-				INNER JOIN 
-					CREDIT C 
-				ON SL.LECTURENUM = C.LECTURENUM 
-						INNER JOIN 
-							PROFESSOR P
-						ON L.USERNAME = P.USERNAME 
-		WHERE SL.USERNAME=#{username}
+		SELECT L.*, C.*, P.NAME, S.*,DENSE_RANK() OVER (PARTITION BY SL.LECTURENUM ORDER BY C.CREDIT DESC) AS RANK
+		FROM STUDENT S
+		INNER JOIN STUDENT_LECTURE SL ON (S.USERNAME = SL.USERNAME)
+		INNER JOIN DEPARTMENT D ON (S.DEPTNUM = D.DEPTNUM)
+		LEFT OUTER JOIN CREDIT C ON (SL.LECTURENUM = C.LECTURENUM AND SL.USERNAME = C.USERNAME)
+		INNER JOIN LECTURE L ON SL.LECTURENUM = L.LECTURENUM
+		INNER JOIN PROFESSOR P ON L.USERNAME = P.USERNAME
+		WHERE SL.USERNAME = #{username}
+		
+		<if test="year ==null and semester ==null">
+			AND L.YEAR=DATE_FORMAT(now(),'%Y') AND 
+  			L.SEMESTER = CASE
+    		WHEN MONTH(NOW()) BETWEEN 3 AND 8 THEN 1
+    		ELSE 2
+			END
+		</if>
 		<if test="year !=null and !year.equals('')">
 			AND L.YEAR = #{year}
 		</if>
 		<if test="semester !=null and !semester.equals('')">
 			AND L.SEMESTER=#{semester}
 		</if>
+		ORDER BY CREDIT DESC
  	</select>
  	
  	
@@ -110,6 +119,7 @@
  		<result column="CATEGORY" property="category"/>
  		<result column="YEAR" property="year"/>
  		<result column="SEMESTER" property="semester"/>
+ 		<result column="SUBSCRIPTION" property="subscription"/>
  		
  		<association property="studentLectureVO" javaType="StudentLectureVO">
  			<association property="creditVO" javaType="CreditVO">
@@ -119,6 +129,10 @@
  		<association property="professorVO" javaType="ProfessorVO">
  			<id column="USERNAME" property="username"/>
  			<result column="NAME" property="name"/>
+ 		</association>
+ 		<association property="studentVO" javaType="StudentVO">
+ 			<id column="USERNAME" property="username"/>
+ 			<result column="RANK" property="rank"/>
  		</association>
  		
  	</resultMap>
@@ -248,23 +262,23 @@
 		SELECT COUNT(USERNAME) FROM STUDENT
 	</select>
 	<select id="getAttendeeList" parameterType="Pagination" resultMap="AttendeeList">
-		SELECT S.*,D.DEPTNAME, C.COLLEGENAME,MF.*  FROM `MEMBER` M 
-			LEFT OUTER JOIN 
-				MEMBERFILES MF 
-			ON M.USERNAME = MF.USERNAME 
+		SELECT S.*,D.DEPTNAME, C.COLLEGENAME, MF.*FROM `MEMBER` M 
+				INNER JOIN 
+					STUDENT S 
+				ON (M.USERNAME=S.USERNAME) 
+					LEFT OUTER JOIN 
+						MEMBERFILES MF 
+					ON 	(M.USERNAME = MF.USERNAME)
 					INNER JOIN 
-						STUDENT S 
-					ON (MF.USERNAME=S.USERNAME) 
-						INNER JOIN 
-							STUDENT_LECTURE SL 
-						ON (M.USERNAME=SL.USERNAME) 
-								INNER JOIN 
-									DEPARTMENT D 
-								ON(S.DEPTNUM=D.DEPTNUM) 
-								INNER JOIN 
-									COLLEGE C 
-								ON D.COLLEGENUM = C.COLLEGENUM	
-					WHERE LECTURENUM=#{lectureNum}
+						STUDENT_LECTURE SL 
+					ON (M.USERNAME=SL.USERNAME) 
+							INNER JOIN 
+								DEPARTMENT D 
+							ON(S.DEPTNUM=D.DEPTNUM) 
+							INNER JOIN 
+								COLLEGE C 
+							ON D.COLLEGENUM = C.COLLEGENUM	
+				WHERE LECTURENUM= #{lectureNum}
 					<if test="search != null and !search.equals('')">
 						AND S.USERNAME LIKE CONCAT('%',#{search},'%' )
 					</if>
@@ -273,10 +287,11 @@
 					</if>
 				LIMIT #{startRow},#{perPage}
 	</select>
-	<resultMap type="LectureVO" id="AttendeeList">
-		<id column="LECTURENUM" property="lectureNum"/>
-		<result column="LECTURENAME" property="lectureName"/>
-			<association property="collegeVO" javaType="CollegeVO">
+	<resultMap type="StudentLectureVO" id="AttendeeList">
+			<id column="LECTURENUM" property="lectureNum"/>
+			<result column="USERNAME" property="username"/>
+			<association property="lectureVO" javaType="LectureVO">
+				<association property="collegeVO" javaType="CollegeVO">
 				<id column="COLLEGENUM" property="collegeNum"/>
 				<result column="COLLEGENAME" property="collegeName"/>
 			</association>
@@ -292,6 +307,8 @@
 				<id column="DEPTNUM" property="deptNum"/>
 				<result column="DEPTNAME" property="deptName"/>
 			</association>
+			</association>
+			
 	</resultMap>
 	
 	<!--수강 신청,장바구니 기간 막기 -->

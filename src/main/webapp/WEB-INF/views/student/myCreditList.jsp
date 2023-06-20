@@ -90,9 +90,24 @@
 		               							<tr>
 		               								<td>${lectureVO.lectureName}</td>
 		               								<td>${lectureVO.professorVO.name}</td>
-		               								<td>${lectureVO.studentLectureVO.creditVO.credit}</td>
 		               								<td>${lectureVO.category}</td>
-		               								<td></td>
+		               								
+		               								<c:if test="${lectureVO.studentLectureVO.creditVO.credit==null}">
+						                    				<td style="color:gray;">점수 없음</td>
+						                    				<td style="color:gray;">성적 없음</td>
+					                    				</c:if>
+					                    				<c:if test="${lectureVO.studentLectureVO.creditVO.credit!=null}">
+																<td>${lectureVO.studentLectureVO.creditVO.credit}</td>
+														     <c:choose>
+														        <c:when test="${lectureVO.studentVO.rank <=(lectureVO.subscription*50/100)}">
+														            <td>A</td>
+														        </c:when>
+														        <c:otherwise>
+														            <td>B</td>
+														        </c:otherwise>
+														    </c:choose>
+														    
+					                    				</c:if>
 		               							</tr>
 		               						</c:forEach>
 		               					</tbody>
@@ -110,7 +125,7 @@
 /*입학년도 ~ 재학년도 */
  	
 /* 검색 기능 */
-$("#year").on("change", function() {
+/* $("#year").on("change", function() {
 	let year = $(this).val()
 	let semester = $("#semester").val()
 	
@@ -144,7 +159,7 @@ $("#semester").on("change", function() {
 			location.href="./myCreditList?year=" + year + "&semester=" + semester
 		}
 	})
-})
+}) */
 
 $(function () {
      $('.select2').select2()
