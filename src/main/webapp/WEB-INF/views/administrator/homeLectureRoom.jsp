@@ -53,4 +53,5 @@
 <script>
 	let button = $('[data-lecture]')
 	
+	button
 </script>
