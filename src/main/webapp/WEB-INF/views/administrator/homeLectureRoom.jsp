@@ -10,7 +10,7 @@
 }
 </style>
 <div class="mt-5 mb-3 mx-5">
-	<div class="row  mt-4 ">
+	<div class="row mt-4 ">
 		<div class="col-12">
 				<div class="card card-info">
 					<div class="row">
@@ -39,8 +39,8 @@
 		            			<div class="col-2">
 		            				${lectureVO.personal}명
 		            			</div>
-		            			<div class="col-4 text-right">
-								    <button class ="btn btn-info">강의실 배정</button>
+		            			<div class="col-4 text-right" >
+								    <button class ="btn btn-info" style="display:inline-block;" data-lecture= "${lectureVO.lectureBuilding}"${lectureVO.lectureRoom }" >강의실 배정</button>
 								</div>
 		            		</div>
 		            		</c:if>
@@ -50,3 +50,7 @@
 			</div>
 	</div>
 </div>
+<script>
+	let button = $('[data-lecture]')
+	
+</script>
