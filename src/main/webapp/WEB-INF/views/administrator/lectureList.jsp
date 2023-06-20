@@ -228,7 +228,7 @@
 						   	 				</div>
 						   	 				
 					   	 			</td>
-					   	 			<td><button class="btn btn-danger"  data-lectureNum="${lectureNum}">폐강</button> </td>
+					   	 			
 					   	 			
 					   	 		</tr>	
 					   	 		</c:forEach>
@@ -273,7 +273,7 @@
 	<!-- ./wrapper -->
 
 <c:import url="../temp/footer.jsp"></c:import>
-<script type="text/javascript" src="../js/administrator/lectureList.js"></script>
+
 <script type="text/javascript">
 	/* 토글 */
 	let toggleButtons = document.getElementsByClassName("toggleButton");
