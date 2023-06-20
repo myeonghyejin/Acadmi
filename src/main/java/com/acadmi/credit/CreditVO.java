@@ -20,5 +20,7 @@ public class CreditVO {
 	private Integer attendance;
 	private Float Credit;
 	
+	private Integer rank;
+	
 
 }

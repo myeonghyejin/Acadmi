@@ -216,21 +216,23 @@
 															</c:if>
 														</c:forEach>
 													</td>
-													<c:forEach items="${students}" var="student">
+													<td>
+														<c:forEach items="${students}" var="student">
+															<c:if test="${student.username eq dto.writer}">
+																${student.name}
+															</c:if>
+														</c:forEach>
 														<c:forEach items="${professors}" var="professor">
-															<c:choose>
-															    <c:when test="${student.username eq dto.writer}">
-															        <td>${student.name}</td>
-															    </c:when>
-															    <c:when test="${professor.username eq dto.writer}">
-															        <td>${professor.name} 교수</td>
-															    </c:when>
-															    <c:otherwise>
-															         <td>관리자</td>
-															    </c:otherwise>
-															</c:choose>				
-														</c:forEach>		
-													</c:forEach>
+															<c:if test="${professor.username eq dto.writer}">
+																${professor.name} 교수님
+															</c:if>
+														</c:forEach>
+														<c:forEach items="${administrators}" var="administrator">
+															<c:if test="${administrator.username eq dto.writer}">
+																관리자
+															</c:if>
+														</c:forEach>
+													</td>
 													<td>${dto.regDate}</td>
 												</tr>
 											</c:if>	
@@ -290,16 +292,18 @@
 															</c:if>
 														</c:forEach>
 													</td>			
-													<c:forEach items="${students}" var="student">
-														<c:forEach items="${professors}" var="professor">
+													<td>
+														<c:forEach items="${students}" var="student">
 															<c:if test="${student.username eq dto.writer}">
-																<td>${student.name}</td>
+																${student.name}
 															</c:if>
+														</c:forEach>
+														<c:forEach items="${professors}" var="professor">
 															<c:if test="${professor.username eq dto.writer}">
-																<td>${professor.name} 교수</td>
+																${professor.name} 교수님
 															</c:if>
-														</c:forEach>		
-													</c:forEach>
+														</c:forEach>
+													</td>
 													<td>${dto.regDate}</td>
 												</tr>
 											</c:if>	

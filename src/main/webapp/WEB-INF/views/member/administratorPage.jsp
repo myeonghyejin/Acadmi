@@ -41,7 +41,7 @@
 							<section class="content">
 								<div class="container-fluid">
 									<div class="row justify-content-center">
-										<div class="col-md-6" style="padding-top:20px">
+										<div class="col-md-6" style="padding-top:37px">
 											<div class="card card-info card-outline ml-5">
 												<div class="card-body box-profile">
 													<div class="text-center">
@@ -63,7 +63,7 @@
 													<c:forEach items="${departmentVO.administratorVOs}" var="administratorVO">
 														<c:set var="administratorName" value="${administratorVO.name}"></c:set>
 															<sec:authentication property="Principal" var="user"/>
-																	<h3 class="profile-username text-center read-only"><c:out value="${administratorName}"></c:out>(${user.username})</h3>							
+																	<h3 class="profile-username text-center mt-3 read-only"><c:out value="${administratorName}"></c:out>(${user.username})</h3>							
 													</c:forEach>
 
 													<c:forEach items="${departmentVO.administratorVOs}" var="administratorVO">
@@ -74,7 +74,7 @@
 														<c:set var="administratorEmail" value="${administratorVO.email}"></c:set>
 
 														<div class="card-body">
-															<strong><i class="fas fa-book mr-1"></i> 학과정보</strong>
+															<strong><i class="fas fa-book mr-1"></i> 학과 정보</strong>
 															<p class="text-muted">
 																<c:set value="${departmentVO.deptName}" var="administratorDeptName"></c:set>
 																	<c:out value="${administratorDeptName}"></c:out>
@@ -86,7 +86,8 @@
 																	<strong><i class="fa-solid fa-phone mr-1"></i> 전화번호</strong>
 																		<p class="text-muted">
 																			<script type="text/javascript">
-																	        	const number = '${administratorPhone}'
+																	        	let number = '${administratorPhone}'
+																	        	number=number.replace(/-/g, '');
 																	        	const countryCode = number.substring(0, 3);
 																	        	const areaCode = number.substring(3, 7);
 																	        	const phoneNumber = number.substring(7, 11);
