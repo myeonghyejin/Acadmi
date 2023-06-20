@@ -98,7 +98,7 @@
 												</tr>
 											</thead>				
 											<tbody>
-												<c:forEach begin="1" end="10" var="hour">
+												<c:forEach begin="1" end="9" var="hour">
 													<tr>
 														<th scope="row" style="height: 80px;">${hour + 8}:00</th>
 															<c:set var="lectureExists" value="false" />

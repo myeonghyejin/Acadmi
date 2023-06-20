@@ -153,7 +153,7 @@
 										<c:if test="${lectureVO.startTime eq 6}">14:00</c:if>
 										<c:if test="${lectureVO.startTime eq 7}">15:00</c:if>
 										<c:if test="${lectureVO.startTime eq 8}">16:00</c:if>
-										<c:if test="${lectureVO.startTime eq 9}">17:00</c:if>										<c:if test="${lectureVO.startTime eq 10}">PM 18:00</c:if>
+										<c:if test="${lectureVO.startTime eq 9}">17:00</c:if>
 									</td>
 									<td>
 										<c:if test="${lectureVO.endTime eq 1}">10:00</c:if>
@@ -165,7 +165,6 @@
 										<c:if test="${lectureVO.endTime eq 7}">16:00</c:if>
 										<c:if test="${lectureVO.endTime eq 8}">17:00</c:if>
 										<c:if test="${lectureVO.endTime eq 9}">18:00</c:if>
-										<c:if test="${lectureVO.endTime eq 10}">19:00</c:if>
 									</td>
 									<td>${lectureVO.lectureRoomVO.lectureBuilding} ${lectureVO.lectureRoomVO.lectureRoom}</td>
 									<td>${lectureVO.subscription}/${lectureVO.personal}명</td>
@@ -216,12 +215,9 @@
 					</div>
 					<!-- /.card-body -->
 				
-				</div>
-				<!-- /.card -->
-				
 				<!-- Pagination -->
-				<div class="row g-3 mt-3 justify-content-center">
-					<ul class="pagination pagination-sm mx-auto" style="width: 200px;">
+				<div class="row g-3 mt-3 justify-content-center mx-auto">
+					<ul class="pagination pagination-sm">
 						<c:if test="${pagination.pre}">
 							<li class="page-item">
 								<a class="page-link" href="#" aria-label="Previous" data-all-page="1" style="color:#17a2b8;">
@@ -243,6 +239,10 @@
 						</c:if>
 					</ul>
 				</div>
+				
+				</div>
+				<!-- /.card -->
+				
 				
 				<div class="row">
 					<div class="col">

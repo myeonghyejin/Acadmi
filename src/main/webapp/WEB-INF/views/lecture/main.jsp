@@ -61,10 +61,10 @@
 									        	let number = '${lecture.professorVO.phone}'
 									        	number=number.replace(/-/g, '');
 									        	console.log(number);
-									        	const countryCode = number.substring(0, 2);
-									        	const areaCode = number.substring(2, 6);
-									        	const phoneNumber = number.substring(6);
-									        	document.write(0,countryCode,'-',areaCode,'-',phoneNumber);
+									        	const countryCode = number.substring(0, 3);
+									        	const areaCode = number.substring(3, 7);
+									        	const phoneNumber = number.substring(7);
+									        	document.write(countryCode,'-',areaCode,'-',phoneNumber);
 								        	</script>
 								        </td>
 								        <td>${lecture.professorVO.professorRoom}</td>
