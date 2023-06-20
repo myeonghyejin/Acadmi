@@ -4,32 +4,32 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="com.acadmi.lecture.LectureDAO">
-  <sql id="lectureCondition">
-  	<trim prefix="WHERE" prefixOverrides="AND">
-  		<if test="temporary!=null">
-  			TEMPORARY = #{temporary}
-  		</if>
-  		<if test="year==null and semester==null and username!=null">
-  			AND USERNAME=#{username}AND STATUS=1 AND YEAR=DATE_FORMAT(now(),'%Y') AND 
-  			SEMESTER = CASE
-    		WHEN MONTH(NOW()) BETWEEN 3 AND 8 THEN 1
-    		ELSE 2
-			END
-  		</if>
-  		<if test="year!=null and semester!=null">
-  			AND USERNAME=#{username} AND YEAR=#{year} AND SEMESTER=#{semester}
-  		</if>
-  	</trim>
-  </sql>
-  <sql id="attendeeCondition">
-		<if test="kind=='userName'">
-			AND S.USERNAME LIKE CONCAT('%', #{search}, '%')
-		</if>
-		<if test="kind=='name'">
-			AND NAME LIKE CONCAT('%', #{search}, '%')
-		</if>
-  </sql>
+<mapper namespace="com.acadmi.lecture.LectureDAO">
+	  <sql id="lectureCondition">
+	  	<trim prefix="WHERE" prefixOverrides="AND">
+	  		<if test="temporary!=null">
+	  			TEMPORARY = #{temporary}
+	  		</if>
+	  		<if test="year==null and semester==null and username!=null">
+	  			AND USERNAME=#{username}AND STATUS=1 AND YEAR=DATE_FORMAT(now(),'%Y') AND 
+	  			SEMESTER = CASE
+	    		WHEN MONTH(NOW()) BETWEEN 3 AND 8 THEN 1
+	    		ELSE 2
+				END
+	  		</if>
+	  		<if test="year!=null and semester!=null">
+	  			AND USERNAME=#{username} AND YEAR=#{year} AND SEMESTER=#{semester} AND STATUS=1 AND TEMPORARY=1
+	  		</if>
+	  		</trim>
+	  </sql>
+	  <sql id="attendeeCondition">
+			<if test="kind=='userName'">
+				AND S.USERNAME LIKE CONCAT('%', #{search}, '%')
+			</if>
+			<if test="kind=='name'">
+				AND NAME LIKE CONCAT('%', #{search}, '%')
+			</if>
+	  </sql>
  
  	<!--  홈페이지 강의 목록 -->
  	<select id="getHomeLectureList" parameterType="LectureVO" resultType="LectureVO">
@@ -67,15 +67,15 @@
 	
 	<!-- 강의 insert -->
   	<insert id="setLectureAdd" parameterType="LectureVO" useGeneratedKeys="true" keyProperty="lectureNum">
-  		INSERT INTO LECTURE (USERNAME,LECTURENAME,SEMESTER,CATEGORY,DEPTNUM,GRADE,
+  		INSERT INTO LECTURE (USERNAME,LECTURENAME,SEMESTER,CATEGORY,DEPTNUM,GRADE,SUBSCRIPTION,
   		YEAR,WEEKDAY, STARTTIME, ENDTIME, PERSONAL, COMPLETIONGRADE,STATUS,TEMPORARY)
-  		VALUES (#{username},#{lectureName},#{semester},#{category},#{deptNum},#{grade},#{year},#{weekday},
+  		VALUES (#{username},#{lectureName},#{semester},#{category},#{deptNum},#{grade},0,#{year},#{weekday},
   		#{startTime},#{endTime},#{personal},#{completionGrade},1,1)
   	</insert>
   	<insert id="setTemporaryAdd" parameterType="LectureVO" useGeneratedKeys="true" keyProperty="lectureNum">
-  		INSERT INTO LECTURE (USERNAME,LECTURENAME,SEMESTER,CATEGORY,DEPTNUM,GRADE,
+  		INSERT INTO LECTURE (USERNAME,LECTURENAME,SEMESTER,CATEGORY,DEPTNUM,GRADE,SUBSCRIPTION,
   		YEAR,WEEKDAY, STARTTIME, ENDTIME, PERSONAL, COMPLETIONGRADE,STATUS,TEMPORARY)
-  		VALUES (#{username},#{lectureName},#{semester},#{category},#{deptNum},#{grade},#{year},#{weekday},
+  		VALUES (#{username},#{lectureName},#{semester},#{category},#{deptNum},#{grade},0,#{year},#{weekday},
   		#{startTime},#{endTime},#{personal},#{completionGrade},1,0)
   	</insert>
   
@@ -259,4 +259,4 @@
   		</association>
   	</resultMap>
   	
-  </mapper>
+	</mapper>
