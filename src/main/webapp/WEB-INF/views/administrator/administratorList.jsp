@@ -48,12 +48,11 @@
 		<!-- Header 끝 -->
 
 		<!-- Main Contents -->
+		<div class="content-wrapper">
 		<div class="container-fluid">
 			<div class="row">
 				<!-- 2레벨 Sidebar 적용 -->
-				<div class="content-wrapper">
-					<c:import url="../temp/sidebar/administrator_memberList.jsp"></c:import>
-				</div>
+				<c:import url="../temp/sidebar/administrator_memberList.jsp"></c:import>
 				<!-- 2레벨 Sidebar 끝 -->
 				
 				<!-- Contents -->
@@ -73,11 +72,6 @@
 					<!-- Default box -->
 					<div class="card">
 						<div class="card-header">
-							<div class="card-tools">
-								<button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-									<i class="fas fa-minus"></i>
-								</button>		
-							</div>
 							<form action="./administratorList" id="search-form">
 								<c:forEach items="${list}" var="departmentVO">
 									<c:forEach items="${departmentVO.administratorVOs}" var="administratorVO">
@@ -127,7 +121,6 @@
 											</div>
 										</div>
 									
-				              		<div class="card-body">
 				              		<table class="table table-hover text-nowrap" style="text-align : center;"  id="tableAdmin">
 			             				 <thead>
 							                  <tr>
@@ -205,10 +198,9 @@
 								   	 		</c:forEach>
 							              </tbody>
 			          				</table>
-				            	</div>
-				            	  <div class="row g-3 justify-content-center" style="margin: 20px auto;" id="pagination">
+				            	  <div class="row g-3 justify-content-center" id="pagination">
 									
-										<ul class="pagination pagination-sm mx-auto"  style="width: 200px;">
+										<ul class="pagination pagination-sm mx-auto">
 											<c:if test="${pagination.pre}">
 												<li class="page-item">
 													<a class="page-link" href="./administratorList?page=1&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="1" style="color:#17a2b8;">
@@ -238,19 +230,16 @@
 				</div>
 			</div>
 		</div>
-
+	</div>
 	<!-- Footer 적용 -->
 	<c:import url="../temp/footer.jsp"></c:import>
 	<!-- Footer 끝 -->
-	
+</div>
+<!-- ./wrapper -->
+</body>
 	<script>
 	    $(function () {
 	      $('.select2').select2()
 	    });
 	</script>
-
-	</div>
-<!-- ./wrapper -->
-</body>
-</body>
 </html>

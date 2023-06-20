@@ -49,8 +49,8 @@
 					<!-- Contents -->
 					<div class="col">
 					<!-- header start -->
-						<div class="row" style="padding-top:10px">
-							<div class="col-12">
+						<div class="row">
+							<div class="col-12 mt-3">
 								<div class="card">
 									<h3 class="my-3 mx-3">학생 계정 생성</h3>
 								</div>
@@ -145,7 +145,7 @@
 									</div>
 									<input type="hidden" name="category" value="2">
 									<div style="width:auto; float: right; margin-top : 50px;">
-							            <button type="button" class="btn btn-info" id="studentBtn" style="margin-right :10px;">학생 가입</button> 
+							            <button type="button" class="btn btn-info" id="studentBtn">학생 가입</button> 
 							            <button type="button" class="btn btn-danger" id="backBtn">취소</button>
 					            	</div>
 								</div>

@@ -47,8 +47,8 @@
 				<!-- Contents -->
 				<div class="col">
 				<!-- header start -->
-					<div class="row" style="padding-top:20px">
-						<div class="col-12">
+					<div class="row">
+						<div class="col-12 mt-3">
 							<div class="card">
 								<h3 class="my-3 mx-3">학생 목록 조회</h3>
 							</div>
@@ -58,15 +58,10 @@
 					<!-- Default box -->
 					<div class="card">
 						<div class="card-header">
-							<div class="card-tools">
-								<button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-									<i class="fas fa-minus"></i>
-								</button>		
-							</div>
 						<form action="./studentList" id="search-form">
 							
 								<input type="hidden" name="page" value="1">
-									<div class="row justify-content-center mx-auto my-3" >
+									<div class="row justify-content-center mx-auto my-3">
 										<div class="col-md-8">
 											<div class="row">
 												<div class="col-3">
@@ -145,7 +140,6 @@
 											</div>
 									</div>
 									</div>
-			              		<div class="card-body">
 								 	  <table class="table table-hover text-nowrap" style="text-align : center;"  id="tableStudent">
 							              <thead>
 							                  <tr>
@@ -236,7 +230,6 @@
 					     	 				</c:forEach>
 									    </tbody>
 				          		</table>
-			            	</div>
 			            	  <div class="row g-3 justify-content-center" style="margin: 20px auto;" id="pagination">
 									
 									<ul class="pagination pagination-sm mx-auto">

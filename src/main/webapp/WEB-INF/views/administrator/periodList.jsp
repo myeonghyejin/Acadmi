@@ -63,11 +63,6 @@
 				<!-- Default box -->
 				<div class="card">
 					<div class="card-header">
-						<div class="card-tools">
-							<button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-								<i class="fas fa-minus"></i>
-							</button>		
-						</div>
 					
 				<form action="./periodList" method="get">
 					<div class="row justify-content-center mx-auto mt-2 mb-4">
@@ -91,7 +86,7 @@
                					<option value="2" ${lectureVO.semester eq 2 ? 'selected' : '' }>2학기</option>
 							</select>
 						</div>
-						<button type="submit" class="btn btn-default" style="height: 50%; margin-top: auto; margin-left: 7px;">
+						<button type="submit" class="btn btn-default" style="height: 50%; margin-top: auto;">
 							<i class="fa fa-search"></i>
 						</button>
 					</div>
