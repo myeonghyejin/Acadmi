@@ -365,14 +365,14 @@
 		APPLICATIONEND = CONCAT(#{applicationEnd}, ' 23:59:59'),
 		FAVORITESTART = CONCAT(#{favoriteStart}, ' 18:00:00'),
 		FAVORITEEND = CONCAT(#{favoriteEnd}, ' 23:59:59'),
-		REGISTRATIONSTART = CONCAT(#{registrationStart}, '18:00:00'),
+		REGISTRATIONSTART = CONCAT(#{registrationStart}, ' 18:00:00'),
 		DEADLINE = CONCAT(#{deadline}, ' 23:59:59')
 			ON DUPLICATE KEY UPDATE
 		APPLICATIONSTART = CONCAT(#{applicationStart}, ' 18:00:00'), 
 		APPLICATIONEND = CONCAT(#{applicationEnd}, ' 23:59:59'),
 		FAVORITESTART = CONCAT(#{favoriteStart}, ' 18:00:00'),
 		FAVORITEEND = CONCAT(#{favoriteEnd}, ' 23:59:59'),
-		REGISTRATIONSTART = CONCAT(#{registrationStart}, '18:00:00'),
+		REGISTRATIONSTART = CONCAT(#{registrationStart}, ' 18:00:00'),
 		DEADLINE = CONCAT(#{deadline}, ' 23:59:59')
   </insert>
   
