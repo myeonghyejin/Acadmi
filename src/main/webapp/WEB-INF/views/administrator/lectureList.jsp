@@ -152,7 +152,9 @@
 				                      <th style="width: 20%">
 				                      	  상태
 				                      </th>
-				                      <th></th>
+				                      <th>강의실</th>
+									  <th></th>
+									  <th></th>
 				                  </tr>
 				              </thead>
 				              <tbody>
@@ -198,6 +200,9 @@
 						   	 			<c:if test="${lectureVO.status eq null }">
 						   	 				<td>상태 없음</td>
 						   	 			</c:if>
+						   	 			<td>${lectureBuilding} ${lectureRoom}</td>
+			                        	
+						   	 				
 						
 						   	 			<td>
 							   	 				<button class="toggleButton" style="background-color : white; border : none; outline : none; ">+</button>
@@ -209,18 +214,14 @@
 									                            <th>학과</th>
 									                           	<th>학기</th>
 									                           	<th>담당교수</th>
-									                           	<th>강의실</th>
-									                           	<th></th>
+									                           	
 									                        </tr>
 									                        <tr>
 									                        	<td>${year}</td>
 									                        	<td>${deptName}</td>
 									                        	<td>${semester }</td>
 									                        	<td>${professorName}</td>
-									                        	<td>${lectureBuilding} ${lectureRoom}</td>
-									                        	<c:if test="${lectureBuilding eq  null}">
-									                        		<td><a href="./lectureRoomAssignment?lectureNum=${lectureNum}&startTime=${lectureStartTime}&endTime=${lectureEndTime}&weekday=${lectureWeekday}&personal=${lectureRoomPersonal}"><button class="btn btn-info">강의실 배정</button></a></td>
-									                        	</c:if>
+									                        	
 								                        </tr>
 								                       
 								                    </table>
@@ -228,6 +229,9 @@
 						   	 				</div>
 						   	 				
 					   	 			</td>
+					   	 			<c:if test="${lectureBuilding eq  null}">
+			                        		<td><a href="./lectureRoomAssignment?lectureNum=${lectureNum}&startTime=${lectureStartTime}&endTime=${lectureEndTime}&weekday=${lectureWeekday}&personal=${lectureRoomPersonal}"><button class="btn btn-info">강의실 배정</button></a></td>
+			                        </c:if>
 					   	 			
 					   	 			
 					   	 		</tr>	
