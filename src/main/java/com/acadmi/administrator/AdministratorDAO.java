@@ -87,11 +87,15 @@ public interface AdministratorDAO {
 	public List<PeriodVO> getPeriodList(Pagination pagination) throws Exception;
 	public Long getTotalCountPeriod(Pagination pagination) throws Exception;
 	public List<String> getCurrentYear() throws Exception;
+	public List<String> getCurrentYearMinus() throws Exception;
 	
 	//강의 조회
 	public List<LectureVO> getLectureList(Pagination pagination) throws Exception;
 	
 	public Long getTotalCountLecture(Pagination pagination) throws Exception;
+	
+	//강의 폐강
+	public int setLectureUpdate(LectureVO lectureVO) throws Exception;
 	
 	//강의실 배정 
 	public List<LectureRoomVO> getLectureRoomAssignment(Map<String, Object> map) throws Exception;

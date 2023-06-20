@@ -198,6 +198,7 @@
 						   	 			<c:if test="${lectureVO.status eq null }">
 						   	 				<td>상태 없음</td>
 						   	 			</c:if>
+						
 						   	 			<td>
 							   	 				<button class="toggleButton" style="background-color : white; border : none; outline : none; ">+</button>
 							   	 				<div class="toggleContent" style="display:none">
@@ -227,6 +228,7 @@
 						   	 				</div>
 						   	 				
 					   	 			</td>
+					   	 			<td><button class="btn btn-danger"  data-lectureNum="${lectureNum}">폐강</button> </td>
 					   	 			
 					   	 		</tr>	
 					   	 		</c:forEach>
@@ -236,43 +238,42 @@
 				          
 				        </div>
 									
+					<!-- Pagination -->
+				 <div class="row g-3 justify-content-center" style="margin: 20px auto;" id="pagination">
 					
-					<!-- /.card-body -->
-						
-				</div>
-				<!-- /.card -->
-				
-						<!-- Pagination -->
-						 <div class="row g-3 justify-content-center" style="margin: 20px auto;" id="pagination">
+						<ul class="pagination pagination-sm mx-auto" style="width: 200px;">
+							<c:if test="${pagination.pre}">
+								<li class="page-item">
+									<a class="page-link" href="./lectureList?page=${pagination.startNum-1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="${pagination.startNum-1}" style="color:#17a2b8;">
+										<span aria-hidden="true">&lsaquo;</span>
+									</a>
+								</li>
+							</c:if>
+							<c:forEach begin="${pagination.startNum}" end="${pagination.lastNum}" var="i">
+								<li class="page-item"><a class="page-link" href="./lectureList?page=${i}&kind=${pagination.kind}&search=${pagination.search}" data-board-page="${i}" style="color:#17a2b8;">${i}</a></li>
+							</c:forEach>
+							<c:if test="${pagination.next}">
+								<li class="page-item">
+									<a class="page-link" href="./lectureList?page=${pagination.lastNum+1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next" data-board-page="${pagination.totalPage}" style="color:#17a2b8;">
+										<span aria-hidden="true">&rsaquo;</span>
+									</a>
+								</li>
+							</c:if>
 							
-								<ul class="pagination pagination-sm mx-auto" style="width: 200px;">
-									<c:if test="${pagination.pre}">
-										<li class="page-item">
-											<a class="page-link" href="./lectureList?page=${pagination.startNum-1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="${pagination.startNum-1}" style="color:#17a2b8;">
-												<span aria-hidden="true">&lsaquo;</span>
-											</a>
-										</li>
-									</c:if>
-									<c:forEach begin="${pagination.startNum}" end="${pagination.lastNum}" var="i">
-										<li class="page-item"><a class="page-link" href="./lectureList?page=${i}&kind=${pagination.kind}&search=${pagination.search}" data-board-page="${i}" style="color:#17a2b8;">${i}</a></li>
-									</c:forEach>
-									<c:if test="${pagination.next}">
-										<li class="page-item">
-											<a class="page-link" href="./lectureList?page=${pagination.lastNum+1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Next" data-board-page="${pagination.totalPage}" style="color:#17a2b8;">
-												<span aria-hidden="true">&rsaquo;</span>
-											</a>
-										</li>
-									</c:if>
-									
-								</ul>
-						
-							</div>
+						</ul>
+				
+					</div>
+					<!-- /.card-body -->
+				</div>
+				
+				<!-- /.card -->
 			</div>
 		</div>
 	</div>	
 	<!-- ./wrapper -->
 
 <c:import url="../temp/footer.jsp"></c:import>
+<script type="text/javascript" src="../js/administrator/lectureList.js"></script>
 <script type="text/javascript">
 	/* 토글 */
 	let toggleButtons = document.getElementsByClassName("toggleButton");

@@ -99,7 +99,7 @@
 					                    				<c:if test="${lectureVO.studentLectureVO.creditVO.credit!=null}">
 																<td>${lectureVO.studentLectureVO.creditVO.credit}</td>
 														     <c:choose>
-														        <c:when test="${lectureVO.rank <=(lectureVO.subscription*50/100)}">
+														        <c:when test="${lectureVO.studentVO.rank <=(lectureVO.subscription*50/100)}">
 														            <td>A</td>
 														        </c:when>
 														        <c:otherwise>

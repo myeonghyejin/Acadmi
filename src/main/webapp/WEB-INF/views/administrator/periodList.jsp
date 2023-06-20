@@ -12,7 +12,17 @@
 	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
 	rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-
+<style type="text/css">
+	#row {
+	  display: flex;
+	  justify-content: center; /* 가로 방향으로 가운데 정렬 */
+	  align-items: center; /* 세로 방향으로 가운데 정렬 */
+	}
+	
+	.col-custom {
+	  flex-grow: 1;
+	}
+</style>
 <title>Insert title here</title>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -41,47 +51,51 @@
 				<div class="row">
 					<div class="col mt-3">
 						<div class="card">
-							<h3 class="my-3 mx-3">기간 목록 조회</h3>
+							<h3 class="my-3 mx-3">기간 조회</h3>
 						</div>
 					</div>
 				</div>
 				<!-- header end -->
 				
 					<!-- Search -->
-						<form action="./periodList" id="search-form">
-							<input type="hidden" name="page" value="1">
-								<div class="card search">
-		               			<div class="row content">
-		               				<label style="margin : 10px;">수강 년도</label>
-		               				<select  class="select2" name="year" style="width: 15%;" id="year" >
-		               				<option value="">전체</option>
-		               				<c:forEach  begin="${map['min']}" end="${map['max']}" varStatus="i">
-		               					<option value="${i.index}" ${lectureVO.year eq i.index  ? 'selected' : ''}>${i.index}</option>
-		               				</c:forEach>
-		               				
-		       
-		               				</select>
-		               				<label style="margin : 10px;">학기</label>
-		               				<select class="select2" name="semester"style="width: 15%;" id="semester">
-		               					<option value="">전체</option>
-		               					<option value="1" ${lectureVO.semester eq 1 ? 'selected' : '' }>1학기</option>
-		               					<option value="2" ${lectureVO.semester eq 2 ? 'selected' : '' }>2학기</option>
-		               				</select>
-		               			</div>
-		               		</div>
-		               		
-						</form>
+						
 				
 				<!-- Default box -->
 				<div class="card">
 					<div class="card-header">
-						
 						<div class="card-tools">
 							<button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
 								<i class="fas fa-minus"></i>
 							</button>		
 						</div>
-						
+					
+				<form action="./periodList" method="get">
+					<div class="row justify-content-center mx-auto mt-2 mb-4">
+						<div class="col-3">
+							<label>수강 연도</label>
+							<select class="select2" style="width: 100%;" name="year">
+								<option value="">전체</option>
+		               				<c:forEach items="${year}" var="year">
+										<option value="${year}">${year }</option>
+									</c:forEach>
+		               				<%-- <c:forEach  begin="${map['min']}" end="${map['max']}" varStatus="i">
+		               					<option value="${i.index}" ${lectureVO.year eq i.index  ? 'selected' : ''}>${i.index}</option>
+		               				</c:forEach> --%>
+							</select>
+						</div>
+						<div class="col-3">
+							<label>수강 학기</label>
+							<select class="select2" style="width: 100%;" name="semester">
+								<option value="">전체</option>
+               					<option value="1" ${lectureVO.semester eq 1 ? 'selected' : '' }>1학기</option>
+               					<option value="2" ${lectureVO.semester eq 2 ? 'selected' : '' }>2학기</option>
+							</select>
+						</div>
+						<button type="submit" class="btn btn-default" style="height: 50%; margin-top: auto; margin-left: 7px;">
+							<i class="fa fa-search"></i>
+						</button>
+					</div>
+				</form>
 					
 					</div>
 					

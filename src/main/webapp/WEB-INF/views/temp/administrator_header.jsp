@@ -102,13 +102,13 @@
                </a>
                <ul class="nav nav-treeview">
                   <li class="nav-item">
-                     <a href="/administrator/studentAdd" class="nav-link" id="acountLink">
+                     <a href="/administrator/administratorAdd" class="nav-link" id="acountLink">
                         <i class="fa-solid fa-circle fa-2xs"></i>
                         <p>계정 관리</p>
                      </a>
                   </li>
                   <li class="nav-item">
-                     <a href="/administrator/studentList" class="nav-link" id="acountList">
+                     <a href="/administrator/administratorList" class="nav-link" id="acountList">
                         <i class="fa-solid fa-circle fa-2xs"></i>
                         <p>회원 목록</p>
                      </a>

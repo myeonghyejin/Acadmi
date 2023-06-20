@@ -86,7 +86,7 @@
  	
  	<!--내 성적 조회  -->
  	<select id="getMyCreditList" parameterType="lectureVO" resultMap="myCreditList">
-		SELECT L.*, C.*, P.NAME, DENSE_RANK() OVER (PARTITION BY SL.LECTURENUM ORDER BY C.CREDIT DESC) AS RANK
+		SELECT L.*, C.*, P.NAME, S.*,DENSE_RANK() OVER (PARTITION BY SL.LECTURENUM ORDER BY C.CREDIT DESC) AS RANK
 		FROM STUDENT S
 		INNER JOIN STUDENT_LECTURE SL ON (S.USERNAME = SL.USERNAME)
 		INNER JOIN DEPARTMENT D ON (S.DEPTNUM = D.DEPTNUM)
@@ -119,7 +119,6 @@
  		<result column="CATEGORY" property="category"/>
  		<result column="YEAR" property="year"/>
  		<result column="SEMESTER" property="semester"/>
- 		<result column="RANK" property="rank"/>
  		<result column="SUBSCRIPTION" property="subscription"/>
  		
  		<association property="studentLectureVO" javaType="StudentLectureVO">
@@ -130,6 +129,10 @@
  		<association property="professorVO" javaType="ProfessorVO">
  			<id column="USERNAME" property="username"/>
  			<result column="NAME" property="name"/>
+ 		</association>
+ 		<association property="studentVO" javaType="StudentVO">
+ 			<id column="USERNAME" property="username"/>
+ 			<result column="RANK" property="rank"/>
  		</association>
  		
  	</resultMap>

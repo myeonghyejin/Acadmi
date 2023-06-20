@@ -467,6 +467,10 @@ public class AdministratorService{
 		return result;
 	}
 	
+	public List<String> getCurrentYearMinus() throws Exception {
+		return administratorDAO.getCurrentYearMinus();
+	}
+	
 	//강의 조회
 	public List<LectureVO> getLectureList(Pagination pagination) throws Exception {
 		Long totalCount = administratorDAO.getTotalCountLecture(pagination);
@@ -478,6 +482,11 @@ public class AdministratorService{
 		
 		
 		return ar;
+	}
+	
+	//강의 폐강
+	public int setLectureUpdate(LectureVO lectureVO) throws Exception {
+		return administratorDAO.setLectureUpdate(lectureVO);
 	}
 	
 	//강의실 배정
