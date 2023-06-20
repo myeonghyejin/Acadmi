@@ -61,12 +61,6 @@
 				<!-- Default box -->
 				<div class="card">
 					<div class="card-header">
-							
-						<div class="card-tools">
-							<button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-								<i class="fas fa-minus"></i>
-							</button>		
-						</div>
 					
 						<!-- Search -->
 						<form action="./departmentList" id="search-form">
@@ -79,8 +73,8 @@
 														<label>상태</label>
 														<select class="select2" name="status" style="width: 100%;">
 															<option value="">전체</option>
-															<option value="1">사용가능</option>
-															<option value="0">사용불가</option>
+															<option value="1">사용 가능</option>
+															<option value="0">사용 불가</option>
 															
 														</select>
 													</div>
@@ -124,7 +118,7 @@
 				                         학과 번호
 				                      </th>
 				                      <th style="width: 10%">
-				                          단과 대학
+				                          단과대학
 				                      </th>
 				                      <th style="width: 10%" class="text-center">
 				                          학과
@@ -151,9 +145,9 @@
 												<td><c:out value="${collegeName}"></c:out></td>
 												<td><c:out value="${deptName}"></c:out></td>
 												<td>
-													<select name="status" class="select2" style="width : 31%">
-														<option value="1" selected>사용가능</option>
-														<option value="0">사용불가</option>
+													<select name="status" class="select2" style="width : 35%">
+														<option value="1" selected>사용 가능</option>
+														<option value="0">사용 불가</option>
 													</select>
 												</td>
 											</c:if>
@@ -162,9 +156,9 @@
 												<td style="color: #E2E2E2;"><c:out value="${collegeName}"></c:out></td>
 												<td style="color: #E2E2E2;"><c:out value="${deptName}"></c:out></td>
 												<td>
-													<select name="status" class="select2" style="width : 31%">
-														<option value="1">사용가능</option>
-														<option value="0" selected>사용불가</option>
+													<select name="status" class="select2" style="width : 35%">
+														<option value="1">사용 가능</option>
+														<option value="0" selected>사용 불가</option>
 													</select>
 												</td>
 											</c:if>
@@ -183,7 +177,7 @@
 					<!-- /.card-body -->
 						<div class="row g-3 justify-content-center" style="margin: 20px auto;" id="pagination">
 									
-							<ul class="pagination pagination-sm mx-auto"  style="width: 200px;">
+							<ul class="pagination pagination-sm mx-auto">
 								<c:if test="${pagination.pre}">
 									<li class="page-item">
 										<a class="page-link" href="./departmentList?page=1&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="1" style="color:#17a2b8;">

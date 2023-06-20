@@ -22,6 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			AND LECTURENUM NOT IN (SELECT LECTURENUM FROM STUDENT_LECTURE WHERE USERNAME = #{username})
 			AND YEAR = #{year}
 			AND SEMESTER = #{semester}
+			AND L.STATUS = 1
 		</trim>
 	</sql>	
 

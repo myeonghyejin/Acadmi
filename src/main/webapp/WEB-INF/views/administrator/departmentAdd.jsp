@@ -52,8 +52,7 @@
 
 					      <!-- Default box -->	
 					      <div class="card">
-					        <div class="card-body row">
-					          <div class="col-7">
+					        <div class="card-body">
 						         <form action="./departmentAdd" method="post" id="deptForm">
 						          	 <div class="form-group">
 						           	  <label>단과 대학</label>
@@ -71,14 +70,13 @@
 						            </div>
 						           
 						            <div class="form-group clearfix">
-						            <div class="icheck-primary d-inline">
+						            <div class="icheck-info d-inline">
 				                        <input type="radio" id="radioPrimary1" name="status" value="1" checked>
 				                        	<label for="radioPrimary1">
 				                        	사용 가능
 				                       		</label>
 				                     </div>
-				                     
-					                      <div class="icheck-primary d-inline">
+					                      <div class="icheck-info d-inline ml-3">
 					                        <input type="radio" id="radioPrimary1" name="status" value="0">
 				                        	<label for="radioPrimary1">
 				                        	사용 불가
@@ -86,12 +84,10 @@
 					                     </div>
 				                     </div>
 					                 <div  style="width:auto; float: right;">
-							            <button type="button" class="btn btn-info" id="deptBtn" style="margin-right : 10px;">등록</button> 
+							            <button type="button" class="btn btn-info" id="deptBtn">등록</button> 
 							            <button type="button" class="btn btn-danger" id="backBtn">취소</button>
 						            </div>
 						          </form>
-					          </div>
-					        </div>
 					      </div>
 			
 			    	</section>
