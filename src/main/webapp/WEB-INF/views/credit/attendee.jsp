@@ -73,8 +73,8 @@
 				                    		<thead style="background-color: #f8f9fa;">
 					                    		<tr>
 					                    			<th>학번</th>
-					                    			<th>학과</th>
 					                    			<th>이름</th>
+					                    			<th>학과</th>
 					                    			<th>학년</th>
 					                    			<th>총점</th>
 					                    			<th>성적</th>
@@ -84,8 +84,8 @@
 					                    		<c:forEach items="${attendee}" var="attendee">
 					                    			<tr>
 					                    				<td>${attendee.username}</td>
-					                    				<td>${attendee.departmentVO.deptName}</td>
 					                    				<td>${attendee.name}</td>
+					                    				<td>${attendee.departmentVO.deptName}</td>
 					                    				<td>${attendee.grade}학년</td>
 					                    				<c:if test="${attendee.creditVO.credit==null}">
 						                    				<td style="color:gray;">점수 없음</td>

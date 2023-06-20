@@ -118,6 +118,7 @@
   			<result column="REPORTGRADE" property="reportGrade"/>
   			<result column="ATTENDANCE" property="attendance"/>
   			<result column="CREDIT" property="credit"/>
+  			<result column="RANK" property="rank"/>
   		</association>
   		
   	</resultMap>
