@@ -55,9 +55,6 @@
 					<div class="card-header">
 						<!-- Search -->
 						<form action="./all_lecture">
-							<input type="hidden" name="year" value="${year}">
-							<input type="hidden" name="semester" value="${semester}">
-							<input type="hidden" name="page" value="1">
 							<div class="row justify-content-center mx-auto my-3">
 								<div class="col-md-6">
 									<div class="row">
@@ -216,23 +213,23 @@
 					<!-- /.card-body -->
 				
 				<!-- Pagination -->
-				<div class="row g-3 mt-3 justify-content-center mx-auto">
+				<div class="row g-3 my-3 justify-content-center mx-auto">
 					<ul class="pagination pagination-sm">
 						<c:if test="${pagination.pre}">
 							<li class="page-item">
-								<a class="page-link" href="#" aria-label="Previous" data-all-page="1" style="color:#17a2b8;">
+								<a class="page-link" href="./all_lecture?page=${pagination.startNum - 1}&year=${year}&semester=${semester}" aria-label="Previous" style="color:#17a2b8;">
 									<span aria-hidden="true">&laquo;</span>
 								</a>
 							</li>
 						</c:if>
 						<c:forEach begin="${pagination.startNum}" end="${pagination.lastNum}" var="page">
 							<li class="page-item">
-								<a class="page-link" href="#" data-all-page="${page}" style="color:#17a2b8;">${page}</a>
+								<a class="page-link" href="./all_lecture?page=${page}&year=${year}&semester=${semester}" style="color:#17a2b8;">${page}</a>
 							</li>
 						</c:forEach>
 						<c:if test="${pagination.next}">
 							<li class="page-item">
-								<a class="page-link" href="#" aria-label="Next" data-all-page="${pagination.totalPage}" style="color:#17a2b8;">
+								<a class="page-link" href="./all_lecture?page=${pagination.lastNum + 1}&year=${year}&semester=${semester}" aria-label="Next" style="color:#17a2b8;">
 									<span aria-hidden="true">&raquo;</span>
 								</a>
 							</li>
@@ -266,6 +263,6 @@
       $('.select2').select2()
     });
 </script>
-<script src="/js/student/lecture/all_lecture.js"></script>
+<script src="/js/student/registration/all_lecture.js"></script>
 </body>
 </html>

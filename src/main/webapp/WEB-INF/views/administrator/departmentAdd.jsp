@@ -40,8 +40,8 @@
 			<div class="content-wrapper">
 					<div class="col">
 						<!-- header start -->
-						<div class="row" style="padding-top:10px">
-							<div class="col-12">
+						<div class="row">
+							<div class="col-12 mt-3">
 								<div class="card">
 									<h3 class="my-3 mx-3">학과 등록</h3>
 								</div>

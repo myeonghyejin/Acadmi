@@ -53,15 +53,15 @@ if($("#radioPrimary1").val() == 1) {
 $("#roomAdd").click(function() {
     if(!check.includes(false) || check[2]) {
         if($("#lectureRoom").val() == '') {
-            alert("강의실 호수는 필수 사항입니다")
+            alert("강의실 호수는 필수 사항입니다.")
             return
         }
         if(!check[0]) {
-            alert("중복된 강의실입니다")
+            alert("중복된 강의실입니다.")
             return;
         }
         if(!check[1]) {
-            alert("최대 수용 인원을 입력하세요")
+            alert("최대 수용 인원을 입력하세요.")
             return;
         }
         //console.log("성공")
@@ -71,7 +71,7 @@ $("#roomAdd").click(function() {
 
 //취소
 $("#backBtn").click(function() {
-    let back = confirm("정말 취소하시겠습니까?")
+    let back = confirm("취소하시겠습니까?")
 
     if(back == true) {
         location.href="../administrator/lectureRoomList"
