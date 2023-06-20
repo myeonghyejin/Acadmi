@@ -40,7 +40,7 @@
 		            				${lectureVO.personal}명
 		            			</div>
 		            			<div class="col-4 text-right">
-								    <button class ="btn btn-info">강의실 버튼</button>
+								    <button class ="btn btn-info">강의실 배정</button>
 								</div>
 		            		</div>
 		            		</c:if>
