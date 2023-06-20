@@ -23,7 +23,7 @@
                             <a href="./login" class="h1"><img src="/images/black.png" style="width: 70%; height: 70%;"></a>
                         </div>
                         <div class="card-body">
-                            <p class="login-box-msg">임시 비밀번호 발급</p>
+                            <p class="login-box-msg">비밀번호 찾기</p>
                             <form:form id="contactForm" modelAttribute="memberVO" action="./findPw" method="post">
                                 <div class="input-group mb-3">
                                     <form:input path="username" id="username" class="form-control" placeholder="아이디를 입력하세요."></form:input>
