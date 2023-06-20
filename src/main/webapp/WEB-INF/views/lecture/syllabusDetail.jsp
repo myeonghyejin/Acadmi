@@ -139,7 +139,7 @@
 											<table class="table table-bordered" style="text-align: center;margin-top: 20px">
 								                <tbody>
 								                	<tr>
-								                		<th style="background-color:#f8f9fa;color:#17a2b8;vertical-align:middle;width:210px" rowspan="4">교재 및 참고문서</th>
+								                		<th style="background-color:#f8f9fa;color:#17a2b8;vertical-align:middle;width:210px" rowspan="4">교재 및 참고 문서</th>
 								                		<th style="background-color:#f8f9fa;color:#17a2b8;">교재명</th>
 								                		<th style="background-color:#f8f9fa;color:#17a2b8;">저자</th>
 								                		<th style="background-color:#f8f9fa;color:#17a2b8;">출판사</th>
@@ -150,7 +150,7 @@
 								                		<td>${lecture.syllabusVO.bookPublisher}</td>
 								                	</tr>
 								                	<tr>
-								                		<th style="background-color:#f8f9fa;color:#17a2b8;">출판년도</th>
+								                		<th style="background-color:#f8f9fa;color:#17a2b8;">출판 연도</th>
 								                		<th style="background-color:#f8f9fa;color:#17a2b8;">ISBN</th>
 								                		<th style="background-color:#f8f9fa;color:#17a2b8;">비고</th>
 								                	</tr>

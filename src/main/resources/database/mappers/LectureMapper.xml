@@ -11,7 +11,7 @@
   			TEMPORARY = #{temporary}
   		</if>
   		<if test="year==null and semester==null and username!=null">
-  			AND USERNAME=#{username} AND YEAR=DATE_FORMAT(now(),'%Y') AND 
+  			AND USERNAME=#{username}AND STATUS=1 AND YEAR=DATE_FORMAT(now(),'%Y') AND 
   			SEMESTER = CASE
     		WHEN MONTH(NOW()) BETWEEN 3 AND 8 THEN 1
     		ELSE 2
@@ -33,7 +33,7 @@
  
  	<!--  홈페이지 강의 목록 -->
  	<select id="getHomeLectureList" parameterType="LectureVO" resultType="LectureVO">
- 		SELECT * FROM LECTURE WHERE YEAR=DATE_FORMAT(now(),'%Y') AND USERNAME=#{username} AND TEMPORARY=1 AND
+ 		SELECT * FROM LECTURE WHERE YEAR=DATE_FORMAT(now(),'%Y') AND USERNAME=#{username} AND STATUS=1 AND TEMPORARY=1 AND
  		SEMESTER = CASE
     	WHEN MONTH(NOW()) BETWEEN 3 AND 8 THEN 1
     	ELSE 2
@@ -68,9 +68,9 @@
 	<!-- 강의 insert -->
   	<insert id="setLectureAdd" parameterType="LectureVO" useGeneratedKeys="true" keyProperty="lectureNum">
   		INSERT INTO LECTURE (USERNAME,LECTURENAME,SEMESTER,CATEGORY,DEPTNUM,GRADE,
-  		YEAR,WEEKDAY, STARTTIME, ENDTIME, PERSONAL, COMPLETIONGRADE,TEMPORARY)
+  		YEAR,WEEKDAY, STARTTIME, ENDTIME, PERSONAL, COMPLETIONGRADE,STATUS,TEMPORARY)
   		VALUES (#{username},#{lectureName},#{semester},#{category},#{deptNum},#{grade},#{year},#{weekday},
-  		#{startTime},#{endTime},#{personal},#{completionGrade},1)
+  		#{startTime},#{endTime},#{personal},#{completionGrade},1,1)
   	</insert>
   	<insert id="setTemporaryAdd" parameterType="LectureVO" useGeneratedKeys="true" keyProperty="lectureNum">
   		INSERT INTO LECTURE (USERNAME,LECTURENAME,SEMESTER,CATEGORY,DEPTNUM,GRADE,

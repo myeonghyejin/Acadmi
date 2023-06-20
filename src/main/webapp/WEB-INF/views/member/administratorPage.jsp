@@ -41,10 +41,10 @@
 							<section class="content">
 								<div class="container-fluid">
 									<div class="row justify-content-center">
-										<div class="col-md-6" style="padding-top:20px">
+										<div class="col-md-6" style="padding-top:37px">
 											<div class="card card-info card-outline ml-5">
 												<div class="card-body box-profile">
-													<div class="text-center">
+													<div class="text-center mb-4">
 														<c:forEach items="${departmentVO.administratorVOs}" var="administratorVO">
 		     	 												<c:choose>
 																    <c:when test="${empty administratorVO.memberFilesVO.fileName}">
@@ -60,10 +60,11 @@
 																</c:choose>
 														</c:forEach>
 													</div>
+													
 													<c:forEach items="${departmentVO.administratorVOs}" var="administratorVO">
 														<c:set var="administratorName" value="${administratorVO.name}"></c:set>
 															<sec:authentication property="Principal" var="user"/>
-																	<h3 class="profile-username text-center read-only"><c:out value="${administratorName}"></c:out>(${user.username})</h3>							
+																	<h3 class="profile-username text-center mt-3 read-only"><c:out value="${administratorName}"></c:out>(${user.username})</h3>							
 													</c:forEach>
 
 													<c:forEach items="${departmentVO.administratorVOs}" var="administratorVO">
@@ -75,18 +76,22 @@
 
 														<div class="card-body">
 															<strong><i class="fas fa-book mr-1"></i> 학과정보</strong>
+															<div style="height: 8px;"></div>
 															<p class="text-muted">
 																<c:set value="${departmentVO.deptName}" var="administratorDeptName"></c:set>
 																	<c:out value="${administratorDeptName}"></c:out>
 															</p>
 																<hr>
 																	<strong><i class="fa-solid fa-cake-candles mr-1"></i> 생년월일</strong>
+																	<div style="height: 8px;"></div>
 																			<p class="text-muted"><c:out value="${administratorBirth}"></c:out></p>
 																<hr>
 																	<strong><i class="fa-solid fa-phone mr-1"></i> 전화번호</strong>
+																	<div style="height: 8px;"></div>
 																		<p class="text-muted">
 																			<script type="text/javascript">
-																	        	const number = '${administratorPhone}'
+																	        	let number = '${administratorPhone}'
+																	        	number=number.replace(/-/g, '');
 																	        	const countryCode = number.substring(0, 3);
 																	        	const areaCode = number.substring(3, 7);
 																	        	const phoneNumber = number.substring(7, 11);
@@ -95,17 +100,17 @@
 																		</p>
 																<hr>
 																	<strong><i class="fas fa-envelope mr-1"></i> 이메일</strong>
+																	<div style="height: 8px;"></div>
 																		<p class="text-muted"><c:out value="${administratorEmail}"></c:out></p>
 																<hr>
 																	<strong><i class="fas fa-map-marker-alt mr-1"></i> 주소</strong>
+																	<div style="height: 8px;"></div>
 																		<p class="text-muted"><c:out value="${administratorAddress}"></c:out>&ensp;<c:out value="${administratorAddressDetail}"></c:out></p>
 															
+															<sec:authentication property="Principal" var="user"/>
+															<a href="/member/administratorUpdate?username=${user.username}" id="studentUpdate" class="btn btn-info float-right">수정</a>
 														</div>
 													</c:forEach>
-
-														<sec:authentication property="Principal" var="user"/>
-														<a href="/member/administratorUpdate?username=${user.username}" id="studentUpdate" class="btn btn-info float-right">수정</a>
-
 												</div>
 											</div>
 										</div>

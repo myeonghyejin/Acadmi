@@ -47,7 +47,7 @@
 													<form action="./professorUpdate" method="post" enctype="multipart/form-data">
 														<sec:authentication property="Principal" var="user"/>
 															<input type="hidden" name="username" value="${user.username}">
-																<div class="text-center">
+																<div class="text-center mb-4">
 																	<c:forEach items="${departmentVO.professorVOs}" var="professorVO">
 				     	 												<c:choose>
 																		    <c:when test="${empty professorVO.memberFilesVO.fileName}">
@@ -62,7 +62,7 @@
 																		    </c:otherwise>
 																		</c:choose>
 																	</c:forEach>
-																<div class="col-md-12 mt-3">
+																<div class="col-md-12 mt-4">
 											                        <div id="fileList">
 											                           <button class="col-md-3  btn btn-info" id="fileAdd" type="button">파일추가</button>
 											                        </div> 
@@ -70,9 +70,9 @@
 															</div>
 												
 													<c:forEach items="${departmentVO.professorVOs}" var="professorVO">
-															<h3 class="profile-username text-center">${professorVO.name}</h3>
-																<sec:authentication property="Principal" var="user"/>
-																	<h3 class="profile-username text-center">(${user.username})</h3>
+														<c:set var="professorName" value="${professorVO.name}"></c:set>
+															<sec:authentication property="Principal" var="user"/>
+																<h3 class="profile-username text-center"><c:out value="${professorName}"></c:out>(${user.username})</h3>
 													</c:forEach>
 													
 													<c:forEach items="${departmentVO.professorVOs}" var="professorVO">
@@ -86,37 +86,49 @@
 
 														<div class="card-body">
 															<strong><i class="fas fa-book mr-1"></i> 학과정보</strong>
+															<div style="height: 8px;"></div>
 															<p class="text-muted">
 																<c:set value="${departmentVO.deptName}" var="professorDeptName"></c:set>
 																	<c:out value="${professorDeptName}"></c:out><br>
 															</p>
 																<hr>
 																	<strong><i class="fa-solid fa-cake-candles mr-1"></i> 생년월일</strong>
+																	<div style="height: 8px;"></div>
 																			<p class="text-muted"><c:out value="${professorBirth}"></c:out></p>
 																<hr>
 																	<strong><i class="fa-solid fa-briefcase mr-1"></i> 사무실</strong>
+																	<div style="height: 8px;"></div>
 																			<p class="text-muted"><c:out value="${professorRoom}"></c:out>호</p>
 																<hr>
 																	<strong><i class="fa-solid fa-phone mr-1"></i> 전화번호</strong>
+																	<div style="height: 10px;"></div>
 																		<p class="text-muted"><input value="${professorVO.phone}" class="form-control" type="text" id="phone" name="phone"></p>
 																<hr>
 																	<strong><i class="fas fa-envelope mr-1"></i> 이메일</strong>
+																	<div style="height: 10px;"></div>
 																		<p class="text-muted"><input value="${professorVO.email}" class="form-control" type="email" id="email" name="email"></p>
 																<hr>
 																	<strong><i class="fas fa-map-marker-alt mr-1"></i> 주소</strong>
+																	<div style="height: 10px;"></div>
 																		<p class="text-muted"><input value="${professorVO.address}" class="form-control" type="text" id="address" name="address"></p>
 																	<strong><i class="mr-1"></i> 상세 주소 입력</strong>
+																	<div style="height: 10px;"></div>
 																		<p class="text-muted"><input value="${professorVO.addressDetail}" class="form-control" type="text" id="addressDetail" name="addressDetail"></p>
 																<hr>
 																	<strong><i class="fas fa-lock mr-1"></i> 비밀번호</strong>
+																	<div style="height: 10px;"></div>
 																		<p class="text-muted"><input class="form-control" type="password" id="password" name="password" placeholder="비밀번호를 입력하세요."/></p>
 																	<strong><i class="mr-1"></i> 비밀번호 확인</strong>
+																	<div style="height: 10px;"></div>
 																		<p class="text-muted" id="pwCheck"><input class="form-control" type="password" id="passwordCheck" name="passwordCheck" placeholder="비밀번호를 다시 입력하세요."/></p>
+														
+														<div class="row justify-content-end mt-4">
+															<sec:authentication property="Principal" var="user"/>
+		                 									<button class="btn btn-info" id="submitButton" type="submit">수정</button>
+		                 										<a href="/member/professorPage?username=${user.username}" class="btn btn-danger mx-2">취소</a>
+	                 									</div>
 														</div>
 													</c:forEach>
-														<sec:authentication property="Principal" var="user"/>
-	                 										<a href="/member/professorPage?username=${user.username}" class="btn btn-danger float-right mx-3">취소</a>
-	                 									<button class="btn btn-info float-right" id="submitButton" type="submit">수정</button>
 													</form>
 												</div>
 											</div>

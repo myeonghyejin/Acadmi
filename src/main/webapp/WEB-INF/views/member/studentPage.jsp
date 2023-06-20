@@ -44,7 +44,7 @@
 										<div class="col-md-6" style="padding-top:20px">
 											<div class="card card-info card-outline ml-5">
 												<div class="card-body box-profile">
-													<div class="text-center">
+													<div class="text-center mb-4">
 														<c:forEach items="${departmentVO.studentVOs}" var="studentVO">
 		     	 												<c:choose>
 																    <c:when test="${empty studentVO.memberFilesVO.fileName}">
@@ -60,6 +60,7 @@
 																</c:choose>
 														</c:forEach>
 													</div>
+													
 													<c:forEach items="${departmentVO.studentVOs}" var="studentVO">
 														<c:set var="studentName" value="${studentVO.name}"></c:set>
 															<sec:authentication property="Principal" var="user"/>
@@ -76,6 +77,7 @@
 
 														<div class="card-body">
 															<strong><i class="fas fa-book mr-1"></i> 학과정보</strong>
+															<div style="height: 8px;"></div>
 															<p class="text-muted">
 																<c:set value="${departmentVO.deptName}" var="studentDeptName"></c:set>
 																	<c:out value="${studentDeptName}"></c:out><br>
@@ -83,9 +85,11 @@
 															</p>
 																<hr>
 																	<strong><i class="fa-solid fa-cake-candles mr-1"></i> 생년월일</strong>
+																	<div style="height: 8px;"></div>
 																			<p class="text-muted"><c:out value="${studentBirth}"></c:out></p>
 																<hr>
 																	<strong><i class="fa-solid fa-phone mr-1"></i> 전화번호</strong>
+																	<div style="height: 8px;"></div>
 																		<p class="text-muted">
 																			<script type="text/javascript">
 																	        	const number = '${studentPhone}'
@@ -97,17 +101,17 @@
 																		</p>
 																<hr>
 																	<strong><i class="fas fa-envelope mr-1"></i> 이메일</strong>
+																	<div style="height: 8px;"></div>
 																		<p class="text-muted"><c:out value="${studentEmail}"></c:out></p>
 																<hr>
 																	<strong><i class="fas fa-map-marker-alt mr-1"></i> 주소</strong>
+																	<div style="height: 8px;"></div>
 																		<p class="text-muted"><c:out value="${studentAddress}"></c:out>&ensp;<c:out value="${studentAddressDetail}"></c:out></p>
 															
+															<sec:authentication property="Principal" var="user"/>
+															<a href="/member/studentUpdate?username=${user.username}" id="studentUpdate" class="btn btn-info float-right">수정</a>
 														</div>
 													</c:forEach>
-
-														<sec:authentication property="Principal" var="user"/>
-														<a href="/member/studentUpdate?username=${user.username}" id="studentUpdate" class="btn btn-info float-right">수정</a>
-
 												</div>
 											</div>
 										</div>

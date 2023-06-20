@@ -76,7 +76,7 @@
 				 										<td>${LectureVO.grade}학년</td>
 				 										<td>${LectureVO.category}</td>
 				 										<td>
-				 											<button class="btn btn-info"><a href="./attendee?lectureNum=${LectureVO.lectureNum}" style="color: white;">학생 조회</a></button>
+				 											<a class="btn btn-info" href="./attendee?lectureNum=${LectureVO.lectureNum}" style="color: white;">학생 조회</a>
 				 										</td>
 					                    			</tr>
 					                    		</c:forEach>
