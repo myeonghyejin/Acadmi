@@ -102,7 +102,16 @@
 </div>
 <c:import url="../temp/footer.jsp"></c:import>	
 <script type="text/javascript">
-	$("#lectureBuilding").disabled = true
+//취소
+$("#backBtn").click(function() {
+    let back = confirm("취소하시겠습니까?")
+
+    if(back == true) {
+    	location.href = "../administrator/lectureRoomList"
+    }else {
+        return;
+    }
+})
 	
 </script>
 </html>
