@@ -138,7 +138,7 @@
 															<c:set var="memberFiles" value="${studentLectureVO.lectureVO.studentVO.memberFilesVO.fileName }"></c:set>
 															<td style="vertical-align:middle; width:10%">
 						     	 								<sec:authentication property="principal.username" var="username"/>
-									     	 					<a href="../../chat/detail?roomSender=${username}&roomRecipient=${lectureVO.studentVO.username}"><i class="fa-regular fa-envelope fa-2xl" style="margin:30px 0 0 0;"></i></a>
+									     	 					<a href="../../chat/detail?roomSender=${username}&roomRecipient=${studentLectureVO.lectureVO.studentVO.username}"><i class="fa-regular fa-envelope fa-2xl" style="margin:30px 0 0 0;"></i></a>
 						     	 							</td>
 						     	 							<td style="vertical-align:middle; width:13%;">
 						     	 								<c:if test="${memberFiles eq null}">

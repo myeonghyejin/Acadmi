@@ -14,8 +14,7 @@
                 <div class="card card-info">
                 <c:choose>
 					<c:when test="${empty list}">
-			            <div class="card-body" style="padding:0px">
-			                <div class="card" style="padding: 15px;color: gray">
+			                <div class="card-body" style="padding: 15px;color: gray">
 			                    수강 중인 강의가 없습니다.
 			                </div>
 			            </div>

@@ -18,7 +18,7 @@
 		
 		</div>
 	</div>
-	<div class="col-3 mt-3 mb-4" style="border-left: 1px solid #17a2b8;">
+	<div class="col-3 mt-3 mb-4" style="border-left: 1px solid #dee2e6;">
 		<!-- 중요 공지사항 목록 -->
 		<div id="homeImportant">
 		

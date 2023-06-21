@@ -104,7 +104,7 @@
 								                    	<tr>
 								                    		<td style="vertical-align:middle; width:10%">
 								                    			<sec:authentication property="principal.username" var="username"/>
-									                    		<a href="../chat/detail?sender=${username}&recipient=${attendee.username}">
+									                    		<a href="../chat/detail?RoomSender=${username}&roomRecipient=${attendee.username}">
 									                    			<i class="fa-regular fa-envelope fa-2xl"></i>
 									                    		</a>
 								                    		</td>

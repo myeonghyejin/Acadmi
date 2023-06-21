@@ -16,7 +16,7 @@
 <!-- iCheck -->
 <link rel="stylesheet" href="/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
 <!-- JQVMap -->
-<link rel="stylesheet" href="/plugins/jqvmap/jqvmap.min.css">
+<!-- <link rel="stylesheet" href="/plugins/jqvmap/jqvmap.min.css"> -->
 <!-- Theme style -->
 <link rel="stylesheet" href="/css/adminlte.css">
 <!-- overlayScrollbars -->
@@ -43,8 +43,8 @@
 <!-- Sparkline -->
 <script src="/plugins/sparklines/sparkline.js"></script>
 <!-- JQVMap -->
-<script src="/plugins/jqvmap/jquery.vmap.min.js"></script>
-<script src="/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+<!-- <script src="/plugins/jqvmap/jquery.vmap.min.js"></script>
+<script src="/plugins/jqvmap/maps/jquery.vmap.usa.js"></script> -->
 <!-- jQuery Knob Chart -->
 <script src="/plugins/jquery-knob/jquery.knob.min.js"></script>
 <!-- daterangepicker -->
