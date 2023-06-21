@@ -129,7 +129,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					LECTURE_ROOM LR
 					ON LR.LECTUREBUILDING = L.LECTUREBUILDING AND LR.LECTUREROOM = L.LECTUREROOM
 		<include refid="search"></include>
-		ORDER BY LECTURENUM DESC
+		ORDER BY D.DEPTNAME ASC, L.GRADE ASC, L.LECTURENAME ASC
 		LIMIT #{startRow}, #{perPage}
 	</select>
 	
@@ -154,7 +154,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE S.USERNAME = #{username}
 			AND SL.YEAR = #{year}
 			AND SL.SEMESTER = #{semester}
-		ORDER BY L.LECTURENUM DESC
+		ORDER BY D.DEPTNAME ASC, L.GRADE ASC, L.LECTURENAME ASC
 	</select>
 	
 	<select id="getMyFavoriteList" parameterType="FavoriteLectureVO" resultMap="allLectureList">
@@ -178,7 +178,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE FL.LECTURENUM NOT IN (SELECT LECTURENUM FROM STUDENT_LECTURE WHERE USERNAME = #{username})
 			AND FL.YEAR = #{year}
 			AND FL.SEMESTER = #{semester}
-		ORDER BY FAVORITENUM DESC
+		ORDER BY D.DEPTNAME ASC, L.GRADE ASC, L.LECTURENAME ASC
 	</select>
 	
 	<select id="getAllLectureCount" parameterType="Pagination" resultType="Long">
