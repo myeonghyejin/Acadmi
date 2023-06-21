@@ -507,7 +507,7 @@
   
   <!--강의실 배정  -->
   
-  <select id="getLectureRoomAssignment" resultMap="LectureRoomAssignment" parameterType="LectureVO">
+  <select id="getLectureRoomAssignment" resultMap="LectureRoomAssignment" parameterType="Map">
 		SELECT * FROM LECTURE_ROOM 
 			WHERE PERSONAL &gt;= #{personal}
 			AND STATUS=1
@@ -523,9 +523,7 @@
 					
 				)	
 		)
-		<if test="lectureBuilding !=null and !eqauls('')">
-			AND LR.LECTUREBUILDING = #{lectureBuilding}
-		</if>
+		
 		LIMIT #{startRow}, #{perPage}
   </select>
   <resultMap type="LectureRoomVO" id="LectureRoomAssignment">

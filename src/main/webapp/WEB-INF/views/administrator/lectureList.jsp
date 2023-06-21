@@ -54,11 +54,11 @@
 				<div class="card">
 					<div class="card-header">
 							
-						<div class="card-tools">
+						<!-- <div class="card-tools">
 							<button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
 								<i class="fas fa-minus"></i>
 							</button>		
-						</div>
+						</div> -->
 					
 						<!-- Search -->
 						<form action="./lectureList" id="search-form">
@@ -156,6 +156,7 @@
 				                      	강의실
 				                      </th>
 									  <th></th>
+									 
 				                  </tr>
 				              </thead>
 				              <tbody>
@@ -184,11 +185,10 @@
 						   	 		
 						   	
 						   	 		<tr class="container">
-						   	 			
-						   	 			<td> ${lectureNum}</td>
-						   	 			<td>${lectureName}</td>
-						   	 			<td>${lectureWeekday}요일</td>
-						   	 			<td>
+						   	 			<td style="${lectureStatus==0 ? 'color: #E2E2E2;;' : 'color: black;'}"> ${lectureNum}</td>
+						   	 			<td style="${lectureStatus==0 ? 'color: #E2E2E2;;' : 'color: black;'}">${lectureName}</td>
+						   	 			<td style="${lectureStatus==0 ? 'color: #E2E2E2;;' : 'color: black;'}">${lectureWeekday}요일</td>
+						   	 			<td style="${lectureStatus==0 ? 'color: #E2E2E2;;' : 'color: black;'}">
 						   	 				<c:if test="${lectureStartTime eq 1}">09:00</c:if>
 											<c:if test="${lectureStartTime eq 2}">10:00</c:if>
 											<c:if test="${lectureStartTime eq 3}">11:00</c:if>
@@ -199,7 +199,7 @@
 											<c:if test="${lectureStartTime eq 8}">16:00</c:if>
 											<c:if test="${lectureStartTime eq 9}">17:00</c:if>
 						   	 			</td>
-						   	 			<td>
+						   	 			<td style="${lectureStatus==0 ? 'color: #E2E2E2;;' : 'color: black;'}">
 						   	 				<c:if test="${lectureEndTime eq 1}">10:00</c:if>
 											<c:if test="${lectureEndTime eq 2}">11:00</c:if>
 											<c:if test="${lectureEndTime eq 3}">12:00</c:if>
@@ -210,56 +210,29 @@
 											<c:if test="${lectureEndTime eq 8}">17:00</c:if>
 											<c:if test="${lectureEndTime eq 9}">18:00</c:if>
 						   	 			</td>
-						   	 			<td>${lecturePersonal}</td>
+						   	 			<td style="${lectureStatus==0 ? 'color: #E2E2E2;;' : 'color: black;'}">${lecturePersonal}</td>
 						   	 			<c:if test="${lectureStatus eq 1}">
-						   	 				<td>개강</td>	
+						   	 				<td >개강</td>	
 						   	 			</c:if>
 						   	 			<c:if test="${lectureStatus eq 0}">
-						   	 				<td>폐강</td>
+						   	 				<td style="${lectureStatus==0 ? 'color: #E2E2E2;;' : 'color: black;'}">폐강</td>
 						   	 			</c:if>
 						   	 			<c:if test="${lectureVO.status eq null }">
 						   	 				<td>상태 없음</td>
 						   	 			</c:if>
-						   	 			<td>
+						   	 			<td style="${lectureStatus==0 ? 'color: #E2E2E2;;' : 'color: black;'}">
 						   	 				${lectureBuilding} ${lectureRoom}
 						   	 				<c:if test="${lectureBuilding eq null}">
 				                        		<a href="./lectureRoomAssignment?lectureNum=${lectureNum}&startTime=${lectureStartTime}&endTime=${lectureEndTime}&weekday=${lectureWeekday}&personal=${lectureRoomPersonal}"><button class="btn btn-info">강의실 배정</button></a>
 				                        	</c:if>
 						   	 			</td>
 			                        	
-						   	 				
-						
-						   	 			<td>
-							   	 				<button class="toggleButton" style="background-color : white; border : none; outline : none; ">+</button>
-							   	 				<div class="toggleContent" style="display:none">
-							   	 					<div class="contentContainer">
-								   	 					  <table class="table table-hover text-nowrap" style="text-align: center;" id="table1">
-									                        <tr>
-									                            <th>연도</th>
-									                            <th>학과</th>
-									                           	<th>학기</th>
-									                           	<th>담당 교수</th>
-									                           	
-									                        </tr>
-									                        <tr>
-									                        	<td>${year}</td>
-									                        	<td>${deptName}</td>
-									                        	<td>${semester}</td>
-									                        	<td>${professorName}</td>
-									                        	
-								                        </tr>
-								                       
-								                    </table>
-							                   </div>
-						   	 				</div>
-						   	 				
-					   	 			</td>
-					   	 			<c:if test="${lectureBuilding eq  null}">
-			                        		<td><a href="./lectureRoomAssignment?lectureNum=${lectureNum}&startTime=${lectureStartTime}&endTime=${lectureEndTime}&weekday=${lectureWeekday}&personal=${lectureRoomPersonal}"><button class="btn btn-info">강의실 배정</button></a></td>
-			                        </c:if>
 			                        <c:if test="${lectureBuilding ne null && lectureStatus ne 0}">
-			                        	<td><button class="btn btn-danger" data-lecturenum="${lectureNum}">폐강</button> </td>
+			                        	<td ><button  class="btn btn-danger" data-lecturenum="${lectureNum}">폐강</button></td>
 					   	 			</c:if>
+					   	 			<td></td>
+					   	 			
+					   	 			
 					   	 		
 					   	 		</tr>	
 					   	 		</c:forEach>

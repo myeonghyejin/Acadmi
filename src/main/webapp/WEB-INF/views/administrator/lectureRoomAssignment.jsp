@@ -54,14 +54,9 @@
                <section class="content">
                
                	<div class="card">
-             		 <div class="card-header">
-			       
-			          <div class="card-tools">
-			          
-			          </div>
-		        	</div>
+             		
 		        	 <!--Search -->
-					<form action="./lectureRoomAssignment" id="search-form">
+					<%-- <form action="./lectureRoomAssignment" id="search-form">
 						<input type="hidden" name="page" value="1">
 						<div class="row justify-content-center mx-auto my-3 ">
 							<div class="col-md-8">
@@ -92,7 +87,7 @@
 						</div>
 					</form>
                	
-		        	
+		        	 --%>
 		        	<div class="card-body p-0">
 		        		<table class="table table-hover text-nowrap"  style="text-align : center;"id="table1">
 		        			 <thead>
