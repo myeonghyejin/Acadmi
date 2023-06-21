@@ -68,7 +68,7 @@
 								<option value="2" ${param.semester == '2' ? 'selected' : ''}>2학기</option>
 							</select>
 						</div>
-						<button type="submit" class="btn btn-default" style="height: 50%; margin-top: auto; margin-left: 7px;">
+						<button type="submit" class="btn btn-default" style="height: 50%; margin-top: auto;">
 							<i class="fa fa-search"></i>
 						</button>
 					</div>
