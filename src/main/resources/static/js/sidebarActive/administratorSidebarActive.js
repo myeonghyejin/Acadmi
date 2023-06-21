@@ -26,11 +26,11 @@ if(window.location.pathname.startsWith('/notice')){
 	$('#periodItem').addClass('menu-open')
 	$('#periodLink').addClass('active')
 	$('#periodListLink').addClass('active')
-} else if(window.location.pathname == '/administrator/lectureRoomList'){
+} else if(window.location.pathname == '/administrator/lectureRoomList' || window.location.pathname == '/administrator/lectureRoomAdd' || window.location.pathname == '/administrator/lectureRoomUpdate' ){
 	$('#lectureRoomItem').addClass('menu-open')
 	$('#lectureRoomLink').addClass('active')
 	$('#lectureRoomList').addClass('active')
-} else if(window.location.pathname == '/administrator/departmentList' || window.location.pathname == '/administrator/departmentAdd'){
+} else if(window.location.pathname == '/administrator/departmentList' || window.location.pathname == '/administrator/departmentAdd' || window.location.pathname == '/administrator/departmentUpdate'){
 	$('#departmentItem').addClass('menu-open')
 	$('#departmentLink').addClass('active')
 	$('#departmentList').addClass('active')
