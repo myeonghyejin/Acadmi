@@ -58,8 +58,8 @@
 						          	 <div class="form-group">
 						           	  <label>단과대학 건물</label>
 					                  <select class="form-control select2" style="width: 100%;" name="lectureBuilding" id="lectureBuilding">
-					                  	<c:forEach items="${lectureRoom}" var="lectureRoom">
-											<option value="${lectureRoom.lectureBuilding}">${lectureRoom.lectureBuilding}
+					                  	<c:forEach items="${college}" var="college">
+											<option value="${college.building}">${college.building}
 										</c:forEach>
 					                  </select>
 						           </div>

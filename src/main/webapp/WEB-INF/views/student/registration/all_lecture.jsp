@@ -113,8 +113,7 @@
 						<table class="table table-hover text-nowrap">
 							<thead>
 								<tr style="text-align: center;">
-									<th style="width: 8%">강의 번호</th>
-									<th style="width: 8%">강의 이름</th>
+									<th style="width: 16%">강의 이름</th>
 									<th style="width: 8%">학년</th>
 									<th style="width: 8%">구분</th>
 									<th style="width: 8%">학과</th>
@@ -130,7 +129,6 @@
 						<tbody>
 							<c:forEach items="${list}" var="lectureVO">
 								<tr style="text-align: center;">
-									<td>${lectureVO.lectureNum}</td>
 									<td><a>${lectureVO.lectureName}</a><br/><small>${lectureVO.professorVO.name} 교수님</small></td>
 									<td>${lectureVO.grade}학년</td>
 									<td>
@@ -163,7 +161,7 @@
 										<c:if test="${lectureVO.endTime eq 8}">17:00</c:if>
 										<c:if test="${lectureVO.endTime eq 9}">18:00</c:if>
 									</td>
-									<td>${lectureVO.lectureRoomVO.lectureBuilding} ${lectureVO.lectureRoomVO.lectureRoom}</td>
+									<td>${lectureVO.lectureRoomVO.lectureBuilding} ${lectureVO.lectureRoomVO.lectureRoom}호</td>
 									<td>${lectureVO.subscription}/${lectureVO.personal}명</td>
 									<td class="project-actions text-right">
 										<c:choose>

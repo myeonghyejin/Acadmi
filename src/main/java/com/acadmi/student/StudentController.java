@@ -83,7 +83,7 @@ public class StudentController {
 		
 		lectureVO.setUsername(authentication.getName()); 
 		
-		log.error("name ::{}", authentication.getName());
+//		log.error("name ::{}", authentication.getName());
 	
 		
 		List<LectureVO> ar =  studentService.getMyLectureList(lectureVO);

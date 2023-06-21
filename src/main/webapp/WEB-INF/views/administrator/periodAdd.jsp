@@ -56,6 +56,9 @@
 							<div class="card-header" style="color: gray;">
 								<i class="fa-solid fa-clock"></i>
 								<span class="mt-2"> 시작일 10:00:00 | 종료일 23:59:59</span>
+								<div class="mt-2">
+									<span class="mt-2">수강 연도, 수강 학기가 동일할 시 데이터가 업데이트됩니다.</span>
+								</div>
 							</div>	
 							<div class="card-body row">
 								
@@ -72,7 +75,7 @@
 												</select>
 											</div>
 											<div class="form-group">
-								          	  <label>수강학기</label>
+								          	  <label>수강 학기</label>
 								                <select  class="form-control select2" style="width: 100%;" name="semester" id="semester">
 													<option value="1">1학기</option>
 													<option value="2">2학기</option>
