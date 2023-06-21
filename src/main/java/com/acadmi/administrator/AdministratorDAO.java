@@ -64,6 +64,9 @@ public interface AdministratorDAO {
 	public LectureRoomVO LectureRoomDuplicateCheck(LectureRoomVO lectureRoomVO) throws Exception;
 	//강의실 수정
 	public int setLectureRoomUpdate(LectureRoomVO lectureRoomVO) throws Exception;
+	
+	//강의실 디테일
+	public LectureRoomVO getLectureRoomDetail(LectureRoomVO lectureRoomVO) throws Exception;
 
 	
  	//학과 관리
@@ -75,8 +78,14 @@ public interface AdministratorDAO {
 	//학과 등록
 	public int setDepartmentAdd(DepartmentVO departmentVO) throws Exception;
 	
+	//학과 상태 수정
+	public int setDepartmentStatus(DepartmentVO departmentVO) throws Exception;
+	
 	//학과 수정
 	public int setDepartmentUpdate(DepartmentVO departmentVO) throws Exception;
+	
+	//학과 디테일
+	public DepartmentVO getDepartmentDetail(DepartmentVO departmentVO) throws Exception;
 	
 	//학과 중복 체크
 	public DepartmentVO departmentDuplicateCheck(DepartmentVO departmentVO) throws Exception;

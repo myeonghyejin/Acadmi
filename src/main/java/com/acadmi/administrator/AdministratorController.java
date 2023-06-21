@@ -244,15 +244,7 @@ public class AdministratorController {
 		
 		return mv;
 	}
-	@PostMapping("lectureRoomList")
-	public ModelAndView setLectureRoomUpdate(LectureRoomVO lectureRoomVO) throws Exception {
-		ModelAndView mv = new ModelAndView();
-		
-		int result =  administratorService.setLectureRoomUpdate(lectureRoomVO);
-		
-		
-		return mv;
-	}
+
 	
 	//강의실 등록
 	@GetMapping("lectureRoomAdd")
@@ -308,6 +300,40 @@ public class AdministratorController {
 		return check;
 	}
 	
+	//강의실 수정
+	@GetMapping("lectureRoomUpdate")
+	public ModelAndView setLectureRoomUpdate(LectureRoomVO lectureRoomVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		lectureRoomVO =  administratorService.getLectureRoomDetail(lectureRoomVO);
+		List<CollegeVO> ar = administratorService.getCollege();
+		
+		mv.addObject("college", ar);
+		mv.addObject("lectureRoom", lectureRoomVO);
+		
+		mv.setViewName("administrator/lectureRoomUpdate");		
+		return mv;
+	}
+	
+	@PostMapping("lectureRoomUpdate")
+	public ModelAndView setLectureRoomUpdate2(LectureRoomVO lectureRoomVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		int result = administratorService.setLectureRoomUpdate(lectureRoomVO);
+		
+		if(result > 0) {
+			String message = "수정 되었습니다";
+			mv.addObject("result", message);
+			
+		}
+		
+		
+		mv.setViewName("common/result");
+		
+		mv.addObject("url", "./lectureRoomList");
+		
+		return mv;
+	}
 	//학과 관리
 	
 	//학과 조회
@@ -325,11 +351,39 @@ public class AdministratorController {
 		return mv;
 	}
 	
-	@PostMapping("departmentList")
-	public ModelAndView setDepartmentUpdate(@Valid DepartmentVO departmentVO, BindingResult bindingResult) throws Exception {
+
+	//학과 수정
+	@GetMapping("departmentUpdate")
+	public ModelAndView setDepartmentUpdate(DepartmentVO departmentVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		int result =  administratorService.setDepartmentUpdate(departmentVO);
+		List<CollegeVO> ar2 =  administratorService.getCollege();
+		departmentVO  = administratorService.getDepartmentDetail(departmentVO);
+		
+		mv.addObject("department", departmentVO);
+		mv.addObject("college", ar2);
+		mv.setViewName("administrator/departmentUpdate");
+		
+		return mv;
+	}
+	
+	@PostMapping("departmentUpdate")
+	public ModelAndView setDepartmentUpdate2(@Valid DepartmentVO departmentVO, BindingResult bindingResult) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		int result = administratorService.setDepartmentUpdate(departmentVO);
+		
+		
+		if(result > 0) {
+			String message = "수정 되었습니다";
+			mv.addObject("result", message);
+			
+		}
+		
+		
+		mv.setViewName("common/result");
+		
+		mv.addObject("url", "./departmentList");
 		
 		return mv;
 	}

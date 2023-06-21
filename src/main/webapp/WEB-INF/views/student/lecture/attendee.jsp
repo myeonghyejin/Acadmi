@@ -13,43 +13,10 @@
 	<!-- CSS/favicon 끝 -->
 <title>Insert title here</title>
 <style type="text/css">
-	#pagination {
-		 display: flex;
-   	 	justify-content: center;	
 	
-	}
-	#tableAdmin {
-		width : 90%; 
-	}	
-	
-	.content {
-		margin: 30px;
-	}
-	#add2 {
-		float : right;
-		clear : both;
-		
-	} 
-	.card-title {
-		margin : 20px 0 20px 40px;
-	}
-	.card-body{
-		display: flex;
-	  	justify-content: center;
-	 	align-items: center;
-	 	margin : 10px 0 30px 0;
-	}
-	
-	.search {
-		padding : 10px;
-		
-	}
-	.content {
-		margin : 10px;
-	}
 </style>
 </head>
-<body class="hold-transition sidebar-mini layout-fixed" >
+<body class="hold-transition si	debar-mini layout-fixed" >
 	<div class="wrapper">
 		
 		<!-- Header 적용 -->

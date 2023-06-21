@@ -305,12 +305,18 @@
 		FROM LECTURE_ROOM 
 		WHERE LECTUREBUILDING =#{lectureBuilding} AND LECTUREROOM = #{lectureRoom}
  	</select>
- 	<!--강의실 수정 -->
+ 	
+ 	<select id="getLectureRoomDetail" parameterType="LectureRoomVO" resultType="LectureRoomVO">
+ 		SELECT * FROM LECTURE_ROOM
+		WHERE LECTUREBUILDING = #{lectureBuilding} AND LECTUREROOM = #{lectureRoom}
+ 	</select>
+ 	
  	<update id="setLectureRoomUpdate" parameterType="LectureRoomVO">
- 		UPDATE LECTURE_ROOM
- 		SET STATUS=#{status}
- 		WHERE LECTUREBUILDING = #{lectureBuilding} AND LECTUREROOM = #{lectureRoom}
+ 		UPDATE LECTURE_ROOM SET
+ 		PERSONAL =#{personal},STATUS= #{status}
+ 		WHERE LECTUREBUILDING  = #{lectureBuilding} AND LECTUREROOM = #{lectureRoom}
  	</update>
+ 	
   
   <!--학과 관리  -->
   
@@ -337,12 +343,17 @@
   		SELECT COUNT(DEPTNUM) FROM DEPARTMENT
   	</select>
   	
-  <!--학과 수정 -->
+ 
   <update id="setDepartmentUpdate" parameterType="DepartmentVO">
   	UPDATE DEPARTMENT
-  	SET STATUS=#{status}
+  	SET COLLEGENUM=#{collegeNum}, DEPTNAME = #{deptName}, STATUS=#{status}
   	WHERE DEPTNUM=#{deptNum}
   </update>
+  
+  <select id="getDepartmentDetail" parameterType="DepartmentVO" resultType="DepartmentVO">
+  	SELECT * FROM DEPARTMENT
+  	WHERE DEPTNUM=#{deptNum}
+  </select>
   
   <!--학과 등록 -->
   <insert id="setDepartmentAdd" parameterType="DepartmentVO">
