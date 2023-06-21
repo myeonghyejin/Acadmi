@@ -72,7 +72,7 @@
 												<div class="col-4">
 													<div class="form-group">
 														<label>담당대학</label>
-														<select class="select2" name="collegeName" style="width : 100%;" id="college" onchange="updateDepartmentOptions()">
+														<select class="select2" name="collegeName" style="width : 100%;" id="college" >
 														<option value="">전체</option>
 															<c:forEach items="${college}" var="collegeVO">
 																<c:if test="${collegeVO.collegeNum != 1 && collegeVO.collegeNum != 2}">
@@ -186,7 +186,7 @@
 																	</td>
 																	<td style="vertical-align:middle;"><c:out value="${professorEmail}"></c:out></td>
 																	<td style="vertical-align:middle;">
-																	<c:out value="${collegeBuilding} "></c:out><c:out value="${professorRoom}"></c:out>
+																	<c:out value="${collegeBuilding} "></c:out><c:out value="${professorRoom}"></c:out>호
 																	</td>
 																	<td style="vertical-align:middle;">
 																		<c:if test="${professorStatus eq 1}">재직</c:if>

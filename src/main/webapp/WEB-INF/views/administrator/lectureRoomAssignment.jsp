@@ -57,9 +57,7 @@
              		 <div class="card-header">
 			       
 			          <div class="card-tools">
-			            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-			              <i class="fas fa-minus"></i>
-			            </button>
+			          
 			          </div>
 		        	</div>
 		        	 <!--Search -->
@@ -70,71 +68,24 @@
 								<div class="row">
 									<div class="col-4">
 										<div class="form-group">
-											<label>요일</label>
-											<select class="select2" name="weekday" style="width : 100%;" id="weekday">
-												<option value="">전체</option>
-												<option value="월">월요일</option>
-												<option value="화">화요일</option>
-												<option value="수">수요일</option>
-												<option value="목">목요일</option>
-												<option value="금">금요일</option>
-												</select>
-										</div>
-									</div>
-									<div class="col-4">
-										<div class="form-group">
-											<label>시작 시간</label>
-											<select class="select2" name="startTime" style="width : 100%;" id="startTime">
-												<option value="">전체</option>
-												<option value="1">9:00</option>
-												<option value="2">10:00</option>
-												<option value="3">11:00</option>
-												<option value="4">12:00</option>
-												<option value="5">13:00</option>
-												<option value="6">14:00</option>
-												<option value="7">15:00</option>
-												<option value="8">16:00</option>
-												<option value="9">17:00</option>
-												<option value="10">18:00</option>
-												
+											<label>강의실 건물</label>
+											<select class="select2" name="lectureBuilding" style="width : 100%;" id="lectureBuilding">
+												<c:forEach items="${college}" var="collegeVO">
+													<option value="${collegeVO.building }">${collegeVO.building }</option>
+												</c:forEach>
 											</select>
 										</div>
+										
 									</div>
+									
 								</div>	
-								<div class="row">
-									<div class="col-4">
-										<div class="form-group">
-											<label>종료 시간</label>
-											<select class="select2" name="endTime" style="width : 100%;" id="endTime">
-												<option value="">전체</option>
-												<option value="1">10:00</option>
-												<option value="2">11:00</option>
-												<option value="3">12:00</option>
-												<option value="4">13:00</option>
-												<option value="5">14:00</option>
-												<option value="6">15:00</option>
-												<option value="7">16:00</option>
-												<option value="8">17:00</option>
-												<option value="9">18:00</option>
-												<option value="10">19:00</option>
-												
-											</select>
-										</div>
-									</div>
-									<div class="col-6">
-										<div class="form-group">
-											<label>수용 인원</label>
-												<div class="input-group">
-													<input type="text" class="form-control" placeholder="수용인원을 입력하세요." name="personal" >
-													<div class="input-group-append">
-														<button type="submit" class="btn btn-default" id="submit">
-															<i class="fas fa-search "></i>
-														</button>
-													</div>
-												</div>
-										</div>
-									</div>
+								
+								<div class="input-group-append">
+									<button type="submit" class="btn btn-default" id="submit">
+										<i class="fas fa-search "></i>
+									</button>
 								</div>
+							
 								
 							</div>
 							

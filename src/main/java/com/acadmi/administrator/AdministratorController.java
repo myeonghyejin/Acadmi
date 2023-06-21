@@ -443,6 +443,8 @@ public class AdministratorController {
 		
 	}
 	
+
+	
 	//강의 조회
 	@GetMapping("lectureList")
 	public ModelAndView getLectureList(Pagination pagination) throws Exception {
@@ -506,7 +508,7 @@ public class AdministratorController {
 	//강의실 배정
 	@GetMapping("lectureRoomAssignment")
 	public ModelAndView getLectureRoomAssignment( NotificationVO notificationVO,Pagination pagination,LectureRoomVO lectureRoomVO, TimeTableVO timeTableVO, TimeInfoVO timeInfoVO, LectureVO lectureVO) throws Exception {
-		ModelAndView mv = new ModelAndView();
+ModelAndView mv = new ModelAndView();
 		
 		Map<String, Object> map = new HashMap<>();
 		
@@ -521,9 +523,10 @@ public class AdministratorController {
 		map.put("startTime", timeInfoVO.getStartTime());
 		map.put("endTime", timeInfoVO.getEndTime());
 		
-		
+		List<CollegeVO> ar2 = administratorService.getCollege();
 		List<LectureRoomVO> ar =  administratorService.getLectureRoomAssignment(map);	
 		lectureVO = administratorService.getLectureNum(lectureVO);
+		List<LectureVO> ar3 = administratorService.getLectureList(pagination);
 		
 		
 		if(notificationVO.getNotificationNum() != null) {
@@ -531,8 +534,10 @@ public class AdministratorController {
 		}
 		
 		mv.addObject("list", ar);
-	
-		mv.addObject("lectureNum", lectureVO);
+		mv.addObject("college", ar2);
+		mv.addObject("lectureList", ar3);
+		
+		
 		mv.setViewName("administrator/lectureRoomAssignment");
 		
 		return mv;

@@ -375,7 +375,7 @@
 		REGISTRATIONSTART = CONCAT(#{registrationStart}, ' 10:00:00'),
 		DEADLINE = CONCAT(#{deadline}, ' 23:59:59')
   </insert>
-  
+
   <!--기간 조회 -->
   <select id="getPeriodList" resultType="PeriodVO" parameterType="Pagination">
   	SELECT * FROM PERIOD
@@ -390,6 +390,7 @@
 	</trim>
  	LIMIT #{startRow},#{perPage}
   </select>
+  
   
    <select id="getTotalCountPeriod" resultType="Long" >
    		SELECT COUNT(YEAR) FROM PERIOD 
@@ -517,22 +518,14 @@
 					AND TIMENUM IN (
 						SELECT TIMENUM 
 						FROM TIMEINFO T 
-						WHERE STARTTIME = #{startTime} AND ENDTIME=  #{endTime}
-						<if test="weekday !=null and !weekday.equals('')">
-							AND WEEKDAY = #{weekday}
-						</if>
-						<if test="startTime !=null and !startTime.equals('')">
-							AND STARTTIME = #{startTime}
-						</if>
-						<if test="endTime !=null and !endTime.equals('')">
-							AND ENDTIME = #{endTime}
-						</if>
-						<if test="personal !=null and !personal.equals('')">
-							AND PERSONAL = #{personal}
-						</if>
+						WHERE (STARTTIME, ENDTIME) = (#{startTime}, #{endTime})
+						
 					
 				)	
 		)
+		<if test="lectureBuilding !=null and !eqauls('')">
+			AND LR.LECTUREBUILDING = #{lectureBuilding}
+		</if>
 		LIMIT #{startRow}, #{perPage}
   </select>
   <resultMap type="LectureRoomVO" id="LectureRoomAssignment">

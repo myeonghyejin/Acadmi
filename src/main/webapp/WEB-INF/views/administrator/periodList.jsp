@@ -107,6 +107,7 @@
 					   					<th>장바구니 종료일</th>
 					   					<th>강의 등록 시작일</th>
 					   					<th>강의 등록 종료일</th>
+					   					
 					   				</tr>
 					   			</thead>
 					   			<tbody>
@@ -120,6 +121,7 @@
 					   						<td>${periodVO.favoriteEnd }</td>
 					   						<td>${periodVO.registrationStart }</td>
 					   						<td>${periodVO.deadline }</td>
+					   						
 					   					</tr>
 					   				</c:forEach>
 					   			</tbody>
