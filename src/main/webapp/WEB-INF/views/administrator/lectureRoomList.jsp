@@ -146,29 +146,20 @@
 												<td class="lectureRoom" style="color: #E2E2E2;">${lectureRoomVO.lectureBuilding}</td>
 												<td class="lectureRoom" style="color: #E2E2E2;">${lectureRoomVO.lectureRoom}</td>
 												<td class="lectureRoom" style="color: #E2E2E2;">${lectureRoomVO.personal}</td>
-												<td>
-													<select name="status" class="select2" style="width : 35%">
-														<option value="0"selected >사용 불가</option>
-														<option value="1">사용 가능</option>
-													</select>
-												</td>
+												<td class="lectureRoom" style="color: #E2E2E2;">사용 불가</td>
 											</c:if>
 											<c:if test="${lectureRoomVO.status eq 1 }">
 												<td>${lectureRoomVO.lectureBuilding}</td>
 												<td>${lectureRoomVO.lectureRoom}</td>
 												<td >${lectureRoomVO.personal}</td>
-												<td>
-													<select name="status" class="select2" style="width : 35%">
-														<option value="0" >사용 불가</option>
-														<option value="1"selected>사용 가능</option>
-													</select>
-												</td>
+												<td>사용 가능</td>
 											</c:if>
 										<td>
+											<a href="./lectureRoomUpdate?lectureBuilding=${lectureRoomVO.lectureBuilding }&lectureRoom=${lectureRoomVO.lectureRoom}">
 											<button type="button" class="btn btn-primary" id="update" data-lecture="${lectureRoomVO.lectureBuilding}${lectureRoomVO.lectureRoom}"
-												data-lectureBuilding="${lectureRoomVO.lectureBuilding}" data-lectureRoom="${lectureRoomVO.lectureRoom }">
-												수정
-											</button> 
+												data-lectureBuilding="${lectureRoomVO.lectureBuilding}" data-lectureRoom="${lectureRoomVO.lectureRoom }" >
+												강의실 수정
+											</button></a> 
 										</td>
 									</tr>
 								</c:forEach>
