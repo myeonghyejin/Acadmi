@@ -147,6 +147,7 @@ public class LectureController {
 		if(buttonType.equals("1")) {
 			int result = lectureService.setLectureUpdate(lectureVO);
 			mv.addObject("result","강의가 등록되었습니다.");
+			result = notificationService.setLecture(lectureVO);
 		} else if(buttonType.equals("0")){
 			int result = lectureService.setTemporaryUpdate(lectureVO);
 			mv.addObject("result","강의가 임시등록되었습니다.");
