@@ -6,7 +6,10 @@ $("#year").blur(function() {
     if($("#year").val() == '') {
         check[0] = false
         $("#yearResult").html("<p style='color : red;'>입학 연도는 필수 사항입니다.</p>")
-    }else {
+    }else if($("#year").val()>=3000){
+		check[0] = false
+        $("#yearResult").html("<p style='color : red;'>입학 연도가 비정상적입니다. 다시 확인해주세요.</p>")
+	}else {
        check[0] = true
        $("#yearResult").html("")
     }
