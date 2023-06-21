@@ -67,7 +67,7 @@
 									        	document.write(countryCode,'-',areaCode,'-',phoneNumber);
 								        	</script>
 								        </td>
-								        <td>${lecture.professorVO.professorRoom}</td>
+								        <td>${college.building}&nbsp;${lecture.professorVO.professorRoom}호</td>
 								        <td>${lecture.professorVO.email}</td>
 									</tr>
 								</tbody>

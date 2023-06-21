@@ -361,21 +361,21 @@
 	INSERT INTO PERIOD 
 	SET YEAR = #{year},
 		SEMESTER = #{semester},
-		APPLICATIONSTART = CONCAT(#{applicationStart}, ' 18:00:00'), 
+		APPLICATIONSTART = CONCAT(#{applicationStart}, ' 10:00:00'), 
 		APPLICATIONEND = CONCAT(#{applicationEnd}, ' 23:59:59'),
-		FAVORITESTART = CONCAT(#{favoriteStart}, ' 18:00:00'),
+		FAVORITESTART = CONCAT(#{favoriteStart}, ' 10:00:00'),
 		FAVORITEEND = CONCAT(#{favoriteEnd}, ' 23:59:59'),
-		REGISTRATIONSTART = CONCAT(#{registrationStart}, ' 18:00:00'),
+		REGISTRATIONSTART = CONCAT(#{registrationStart}, ' 10:00:00'),
 		DEADLINE = CONCAT(#{deadline}, ' 23:59:59')
 			ON DUPLICATE KEY UPDATE
-		APPLICATIONSTART = CONCAT(#{applicationStart}, ' 18:00:00'), 
+		APPLICATIONSTART = CONCAT(#{applicationStart}, ' 10:00:00'), 
 		APPLICATIONEND = CONCAT(#{applicationEnd}, ' 23:59:59'),
-		FAVORITESTART = CONCAT(#{favoriteStart}, ' 18:00:00'),
+		FAVORITESTART = CONCAT(#{favoriteStart}, ' 10:00:00'),
 		FAVORITEEND = CONCAT(#{favoriteEnd}, ' 23:59:59'),
-		REGISTRATIONSTART = CONCAT(#{registrationStart}, ' 18:00:00'),
+		REGISTRATIONSTART = CONCAT(#{registrationStart}, ' 10:00:00'),
 		DEADLINE = CONCAT(#{deadline}, ' 23:59:59')
   </insert>
-  
+
   <!--기간 조회 -->
   <select id="getPeriodList" resultType="PeriodVO" parameterType="Pagination">
   	SELECT * FROM PERIOD
@@ -390,6 +390,7 @@
 	</trim>
  	LIMIT #{startRow},#{perPage}
   </select>
+  
   
    <select id="getTotalCountPeriod" resultType="Long" >
    		SELECT COUNT(YEAR) FROM PERIOD 
@@ -425,15 +426,15 @@
   
   <!--강의 목록 조회  -->
   <select id="getLectureList" resultMap="LectureList" parameterType="Pagination">
-  	SELECT D.DEPTNAME,L.*,P.NAME, P.PROFESSORROOM, L.STATUS FROM PROFESSOR P
-		INNER JOIN
-			LECTURE L
-		ON L.USERNAME = P.USERNAME 
-			INNER JOIN 
-					DEPARTMENT D
-		ON D.DEPTNUM = L.DEPTNUM
-	WHERE TEMPORARY = 1
-	ORDER BY L.LECTURENUM DESC
+  	SELECT D.DEPTNAME , L.*, P.NAME, P.PROFESSORROOM , L.STATUS  FROM PROFESSOR P
+	INNER JOIN 
+		LECTURE L 
+	ON L.USERNAME = P.USERNAME
+		RIGHT OUTER JOIN
+			DEPARTMENT D 
+		ON L.DEPTNUM = D.DEPTNUM 
+	WHERE TEMPORARY =1 
+	ORDER BY L.LECTURENUM  DESC
 	
 	<if test="deptName != null and !deptName.equals('')">
    		AND DEPTNAME = #{deptName}
@@ -517,22 +518,12 @@
 					AND TIMENUM IN (
 						SELECT TIMENUM 
 						FROM TIMEINFO T 
-						WHERE STARTTIME = #{startTime} AND ENDTIME=  #{endTime}
-						<if test="weekday !=null and !weekday.equals('')">
-							AND WEEKDAY = #{weekday}
-						</if>
-						<if test="startTime !=null and !startTime.equals('')">
-							AND STARTTIME = #{startTime}
-						</if>
-						<if test="endTime !=null and !endTime.equals('')">
-							AND ENDTIME = #{endTime}
-						</if>
-						<if test="personal !=null and !personal.equals('')">
-							AND PERSONAL = #{personal}
-						</if>
+						WHERE (STARTTIME, ENDTIME) = (#{startTime}, #{endTime})
+						
 					
 				)	
 		)
+		
 		LIMIT #{startRow}, #{perPage}
   </select>
   <resultMap type="LectureRoomVO" id="LectureRoomAssignment">

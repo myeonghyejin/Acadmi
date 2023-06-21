@@ -109,7 +109,7 @@
 																)
 									                		</td>
 								                		<th style="background-color:#f8f9fa;color:#17a2b8;">수업 장소</th>
-								                		<td>${lecture.lectureBuilding}${lecture.lectureRoom}</td>
+								                		<td>${lecture.lectureBuilding}&nbsp;${lecture.lectureRoom}호</td>
 								                		<th style="background-color:#f8f9fa;color:#17a2b8;">학점</th>
 								                		<td>${lecture.completionGrade}학점</td>
 								                	</tr>
@@ -175,8 +175,8 @@
 			                    					<!-- class라는 객체가 java에 있기 때문에 class로 출력이 안됨 -->
 			                    						<tr>
 			                    							<td style="vertical-align:middle;">${classes.order}차수</td>
-		                    								<td>${classes.subject}</td>
-		                    								<td>${classes.goal}</td>
+		                    								<td style="text-align:left;">${classes.subject}</td>
+		                    								<td style="text-align:left;">${classes.goal}</td>
 		                    								<td>${classes.capability}</td>
 		                    								<td>${classes.note}</td>
 		                    							</tr>

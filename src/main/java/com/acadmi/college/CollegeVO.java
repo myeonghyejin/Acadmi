@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CollegeVO {
-
+	private Integer deptNum;
 	private Integer collegeNum;
 	private String collegeName;
 	private String building;

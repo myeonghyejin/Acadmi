@@ -65,7 +65,7 @@
 									<div class="row">
 	              						<div class="col-6">
 	                						<label for="year">입학 연도</label>
-											 <input type="text" id="year" class="form-control" name="year"/>
+											 <input type="number" id="year" class="form-control" name="year"/>
 											  <div class="mt-1 mx-1" id="yearResult"></div>
 	                					</div>
 	                					
@@ -105,7 +105,7 @@
 									<div class="row" style="margin-top: 20px;">
 										<div class="col-6">
 											 <label for="professorRoom">교수 사무실</label>
-		             						 <input type="text" id="professorRoom" class="form-control" name="professorRoom"/>
+		             						 <input type="number" id="professorRoom" class="form-control" name="professorRoom"/>
 							           	  	<div  class="mt-1 mx-1" id="roomResult"></div>
 										</div>
 										<div class="col-6">
@@ -118,7 +118,7 @@
 									<div class="row" style="margin-top:20px;">
 										<div class="col-6">
 						              		<label for="phone">전화번호</label>
-					              			<input type="text" id="phone" class="form-control" name="phone"/>
+					              			<input type="number" id="phone" class="form-control" name="phone"/>
 					              			 <div  class="mt-1 mx-1" id="phoneResult"></div>
 										</div>
 									

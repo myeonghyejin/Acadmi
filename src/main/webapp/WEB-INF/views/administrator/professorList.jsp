@@ -72,7 +72,7 @@
 												<div class="col-4">
 													<div class="form-group">
 														<label>담당대학</label>
-														<select class="select2" name="collegeName" style="width : 100%;" id="college" onchange="updateDepartmentOptions()">
+														<select class="select2" name="collegeName" style="width : 100%;" id="college" >
 														<option value="">전체</option>
 															<c:forEach items="${college}" var="collegeVO">
 																<c:if test="${collegeVO.collegeNum != 1 && collegeVO.collegeNum != 2}">
@@ -141,9 +141,9 @@
 													<th style="width: 5%" class="text-center">이름</th>
 					                     			<th style="width: 15%" class="text-center">담당 대학</th>
 													<th style="width: 15%">담당 학과</th>
+					                      			<th style="width: 15%">사무실</th>
 					                       			<th style="width: 10%">연락처</th>
 					                      			<th style="width: 10%">이메일</th>
-					                      			<th style="width: 15%">사무실</th>
 					                      			<th style="width: 20%">상태</th>
 					                  			</tr>
 					              			</thead>
@@ -180,15 +180,20 @@
 																	<td style="vertical-align:middle;"><c:out value="${collegeName}"></c:out></td>	
 																	<td style="vertical-align:middle;"><c:out value="${department}"></c:out></td>
 																	<td style="vertical-align:middle;">
+																		<c:out value="${collegeBuilding} "></c:out><c:out value="${professorRoom}"></c:out>
+																	</td>
+																	<td style="vertical-align:middle;">
 																		<c:out value="${fn:substring(fn:replace(professorPhone,'-',''), 0, 3)}"></c:out> 
 												     	 				-<c:out value="${fn:substring(fn:replace(professorPhone,'-',''), 3, 7)}"></c:out>
 												     	 				-<c:out value="${fn:substring(fn:replace(professorPhone,'-',''), 7,11)}"></c:out>
 																	</td>
 																	<td style="vertical-align:middle;"><c:out value="${professorEmail}"></c:out></td>
 																	<td style="vertical-align:middle;">
-																	<c:out value="${collegeBuilding} "></c:out><c:out value="${professorRoom}"></c:out>
+
+																	<c:out value="${collegeBuilding} "></c:out><c:out value="${professorRoom}"></c:out>호
 																	</td>
 																	<td style="vertical-align:middle;">
+
 																		<c:if test="${professorStatus eq 1}">재직</c:if>
 																		<c:if test="${professorStatus eq 2}">휴직</c:if>
 																		<c:if test="${professorStatus  eq 3}">퇴임</c:if>
