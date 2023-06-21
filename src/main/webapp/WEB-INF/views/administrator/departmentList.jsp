@@ -125,9 +125,10 @@
 				                      <th style="width : 18%">
 				                          사용 여부
 				                      </th>
-				                      <th style="width: 10%">
+				                      <th style="width: 8%">
 				                 
 				                      </th>
+				                      <th style="width : 10%"></th>
 				                    
 				                  </tr>
 				              </thead>
@@ -143,29 +144,25 @@
 												<td><c:out value="${deptNum}"></c:out></td>
 												<td><c:out value="${collegeName}"></c:out></td>
 												<td><c:out value="${deptName}"></c:out></td>
-												<td>
-													<select name="status" class="select2" style="width : 35%">
-														<option value="1" selected>사용 가능</option>
-														<option value="0">사용 불가</option>
-													</select>
-												</td>
+												<td>사용 가능</td>
+													
+													
+												
 											</c:if>
 											<c:if test="${status eq 0 }">
 												<td style="color: #E2E2E2;"><c:out value="${deptNum}"></c:out></td>
 												<td style="color: #E2E2E2;"><c:out value="${collegeName}"></c:out></td>
 												<td style="color: #E2E2E2;"><c:out value="${deptName}"></c:out></td>
-												<td>
-													<select name="status" class="select2" style="width : 35%">
-														<option value="1">사용 가능</option>
-														<option value="0" selected>사용 불가</option>
-													</select>
-												</td>
+												<td style="color: #E2E2E2;">사용 불가</td>
+													
+												
 											</c:if>
 											<td>
-												<button type="button" class="btn btn-primary" id="deptUpdate" data-dept="${deptNum}">
-												수정
-												</button>
+												<a href="./departmentUpdate?deptNum=${deptNum}"><button type="button" class="btn btn-primary" id="update">
+												학과 수정
+												</button></a>
 											</td>
+											
 										</tr>
 									</c:forEach>
 									

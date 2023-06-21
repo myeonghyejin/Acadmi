@@ -413,8 +413,12 @@ public class AdministratorService{
 	
 	//강의실 수정
 	public int setLectureRoomUpdate(LectureRoomVO lectureRoomVO) throws Exception {
-		
 		return administratorDAO.setLectureRoomUpdate(lectureRoomVO);
+	}
+	
+	//강의실 디테일
+	public LectureRoomVO getLectureRoomDetail(LectureRoomVO lectureRoomVO) throws Exception {
+		return administratorDAO.getLectureRoomDetail(lectureRoomVO);
 	}
 
 	
@@ -430,12 +434,27 @@ public class AdministratorService{
 		return administratorDAO.getDepartmentList(pagination);
 	}
 	
+	//학과 등록
 	public int setDepartmentAdd(DepartmentVO departmentVO) throws Exception {
 		return administratorDAO.setDepartmentAdd(departmentVO);
 	}
+	
+	public Integer  getDeptNum() throws Exception {
+		return administratorDAO.getDeptNum();
+	}
+	//학과 상태 수정
+	public int setDepartmentStatus(DepartmentVO departmentVO) throws Exception {
+		return administratorDAO.setDepartmentStatus(departmentVO);
+	}
+	
 	//학과 수정
 	public int setDepartmentUpdate(DepartmentVO departmentVO) throws Exception {
 		return administratorDAO.setDepartmentUpdate(departmentVO);
+	}
+	
+	//학과 디테일
+	public DepartmentVO getDepartmentDetail(DepartmentVO departmentVO) throws Exception {
+		return administratorDAO.getDepartmentDetail(departmentVO);
 	}
 	
 	//학과 중복 체크
