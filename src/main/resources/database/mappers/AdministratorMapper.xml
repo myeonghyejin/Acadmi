@@ -507,7 +507,7 @@
   
   <!--강의실 배정  -->
   
-  <select id="getLectureRoomAssignment" resultMap="LectureRoomAssignment" parameterType="Map">
+  <select id="getLectureRoomAssignment" resultMap="LectureRoomAssignment" parameterType="LectureVO">
 		SELECT * FROM LECTURE_ROOM 
 			WHERE PERSONAL &gt;= #{personal}
 			AND STATUS=1

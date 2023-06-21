@@ -258,8 +258,8 @@ public class AdministratorController {
 	@GetMapping("lectureRoomAdd")
 	public ModelAndView getLectureRoomAdd() throws Exception {
 		ModelAndView mv = new ModelAndView();
-		List<LectureRoomVO> ar = administratorService.getLectureBuilding();
-		mv.addObject("lectureRoom", ar);
+		List<CollegeVO> ar = administratorService.getCollege();
+		mv.addObject("college", ar);
 		mv.setViewName("administrator/lectureRoomAdd");
 		
 		return mv;
@@ -512,10 +512,10 @@ ModelAndView mv = new ModelAndView();
 		
 		Map<String, Object> map = new HashMap<>();
 		
-//		log.error("personal::{}", lectureRoomVO.getPersonal());
-//		log.error("weekday ::{}", timeTableVO.getWeekday());
-//		log.error("startTime::{}",timeInfoVO.getStartTime());
-//		log.error("endTime ::{}", timeInfoVO.getEndTime());
+		log.error("personal::{}", lectureVO.getPersonal());
+		log.error("weekday ::{}", lectureVO.getWeekday());
+		log.error("startTime::{}",lectureVO.getStartTime());
+		log.error("endTime ::{}", lectureVO.getEndTime());
 //		
 		map.put("pagination", pagination);
 		map.put("personal", lectureRoomVO.getPersonal());
@@ -527,6 +527,11 @@ ModelAndView mv = new ModelAndView();
 		List<LectureRoomVO> ar =  administratorService.getLectureRoomAssignment(map);	
 		lectureVO = administratorService.getLectureNum(lectureVO);
 		List<LectureVO> ar3 = administratorService.getLectureList(pagination);
+		
+		log.error("personal::{}", lectureVO.getPersonal());
+		log.error("weekday ::{}", lectureVO.getWeekday());
+		log.error("startTime::{}",lectureVO.getStartTime());
+		log.error("endTime ::{}", lectureVO.getEndTime());
 		
 		
 		if(notificationVO.getNotificationNum() != null) {

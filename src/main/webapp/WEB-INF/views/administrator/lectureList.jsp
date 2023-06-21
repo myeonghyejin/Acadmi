@@ -81,7 +81,7 @@
 												</div>
 												<div class="col-3">
 													<div class="form-group">
-														<label>학년도</label>
+														<label>연도</label>
 														<select class="select2" style="width: 100%;" name="year">
 															<option value="">전체</option>
 															<c:forEach items="${year}" var="year">
@@ -132,28 +132,29 @@
 				              <thead>
 				                  <tr>
 				                      <th style="width: 10%">
-				                          강의번호
+				                          강의 번호
+				                      </th>
+				                      <th style="width: 20%">
+				                          강의 이름
+				                      </th>
+				                      <th style="width: 10%" class="text-center">
+				                          강의 요일
 				                      </th>
 				                      <th style="width: 10%">
-				                          강의이름
+				                          시작 시간
 				                      </th>
 				                      <th style="width: 10%" class="text-center">
-				                          강의요일
+				                          종료 시간
 				                      </th>
-				                      <th style="width : 15%">
-				                          시작교시
+				                      <th style="width: 10%">
+				                      	  수강 인원
 				                      </th>
-				                      <th style="width: 10%" class="text-center">
-				                          종료교시
-				                      </th>
-				                      <th style="width: 20%">
-				                      	  수강인원
-				                      </th>
-				                      <th style="width: 20%">
+				                      <th style="width: 10%">
 				                      	  상태
 				                      </th>
-				                      <th>강의실</th>
-									  <th></th>
+				                      <th style="width: 10%">
+				                      	강의실
+				                      </th>
 									  <th></th>
 				                  </tr>
 				              </thead>
@@ -187,8 +188,28 @@
 						   	 			<td> ${lectureNum}</td>
 						   	 			<td>${lectureName}</td>
 						   	 			<td>${lectureWeekday}요일</td>
-						   	 			<td>${lectureStartTime}교시</td>
-						   	 			<td>${lectureEndTime}교시</td>
+						   	 			<td>
+						   	 				<c:if test="${lectureStartTime eq 1}">09:00</c:if>
+											<c:if test="${lectureStartTime eq 2}">10:00</c:if>
+											<c:if test="${lectureStartTime eq 3}">11:00</c:if>
+											<c:if test="${lectureStartTime eq 4}">12:00</c:if>
+											<c:if test="${lectureStartTime eq 5}">13:00</c:if>
+											<c:if test="${lectureStartTime eq 6}">14:00</c:if>
+											<c:if test="${lectureStartTime eq 7}">15:00</c:if>
+											<c:if test="${lectureStartTime eq 8}">16:00</c:if>
+											<c:if test="${lectureStartTime eq 9}">17:00</c:if>
+						   	 			</td>
+						   	 			<td>
+						   	 				<c:if test="${lectureEndTime eq 1}">10:00</c:if>
+											<c:if test="${lectureEndTime eq 2}">11:00</c:if>
+											<c:if test="${lectureEndTime eq 3}">12:00</c:if>
+											<c:if test="${lectureEndTime eq 4}">13:00</c:if>
+											<c:if test="${lectureEndTime eq 5}">14:00</c:if>
+											<c:if test="${lectureEndTime eq 6}">15:00</c:if>
+											<c:if test="${lectureEndTime eq 7}">16:00</c:if>
+											<c:if test="${lectureEndTime eq 8}">17:00</c:if>
+											<c:if test="${lectureEndTime eq 9}">18:00</c:if>
+						   	 			</td>
 						   	 			<td>${lecturePersonal}</td>
 						   	 			<c:if test="${lectureStatus eq 1}">
 						   	 				<td>개강</td>	
@@ -199,7 +220,13 @@
 						   	 			<c:if test="${lectureVO.status eq null }">
 						   	 				<td>상태 없음</td>
 						   	 			</c:if>
-						   	 			<td>${lectureBuilding} ${lectureRoom}</td>
+						   	 			<td>
+						   	 				${lectureBuilding} ${lectureRoom}
+						   	 				<c:if test="${lectureBuilding eq null}">
+				                        		<a href="./lectureRoomAssignment?lectureNum=${lectureNum}&startTime=${lectureStartTime}&endTime=${lectureEndTime}&weekday=${lectureWeekday}&personal=${lectureRoomPersonal}"><button class="btn btn-info">강의실 배정</button></a>
+				                        	</c:if>
+						   	 			</td>
+			                        	
 						   	 				
 						
 						   	 			<td>
@@ -208,16 +235,16 @@
 							   	 					<div class="contentContainer">
 								   	 					  <table class="table table-hover text-nowrap" style="text-align: center;" id="table1">
 									                        <tr>
-									                            <th>학년도</th>
+									                            <th>연도</th>
 									                            <th>학과</th>
 									                           	<th>학기</th>
-									                           	<th>담당교수</th>
+									                           	<th>담당 교수</th>
 									                           	
 									                        </tr>
 									                        <tr>
 									                        	<td>${year}</td>
 									                        	<td>${deptName}</td>
-									                        	<td>${semester }</td>
+									                        	<td>${semester}</td>
 									                        	<td>${professorName}</td>
 									                        	
 								                        </tr>
@@ -243,9 +270,8 @@
 				        </div>
 									
 					<!-- Pagination -->
-				 <div class="row g-3 justify-content-center" style="margin: 20px auto;" id="pagination">
-					
-						<ul class="pagination pagination-sm mx-auto" style="width: 200px;">
+				 <div class="row g-3 my-3 justify-content-center" id="pagination">
+						<ul class="pagination pagination-sm mx-auto">
 							<c:if test="${pagination.pre}">
 								<li class="page-item">
 									<a class="page-link" href="./lectureList?page=${pagination.startNum-1}&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="${pagination.startNum-1}" style="color:#17a2b8;">

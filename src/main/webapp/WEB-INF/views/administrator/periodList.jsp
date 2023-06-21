@@ -128,9 +128,8 @@
 					   		</table>
 					   </div>
 				<!-- Pagination -->
-				 <div class="row g-3 justify-content-center" style="margin: 20px auto;" id="pagination">
-									
-					<ul class="pagination pagination-sm mx-auto"  style="width: 200px;">
+				 <div class="row g-3 my-3 justify-content-center" id="pagination">
+					<ul class="pagination pagination-sm mx-auto">
 						<c:if test="${pagination.pre}">
 							<li class="page-item">
 								<a class="page-link" href="./periodList?page=1&kind=${pagination.kind}&search=${pagination.search}" aria-label="Previous" data-board-page="1" style="color:#17a2b8;">

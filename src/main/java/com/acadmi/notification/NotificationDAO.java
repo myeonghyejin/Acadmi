@@ -46,6 +46,9 @@ public interface NotificationDAO {
 	//강의 정보를 가져오는 것
 	public LectureVO getLecture(LectureVO lectureVO) throws Exception;
 	
+	//강의List를 가져오는 것
+	public List<LectureVO> getLectureList() throws Exception;
+	
 	//수강 강의 정보를 가져오는 List
 	public List<StudentLectureVO> getStudentLectureList(LectureVO lectureVO) throws Exception;
 	

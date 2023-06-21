@@ -17,7 +17,7 @@ $('#table1').on("click",'[data-lecture]',function() {
             status : status,
         },
         success : function(response) {
-            alert("수정되었습니다")
+            alert("수정되었습니다.")
             location.href = './lectureRoomList'
         }
    })

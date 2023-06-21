@@ -60,6 +60,11 @@ public class NotificationService {
 		return notificationDAO.getKindList(notificationVO);
 	}
 	
+	//강의 정보를 가져오는 코드
+	public List<LectureVO> getLectureList() throws Exception {
+		return notificationDAO.getLectureList();
+	}
+	
 	//member 모두가 받을 수 있음
 	//중요 공지사항이 등록외었을때 알림발생
 	public int setIptNotice(NoticeVO noticeVO) throws Exception {

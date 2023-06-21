@@ -102,7 +102,11 @@
 								 					<a href="../lectureQna/detail?num=${notificationVO.num}&notificationNum=${notificationVO.notificationNum}">
 								 				</c:if>
 								 				<c:if test="${notificationVO.notificationKind eq 7}">
-								 					<a href="../administrator/lectureRoomAssignment?lectureNum=${notificationVO.lectureNum}&notificationNum=${notificationVO.notificationNum}">
+									 				<c:forEach items="${lecture}" var="lecture">
+										 				<c:if test="${notificationVO.lectureNum eq lecture.lectureNum}">
+										 					<a href="../administrator/lectureRoomAssignment?lectureNum=${notificationVO.lectureNum}&startTime=${lecture.startTime}&endTime=${lecture.endTime}&weekday=${lecture.weekday}&personal=${lecture.personal}&notificationNum=${notificationVO.notificationNum}">
+										 				</c:if>
+									 				</c:forEach>
 								 				</c:if>
 								 						${notificationVO.notificationMsg}
 								 					</a>
