@@ -55,6 +55,9 @@
 					<div class="card-header">
 						<!-- Search -->
 						<form action="./all_lecture">
+							<input type="hidden" name="page" value="1">
+							<input type="hidden" name="year" value="${year}">
+							<input type="hidden" name="semester" value="${semester}">
 							<div class="row justify-content-center mx-auto my-3">
 								<div class="col-md-6">
 									<div class="row">
