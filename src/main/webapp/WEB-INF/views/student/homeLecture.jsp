@@ -4,14 +4,15 @@
 <div class="mt-3 mx-5">
     <div class="row mt-4">
         <div class="col-12">
-            <div class="card">
+            <div class="card card-info card-outline">
                 <h5 class="my-3 mx-3" style="color:#17a2b8;">수강 중인 강의 보기</h5>
             </div>
         </div>
     </div>
 
             <div class="card-body" style="padding:0px">
-                <div class="card card-info card-outline">
+                <div class="card card-info">
+                <c:choose>
 					<c:when test="${empty list}">
 			            <div class="card-body" style="padding:0px">
 			                <div class="card" style="padding: 15px;color: gray">
@@ -19,6 +20,7 @@
 			                </div>
 			            </div>
 			        </c:when>
+			       </c:choose> 
                     <c:forEach items="${list}" var="lectureVO">
                     	<a href="student/lecture/main?lectureNum=${lectureVO.lectureNum}" style="color: black;">
 	                        <div class="card-header">

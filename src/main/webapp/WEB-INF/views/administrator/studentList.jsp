@@ -68,7 +68,7 @@
 												<div class="col-3">
 													<div class="form-group">
 														<label>단과대학</label>
-														<select class=" select2" name="collegeName"  id="college" style="width : 100%;" onchange="updateDepartmentOptions()">
+														<select class=" select2" name="collegeName"  id="college" style="width : 100%;" >
 															<option value="">전체</option>
 															<c:forEach items="${college}" var="collegeVO">
 																<c:if test="${collegeVO.collegeNum != 1 && collegeVO.collegeNum != 2}">
@@ -245,13 +245,14 @@
 		<c:import url="../temp/footer.jsp"></c:import>
 		<!-- Footer 끝 -->
 	
+	
+	</div>
+	<!-- ./wrapper -->
 		<script>
 		    $(function () {
 		      $('.select2').select2()
 		    });
 		</script>
-
-	</div>
-	<!-- ./wrapper -->
+	
 </body>
 </html>

@@ -450,6 +450,7 @@ public class AdministratorService{
 		
 	}
 	
+	
 	public List<PeriodVO> getPeriodList(Pagination pagination) throws Exception {
 		Long totalCount = administratorDAO.getTotalCountPeriod(pagination);
 		
@@ -494,7 +495,8 @@ public class AdministratorService{
 		
 		Long totalCount = administratorDAO.getTotalCountAssiginment();
 		
-		Pagination pagination = (Pagination)map.get("pagination");
+		Pagination pagination = (Pagination) map.get("pagination");
+		
 		pagination.makeNum(totalCount);
 		pagination.makeStartRow();
 		
