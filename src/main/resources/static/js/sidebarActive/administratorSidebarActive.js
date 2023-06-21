@@ -10,7 +10,7 @@ if(window.location.pathname.startsWith('/notice')){
 	$('#boardItem').addClass('menu-open')
 	$('#boardLink').addClass('active')
 	$('#qnaLink').addClass('active')
-} else if(window.location.pathname == '/administrator/lectureList'){
+} else if(window.location.pathname == '/administrator/lectureList' || window.location.pathname == '/administrator/lectureRoomAssignment'){
 	$('#administratorLectureItem').addClass('menu-open')
 	$('#administratorLectureLink').addClass('active')
 	$('#administratorLectureList').addClass('active')
