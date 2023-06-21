@@ -434,8 +434,13 @@ public class AdministratorService{
 		return administratorDAO.getDepartmentList(pagination);
 	}
 	
+	//학과 등록
 	public int setDepartmentAdd(DepartmentVO departmentVO) throws Exception {
 		return administratorDAO.setDepartmentAdd(departmentVO);
+	}
+	
+	public Integer  getDeptNum() throws Exception {
+		return administratorDAO.getDeptNum();
 	}
 	//학과 상태 수정
 	public int setDepartmentStatus(DepartmentVO departmentVO) throws Exception {

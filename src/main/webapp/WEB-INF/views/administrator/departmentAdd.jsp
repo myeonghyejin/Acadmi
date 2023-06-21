@@ -54,6 +54,7 @@
 					      <div class="card">
 					        <div class="card-body">
 						         <form action="./departmentAdd" method="post" id="deptForm">
+						         <input type="hidden" name= "deptNum">
 						          	 <div class="form-group">
 						           	  <label>단과 대학</label>
 					                  <select class="form-control select2" style="width: 100%;" name="collegeNum">

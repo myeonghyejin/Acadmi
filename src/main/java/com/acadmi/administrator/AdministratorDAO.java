@@ -77,6 +77,7 @@ public interface AdministratorDAO {
 	
 	//학과 등록
 	public int setDepartmentAdd(DepartmentVO departmentVO) throws Exception;
+	public Integer getDeptNum() throws Exception;
 	
 	//학과 상태 수정
 	public int setDepartmentStatus(DepartmentVO departmentVO) throws Exception;

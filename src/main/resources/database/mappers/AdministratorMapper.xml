@@ -325,8 +325,9 @@
   		SELECT * FROM DEPARTMENT D
 			INNER JOIN 
 				COLLEGE C 
-			USING(COLLEGENUM)
+			ON C.COLLEGENUM = D.COLLEGENUM
 			<include refid="departmentSearch"></include>
+		ORDER BY D.DEPTNUM DESC	
   		LIMIT #{startRow},#{perPage}
   	</select>
   	<resultMap type="CollegeVO" id="DepartmentList">
@@ -361,6 +362,9 @@
 	VALUES(#{deptNum},#{collegeNum},#{deptName},#{status})
   </insert>	
   
+  <select id="getDeptNum" resultType="Integer" >
+  	SELECT MAX(DEPTNUM)  FROM DEPARTMENT
+  </select>
   <!--학과 중복 체크  -->
   <select id="departmentDuplicateCheck" parameterType="DepartmentVO" resultType="DepartmentVO">
   	SELECT DEPTNAME FROM DEPARTMENT

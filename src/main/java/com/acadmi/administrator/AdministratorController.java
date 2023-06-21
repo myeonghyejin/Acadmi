@@ -393,6 +393,8 @@ public class AdministratorController {
 	public ModelAndView setDepartmentAdd(CollegeVO collegeVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
+		
+		
 		List<CollegeVO> ar =  administratorService.getCollege();
 		mv.addObject("list", ar);
 		
@@ -405,6 +407,10 @@ public class AdministratorController {
 	public ModelAndView setDepartmentAdd(@Valid DepartmentVO departmentVO, BindingResult bindingResult) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
+		Integer deptNum = administratorService.getDeptNum();
+		departmentVO.setDeptNum(deptNum + 1);
+		
+	
 		int result = administratorService.setDepartmentAdd(departmentVO);
 		
 		if(bindingResult.hasErrors()) {
