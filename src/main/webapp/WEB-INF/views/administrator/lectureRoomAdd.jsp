@@ -101,6 +101,7 @@
 		</div>
 	</div>	
 </div>
+<c:import url="../temp/footer.jsp"></c:import>
 <script type="text/javascript" src="../js/administrator/lectureRoomAdd.js"></script>
 </body>
 </html>
