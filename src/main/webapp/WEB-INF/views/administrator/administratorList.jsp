@@ -184,7 +184,7 @@
 									<!-- 직원 목록 -->
 									
 									<!-- pagination -->
-									<div class="row g-3 justify-content-center" id="pagination">
+									<div class="row g-3 my-3 justify-content-center" id="pagination">
 										<ul class="pagination pagination-sm mx-auto">
 											<c:if test="${pagination.pre}">
 												<li class="page-item">

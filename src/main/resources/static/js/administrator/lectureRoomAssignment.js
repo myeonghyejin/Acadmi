@@ -5,7 +5,7 @@ $("#table1").on("click", '[data-lecture]',function() {
     let lectureRoom = $(this).attr('data-lectureRoom')
     let lectureNum = $(this).attr('data-lectureNum')
     
-    let assignment = confirm("정말 배정하시겠습니까?")
+    let assignment = confirm("배정하시겠습니까?")
 
     if(assignment == true) {
         $.ajax ({
@@ -18,7 +18,7 @@ $("#table1").on("click", '[data-lecture]',function() {
             },
     
             success : function(response) {
-                alert("배정 되었습니다")
+                alert("배정되었습니다.")
                 location.href = './lectureList'
             }
         })

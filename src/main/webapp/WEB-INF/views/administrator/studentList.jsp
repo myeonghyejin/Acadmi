@@ -210,7 +210,7 @@
 									<!-- 학생 목록 조회 -->
 									
 									<!-- pagination -->
-			            	  		<div class="row g-3 justify-content-center" style="margin: 20px auto;" id="pagination">
+			            	  		<div class="row g-3 my-3 justify-content-center" id="pagination">
 										<ul class="pagination pagination-sm mx-auto">
 											<c:if test="${pagination.pre}">
 												<li class="page-item">
