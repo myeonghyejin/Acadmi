@@ -149,11 +149,11 @@
 												<th style="width: 10%">쪽지</th>
 							                    <th style="width: 10%">사진</th>
 							                    <th style="width: 15%">학과</th>
-							                    <th style="width: 8%">학번</th>
-							                    <th style="width: 8%" class="text-center">이름</th>
-							                    <th style="width: 15%">연락처</th>
+							                    <th style="width: 10%">학번</th>
+							                    <th style="width: 10%" class="text-center">이름</th>
 							                    <th style="width: 10%" class="text-center">단과 대학</th>
-							                    <th style="width: 8%">학년</th>
+							                    <th style="width: 10%">학년</th>
+							                    <th style="width: 15%">연락처</th>
 							                    <th style="width: 20%">학적 상태</th>
 											</tr>
 										</thead>
@@ -186,13 +186,13 @@
 						   	 									<td style="vertical-align:middle;"><c:out value="${department}"></c:out></td>
 						     	 								<td style="vertical-align:middle;"><c:out value="${studentUsername}"></c:out></td>
 									     	 					<td style="vertical-align:middle;"><c:out value="${studentName}"></c:out></td>
+									     	 					<td style="vertical-align:middle;"><c:out value="${college}"></c:out></td>
+									     	 					<td style="vertical-align:middle;"><c:out value="${studentGrade}"></c:out>학년</td>
 									     	 					<td style="vertical-align:middle;">
 											     	 				<c:out value="${fn:substring(fn:replace(studentPhone,'-',''), 0, 3)}"></c:out> 
 											     	 				-<c:out value="${fn:substring(fn:replace(studentPhone,'-',''), 3, 7)}"></c:out>
 											     	 				-<c:out value="${fn:substring(fn:replace(studentPhone,'-',''), 7,11)}"></c:out>
 									     	 					</td>
-									     	 					<td style="vertical-align:middle;"><c:out value="${college}"></c:out></td>
-									     	 					<td style="vertical-align:middle;"><c:out value="${studentGrade}"></c:out>학년</td>
 									     	 					<td style="vertical-align:middle;">
 										     	 					<c:if test="${studentStatus eq 1}">재학</c:if>
 										     	 					<c:if test="${studentStatus eq 2 }">휴학</c:if>

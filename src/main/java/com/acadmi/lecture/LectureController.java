@@ -169,7 +169,7 @@ public class LectureController {
 	
 	//강의 메인 페이지
 	@GetMapping("main")
-	public ModelAndView getLectureMain(LectureVO lectureVO) throws Exception{
+	public ModelAndView getLectureMain(LectureVO lectureVO,CollegeVO collegeVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		lectureVO = lectureService.getLectureProfessor(lectureVO);
 		mv.addObject("lecture",lectureVO);
@@ -177,6 +177,8 @@ public class LectureController {
 		mv.addObject("classes",ar);
 		int exists = lectureService.getSyllabusExists(lectureVO);
 		mv.addObject("exists",exists);
+		collegeVO=lectureService.getCollege(lectureVO.getDeptNum());
+		mv.addObject("college",collegeVO);
 		mv.setViewName("temp/sidebar/professor_lecture");
 		mv.setViewName("temp/lecture_header");
 		mv.setViewName("lecture/main");

@@ -92,7 +92,8 @@
 																	<div style="height: 8px;"></div>
 																		<p class="text-muted">
 																			<script type="text/javascript">
-																	        	const number = '${studentPhone}'
+																	        	let number = '${studentPhone}'
+																	        	number=number.replace(/-/g, '');
 																	        	const countryCode = number.substring(0, 3);
 																	        	const areaCode = number.substring(3, 7);
 																	        	const phoneNumber = number.substring(7, 11);

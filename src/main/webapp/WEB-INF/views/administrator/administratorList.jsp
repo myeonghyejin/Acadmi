@@ -129,9 +129,9 @@
 							                    <th style="width: 10%">사진</th>
 							                    <th style="width: 10%">직원 번호</th>
 							                    <th style="width: 10%" class="text-center">이름</th>
+							                    <th style="width: 20%">담당 학과</th>
 							                    <th style="width: 15%">연락처</th>
 							                    <th style="width: 10%" class="text-center">이메일</th>
-							                    <th style="width: 20%">담당 학과</th>
 							                    <th style="width: 20%">상태</th>
 											</tr>
 										</thead>
@@ -163,13 +163,13 @@
 									   	 					</td>
 												   	 		<td style="vertical-align:middle;"><c:out value="${administratoruserName}"></c:out></td>
 												   	 		<td style="vertical-align:middle;"><c:out value="${administratorName}"></c:out></td>
+												   	 		<td style="vertical-align:middle;"><c:out value="${department}"></c:out></td>
 															<td style="vertical-align:middle;">
 																<c:out value="${fn:substring(fn:replace(administratorPhone,'-',''), 0, 3)}"></c:out> 
 												     	 		-<c:out value="${fn:substring(fn:replace(administratorPhone,'-',''), 3, 7)}"></c:out>
 												     	 		-<c:out value="${fn:substring(fn:replace(administratorPhone,'-',''), 7,11)}"></c:out>
 															</td>
 												   	 		<td style="vertical-align:middle;"><c:out value="${administratorEmail}"></c:out></td>
-												   	 		<td style="vertical-align:middle;"><c:out value="${department}"></c:out></td>
 												   	 		<td style="vertical-align:middle;">
 													   	 		<c:if test="${administratorStatus eq 1}">재직</c:if>
 													   	 		<c:if test="${administratorStatus eq 2}">휴직</c:if>
