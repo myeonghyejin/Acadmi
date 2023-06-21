@@ -55,10 +55,8 @@
 						<div class="card">
 							<div class="card-header" style="color: gray;">
 								<i class="fa-solid fa-clock"></i>
-								<span class="mt-2"> 시작일 10:00:00 | 종료일 23:59:59</span>
-								<div class="mt-2">
-									<span class="mt-2">수강 연도, 수강 학기가 동일할 시 데이터가 업데이트됩니다.</span>
-								</div>
+								<span class="mt-2 mb-1"> 시작일 10:00:00 | 종료일 23:59:59</span>
+								<p style="font-size: 14px; margin-bottom: 0px;">이미 존재하는 기간이면 등록되어 있는 정보가 수정됩니다.</p>
 							</div>	
 							<div class="card-body row">
 								
@@ -148,8 +146,8 @@
 											  </div>
 											</div>
 										</div>
-										<div style="width:auto; float: right; margin-top : 50px;">
-								            <button type="submit" class="btn btn-info" id="periodBtn" style="margin-right :10px;">등록</button> 
+										<div style="width:auto; float: right;">
+								            <button type="submit" class="btn btn-info" id="periodBtn">등록</button> 
 								            <button type="button" class="btn btn-danger" id="backBtn">취소</button>
 						            	</div>
 									</form>
@@ -176,7 +174,7 @@ function updateApplicationEnd(){
 
 //취소 
 $("#backBtn").click(function() {
-    let back = confirm("정말 취소하시겠습니까?")
+    let back = confirm("취소하시겠습니까?")
 
     if(back == true) {
         location.href="./periodList"
