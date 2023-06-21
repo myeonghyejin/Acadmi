@@ -434,7 +434,7 @@
 			DEPARTMENT D 
 		ON L.DEPTNUM = D.DEPTNUM 
 	WHERE TEMPORARY =1 
-	ORDER BY L.LECTURENUM  DESC
+	
 	
 	<if test="deptName != null and !deptName.equals('')">
    		AND DEPTNAME = #{deptName}
@@ -453,6 +453,7 @@
 	<if test="search != null and !search.equals('')">
 		AND LECTURENAME LIKE CONCAT('%', #{search}, '%')
 	</if>
+	ORDER BY L.LECTURENUM  DESC
 	LIMIT #{startRow},#{perPage}
  </select>  
  

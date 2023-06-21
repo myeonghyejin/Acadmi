@@ -105,13 +105,13 @@
 				<sec:authorize access="hasRole('PROFESSOR')">
 					<img src="/images/professor.png" class="img-circle elevation-2" alt="User Image" style="opacity: .8;">
 					<sec:authentication property="Principal" var="user"/>
-				<a href="/member/professorPage?username=${user.username}" style="margin-left: 8px">${user.username}</a>
+				<a href="/member/professorPage?username=${user.username}" style="margin-left: 8px">${name} (${user.username})</a>
 				</sec:authorize>
 				
 				<sec:authorize access="hasRole('STUDENT')">
 					<img src="/images/student.png" class="img-circle elevation-2" alt="User Image" style="opacity: .8;">
 	               <sec:authentication property="Principal" var="user"/>
-                <a href="/member/studentPage?username=${user.username}" style="margin-left: 8px">${user.username}</a>
+                <a href="/member/studentPage?username=${user.username}" style="margin-left: 8px">${name} (${user.username})</a>
 				</sec:authorize>
 			</div>
 		</div>

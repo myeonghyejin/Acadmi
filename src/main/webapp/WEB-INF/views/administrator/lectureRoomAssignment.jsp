@@ -5,17 +5,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<c:import url="../temp/style.jsp"></c:import>
-<link
-	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
-	rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-
-<style type="text/css">
-	
-</style>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Acadmi!</title>
+	<!-- CSS/favicon 적용 -->
+	<c:import url="../temp/style.jsp"></c:import>
+	<!-- CSS/favicon 끝 -->
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">

@@ -7,13 +7,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<c:import url="../temp/style.jsp"></c:import>
-<link
-	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
-	rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-<title>Insert title here</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Acadmi!</title>
+	<!-- CSS/favicon 적용 -->
+	<c:import url="../temp/style.jsp"></c:import>
+	<!-- CSS/favicon 끝 -->
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 	<div class="wrapper">
@@ -189,9 +188,7 @@
 									     	 					<td style="vertical-align:middle;"><c:out value="${college}"></c:out></td>
 									     	 					<td style="vertical-align:middle;"><c:out value="${studentGrade}"></c:out>학년</td>
 									     	 					<td style="vertical-align:middle;">
-											     	 				<c:out value="${fn:substring(fn:replace(studentPhone,'-',''), 0, 3)}"></c:out> 
-											     	 				-<c:out value="${fn:substring(fn:replace(studentPhone,'-',''), 3, 7)}"></c:out>
-											     	 				-<c:out value="${fn:substring(fn:replace(studentPhone,'-',''), 7,11)}"></c:out>
+											     	 				<c:out value="${fn:substring(fn:replace(studentPhone,'-',''), 0, 3)}"></c:out>-<c:out value="${fn:substring(fn:replace(studentPhone,'-',''), 3, 7)}"></c:out>-<c:out value="${fn:substring(fn:replace(studentPhone,'-',''), 7,11)}"></c:out>
 									     	 					</td>
 									     	 					<td style="vertical-align:middle;">
 										     	 					<c:if test="${studentStatus eq 1}">재학</c:if>

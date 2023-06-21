@@ -6,17 +6,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<c:import url="../temp/style.jsp"></c:import>
-<link
-	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
-	rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-<title>Insert title here</title>
-<style type="text/css">
-
-
-</style>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Acadmi!</title>
+	<!-- CSS/favicon 적용 -->
+	<c:import url="../temp/style.jsp"></c:import>
+	<!-- CSS/favicon 끝 -->
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -180,18 +175,13 @@
 																	<td style="vertical-align:middle;"><c:out value="${collegeName}"></c:out></td>	
 																	<td style="vertical-align:middle;"><c:out value="${department}"></c:out></td>
 																	<td style="vertical-align:middle;">
-																		<c:out value="${collegeBuilding} "></c:out><c:out value="${professorRoom}"></c:out>
+																		<c:out value="${collegeBuilding} "></c:out><c:out value="${professorRoom}"></c:out>호
 																	</td>
 																	<td style="vertical-align:middle;">
-																		<c:out value="${fn:substring(fn:replace(professorPhone,'-',''), 0, 3)}"></c:out> 
-												     	 				-<c:out value="${fn:substring(fn:replace(professorPhone,'-',''), 3, 7)}"></c:out>
-												     	 				-<c:out value="${fn:substring(fn:replace(professorPhone,'-',''), 7,11)}"></c:out>
+																		<c:out value="${fn:substring(fn:replace(professorPhone,'-',''), 0, 3)}"></c:out>-<c:out value="${fn:substring(fn:replace(professorPhone,'-',''), 3, 7)}"></c:out>-<c:out value="${fn:substring(fn:replace(professorPhone,'-',''), 7,11)}"></c:out>
 																	</td>
 																	<td style="vertical-align:middle;"><c:out value="${professorEmail}"></c:out></td>
-																	<td style="vertical-align:middle;">
-
-																	<c:out value="${collegeBuilding} "></c:out><c:out value="${professorRoom}"></c:out>호
-																	</td>
+																	
 																	<td style="vertical-align:middle;">
 
 																		<c:if test="${professorStatus eq 1}">재직</c:if>
