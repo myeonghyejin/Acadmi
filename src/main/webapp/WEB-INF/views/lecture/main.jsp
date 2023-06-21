@@ -60,7 +60,6 @@
 								        	<script type="text/javascript">
 									        	let number = '${lecture.professorVO.phone}'
 									        	number=number.replace(/-/g, '');
-									        	console.log(number);
 									        	const countryCode = number.substring(0, 3);
 									        	const areaCode = number.substring(3, 7);
 									        	const phoneNumber = number.substring(7);

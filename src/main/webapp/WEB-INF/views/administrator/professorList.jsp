@@ -184,8 +184,8 @@
 																	</td>
 																	<td style="vertical-align:middle;">
 																		<c:out value="${fn:substring(fn:replace(professorPhone,'-',''), 0, 3)}"></c:out> 
-												     	 				-<c:out value="${fn:substring(fn:replace(professorPhone,'-',''), 3, 7)}"></c:out>
-												     	 				-<c:out value="${fn:substring(fn:replace(professorPhone,'-',''), 7,11)}"></c:out>
+												     	 				-&nbsp;<c:out value="${fn:substring(fn:replace(professorPhone,'-',''), 3, 7)}"></c:out>
+												     	 				-&nbsp;<c:out value="${fn:substring(fn:replace(professorPhone,'-',''), 7,11)}"></c:out>
 																	</td>
 																	<td style="vertical-align:middle;"><c:out value="${professorEmail}"></c:out></td>
 																	<td style="vertical-align:middle;">

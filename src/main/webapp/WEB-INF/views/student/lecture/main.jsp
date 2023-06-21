@@ -57,11 +57,12 @@
 								    	<td>${lecture.professorVO.name}</td>
 								        <td>
 								        	<script type="text/javascript">
-									        	const number = '${lecture.professorVO.phone}'
+									        	let number = '${lecture.professorVO.phone}'
+									        	number=number.replace(/-/g, '');
 									        	const countryCode = number.substring(0, 2);
 									        	const areaCode = number.substring(2, 6);
 									        	const phoneNumber = number.substring(6);
-									        	document.write(0,countryCode,'-',areaCode,'-',phoneNumber);
+									        	document.write(countryCode,'-',areaCode,'-',phoneNumber);
 								        	</script>
 								        </td>
 								        <td>${lecture.professorVO.professorRoom}</td>
