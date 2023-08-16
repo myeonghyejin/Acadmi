@@ -89,7 +89,7 @@
 										<table class="timetable table table-striped mt-3">
 											<thead>
 												<tr class="text-center">
-													<th scope="col" style="width: 10%"></th>
+													<th scope="col" style="width: 15%"></th>
 													<th scope="col" style="width: 15%">월요일</th>
 													<th scope="col" style="width: 15%">화요일</th>
 													<th scope="col" style="width: 15%">수요일</th>
@@ -100,7 +100,7 @@
 											<tbody>
 												<c:forEach begin="1" end="9" var="hour">
 													<tr>
-														<th scope="row" style="height: 80px;">${hour + 8}:00</th>
+														<th scope="row" style="height: 80px;">${hour + 8}:00 ~ ${hour + 9}:00</th>
 															<c:set var="lectureExists" value="false" />
 														<c:forEach items="${day}" var="day">
 															<c:set var="hasLecture" value="false" />
